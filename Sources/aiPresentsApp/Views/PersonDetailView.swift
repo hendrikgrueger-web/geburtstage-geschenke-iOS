@@ -132,6 +132,14 @@ struct PersonDetailView: View {
                         } label: {
                             GiftHistoryRow(history: history)
                         }
+                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                            Button {
+                                copyToGiftIdea(history)
+                            } label: {
+                                Label("Als Idee", systemImage: "lightbulb.circle.fill")
+                            }
+                            .tint(AppColor.primary)
+                        }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive) {
                                 if let index = filteredGiftHistory.firstIndex(where: { $0.id == history.id }) {
@@ -280,6 +288,21 @@ struct PersonDetailView: View {
             }
             HapticFeedback.warning()
         }
+    }
+
+    private func copyToGiftIdea(_ history: GiftHistory) {
+        let newIdea = GiftIdea(
+            personId: person.id,
+            title: history.title,
+            note: history.note.isEmpty ? "Kopiert aus Geschenk-Verlauf (\(history.year))" : history.note,
+            budgetMin: history.budget * 0.8,
+            budgetMax: history.budget * 1.2,
+            link: history.link,
+            status: .idea,
+            tags: [history.category]
+        )
+        modelContext.insert(newIdea)
+        HapticFeedback.success()
     }
 
     private func deletePerson() {
