@@ -31,6 +31,15 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                     }
 
+                    Button(action: openAbout) {
+                        HStack {
+                            Text("Über die App")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
                     Button(action: openFeedback) {
                         HStack {
                             Text("Feedback senden")
@@ -196,6 +205,41 @@ struct SettingsView: View {
 
         if let url = URL(string: "mailto:\(feedbackEmail)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") {
             UIApplication.shared.open(url)
+        }
+    }
+
+    private func openAbout() {
+        let aboutText = """
+        ai-presents-app v\(appVersion)
+
+        Eine private iOS App zum Verwalten von Geburtstagen und Geschenkideen.
+
+        Features:
+        • Geburtstags-Übersicht mit Countdowns
+        • Geschenkideen mit Budget und Tags
+        • Smarte Erinnerungen (30/14/7/2 Tage)
+        • iCloud Sync
+        • KI-Vorschläge (OpenRouter)
+
+        Entwickelt mit SwiftUI & SwiftData
+        """
+
+        let alert = UIAlertController(
+            title: "Über ai-presents-app",
+            message: aboutText,
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "GitHub", style: .default) { _ in
+            if let url = URL(string: "https://github.com/harryhirsch1878/ai-presents-app-ios") {
+                UIApplication.shared.open(url)
+            }
+        })
+
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController {
+            rootViewController.present(alert, animated: true)
         }
     }
 }
