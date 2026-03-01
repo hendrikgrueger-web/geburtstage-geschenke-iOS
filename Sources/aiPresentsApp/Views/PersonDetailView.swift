@@ -128,7 +128,18 @@ struct PersonDetailView: View {
     }
 
     private var filteredGiftIdeas: [GiftIdea] {
-        giftIdeas.filter { $0.personId == person.id }
+        let statusOrder: [GiftStatus] = [.idea, .planned, .purchased, .given]
+
+        return giftIdeas
+            .filter { $0.personId == person.id }
+            .sorted { idea1, idea2 in
+                let index1 = statusOrder.firstIndex(of: idea1.status) ?? 0
+                let index2 = statusOrder.firstIndex(of: idea2.status) ?? 0
+                if index1 != index2 {
+                    return index1 < index2
+                }
+                return idea1.title < idea2.title
+            }
     }
 
     private var birthdayString: String {
