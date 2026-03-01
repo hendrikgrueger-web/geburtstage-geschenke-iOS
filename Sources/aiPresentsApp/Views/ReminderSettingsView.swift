@@ -69,7 +69,12 @@ struct ReminderSettingsView: View {
             } header: {
                 Text("Ruhestunden")
             } footer: {
-                Text("Keine Benachrichtigungen in diesem Zeitraum.")
+                if quietHoursStart == quietHoursEnd {
+                    Text("⚠️ Beginn und Ende können nicht identisch sein. Setze einen anderen Wert.")
+                        .foregroundColor(.red)
+                } else {
+                    Text("Keine Benachrichtigungen in diesem Zeitraum.")
+                }
             }
         }
         .navigationTitle("Erinnerungseinstellungen")
@@ -82,9 +87,14 @@ struct ReminderSettingsView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Speichern") {
-                    saveSettings()
-                    dismiss()
+                    if quietHoursStart != quietHoursEnd {
+                        saveSettings()
+                        dismiss()
+                    } else {
+                        HapticFeedback.warning()
+                    }
                 }
+                .disabled(quietHoursStart == quietHoursEnd)
             }
         }
     }
