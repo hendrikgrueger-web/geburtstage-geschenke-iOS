@@ -165,17 +165,15 @@ struct SettingsView: View {
     }
 
     private func handlePermissionChange(_ enabled: Bool) async {
-        guard let manager = reminderManager else { return }
-
         if enabled {
-            let granted = await manager.requestPermission()
+            let granted = await reminderManager.requestPermission()
             hasNotificationPermission = granted
 
             if granted {
-                await manager.scheduleAllReminders()
+                await reminderManager.scheduleAllReminders()
             }
         } else {
-            await manager.cancelAllReminders()
+            await reminderManager.cancelAllReminders()
         }
     }
 

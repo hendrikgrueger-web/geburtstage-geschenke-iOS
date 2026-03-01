@@ -2,6 +2,12 @@ import SwiftUI
 
 struct BirthdayRow: View {
     let person: PersonRef
+    let onTap: (() -> Void)?
+
+    init(person: PersonRef, onTap: (() -> Void)? = nil) {
+        self.person = person
+        self.onTap = onTap
+    }
 
     var body: some View {
         HStack(spacing: 16) {
@@ -54,6 +60,11 @@ struct BirthdayRow: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityHint("Tap für Details und Geschenkideen")
+        .contentShape(Rectangle())
+        .onTapGesture {
+            HapticFeedback.light()
+            onTap?()
+        }
     }
 
     private var daysUntilBirthday: Int {
