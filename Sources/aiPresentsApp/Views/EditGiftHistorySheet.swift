@@ -31,6 +31,10 @@ struct EditGiftHistorySheet: View {
         currentYear = calendar.component(.year, from: Date())
     }
 
+    private var isTitleValid: Bool {
+        FormValidator.validateTitle(title) == nil
+    }
+
     private var linkValidation: (sanitized: String, isValid: Bool) {
         URLValidator.validate(link)
     }
@@ -103,7 +107,7 @@ struct EditGiftHistorySheet: View {
                         saveHistory()
                         dismiss()
                     }
-                    .disabled(title.isEmpty)
+                    .disabled(!isTitleValid)
                 }
             }
         }
