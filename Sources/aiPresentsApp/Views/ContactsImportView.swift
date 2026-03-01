@@ -38,6 +38,7 @@ struct ContactsImportView: View {
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
+                .accessibilityLabel("Import-Modus wählen")
 
                 // Permission Status
                 VStack(alignment: .leading, spacing: 12) {
@@ -65,6 +66,8 @@ struct ContactsImportView: View {
                 .padding()
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(12)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Kontaktoptionen")
 
                 if importedCount > 0 {
                     Text("✓ \(importedCount) Kontakte importiert")
