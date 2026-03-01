@@ -186,7 +186,7 @@ struct PersonDetailView: View {
     private var avatarRow: some View {
         HStack {
             Circle()
-                .fill(AppColor.gradientBlue)
+                .fill(AppColor.gradientForRelation(person.relation))
                 .frame(width: 60, height: 60)
                 .overlay {
                     Text(String(person.displayName.prefix(1)))

@@ -13,7 +13,7 @@ struct BirthdayRow: View {
         HStack(spacing: 16) {
             // Avatar
             Circle()
-                .fill(AppColor.gradientBlue)
+                .fill(AppColor.gradientForRelation(person.relation))
                 .frame(width: 56, height: 56)
                 .overlay {
                     Text(String(person.displayName.prefix(1)))

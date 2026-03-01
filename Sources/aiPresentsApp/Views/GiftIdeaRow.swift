@@ -70,13 +70,17 @@ struct GiftIdeaRow: View {
     }
 
     private var statusBadge: some View {
-        Text(statusText)
-            .font(.caption2)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 2)
-            .background(statusColor.opacity(0.2))
-            .foregroundColor(statusColor)
-            .cornerRadius(4)
+        HStack(spacing: 4) {
+            Image(systemName: idea.status.icon)
+                .font(.caption2)
+            Text(statusText)
+                .font(.caption2)
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .background(idea.status.color.opacity(0.2))
+        .foregroundColor(idea.status.color)
+        .cornerRadius(4)
     }
 
     private var statusText: String {
