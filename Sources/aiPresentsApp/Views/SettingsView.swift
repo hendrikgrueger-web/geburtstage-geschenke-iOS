@@ -7,7 +7,7 @@ struct SettingsView: View {
     @State private var showingResetConfirmation = false
     @State private var hasNotificationPermission = false
 
-    private let reminderManager = ReminderManager(modelContext: ModelContext.mainContext)
+    @StateObject private var reminderManager: ReminderManager?
 
     var body: some View {
         NavigationStack {
@@ -74,6 +74,9 @@ struct SettingsView: View {
             }
             .navigationTitle("Einstellungen")
             .onAppear {
+                if reminderManager == nil {
+                    reminderManager = ReminderManager(modelContext: modelContext)
+                }
                 Task {
                     await checkNotificationPermission()
                 }
@@ -82,7 +85,7 @@ struct SettingsView: View {
                 Button("Abbrechen", role: .cancel) { }
                 Button("Löschen", role: .destructive) {
                     Task {
-                        await reminderManager.cancelAllReminders()
+                        await reminderManager?.cancelAllReminders()
                     }
                     resetAllData()
                 }
@@ -99,15 +102,17 @@ struct SettingsView: View {
     }
 
     private func handlePermissionChange(_ enabled: Bool) async {
+        guard let manager = reminderManager else { return }
+
         if enabled {
-            let granted = await reminderManager.requestPermission()
+            let granted = await manager.requestPermission()
             hasNotificationPermission = granted
 
             if granted {
-                await reminderManager.scheduleAllReminders()
+                await manager.scheduleAllReminders()
             }
         } else {
-            await reminderManager.cancelAllReminders()
+            await manager.cancelAllReminders()
         }
     }
 

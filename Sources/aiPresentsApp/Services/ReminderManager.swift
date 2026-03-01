@@ -4,13 +4,12 @@ import UserNotifications
 
 @MainActor
 class ReminderManager: ObservableObject {
-    static let shared = ReminderManager()
-
     private let modelContext: ModelContext
     private let center = UNUserNotificationCenter.current()
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
+        Self.shared = self
     }
 
     func requestPermission() async -> Bool {
