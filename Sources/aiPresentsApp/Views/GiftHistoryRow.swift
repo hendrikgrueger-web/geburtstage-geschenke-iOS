@@ -31,5 +31,8 @@ struct GiftHistoryRow: View {
                 .font(.caption)
         }
         .padding(.vertical, 2)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(history.title), \(history.category), \(history.year)")
+        .accessibilityHint("Geschenk vermerkt im Jahr \(history.year)")
     }
 }

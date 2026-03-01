@@ -49,6 +49,24 @@ struct GiftIdeaRow: View {
             }
         }
         .padding(.vertical, 2)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint("Status: \(statusText). Tap zum Bearbeiten")
+    }
+
+    private var accessibilityLabel: String {
+        var label = idea.title
+        if !idea.note.isEmpty {
+            label += ". " + idea.note
+        }
+        if idea.budgetMax > 0 {
+            label += ". Budget: \(budgetString)"
+        }
+        if !idea.tags.isEmpty {
+            label += ". Tags: \(idea.tags.joined(separator: ", "))"
+        }
+        label += ". Status: \(statusText)"
+        return label
     }
 
     private var statusBadge: some View {

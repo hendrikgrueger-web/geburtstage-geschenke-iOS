@@ -78,6 +78,7 @@ class ReminderManager: ObservableObject {
         content.body = notificationBody(for: leadDay)
         content.sound = .default
         content.badge = 1
+        content.userInfo = ["personId": person.id.uuidString, "leadDay": leadDay]
 
         // Create trigger
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
