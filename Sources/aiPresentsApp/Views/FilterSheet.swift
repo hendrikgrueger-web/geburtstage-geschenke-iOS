@@ -22,6 +22,7 @@ struct FilterSheet: View {
                     .onChange(of: filterHasIdeas) { _, _ in
                         HapticFeedback.selectionChanged()
                     }
+                    .accessibilityLabel("Filter nach Geschenkideen")
                 } footer: {
                     Text("Filtere Kontakte nach ob Geschenkideen existieren")
                 }
@@ -37,6 +38,7 @@ struct FilterSheet: View {
                         .onChange(of: filterRelation) { _, _ in
                             HapticFeedback.selectionChanged()
                         }
+                        .accessibilityLabel("Filter nach Beziehung")
                     } footer: {
                         Text("Filtere nach Beziehungsart")
                     }
