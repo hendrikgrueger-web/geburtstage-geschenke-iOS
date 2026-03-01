@@ -184,40 +184,63 @@ struct TimelineView: View {
 
     private var emptyStateView: some View {
         VStack(spacing: 24) {
-            Image(systemName: "gift.fill")
-                .font(.system(size: 70))
-                .foregroundColor(AppColor.textSecondary.opacity(0.5))
-
-            Text("Keine Geburtstage")
-                .font(.title2)
-                .fontWeight(.semibold)
-                .foregroundColor(AppColor.textPrimary)
-
-            switch selectedTab {
-            case .today:
-                Text("Heute keine Geburtstage")
-                    .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
-            case .week:
-                Text("Keine Geburtstage in den nächsten 7 Tagen")
-                    .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
-            case .month:
-                Text("Keine Geburtstage in den nächsten 30 Tagen")
-                    .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
+            // Icon based on filter/search state
+            if !searchText.isEmpty || filterHasIdeas != nil || filterRelation != nil {
+                Image(systemName: "magnifyingglass")
+                    .font(.system(size: 60))
+                    .foregroundColor(AppColor.textSecondary.opacity(0.4))
+            } else {
+                Image(systemName: "giftcard")
+                    .font(.system(size: 60))
+                    .foregroundColor(AppColor.textSecondary.opacity(0.4))
             }
 
-            Button("Kontakte importieren") {
-                showingContactsImport = true
+            VStack(spacing: 8) {
+                Text("Keine Ergebnisse")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundColor(AppColor.textPrimary)
+
+                Text(emptyStateMessage)
+                    .font(.subheadline)
+                    .foregroundColor(AppColor.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
             }
-            .buttonStyle(.borderedProminent)
+
+            if searchText.isEmpty && filterHasIdeas == nil && filterRelation == nil {
+                Button("Kontakte importieren") {
+                    showingContactsImport = true
+                }
+                .buttonStyle(.borderedProminent)
+            }
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppColor.background)
         .sheet(isPresented: $showingContactsImport) {
             ContactsImportView()
+        }
+    }
+
+    private var emptyStateMessage: String {
+        if !searchText.isEmpty {
+            return "Keine Kontakte finden, die \"\(searchText)\" enthalten"
+        } else if filterHasIdeas == true {
+            return "Keine Kontakte mit Geschenkideen gefunden"
+        } else if filterHasIdeas == false {
+            return "Keine Kontakte ohne Geschenkideen gefunden"
+        } else if let relation = filterRelation {
+            return "Keine Kontakte mit Beziehung \"\(relation)\" gefunden"
+        }
+
+        switch selectedTab {
+        case .today:
+            return "Heute keine Geburtstage"
+        case .week:
+            return "Keine Geburtstage in den nächsten 7 Tagen"
+        case .month:
+            return "Keine Geburtstage in den nächsten 30 Tagen"
         }
     }
 }
