@@ -19,6 +19,11 @@ enum AppColor {
     static let warning = Color(red: 1.0, green: 0.7, blue: 0.0)
     static let error = Color(red: 1.0, green: 0.3, blue: 0.3)
 
+    // Birthday Colors
+    static let birthdayToday = Color(red: 1.0, green: 0.4, blue: 0.7)
+    static let birthdaySoon = Color(red: 1.0, green: 0.6, blue: 0.2)
+    static let birthdayUpcoming = Color(red: 0.3, green: 0.7, blue: 1.0)
+
     // Background Colors
     static let background = Color(UIColor.systemGroupedBackground)
     static let cardBackground = Color(UIColor.secondarySystemGroupedBackground)
