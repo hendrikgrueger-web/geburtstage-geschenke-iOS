@@ -30,6 +30,15 @@ struct SettingsView: View {
                         Text("\(appVersion) (\(buildNumber))")
                             .foregroundColor(.secondary)
                     }
+
+                    Button(action: openFeedback) {
+                        HStack {
+                            Text("Feedback senden")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
                 }
 
                 Section("Benachrichtigungen") {
@@ -129,6 +138,16 @@ struct SettingsView: View {
             try modelContext.deleteContainer()
         } catch {
             print("Failed to reset data: \(error)")
+        }
+    }
+
+    private func openFeedback() {
+        let feedbackEmail = "harryhirsch1878@gmail.com"
+        let subject = "ai-presents-app Feedback v\(appVersion)"
+        let body = "Was funktioniert gut?\n\nWas könnte besser sein?\n\n"
+
+        if let url = URL(string: "mailto:\(feedbackEmail)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") {
+            UIApplication.shared.open(url)
         }
     }
 }
