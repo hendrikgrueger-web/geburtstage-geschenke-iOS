@@ -32,9 +32,19 @@ struct BirthdayRow: View {
             Spacer()
 
             if let giftCount = person.giftIdeas?.count, giftCount > 0 {
-                Image(systemName: "lightbulb.fill")
-                    .foregroundColor(.orange)
-                    .font(.caption)
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text("\(giftCount)")
+                        .font(.caption)
+                        .fontWeight(.bold)
+                        .foregroundColor(.orange)
+                    Text("Ideen")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.horizontal, 6)
+                .padding(.vertical, 4)
+                .background(Color.orange.opacity(0.1))
+                .cornerRadius(6)
             }
         }
         .padding(.vertical, 4)
@@ -46,17 +56,20 @@ struct BirthdayRow: View {
         let birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
         let age = calendar.dateComponents([.year], from: person.birthday, to: birthdayThisYear).year ?? 0
 
-        if calendar.isDateInToday(birthdayThisYear) {
+        let daysUntil = calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
+
+        if daysUntil == 0 {
             return "Heute wird \(age)!"
+        } else if daysUntil == 1 {
+            return "Morgen wird \(age)"
+        } else if daysUntil == -1 {
+            return "Gestern wurde \(age)"
+        } else if daysUntil < -1 {
+            return "Vor \(-daysUntil) Tagen wurde \(age)"
+        } else if daysUntil == 365 {
+            return "Nächstes Jahr wird \(age + 1)"
         } else {
-            let days = calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
-            if days == 0 {
-                return "Wird \(age)"
-            } else if days == 1 {
-                return "Morgen wird \(age)"
-            } else {
-                return "In \(days) Tagen wird \(age)"
-            }
+            return "In \(daysUntil) Tagen wird \(age)"
         }
     }
 }

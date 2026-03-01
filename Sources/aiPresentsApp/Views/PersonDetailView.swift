@@ -7,6 +7,8 @@ struct PersonDetailView: View {
 
     @Query private var giftIdeas: [GiftIdea]
 
+    @State private var showingAddGiftIdea = false
+
     var body: some View {
         List {
             // Person Info
@@ -37,7 +39,7 @@ struct PersonDetailView: View {
             }
 
             // Gift Ideas
-            Section("Geschenkideen") {
+            Section {
                 if filteredGiftIdeas.isEmpty {
                     Text("Keine Ideen")
                         .foregroundColor(.secondary)
@@ -52,11 +54,14 @@ struct PersonDetailView: View {
                 HStack {
                     Text("Geschenkideen")
                     Spacer()
-                    Button(action: showAddGiftIdea) {
+                    Button(action: { showingAddGiftIdea = true }) {
                         Image(systemName: "plus.circle.fill")
                     }
                 }
             }
+        }
+        .sheet(isPresented: $showingAddGiftIdea) {
+            AddGiftIdeaSheet(person: person)
         }
         .navigationTitle(person.displayName)
         .navigationBarTitleDisplayMode(.inline)
@@ -79,9 +84,5 @@ struct PersonDetailView: View {
                 modelContext.delete(filteredGiftIdeas[index])
             }
         }
-    }
-
-    private func showAddGiftIdea() {
-        // TODO: Show add gift idea sheet
     }
 }
