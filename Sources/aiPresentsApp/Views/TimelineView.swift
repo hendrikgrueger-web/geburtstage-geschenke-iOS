@@ -33,10 +33,12 @@ struct TimelineView: View {
             Picker("", selection: $selectedTab) {
                 ForEach(TimelineTab.allCases, id: \.self) { tab in
                     Text(tab.rawValue).tag(tab)
+                        .accessibilityLabel(tab.rawValue + " Geburtstage")
                 }
             }
             .pickerStyle(.segmented)
             .padding()
+            .accessibilityLabel("Zeitfilter")
 
             // Quick Stats
             QuickStatsView()
