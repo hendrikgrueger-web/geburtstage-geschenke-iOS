@@ -2,6 +2,12 @@ import SwiftUI
 
 struct GiftHistoryRow: View {
     let history: GiftHistory
+    let onShare: (() -> Void)?
+
+    init(history: GiftHistory, onShare: (() -> Void)? = nil) {
+        self.history = history
+        self.onShare = onShare
+    }
 
     var body: some View {
         HStack(spacing: 12) {
@@ -41,9 +47,17 @@ struct GiftHistoryRow: View {
 
             Spacer()
 
-            Image(systemName: "gift.fill")
-                .foregroundColor(AppColor.accent.opacity(0.6))
-                .font(.caption)
+            if let onShare = onShare {
+                Button {
+                    onShare()
+                    HapticFeedback.light()
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .foregroundColor(AppColor.textSecondary.opacity(0.6))
+                        .font(.caption)
+                }
+                .buttonStyle(.plain)
+            }
         }
         .padding(.vertical, 2)
         .accessibilityElement(children: .combine)

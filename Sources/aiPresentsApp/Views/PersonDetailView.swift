@@ -188,7 +188,9 @@ struct PersonDetailView: View {
                         Button {
                             showingEditGiftHistory = history
                         } label: {
-                            GiftHistoryRow(history: history)
+                            GiftHistoryRow(history: history) {
+                                shareGiftHistory(history)
+                            }
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                             Button {
@@ -464,5 +466,25 @@ struct PersonDetailView: View {
         )
         modelContext.insert(newIdea)
         HapticFeedback.success()
+    }
+
+    private func shareGiftHistory(_ history: GiftHistory) {
+        var text = "🎁 \(history.title) (\(history.year))\n"
+        text += "📝 \(history.category)\n"
+
+        if history.budget > 0 {
+            text += "💰 \(Int(history.budget))€\n"
+        }
+
+        if !history.note.isEmpty {
+            text += "📝 \(history.note)\n"
+        }
+
+        if !history.link.isEmpty {
+            text += "🔗 \(history.link)\n"
+        }
+
+        shareText = text
+        showingShareSheet = true
     }
 }
