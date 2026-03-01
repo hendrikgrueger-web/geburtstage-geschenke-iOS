@@ -48,6 +48,7 @@ struct SettingsView: View {
                                 await handlePermissionChange(newValue)
                             }
                         }
+                        .accessibilityLabel("Erinnerungen aktivieren")
 
                     NavigationLink {
                         ReminderSettingsView(rule: reminderRule.first)
@@ -77,6 +78,9 @@ struct SettingsView: View {
                         Image(systemName: "icloud.fill")
                             .foregroundColor(.blue)
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("iCloud Sync, automatisch synchronisiert")
+                    .accessibilityHint("Daten werden automatisch über deine Apple-Geräte synchronisiert")
                 } footer: {
                     Text("Daten werden automatisch über deine Apple-Geräte synchronisiert.")
                 }
