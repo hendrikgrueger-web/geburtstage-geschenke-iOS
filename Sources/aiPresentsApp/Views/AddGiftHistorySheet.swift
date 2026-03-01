@@ -44,6 +44,7 @@ struct AddGiftHistorySheet: View {
                             Text("\(y)").tag(y)
                         }
                     }
+                    .accessibilityLabel("Jahr des Geschenks")
                 } header: {
                     Text("Jahr des Geschenks")
                 } footer: {
