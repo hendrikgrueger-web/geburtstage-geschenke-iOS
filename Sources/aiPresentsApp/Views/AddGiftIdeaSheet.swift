@@ -68,6 +68,7 @@ struct AddGiftIdeaSheet: View {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundColor(.blue)
                             }
+                            .accessibilityLabel("Link öffnen")
                         }
                     }
                 }
@@ -105,6 +106,7 @@ struct AddGiftIdeaSheet: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .accessibilityLabel("Geschenkstatus")
                 }
             }
             .navigationTitle("Geschenk-Idee")
