@@ -6,6 +6,7 @@ struct TimelineView: View {
     @Query private var people: [PersonRef]
 
     @State private var selectedTab: TimelineTab = .today
+    @State private var showingContactsImport = false
 
     enum TimelineTab: String, CaseIterable {
         case today = "Heute"
@@ -137,12 +138,15 @@ struct TimelineView: View {
             }
 
             Button("Kontakte importieren") {
-                // Navigate to ContactsImportView
+                showingContactsImport = true
             }
             .buttonStyle(.borderedProminent)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppColor.background)
+        .sheet(isPresented: $showingContactsImport) {
+            ContactsImportView()
+        }
     }
 }
