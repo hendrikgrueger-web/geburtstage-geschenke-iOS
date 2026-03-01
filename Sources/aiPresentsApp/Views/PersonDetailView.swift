@@ -99,6 +99,15 @@ struct PersonDetailView: View {
         }
         .navigationTitle(person.displayName)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showingAddGiftIdea = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+        }
     }
 
     private var avatarRow: some View {
