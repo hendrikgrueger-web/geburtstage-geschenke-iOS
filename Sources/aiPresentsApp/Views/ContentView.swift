@@ -33,7 +33,9 @@ struct ContentView: View {
         .onAppear {
             // Show contacts import on first launch if no contacts
             if people.isEmpty && !UserDefaults.standard.bool(forKey: "hasShownContactsImport") {
-                showingContactsImport = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    showingContactsImport = true
+                }
                 UserDefaults.standard.set(true, forKey: "hasShownContactsImport")
             }
         }
