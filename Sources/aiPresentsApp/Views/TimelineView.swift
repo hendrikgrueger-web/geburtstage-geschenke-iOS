@@ -7,6 +7,10 @@ struct TimelineView: View {
 
     @State private var selectedTab: TimelineTab = .today
     @State private var showingContactsImport = false
+    @State private var searchText = ""
+    @State private var showingFilterSheet = false
+    @State private var filterHasIdeas: Bool? = nil
+    @State private var filterRelation: String? = nil
 
     enum TimelineTab: String, CaseIterable {
         case today = "Heute"
@@ -41,12 +45,33 @@ struct TimelineView: View {
         }
         .navigationTitle("Geburtstage")
         .navigationBarTitleDisplayMode(.large)
+        .searchable(text: $searchText, prompt: "Suche...")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: ContactsImportView()) {
-                    Image(systemName: "person.badge.plus")
+                HStack(spacing: 12) {
+                    Button {
+                        showingFilterSheet = true
+                    } label: {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            .symbolVariant(filterHasIdeas != nil || filterRelation != nil ? .fill : .none)
+                    }
+
+                    NavigationLink(destination: ContactsImportView()) {
+                        Image(systemName: "person.badge.plus")
+                    }
                 }
             }
+        }
+        .sheet(isPresented: $showingFilterSheet) {
+            FilterSheet(
+                filterHasIdeas: $filterHasIdeas,
+                filterRelation: $filterRelation,
+                availableRelations: availableRelations,
+                onReset: {
+                    filterHasIdeas = nil
+                    filterRelation = nil
+                }
+            )
         }
     }
 
@@ -55,6 +80,31 @@ struct TimelineView: View {
         let today = calendar.startOfDay(for: Date())
 
         return people.compactMap { person -> (PersonRef, Date)? in
+            // Apply search text filter
+            if !searchText.isEmpty {
+                let searchLower = searchText.lowercased()
+                if !person.displayName.lowercased().contains(searchLower) &&
+                   !person.relation.lowercased().contains(searchLower) {
+                    return nil
+                }
+            }
+
+            // Apply gift ideas filter
+            if let hasIdeas = filterHasIdeas {
+                let personHasIdeas = !person.giftIdeas?.isEmpty ?? false
+                if hasIdeas != personHasIdeas {
+                    return nil
+                }
+            }
+
+            // Apply relation filter
+            if let relation = filterRelation, !relation.isEmpty {
+                if person.relation != relation {
+                    return nil
+                }
+            }
+
+            // Apply date filter
             guard let nextBirthday = nextBirthday(for: person, from: today) else {
                 return nil
             }
@@ -79,6 +129,11 @@ struct TimelineView: View {
         }
         .sorted { $0.1 < $1.1 }
         .map { $0.0 }
+    }
+
+    private var availableRelations: [String] {
+        let allRelations = people.map { $0.relation }
+        return Array(Set(allRelations)).sorted()
     }
 
     private func nextBirthday(for person: PersonRef, from today: Date) -> Date? {
