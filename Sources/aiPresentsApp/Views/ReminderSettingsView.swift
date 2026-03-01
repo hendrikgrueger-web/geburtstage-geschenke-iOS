@@ -49,7 +49,12 @@ struct ReminderSettingsView: View {
             } header: {
                 Text("Vorwarnungen")
             } footer: {
-                Text("Wähle aus, wann du erinnert werden möchtest.")
+                if leadDays.isEmpty {
+                    Text("⚠️ Keine Vorwarnungen ausgewählt. Du wirst nicht erinnert.")
+                        .foregroundColor(.orange)
+                } else {
+                    Text("Wähle aus, wann du erinnert werden möchtest.")
+                }
             }
 
             Section {
