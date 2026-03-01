@@ -46,6 +46,33 @@ struct BirthdayRow: View {
         }
         .padding(.vertical, 8)
         .listRowBackground(AppColor.cardBackground)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint("Tap für Details und Geschenkideen")
+    }
+
+    private var accessibilityLabel: String {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
+        let age = calendar.dateComponents([.year], from: person.birthday, to: birthdayThisYear).year ?? 0
+
+        let daysUntil = calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
+
+        var label = "\(person.displayName), "
+        label += "\(age) Jahre alt. "
+
+        if let giftCount = person.giftIdeas?.count, giftCount > 0 {
+            label += "\(giftCount) Geschenkidee\(giftCount == 1 ? "" : "n"). "
+        }
+
+        if daysUntil == 0 {
+            label += "Geburtstag heute!"
+        } else {
+            label += "Geburtstag in \(daysUntil) Tagen."
+        }
+
+        return label
     }
 
     private var birthdayInfo: String {
