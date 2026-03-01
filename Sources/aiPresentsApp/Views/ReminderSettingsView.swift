@@ -11,6 +11,7 @@ struct ReminderSettingsView: View {
     @State private var quietHoursStart: Int
     @State private var quietHoursEnd: Int
     @State private var enabled: Bool
+    @State private var reminderManager: ReminderManager?
 
     init(rule: ReminderRule?) {
         let days = rule?.leadDays ?? [30, 14, 7, 2]
@@ -70,6 +71,11 @@ struct ReminderSettingsView: View {
         }
         .navigationTitle("Erinnerungseinstellungen")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            if reminderManager == nil {
+                reminderManager = ReminderManager(modelContext: modelContext)
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Speichern") {
@@ -94,6 +100,14 @@ struct ReminderSettingsView: View {
                 enabled: enabled
             )
             modelContext.insert(newRule)
+        }
+
+        // Reschedule reminders with new settings
+        Task {
+            await reminderManager?.cancelAllReminders()
+            if enabled {
+                await reminderManager?.scheduleAllReminders()
+            }
         }
     }
 }
