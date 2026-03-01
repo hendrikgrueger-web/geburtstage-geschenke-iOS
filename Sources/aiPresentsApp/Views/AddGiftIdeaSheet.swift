@@ -7,13 +7,35 @@ struct AddGiftIdeaSheet: View {
 
     let person: PersonRef
 
-    @State private var title = ""
-    @State private var note = ""
-    @State private var budgetMin = ""
-    @State private var budgetMax = ""
-    @State private var link = ""
-    @State private var tagsInput = ""
-    @State private var status: GiftStatus = .idea
+    @State private var title: String
+    @State private var note: String
+    @State private var budgetMin: String
+    @State private var budgetMax: String
+    @State private var link: String
+    @State private var tagsInput: String
+    @State private var status: GiftStatus
+
+    init(person: PersonRef) {
+        self.person = person
+        self._title = State(initialValue: "")
+        self._note = State(initialValue: "")
+        self._budgetMin = State(initialValue: "")
+        self._budgetMax = State(initialValue: "")
+        self._link = State(initialValue: "")
+        self._tagsInput = State(initialValue: "")
+        self._status = State(initialValue: .idea)
+    }
+
+    init(person: PersonRef, prefillTitle: String, prefillNote: String) {
+        self.person = person
+        self._title = State(initialValue: prefillTitle)
+        self._note = State(initialValue: prefillNote)
+        self._budgetMin = State(initialValue: "")
+        self._budgetMax = State(initialValue: "")
+        self._link = State(initialValue: "")
+        self._tagsInput = State(initialValue: "")
+        self._status = State(initialValue: .idea)
+    }
 
     private var isBudgetInvalid: Bool {
         guard let min = Double(budgetMin), let max = Double(budgetMax), min > 0, max > 0 else {

@@ -167,16 +167,3 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 }
-
-extension AddGiftIdeaSheet {
-    init(person: PersonRef, prefillTitle: String, prefillNote: String) {
-        self.person = person
-        _title = State(initialValue: prefillTitle)
-        _note = State(initialValue: prefillNote)
-        _budgetMin = State(initialValue: "")
-        _budgetMax = State(initialValue: "")
-        _link = State(initialValue: "")
-        _tagsInput = State(initialValue: "")
-        _status = State(initialValue: .idea)
-    }
-}
