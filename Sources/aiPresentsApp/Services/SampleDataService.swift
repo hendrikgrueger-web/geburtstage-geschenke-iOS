@@ -1,6 +1,5 @@
 import Foundation
 import SwiftData
-import Calendar
 
 class SampleDataService {
     static func createSampleData(in context: ModelContext) {
