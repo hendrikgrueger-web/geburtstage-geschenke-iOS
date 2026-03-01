@@ -6,8 +6,11 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var showingResetConfirmation = false
     @State private var hasNotificationPermission = false
+    @State private var showingReminderSettings = false
 
     @StateObject private var reminderManager: ReminderManager?
+
+    @Query private var reminderRule: [ReminderRule]
 
     var body: some View {
         NavigationStack {
@@ -29,18 +32,15 @@ struct SettingsView: View {
                             }
                         }
 
-                    HStack {
-                        Text("Standard-Zeiten")
-                        Spacer()
-                        Text("30, 14, 7, 2 Tage")
-                            .foregroundColor(.secondary)
-                    }
-
-                    HStack {
-                        Text("Ruhestunden")
-                        Spacer()
-                        Text("22:00 - 08:00")
-                            .foregroundColor(.secondary)
+                    NavigationLink {
+                        ReminderSettingsView(rule: reminderRule.first)
+                    } label: {
+                        HStack {
+                            Text("Erinnerungseinstellungen")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
 
