@@ -15,6 +15,7 @@ extension ModelContext {
 class ReminderManager: ObservableObject {
     private var modelContext: ModelContext
     private let center = UNUserNotificationCenter.current()
+    static var shared: ReminderManager!
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
