@@ -256,12 +256,14 @@ struct PersonDetailView: View {
             for index in offsets {
                 modelContext.delete(filteredGiftIdeas[index])
             }
+            HapticFeedback.warning()
         }
     }
 
     private func deletePerson() {
         withAnimation {
             modelContext.delete(person)
+            HapticFeedback.error()
         }
         dismiss()
     }
@@ -278,5 +280,6 @@ struct PersonDetailView: View {
             // No further status
             break
         }
+        HapticFeedback.medium()
     }
 }

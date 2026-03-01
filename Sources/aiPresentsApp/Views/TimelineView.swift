@@ -179,6 +179,7 @@ struct TimelineView: View {
 
     private func markAsPlanned(_ idea: GiftIdea) {
         idea.status = .planned
+        HapticFeedback.success()
         // SwiftData automatically tracks changes
     }
 

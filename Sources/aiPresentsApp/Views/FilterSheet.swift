@@ -19,6 +19,9 @@ struct FilterSheet: View {
                         Text("Ohne Ideen").tag(Bool?.some(false))
                     }
                     .pickerStyle(.segmented)
+                    .onChange(of: filterHasIdeas) { _, _ in
+                        HapticFeedback.selectionChanged()
+                    }
                 } footer: {
                     Text("Filtere Kontakte nach ob Geschenkideen existieren")
                 }
@@ -31,6 +34,9 @@ struct FilterSheet: View {
                                 Text(relation).tag(String?.some(relation))
                             }
                         }
+                        .onChange(of: filterRelation) { _, _ in
+                            HapticFeedback.selectionChanged()
+                        }
                     } footer: {
                         Text("Filtere nach Beziehungsart")
                     }
@@ -42,12 +48,14 @@ struct FilterSheet: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Reset") {
                         onReset()
+                        HapticFeedback.light()
                         dismiss()
                     }
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Fertig") {
+                        HapticFeedback.light()
                         dismiss()
                     }
                 }
