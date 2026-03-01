@@ -2,14 +2,27 @@ import Foundation
 import SwiftData
 import UserNotifications
 
+extension ModelContext {
+    static var placeholder: ModelContext {
+        let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self])
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try! ModelContainer(for: schema, configurations: [config])
+        return container.mainContext
+    }
+}
+
 @MainActor
 class ReminderManager: ObservableObject {
-    private let modelContext: ModelContext
+    private var modelContext: ModelContext
     private let center = UNUserNotificationCenter.current()
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
         Self.shared = self
+    }
+
+    func updateModelContext(_ context: ModelContext) {
+        self.modelContext = context
     }
 
     func requestPermission() async -> Bool {

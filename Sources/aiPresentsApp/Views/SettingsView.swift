@@ -8,7 +8,7 @@ struct SettingsView: View {
     @State private var hasNotificationPermission = false
     @State private var showingReminderSettings = false
 
-    @StateObject private var reminderManager: ReminderManager?
+    @StateObject private var reminderManager = ReminderManager(modelContext: ModelContext.placeholder)
 
     @Query private var reminderRule: [ReminderRule]
 
@@ -139,9 +139,7 @@ struct SettingsView: View {
             }
             .navigationTitle("Einstellungen")
             .onAppear {
-                if reminderManager == nil {
-                    reminderManager = ReminderManager(modelContext: modelContext)
-                }
+                reminderManager.updateModelContext(modelContext)
                 Task {
                     await checkNotificationPermission()
                 }
