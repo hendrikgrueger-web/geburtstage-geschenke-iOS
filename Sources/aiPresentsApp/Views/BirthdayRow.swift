@@ -114,13 +114,13 @@ struct BirthdayRow: View {
 
     private var progressColor: Color {
         if daysUntilBirthday <= 2 {
-            return .red
+            return AppColor.birthdaySoon
         } else if daysUntilBirthday <= 7 {
-            return .orange
+            return AppColor.birthdaySoon
         } else if daysUntilBirthday <= 14 {
             return AppColor.secondary
         } else {
-            return AppColor.primary
+            return AppColor.birthdayUpcoming
         }
     }
 
