@@ -171,6 +171,35 @@ final class FormValidatorTests: XCTestCase {
         XCTAssertNil(error, "Empty tags in middle should be filtered out")
     }
 
+    // MARK: - Category Validation Tests
+
+    func testValidateCategoryValid() {
+        let error = FormValidator.validateCategory("Books")
+        XCTAssertNil(error, "Valid category should not error")
+    }
+
+    func testValidateCategoryEmpty() {
+        let error = FormValidator.validateCategory("")
+        XCTAssertNil(error, "Empty category should be valid")
+    }
+
+    func testValidateCategoryWhitespace() {
+        let error = FormValidator.validateCategory("   ")
+        XCTAssertNil(error, "Whitespace category should be valid (will be trimmed)")
+    }
+
+    func testValidateCategoryTooLong() {
+        let longCategory = String(repeating: "a", count: 51)
+        let error = FormValidator.validateCategory(longCategory)
+        XCTAssertEqual(error, .tooLong(maxLength: 50), "Category > 50 chars should error")
+    }
+
+    func testValidateCategoryMaxLength() {
+        let category = String(repeating: "a", count: 50)
+        let error = FormValidator.validateCategory(category)
+        XCTAssertNil(error, "Category = 50 chars should be valid")
+    }
+
     // MARK: - ValidationError Description Tests
 
     func testValidationErrorDescriptions() {

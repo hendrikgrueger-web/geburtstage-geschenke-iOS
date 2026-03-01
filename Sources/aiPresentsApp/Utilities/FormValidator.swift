@@ -114,6 +114,15 @@ struct FormValidator {
 
         return nil
     }
+
+    /// Validates category field
+    static func validateCategory(_ category: String) -> ValidationError? {
+        let trimmed = category.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.count > 50 {
+            return .tooLong(maxLength: 50)
+        }
+        return nil
+    }
 }
 
 // MARK: - View Extensions for Form Validation
