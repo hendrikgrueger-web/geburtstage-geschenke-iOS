@@ -30,6 +30,9 @@ struct QuickStatsView: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
+        .onTapGesture {
+            HapticFeedback.light()
+        }
     }
 
     private var upcomingBirthdaysCount: Int {
