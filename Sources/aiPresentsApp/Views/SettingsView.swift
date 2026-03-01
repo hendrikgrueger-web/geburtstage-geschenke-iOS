@@ -1,9 +1,13 @@
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var showingResetConfirmation = false
+    @State private var hasNotificationPermission = false
+
+    private let reminderManager = ReminderManager(modelContext: ModelContext.mainContext)
 
     var body: some View {
         NavigationStack {
@@ -17,7 +21,14 @@ struct SettingsView: View {
                     }
                 }
 
-                Section("Erinnerungen") {
+                Section("Benachrichtigungen") {
+                    Toggle("Erinnerungen aktivieren", isOn: $hasNotificationPermission)
+                        .onChange(of: hasNotificationPermission) { _, newValue in
+                            Task {
+                                await handlePermissionChange(newValue)
+                            }
+                        }
+
                     HStack {
                         Text("Standard-Zeiten")
                         Spacer()
@@ -62,14 +73,41 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Einstellungen")
+            .onAppear {
+                Task {
+                    await checkNotificationPermission()
+                }
+            }
             .alert("Alle Daten löschen?", isPresented: $showingResetConfirmation) {
                 Button("Abbrechen", role: .cancel) { }
                 Button("Löschen", role: .destructive) {
+                    Task {
+                        await reminderManager.cancelAllReminders()
+                    }
                     resetAllData()
                 }
             } message: {
                 Text("Das löscht alle Kontakte und Geschenkideen. Diese Aktion kann nicht rückgängig gemacht werden.")
             }
+        }
+    }
+
+    private func checkNotificationPermission() async {
+        let center = UNUserNotificationCenter.current()
+        let settings = await center.notificationSettings()
+        hasNotificationPermission = settings.authorizationStatus == .authorized
+    }
+
+    private func handlePermissionChange(_ enabled: Bool) async {
+        if enabled {
+            let granted = await reminderManager.requestPermission()
+            hasNotificationPermission = granted
+
+            if granted {
+                await reminderManager.scheduleAllReminders()
+            }
+        } else {
+            await reminderManager.cancelAllReminders()
         }
     }
 
