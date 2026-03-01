@@ -206,10 +206,12 @@ struct TimelineView: View {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 60))
                     .foregroundColor(AppColor.textSecondary.opacity(0.4))
+                    .symbolEffect(.pulse, options: .repeating, isActive: true)
             } else {
                 Image(systemName: "giftcard")
                     .font(.system(size: 60))
                     .foregroundColor(AppColor.textSecondary.opacity(0.4))
+                    .symbolEffect(.bounce, options: .repeating, isActive: true)
             }
 
             VStack(spacing: 8) {
@@ -228,8 +230,10 @@ struct TimelineView: View {
             if searchText.isEmpty && filterHasIdeas == nil && filterRelation == nil {
                 Button("Kontakte importieren") {
                     showingContactsImport = true
+                    HapticFeedback.medium()
                 }
                 .buttonStyle(.borderedProminent)
+                .buttonStyle(.pressable)
             }
         }
         .padding()

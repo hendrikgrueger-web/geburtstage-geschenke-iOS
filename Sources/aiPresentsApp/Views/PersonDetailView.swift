@@ -55,6 +55,43 @@ struct PersonDetailView: View {
                         .fontWeight(.medium)
                 }
             }
+            // Person Info
+            Section {
+                avatarRow
+
+                HStack {
+                    Text("Name")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(person.displayName)
+                        .fontWeight(.medium)
+                }
+
+                HStack {
+                    Text("Geburtstag")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(birthdayString)
+                        .fontWeight(.medium)
+                }
+
+                HStack {
+                    Text("Nächster Geburtstag")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(nextBirthdayInfo)
+                        .fontWeight(.medium)
+                        .foregroundColor(daysUntilBirthday <= 7 ? .orange : .primary)
+                }
+
+                HStack {
+                    Text("Beziehung")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(person.relation)
+                        .fontWeight(.medium)
+                }
+            }
 
             // Gift Ideas
             Section {
@@ -185,15 +222,7 @@ struct PersonDetailView: View {
 
     private var avatarRow: some View {
         HStack {
-            Circle()
-                .fill(AppColor.gradientForRelation(person.relation))
-                .frame(width: 60, height: 60)
-                .overlay {
-                    Text(String(person.displayName.prefix(1)))
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
+            PersonAvatar(person: person, size: 60)
 
             Spacer()
         }

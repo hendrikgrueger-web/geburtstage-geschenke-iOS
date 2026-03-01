@@ -12,15 +12,7 @@ struct BirthdayRow: View {
     var body: some View {
         HStack(spacing: 16) {
             // Avatar
-            Circle()
-                .fill(AppColor.gradientForRelation(person.relation))
-                .frame(width: 56, height: 56)
-                .overlay {
-                    Text(String(person.displayName.prefix(1)))
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
+            PersonAvatar(person: person, size: 56)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(person.displayName)
