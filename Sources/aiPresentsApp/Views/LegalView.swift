@@ -11,7 +11,7 @@ struct LegalView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
 
-                        Text("Angaben gemäß § 5 TMG")
+                        Text("Stand: März 2026")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -20,10 +20,9 @@ struct LegalView: View {
                     // Legal Information
                     Group {
                         legalSection(
-                            title: "Verantwortlich",
+                            title: "Anbieter",
                             content: """
                             Hendrik Grüger
-                            Harry (Digitaler Mitarbeiter)
                             """
                         )
 
@@ -31,41 +30,49 @@ struct LegalView: View {
                             title: "Kontakt",
                             content: """
                             E-Mail: harryhirsch1878@gmail.com
-                            Telegram: @harryhirsch1878
-
-                            Für Anfragen zur App oder Feedback kontaktieren Sie uns gerne über obenstehende Kanäle.
                             """
                         )
 
                         legalSection(
-                            title: "Haftung für Inhalte",
+                            title: "Haftungsausschluss",
                             content: """
-                            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-                            """
-                        )
+                            Diese App wird "wie besehen" bereitgestellt. Der Anbieter übernimmt keine Gewähr für die Vollständigkeit, Richtigkeit oder Aktualität der bereitgestellten Informationen.
 
-                        legalSection(
-                            title: "Haftung für Links",
-                            content: """
-                            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+                            Der Anbieter haftet nicht für Schäden, die durch die Nutzung oder Nicht-Nutzung der Informationen entstehen. Dies gilt insbesondere bei direkten oder indirekten Schäden, einschließlich entgangenen Gewinns.
                             """
                         )
 
                         legalSection(
                             title: "Urheberrecht",
                             content: """
-                            Die durch die App-Betreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+                            Alle Inhalte dieser App sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung oder Verbreitung bedarf der schriftlichen Zustimmung des Anbieters.
+
+                            Die App verwendet System-Symbols und Standard-UI-Elemente von Apple Inc., die deren Urheberrecht unterliegen.
+                            """
+                        )
+
+                        legalSection(
+                            title: "Links zu Dritten",
+                            content: """
+                            Die App enthält Links zu externen Websites (z.B. für Geschenkideen). Der Anbieter hat keinen Einfluss auf deren Inhalt. Die Verantwortung für diese externen Inhalte liegt bei den jeweiligen Betreibern.
+
+                            Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Sollten sich Inhalte ändern, wird der Link unverzüglich entfernt.
+                            """
+                        )
+
+                        legalSection(
+                            title: "Datenschutz",
+                            content: """
+                            Informationen zum Datenschutz finden Sie in der Datenschutzerklärung in den Einstellungen.
                             """
                         )
 
                         legalSection(
                             title: "App-Informationen",
                             content: """
-                            Version: 1.0.0
+                            App-Name: ai-presents-app
+                            Version: siehe Einstellungen
                             Plattform: iOS (iPhone)
-                            Verfügbar im App Store
-
-                            Diese App wurde mit SwiftUI entwickelt und entspricht den Apple Human Interface Guidelines.
                             """
                         )
                     }

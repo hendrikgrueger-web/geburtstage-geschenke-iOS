@@ -48,6 +48,8 @@
     <string>Diese App benötigt Zugriff auf deine Kontakte, um Geburtstage von Freunden und Familie zu importieren.</string>
     <key>NSUserNotificationsUsageDescription</key>
     <string>Diese App möchte dich an Geburtstage erinnern, damit du pünktlich Geschenke vorbereiten kannst.</string>
+    <key>NSUbiquitousContainersUsageDescription</key>
+    <string>Diese App nutzt iCloud, um deine Daten zwischen deinen Apple-Geräten zu synchronisieren.</string>
     <key>UIApplicationSceneManifest</key>
     <dict>
         <key>UIApplicationSupportsMultipleScenes</key>
