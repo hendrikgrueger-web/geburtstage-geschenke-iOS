@@ -14,6 +14,7 @@ struct AddGiftIdeaSheet: View {
     @State private var link: String
     @State private var tagsInput: String
     @State private var status: GiftStatus
+    @State private var formState = FormState()
 
     init(person: PersonRef) {
         self.person = person
@@ -24,6 +25,7 @@ struct AddGiftIdeaSheet: View {
         self._link = State(initialValue: "")
         self._tagsInput = State(initialValue: "")
         self._status = State(initialValue: .idea)
+        self._formState = State(initialValue: FormState())
     }
 
     init(person: PersonRef, prefillTitle: String, prefillNote: String) {
@@ -35,17 +37,19 @@ struct AddGiftIdeaSheet: View {
         self._link = State(initialValue: "")
         self._tagsInput = State(initialValue: "")
         self._status = State(initialValue: .idea)
+        self._formState = State(initialValue: FormState())
     }
 
     private var isBudgetInvalid: Bool {
-        guard let min = Double(budgetMin), let max = Double(budgetMax), min > 0, max > 0 else {
-            return false
-        }
-        return max < min
+        FormValidator.validateBudget(minString: budgetMin, maxString: budgetMax) != nil
     }
 
     private var linkValidation: (sanitized: String, isValid: Bool) {
         URLValidator.validate(link)
+    }
+
+    private var canSave: Bool {
+        !title.isEmpty && !isBudgetInvalid && formState.isValid
     }
 
     var body: some View {
