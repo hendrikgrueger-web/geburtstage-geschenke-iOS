@@ -48,6 +48,19 @@ struct SettingsView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
+
+                    #if DEBUG
+                    NavigationLink {
+                        DevSettingsView()
+                    } label: {
+                        HStack {
+                            Text("Dev Settings")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    #endif
                 }
 
                 Section("Benachrichtigungen") {
