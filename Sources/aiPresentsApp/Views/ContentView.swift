@@ -6,6 +6,7 @@ struct ContentView: View {
     @Query private var people: [PersonRef]
 
     @State private var selectedTab: MainTab = .timeline
+    @State private var showingContactsImport = false
 
     enum MainTab: String, CaseIterable {
         case timeline = "Geburtstage"
@@ -25,6 +26,16 @@ struct ContentView: View {
                     Label("Einstellungen", systemImage: selectedTab == .settings ? "gearshape.fill" : "gearshape")
                 }
                 .tag(MainTab.settings)
+        }
+        .sheet(isPresented: $showingContactsImport) {
+            ContactsImportView()
+        }
+        .onAppear {
+            // Show contacts import on first launch if no contacts
+            if people.isEmpty && !UserDefaults.standard.bool(forKey: "hasShownContactsImport") {
+                showingContactsImport = true
+                UserDefaults.standard.set(true, forKey: "hasShownContactsImport")
+            }
         }
     }
 }
