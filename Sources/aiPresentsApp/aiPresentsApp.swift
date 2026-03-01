@@ -40,12 +40,18 @@ struct aiPresentsApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .onAppear {
-                    Task {
-                        await reminderManager.scheduleAllReminders()
-                    }
+            ZStack {
+                if UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") {
+                    ContentView()
+                        .onAppear {
+                            Task {
+                                await reminderManager.scheduleAllReminders()
+                            }
+                        }
+                } else {
+                    OnboardingView()
                 }
+            }
         }
         .modelContainer(modelContainer)
     }
