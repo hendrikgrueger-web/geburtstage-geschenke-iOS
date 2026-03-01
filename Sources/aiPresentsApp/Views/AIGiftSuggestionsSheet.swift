@@ -130,6 +130,7 @@ struct AIGiftSuggestionsSheet: View {
                             }
                         }
                         .pickerStyle(.segmented)
+                        .accessibilityLabel("Budget-Bereich wählen")
                     }
 
                     Section {
