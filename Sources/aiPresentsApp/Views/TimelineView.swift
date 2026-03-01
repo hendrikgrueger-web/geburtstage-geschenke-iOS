@@ -41,6 +41,11 @@ struct TimelineView: View {
             .padding()
             .accessibilityLabel("Zeitfilter")
 
+            // Birthday Widget
+            BirthdayWidgetView()
+                .padding(.horizontal)
+                .padding(.bottom, 16)
+
             // Quick Stats
             QuickStatsView()
                 .padding(.bottom, 8)
