@@ -12,6 +12,7 @@ struct PersonDetailView: View {
 
     @State private var showingAddGiftIdea = false
     @State private var showingEditGiftIdea: GiftIdea?
+    @State private var showingAddGiftHistory = false
     @State private var showingDeletePerson = false
 
     var body: some View {
@@ -86,9 +87,9 @@ struct PersonDetailView: View {
                 HStack {
                     Text("Geschenke-Verlauf")
                     Spacer()
-                    Image(systemName: "clock.arrow.circlepath")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    Button(action: { showingAddGiftHistory = true }) {
+                        Image(systemName: "plus.circle.fill")
+                    }
                 }
             } footer: {
                 Text("In früheren Jahren verschenkt")
@@ -112,6 +113,9 @@ struct PersonDetailView: View {
         }
         .sheet(item: $showingEditGiftIdea) { idea in
             EditGiftIdeaSheet(person: person, idea: idea)
+        }
+        .sheet(isPresented: $showingAddGiftHistory) {
+            AddGiftHistorySheet(person: person)
         }
         .alert("Kontakt löschen?", isPresented: $showingDeletePerson) {
             Button("Abbrechen", role: .cancel) { }
