@@ -8,6 +8,7 @@ struct PersonDetailView: View {
     let person: PersonRef
 
     @Query private var giftIdeas: [GiftIdea]
+    @Query private var giftHistory: [GiftHistory]
 
     @State private var showingAddGiftIdea = false
     @State private var showingEditGiftIdea: GiftIdea?
@@ -68,6 +69,29 @@ struct PersonDetailView: View {
                         Image(systemName: "plus.circle.fill")
                     }
                 }
+            }
+
+            // Gift History
+            Section {
+                if filteredGiftHistory.isEmpty {
+                    Text("Noch keine Geschenke eingetragen")
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                } else {
+                    ForEach(filteredGiftHistory) { history in
+                        GiftHistoryRow(history: history)
+                    }
+                }
+            } header: {
+                HStack {
+                    Text("Geschenke-Verlauf")
+                    Spacer()
+                    Image(systemName: "clock.arrow.circlepath")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            } footer: {
+                Text("In früheren Jahren verschenkt")
             }
 
             // Danger Zone
@@ -140,6 +164,12 @@ struct PersonDetailView: View {
                 }
                 return idea1.title < idea2.title
             }
+    }
+
+    private var filteredGiftHistory: [GiftHistory] {
+        giftHistory
+            .filter { $0.personId == person.id }
+            .sorted { $0.year > $1.year }
     }
 
     private var birthdayString: String {
