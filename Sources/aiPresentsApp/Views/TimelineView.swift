@@ -62,8 +62,30 @@ struct TimelineView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack(spacing: 12) {
-                    Button {
-                        showingFilterSheet = true
+                    Menu {
+                        Button {
+                            filterHasIdeas = nil
+                            filterRelation = nil
+                            HapticFeedback.selectionChanged()
+                        } label: {
+                            Label("Alle", systemImage: "list.bullet")
+                        }
+
+                        Divider()
+
+                        Button {
+                            filterHasIdeas = false
+                            HapticFeedback.selectionChanged()
+                        } label: {
+                            Label("Ohne Ideen", systemImage: "lightbulb.slash")
+                        }
+
+                        Button {
+                            filterHasIdeas = true
+                            HapticFeedback.selectionChanged()
+                        } label: {
+                            Label("Mit Ideen", systemImage: "lightbulb.fill")
+                        }
                     } label: {
                         Image(systemName: "line.3.horizontal.decrease.circle")
                             .symbolVariant(filterHasIdeas != nil || filterRelation != nil ? .fill : .none)
