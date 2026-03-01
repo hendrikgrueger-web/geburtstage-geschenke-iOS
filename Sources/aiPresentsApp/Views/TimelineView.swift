@@ -11,6 +11,7 @@ struct TimelineView: View {
     @State private var showingFilterSheet = false
     @State private var filterHasIdeas: Bool? = nil
     @State private var filterRelation: String? = nil
+    @State private var showingAddGiftIdeaFor: PersonRef?
 
     enum TimelineTab: String, CaseIterable {
         case today = "Heute"
@@ -36,6 +37,10 @@ struct TimelineView: View {
             }
             .pickerStyle(.segmented)
             .padding()
+
+            // Quick Stats
+            QuickStatsView()
+                .padding(.bottom, 8)
 
             if filteredBirthdays.isEmpty {
                 emptyStateView
@@ -171,10 +176,21 @@ struct TimelineView: View {
                         }
                         .tint(.orange)
                     }
+
+                    Button {
+                        showingAddGiftIdeaFor = person
+                        HapticFeedback.light()
+                    } label: {
+                        Label("Idee", systemImage: "plus.circle.fill")
+                    }
+                    .tint(.blue)
                 }
             }
         }
         .listStyle(.insetGrouped)
+        .sheet(item: $showingAddGiftIdeaFor) { person in
+            AddGiftIdeaSheet(person: person)
+        }
     }
 
     private func markAsPlanned(_ idea: GiftIdea) {
