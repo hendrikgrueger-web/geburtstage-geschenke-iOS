@@ -31,9 +31,17 @@ struct GiftIdeaRow: View {
             }
 
             if idea.budgetMax > 0 {
-                budgetString
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                HStack {
+                    budgetString
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+
+                    Spacer()
+
+                    if idea.budgetMin > 0 && idea.budgetMax > idea.budgetMin {
+                        budgetBar
+                    }
+                }
             }
 
             if !idea.tags.isEmpty {
@@ -79,6 +87,43 @@ struct GiftIdeaRow: View {
         } else {
             return String(format: "%.0f - %.0f €", idea.budgetMin, idea.budgetMax)
         }
+    }
+
+    private var budgetBar: some View {
+        GeometryReader { geometry in
+            HStack(spacing: 2) {
+                // Min marker
+                Rectangle()
+                    .fill(AppColor.primary.opacity(0.6))
+                    .frame(width: 2)
+                    .frame(height: 8)
+
+                // Budget range
+                Rectangle()
+                    .fill(budgetGradient)
+                    .frame(width: geometry.size.width - 4)
+                    .frame(height: 6)
+                    .cornerRadius(2)
+
+                // Max marker
+                Rectangle()
+                    .fill(AppColor.accent.opacity(0.8))
+                    .frame(width: 2)
+                    .frame(height: 8)
+            }
+        }
+        .frame(width: 80, height: 10)
+    }
+
+    private var budgetGradient: LinearGradient {
+        LinearGradient(
+            gradient: Gradient(colors: [
+                AppColor.primary.opacity(0.4),
+                AppColor.secondary.opacity(0.4)
+            ]),
+            startPoint: .leading,
+            endPoint: .trailing
+        )
     }
 
     private var tagsView: some View {
