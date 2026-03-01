@@ -109,12 +109,25 @@ struct PersonDetailView: View {
                     }
                 }
             } footer: {
-                Button(action: { showingAISuggestions = true }) {
-                    HStack {
-                        Image(systemName: "sparkles")
-                            .foregroundColor(.orange)
-                        Text("KI-Vorschläge generieren")
-                            .font(.subheadline)
+                VStack(alignment: .leading, spacing: 12) {
+                    Button(action: { showingAISuggestions = true }) {
+                        HStack {
+                            Image(systemName: "sparkles")
+                                .foregroundColor(.orange)
+                            Text("KI-Vorschläge generieren")
+                                .font(.subheadline)
+                        }
+                    }
+
+                    if !filteredGiftIdeas.isEmpty && hasPurchasedGifts {
+                        Button(action: markAllAsGiven) {
+                            HStack {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(AppColor.success)
+                                Text("Alle als verschenkt markieren")
+                                    .font(.subheadline)
+                            }
+                        }
                     }
                 }
             }
@@ -242,6 +255,10 @@ struct PersonDetailView: View {
             .sorted { $0.year > $1.year }
     }
 
+    private var hasPurchasedGifts: Bool {
+        filteredGiftIdeas.contains { $0.status == .purchased }
+    }
+
     private var birthdayString: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -326,5 +343,13 @@ struct PersonDetailView: View {
             break
         }
         HapticFeedback.medium()
+    }
+
+    private func markAllAsGiven() {
+        let purchasedGifts = filteredGiftIdeas.filter { $0.status == .purchased }
+        for gift in purchasedGifts {
+            gift.status = .given
+        }
+        HapticFeedback.success()
     }
 }
