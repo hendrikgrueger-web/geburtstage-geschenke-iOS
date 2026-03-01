@@ -28,6 +28,13 @@ struct EditGiftIdeaSheet: View {
         self._status = State(initialValue: idea.status)
     }
 
+    private var isBudgetInvalid: Bool {
+        guard let min = Double(budgetMin), let max = Double(budgetMax), min > 0, max > 0 else {
+            return false
+        }
+        return max < min
+    }
+
     var body: some View {
         NavigationStack {
             Form {
@@ -56,6 +63,13 @@ struct EditGiftIdeaSheet: View {
                         Text("Max")
                         TextField("€", text: $budgetMax)
                             .keyboardType(.decimalPad)
+                            .foregroundColor(isBudgetInvalid ? .red : .primary)
+                    }
+
+                    if isBudgetInvalid {
+                        Text("Max darf nicht kleiner als Min sein")
+                            .font(.caption)
+                            .foregroundColor(.red)
                     }
                 }
 
@@ -87,7 +101,7 @@ struct EditGiftIdeaSheet: View {
                         saveGiftIdea()
                         dismiss()
                     }
-                    .disabled(title.isEmpty)
+                    .disabled(title.isEmpty || isBudgetInvalid)
                 }
             }
         }
