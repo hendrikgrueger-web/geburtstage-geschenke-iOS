@@ -25,7 +25,7 @@ struct AddGiftHistorySheet: View {
     }
 
     private var isTitleValid: Bool {
-        !title.trimmingCharacters(in: .whitespaces).isEmpty
+        FormValidator.validateTitle(title) == nil
     }
 
     private var linkValidation: (sanitized: String, isValid: Bool) {
