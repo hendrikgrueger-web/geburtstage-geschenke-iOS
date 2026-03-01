@@ -61,6 +61,26 @@ struct SettingsView: View {
                     }
                 }
 
+                Section("iCloud Sync") {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("iCloud Sync")
+                                .font(.body)
+
+                            Text("Automatisch synchronisiert")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+
+                        Spacer()
+
+                        Image(systemName: "icloud.fill")
+                            .foregroundColor(.blue)
+                    }
+                } footer: {
+                    Text("Daten werden automatisch über deine Apple-Geräte synchronisiert.")
+                }
+
                 Section("Daten") {
                     Button(role: .destructive) {
                         showingResetConfirmation = true
