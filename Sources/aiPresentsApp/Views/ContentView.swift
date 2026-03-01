@@ -20,12 +20,14 @@ struct ContentView: View {
                     Label("Geburtstage", systemImage: selectedTab == .timeline ? "gift.fill" : "gift")
                 }
                 .tag(MainTab.timeline)
+                .accessibilityLabel("Geburtstage")
 
             SettingsView()
                 .tabItem {
                     Label("Einstellungen", systemImage: selectedTab == .settings ? "gearshape.fill" : "gearshape")
                 }
                 .tag(MainTab.settings)
+                .accessibilityLabel("Einstellungen")
         }
         .sheet(isPresented: $showingContactsImport) {
             ContactsImportView()
