@@ -93,6 +93,44 @@ struct PersonDetailView: View {
                 }
             }
 
+            // Person Info
+            Section {
+                avatarRow
+
+                HStack {
+                    Text("Name")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(person.displayName)
+                        .fontWeight(.medium)
+                }
+
+                HStack {
+                    Text("Geburtstag")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(birthdayString)
+                        .fontWeight(.medium)
+                }
+
+                HStack {
+                    Text("Nächster Geburtstag")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(nextBirthdayInfo)
+                        .fontWeight(.medium)
+                        .foregroundColor(daysUntilBirthday <= 7 ? .orange : .primary)
+                }
+
+                HStack {
+                    Text("Beziehung")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(person.relation)
+                        .fontWeight(.medium)
+                }
+            }
+
             // Gift Ideas
             Section {
                 GiftSummaryView(person: person)
