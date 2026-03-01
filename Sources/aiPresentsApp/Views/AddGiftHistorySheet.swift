@@ -28,6 +28,10 @@ struct AddGiftHistorySheet: View {
         !title.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
+    private var linkValidation: (sanitized: String, isValid: Bool) {
+        URLValidator.validate(link)
+    }
+
     var body: some View {
         NavigationStack {
             Form {
@@ -57,11 +61,9 @@ struct AddGiftHistorySheet: View {
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
 
-                        if !link.isEmpty {
+                        if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {
-                                if let url = URL(string: link), UIApplication.shared.canOpenURL(url) {
-                                    UIApplication.shared.open(url)
-                                }
+                                UIApplication.shared.open(URL(string: linkValidation.sanitized)!)
                             } label: {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundColor(.blue)
@@ -105,6 +107,7 @@ struct AddGiftHistorySheet: View {
     }
 
     private func saveGiftHistory() {
+        let linkValue = linkValidation.isValid ? linkValidation.sanitized : link.trimmingCharacters(in: .whitespacesAndNewlines)
         let history = GiftHistory(
             personId: person.id,
             title: title.trimmingCharacters(in: .whitespaces),
@@ -112,7 +115,7 @@ struct AddGiftHistorySheet: View {
             year: year,
             budget: Double(budget) ?? 0,
             note: note,
-            link: link
+            link: linkValue
         )
 
         modelContext.insert(history)

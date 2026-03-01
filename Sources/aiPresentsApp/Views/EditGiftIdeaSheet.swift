@@ -35,6 +35,10 @@ struct EditGiftIdeaSheet: View {
         return max < min
     }
 
+    private var linkValidation: (sanitized: String, isValid: Bool) {
+        URLValidator.validate(link)
+    }
+
     var body: some View {
         NavigationStack {
             Form {
@@ -50,11 +54,9 @@ struct EditGiftIdeaSheet: View {
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
 
-                        if !link.isEmpty {
+                        if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {
-                                if let url = URL(string: link), UIApplication.shared.canOpenURL(url) {
-                                    UIApplication.shared.open(url)
-                                }
+                                UIApplication.shared.open(URL(string: linkValidation.sanitized)!)
                             } label: {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundColor(.blue)
@@ -124,7 +126,7 @@ struct EditGiftIdeaSheet: View {
         idea.note = note
         idea.budgetMin = Double(budgetMin) ?? 0
         idea.budgetMax = Double(budgetMax) ?? 0
-        idea.link = link
+        idea.link = linkValidation.isValid ? linkValidation.sanitized : link.trimmingCharacters(in: .whitespacesAndNewlines)
         idea.status = status
 
         let tags = tagsInput

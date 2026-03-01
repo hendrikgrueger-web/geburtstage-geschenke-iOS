@@ -3,6 +3,10 @@ import SwiftUI
 struct GiftIdeaRow: View {
     let idea: GiftIdea
 
+    private var linkValidation: (sanitized: String, isValid: Bool) {
+        URLValidator.validate(idea.link)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
@@ -12,8 +16,8 @@ struct GiftIdeaRow: View {
 
                 Spacer()
 
-                if !idea.link.isEmpty {
-                    Link(destination: URL(string: idea.link) ?? URL(string: "https://")!) {
+                if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
+                    Link(destination: URL(string: linkValidation.sanitized)!) {
                         Image(systemName: "link.circle.fill")
                             .font(.caption)
                             .foregroundColor(AppColor.primary)

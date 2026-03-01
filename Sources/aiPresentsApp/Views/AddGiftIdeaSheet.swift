@@ -44,6 +44,10 @@ struct AddGiftIdeaSheet: View {
         return max < min
     }
 
+    private var linkValidation: (sanitized: String, isValid: Bool) {
+        URLValidator.validate(link)
+    }
+
     var body: some View {
         NavigationStack {
             Form {
@@ -59,11 +63,9 @@ struct AddGiftIdeaSheet: View {
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
 
-                        if !link.isEmpty {
+                        if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {
-                                if let url = URL(string: link), UIApplication.shared.canOpenURL(url) {
-                                    UIApplication.shared.open(url)
-                                }
+                                UIApplication.shared.open(URL(string: linkValidation.sanitized)!)
                             } label: {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundColor(.blue)
@@ -135,13 +137,14 @@ struct AddGiftIdeaSheet: View {
             .map { $0.trimmingCharacters(in: .whitespaces) }
             .filter { !$0.isEmpty }
 
+        let linkValue = linkValidation.isValid ? linkValidation.sanitized : link.trimmingCharacters(in: .whitespacesAndNewlines)
         let idea = GiftIdea(
             personId: person.id,
             title: title,
             note: note,
             budgetMin: Double(budgetMin) ?? 0,
             budgetMax: Double(budgetMax) ?? 0,
-            link: link,
+            link: linkValue,
             status: status,
             tags: tags
         )

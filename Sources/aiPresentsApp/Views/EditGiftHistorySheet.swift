@@ -31,6 +31,10 @@ struct EditGiftHistorySheet: View {
         currentYear = calendar.component(.year, from: Date())
     }
 
+    private var linkValidation: (sanitized: String, isValid: Bool) {
+        URLValidator.validate(link)
+    }
+
     var body: some View {
         NavigationStack {
             Form {
@@ -73,11 +77,9 @@ struct EditGiftHistorySheet: View {
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
 
-                        if !link.isEmpty {
+                        if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {
-                                if let url = URL(string: link), UIApplication.shared.canOpenURL(url) {
-                                    UIApplication.shared.open(url)
-                                }
+                                UIApplication.shared.open(URL(string: linkValidation.sanitized)!)
                             } label: {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundColor(.blue)
@@ -113,6 +115,6 @@ struct EditGiftHistorySheet: View {
         history.year = year
         history.budget = Double(budget) ?? 0
         history.note = note
-        history.link = link
+        history.link = linkValidation.isValid ? linkValidation.sanitized : link.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
