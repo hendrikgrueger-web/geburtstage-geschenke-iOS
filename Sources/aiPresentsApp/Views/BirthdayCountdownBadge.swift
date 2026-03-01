@@ -21,6 +21,18 @@ struct BirthdayCountdownBadge: View {
         .background(badgeGradient)
         .cornerRadius(12)
         .shadow(color: badgeColor.opacity(0.3), radius: 4, x: 0, y: 2)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
+    }
+
+    private var accessibilityLabel: String {
+        if daysUntil == 0 {
+            return "Geburtstag heute"
+        } else if daysUntil == 1 {
+            return "Geburtstag morgen"
+        } else {
+            return "Geburtstag in \(daysUntil) Tagen"
+        }
     }
 
     private var countdownText: String {
