@@ -3,16 +3,22 @@ import SwiftData
 
 struct PersonDetailView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+
     let person: PersonRef
 
     @Query private var giftIdeas: [GiftIdea]
 
     @State private var showingAddGiftIdea = false
+    @State private var showingEditGiftIdea: GiftIdea?
+    @State private var showingDeletePerson = false
 
     var body: some View {
         List {
             // Person Info
             Section {
+                avatarRow
+
                 HStack {
                     Text("Name")
                         .foregroundColor(.secondary)
@@ -46,7 +52,11 @@ struct PersonDetailView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                 } else {
                     ForEach(filteredGiftIdeas) { idea in
-                        GiftIdeaRow(idea: idea)
+                        Button {
+                            showingEditGiftIdea = idea
+                        } label: {
+                            GiftIdeaRow(idea: idea)
+                        }
                     }
                     .onDelete(perform: deleteGiftIdeas)
                 }
@@ -59,12 +69,53 @@ struct PersonDetailView: View {
                     }
                 }
             }
+
+            // Danger Zone
+            Section {
+                Button(role: .destructive) {
+                    showingDeletePerson = true
+                } label: {
+                    HStack {
+                        Text("Kontakt löschen")
+                        Spacer()
+                        Image(systemName: "trash")
+                    }
+                }
+            }
         }
         .sheet(isPresented: $showingAddGiftIdea) {
             AddGiftIdeaSheet(person: person)
         }
+        .sheet(item: $showingEditGiftIdea) { idea in
+            EditGiftIdeaSheet(person: person, idea: idea)
+        }
+        .alert("Kontakt löschen?", isPresented: $showingDeletePerson) {
+            Button("Abbrechen", role: .cancel) { }
+            Button("Löschen", role: .destructive) {
+                deletePerson()
+            }
+        } message: {
+            Text("Das löscht \(person.displayName) und alle zugehörigen Geschenkideen.")
+        }
         .navigationTitle(person.displayName)
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private var avatarRow: some View {
+        HStack {
+            Circle()
+                .fill(AppColor.gradientBlue)
+                .frame(width: 60, height: 60)
+                .overlay {
+                    Text(String(person.displayName.prefix(1)))
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+
+            Spacer()
+        }
+        .padding(.vertical, 8)
     }
 
     private var filteredGiftIdeas: [GiftIdea] {
@@ -84,5 +135,12 @@ struct PersonDetailView: View {
                 modelContext.delete(filteredGiftIdeas[index])
             }
         }
+    }
+
+    private func deletePerson() {
+        withAnimation {
+            modelContext.delete(person)
+        }
+        dismiss()
     }
 }

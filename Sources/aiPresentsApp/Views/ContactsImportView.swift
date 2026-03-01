@@ -9,7 +9,8 @@ struct ContactsImportView: View {
     @State private var hasPermission = false
     @State private var isImporting = false
     @State private var importedCount = 0
-    @State private var importError: String?
+    @State private importError: String?
+    @State private var useSampleData = false
 
     var body: some View {
         NavigationStack {
@@ -25,10 +26,18 @@ struct ContactsImportView: View {
                     .fontWeight(.bold)
 
                 // Description
-                Text("Importiere Kontakte mit Geburtstagen aus deinem Adressbuch. Wir speichern nur die minimalen Informationen.")
+                Text("Importiere Kontakte mit Geburtstagen aus deinem Adressbuch oder verwende Demo-Daten zum Testen.")
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
+
+                // Import Mode Toggle
+                Picker("Modus", selection: $useSampleData) {
+                    Text(" echte Kontakte").tag(false)
+                    Text(" Demo-Daten").tag(true)
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
 
                 // Permission Status
                 VStack(alignment: .leading, spacing: 12) {
@@ -36,14 +45,14 @@ struct ContactsImportView: View {
                         Image(systemName: hasPermission ? "checkmark.circle.fill" : "circle")
                             .foregroundColor(hasPermission ? .green : .gray)
 
-                        Text("Zugriff auf Kontakte")
+                        Text(useSampleData ? "Demo-Daten verwenden" : "Zugriff auf Kontakte")
                     }
 
                     HStack(spacing: 12) {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
 
-                        Text("Nur Geburtstage & Namen")
+                        Text(useSampleData ? "3 Beispiel-Kontakte" : "Nur Geburtstage & Namen")
                     }
 
                     HStack(spacing: 12) {
@@ -83,7 +92,7 @@ struct ContactsImportView: View {
                         Text("Fertig")
                             .fontWeight(.semibold)
                     } else {
-                        Text(hasPermission ? "Importieren" : "Zugriff gewähren")
+                        Text(useSampleData ? "Demo-Daten laden" : "Importieren")
                             .fontWeight(.semibold)
                     }
                 }
@@ -108,7 +117,9 @@ struct ContactsImportView: View {
     }
 
     private func mainAction() {
-        if hasPermission {
+        if useSampleData {
+            loadSampleData()
+        } else if hasPermission {
             importContacts()
         } else {
             requestPermission()
@@ -163,6 +174,18 @@ struct ContactsImportView: View {
                     importError = error.localizedDescription
                 }
             }
+        }
+    }
+
+    private func loadSampleData() {
+        isImporting = true
+        importError = nil
+
+        SampleDataService.createSampleData(in: modelContext)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            isImporting = false
+            importedCount = 3
         }
     }
 }
