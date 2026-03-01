@@ -16,6 +16,14 @@ struct PersonDetailView: View {
     @State private var showingEditGiftHistory: GiftHistory?
     @State private var showingDeletePerson = false
     @State private var showingAISuggestions = false
+    @State private var giftSortOption: GiftSortOption = .status
+
+    enum GiftSortOption: String, CaseIterable {
+        case status = "Status"
+        case budget = "Budget"
+        case title = "Titel"
+        case date = "Datum"
+    }
 
     var body: some View {
         List {
@@ -104,6 +112,13 @@ struct PersonDetailView: View {
                 HStack {
                     Text("Geschenkideen")
                     Spacer()
+                    Picker("", selection: $giftSortOption) {
+                        ForEach(GiftSortOption.allCases, id: \.self) { option in
+                            Text(option.rawValue).tag(option)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    .buttonStyle(.plain)
                     Button(action: { showingAddGiftIdea = true }) {
                         Image(systemName: "plus.circle.fill")
                     }
@@ -240,12 +255,21 @@ struct PersonDetailView: View {
         return giftIdeas
             .filter { $0.personId == person.id }
             .sorted { idea1, idea2 in
-                let index1 = statusOrder.firstIndex(of: idea1.status) ?? 0
-                let index2 = statusOrder.firstIndex(of: idea2.status) ?? 0
-                if index1 != index2 {
-                    return index1 < index2
+                switch giftSortOption {
+                case .status:
+                    let index1 = statusOrder.firstIndex(of: idea1.status) ?? 0
+                    let index2 = statusOrder.firstIndex(of: idea2.status) ?? 0
+                    if index1 != index2 {
+                        return index1 < index2
+                    }
+                    return idea1.title < idea2.title
+                case .budget:
+                    return idea1.budgetMax > idea2.budgetMax
+                case .title:
+                    return idea1.title < idea2.title
+                case .date:
+                    return idea1.createdAt > idea2.createdAt
                 }
-                return idea1.title < idea2.title
             }
     }
 
