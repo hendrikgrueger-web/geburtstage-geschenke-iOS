@@ -17,6 +17,8 @@ struct PersonDetailView: View {
     @State private var showingDeletePerson = false
     @State private var showingAISuggestions = false
     @State private var giftSortOption: GiftSortOption = .status
+    @State private var showingShareSheet = false
+    @State private var shareText: String = ""
 
     enum GiftSortOption: String, CaseIterable {
         case status = "Status"
@@ -91,6 +93,14 @@ struct PersonDetailView: View {
                             .tint(AppColor.primary)
                         }
                         .contextMenu {
+                            Button {
+                                shareText = idea.exportAsText()
+                                showingShareSheet = true
+                                HapticFeedback.light()
+                            } label: {
+                                Label("Teilen", systemImage: "square.and.arrow.up")
+                            }
+
                             Button {
                                 advanceStatus(for: idea)
                             } label: {
@@ -231,11 +241,26 @@ struct PersonDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    showingAddGiftIdea = true
-                } label: {
-                    Image(systemName: "plus")
+                HStack(spacing: 16) {
+                    Button {
+                        shareText = person.exportAllGiftIdeasAsText()
+                        showingShareSheet = true
+                        HapticFeedback.light()
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+
+                    Button {
+                        showingAddGiftIdea = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
+            }
+        }
+        .sheet(isPresented: $showingShareSheet) {
+            if !shareText.isEmpty {
+                ShareSheetView(items: [shareText])
             }
         }
     }
