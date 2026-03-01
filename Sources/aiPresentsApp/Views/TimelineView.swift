@@ -161,9 +161,25 @@ struct TimelineView: View {
                 NavigationLink(destination: PersonDetailView(person: person)) {
                     BirthdayRow(person: person)
                 }
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    if let firstIdea = person.giftIdeas?.first,
+                       firstIdea.status == .idea {
+                        Button {
+                            markAsPlanned(firstIdea)
+                        } label: {
+                            Label("Planen", systemImage: "checkmark.circle.fill")
+                        }
+                        .tint(.orange)
+                    }
+                }
             }
         }
         .listStyle(.insetGrouped)
+    }
+
+    private func markAsPlanned(_ idea: GiftIdea) {
+        idea.status = .planned
+        // SwiftData automatically tracks changes
     }
 
     private var emptyStateView: some View {
