@@ -49,13 +49,13 @@ struct BirthdayCountdownBadge: View {
 
     private var badgeColor: Color {
         if daysUntil == 0 {
-            return .pink
+            return AppColor.birthdayToday
         } else if daysUntil <= 2 {
-            return .red
+            return AppColor.birthdaySoon
         } else if daysUntil <= 7 {
             return AppColor.accent
         } else {
-            return AppColor.primary
+            return AppColor.birthdayUpcoming
         }
     }
 
