@@ -95,6 +95,8 @@ struct PersonDetailView: View {
 
             // Gift Ideas
             Section {
+                GiftSummaryView(person: person)
+
                 if filteredGiftIdeas.isEmpty {
                     Text("Keine Ideen")
                         .foregroundColor(.secondary)
