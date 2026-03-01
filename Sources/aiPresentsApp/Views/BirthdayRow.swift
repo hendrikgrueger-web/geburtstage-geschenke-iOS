@@ -3,10 +3,12 @@ import SwiftUI
 struct BirthdayRow: View {
     let person: PersonRef
     let onTap: (() -> Void)?
+    let showCountdown: Bool
 
-    init(person: PersonRef, onTap: (() -> Void)? = nil) {
+    init(person: PersonRef, onTap: (() -> Void)? = nil, showCountdown: Bool = true) {
         self.person = person
         self.onTap = onTap
+        self.showCountdown = showCountdown
     }
 
     var body: some View {
@@ -31,20 +33,26 @@ struct BirthdayRow: View {
 
             Spacer()
 
-            if let giftCount = person.giftIdeas?.count, giftCount > 0 {
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text("\(giftCount)")
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .foregroundColor(AppColor.accent)
-                    Text("Ideen")
-                        .font(.caption2)
-                        .foregroundColor(AppColor.textSecondary)
+            VStack(alignment: .trailing, spacing: 8) {
+                if showCountdown && daysUntilBirthday >= 0 && daysUntilBirthday <= 30 {
+                    BirthdayCountdownBadge(daysUntil: daysUntilBirthday)
                 }
-                .padding(.horizontal, 8)
-                .padding(.vertical, 6)
-                .background(AppColor.accent.opacity(0.15))
-                .cornerRadius(8)
+
+                if let giftCount = person.giftIdeas?.count, giftCount > 0 {
+                    HStack(spacing: 4) {
+                        Text("\(giftCount)")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .foregroundColor(AppColor.accent)
+                        Text("Ideen")
+                            .font(.caption2)
+                            .foregroundColor(AppColor.textSecondary)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(AppColor.accent.opacity(0.15))
+                    .cornerRadius(8)
+                }
             }
         }
         .padding(.vertical, 8)
