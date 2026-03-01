@@ -96,6 +96,7 @@ struct EditGiftIdeaSheet: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .accessibilityLabel("Geschenkstatus")
                 }
             }
             .navigationTitle("Idee bearbeiten")
