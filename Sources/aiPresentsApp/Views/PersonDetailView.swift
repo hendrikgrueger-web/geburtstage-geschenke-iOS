@@ -39,6 +39,15 @@ struct PersonDetailView: View {
                 }
 
                 HStack {
+                    Text("Nächster Geburtstag")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(nextBirthdayInfo)
+                        .fontWeight(.medium)
+                        .foregroundColor(daysUntilBirthday <= 7 ? .orange : .primary)
+                }
+
+                HStack {
                     Text("Beziehung")
                         .foregroundColor(.secondary)
                     Spacer()
@@ -217,6 +226,29 @@ struct PersonDetailView: View {
         formatter.dateStyle = .medium
         formatter.locale = Locale(identifier: "de_DE")
         return formatter.string(from: person.birthday)
+    }
+
+    private var daysUntilBirthday: Int {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
+        return calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
+    }
+
+    private var nextBirthdayInfo: String {
+        if daysUntilBirthday == 0 {
+            return "🎉 Heute!"
+        } else if daysUntilBirthday == 1 {
+            return "Morgen"
+        } else if daysUntilBirthday < 0 {
+            return "Vor \(-daysUntilBirthday) Tagen"
+        } else if daysUntilBirthday == 365 {
+            return "Nächstes Jahr"
+        } else if daysUntilBirthday < 7 {
+            return "In \(daysUntilBirthday) Tagen"
+        } else {
+            return "\(daysUntilBirthday) Tage"
+        }
     }
 
     private func deleteGiftIdeas(at offsets: IndexSet) {
