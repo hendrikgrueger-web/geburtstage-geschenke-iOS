@@ -15,6 +15,7 @@ struct EditGiftIdeaSheet: View {
     @State private var link: String
     @State private var tagsInput: String
     @State private var status: GiftStatus
+    @State private var formState = FormState()
 
     init(person: PersonRef, idea: GiftIdea) {
         self.person = person
@@ -26,13 +27,11 @@ struct EditGiftIdeaSheet: View {
         self._link = State(initialValue: idea.link)
         self._tagsInput = State(initialValue: idea.tags.joined(separator: ", "))
         self._status = State(initialValue: idea.status)
+        self._formState = State(initialValue: FormState())
     }
 
     private var isBudgetInvalid: Bool {
-        guard let min = Double(budgetMin), let max = Double(budgetMax), min > 0, max > 0 else {
-            return false
-        }
-        return max < min
+        FormValidator.validateBudget(minString: budgetMin, maxString: budgetMax) != nil
     }
 
     private var linkValidation: (sanitized: String, isValid: Bool) {
