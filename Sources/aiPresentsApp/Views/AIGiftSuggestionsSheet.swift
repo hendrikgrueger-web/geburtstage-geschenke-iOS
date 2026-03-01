@@ -1,6 +1,31 @@
 import SwiftUI
 import SwiftData
 
+enum BudgetRange: String, CaseIterable {
+    case low = "Klein (bis 25€)"
+    case medium = "Mittel (25-75€)"
+    case high = "Groß (75-150€)"
+    case premium = "Premium (150€+)"
+
+    var min: Double {
+        switch self {
+        case .low: return 0
+        case .medium: return 25
+        case .high: return 75
+        case .premium: return 150
+        }
+    }
+
+    var max: Double {
+        switch self {
+        case .low: return 25
+        case .medium: return 75
+        case .high: return 150
+        case .premium: return 300
+        }
+    }
+}
+
 struct AIGiftSuggestionsSheet: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
@@ -12,6 +37,7 @@ struct AIGiftSuggestionsSheet: View {
     @State private var suggestions: [GiftSuggestion] = []
     @State private var errorMessage: String?
     @State private var selectedSuggestion: GiftSuggestion?
+    @State private var selectedBudget: BudgetRange = .medium
 
     var body: some View {
         NavigationStack {
@@ -97,6 +123,15 @@ struct AIGiftSuggestionsSheet: View {
                         Text("Tippe auf einen Vorschlag, um ihn als Geschenkidee zu speichern")
                     }
                 } else {
+                    Section("Budget") {
+                        Picker("Budget-Bereich", selection: $selectedBudget) {
+                            ForEach(BudgetRange.allCases, id: \.self) { budget in
+                                Text(budget.rawValue).tag(budget)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    }
+
                     Section {
                         Button(action: loadSuggestions) {
                             HStack {
@@ -148,8 +183,8 @@ struct AIGiftSuggestionsSheet: View {
             do {
                 let newSuggestions = try await AIService.shared.generateGiftIdeas(
                     for: person,
-                    budgetMin: 20,
-                    budgetMax: 100,
+                    budgetMin: selectedBudget.min,
+                    budgetMax: selectedBudget.max,
                     tags: [],
                     pastGifts: filteredGiftHistory
                 )
