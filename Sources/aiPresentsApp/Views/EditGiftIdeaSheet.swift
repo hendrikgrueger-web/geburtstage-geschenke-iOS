@@ -86,7 +86,7 @@ struct EditGiftIdeaSheet: View {
 
                 Section("Tags") {
                     TextField("Getrennt durch Kommas", text: $tagsInput)
-                        .textInputAutocapitization(.never)
+                        .textInputAutocapitalization(.never)
                 }
 
                 Section("Status") {
