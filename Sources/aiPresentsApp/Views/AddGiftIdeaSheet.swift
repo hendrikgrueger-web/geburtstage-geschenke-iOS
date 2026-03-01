@@ -58,6 +58,17 @@ struct AddGiftIdeaSheet: View {
                         TextField("URL", text: $link)
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
+
+                        if !link.isEmpty {
+                            Button {
+                                if let url = URL(string: link), UIApplication.shared.canOpenURL(url) {
+                                    UIApplication.shared.open(url)
+                                }
+                            } label: {
+                                Image(systemName: "arrow.up.right.square")
+                                    .foregroundColor(.blue)
+                            }
+                        }
                     }
                 }
 
