@@ -13,6 +13,7 @@ struct PersonDetailView: View {
     @State private var showingAddGiftIdea = false
     @State private var showingEditGiftIdea: GiftIdea?
     @State private var showingAddGiftHistory = false
+    @State private var showingEditGiftHistory: GiftHistory?
     @State private var showingDeletePerson = false
     @State private var showingAISuggestions = false
 
@@ -126,7 +127,20 @@ struct PersonDetailView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                 } else {
                     ForEach(filteredGiftHistory) { history in
-                        GiftHistoryRow(history: history)
+                        Button {
+                            showingEditGiftHistory = history
+                        } label: {
+                            GiftHistoryRow(history: history)
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            Button(role: .destructive) {
+                                if let index = filteredGiftHistory.firstIndex(where: { $0.id == history.id }) {
+                                    deleteGiftHistory(at: IndexSet([index]))
+                                }
+                            } label: {
+                                Label("Löschen", systemImage: "trash")
+                            }
+                        }
                     }
                 }
             } header: {
@@ -162,6 +176,9 @@ struct PersonDetailView: View {
         }
         .sheet(isPresented: $showingAddGiftHistory) {
             AddGiftHistorySheet(person: person)
+        }
+        .sheet(item: $showingEditGiftHistory) { history in
+            EditGiftHistorySheet(person: person, history: history)
         }
         .sheet(isPresented: $showingAISuggestions) {
             AIGiftSuggestionsSheet(person: person)
@@ -251,6 +268,15 @@ struct PersonDetailView: View {
         withAnimation {
             for index in offsets {
                 modelContext.delete(filteredGiftIdeas[index])
+            }
+            HapticFeedback.warning()
+        }
+    }
+
+    private func deleteGiftHistory(at offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(filteredGiftHistory[index])
             }
             HapticFeedback.warning()
         }

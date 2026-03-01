@@ -19,9 +19,24 @@ struct GiftHistoryRow: View {
                     .font(.subheadline)
                     .fontWeight(.medium)
 
-                Text(history.category)
-                    .font(.caption)
-                    .foregroundColor(AppColor.textSecondary)
+                HStack(spacing: 8) {
+                    Text(history.category)
+                        .font(.caption)
+                        .foregroundColor(AppColor.textSecondary)
+
+                    if history.budget > 0 {
+                        Text("• \(Int(history.budget))€")
+                            .font(.caption)
+                            .foregroundColor(AppColor.textSecondary)
+                    }
+                }
+
+                if !history.note.isEmpty {
+                    Text(history.note)
+                        .font(.caption2)
+                        .foregroundColor(AppColor.textTertiary)
+                        .lineLimit(1)
+                }
             }
 
             Spacer()

@@ -1,31 +1,34 @@
 import SwiftUI
 import SwiftData
 
-struct AddGiftHistorySheet: View {
+struct EditGiftHistorySheet: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     let person: PersonRef
+    @Bindable var history: GiftHistory
 
-    @State private var title = ""
-    @State private var category = ""
+    @State private var title: String
+    @State private var category: String
     @State private var year: Int
-    @State private var budget = ""
-    @State private var note = ""
-    @State private var link = ""
+    @State private var budget: String
+    @State private var note: String
+    @State private var link: String
 
     private let calendar = Calendar.current
     private let currentYear: Int
 
-    init(person: PersonRef) {
+    init(person: PersonRef, history: GiftHistory) {
         self.person = person
-        _year = State(initialValue: Calendar.current.component(.year, from: Date()))
+        self._history = Bindable(history)
+        self._title = State(initialValue: history.title)
+        self._category = State(initialValue: history.category)
+        self._year = State(initialValue: history.year)
+        self._budget = State(initialValue: history.budget == 0 ? "" : "\(history.budget)")
+        self._note = State(initialValue: history.note)
+        self._link = State(initialValue: history.link)
         calendar = Calendar.current
         currentYear = calendar.component(.year, from: Date())
-    }
-
-    private var isTitleValid: Bool {
-        !title.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
     var body: some View {
@@ -39,6 +42,19 @@ struct AddGiftHistorySheet: View {
                         .textInputAutocapitalization(.sentences)
                 } footer: {
                     Text("z.B. Schmuck, Buch, Erlebnis, Geld")
+                }
+
+                Section("Wann") {
+                    Picker("Jahr", selection: $year) {
+                        ForEach((currentYear - 10)...currentYear, id: \.self) { y in
+                            Text("\(y)").tag(y)
+                        }
+                    }
+                    .accessibilityLabel("Jahr des Geschenks")
+                } header: {
+                    Text("Jahr des Geschenks")
+                } footer: {
+                    Text("Wähle das Jahr, in dem das Geschenk verschenkt wurde")
                 }
 
                 Section("Details") {
@@ -70,21 +86,8 @@ struct AddGiftHistorySheet: View {
                         }
                     }
                 }
-
-                Section("Wann") {
-                    Picker("Jahr", selection: $year) {
-                        ForEach((currentYear - 10)...currentYear, id: \.self) { y in
-                            Text("\(y)").tag(y)
-                        }
-                    }
-                    .accessibilityLabel("Jahr des Geschenks")
-                } header: {
-                    Text("Jahr des Geschenks")
-                } footer: {
-                    Text("Wähle das Jahr, in dem das Geschenk verschenkt wurde")
-                }
             }
-            .navigationTitle("Geschenk vermerken")
+            .navigationTitle("Geschenk bearbeiten")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -95,26 +98,21 @@ struct AddGiftHistorySheet: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Speichern") {
-                        saveGiftHistory()
+                        saveHistory()
                         dismiss()
                     }
-                    .disabled(!isTitleValid)
+                    .disabled(title.isEmpty)
                 }
             }
         }
     }
 
-    private func saveGiftHistory() {
-        let history = GiftHistory(
-            personId: person.id,
-            title: title.trimmingCharacters(in: .whitespaces),
-            category: category.isEmpty ? "Sonstiges" : category.trimmingCharacters(in: .whitespaces),
-            year: year,
-            budget: Double(budget) ?? 0,
-            note: note,
-            link: link
-        )
-
-        modelContext.insert(history)
+    private func saveHistory() {
+        history.title = title.trimmingCharacters(in: .whitespaces)
+        history.category = category.isEmpty ? "Sonstiges" : category.trimmingCharacters(in: .whitespaces)
+        history.year = year
+        history.budget = Double(budget) ?? 0
+        history.note = note
+        history.link = link
     }
 }

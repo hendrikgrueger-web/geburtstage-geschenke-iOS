@@ -72,7 +72,9 @@ class SampleDataService {
             personId: person1.id,
             title: "Parfüm",
             category: "Kosmetik",
-            year: calendar.component(.year, from: today) - 1
+            year: calendar.component(.year, from: today) - 1,
+            budget: 65,
+            note: "Liebt blumige Düfte"
         )
 
         // Create reminder rule
