@@ -19,6 +19,8 @@ struct PersonDetailView: View {
     @State private var giftSortOption: GiftSortOption = .status
     @State private var showingShareSheet = false
     @State private var shareText: String = ""
+    @State private var showingEditRelation = false
+    @State private var editedRelation: String = ""
 
     enum GiftSortOption: String, CaseIterable {
         case status = "Status"
@@ -62,8 +64,20 @@ struct PersonDetailView: View {
                     Text("Beziehung")
                         .foregroundColor(.secondary)
                     Spacer()
-                    Text(person.relation)
-                        .fontWeight(.medium)
+                    Button {
+                        editedRelation = person.relation
+                        showingEditRelation = true
+                        HapticFeedback.light()
+                    } label: {
+                        HStack {
+                            Text(person.relation)
+                                .fontWeight(.medium)
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .accessibilityElement(children: .combine)
@@ -267,6 +281,35 @@ struct PersonDetailView: View {
         .sheet(isPresented: $showingShareSheet) {
             if !shareText.isEmpty {
                 ShareSheetView(items: [shareText])
+            }
+        }
+        .sheet(isPresented: $showingEditRelation) {
+            NavigationStack {
+                Form {
+                    Section {
+                        TextField("Beziehung", text: $editedRelation)
+                            .textInputAutocapitalization(.sentences)
+                    } footer: {
+                        Text("z.B. Familie, Freunde, Kollegen")
+                    }
+                }
+                .navigationTitle("Beziehung bearbeiten")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Abbrechen") {
+                            editedRelation = person.relation
+                        }
+                    }
+
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Speichern") {
+                            person.relation = editedRelation
+                            HapticFeedback.success()
+                        }
+                        .disabled(editedRelation.trimmingCharacters(in: .whitespaces).isEmpty)
+                    }
+                }
             }
         }
     }
