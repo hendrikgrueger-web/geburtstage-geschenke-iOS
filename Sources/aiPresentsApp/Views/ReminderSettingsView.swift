@@ -44,6 +44,7 @@ struct ReminderSettingsView: View {
                             }
                         )
                     )
+                    .accessibilityLabel("\(day) Tage vorher erinnern")
                 }
             } header: {
                 Text("Vorwarnungen")
@@ -57,12 +58,14 @@ struct ReminderSettingsView: View {
                         Text(String(format: "%02d:00", hour)).tag(hour)
                     }
                 }
+                .accessibilityLabel("Beginn Ruhestunden")
 
                 Picker("Ende Ruhestunden", selection: $quietHoursEnd) {
                     ForEach(0..<24) { hour in
                         Text(String(format: "%02d:00", hour)).tag(hour)
                     }
                 }
+                .accessibilityLabel("Ende Ruhestunden")
             } header: {
                 Text("Ruhestunden")
             } footer: {
