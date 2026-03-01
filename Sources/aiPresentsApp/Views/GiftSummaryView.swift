@@ -35,6 +35,8 @@ struct GiftSummaryView: View {
             Spacer()
         }
         .padding(.vertical, 8)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Keine Geschenkideen vorhanden")
     }
 
     private var summaryContent: some View {
@@ -46,6 +48,8 @@ struct GiftSummaryView: View {
             statusBreakdownView
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Geschenk-Status Übersicht")
     }
 
     private var progressOverview: some View {
@@ -94,6 +98,17 @@ struct GiftSummaryView: View {
             .padding(.vertical, 3)
             .background(status.color.opacity(0.15))
             .cornerRadius(6)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("\(statusText(for: status)): \(count)")
+        }
+    }
+
+    private func statusText(for status: GiftStatus) -> String {
+        switch status {
+        case .idea: return "Ideen"
+        case .planned: return "Geplant"
+        case .purchased: return "Gekauft"
+        case .given: return "Verschenkt"
         }
     }
 
