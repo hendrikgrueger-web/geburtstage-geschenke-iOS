@@ -37,13 +37,17 @@ class ReminderManager: ObservableObject {
             return
         }
 
+        guard let rule = currentRule(), rule.enabled else {
+            return
+        }
+
         let descriptor = FetchDescriptor<PersonRef>()
         guard let people = try? modelContext.fetch(descriptor) else {
             return
         }
 
         for person in people {
-            await scheduleReminders(for: person)
+            await scheduleReminders(for: person, rule: rule)
         }
     }
 
@@ -52,8 +56,23 @@ class ReminderManager: ObservableObject {
         return settings.authorizationStatus == .authorized
     }
 
-    private func scheduleReminders(for person: PersonRef) async {
-        let leadDays = [30, 14, 7, 2]
+    private func currentRule() -> ReminderRule? {
+        let descriptor = FetchDescriptor<ReminderRule>()
+        guard let rules = try? modelContext.fetch(descriptor) else {
+            return ReminderRule(leadDays: [30, 14, 7, 2], quietHoursStart: 22, quietHoursEnd: 8, enabled: true)
+        }
+        return rules.first ?? ReminderRule(leadDays: [30, 14, 7, 2], quietHoursStart: 22, quietHoursEnd: 8, enabled: true)
+    }
+
+    private func isWithinQuietHours(hour: Int, start: Int, end: Int) -> Bool {
+        if start < end {
+            return hour >= start && hour < end
+        }
+        return hour >= start || hour < end
+    }
+
+    private func scheduleReminders(for person: PersonRef, rule: ReminderRule) async {
+        let leadDays = rule.leadDays.isEmpty ? [30, 14, 7, 2] : rule.leadDays
 
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
@@ -63,11 +82,23 @@ class ReminderManager: ObservableObject {
         }
 
         for leadDay in leadDays {
-            await scheduleReminder(for: person, nextBirthday: nextBirthday, leadDay: leadDay)
+            await scheduleReminder(
+                for: person,
+                nextBirthday: nextBirthday,
+                leadDay: leadDay,
+                quietHoursStart: rule.quietHoursStart,
+                quietHoursEnd: rule.quietHoursEnd
+            )
         }
     }
 
-    private func scheduleReminder(for person: PersonRef, nextBirthday: Date, leadDay: Int) async {
+    private func scheduleReminder(
+        for person: PersonRef,
+        nextBirthday: Date,
+        leadDay: Int,
+        quietHoursStart: Int,
+        quietHoursEnd: Int
+    ) async {
         let calendar = Calendar.current
         let notificationDate = calendar.date(byAdding: .day, value: -leadDay, to: nextBirthday) ?? nextBirthday
 
@@ -77,13 +108,31 @@ class ReminderManager: ObservableObject {
             return
         }
 
-        // Quiet hours check (22:00 - 08:00)
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: notificationDate)
         let hour = components.hour ?? 0
 
-        if hour >= 22 || hour < 8 {
-            components.hour = 9
-            components.minute = 0
+        if isWithinQuietHours(hour: hour, start: quietHoursStart, end: quietHoursEnd) {
+            if quietHoursStart < quietHoursEnd {
+                components.hour = quietHoursEnd
+                components.minute = 0
+            } else if hour >= quietHoursStart {
+                let nextDay = calendar.date(byAdding: .day, value: 1, to: notificationDate) ?? notificationDate
+                var nextComponents = calendar.dateComponents([.year, .month, .day], from: nextDay)
+                nextComponents.hour = quietHoursEnd
+                nextComponents.minute = 0
+                components = nextComponents
+            } else {
+                components.hour = quietHoursEnd
+                components.minute = 0
+            }
+        }
+
+        if let adjustedDate = calendar.date(from: components), adjustedDate < Date() {
+            let nextDay = calendar.date(byAdding: .day, value: 1, to: adjustedDate) ?? adjustedDate
+            var nextComponents = calendar.dateComponents([.year, .month, .day], from: nextDay)
+            nextComponents.hour = components.hour
+            nextComponents.minute = components.minute
+            components = nextComponents
         }
 
         // Create content
