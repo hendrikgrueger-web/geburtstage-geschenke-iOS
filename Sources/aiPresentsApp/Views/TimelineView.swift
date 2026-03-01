@@ -12,6 +12,7 @@ struct TimelineView: View {
     @State private var filterHasIdeas: Bool? = nil
     @State private var filterRelation: String? = nil
     @State private var showingAddGiftIdeaFor: PersonRef?
+    @State private var quickAddPerson: PersonRef?
 
     enum TimelineTab: String, CaseIterable {
         case today = "Heute"
@@ -79,6 +80,9 @@ struct TimelineView: View {
                     filterRelation = nil
                 }
             )
+        }
+        .sheet(item: $quickAddPerson) { person in
+            AddGiftIdeaSheet(person: person)
         }
     }
 
@@ -166,7 +170,9 @@ struct TimelineView: View {
         List {
             ForEach(filteredBirthdays) { person in
                 NavigationLink(destination: PersonDetailView(person: person)) {
-                    BirthdayRow(person: person)
+                    BirthdayRow(person: person, onQuickAdd: {
+                        quickAddPerson = person
+                    })
                 }
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     if let firstIdea = person.giftIdeas?.first,

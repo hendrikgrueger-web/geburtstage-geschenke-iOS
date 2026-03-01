@@ -3,11 +3,13 @@ import SwiftUI
 struct BirthdayRow: View {
     let person: PersonRef
     let onTap: (() -> Void)?
+    let onQuickAdd: (() -> Void)?
     let showCountdown: Bool
 
-    init(person: PersonRef, onTap: (() -> Void)? = nil, showCountdown: Bool = true) {
+    init(person: PersonRef, onTap: (() -> Void)? = nil, onQuickAdd: (() -> Void)? = nil, showCountdown: Bool = true) {
         self.person = person
         self.onTap = onTap
+        self.onQuickAdd = onQuickAdd
         self.showCountdown = showCountdown
     }
 
@@ -52,6 +54,18 @@ struct BirthdayRow: View {
                     .padding(.vertical, 4)
                     .background(AppColor.accent.opacity(0.15))
                     .cornerRadius(8)
+                }
+
+                if let onQuickAdd = onQuickAdd {
+                    Button(action: {
+                        HapticFeedback.light()
+                        onQuickAdd()
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title3)
+                            .foregroundColor(AppColor.primary)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
         }
