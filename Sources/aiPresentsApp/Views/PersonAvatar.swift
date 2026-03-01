@@ -15,6 +15,9 @@ struct PersonAvatar: View {
                     .foregroundColor(.white)
             }
             .shadow(color: AppColor.gradientForRelation(person.relation).opacity(0.3), radius: 8, x: 0, y: 4)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Avatar für \(person.displayName)")
+            .accessibilityHint("\(person.relation)")
     }
 }
 
@@ -32,5 +35,8 @@ struct CompactPersonAvatar: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Avatar für \(person.displayName)")
+            .accessibilityHidden(true)
     }
 }
