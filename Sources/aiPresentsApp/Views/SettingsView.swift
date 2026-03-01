@@ -74,18 +74,26 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    HStack {
-                        Text("Datenschutz")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.secondary)
+                    NavigationLink {
+                        PrivacyView()
+                    } label: {
+                        HStack {
+                            Text("Datenschutz")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
                     }
 
-                    HStack {
-                        Text("Impressum")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.secondary)
+                    NavigationLink {
+                        LegalView()
+                    } label: {
+                        HStack {
+                            Text("Impressum")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
             }
