@@ -102,6 +102,12 @@ struct PersonDetailView: View {
                             }
 
                             Button {
+                                duplicateGiftIdea(idea)
+                            } label: {
+                                Label("Duplizieren", systemImage: "doc.on.doc")
+                            }
+
+                            Button {
                                 advanceStatus(for: idea)
                             } label: {
                                 Label("Status vorwärts", systemImage: "arrow.right.circle.fill")
@@ -399,6 +405,21 @@ struct PersonDetailView: View {
         for gift in purchasedGifts {
             gift.status = .given
         }
+        HapticFeedback.success()
+    }
+
+    private func duplicateGiftIdea(_ idea: GiftIdea) {
+        let newIdea = GiftIdea(
+            personId: person.id,
+            title: idea.title + " (Kopie)",
+            note: idea.note,
+            budgetMin: idea.budgetMin,
+            budgetMax: idea.budgetMax,
+            link: idea.link,
+            status: .idea,
+            tags: idea.tags
+        )
+        modelContext.insert(newIdea)
         HapticFeedback.success()
     }
 }
