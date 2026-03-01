@@ -14,6 +14,7 @@ struct PersonDetailView: View {
     @State private var showingEditGiftIdea: GiftIdea?
     @State private var showingAddGiftHistory = false
     @State private var showingDeletePerson = false
+    @State private var showingAISuggestions = false
 
     var body: some View {
         List {
@@ -93,6 +94,15 @@ struct PersonDetailView: View {
                         Image(systemName: "plus.circle.fill")
                     }
                 }
+            } footer: {
+                Button(action: { showingAISuggestions = true }) {
+                    HStack {
+                        Image(systemName: "sparkles")
+                            .foregroundColor(.orange)
+                        Text("KI-Vorschläge generieren")
+                            .font(.subheadline)
+                    }
+                }
             }
 
             // Gift History
@@ -139,6 +149,9 @@ struct PersonDetailView: View {
         }
         .sheet(isPresented: $showingAddGiftHistory) {
             AddGiftHistorySheet(person: person)
+        }
+        .sheet(isPresented: $showingAISuggestions) {
+            AIGiftSuggestionsSheet(person: person)
         }
         .alert("Kontakt löschen?", isPresented: $showingDeletePerson) {
             Button("Abbrechen", role: .cancel) { }

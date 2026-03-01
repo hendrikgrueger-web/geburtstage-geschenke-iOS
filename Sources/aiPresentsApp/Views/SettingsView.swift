@@ -81,6 +81,26 @@ struct SettingsView: View {
                     Text("Daten werden automatisch über deine Apple-Geräte synchronisiert.")
                 }
 
+                Section("KI-Assistent") {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("KI-Vorschläge")
+                                .font(.body)
+
+                            Text("Geschenkideen mit OpenRouter")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+
+                        Spacer()
+
+                        Image(systemName: "sparkles")
+                            .foregroundColor(.orange)
+                    }
+                } footer: {
+                    Text("Die KI hilft dir, passende Geschenkideen zu finden. Optional und kann deaktiviert werden.")
+                }
+
                 Section("Daten") {
                     Button(role: .destructive) {
                         showingResetConfirmation = true
