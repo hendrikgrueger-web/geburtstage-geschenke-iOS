@@ -88,9 +88,12 @@ struct PersonDetailView: View {
                 GiftSummaryView(person: person)
 
                 if filteredGiftIdeas.isEmpty {
-                    Text("Keine Ideen")
-                        .foregroundColor(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                    EmptyStateView(type: .noGiftIdeas, action: {
+                        showingAddGiftIdea = true
+                        HapticFeedback.light()
+                    })
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
                 } else {
                     ForEach(filteredGiftIdeas) { idea in
                         Button {
@@ -180,9 +183,12 @@ struct PersonDetailView: View {
             // Gift History
             Section {
                 if filteredGiftHistory.isEmpty {
-                    Text("Noch keine Geschenke eingetragen")
-                        .foregroundColor(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                    EmptyStateView(type: .noHistory, action: {
+                        showingAddGiftHistory = true
+                        HapticFeedback.light()
+                    })
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
                 } else {
                     ForEach(filteredGiftHistory) { history in
                         Button {
