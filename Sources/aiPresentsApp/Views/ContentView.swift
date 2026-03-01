@@ -5,9 +5,26 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var people: [PersonRef]
 
+    @State private var selectedTab: MainTab = .timeline
+
+    enum MainTab: String, CaseIterable {
+        case timeline = "Geburtstage"
+        case settings = "Einstellungen"
+    }
+
     var body: some View {
-        NavigationStack {
+        TabView(selection: $selectedTab) {
             TimelineView()
+                .tabItem {
+                    Label("Geburtstage", systemImage: selectedTab == .timeline ? "gift.fill" : "gift")
+                }
+                .tag(MainTab.timeline)
+
+            SettingsView()
+                .tabItem {
+                    Label("Einstellungen", systemImage: selectedTab == .settings ? "gearshape.fill" : "gearshape")
+                }
+                .tag(MainTab.settings)
         }
     }
 }

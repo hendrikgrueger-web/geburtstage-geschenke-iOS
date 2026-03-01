@@ -39,6 +39,7 @@ struct TimelineView: View {
             }
         }
         .navigationTitle("Geburtstage")
+        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: ContactsImportView()) {
@@ -110,28 +111,29 @@ struct TimelineView: View {
     }
 
     private var emptyStateView: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 24) {
             Image(systemName: "gift.fill")
-                .font(.system(size: 60))
-                .foregroundColor(.gray)
+                .font(.system(size: 70))
+                .foregroundColor(AppColor.textSecondary.opacity(0.5))
 
             Text("Keine Geburtstage")
-                .font(.headline)
-                .foregroundColor(.gray)
+                .font(.title2)
+                .fontWeight(.semibold)
+                .foregroundColor(AppColor.textPrimary)
 
             switch selectedTab {
             case .today:
                 Text("Heute keine Geburtstage")
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppColor.textSecondary)
             case .week:
                 Text("Keine Geburtstage in den nächsten 7 Tagen")
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppColor.textSecondary)
             case .month:
                 Text("Keine Geburtstage in den nächsten 30 Tagen")
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppColor.textSecondary)
             }
 
             Button("Kontakte importieren") {
@@ -141,5 +143,6 @@ struct TimelineView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(AppColor.background)
     }
 }

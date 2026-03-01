@@ -4,15 +4,11 @@ struct BirthdayRow: View {
     let person: PersonRef
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 16) {
             // Avatar
             Circle()
-                .fill(LinearGradient(
-                    gradient: Gradient(colors: [.blue, .purple]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                ))
-                .frame(width: 50, height: 50)
+                .fill(AppColor.gradientBlue)
+                .frame(width: 56, height: 56)
                 .overlay {
                     Text(String(person.displayName.prefix(1)))
                         .font(.title2)
@@ -23,10 +19,11 @@ struct BirthdayRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(person.displayName)
                     .font(.headline)
+                    .foregroundColor(AppColor.textPrimary)
 
                 Text(birthdayInfo)
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AppColor.textSecondary)
             }
 
             Spacer()
@@ -36,18 +33,19 @@ struct BirthdayRow: View {
                     Text("\(giftCount)")
                         .font(.caption)
                         .fontWeight(.bold)
-                        .foregroundColor(.orange)
+                        .foregroundColor(AppColor.accent)
                     Text("Ideen")
                         .font(.caption2)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AppColor.textSecondary)
                 }
-                .padding(.horizontal, 6)
-                .padding(.vertical, 4)
-                .background(Color.orange.opacity(0.1))
-                .cornerRadius(6)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .background(AppColor.accent.opacity(0.15))
+                .cornerRadius(8)
             }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 8)
+        .listRowBackground(AppColor.cardBackground)
     }
 
     private var birthdayInfo: String {
@@ -59,7 +57,7 @@ struct BirthdayRow: View {
         let daysUntil = calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
 
         if daysUntil == 0 {
-            return "Heute wird \(age)!"
+            return "🎉 Heute wird \(age)!"
         } else if daysUntil == 1 {
             return "Morgen wird \(age)"
         } else if daysUntil == -1 {
