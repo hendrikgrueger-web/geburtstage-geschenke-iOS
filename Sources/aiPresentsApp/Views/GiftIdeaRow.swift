@@ -12,6 +12,14 @@ struct GiftIdeaRow: View {
 
                 Spacer()
 
+                if !idea.link.isEmpty {
+                    Link(destination: URL(string: idea.link) ?? URL(string: "https://")!) {
+                        Image(systemName: "link.circle.fill")
+                            .font(.caption)
+                            .foregroundColor(AppColor.primary)
+                    }
+                }
+
                 statusBadge
             }
 

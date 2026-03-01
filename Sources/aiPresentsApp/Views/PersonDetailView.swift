@@ -59,6 +59,29 @@ struct PersonDetailView: View {
                         } label: {
                             GiftIdeaRow(idea: idea)
                         }
+                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                            Button {
+                                advanceStatus(for: idea)
+                            } label: {
+                                Label("Vor", systemImage: "arrow.right.circle.fill")
+                            }
+                            .tint(AppColor.primary)
+                        }
+                        .contextMenu {
+                            Button {
+                                advanceStatus(for: idea)
+                            } label: {
+                                Label("Status vorwärts", systemImage: "arrow.right.circle.fill")
+                            }
+
+                            Button(role: .destructive) {
+                                if let index = filteredGiftIdeas.firstIndex(where: { $0.id == idea.id }) {
+                                    deleteGiftIdeas(at: IndexSet([index]))
+                                }
+                            } label: {
+                                Label("Löschen", systemImage: "trash")
+                            }
+                        }
                     }
                     .onDelete(perform: deleteGiftIdeas)
                 }
@@ -196,5 +219,19 @@ struct PersonDetailView: View {
             modelContext.delete(person)
         }
         dismiss()
+    }
+
+    private func advanceStatus(for idea: GiftIdea) {
+        switch idea.status {
+        case .idea:
+            idea.status = .planned
+        case .planned:
+            idea.status = .purchased
+        case .purchased:
+            idea.status = .given
+        case .given:
+            // No further status
+            break
+        }
     }
 }
