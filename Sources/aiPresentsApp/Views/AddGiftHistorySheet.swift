@@ -68,9 +68,13 @@ struct AddGiftHistorySheet: View {
                 Section("Geschenk") {
                     TextField("Was wurde verschenkt?", text: $title)
                         .textInputAutocapitalization(.sentences)
+                        .accessibilityLabel("Geschenk-Titel")
+                        .accessibilityHint("Gib den Namen des Geschenks ein")
 
                     TextField("Kategorie", text: $category)
                         .textInputAutocapitalization(.sentences)
+                        .accessibilityLabel("Geschenk-Kategorie")
+                        .accessibilityHint("z.B. Schmuck, Buch, Erlebnis, Geld")
                 } footer: {
                     Text("z.B. Schmuck, Buch, Erlebnis, Geld")
                 }
@@ -81,22 +85,29 @@ struct AddGiftHistorySheet: View {
                         TextField("€", text: $budget)
                             .keyboardType(.decimalPad)
                             .foregroundColor(isBudgetValid ? .primary : .red)
+                            .accessibilityLabel("Budget")
+                            .accessibilityHint("Gib das Budget in Euro ein")
                     }
 
                     if !isBudgetValid && !budget.isEmpty {
                         Text("Bitte gib eine gültige Zahl ein")
                             .font(.caption)
                             .foregroundColor(.red)
+                            .accessibilityLabel("Fehler: Ungültiges Budget")
                     }
 
                     TextField("Notizen", text: $note, axis: .vertical)
                         .lineLimit(3...6)
+                        .accessibilityLabel("Notizen zum Geschenk")
+                        .accessibilityHint("Optionale zusätzliche Informationen")
 
                     HStack {
                         Text("Link")
                         TextField("URL", text: $link)
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
+                            .accessibilityLabel("Link zum Geschenk")
+                            .accessibilityHint("Optional: Link zur Webseite")
 
                         if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {
@@ -112,6 +123,7 @@ struct AddGiftHistorySheet: View {
                                     .foregroundColor(.blue)
                             }
                             .accessibilityLabel("Link öffnen")
+                            .accessibilityHint("Öffnet den Link im Browser")
                         }
                     }
                 }
@@ -136,6 +148,8 @@ struct AddGiftHistorySheet: View {
                     Button("Abbrechen") {
                         dismiss()
                     }
+                    .accessibilityLabel("Abbrechen")
+                    .accessibilityHint("Schließt das Formular ohne zu speichern")
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -149,6 +163,8 @@ struct AddGiftHistorySheet: View {
                         }
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .accessibilityLabel("Speichern")
+                    .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? "Titel muss ausgefüllt sein" : "Speichert das Geschenk")
                 }
             }
         }
