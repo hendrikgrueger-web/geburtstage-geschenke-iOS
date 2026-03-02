@@ -2,13 +2,13 @@ import SwiftUI
 import SwiftData
 
 @main
-struct AIPresentsAppEntry: App {
+struct aiPresentsApp: App {
     let modelContainer: ModelContainer
     @StateObject private var reminderManager: ReminderManager
 
     init() {
         do {
-            let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self])
+            let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self, SuggestionFeedback.self])
 
             // CloudKit configuration
             let config = ModelConfiguration(
@@ -26,7 +26,7 @@ struct AIPresentsAppEntry: App {
         } catch {
             // Fallback to local-only if CloudKit fails
             do {
-                let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self])
+                let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self, SuggestionFeedback.self])
                 let config = ModelConfiguration(isStoredInMemoryOnly: false, cloudKitDatabase: nil)
                 modelContainer = try ModelContainer(for: schema, configurations: [config])
 
@@ -40,12 +40,18 @@ struct AIPresentsAppEntry: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .onAppear {
-                    Task {
-                        await reminderManager.scheduleAllReminders()
-                    }
+            ZStack {
+                if UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") {
+                    ContentView()
+                        .onAppear {
+                            Task {
+                                await reminderManager.scheduleAllReminders()
+                            }
+                        }
+                } else {
+                    OnboardingView()
                 }
+            }
         }
         .modelContainer(modelContainer)
     }
