@@ -16,6 +16,7 @@ struct PersonDetailView: View {
     @State private var showingEditGiftHistory: GiftHistory?
     @State private var showingDeletePerson = false
     @State private var showingAISuggestions = false
+    @State private var showingBirthdayMessage = false
     @State private var giftSortOption: GiftSortOption = .status
     @State private var giftStatusFilter: GiftStatusFilter = .all
     @State private var showingShareSheet = false
@@ -204,6 +205,20 @@ struct PersonDetailView: View {
                     .accessibilityLabel("KI-Vorschläge generieren")
                     .accessibilityHint("Generiert neue Geschenkideen basierend auf KI")
 
+                    Button(action: {
+                        showingBirthdayMessage = true
+                        HapticFeedback.medium()
+                    }) {
+                        HStack {
+                            Image(systemName: "envelope.badge")
+                                .foregroundColor(.blue)
+                            Text("Geburtstagsnachricht")
+                                .font(.subheadline)
+                        }
+                    }
+                    .accessibilityLabel("Geburtstagsnachricht")
+                    .accessibilityHint("Erstellt eine personalisierte Geburtstagsnachricht")
+
                     if !filteredGiftIdeas.isEmpty && hasPurchasedGifts {
                         Button(action: { showingMarkAllAsGivenConfirmation = true }) {
                             HStack {
@@ -296,6 +311,9 @@ struct PersonDetailView: View {
         }
         .sheet(isPresented: $showingAISuggestions) {
             AIGiftSuggestionsSheet(person: person)
+        }
+        .sheet(isPresented: $showingBirthdayMessage) {
+            AIBirthdayMessageSheet(person: person)
         }
         .alert("Alle als verschenkt markieren?", isPresented: $showingMarkAllAsGivenConfirmation) {
             Button("Abbrechen", role: .cancel) { }
