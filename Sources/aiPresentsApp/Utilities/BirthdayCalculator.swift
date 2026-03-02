@@ -3,7 +3,9 @@ import Foundation
 /// Utility for calculating birthdays and upcoming dates
 struct BirthdayCalculator {
     /// Internal cache for birthday calculations to improve performance
+    /// Protected by cacheLock for thread safety
     private static var cache: [String: BirthdayCacheEntry] = [:]
+    private static let cacheLock = NSLock()
 
     /// Cache entry for birthday calculations
     private struct BirthdayCacheEntry {
@@ -19,6 +21,8 @@ struct BirthdayCalculator {
 
     /// Clear the birthday calculation cache
     static func clearCache() {
+        cacheLock.lock()
+        defer { cacheLock.unlock() }
         cache.removeAll()
         AppLogger.debug("BirthdayCalculator cache cleared")
     }
@@ -31,21 +35,26 @@ struct BirthdayCalculator {
     static func nextBirthday(for birthday: Date, from referenceDate: Date = Date()) -> Date? {
         let cacheKey = generateCacheKey(birthday: birthday, from: referenceDate)
 
-        // Check cache
+        // Check cache (thread-safe)
+        cacheLock.lock()
         if let entry = cache[cacheKey], entry.isValid, let cachedNextBirthday = entry.nextBirthday {
+            cacheLock.unlock()
             AppLogger.debug("Cache hit for nextBirthday: \(cacheKey)")
             return cachedNextBirthday
         }
+        cacheLock.unlock()
 
-        // Calculate new value
+        // Calculate new value (outside lock)
         let nextBirthday = calculateNextBirthday(for: birthday, from: referenceDate)
 
-        // Update cache
+        // Update cache (thread-safe)
+        cacheLock.lock()
         cache[cacheKey] = BirthdayCacheEntry(
             nextBirthday: nextBirthday,
             daysUntil: nil,
             timestamp: Date()
         )
+        cacheLock.unlock()
 
         return nextBirthday
     }
@@ -80,21 +89,26 @@ struct BirthdayCalculator {
     static func daysUntilBirthday(for birthday: Date, from referenceDate: Date = Date()) -> Int? {
         let cacheKey = generateCacheKey(birthday: birthday, from: referenceDate)
 
-        // Check cache
+        // Check cache (thread-safe)
+        cacheLock.lock()
         if let entry = cache[cacheKey], entry.isValid, let cachedDaysUntil = entry.daysUntil {
+            cacheLock.unlock()
             AppLogger.debug("Cache hit for daysUntilBirthday: \(cacheKey)")
             return cachedDaysUntil
         }
+        cacheLock.unlock()
 
-        // Calculate new value
+        // Calculate new value (outside lock)
         let daysUntil = calculateDaysUntilBirthday(for: birthday, from: referenceDate)
 
-        // Update cache
+        // Update cache (thread-safe)
+        cacheLock.lock()
         cache[cacheKey] = BirthdayCacheEntry(
             nextBirthday: nil,
             daysUntil: daysUntil,
             timestamp: Date()
         )
+        cacheLock.unlock()
 
         return daysUntil
     }
@@ -117,6 +131,7 @@ struct BirthdayCalculator {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: referenceDate)
         let birthdayKey = calendar.startOfDay(for: birthday).timeIntervalSince1970
+
         return "\(birthdayKey)-\(today.timeIntervalSince1970)"
     }
 
@@ -150,7 +165,6 @@ struct BirthdayCalculator {
     static func age(for birthday: Date, on date: Date = Date()) -> Int? {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: date)
-
         var components = calendar.dateComponents([.year, .month, .day], from: birthday)
         let currentComponents = calendar.dateComponents([.year, .month, .day], from: today)
 
