@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Finalized App Icon design with Gift Box + Calendar concept
 - AppIcon.md with complete design specifications and Figma/Sketch template
 - Comprehensive tests for BirthdayCalculator.clearCache() functionality
+- Category validation in ValidationHelper with empty field check
+- URL normalization helper to auto-add https:// to URLs without scheme
+- Tag sanitization helper to clean up tag arrays
+- BirthdayCalculator.age() caching for better performance
 
 ### Improved
 - Better user feedback with toast notifications for all SettingsView actions
@@ -20,8 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - BirthdayCalculator cache management with clearCache() method for refresh scenarios
 - Improved UX with immediate visual feedback for settings changes
 - Better accessibility in SettingsView with improved feedback messages
-
-### Improved
+- Category validation now checks for empty fields (FormValidator)
+- URL validation now accepts URLs without http/https prefix
+- Tags validation automatically filters out empty tags
+- Performance improvements for age calculations in BirthdayRow
 - Better user feedback for CSV export operations with success/error/warning toasts
 - Enhanced accessibility coverage for gift idea and history editing forms
 - Clearer hints for VoiceOver users on all form inputs
