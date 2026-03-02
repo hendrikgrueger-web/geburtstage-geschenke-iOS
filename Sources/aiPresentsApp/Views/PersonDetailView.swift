@@ -22,6 +22,7 @@ struct PersonDetailView: View {
     @State private var shareText: String = ""
     @State private var showingEditRelation = false
     @State private var editedRelation: String = ""
+    @State private var showingMarkAllAsGivenConfirmation = false
 
     enum GiftSortOption: String, CaseIterable {
         case status = "Status"
@@ -189,7 +190,7 @@ struct PersonDetailView: View {
                     }
 
                     if !filteredGiftIdeas.isEmpty && hasPurchasedGifts {
-                        Button(action: markAllAsGiven) {
+                        Button(action: { showingMarkAllAsGivenConfirmation = true }) {
                             HStack {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(AppColor.success)
@@ -279,6 +280,15 @@ struct PersonDetailView: View {
         }
         .sheet(isPresented: $showingAISuggestions) {
             AIGiftSuggestionsSheet(person: person)
+        }
+        .alert("Alle als verschenkt markieren?", isPresented: $showingMarkAllAsGivenConfirmation) {
+            Button("Abbrechen", role: .cancel) { }
+            Button("Markieren") {
+                markAllAsGiven()
+            }
+        } message: {
+            let purchasedCount = filteredGiftIdeas.filter { $0.status == .purchased }.count
+            Text("\(purchasedCount) Geschenk\(purchasedCount == 1 ? "" : "e") werden als verschenkt markiert.")
         }
         .alert("Kontakt löschen?", isPresented: $showingDeletePerson) {
             Button("Abbrechen", role: .cancel) { }
