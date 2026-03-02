@@ -19,11 +19,12 @@ Alle geplanten Features für Phase 2 wurden implementiert und in bestehende View
 - ✅ AIBirthdayMessageSheet: Vollständige UI für Nachricht-Generierung
 - ✅ PersonDetailView Integration: "Geburtstagsnachricht" Button
 - ✅ Komplette Testabdeckung: 18 Tests für Sheet-UI
-- ✅ **NEU**: Prompt-Qualitätsmessung mit Feedback-System
+- ✅ **Prompt-Qualitätsmessung mit Feedback-System**
   - SuggestionFeedback Model für Tracking
   - SuggestionQualityViewModel für Metriken
   - Thumbs up/down Feedback UI
   - Qualitätsmetrik-Anzeige (0-5 Sterne)
+  - 15 Tests für Qualitätsmessung
 
 ## Erledigte Aufgaben
 
@@ -159,7 +160,7 @@ Alle 4 Add/Edit Sheets aktualisiert:
 ### Phase 3
 6. `0595685` — Phase 3: Enhanced AI suggestions with age/milestone context + birthday message feature
 7. `b8dfa1c` — Phase 3: Add Birthday Message UI with personalization features
-8. `ADD HERE` — Phase 3: Add suggestion quality metrics with feedback system
+8. `88983d3` — Phase 3: Add suggestion quality metrics with feedback system
 
 ## Nächste Schritte (Priorität)
 
