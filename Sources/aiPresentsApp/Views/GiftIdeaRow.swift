@@ -155,15 +155,38 @@ struct GiftIdeaRow: View {
     private var tagsView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 4) {
-                ForEach(idea.tags, id: \.self) { tag in
+                ForEach(Array(idea.tags.enumerated()), id: \.offset) { index, tag in
                     Text("#\(tag)")
                         .font(.caption2)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
-                        .background(Color.gray.opacity(0.2))
+                        .background(tagColor(for: index))
+                        .foregroundColor(tagTextColor(for: index))
                         .cornerRadius(4)
                 }
             }
         }
+    }
+
+    private func tagColor(for index: Int) -> Color {
+        let colors: [Color] = [
+            AppColor.primary.opacity(0.15),
+            AppColor.secondary.opacity(0.15),
+            AppColor.accent.opacity(0.15),
+            AppColor.success.opacity(0.15),
+            AppColor.textSecondary.opacity(0.15)
+        ]
+        return colors[index % colors.count]
+    }
+
+    private func tagTextColor(for index: Int) -> Color {
+        let colors: [Color] = [
+            AppColor.primary,
+            AppColor.secondary,
+            AppColor.accent,
+            AppColor.success,
+            AppColor.textSecondary
+        ]
+        return colors[index % colors.count]
     }
 }
