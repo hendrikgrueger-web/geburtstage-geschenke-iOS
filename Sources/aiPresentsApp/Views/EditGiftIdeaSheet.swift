@@ -64,22 +64,27 @@ struct EditGiftIdeaSheet: View {
         NavigationStack {
             Form {
                 Section("Geschenk") {
-                    TextField("Titel", text: $title)
-                        .accessibilityLabel("Geschenk-Titel")
-                        .accessibilityHint("Gib den Namen des Geschenks ein")
+                    // SmartInputField for title with real-time validation
+                    SmartInputField.titleField(
+                        text: $title,
+                        minLength: 2,
+                        maxLength: 100,
+                        placeholder: "Name des Geschenks"
+                    )
 
-                    TextField("Notizen", text: $note, axis: .vertical)
-                        .lineLimit(3...6)
-                        .accessibilityLabel("Notizen zum Geschenk")
-                        .accessibilityHint("Optionale zusätzliche Informationen")
+                    // SmartInputField for notes with character limit
+                    SmartInputField.noteField(
+                        text: $note,
+                        maxLength: 500,
+                        placeholder: "Optionale Notizen"
+                    )
 
+                    // SmartInputField for URL with auto-https normalization
                     HStack {
-                        Text("Link")
-                        TextField("URL", text: $link)
-                            .textInputAutocapitalization(.never)
-                            .keyboardType(.URL)
-                            .accessibilityLabel("Link zum Geschenk")
-                            .accessibilityHint("Optional: Link zur Webseite")
+                        SmartInputField.urlField(
+                            text: $link,
+                            placeholder: "https://example.com"
+                        )
 
                         if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {

@@ -66,20 +66,32 @@ struct AddGiftHistorySheet: View {
         NavigationStack {
             Form {
                 Section("Geschenk") {
-                    TextField("Was wurde verschenkt?", text: $title)
-                        .textInputAutocapitalization(.sentences)
-                        .accessibilityLabel("Geschenk-Titel")
-                        .accessibilityHint("Gib den Namen des Geschenks ein")
+                    // SmartInputField for title with validation
+                    SmartInputField.titleField(
+                        text: $title,
+                        minLength: 2,
+                        maxLength: 100,
+                        placeholder: "Was wurde verschenkt?"
+                    )
 
-                    TextField("Kategorie", text: $category)
-                        .textInputAutocapitalization(.sentences)
-                        .accessibilityLabel("Geschenk-Kategorie")
-                        .accessibilityHint("z.B. Schmuck, Buch, Erlebnis, Geld")
+                    // SmartInputField for category
+                    SmartInputField(
+                        title: "Kategorie",
+                        text: $category,
+                        placeholder: "z.B. Schmuck, Buch, Erlebnis, Geld",
+                        validator: { value in
+                            if !value.isEmpty {
+                                return ValidationHelper.validateMaxLength(value, maxLength: 50, fieldName: "Kategorie")
+                            }
+                            return .valid
+                        }
+                    )
                 } footer: {
                     Text("z.B. Schmuck, Buch, Erlebnis, Geld")
                 }
 
                 Section("Details") {
+                    // SmartInputField for budget with number validation
                     HStack {
                         Text("Budget")
                         TextField("€", text: $budget)
@@ -96,18 +108,19 @@ struct AddGiftHistorySheet: View {
                             .accessibilityLabel("Fehler: Ungültiges Budget")
                     }
 
-                    TextField("Notizen", text: $note, axis: .vertical)
-                        .lineLimit(3...6)
-                        .accessibilityLabel("Notizen zum Geschenk")
-                        .accessibilityHint("Optionale zusätzliche Informationen")
+                    // SmartInputField for notes
+                    SmartInputField.noteField(
+                        text: $note,
+                        maxLength: 500,
+                        placeholder: "Optionale Notizen"
+                    )
 
+                    // SmartInputField for URL with auto-https
                     HStack {
-                        Text("Link")
-                        TextField("URL", text: $link)
-                            .textInputAutocapitalization(.never)
-                            .keyboardType(.URL)
-                            .accessibilityLabel("Link zum Geschenk")
-                            .accessibilityHint("Optional: Link zur Webseite")
+                        SmartInputField.urlField(
+                            text: $link,
+                            placeholder: "https://example.com"
+                        )
 
                         if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {
