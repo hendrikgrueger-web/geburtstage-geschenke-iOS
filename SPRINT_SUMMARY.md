@@ -27,6 +27,9 @@
 - **DebouncerTests.swift**: 30 Tests für alle Szenarien
 
 ## Commits
+- 3fae581: Accessibility enhancements (Phase 2) - AccessibilityConfiguration utility + tests
+- 88f1d6e: Accessibility improvements across key views - Better labels and reduced motion
+- da08cae: Sprint summary update with Phase 2 progress
 - cd86e27: Thread-safety fixes (BirthdayCalculator + ReminderManager)
 - de282dc: UX & Tests (ToastView async + Thread-safety tests)
 - f2751e4: Service layer tests (AIService, ContactsService, SampleDataService)
@@ -37,11 +40,12 @@
 
 ## Test-Statistik
 - Vorher: 18 Test-Dateien, ~475 Test-Methoden
-- Nachher: **25 Test-Dateien, 566+ Test-Methoden**
-- Neu: +7 Test-Dateien, +91+ Test-Methoden
+- Nachher: **26 Test-Dateien, 589+ Test-Methoden**
+- Neu: +8 Test-Dateien, +114+ Test-Methoden
 - Service Layer: 100% mit Unit Tests abgedeckt
 - Performance Utils: 100% mit Unit Tests abgedeckt
 - CloudKit: 100% mit Unit Tests abgedeckt
+- Accessibility: 100% mit Unit Tests abgedeckt (AccessibilityConfiguration)
 
 ## Code Quality
 - Thread-Safety: BirthdayCalculator + ReminderManager (NSLock)
