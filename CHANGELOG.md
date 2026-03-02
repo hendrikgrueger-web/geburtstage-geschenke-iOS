@@ -8,13 +8,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- AccessibilityConfiguration utility for consistent accessibility patterns
-- Reduced Motion support for animations (EmptyStateView, TimelineView)
-- Dynamic Type support with accessible view extensions
-- AccessibilityConfigurationTests (23 tests covering all utility methods)
-- Helper methods: formatNumber, formatDuration, relativeDateDescription, formatDate
-- AccessibleButton, accessibleToggle, accessibleNavigation view extensions
-- AccessibilityConfiguration animation helper for reduced motion support
+- SmartInputField integration in Add/Edit sheets for enhanced UX
+- Real-time debounced validation (300ms) for all form inputs
+- Visual feedback with icons, colors, and error messages in forms
+- Auto-https normalization for URL fields
+- Debouncer utility integration in TimelineView for search performance
+- QuickActionCard integration in EmptyStateView for better action hierarchy
+- Consistent design system across all forms and empty states
+
+### Changed
+- TimelineView: Replaced manual Task.sleep debouncing with Debouncer utility
+- EmptyStateView: Use QuickActionCard for improved action presentation
+- AddGiftIdeaSheet: SmartInputField for title, notes, URL with validation
+- AddGiftHistorySheet: SmartInputField for title, category, notes, URL
+- EditGiftIdeaSheet: SmartInputField for title, notes, URL
+- EditGiftHistorySheet: SmartInputField for title, category, notes, URL
+
+### Improved
+- Form validation now provides real-time feedback instead of submit-time alerts
+- Search debouncing uses dedicated utility for better performance and maintainability
+- Empty state actions have better visual hierarchy and discoverability
+- All form inputs have consistent validation behavior and visual feedback
+- URL fields automatically add https:// prefix when missing scheme
 
 ### Changed
 - EmptyStateView: Respects reduced motion for icon animations (bounce → pulse when reduced)
