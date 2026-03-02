@@ -12,6 +12,7 @@ struct TimelineView: View {
     @State private var filterRelation: String? = nil
     @State private var showingAddGiftIdeaFor: PersonRef?
     @State private var quickAddPerson: PersonRef?
+    @State private var showingAISuggestionsFor: PersonRef?
     @State private var listAnimation = false
     @State private var isRefreshing = false
 
@@ -215,6 +216,15 @@ struct TimelineView: View {
                     removal: .scale.combined(with: .opacity)
                 ))
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Button {
+                        showingAISuggestionsFor = person
+                        HapticFeedback.light()
+                    } label: {
+                        Label("KI", systemImage: "sparkles")
+                    }
+                    .tint(.orange)
+                    .accessibilityLabel("KI-Geschenkideen generieren")
+
                     if let firstIdea = person.giftIdeas?.first,
                        firstIdea.status == .idea {
                         Button {
@@ -222,7 +232,7 @@ struct TimelineView: View {
                         } label: {
                             Label("Planen", systemImage: "checkmark.circle.fill")
                         }
-                        .tint(.orange)
+                        .tint(.blue)
                         .accessibilityLabel("Als geplant markieren")
                     }
 
@@ -232,8 +242,19 @@ struct TimelineView: View {
                     } label: {
                         Label("Idee", systemImage: "plus.circle.fill")
                     }
-                    .tint(.blue)
+                    .tint(.green)
                     .accessibilityLabel("Geschenkidee hinzufügen")
+                }
+
+                .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                    if daysUntilBirthday <= 7 {
+                        Button {
+                            markAsPlannedFirstIdea(person)
+                        } label: {
+                            Label("Erste Idee planen", systemImage: "checkmark.circle")
+                        }
+                        .tint(.blue)
+                    }
                 }
             }
         }
@@ -247,6 +268,9 @@ struct TimelineView: View {
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: filterRelation)
         .sheet(item: $showingAddGiftIdeaFor) { person in
             AddGiftIdeaSheet(person: person)
+        }
+        .sheet(item: $showingAISuggestionsFor) { person in
+            AIGiftSuggestionsSheet(person: person)
         }
     }
 
@@ -268,6 +292,20 @@ struct TimelineView: View {
         idea.status = .planned
         HapticFeedback.success()
         // SwiftData automatically tracks changes
+    }
+
+    private func markAsPlannedFirstIdea(_ person: PersonRef) {
+        if let firstIdea = person.giftIdeas?.first(where: { $0.status == .idea }) {
+            firstIdea.status = .planned
+            HapticFeedback.success()
+        } else {
+            HapticFeedback.error()
+        }
+    }
+
+    private func daysUntilBirthday(for person: PersonRef) -> Int {
+        let today = Calendar.current.startOfDay(for: Date())
+        return BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) ?? 0
     }
 
     private var emptyStateView: some View {
