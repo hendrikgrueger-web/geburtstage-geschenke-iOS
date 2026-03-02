@@ -102,17 +102,17 @@ struct BirthdayDateHelper {
 
         switch (month, day) {
         case (3, 21...31), (4, 1...19): return "♈ Widder"
-        case (4, 20...30), (5, 1...20): return "♈ Stier"
-        case (5, 21...31), (6, 1...20): return "♈ Zwilling"
-        case (6, 21...30), (7, 1...22): return "♈ Krebs"
-        case (7, 23...31), (8, 1...22): return "♈ Löwe"
-        case (8, 23...31), (9, 1...22): return "♈ Jungfrau"
-        case (9, 23...30), (10, 1...22): return "♈ Waage"
-        case (10, 23...31), (11, 1...21): return "♈ Skorpion"
-        case (11, 22...30), (12, 1...21): return "♈ Schütze"
-        case (12, 22...31), (1, 1...19): return "♈ Steinbock"
-        case (1, 20...31), (2, 1...18): return "♈ Wassermann"
-        case (2, 19...29), (3, 1...20): return "♈ Fische"
+        case (4, 20...30), (5, 1...20): return "♉ Stier"
+        case (5, 21...31), (6, 1...20): return "♊ Zwilling"
+        case (6, 21...30), (7, 1...22): return "♋ Krebs"
+        case (7, 23...31), (8, 1...22): return "♌ Löwe"
+        case (8, 23...31), (9, 1...22): return "♍ Jungfrau"
+        case (9, 23...30), (10, 1...22): return "♎ Waage"
+        case (10, 23...31), (11, 1...21): return "♏ Skorpion"
+        case (11, 22...30), (12, 1...21): return "♐ Schütze"
+        case (12, 22...31), (1, 1...19): return "♑ Steinbock"
+        case (1, 20...31), (2, 1...18): return "♒ Wassermann"
+        case (2, 19...29), (3, 1...20): return "♓ Fische"
         default: return ""
         }
     }
