@@ -38,114 +38,24 @@ struct AIGiftSuggestionsSheet: View {
     @State private var errorMessage: String?
     @State private var selectedSuggestion: GiftSuggestion?
     @State private var selectedBudget: BudgetRange = .medium
+    @State private var showDemoModeNotice = false
 
     var body: some View {
         NavigationStack {
             Form {
+                // Person Details Card
                 Section {
-                    HStack {
-                        Text("Empfänger")
-                        Spacer()
-                        Text(person.displayName)
-                            .foregroundColor(.secondary)
-                    }
-
-                    HStack {
-                        Text("Beziehung")
-                        Spacer()
-                        Text(person.relation)
-                            .foregroundColor(.secondary)
-                    }
-                } header: {
-                    Text("Details")
+                    personDetailsCard
                 }
 
                 if isLoading {
-                    Section {
-                        HStack {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle())
-
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("KI denkt nach...")
-                                    .font(.subheadline)
-                                Text("Das kann ein paar Sekunden dauern")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding()
-                    }
+                    loadingState
                 } else if let error = errorMessage {
-                    Section {
-                        VStack(spacing: 12) {
-                            Image(systemName: "exclamationmark.triangle")
-                                .font(.system(size: 40))
-                                .foregroundColor(.orange)
-
-                            Text("Fehler")
-                                .font(.headline)
-
-                            Text(error)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .multilineTextAlignment(.center)
-
-                            Button("Erneut versuchen") {
-                                loadSuggestions()
-                            }
-                            .buttonStyle(.borderedProminent)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding()
-                    }
+                    errorState(error)
                 } else if !suggestions.isEmpty {
-                    Section {
-                        ForEach(Array(suggestions.enumerated()), id: \.offset) { index, suggestion in
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(suggestion.title)
-                                    .font(.headline)
-
-                                Text(suggestion.reason)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
-                            .padding(.vertical, 4)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                selectedSuggestion = suggestion
-                            }
-                        }
-                    } header: {
-                        Text("Vorschläge")
-                    } footer: {
-                        Text("Tippe auf einen Vorschlag, um ihn als Geschenkidee zu speichern")
-                    }
+                    suggestionsList
                 } else {
-                    Section("Budget") {
-                        Picker("Budget-Bereich", selection: $selectedBudget) {
-                            ForEach(BudgetRange.allCases, id: \.self) { budget in
-                                Text(budget.rawValue).tag(budget)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        .accessibilityLabel("Budget-Bereich wählen")
-                    }
-
-                    Section {
-                        Button(action: loadSuggestions) {
-                            HStack {
-                                Image(systemName: "sparkles")
-                                Text("KI-Vorschläge generieren")
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                    } header: {
-                        Text("KI-Assistent")
-                    } footer: {
-                        Text("Die KI analysiert vergangene Geschenke und schlägt neue Ideen vor.")
-                    }
+                    budgetSection
                 }
             }
             .navigationTitle("KI-Geschenk-Ideen")
@@ -164,7 +74,188 @@ struct AIGiftSuggestionsSheet: View {
                     prefillNote: suggestion.reason
                 )
             }
+            .alert("Demo-Mode", isPresented: $showDemoModeNotice) {
+                Button("OK") {
+                    loadSuggestions()
+                }
+            } message: {
+                Text("Da kein API-Key konfiguriert ist, werden Demo-Vorschläge angezeigt.")
+            }
         }
+    }
+
+    private var personDetailsCard: View {
+        HStack(spacing: 16) {
+            PersonAvatar(person: person, size: 60)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(person.displayName)
+                    .font(.headline)
+                    .foregroundColor(AppColor.textPrimary)
+
+                Text(person.relation)
+                    .font(.subheadline)
+                    .foregroundColor(AppColor.textSecondary)
+
+                if !filteredGiftHistory.isEmpty {
+                    Text("\(filteredGiftHistory.count) vergangene Geschenk\(filteredGiftHistory.count == 1 ? "" : "e")")
+                        .font(.caption)
+                        .foregroundColor(AppColor.textTertiary)
+                }
+            }
+
+            Spacer()
+        }
+        .padding(.vertical, 4)
+    }
+
+    private var loadingState: View {
+        Section {
+            VStack(spacing: 16) {
+                ZStack {
+                    Circle()
+                        .stroke(AppColor.primary.opacity(0.2), lineWidth: 4)
+                        .frame(width: 80, height: 80)
+
+                    Circle()
+                        .trim(from: 0, to: 0.7)
+                        .stroke(
+                            AppColor.primary,
+                            style: StrokeStyle(lineWidth: 4, lineCap: .round)
+                        )
+                        .frame(width: 80, height: 80)
+                        .rotationEffect(.degrees(isLoading ? 360 : 0))
+                        .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: isLoading)
+                }
+
+                VStack(spacing: 4) {
+                    Text("KI denkt nach...")
+                        .font(.headline)
+                        .foregroundColor(AppColor.textPrimary)
+
+                    Text("Das kann ein paar Sekunden dauern")
+                        .font(.caption)
+                        .foregroundColor(AppColor.textSecondary)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding()
+        }
+    }
+
+    private func errorState(_ error: String) -> View {
+        Section {
+            VStack(spacing: 16) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 50))
+                    .foregroundColor(.orange)
+
+                Text("Fehler")
+                    .font(.headline)
+                    .foregroundColor(AppColor.textPrimary)
+
+                Text(error)
+                    .font(.subheadline)
+                    .foregroundColor(AppColor.textSecondary)
+                    .multilineTextAlignment(.center)
+
+                Button("Erneut versuchen") {
+                    loadSuggestions()
+                }
+                .buttonStyle(.borderedProminent)
+                .buttonStyle(.pressable)
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding()
+        }
+    }
+
+    private var suggestionsList: View {
+        Section("Vorschläge (\(suggestions.count))") {
+            ForEach(Array(suggestions.enumerated()), id: \.offset) { index, suggestion in
+                suggestionCard(suggestion: suggestion, index: index)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        selectedSuggestion = suggestion
+                        HapticFeedback.medium()
+                    }
+            }
+        } footer: {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("💡 Tippe auf einen Vorschlag, um ihn als Geschenkidee zu speichern.")
+                if suggestions.count >= 3 {
+                    Text("✨ Möchtest du mehr Vorschläge? Tippe oben auf 'Aktualisieren'.")
+                }
+            }
+            .font(.caption)
+            .foregroundColor(AppColor.textSecondary)
+        }
+    }
+
+    private func suggestionCard(suggestion: GiftSuggestion, index: Int) -> View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text(suggestion.title)
+                    .font(.headline)
+                    .foregroundColor(AppColor.textPrimary)
+
+                Spacer()
+
+                Image(systemName: "arrow.right.circle.fill")
+                    .font(.title3)
+                    .foregroundColor(AppColor.primary)
+            }
+
+            Text(suggestion.reason)
+                .font(.subheadline)
+                .foregroundColor(AppColor.textSecondary)
+                .lineLimit(3)
+        }
+        .padding(.vertical, 4)
+    }
+
+    private var budgetSection: View {
+        Section {
+            budgetPicker
+            generateButton
+        } header: {
+            Text("KI-Assistent")
+        } footer: {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Die KI analysiert vergangene Geschenke und die Beziehung, um passende Vorschläge zu generieren.")
+
+                if !filteredGiftHistory.isEmpty {
+                    Text("📋 Basiert auf \(filteredGiftHistory.count) vergangenen Geschenk\(filteredGiftHistory.count == 1 ? "" : "en").")
+                        .foregroundColor(AppColor.accent)
+                }
+            }
+            .font(.caption)
+            .foregroundColor(AppColor.textSecondary)
+        }
+    }
+
+    private var budgetPicker: View {
+        Picker("Budget-Bereich", selection: $selectedBudget) {
+            ForEach(BudgetRange.allCases, id: \.self) { budget in
+                Text(budget.rawValue).tag(budget)
+            }
+        }
+        .pickerStyle(.segmented)
+        .accessibilityLabel("Budget-Bereich wählen")
+    }
+
+    private var generateButton: View {
+        Button(action: {
+            loadSuggestions()
+        }) {
+            HStack {
+                Image(systemName: "sparkles")
+                Text("KI-Vorschläge generieren")
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .buttonStyle(.pressable)
     }
 
     private var filteredGiftHistory: [GiftHistory] {
@@ -179,6 +270,7 @@ struct AIGiftSuggestionsSheet: View {
         isLoading = true
         errorMessage = nil
         suggestions = []
+        HapticFeedback.light()
 
         Task {
             do {
@@ -193,11 +285,13 @@ struct AIGiftSuggestionsSheet: View {
                 await MainActor.run {
                     isLoading = false
                     suggestions = newSuggestions
+                    HapticFeedback.success()
                 }
             } catch {
                 await MainActor.run {
                     isLoading = false
                     errorMessage = error.localizedDescription
+                    HapticFeedback.error()
                 }
             }
         }
