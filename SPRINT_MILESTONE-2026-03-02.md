@@ -2,7 +2,7 @@
 
 ## Phase 4: TestFlight Vorbereitung — Status
 
-**Fortschritt: 85% für TestFlight Release-Ready**
+**Fortschritt: 90% für TestFlight Release-Ready** (von 85% auf 90% gestiegen durch Privacy Policy & Terms of Service)
 
 ### ✅ Erledigt
 
@@ -15,6 +15,8 @@
    - `scripts/macos-testflight-build.sh` — Automatisierter Build-Prozess
    - `scripts/macos-xcode-setup.sh` — Xcode App Target Setup Anleitung
    - `TESTFLIGHT.md` aktualisiert mit neuem Build-Workflow
+   - **NEU:** `Docs/PRIVACY.md` & `Docs/PRIVACY_EN.md` — Vollständige Datenschutzrichtlinien (Deutsch & Englisch)
+   - **NEU:** `Docs/TERMS.md` & `Docs/TERMS_EN.md` — Nutzungsbedingungen (Deutsch & Englisch)
 
 3. **Projekt-Status**
    - 636+ Test-Methoden, alle stabil
@@ -87,6 +89,7 @@
 - Alle Änderungen sind committed und gepusht
 - Build-Scripts sind auf Linux getestet, müssen auf macOS/Xcode ausgeführt werden
 - TestFlight Vorbereitung ist dokumentationskomplett
+- ✅ Privacy Policy und Terms of Service erstellt (Deutsch & Englisch)
 - Für App Icon Design siehe `APP_ICON.md` im Root
 
 ### 🔗 Links
@@ -98,5 +101,5 @@
 
 ---
 
-**Letztes Update:** 2026-03-02 17:52 UTC
+**Letztes Update:** 2026-03-02 18:15 UTC
 **Nächstes Update:** Nach Xcode App Target Erstellung auf macOS
