@@ -70,11 +70,39 @@ struct ValidationHelper {
             return .valid
         }
 
+        // Try to auto-add http:// or https:// if scheme is missing
+        let withHTTP = "http://" + trimmed
+        if let url = URL(string: withHTTP), url.scheme != nil && url.host != nil {
+            return .valid
+        }
+
+        let withHTTPS = "https://" + trimmed
+        if let url = URL(string: withHTTPS), url.scheme != nil && url.host != nil {
+            return .valid
+        }
+
         return ValidationResult(
             isValid: false,
             errorMessage: "Bitte gib eine gültige URL ein (z.B. https://example.com)",
             errorKey: "invalidURL"
         )
+    }
+
+    /// Normalizes URL by adding https:// if scheme is missing
+    static func normalizeURL(_ urlString: String) -> String {
+        let trimmed = urlString.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if trimmed.isEmpty {
+            return trimmed
+        }
+
+        // If URL already has a scheme, return as-is
+        if let url = URL(string: trimmed), url.scheme != nil {
+            return trimmed
+        }
+
+        // Prefer https:// for modern sites
+        return "https://" + trimmed
     }
 
     /// Validates email format
@@ -94,6 +122,29 @@ struct ValidationHelper {
                 isValid: false,
                 errorMessage: "Bitte gib eine gültige E-Mail-Adresse ein",
                 errorKey: "invalidEmail"
+            )
+        }
+
+        return .valid
+    }
+
+    /// Validates category (for gift history)
+    static func validateCategory(_ category: String) -> ValidationResult {
+        let trimmed = category.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if trimmed.isEmpty {
+            return ValidationResult(
+                isValid: false,
+                errorMessage: "Kategorie darf nicht leer sein",
+                errorKey: "empty"
+            )
+        }
+
+        if trimmed.count > 50 {
+            return ValidationResult(
+                isValid: false,
+                errorMessage: "Kategorie darf maximal 50 Zeichen haben",
+                errorKey: "maxLength"
             )
         }
 
@@ -154,8 +205,11 @@ struct ValidationHelper {
 
     /// Validates tags array
     static func validateTags(_ tags: [String]) -> ValidationResult {
-        // Check max tags
-        if tags.count > 10 {
+        // Filter out empty tags first
+        let nonEmptyTags = tags.filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+
+        // Check max tags (after filtering empty ones)
+        if nonEmptyTags.count > 10 {
             return ValidationResult(
                 isValid: false,
                 errorMessage: "Maximal 10 Tags erlaubt",
@@ -164,8 +218,9 @@ struct ValidationHelper {
         }
 
         // Validate each tag
-        for (index, tag) in tags.enumerated() {
-            if tag.count > 30 {
+        for (index, tag) in nonEmptyTags.enumerated() {
+            let trimmedTag = tag.trimmingCharacters(in: .whitespacesAndNewlines)
+            if trimmedTag.count > 30 {
                 return ValidationResult(
                     isValid: false,
                     errorMessage: "Tag \(index + 1) darf maximal 30 Zeichen haben",
@@ -175,6 +230,13 @@ struct ValidationHelper {
         }
 
         return .valid
+    }
+
+    /// Sanitizes tags array by trimming whitespace and removing empty tags
+    static func sanitizeTags(_ tags: [String]) -> [String] {
+        return tags
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
     }
 
     // MARK: - Date Validation
@@ -247,6 +309,7 @@ struct ValidationHelper {
     /// Validates gift history fields
     static func validateGiftHistory(
         title: String,
+        category: String,
         year: Int,
         budget: Double,
         link: String
@@ -257,6 +320,11 @@ struct ValidationHelper {
         }
         if let error = validateMaxLength(title, maxLength: 100, fieldName: "Titel").errorMessage {
             return ValidationResult(isValid: false, errorMessage: error, errorKey: "title")
+        }
+
+        // Validate category
+        if let error = validateCategory(category).errorMessage {
+            return ValidationResult(isValid: false, errorMessage: error, errorKey: "category")
         }
 
         // Validate year

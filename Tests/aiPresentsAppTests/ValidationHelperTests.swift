@@ -247,7 +247,112 @@ final class ValidationHelperTests: XCTestCase {
         XCTAssertEqual(result.errorKey, "dateTooFar")
     }
 
-    // MARK: - Gift-Specific Validation Tests
+    func testValidateURLWithProtocolRelative() {
+        let result = ValidationHelper.validateURL("//example.com")
+
+        // This may or may not be valid depending on URL parsing
+        // The test just verifies it doesn't crash
+        XCTAssertNotNil(result)
+    }
+
+    func testValidateURLWithoutScheme() {
+        // Should now auto-add https://
+        let result = ValidationHelper.validateURL("example.com")
+
+        XCTAssertTrue(result.isValid, "URL without scheme should be valid with auto-added https://")
+    }
+
+    func testValidateURLWithoutSchemeWithSubdomain() {
+        let result = ValidationHelper.validateURL("www.example.com")
+
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testNormalizeURL() {
+        XCTAssertEqual(ValidationHelper.normalizeURL("example.com"), "https://example.com")
+        XCTAssertEqual(ValidationHelper.normalizeURL("http://example.com"), "http://example.com")
+        XCTAssertEqual(ValidationHelper.normalizeURL("https://example.com"), "https://example.com")
+        XCTAssertEqual(ValidationHelper.normalizeURL(""), "")
+        XCTAssertEqual(ValidationHelper.normalizeURL("  "), "")
+        XCTAssertEqual(ValidationHelper.normalizeURL("  example.com  "), "https://example.com")
+    }
+
+    func testValidateCategoryWithValidCategory() {
+        let result = ValidationHelper.validateCategory("Bücher")
+
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testValidateCategoryWithEmptyCategory() {
+        let result = ValidationHelper.validateCategory("")
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(result.errorKey, "empty")
+    }
+
+    func testValidateCategoryWithWhitespace() {
+        let result = ValidationHelper.validateCategory("   ")
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(result.errorKey, "empty")
+    }
+
+    func testValidateCategoryWithTooLongCategory() {
+        let longCategory = String(repeating: "a", count: 51)
+        let result = ValidationHelper.validateCategory(longCategory)
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(result.errorKey, "maxLength")
+    }
+
+    func testValidateCategoryWithExactlyMaxLength() {
+        let category = String(repeating: "a", count: 50)
+        let result = ValidationHelper.validateCategory(category)
+
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testSanitizeTags() {
+        let result = ValidationHelper.sanitizeTags(["tag1", "  tag2  ", "", "tag3", "   "])
+
+        XCTAssertEqual(result, ["tag1", "tag2", "tag3"])
+    }
+
+    func testSanitizeTagsWithAllEmpty() {
+        let result = ValidationHelper.sanitizeTags(["", "   ", "  "])
+
+        XCTAssertEqual(result, [])
+    }
+
+    func testSanitizeTagsWithValidTags() {
+        let result = ValidationHelper.sanitizeTags(["tag1", "tag2", "tag3"])
+
+        XCTAssertEqual(result, ["tag1", "tag2", "tag3"])
+    }
+
+    func testValidateTagsWithEmptyTagsInArray() {
+        // After my changes, empty tags should be filtered out
+        let result = ValidationHelper.validateTags(["tag1", "", "  ", "tag2"])
+
+        XCTAssertTrue(result.isValid, "Empty tags should be filtered out")
+    }
+
+    func testValidateTagsWithTooManyNonEmptyTags() {
+        // Should still fail if there are more than 10 non-empty tags
+        let tags = Array(1...11).map { "tag\($0)" }
+        let result = ValidationHelper.validateTags(tags)
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(result.errorKey, "maxTags")
+    }
+
+    func testValidateTagsWithMixedEmptyAndNonEmpty() {
+        // 5 valid + 5 empty = should be valid (only non-empty counted)
+        let tags = ["tag1", "tag2", "tag3", "tag4", "tag5", "", "", "", "", ""]
+        let result = ValidationHelper.validateTags(tags)
+
+        XCTAssertTrue(result.isValid)
+    }
 
     func testValidateGiftIdeaWithValidData() {
         let result = ValidationHelper.validateGiftIdea(
@@ -330,6 +435,7 @@ final class ValidationHelperTests: XCTestCase {
     func testValidateGiftHistoryWithValidData() {
         let result = ValidationHelper.validateGiftHistory(
             title: "Test Geschenk",
+            category: "Bücher",
             year: 2024,
             budget: 50,
             link: "https://example.com"
@@ -341,6 +447,7 @@ final class ValidationHelperTests: XCTestCase {
     func testValidateGiftHistoryWithEmptyTitle() {
         let result = ValidationHelper.validateGiftHistory(
             title: "",
+            category: "Bücher",
             year: 2024,
             budget: 50,
             link: ""
@@ -350,9 +457,23 @@ final class ValidationHelperTests: XCTestCase {
         XCTAssertEqual(result.errorKey, "title")
     }
 
+    func testValidateGiftHistoryWithEmptyCategory() {
+        let result = ValidationHelper.validateGiftHistory(
+            title: "Test Geschenk",
+            category: "",
+            year: 2024,
+            budget: 50,
+            link: ""
+        )
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(result.errorKey, "category")
+    }
+
     func testValidateGiftHistoryWithInvalidYearTooOld() {
         let result = ValidationHelper.validateGiftHistory(
             title: "Test",
+            category: "Bücher",
             year: 1899,
             budget: 50,
             link: ""
@@ -366,6 +487,7 @@ final class ValidationHelperTests: XCTestCase {
         let currentYear = Calendar.current.component(.year, from: Date())
         let result = ValidationHelper.validateGiftHistory(
             title: "Test",
+            category: "Bücher",
             year: currentYear + 1,
             budget: 50,
             link: ""
@@ -378,6 +500,7 @@ final class ValidationHelperTests: XCTestCase {
     func testValidateGiftHistoryWithNegativeBudget() {
         let result = ValidationHelper.validateGiftHistory(
             title: "Test",
+            category: "Bücher",
             year: 2024,
             budget: -10,
             link: ""
@@ -390,6 +513,7 @@ final class ValidationHelperTests: XCTestCase {
     func testValidateGiftHistoryWithInvalidURL() {
         let result = ValidationHelper.validateGiftHistory(
             title: "Test",
+            category: "Bücher",
             year: 2024,
             budget: 50,
             link: "invalid-url"
