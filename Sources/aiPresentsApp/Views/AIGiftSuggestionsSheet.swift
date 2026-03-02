@@ -32,6 +32,7 @@ struct AIGiftSuggestionsSheet: View {
 
     let person: PersonRef
     @Query private var giftHistory: [GiftHistory]
+    @Query private var existingGiftIdeas: [GiftIdea]
 
     @State private var isLoading = false
     @State private var suggestions: [GiftSuggestion] = []
@@ -171,18 +172,45 @@ struct AIGiftSuggestionsSheet: View {
     }
 
     private var suggestionsList: View {
-        Section("Vorschläge (\(suggestions.count))") {
-            ForEach(Array(suggestions.enumerated()), id: \.offset) { index, suggestion in
-                suggestionCard(suggestion: suggestion, index: index)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        selectedSuggestion = suggestion
-                        HapticFeedback.medium()
-                    }
+        let filteredSuggestions = suggestions.filter { suggestion in
+            !existingGiftIdeaTitles.contains(suggestion.title.lowercased().trimmingCharacters(in: .whitespaces))
+        }
+
+        Section {
+            if filteredSuggestions.isEmpty {
+                VStack(alignment: .leading, spacing: 12) {
+                    Image(systemName: "lightbulb.fill")
+                        .font(.system(size: 40))
+                        .foregroundColor(AppColor.textSecondary.opacity(0.4))
+
+                    Text("Keine neuen Vorschläge")
+                        .font(.headline)
+                        .foregroundColor(AppColor.textPrimary)
+
+                    Text("Alle Vorschläge existieren bereits als Geschenkideen.")
+                        .font(.subheadline)
+                        .foregroundColor(AppColor.textSecondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding()
+            } else {
+                ForEach(Array(filteredSuggestions.enumerated()), id: \.offset) { index, suggestion in
+                    suggestionCard(suggestion: suggestion, index: index)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedSuggestion = suggestion
+                            HapticFeedback.medium()
+                        }
+                }
             }
+        } header: {
+            Text("Vorschläge (\(filteredSuggestions.count))")
         } footer: {
             VStack(alignment: .leading, spacing: 8) {
                 Text("💡 Tippe auf einen Vorschlag, um ihn als Geschenkidee zu speichern.")
+                if suggestions.count != filteredSuggestions.count {
+                    Text("ℹ️ \(suggestions.count - filteredSuggestions.count) Vorschlag\(suggestions.count - filteredSuggestions.count == 1 ? "" : "e") bereits vorhanden.")
+                }
                 if suggestions.count >= 3 {
                     Text("✨ Möchtest du mehr Vorschläge? Tippe oben auf 'Aktualisieren'.")
                 }
@@ -264,6 +292,12 @@ struct AIGiftSuggestionsSheet: View {
             .sorted { $0.year > $1.year }
             .prefix(5)
             .map { $0 }
+    }
+
+    private var existingGiftIdeaTitles: Set<String> {
+        Set(existingGiftIdeas
+            .filter { $0.personId == person.id }
+            .map { $0.title.lowercased().trimmingCharacters(in: .whitespaces) })
     }
 
     private func loadSuggestions() {
