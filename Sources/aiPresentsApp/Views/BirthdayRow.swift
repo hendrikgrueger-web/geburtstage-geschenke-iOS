@@ -67,6 +67,7 @@ struct BirthdayRow: View {
                             .foregroundColor(AppColor.primary)
                     }
                     .buttonStyle(.plain)
+                    .accessibleButton(label: "Geschenkidee hinzufügen", hint: "Fügt eine neue Geschenkidee für \(person.displayName) hinzu")
                 }
             }
         }

@@ -115,8 +115,7 @@ struct AddGiftIdeaSheet: View {
 
                 Section("Budget") {
                     Toggle("Slider verwenden", isOn: $useSlider.animation())
-                        .accessibilityLabel("Budget-Slider verwenden")
-                        .accessibilityHint("Aktiviert oder deaktiviert den Budget-Slider")
+                        .accessibleToggle(label: "Budget-Slider verwenden", isOn: useSlider)
 
                     if useSlider {
                         VStack(spacing: 16) {

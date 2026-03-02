@@ -103,7 +103,11 @@ struct EmptyStateView: View {
             Image(systemName: type.iconName)
                 .font(.system(size: 50))
                 .foregroundColor(type.color)
-                .symbolEffect(.bounce, options: .repeating, isActive: true)
+                .symbolEffect(
+                    AccessibilityConfiguration.isReducedMotionEnabled ? .pulse : .bounce,
+                    options: .repeating,
+                    isActive: true
+                )
         }
     }
 

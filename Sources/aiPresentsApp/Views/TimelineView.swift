@@ -272,10 +272,10 @@ struct TimelineView: View {
         .refreshable {
             await refreshTimeline()
         }
-        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: selectedTab)
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: searchText)
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: filterHasIdeas)
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: filterRelation)
+        .animation(AccessibilityConfiguration.animation(.spring(response: 0.4, dampingFraction: 0.8)), value: selectedTab)
+        .animation(AccessibilityConfiguration.animation(.spring(response: 0.3, dampingFraction: 0.8)), value: searchText)
+        .animation(AccessibilityConfiguration.animation(.spring(response: 0.3, dampingFraction: 0.8)), value: filterHasIdeas)
+        .animation(AccessibilityConfiguration.animation(.spring(response: 0.3, dampingFraction: 0.8)), value: filterRelation)
         .sheet(item: $showingAddGiftIdeaFor) { person in
             AddGiftIdeaSheet(person: person)
         }
@@ -325,12 +325,20 @@ struct TimelineView: View {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 60))
                     .foregroundColor(AppColor.textSecondary.opacity(0.4))
-                    .symbolEffect(.pulse, options: .repeating, isActive: true)
+                    .symbolEffect(
+                        AccessibilityConfiguration.isReducedMotionEnabled ? .pulse : .bounce,
+                        options: .repeating,
+                        isActive: true
+                    )
             } else {
                 Image(systemName: "giftcard")
                     .font(.system(size: 60))
                     .foregroundColor(AppColor.textSecondary.opacity(0.4))
-                    .symbolEffect(.bounce, options: .repeating, isActive: true)
+                    .symbolEffect(
+                        AccessibilityConfiguration.isReducedMotionEnabled ? .pulse : .bounce,
+                        options: .repeating,
+                        isActive: true
+                    )
             }
 
             VStack(spacing: 8) {
