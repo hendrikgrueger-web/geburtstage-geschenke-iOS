@@ -5,33 +5,43 @@ struct QuickStatsView: View {
     @Query private var people: [PersonRef]
     @Query private var giftIdeas: [GiftIdea]
 
+    @State private var animateIn = false
+
     var body: some View {
         HStack(spacing: 12) {
             statCard(
                 icon: "person.2.fill",
                 value: "\(people.count)",
                 label: "Kontakte",
-                color: AppColor.primary
+                color: AppColor.primary,
+                animationDelay: 0
             )
 
             statCard(
                 icon: "bell.fill",
                 value: upcomingBirthdaysCount > 0 ? "\(upcomingBirthdaysCount)" : "Keine",
                 label: "Diese Woche",
-                color: AppColor.accent
+                color: AppColor.accent,
+                animationDelay: 0.1
             )
 
             statCard(
                 icon: "gift.fill",
                 value: "\(totalGiftIdeas)",
                 label: "Ideen",
-                color: AppColor.secondary
+                color: AppColor.secondary,
+                animationDelay: 0.2
             )
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
         .onTapGesture {
             HapticFeedback.light()
+        }
+        .onAppear {
+            withAnimation(.easeOut(duration: 0.5)) {
+                animateIn = true
+            }
         }
     }
 
@@ -68,20 +78,26 @@ struct QuickStatsView: View {
     }
 
     @ViewBuilder
-    private func statCard(icon: String, value: String, label: String, color: Color) -> some View {
+    private func statCard(icon: String, value: String, label: String, color: Color, animationDelay: Double) -> some View {
         VStack(spacing: 4) {
             Image(systemName: icon)
                 .font(.title2)
                 .foregroundColor(color)
+                .scaleEffect(animateIn ? 1 : 0.5)
+                .opacity(animateIn ? 1 : 0)
 
             Text(value)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(AppColor.textPrimary)
+                .offset(y: animateIn ? 0 : 10)
+                .opacity(animateIn ? 1 : 0)
 
             Text(label)
                 .font(.caption)
                 .foregroundColor(AppColor.textSecondary)
+                .offset(y: animateIn ? 0 : 10)
+                .opacity(animateIn ? 1 : 0)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
@@ -90,5 +106,6 @@ struct QuickStatsView: View {
         .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(value) \(label)")
+        .animation(.easeOut(duration: 0.4).delay(animationDelay), value: animateIn)
     }
 }
