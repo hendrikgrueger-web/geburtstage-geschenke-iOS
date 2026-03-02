@@ -43,6 +43,9 @@ class ReminderManager: ObservableObject {
             return
         }
 
+        // First, cancel existing reminders to avoid duplicates
+        await cancelAllReminders()
+
         let descriptor = FetchDescriptor<PersonRef>()
         guard let people = try? modelContext.fetch(descriptor) else {
             return
