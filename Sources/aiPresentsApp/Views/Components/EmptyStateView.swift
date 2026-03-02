@@ -46,6 +46,16 @@ enum EmptyStateType {
         case .noContacts: return "Kontakte importieren"
         }
     }
+
+    var actionIcon: String {
+        switch self {
+        case .noBirthdays: return "person.badge.plus"
+        case .noGiftIdeas: return "plus.circle.fill"
+        case .noHistory: return "plus.circle"
+        case .noSearchResults: return "magnifyingglass"
+        case .noContacts: return "person.badge.plus"
+        }
+    }
 }
 
 struct EmptyStateView: View {
@@ -76,15 +86,15 @@ struct EmptyStateView: View {
                     .padding(.horizontal, 32)
             }
 
-            // Action button
+            // Action using QuickActionCard for better visual hierarchy
             if let actionTitle = type.actionTitle, let action = action {
-                Button(action: action) {
-                    Text(actionTitle)
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                }
-                .buttonStyle(.borderedProminent)
-                .buttonStyle(.pressable())
+                QuickActionCard(
+                    title: actionTitle,
+                    icon: type.actionIcon,
+                    style: .primary,
+                    action: action
+                )
+                .padding(.horizontal, 32)
             }
         }
         .padding()

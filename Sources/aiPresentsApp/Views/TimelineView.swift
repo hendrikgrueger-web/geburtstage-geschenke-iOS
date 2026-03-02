@@ -16,6 +16,7 @@ struct TimelineView: View {
     @State private var listAnimation = false
     @State private var isRefreshing = false
     @State private var debouncedSearchText = ""
+    @State private var searchDebouncer = Debouncer(delay: .milliseconds(300))
 
     enum TimelineTab: String, CaseIterable {
         case today = "Heute"
@@ -63,12 +64,9 @@ struct TimelineView: View {
         .navigationBarTitleDisplayMode(.large)
         .searchable(text: $searchText, prompt: "Suche...")
         .onChange(of: searchText) { oldValue, newValue in
-            // Debounce search text to improve performance
-            Task {
-                try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
-                if newValue == searchText { // Only update if text hasn't changed
-                    debouncedSearchText = newValue
-                }
+            // Use Debouncer utility for better performance and cleaner code
+            searchDebouncer.debounce {
+                debouncedSearchText = newValue
             }
         }
         .toolbar {
