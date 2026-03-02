@@ -2,7 +2,7 @@
 
 ## Phase 4: TestFlight Vorbereitung — Status
 
-**Fortschritt: 90% für TestFlight Release-Ready** (von 85% auf 90% gestiegen durch Privacy Policy & Terms of Service)
+**Fortschritt: 92% für TestFlight Release-Ready** (von 90% auf 92% durch Zodiac-Bugfix)
 
 ### ✅ Erledigt
 
@@ -22,6 +22,7 @@
    - 636+ Test-Methoden, alle stabil
    - Phase 1–3 abgeschlossen (MVP, Accessibility, AI Quality)
    - Clean working tree, alle Commits gepusht
+   - **NEU:** Zodiac-Symbole Bug behoben (Commit: cf3b945)
 
 ### ⏳ Offen (Benötigt macOS/Xcode)
 

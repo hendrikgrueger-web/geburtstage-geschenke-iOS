@@ -70,9 +70,10 @@ Docs/                           # Produkt-/Technik-/Roadmap-Doku
 
 ## Nächste Meilensteine
 1. ✅ QA-Härtung (Blocker/Crash-Prävention)
-2. 🔄 TestFlight Vorbereitung (v0.2.0 Beta)
-3. KI-Qualität & Prompting verbessern
-4. Widget + App Intents (nach MVP-Stabilität)
+2. ✅ Bug Fixes (Zodiac-Symbole korrigiert)
+3. 🔄 TestFlight Vorbereitung (v0.2.0 Beta)
+4. KI-Qualität & Prompting verbessern
+5. Widget + App Intents (nach MVP-Stabilität)
 
 ## TestFlight & Release
 
