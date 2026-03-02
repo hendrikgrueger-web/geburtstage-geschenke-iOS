@@ -13,6 +13,7 @@ struct TimelineView: View {
     @State private var showingAddGiftIdeaFor: PersonRef?
     @State private var quickAddPerson: PersonRef?
     @State private var listAnimation = false
+    @State private var isRefreshing = false
 
     enum TimelineTab: String, CaseIterable {
         case today = "Heute"
@@ -237,6 +238,9 @@ struct TimelineView: View {
             }
         }
         .listStyle(.insetGrouped)
+        .refreshable {
+            await refreshTimeline()
+        }
         .animation(.spring(response: 0.4, dampingFraction: 0.8), value: selectedTab)
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: searchText)
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: filterHasIdeas)
@@ -244,6 +248,20 @@ struct TimelineView: View {
         .sheet(item: $showingAddGiftIdeaFor) { person in
             AddGiftIdeaSheet(person: person)
         }
+    }
+
+    private func refreshTimeline() async {
+        isRefreshing = true
+        HapticFeedback.light()
+
+        // Clear birthday calculator cache to force recalculation
+        BirthdayCalculator.clearCache()
+
+        // Simulate a brief refresh delay for better UX
+        try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+
+        HapticFeedback.success()
+        isRefreshing = false
     }
 
     private func markAsPlanned(_ idea: GiftIdea) {

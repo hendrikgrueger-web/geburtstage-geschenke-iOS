@@ -1,91 +1,54 @@
 # App Icon Specifications
 
 ## Current Status
-⚠️ App Icon NOT IMPLEMENTED YET
+✅ **FINAL DESIGN APPROVED** — Ready for implementation (2026-03-02)
 
-## Requirements
+## Final Design: Gift Box with Calendar
 
-### Sizes Required
-The following sizes are required for iOS app icons:
+### Visual Description
 
-| Size | Usage | File |
-|------|-------|------|
-| 1024x1024 | App Store | `Icon-AppStore-1024x1024.png` |
-| 512x512 | iTunes Artwork | `Icon-iTunesArtwork-512x512.png` |
-| 256x256 | iPad Settings | `Icon-iPadSettings-256x256.png` |
-| 128x128 | iPad Settings (2x) | `Icon-iPadSettings-128x128.png` |
-| 180x180 | iPhone App (3x) | `Icon-App-60x60@3x.png` |
-| 167x167 | iPad Pro App (2x) | `Icon-App-83.5x83.5@2x.png` |
-| 152x152 | iPad App (2x) | `Icon-App-76x76@2x.png` |
-| 144x144 | iPad Pro App (2x) | `Icon-App-72x72@2x.png` |
-| 120x120 | iPhone App (2x) | `Icon-App-60x60@2x.png` |
-| 114x114 | iPhone App (2x) | `Icon-App-57x57@2x.png` |
-| 76x76 | iPad App (1x) | `Icon-App-76x76.png` |
-| 72x72 | iPad App (1x) | `Icon-App-72x72.png` |
-| 60x60 | iPhone App (2x) | `Icon-App-60x60.png` |
-| 57x57 | iPhone App (1x) | `Icon-App-57x57.png` |
-| 40x40 | iPhone Notification (2x) | `Icon-Notification-40x40@2x.png` |
-| 29x29 | iPhone Settings (2x) | `Icon-Small-30x30@2x.png` |
-| 20x20 | iPhone Notification (2x) | `Icon-Small-20x20@2x.png` |
+**Composition:**
+- Background: Blue gradient (AppColor.primary → AppColor.primaryDark) with subtle diagonal texture
+- Center: Stylized white gift box (rounded corners, soft shadow)
+- Top: Birthday candle with flame (orange gradient) on the gift box lid
+- Corner (top-right): Circular calendar badge showing "🎂" emoji
+- Accent: Subtle confetti particles (3-5 stars/sparkles) around the gift box
+- Ribbon: Orange ribbon (AppColor.accent) wrapping horizontally with a bow on top
 
-### Design Guidelines
+**Color Palette (matching AppColor):**
+- Background: `gradientBlue` (Blue gradient: #007AFF → #0059CC)
+- Gift Box: White (#FFFFFF) with subtle drop shadow
+- Candle Flame: Orange gradient (#FF9400 → #FF6600)
+- Ribbon: Orange accent (#FF9400)
+- Confetti: Light sparkles (#FFFFFF at 30% opacity)
 
-#### Concept
-The app icon should represent:
-- **Birthdays** 🎂 / 🎉
-- **Gift Ideas** 🎁
-- **Reminders** ⏰ / 🔔
-- **Apple-style aesthetics**
-
-#### Color Palette
-- Primary: Blue gradient (matching AppColor.primary)
-- Accent: Warm orange (AppColor.accent)
-- Background: Clean white/light gray
-
-#### Style
-- **Flat design** with subtle depth
-- **Rounded corners** (iOS standard)
+**Style:**
+- **Flat design** with subtle depth (2-3px shadow)
+- **Rounded corners** (iOS superellipse standard, ~22% corner radius)
 - **High contrast** for visibility
 - **Simple, memorable** iconography
+- **Apple HIG compliant**
 
-## Design Ideas
+---
 
-### Option 1: Gift Box with Calendar
-- Gift box icon with birthday cake on top
-- Calendar overlay showing date
-- Blue gradient background
-- Orange accent on gift ribbon
+## Implementation
 
-### Option 2: Birthday Cake with Bell
-- Simple birthday cake illustration
-- Notification bell icon
-- Celebratory confetti elements
-- Blue background with orange sparkles
+### Option A: Using Asset Catalog in Xcode
+1. Create design in Figma/Sketch/Adobe XD at 1024x1024
+2. Export to PNG
+3. Open `App/Assets.xcassets` (or create one)
+4. Create new AppIcon asset
+5. Drag and drop icon files to correct slots
+6. Build and verify on device
 
-### Option 3: Abstract Gift
-- Stylized gift box shape
-- Minimalist calendar elements
-- Gradient colors from blue to purple
-- Subtle shadow for depth
-
-## Implementation Steps
-
-### Using Asset Catalog in Xcode
-1. Open `App/Assets.xcassets`
-2. Create new AppIcon asset
-3. Drag and drop icon files to correct slots
-4. Build and verify on device
-
-### Using Online Generators
-- [AppIcon.co](https://appicon.co/)
-- [MakeAppIcon.com](https://makeappicon.com/)
-- [AppIconGenerator.com](https://www.appicongenerator.com/)
-
-### From Figma/Sketch
+### Option B: Using Online Generators
 1. Design master icon at 1024x1024
 2. Export to PNG
-3. Use generator tool to create all sizes
-4. Add to Asset Catalog
+3. Use [AppIcon.co](https://appicon.co/) or [MakeAppIcon.com](https://makeappicon.com/)
+4. Upload and download all sizes
+5. Add to Asset Catalog
+
+---
 
 ## Testing Checklist
 
@@ -93,15 +56,66 @@ The app icon should represent:
 - [ ] Icon displays correctly in App Store
 - [ ] No pixelation on any device size
 - [ ] Good contrast on light background
-- [ ] Good contrast on dark background (if applicable)
+- [ ] Good contrast on dark background
 - [ ] Recognizable at small sizes (29x29)
 - [ ] Looks good in Settings app
 - [ ] Approved by design review
 
+---
+
+## Figma/Sketch Template
+
+### Canvas Setup (1024x1024)
+```
+Size: 1024 x 1024 px
+Export: PNG @ 1x
+Format: RGB + Alpha
+```
+
+### Layer Structure
+```
+Background (Rectangle)
+├─ Gradient Fill (Blue)
+├─ Subtle Pattern (optional)
+
+Confetti Group (3-5 elements)
+├─ Star 1 (White, 30% opacity)
+├─ Star 2 (White, 25% opacity)
+├─ Sparkle 1 (White, 35% opacity)
+
+Gift Box Group
+├─ Box Body (Rectangle, White, rounded)
+│  ├─ Shadow (Drop Shadow, 10px, 30%)
+├─ Ribbon Horizontal (Rectangle, Orange)
+├─ Bow (Path/Shape, Orange)
+├─ Candle (Rectangle, White)
+└─ Flame (Path, Orange Gradient)
+
+Calendar Badge (Circle)
+├─ Background (White)
+├─ Emoji Text ("🎂", size ~256px)
+```
+
+### Dimensions (1024x1024 canvas)
+```
+Gift Box: 500 x 400 px (centered)
+Ribbon: 40 px height, full box width
+Bow: 120 x 120 px (centered on ribbon)
+Candle: 40 x 150 px (centered on top of box)
+Flame: 60 x 80 px (on top of candle)
+Calendar Badge: 200 x 200 px (top-right corner)
+Confetti: 40-60 px each, scattered
+```
+
+---
+
 ## Related Assets
 
-- Launch Screen: See `LaunchScreen.storyboard` specs
-- Color Palette: See `Sources/aiPresentsApp/Resources/AppColor.swift`
+- Launch Screen: `Sources/aiPresentsApp/Views/LaunchScreen.swift`
+- Color Palette: `Sources/aiPresentsApp/Resources/AppColor.swift`
+- App Name: "AI Präsente"
+
+---
 
 ## Resources
 
@@ -111,4 +125,5 @@ The app icon should represent:
 ---
 
 **Last Updated:** 2026-03-02
-**Status:** PENDING IMPLEMENTATION
+**Status:** ✅ READY FOR IMPLEMENTATION
+**Design Version:** 1.0 (Final)
