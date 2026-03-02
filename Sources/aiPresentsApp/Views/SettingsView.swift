@@ -24,14 +24,13 @@ struct SettingsView: View {
     }
 
     private var nextBirthday: (person: PersonRef, date: Date)? {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
+        let today = Calendar.current.startOfDay(for: Date())
 
         let sorted = people.compactMap { person -> (PersonRef, Date)? in
-            guard let nextBirthday = nextBirthday(for: person, from: today) else {
+            guard let nextBirthday = BirthdayCalculator.nextBirthday(for: person.birthday, from: today),
+                  let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
                 return nil
             }
-            let daysUntil = calendar.dateComponents([.day], from: today, to: nextBirthday).day ?? 0
             if daysUntil >= 0 && daysUntil <= 365 {
                 return (person, nextBirthday)
             }
@@ -39,25 +38,6 @@ struct SettingsView: View {
         }.sorted { $0.1 < $1.1 }
 
         return sorted.first
-    }
-
-    private func nextBirthday(for person: PersonRef, from today: Date) -> Date? {
-        let calendar = Calendar.current
-        let currentYear = calendar.component(.year, from: today)
-
-        var components = calendar.dateComponents([.month, .day], from: person.birthday)
-        components.year = currentYear
-
-        guard var birthday = calendar.date(from: components) else {
-            return nil
-        }
-
-        if birthday < today {
-            components.year = currentYear + 1
-            birthday = calendar.date(from: components) ?? birthday
-        }
-
-        return birthday
     }
 
     private func daysUntil(from date: Date) -> Int {

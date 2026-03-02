@@ -36,40 +36,18 @@ struct QuickStatsView: View {
     }
 
     private var upcomingBirthdaysCount: Int {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
+        let today = Calendar.current.startOfDay(for: Date())
 
         return people.filter { person in
-            guard let nextBirthday = nextBirthday(for: person, from: today) else {
+            guard let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
                 return false
             }
-
-            let daysUntil = calendar.dateComponents([.day], from: today, to: nextBirthday).day ?? 0
             return daysUntil >= 0 && daysUntil <= 7
         }.count
     }
 
     private var totalGiftIdeas: Int {
         giftIdeas.count
-    }
-
-    private func nextBirthday(for person: PersonRef, from today: Date) -> Date? {
-        let calendar = Calendar.current
-        let currentYear = calendar.component(.year, from: today)
-
-        var components = calendar.dateComponents([.month, .day], from: person.birthday)
-        components.year = currentYear
-
-        guard var birthday = calendar.date(from: components) else {
-            return nil
-        }
-
-        if birthday < today {
-            components.year = currentYear + 1
-            birthday = calendar.date(from: components) ?? birthday
-        }
-
-        return birthday
     }
 
     @ViewBuilder
