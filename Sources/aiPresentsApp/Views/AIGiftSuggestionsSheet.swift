@@ -286,7 +286,7 @@ struct AIGiftSuggestionsSheet: View {
                     VStack(alignment: .leading, spacing: 0) {
                         suggestionCard(suggestion: suggestion, index: index)
 
-                        // Feedback section - only show if suggestion was generated (not demo mode)
+                        // Feedback section
                         if !feedbackGivenForSuggestions.contains(suggestion.title) {
                             SuggestionFeedbackView(
                                 suggestion: suggestion,
@@ -310,11 +310,9 @@ struct AIGiftSuggestionsSheet: View {
                     .padding(.vertical, 8)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        // Only trigger sheet if tapping on the card (not feedback buttons)
-                        if !feedbackGivenForSuggestions.contains(suggestion.title) {
-                            selectedSuggestion = suggestion
-                            HapticFeedback.medium()
-                        }
+                        // Always allow saving as gift idea
+                        selectedSuggestion = suggestion
+                        HapticFeedback.medium()
                     }
                 }
             }
