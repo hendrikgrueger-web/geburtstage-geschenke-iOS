@@ -78,15 +78,21 @@ struct AddGiftIdeaSheet: View {
             Form {
                 Section("Geschenk") {
                     TextField("Titel", text: $title)
+                        .accessibilityLabel("Geschenk-Titel")
+                        .accessibilityHint("Gib den Namen des Geschenks ein")
 
                     TextField("Notizen", text: $note, axis: .vertical)
                         .lineLimit(3...6)
+                        .accessibilityLabel("Notizen zum Geschenk")
+                        .accessibilityHint("Optionale zusätzliche Informationen")
 
                     HStack {
                         Text("Link")
                         TextField("URL", text: $link)
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
+                            .accessibilityLabel("Link zum Geschenk")
+                            .accessibilityHint("Optional: Link zur Webseite")
 
                         if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {
@@ -102,12 +108,15 @@ struct AddGiftIdeaSheet: View {
                                     .foregroundColor(.blue)
                             }
                             .accessibilityLabel("Link öffnen")
+                            .accessibilityHint("Öffnet den Link im Browser")
                         }
                     }
                 }
 
                 Section("Budget") {
                     Toggle("Slider verwenden", isOn: $useSlider.animation())
+                        .accessibilityLabel("Budget-Slider verwenden")
+                        .accessibilityHint("Aktiviert oder deaktiviert den Budget-Slider")
 
                     if useSlider {
                         VStack(spacing: 16) {
@@ -129,6 +138,8 @@ struct AddGiftIdeaSheet: View {
                                 Text("\(Int(AppConfig.Budget.sliderMaximum))€").font(.caption2).foregroundColor(.secondary)
                             }
                             .tint(AppColor.primary)
+                            .accessibilityLabel("Mindestbudget-Slider")
+                            .accessibilityHint("Wähle das Mindestbudget")
 
                             HStack {
                                 Text("Max")
@@ -148,6 +159,8 @@ struct AddGiftIdeaSheet: View {
                                 Text("\(Int(AppConfig.Budget.sliderMaximum))€").font(.caption2).foregroundColor(.secondary)
                             }
                             .tint(AppColor.accent)
+                            .accessibilityLabel("Maximalbudget-Slider")
+                            .accessibilityHint("Wähle das Maximalbudget")
                         }
                         .padding(.vertical, 8)
                     } else {
@@ -155,6 +168,8 @@ struct AddGiftIdeaSheet: View {
                             Text("Min")
                             TextField("€", text: $budgetMin)
                                 .keyboardType(.decimalPad)
+                                .accessibilityLabel("Mindestbudget")
+                                .accessibilityHint("Gib das Mindestbudget in Euro ein")
                         }
 
                         HStack {
@@ -162,6 +177,8 @@ struct AddGiftIdeaSheet: View {
                             TextField("€", text: $budgetMax)
                                 .keyboardType(.decimalPad)
                                 .foregroundColor(isBudgetInvalid ? .red : .primary)
+                                .accessibilityLabel("Maximalbudget")
+                                .accessibilityHint("Gib das Maximalbudget in Euro ein")
                         }
                     }
 
@@ -169,17 +186,21 @@ struct AddGiftIdeaSheet: View {
                         Text("Max darf nicht kleiner als Min sein")
                             .font(.caption)
                             .foregroundColor(.red)
+                            .accessibilityLabel("Fehler: Ungültiges Budget")
                     }
                 }
 
                 Section("Tags") {
                     TextField("Getrennt durch Kommas", text: $tagsInput)
                         .textInputAutocapitalization(.never)
+                        .accessibilityLabel("Tags")
+                        .accessibilityHint("Gib bis zu 10 Tags getrennt durch Kommas ein, max 30 Zeichen pro Tag")
 
                     if let error = tagsValidation {
                         Text(error.errorDescription ?? "")
                             .font(.caption)
                             .foregroundColor(.red)
+                            .accessibilityLabel("Fehler: \(error.errorDescription ?? "")")
                     }
                 }
 
@@ -191,6 +212,7 @@ struct AddGiftIdeaSheet: View {
                     }
                     .pickerStyle(.segmented)
                     .accessibilityLabel("Geschenkstatus")
+                    .accessibilityHint("Wähle den Status der Geschenkidee aus")
                 }
             }
             .navigationTitle("Geschenk-Idee")
@@ -200,6 +222,8 @@ struct AddGiftIdeaSheet: View {
                     Button("Abbrechen") {
                         dismiss()
                     }
+                    .accessibilityLabel("Abbrechen")
+                    .accessibilityHint("Schließt das Formular ohne zu speichern")
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -214,6 +238,8 @@ struct AddGiftIdeaSheet: View {
                         }
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .accessibilityLabel("Speichern")
+                    .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? "Titel muss ausgefüllt sein" : "Speichert die Geschenkidee")
                 }
             }
         }
