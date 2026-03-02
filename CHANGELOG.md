@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Replace all print() statements with proper AppLogger for consistent logging
-- Add error handling callbacks to URL opening operations
+- Add error handling callbacks to all URL opening operations
 - Improved TimelineView rendering performance with cached birthday calculations
 
 ### Fixed
@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Insufficient error messages when saving with invalid data
 - Save button disabled too aggressively (only for title, not for other fields)
 - Missing visual feedback for budget validation errors
-- URL opening without error handling in AddGiftIdeaSheet and SettingsView
+- URL opening without error handling in all sheet views (Add/Edit GiftIdea, Add/Edit GiftHistory, Settings)
 
 ## [0.1.0] - 2026-03-02
 
