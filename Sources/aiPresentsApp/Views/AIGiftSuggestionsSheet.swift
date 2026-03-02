@@ -245,6 +245,7 @@ struct AIGiftSuggestionsSheet: View {
     private var budgetSection: View {
         Section {
             budgetPicker
+            budgetDetailCard
             generateButton
         } header: {
             Text("KI-Assistent")
@@ -265,11 +266,17 @@ struct AIGiftSuggestionsSheet: View {
     private var budgetPicker: View {
         Picker("Budget-Bereich", selection: $selectedBudget) {
             ForEach(BudgetRange.allCases, id: \.self) { budget in
-                Text(budget.rawValue).tag(budget)
+                BudgetRangeCompactView(budgetRange: budget, isSelected: selectedBudget == budget)
+                    .tag(budget)
             }
         }
-        .pickerStyle(.segmented)
+        .pickerStyle(.automatic)
         .accessibilityLabel("Budget-Bereich wählen")
+    }
+
+    private var budgetDetailCard: View {
+        BudgetRangeView(budgetRange: selectedBudget)
+            .padding(.vertical, 4)
     }
 
     private var generateButton: View {

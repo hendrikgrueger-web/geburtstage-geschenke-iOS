@@ -124,33 +124,65 @@ struct AIService {
     }
 
     private func makeRequest(prompt: String) async throws -> Data {
-        let url = URL(string: "\(baseURL)/chat/completions")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        let retryPolicy = RetryPolicy.default
 
-        let body: [String: Any] = [
-            "model": "anthropic/claude-3-haiku",
-            "messages": [
-                [
-                    "role": "user",
-                    "content": prompt
+        for attempt in 1...retryPolicy.maxAttempts {
+            do {
+                let url = URL(string: "\(baseURL)/chat/completions")!
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+
+                let body: [String: Any] = [
+                    "model": "anthropic/claude-3-haiku",
+                    "messages": [
+                        [
+                            "role": "user",
+                            "content": prompt
+                        ]
+                    ],
+                    "response_format": ["type": "json_object"]
                 ]
-            ],
-            "response_format": ["type": "json_object"]
-        ]
 
-        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+                request.httpBody = try JSONSerialization.data(withJSONObject: body)
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+                let (data, response) = try await URLSession.shared.data(for: request)
 
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw AIError.requestFailed
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    throw AIError.requestFailed
+                }
+
+                if httpResponse.statusCode == 200 {
+                    return data
+                } else if httpResponse.statusCode >= 500 {
+                    // Server errors - retry
+                    throw AIError.serverError(httpResponse.statusCode)
+                } else if httpResponse.statusCode == 429 {
+                    // Rate limit - retry with backoff
+                    throw AIError.rateLimit
+                } else {
+                    // Client errors - don't retry
+                    throw AIError.clientError(httpResponse.statusCode)
+                }
+            } catch let error as AIError {
+                // Don't retry client errors
+                if case .clientError = error {
+                    throw error
+                }
+
+                // Retry for other errors
+                if attempt < retryPolicy.maxAttempts {
+                    let delay = retryPolicy.delay * Double(attempt)
+                    try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+                    continue
+                }
+
+                throw error
+            }
         }
 
-        return data
+        throw AIError.requestFailed
     }
 
     private func parseResponse(_ data: Data) throws -> [GiftSuggestion] {
@@ -181,15 +213,33 @@ struct AIService {
         case apiKeyNotConfigured
         case requestFailed
         case invalidResponse
+        case serverError(Int)
+        case rateLimit
+        case clientError(Int)
 
         var errorDescription: String? {
             switch self {
             case .apiKeyNotConfigured:
                 return "OpenRouter API-Key nicht konfiguriert"
             case .requestFailed:
-                return "API-Anfrage fehlgeschlagen"
+                return "API-Anfrage fehlgeschlagen nach mehreren Versuchen"
             case .invalidResponse:
                 return "Ungültige API-Antwort"
+            case .serverError(let code):
+                return "Server-Fehler (\(code)): Bitte versuche es erneut"
+            case .rateLimit:
+                return "Zu viele Anfragen. Bitte warte einen Moment"
+            case .clientError(let code):
+                return "Client-Fehler (\(code)): Überprüfe deine Konfiguration"
+            }
+        }
+
+        var isRetryable: Bool {
+            switch self {
+            case .serverError, .rateLimit, .requestFailed:
+                return true
+            case .apiKeyNotConfigured, .invalidResponse, .clientError:
+                return false
             }
         }
     }
@@ -198,4 +248,13 @@ struct AIService {
 struct GiftSuggestion {
     let title: String
     let reason: String
+}
+
+// Retry configuration for API requests
+struct RetryPolicy {
+    let maxAttempts: Int
+    let delay: TimeInterval
+
+    static let `default` = RetryPolicy(maxAttempts: 3, delay: 1.0)
+    static let aggressive = RetryPolicy(maxAttempts: 5, delay: 0.5)
 }
