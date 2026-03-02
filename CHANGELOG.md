@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Toast notifications for CSV export success/error states in PersonDetailView
+- Toast notification for share sheet opening in PersonDetailView
+- Comprehensive accessibility labels and hints for AddGiftHistorySheet form fields
+- Comprehensive accessibility labels and hints for EditGiftIdeaSheet form fields
+- Comprehensive accessibility labels and hints for AddGiftIdeaSheet form fields
+
+### Improved
+- Better user feedback for CSV export operations with success/error/warning toasts
+- Enhanced accessibility coverage for gift idea and history editing forms
+- Clearer hints for VoiceOver users on all form inputs
+
+### Fixed
 - DevSettingsView for debug mode with sample data creation and data clearing
 - ReminderManagerTests for comprehensive reminder rule testing
 - Data statistics display in DevSettingsView
