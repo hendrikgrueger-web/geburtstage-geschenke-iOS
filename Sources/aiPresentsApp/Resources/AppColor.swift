@@ -36,19 +36,49 @@ enum AppColor {
 
     // Gradients
     static let gradientBlue = LinearGradient(
-        gradient: Gradient(colors: [primary, primaryDark]),
+        gradient: Gradient(colors: [
+            Color(red: 0.0, green: 0.55, blue: 1.0),
+            Color(red: 0.0, green: 0.48, blue: 1.0),
+            Color(red: 0.0, green: 0.35, blue: 0.8)
+        ]),
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
 
     static let gradientWarm = LinearGradient(
-        gradient: Gradient(colors: [accent, .pink]),
+        gradient: Gradient(colors: [
+            Color(red: 1.0, green: 0.65, blue: 0.1),
+            Color(red: 1.0, green: 0.58, blue: 0.0),
+            Color(red: 1.0, green: 0.4, blue: 0.7)
+        ]),
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
 
     static let gradientPurple = LinearGradient(
-        gradient: Gradient(colors: [secondary, primary]),
+        gradient: Gradient(colors: [
+            Color(red: 0.7, green: 0.5, blue: 1.0),
+            Color(red: 0.6, green: 0.4, blue: 0.9),
+            Color(red: 0.5, green: 0.3, blue: 0.8)
+        ]),
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    static let gradientSuccess = LinearGradient(
+        gradient: Gradient(colors: [
+            Color(red: 0.3, green: 0.85, blue: 0.5),
+            Color(red: 0.2, green: 0.8, blue: 0.4)
+        ]),
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    static let gradientError = LinearGradient(
+        gradient: Gradient(colors: [
+            Color(red: 1.0, green: 0.4, blue: 0.4),
+            Color(red: 1.0, green: 0.3, blue: 0.3)
+        ]),
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
