@@ -15,6 +15,7 @@ struct TimelineView: View {
     @State private var showingAISuggestionsFor: PersonRef?
     @State private var listAnimation = false
     @State private var isRefreshing = false
+    @State private var debouncedSearchText = ""
 
     enum TimelineTab: String, CaseIterable {
         case today = "Heute"
@@ -61,6 +62,15 @@ struct TimelineView: View {
         .navigationTitle("Geburtstage")
         .navigationBarTitleDisplayMode(.large)
         .searchable(text: $searchText, prompt: "Suche...")
+        .onChange(of: searchText) { oldValue, newValue in
+            // Debounce search text to improve performance
+            Task {
+                try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
+                if newValue == searchText { // Only update if text hasn't changed
+                    debouncedSearchText = newValue
+                }
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack(spacing: 12) {
@@ -147,9 +157,9 @@ struct TimelineView: View {
         let today = Calendar.current.startOfDay(for: Date())
 
         return people.compactMap { person -> (PersonRef, Date)? in
-            // Apply search text filter
-            if !searchText.isEmpty {
-                let searchLower = searchText.lowercased()
+            // Apply search text filter (with debouncing)
+            if !debouncedSearchText.isEmpty {
+                let searchLower = debouncedSearchText.lowercased()
                 if !person.displayName.lowercased().contains(searchLower) &&
                    !person.relation.lowercased().contains(searchLower) {
                     return nil
@@ -355,8 +365,8 @@ struct TimelineView: View {
     }
 
     private var emptyStateMessage: String {
-        if !searchText.isEmpty {
-            return "Keine Kontakte finden, die \"\(searchText)\" enthalten"
+        if !debouncedSearchText.isEmpty {
+            return "Keine Kontakte finden, die \"\(debouncedSearchText)\" enthalten"
         } else if filterHasIdeas == true {
             return "Keine Kontakte mit Geschenkideen gefunden"
         } else if filterHasIdeas == false {
