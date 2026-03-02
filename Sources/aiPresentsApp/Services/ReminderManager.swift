@@ -74,7 +74,11 @@ class ReminderManager: ObservableObject {
     }
 
     private func scheduleReminders(for person: PersonRef, rule: ReminderRule) async {
-        let leadDays = rule.leadDays.isEmpty ? [30, 14, 7, 2] : rule.leadDays
+        let leadDays = rule.leadDays.sorted(by: >)
+
+        guard !leadDays.isEmpty else {
+            return
+        }
 
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
