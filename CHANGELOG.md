@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Zodiac Symbols Bug**: Corrected zodiac sign symbols in BirthdayDateHelper
+  - All zodiac signs were incorrectly displaying as '♈' (Aries)
+  - Fixed: ♉ Stier, ♊ Zwilling, ♋ Krebs, ♌ Löwe
+  - Fixed: ♍ Jungfrau, ♎ Waage, ♏ Skorpion, ♐ Schütze
+  - Fixed: ♑ Steinbock, ♒ Wassermann, ♓ Fische
+  - Impact: Zodiac signs now display correctly across the app
+
 ### Added
 - **Phase 4: TestFlight Documentation**
   - **Privacy Policy (Deutsch & Englisch)**: Complete data protection documentation
