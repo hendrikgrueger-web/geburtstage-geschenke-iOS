@@ -118,6 +118,9 @@ struct FormValidator {
     /// Validates category field
     static func validateCategory(_ category: String) -> ValidationError? {
         let trimmed = category.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty {
+            return .emptyField("Kategorie")
+        }
         if trimmed.count > AppConfig.Limits.maxCategoryLength {
             return .tooLong(maxLength: AppConfig.Limits.maxCategoryLength)
         }
