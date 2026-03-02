@@ -47,6 +47,20 @@
   - Echtzeit-Suche mit Debouncing
   - Favoriten-Filter
   - Filter-Zusammenfassung
+
+### 6. System-Utilities (Priority #2 - Fortsetzung)
+- **NotificationPermissionHelper.swift**: Benachrichtigungs-Berechtigungs-Verwaltung
+  - Async/await Unterstützung für Permission Request
+  - Status-Tracking (authorized, denied, notDetermined)
+  - System-Settings Integration
+  - SwiftUI View Modifier und dedizierte View
+  - User-friendly Status-Beschreibungen
+- **FormState.swift**: Generische Formular-Verwaltung
+  - Feld- und Formular-Validierung
+  - Dirty Tracking (Änderungen erkennen)
+  - Submit-Status-Management (loading, success, errors)
+  - FormField Wrapper mit Fehler-Display
+  - FormSubmitButton mit Disabled-States
 - **Debouncer.swift**: Utility für Debouncing und Throttling
   - Debouncer class für rapid value changes
   - Throttler für rate-limiting
@@ -55,6 +69,8 @@
 - **DebouncerTests.swift**: 30 Tests für alle Szenarien
 
 ## Commits
+- acff469: NotificationPermissionHelper + FormState utilities
+- d134662: Update sprint summary with new UX components
 - 6eb7db4: Enhanced UX components (SmartInputField, QuickActionCard, BirthdayDateHelper, TimelineFilterView)
 - 498dcde: Reduced motion support for OnboardingView + BirthdayWidgetView
 - 3fae581: Accessibility enhancements (Phase 2) - AccessibilityConfiguration utility + tests
