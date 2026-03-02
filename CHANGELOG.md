@@ -8,6 +8,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Phase 4: TestFlight Documentation**
+  - **Privacy Policy (Deutsch & Englisch)**: Complete data protection documentation
+    - Data collection overview (contacts, user data, notifications, iCloud sync)
+    - AI features data handling (optional, minimal context only)
+    - No tracking, analytics, or advertising commitment
+    - User rights (access, deletion, correction, portability, withdrawal)
+    - Data retention and security measures
+    - GDPR and privacy law compliance
+  - **Terms of Service (Deutsch & Englisch)**: Comprehensive usage terms
+    - Eligibility and user responsibilities
+    - Intellectual property and open-source licensing
+    - Disclaimer and liability limits
+    - AI features usage terms (use at own risk)
+    - Support availability and beta phase notes
+    - Dispute resolution and governing law (Germany)
+  - **Documentation Updates**:
+    - Updated `Docs/INDEX.md` with legal documentation links
+    - Updated `README.md` to reference privacy policy and terms of service
+    - Updated `RELEASE_CHECKLIST.md` to mark legal documentation as completed
+    - Updated `TESTFLIGHT.md` to reference legal documentation
 - **Phase 3: Logging & Analytics Foundation**
   - **AppLogger Utility**: Centralized logging system with structured logging
     - Multiple log levels (debug, info, warning, error)
