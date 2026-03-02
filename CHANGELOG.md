@@ -16,21 +16,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Birthday message drafts with warm, appreciative tone
   - Zodiac sign context for AI prompts
   - Birthday timing context (today, tomorrow, X days)
+  - **AIBirthdayMessageSheet**: New UI for generating personalized birthday messages
+  - **PersonDetailView Integration**: "Geburtstagsnachricht" button for quick access
+  - **Birthday Message Features**: Copy to clipboard, share, regenerate messages
+  - **Person Details Card**: Shows age, milestone status, and birthday timing in message sheet
+  - **Loading States**: Animated spinner with status text during message generation
+  - **Error Handling**: User-friendly error messages with retry option
+  - **Demo Mode Fallback**: Alert notification when API key is not configured
 - **Tests**
   - Tests for milestone-based gift suggestions (18th, 30th birthday)
   - Tests for birthday message generation across age groups
   - Tests for birthday message structure and past gifts context
+  - **AIBirthdayMessageSheetTests**: 18 new tests covering:
+    - View initialization for different age groups and milestones
+    - Person data binding with various relationships
+    - BirthdayMessage structure validation
+    - Age group detection (under 18, 18-29, 30-49, 50+)
+    - Milestone detection (18, 30, 40, etc.)
+    - Zodiac sign calculation
 
 ### Changed
 - AI prompts now include age, milestone, zodiac, and timing context
 - Demo mode suggestions are now personalized based on age and milestones
 - Gift suggestions are more relevant to person's life stage and relationship
+- PersonDetailView footer now includes birthday message button alongside AI suggestions
 
 ### Improved
 - AI suggestions are now more context-aware and personalized
 - Birthday messages can be generated automatically with personalized drafts
 - Demo mode provides better, more relevant suggestions for different age groups
 - Milestone birthdays (18, 21, 30, 40, 50...) get special attention in suggestions
+- Birthday message generation with Apple-style UI, haptic feedback, and accessibility support
 
 ### Added
 
