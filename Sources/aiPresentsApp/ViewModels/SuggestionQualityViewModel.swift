@@ -32,7 +32,7 @@ class SuggestionQualityViewModel: ObservableObject {
             HapticFeedback.success()
         } catch {
             HapticFeedback.error()
-            print("Failed to save feedback: \(error)")
+            AppLogger.ai.error("Failed to save feedback", error: error)
         }
     }
 
@@ -74,7 +74,7 @@ class SuggestionQualityViewModel: ObservableObject {
             try modelContext.save()
             loadMetrics()
         } catch {
-            print("Failed to clear feedback: \(error)")
+            AppLogger.ai.error("Failed to clear feedback", error: error)
         }
     }
 }

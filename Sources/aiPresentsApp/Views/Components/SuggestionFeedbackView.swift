@@ -55,7 +55,7 @@ struct SuggestionFeedbackView: View {
             ),
             personId: UUID(),
             onFeedback: { isPositive in
-                print("Feedback: \(isPositive)")
+                AppLogger.debug("Feedback: \(isPositive)")
             }
         )
     }
