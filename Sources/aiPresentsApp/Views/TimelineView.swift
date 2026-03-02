@@ -8,7 +8,6 @@ struct TimelineView: View {
     @State private var selectedTab: TimelineTab = .today
     @State private var showingContactsImport = false
     @State private var searchText = ""
-    @State private var showingFilterSheet = false
     @State private var filterHasIdeas: Bool? = nil
     @State private var filterRelation: String? = nil
     @State private var showingAddGiftIdeaFor: PersonRef?
@@ -96,17 +95,6 @@ struct TimelineView: View {
                     }
                 }
             }
-        }
-        .sheet(isPresented: $showingFilterSheet) {
-            FilterSheet(
-                filterHasIdeas: $filterHasIdeas,
-                filterRelation: $filterRelation,
-                availableRelations: availableRelations,
-                onReset: {
-                    filterHasIdeas = nil
-                    filterRelation = nil
-                }
-            )
         }
         .sheet(item: $quickAddPerson) { person in
             AddGiftIdeaSheet(person: person)
