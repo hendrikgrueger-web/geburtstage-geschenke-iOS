@@ -1,0 +1,105 @@
+# SwiftLint Configuration for ai-presents-app-ios
+# Based on Swift Best Practices and SwiftUI guidelines
+
+disabled_rules:
+  - trailing_whitespace
+  - todo
+
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - sorted_imports
+  - vertical_whitespace_closing_braces
+
+included:
+  - Sources
+  - Tests
+
+excluded:
+  - Carthage
+  - Pods
+  - .build
+
+# Line length
+line_length:
+  warning: 120
+  error: 150
+  ignores_function_declarations: true
+  ignores_comments: true
+
+# File length
+file_length:
+  warning: 500
+  error: 1000
+
+# Function body length
+function_body_length:
+  warning: 50
+  error: 100
+
+# Type body length
+type_body_length:
+  warning: 300
+  error: 500
+
+# Nesting
+nesting:
+  type_level:
+    warning: 2
+  statement_level:
+    warning: 5
+
+# Force unwrapping
+force_unwrapping:
+  severity: warning
+
+# Vertical whitespace
+vertical_whitespace:
+  max_empty_lines: 2
+
+# Type name
+type_name:
+  min_length: 3
+  max_length:
+    warning: 40
+    error: 50
+  excluded:
+    - T
+    - U
+    - V
+
+# Identifier name
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1
+  max_length:
+    warning: 40
+    error: 50
+  excluded:
+    - id
+    - url
+    - app
+    - x
+    - y
+
+# Custom rules for SwiftUI
+custom_rules:
+  swiftui_view_naming:
+    name: "SwiftUI View Naming"
+    regex: 'struct \w+[^V]iew'
+    match_kinds:
+      - struct
+    message: "SwiftUI View structs should end with 'View'"
+    severity: warning
+
+  uiapplication_main_call:
+    name: "UIApplicationMain Call"
+    regex: 'UIApplicationMain\s*\('
+    message: "Prefer @UIApplicationDelegateAdaptor over UIApplicationMain"
+    severity: warning
+
+# Reporter
+reporter: "xcode"
