@@ -7,18 +7,11 @@ struct ContentView: View {
 
     @State private var selectedTab: MainTab = .timeline
     @State private var showingContactsImport = false
+    @State private var birthdaysTodayCount: Int = 0
 
     enum MainTab: String, CaseIterable {
         case timeline = "Geburtstage"
         case settings = "Einstellungen"
-    }
-
-    private var birthdaysTodayCount: Int {
-        let today = Calendar.current.startOfDay(for: Date())
-
-        return people.filter { person in
-            BirthdayCalculator.isBirthdayToday(for: person.birthday, from: today)
-        }.count
     }
 
     var body: some View {
@@ -42,6 +35,7 @@ struct ContentView: View {
             ContactsImportView()
         }
         .onAppear {
+            updateBirthdaysTodayCount()
             // Show contacts import on first launch if no contacts
             if people.isEmpty && !UserDefaults.standard.bool(forKey: "hasShownContactsImport") {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -50,5 +44,16 @@ struct ContentView: View {
                 UserDefaults.standard.set(true, forKey: "hasShownContactsImport")
             }
         }
+        .onChange(of: people) { oldValue, newValue in
+            // Recalculate birthdays today count when people data changes
+            updateBirthdaysTodayCount()
+        }
+    }
+
+    private func updateBirthdaysTodayCount() {
+        let today = Calendar.current.startOfDay(for: Date())
+        birthdaysTodayCount = people.filter { person in
+            BirthdayCalculator.isBirthdayToday(for: person.birthday, from: today)
+        }.count
     }
 }
