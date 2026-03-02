@@ -23,6 +23,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Loading States**: Animated spinner with status text during message generation
   - **Error Handling**: User-friendly error messages with retry option
   - **Demo Mode Fallback**: Alert notification when API key is not configured
+- **Phase 3: Suggestion Quality Metrics System**
+  - **SuggestionFeedback Model**: SwiftData model for tracking user feedback per AI suggestion
+  - **SuggestionQualityViewModel**: @MainActor ObservableObject for managing feedback state
+    - `recordFeedback()`: Save feedback with haptic feedback
+    - `loadMetrics()`: Load global quality metrics
+    - `metricsFor(personId:)`: Person-specific metrics
+    - `feedbackFor(personId:)`: Get all feedback for a person
+    - `clearAllFeedback()`: Reset functionality
+  - **SuggestionFeedbackView**: Compact thumbs up/down feedback interface
+    - "War das hilfreich?" prompt
+    - Disabled state after feedback given
+    - Haptic feedback on button press
+  - **Quality Metrics Integration**: Added to AIGiftSuggestionsSheet
+    - Quality metrics section (shows when data exists)
+    - Person-specific rating display
+    - Feedback UI under each suggestion
+    - Smart interaction: Can save suggestions even after feedback
+    - Visual feedback checkmark after feedback
+  - **Rating System**: 5-level quality scale with star ratings
+    - ⭐⭐⭐⭐⭐ Ausgezeichnet (80-100% positive)
+    - ⭐⭐⭐⭐ Gut (60-79% positive)
+    - ⭐⭐⭐ Akzeptabel (40-59% positive)
+    - ⭐⭐ Verbesserungswürdig (20-39% positive)
+    - ⭐ Kritisch (0-19% positive)
 - **Tests**
   - Tests for milestone-based gift suggestions (18th, 30th birthday)
   - Tests for birthday message generation across age groups
@@ -34,23 +58,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Age group detection (under 18, 18-29, 30-49, 50+)
     - Milestone detection (18, 30, 40, etc.)
     - Zodiac sign calculation
-
-### Changed
-- AI prompts now include age, milestone, zodiac, and timing context
-- Demo mode suggestions are now personalized based on age and milestones
-- Gift suggestions are more relevant to person's life stage and relationship
-- PersonDetailView footer now includes birthday message button alongside AI suggestions
-
-### Improved
-- AI suggestions are now more context-aware and personalized
-- Birthday messages can be generated automatically with personalized drafts
-- Demo mode provides better, more relevant suggestions for different age groups
-- Milestone birthdays (18, 21, 30, 40, 50...) get special attention in suggestions
-- Birthday message generation with Apple-style UI, haptic feedback, and accessibility support
-
-### Added
-
-### Added
+  - **SuggestionQualityViewModelTests**: 15 tests covering:
+    - Feedback recording (positive, negative, mixed)
+    - Metrics calculation for all 5 rating levels
+    - No data scenario
+    - Person-specific tracking
+    - Clear feedback functionality
+    - SuggestionQualityMetrics initialization and factory method
 - TestFlight preparation documentation (TESTFLIGHT.md) with comprehensive checklist
 - TestFlight release notes (German & English) for v0.2.0 Beta
 - App Store Connect setup guide and build process documentation
@@ -67,14 +81,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Consistent design system across all forms and empty states
 
 ### Changed
+- AI prompts now include age, milestone, zodiac, and timing context
+- Demo mode suggestions are now personalized based on age and milestones
+- Gift suggestions are more relevant to person's life stage and relationship
+- PersonDetailView footer now includes birthday message button alongside AI suggestions
 - TimelineView: Replaced manual Task.sleep debouncing with Debouncer utility
 - EmptyStateView: Use QuickActionCard for improved action presentation
 - AddGiftIdeaSheet: SmartInputField for title, notes, URL with validation
 - AddGiftHistorySheet: SmartInputField for title, category, notes, URL
 - EditGiftIdeaSheet: SmartInputField for title, notes, URL
 - EditGiftHistorySheet: SmartInputField for title, category, notes, URL
+- AIGiftSuggestionsSheet: Allow saving suggestions as gift ideas even after feedback given
 
 ### Improved
+- AI suggestions are now more context-aware and personalized
+- Birthday messages can be generated automatically with personalized drafts
+- Demo mode provides better, more relevant suggestions for different age groups
+- Milestone birthdays (18, 21, 30, 40, 50...) get special attention in suggestions
+- Birthday message generation with Apple-style UI, haptic feedback, and accessibility support
 - Form validation now provides real-time feedback instead of submit-time alerts
 - Search debouncing uses dedicated utility for better performance and maintainability
 - Empty state actions have better visual hierarchy and discoverability

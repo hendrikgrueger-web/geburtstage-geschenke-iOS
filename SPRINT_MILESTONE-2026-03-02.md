@@ -174,8 +174,8 @@ Alle 4 Add/Edit Sheets aktualisiert:
 5. **Phase 3 Start** ✅ (Kontext-reiche Prompts, Meilensteine)
 6. ~~**Birthday Messages UI Integration**~~ ✅ (AIBirthdayMessageSheet + Tests)
 7. ~~**Prompt-Qualitätsmessung**~~ ✅ (Feedback-System + Metriken)
-8. **Xcode Build**: TestFlight Build auf macOS erstellen (⏸️ Benötigt macOS)
-9. **Code Review & Cleanup**: Finaler Review vor Release
+8. ~~**Code Review & Cleanup**~~ ✅ (CHANGELOG aufgeräumt, Qualitätssystem dokumentiert)
+9. **Xcode Build**: TestFlight Build auf macOS erstellen (⏸️ Benötigt macOS)
 
 ## Phase 2 Status
 
