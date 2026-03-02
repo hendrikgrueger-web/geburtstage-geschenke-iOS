@@ -84,7 +84,14 @@ struct BirthdayRow: View {
     private var daysUntilBirthday: Int {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-        let birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
+        var birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
+
+        // If birthday already passed this year, use next year
+        if birthdayThisYear < today {
+            let nextYear = calendar.component(.year, from: today) + 1
+            birthdayThisYear = calendar.date(bySetting: .year, value: nextYear, of: person.birthday) ?? birthdayThisYear
+        }
+
         return calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
     }
 
@@ -127,10 +134,17 @@ struct BirthdayRow: View {
     private var accessibilityLabel: String {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-        let birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
-        let age = calendar.dateComponents([.year], from: person.birthday, to: birthdayThisYear).year ?? 0
+        var birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
+        var daysUntil = calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
 
-        let daysUntil = calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
+        // If birthday already passed this year, use next year
+        if daysUntil < 0 {
+            let nextYear = calendar.component(.year, from: today) + 1
+            birthdayThisYear = calendar.date(bySetting: .year, value: nextYear, of: person.birthday) ?? birthdayThisYear
+            daysUntil = calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
+        }
+
+        let age = calendar.dateComponents([.year], from: person.birthday, to: birthdayThisYear).year ?? 0
 
         var label = "\(person.displayName), "
         label += "\(age) Jahre alt. "
@@ -151,27 +165,30 @@ struct BirthdayRow: View {
     private var birthdayInfo: String {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-        let birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
-        let age = calendar.dateComponents([.year], from: person.birthday, to: birthdayThisYear).year ?? 0
-
+        var birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
         let daysUntil = calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
 
-        if daysUntil == 0 {
+        // If birthday already passed this year, use next year
+        if daysUntil < 0 {
+            let nextYear = calendar.component(.year, from: today) + 1
+            birthdayThisYear = calendar.date(bySetting: .year, value: nextYear, of: person.birthday) ?? birthdayThisYear
+        }
+
+        let age = calendar.dateComponents([.year], from: person.birthday, to: birthdayThisYear).year ?? 0
+        let correctedDaysUntil = calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
+
+        if correctedDaysUntil == 0 {
             return "🎉 Heute wird \(age)!"
-        } else if daysUntil == 1 {
+        } else if correctedDaysUntil == 1 {
             return "Morgen wird \(age)"
-        } else if daysUntil == -1 {
-            return "Gestern wurde \(age)"
-        } else if daysUntil < -1 {
-            return "Vor \(-daysUntil) Tagen wurde \(age)"
-        } else if daysUntil == 365 {
+        } else if correctedDaysUntil == 365 {
             return "Nächstes Jahr wird \(age + 1)"
-        } else if daysUntil < 7 {
-            return "In \(daysUntil) Tagen wird \(age)"
-        } else if daysUntil < 30 {
-            return "\(daysUntil) Tage bis zum \(age). Geburtstag"
+        } else if correctedDaysUntil < 7 {
+            return "In \(correctedDaysUntil) Tagen wird \(age)"
+        } else if correctedDaysUntil < 30 {
+            return "\(correctedDaysUntil) Tage bis zum \(age). Geburtstag"
         } else {
-            return "Wird \(age) (\(daysUntil) Tage)"
+            return "Wird \(age) (\(correctedDaysUntil) Tage)"
         }
     }
 }
