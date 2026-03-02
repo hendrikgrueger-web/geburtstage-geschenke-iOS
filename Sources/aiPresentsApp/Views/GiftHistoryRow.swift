@@ -1,12 +1,15 @@
 import SwiftUI
+import SwiftData
 
 struct GiftHistoryRow: View {
     let history: GiftHistory
     let onShare: (() -> Void)?
+    let onReuseAsIdea: (() -> Void)?
 
-    init(history: GiftHistory, onShare: (() -> Void)? = nil) {
+    init(history: GiftHistory, onShare: (() -> Void)? = nil, onReuseAsIdea: (() -> Void)? = nil) {
         self.history = history
         self.onShare = onShare
+        self.onReuseAsIdea = onReuseAsIdea
     }
 
     var body: some View {
@@ -47,16 +50,30 @@ struct GiftHistoryRow: View {
 
             Spacer()
 
-            if let onShare = onShare {
-                Button {
-                    onShare()
-                    HapticFeedback.light()
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(AppColor.textSecondary.opacity(0.6))
-                        .font(.caption)
+            HStack(spacing: 8) {
+                if let onReuseAsIdea = onReuseAsIdea {
+                    Button {
+                        onReuseAsIdea()
+                        HapticFeedback.light()
+                    } label: {
+                        Image(systemName: "lightbulb")
+                            .foregroundColor(AppColor.primary.opacity(0.6))
+                            .font(.caption)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
+
+                if let onShare = onShare {
+                    Button {
+                        onShare()
+                        HapticFeedback.light()
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(AppColor.textSecondary.opacity(0.6))
+                            .font(.caption)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
         }
         .padding(.vertical, 2)

@@ -194,9 +194,11 @@ struct PersonDetailView: View {
                         Button {
                             showingEditGiftHistory = history
                         } label: {
-                            GiftHistoryRow(history: history) {
-                                shareGiftHistory(history)
-                            }
+                            GiftHistoryRow(
+                                history: history,
+                                onShare: { shareGiftHistory(history) },
+                                onReuseAsIdea: { copyToGiftIdea(history) }
+                            )
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                             Button {
