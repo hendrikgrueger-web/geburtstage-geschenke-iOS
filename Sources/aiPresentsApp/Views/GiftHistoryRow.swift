@@ -5,6 +5,7 @@ struct GiftHistoryRow: View {
     let history: GiftHistory
     let onShare: (() -> Void)?
     let onReuseAsIdea: (() -> Void)?
+    @State private var isPressed = false
 
     init(history: GiftHistory, onShare: (() -> Void)? = nil, onReuseAsIdea: (() -> Void)? = nil) {
         self.history = history
@@ -19,8 +20,8 @@ struct GiftHistoryRow: View {
                 .font(.caption)
                 .fontWeight(.bold)
                 .frame(width: 50, height: 50)
-                .background(AppColor.secondary.opacity(0.2))
-                .foregroundColor(AppColor.secondary)
+                .background(yearBadgeColor.opacity(0.2))
+                .foregroundColor(yearBadgeColor)
                 .cornerRadius(12)
 
             VStack(alignment: .leading, spacing: 4) {
@@ -50,7 +51,7 @@ struct GiftHistoryRow: View {
 
             Spacer()
 
-            HStack(spacing: 8) {
+            HStack(spacing: 12) {
                 if let onReuseAsIdea = onReuseAsIdea {
                     Button {
                         onReuseAsIdea()
@@ -59,8 +60,10 @@ struct GiftHistoryRow: View {
                         Image(systemName: "lightbulb")
                             .foregroundColor(AppColor.primary.opacity(0.6))
                             .font(.caption)
+                            .frame(width: 32, height: 32)
                     }
                     .buttonStyle(.plain)
+                    .pressable()
                 }
 
                 if let onShare = onShare {
@@ -71,8 +74,10 @@ struct GiftHistoryRow: View {
                         Image(systemName: "square.and.arrow.up")
                             .foregroundColor(AppColor.textSecondary.opacity(0.6))
                             .font(.caption)
+                            .frame(width: 32, height: 32)
                     }
                     .buttonStyle(.plain)
+                    .pressable()
                 }
             }
         }
@@ -80,5 +85,18 @@ struct GiftHistoryRow: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(history.title), \(history.category), \(history.year)")
         .accessibilityHint("Geschenk vermerkt im Jahr \(history.year)")
+    }
+
+    private var yearBadgeColor: Color {
+        let yearsSince = Calendar.current.component(.year, from: Date()) - history.year
+        if yearsSince == 0 {
+            return AppColor.accent
+        } else if yearsSince == 1 {
+            return AppColor.secondary
+        } else if yearsSince <= 3 {
+            return AppColor.primary
+        } else {
+            return AppColor.textSecondary
+        }
     }
 }
