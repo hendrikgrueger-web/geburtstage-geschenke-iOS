@@ -13,7 +13,9 @@ struct EditGiftHistorySheet: View {
     @State private var year: Int
     @State private var budget: String
     @State private var note: String
-    @State private var link: String
+    @State private var link = ""
+    @State private var formState = FormState()
+    @State private var showingValidationError = false
 
     private let calendar = Calendar.current
     private let currentYear: Int
@@ -32,11 +34,39 @@ struct EditGiftHistorySheet: View {
     }
 
     private var isTitleValid: Bool {
-        FormValidator.validateTitle(title) == nil
+        let error = FormValidator.validateTitle(title)
+        formState.setError(error, for: "title")
+        return error == nil
+    }
+
+    private var isBudgetValid: Bool {
+        guard !budget.isEmpty else { return true }
+        guard let value = Double(budget), value >= 0 else {
+            formState.setError(.invalidBudget, for: "budget")
+            return false
+        }
+        formState.clearError(for: "budget")
+        return true
     }
 
     private var linkValidation: (sanitized: String, isValid: Bool) {
-        URLValidator.validate(link)
+        let (sanitized, isValid) = URLValidator.validate(link)
+        if !isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty {
+            formState.setError(.invalidURL, for: "link")
+        } else {
+            formState.clearError(for: "link")
+        }
+        return (sanitized, isValid)
+    }
+
+    private var categoryValidation: ValidationError? {
+        let error = FormValidator.validateCategory(category)
+        formState.setError(error, for: "category")
+        return error
+    }
+
+    private var canSave: Bool {
+        isTitleValid && isBudgetValid && linkValidation.isValid && categoryValidation == nil
     }
 
     var body: some View {
@@ -70,6 +100,13 @@ struct EditGiftHistorySheet: View {
                         Text("Budget")
                         TextField("€", text: $budget)
                             .keyboardType(.decimalPad)
+                            .foregroundColor(isBudgetValid ? .primary : .red)
+                    }
+
+                    if !isBudgetValid && !budget.isEmpty {
+                        Text("Bitte gib eine gültige Zahl ein")
+                            .font(.caption)
+                            .foregroundColor(.red)
                     }
 
                     TextField("Notizen", text: $note, axis: .vertical)
@@ -104,11 +141,41 @@ struct EditGiftHistorySheet: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Speichern") {
-                        saveHistory()
-                        dismiss()
+                        if canSave {
+                            saveHistory()
+                            dismiss()
+                        } else {
+                            showingValidationError = true
+                            HapticFeedback.error()
+                        }
                     }
-                    .disabled(!isTitleValid)
+                    .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
+            }
+        }
+        .alert("Eingabe prüfen", isPresented: $showingValidationError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            if !canSave {
+                var messages: [String] = []
+
+                if !isTitleValid {
+                    messages.append("- Titel darf nicht leer sein")
+                }
+
+                if !isBudgetValid && !budget.isEmpty {
+                    messages.append("- Ungültiges Budget")
+                }
+
+                if let error = categoryValidation {
+                    messages.append("- \(error.errorDescription ?? "")")
+                }
+
+                if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty {
+                    messages.append("- Ungültige URL")
+                }
+
+                Text(messages.joined(separator: "\n"))
             }
         }
     }
