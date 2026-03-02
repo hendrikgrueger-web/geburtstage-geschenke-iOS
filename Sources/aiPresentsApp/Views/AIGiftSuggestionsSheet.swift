@@ -40,6 +40,10 @@ struct AIGiftSuggestionsSheet: View {
     @State private var selectedSuggestion: GiftSuggestion?
     @State private var selectedBudget: BudgetRange = .medium
     @State private var showDemoModeNotice = false
+    @State private var qualityViewModel: SuggestionQualityViewModel?
+
+    // Track which suggestions have received feedback
+    @State private var feedbackGivenForSuggestions = Set<String>()
 
     var body: some View {
         NavigationStack {
@@ -47,6 +51,11 @@ struct AIGiftSuggestionsSheet: View {
                 // Person Details Card
                 Section {
                     personDetailsCard
+                }
+
+                // Quality Metrics Section (only show when we have data)
+                if let viewModel = qualityViewModel, viewModel.metrics.totalFeedback > 0 {
+                    qualityMetricsSection(viewModel)
                 }
 
                 if isLoading {
@@ -57,6 +66,11 @@ struct AIGiftSuggestionsSheet: View {
                     suggestionsList
                 } else {
                     budgetSection
+                }
+            }
+            .onAppear {
+                if qualityViewModel == nil {
+                    qualityViewModel = SuggestionQualityViewModel(modelContext: modelContext)
                 }
             }
             .navigationTitle("KI-Geschenk-Ideen")
@@ -108,6 +122,80 @@ struct AIGiftSuggestionsSheet: View {
             Spacer()
         }
         .padding(.vertical, 4)
+    }
+
+    private func qualityMetricsSection(_ viewModel: SuggestionQualityViewModel) -> View {
+        let personMetrics = viewModel.metricsFor(personId: person.id)
+
+        return Section {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("KI-Qualität")
+                            .font(.headline)
+                            .foregroundColor(AppColor.textPrimary)
+
+                        Text(personMetrics.ratingText)
+                            .font(.subheadline)
+                            .foregroundColor(AppColor.accent)
+                    }
+
+                    Spacer()
+
+                    Text("\(personMetrics.totalFeedback)× Feedback")
+                        .font(.caption)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(AppColor.primary.opacity(0.1))
+                        .foregroundColor(AppColor.primary)
+                        .cornerRadius(8)
+                }
+
+                if personMetrics.totalFeedback >= 5 {
+                    HStack(spacing: 16) {
+                        VStack(alignment: .leading) {
+                            Text("\(personMetrics.positiveFeedback)")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.green)
+                            Text("Positiv")
+                                .font(.caption)
+                                .foregroundColor(AppColor.textSecondary)
+                        }
+
+                        VStack(alignment: .leading) {
+                            Text("\(personMetrics.negativeFeedback)")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.red)
+                            Text("Negativ")
+                                .font(.caption)
+                                .foregroundColor(AppColor.textSecondary)
+                        }
+
+                        Spacer()
+
+                        VStack(alignment: .trailing) {
+                            Text(String(format: "%.0f%%", personMetrics.positivityRate * 100))
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(AppColor.primary)
+                            Text("Akzeptanz")
+                                .font(.caption)
+                                .foregroundColor(AppColor.textSecondary)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+            }
+            .padding(.vertical, 4)
+        } header: {
+            Text("Qualitätsmetrik")
+        } footer: {
+            Text("Dein Feedback hilft, die KI-Vorschläge zu verbessern.")
+                .font(.caption)
+                .foregroundColor(AppColor.textSecondary)
+        }
     }
 
     private var loadingState: View {
@@ -195,12 +283,39 @@ struct AIGiftSuggestionsSheet: View {
                 .padding()
             } else {
                 ForEach(Array(filteredSuggestions.enumerated()), id: \.offset) { index, suggestion in
-                    suggestionCard(suggestion: suggestion, index: index)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
+                    VStack(alignment: .leading, spacing: 0) {
+                        suggestionCard(suggestion: suggestion, index: index)
+
+                        // Feedback section - only show if suggestion was generated (not demo mode)
+                        if !feedbackGivenForSuggestions.contains(suggestion.title) {
+                            SuggestionFeedbackView(
+                                suggestion: suggestion,
+                                personId: person.id,
+                                onFeedback: { isPositive in
+                                    handleFeedback(for: suggestion, isPositive: isPositive)
+                                }
+                            )
+                        } else {
+                            HStack {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                                Text("Feedback gespeichert")
+                                    .font(.caption)
+                                    .foregroundColor(AppColor.textSecondary)
+                                Spacer()
+                            }
+                            .padding(.top, 8)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        // Only trigger sheet if tapping on the card (not feedback buttons)
+                        if !feedbackGivenForSuggestions.contains(suggestion.title) {
                             selectedSuggestion = suggestion
                             HapticFeedback.medium()
                         }
+                    }
                 }
             }
         } header: {
@@ -208,6 +323,7 @@ struct AIGiftSuggestionsSheet: View {
         } footer: {
             VStack(alignment: .leading, spacing: 8) {
                 Text("💡 Tippe auf einen Vorschlag, um ihn als Geschenkidee zu speichern.")
+                Text("👍👎 Gib Feedback, um die KI-Qualität zu verbessern.")
                 if suggestions.count != filteredSuggestions.count {
                     Text("ℹ️ \(suggestions.count - filteredSuggestions.count) Vorschlag\(suggestions.count - filteredSuggestions.count == 1 ? "" : "e") bereits vorhanden.")
                 }
@@ -336,5 +452,15 @@ struct AIGiftSuggestionsSheet: View {
                 }
             }
         }
+    }
+
+    private func handleFeedback(for suggestion: GiftSuggestion, isPositive: Bool) {
+        qualityViewModel?.recordFeedback(
+            personId: person.id,
+            suggestion: suggestion,
+            isPositive: isPositive
+        )
+
+        feedbackGivenForSuggestions.insert(suggestion.title)
     }
 }

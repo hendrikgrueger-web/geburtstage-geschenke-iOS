@@ -8,7 +8,7 @@ struct aiPresentsApp: App {
 
     init() {
         do {
-            let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self])
+            let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self, SuggestionFeedback.self])
 
             // CloudKit configuration
             let config = ModelConfiguration(
@@ -26,7 +26,7 @@ struct aiPresentsApp: App {
         } catch {
             // Fallback to local-only if CloudKit fails
             do {
-                let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self])
+                let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self, SuggestionFeedback.self])
                 let config = ModelConfiguration(isStoredInMemoryOnly: false, cloudKitDatabase: nil)
                 modelContainer = try ModelContainer(for: schema, configurations: [config])
 

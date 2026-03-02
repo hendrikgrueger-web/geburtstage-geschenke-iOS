@@ -12,13 +12,18 @@ Alle geplanten Features für Phase 2 wurden implementiert und in bestehende View
 - Konsistentes EmptyState-System über alle Views
 - Verbesserte UX mit Haptic Feedback und Animationen
 
-**Phase 3 Fortschritt (16:31 UTC):**
+**Phase 3 Fortschritt (16:52 UTC):**
 - ✅ Verbesserte AI-Prompts mit Alter, Meilensteinen und Sternzeichen
 - ✅ Personalisierte Geschenkideen basierend auf Meilensteinen (18, 30, 40+)
 - ✅ Birthday Message Feature: GenerateBirthdayMessage() + Demo-Mode
 - ✅ AIBirthdayMessageSheet: Vollständige UI für Nachricht-Generierung
 - ✅ PersonDetailView Integration: "Geburtstagsnachricht" Button
 - ✅ Komplette Testabdeckung: 18 Tests für Sheet-UI
+- ✅ **NEU**: Prompt-Qualitätsmessung mit Feedback-System
+  - SuggestionFeedback Model für Tracking
+  - SuggestionQualityViewModel für Metriken
+  - Thumbs up/down Feedback UI
+  - Qualitätsmetrik-Anzeige (0-5 Sterne)
 
 ## Erledigte Aufgaben
 
@@ -97,6 +102,36 @@ Alle 4 Add/Edit Sheets aktualisiert:
 - **BirthdayMessage Structure Tests**: greeting, body, fullText
 - **Zodiac Sign Tests**: Sternzeichen-Berechnung
 
+### 9. Prompt-Qualitätsmessung — NEU ✅
+- **SuggestionFeedback Model**: Persistiert User-Feedback pro Suggestion
+  - personId, suggestionTitle, suggestionReason, isPositive, timestamp
+- **SuggestionQualityViewModel**: Verwaltet Feedback und berechnet Metriken
+  - recordFeedback(): Speichert Feedback mit Haptic Feedback
+  - loadMetrics(): Lädt globale Qualitätswerte
+  - metricsFor(personId:): Person-spezifische Metriken
+  - clearAllFeedback(): Reset für Testing
+- **SuggestionQualityMetrics**: Struktur für Qualitätswerte
+  - totalFeedback, positiveFeedback, negativeFeedback
+  - positivityRate: 0.0 - 1.0
+  - ratingText: 0-5 Sterne mit Text
+- **SuggestionFeedbackView**: UI-Komponente für Feedback
+  - "War das hilfreich?" Text
+  - Thumbs up/down Buttons
+  - Deaktiviert nach Feedback
+- **AIGiftSuggestionsSheet Integration**:
+  - Qualitätsmetrik-Section zeigt globales Rating (nur bei Daten)
+  - Feedback unter jedem Vorschlag (nur einmal pro Suggestion)
+  - Person-spezifische Metriken anzeigen
+  - Haptic Feedback für Feedback-Aktionen
+
+### 10. SuggestionQualityViewModel Tests ✅
+- **Feedback Recording Tests**: Positiv, Negativ, Gemischt
+- **Metrics Calculation Tests**: 5 Stufen (Ausgezeichnet bis Kritisch)
+- **No Data Test**: Kein Feedback verfügbar
+- **Person-Specific Tests**: Verschiedene Personen getrennt tracken
+- **Clear Feedback Test**: Reset Funktionalität
+- **SuggestionQualityMetrics Tests**: Initialisierung und FromFeedbacks
+
 ## Code-Statistik
 
 | Metrik | Phase 2 | Phase 3 |
@@ -109,7 +144,8 @@ Alle 4 Add/Edit Sheets aktualisiert:
 | Demo Meilenstein-Suggestions | — | 3 Altersgruppen |
 | Birthday Message Feature | — | 1 Feature + Demo-Mode |
 | Birthday Message UI | — | 1 Sheet + 1 Integration |
-| Neue Tests (Phase 3) | — | 7 AIService + 18 Sheet Tests |
+| Qualitätsmessung System | — | 1 Model + 1 ViewModel + 1 UI |
+| Neue Tests (Phase 3) | — | 7 AIService + 18 Sheet + 15 Quality Tests |
 
 ## Commits (dieser Sprint)
 
@@ -123,6 +159,7 @@ Alle 4 Add/Edit Sheets aktualisiert:
 ### Phase 3
 6. `0595685` — Phase 3: Enhanced AI suggestions with age/milestone context + birthday message feature
 7. `b8dfa1c` — Phase 3: Add Birthday Message UI with personalization features
+8. `ADD HERE` — Phase 3: Add suggestion quality metrics with feedback system
 
 ## Nächste Schritte (Priorität)
 
@@ -135,8 +172,9 @@ Alle 4 Add/Edit Sheets aktualisiert:
 4. ~~**Komponenten-Integration**~~ ✅ (Alle Utilities in Views)
 5. **Phase 3 Start** ✅ (Kontext-reiche Prompts, Meilensteine)
 6. ~~**Birthday Messages UI Integration**~~ ✅ (AIBirthdayMessageSheet + Tests)
-7. **Prompt-Qualitätsmessung**: Metrik für Suggestion-Relevanz
+7. ~~**Prompt-Qualitätsmessung**~~ ✅ (Feedback-System + Metriken)
 8. **Xcode Build**: TestFlight Build auf macOS erstellen (⏸️ Benötigt macOS)
+9. **Code Review & Cleanup**: Finaler Review vor Release
 
 ## Phase 2 Status
 
