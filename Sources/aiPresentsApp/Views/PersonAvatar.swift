@@ -4,6 +4,14 @@ struct PersonAvatar: View {
     let person: PersonRef
     var size: CGFloat = 60
 
+    static func initials(from name: String) -> String {
+        let components = name.split(separator: " ")
+        if components.count >= 2 {
+            return String(components[0].prefix(1)) + String(components[1].prefix(1))
+        }
+        return String(name.prefix(2)).uppercased()
+    }
+
     var body: some View {
         Circle()
             .fill(AppColor.gradientForRelation(person.relation))

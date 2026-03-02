@@ -12,7 +12,8 @@ struct BirthdayWidgetView: View {
 
         // Map back to PersonRef for compatibility with existing UI
         return data.upcomingBirthdays.compactMap { entry -> PersonRef? in
-            let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id.uuidString == entry.id })
+            let entryId = entry.id
+            let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id.uuidString == entryId })
             return try? modelContext.fetch(descriptor).first
         }
     }
@@ -54,36 +55,6 @@ struct BirthdayWidgetView: View {
 
     private func loadWidgetData() {
         widgetData = BirthdayWidgetData.fetchWidgetData(from: modelContext, limit: 3)
-    }
-        VStack(spacing: 16) {
-            if upcomingBirthdays.isEmpty {
-                emptyWidgetState
-            } else {
-                TabView(selection: $selectedIndex) {
-                    ForEach(Array(upcomingBirthdays.enumerated()), id: \.offset) { index, person in
-                        birthdayCard(for: person)
-                            .tag(index)
-                    }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 120)
-
-                if upcomingBirthdays.count > 1 {
-                    HStack(spacing: 4) {
-                        ForEach(0..<upcomingBirthdays.count, id: \.self) { index in
-                            Circle()
-                                .fill(index == selectedIndex ? AppColor.primary : Color.gray.opacity(0.3))
-                                .frame(width: 6, height: 6)
-                        }
-                    }
-                    .transition(.opacity)
-                }
-            }
-        }
-        .padding()
-        .background(AppColor.cardBackground)
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
     }
 
     private func birthdayCard(for person: PersonRef) -> some View {
