@@ -8,11 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Toast notifications for CSV export success/error states in PersonDetailView
-- Toast notification for share sheet opening in PersonDetailView
-- Comprehensive accessibility labels and hints for AddGiftHistorySheet form fields
-- Comprehensive accessibility labels and hints for EditGiftIdeaSheet form fields
-- Comprehensive accessibility labels and hints for AddGiftIdeaSheet form fields
+- Pull-to-refresh gesture for TimelineView to manually refresh birthday calculations
+- Toast notifications for SettingsView actions (permission changes, reminders, data reset, feedback)
+- Finalized App Icon design with Gift Box + Calendar concept
+- AppIcon.md with complete design specifications and Figma/Sketch template
+- Comprehensive tests for BirthdayCalculator.clearCache() functionality
+
+### Improved
+- Better user feedback with toast notifications for all SettingsView actions
+- Manual refresh capability for TimelineView after contact imports
+- BirthdayCalculator cache management with clearCache() method for refresh scenarios
+- Improved UX with immediate visual feedback for settings changes
+- Better accessibility in SettingsView with improved feedback messages
 
 ### Improved
 - Better user feedback for CSV export operations with success/error/warning toasts
