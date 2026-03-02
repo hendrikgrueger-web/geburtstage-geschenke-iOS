@@ -27,8 +27,10 @@
 - **DebouncerTests.swift**: 30 Tests für alle Szenarien
 
 ## Commits
+- 498dcde: Reduced motion support for OnboardingView + BirthdayWidgetView
 - 3fae581: Accessibility enhancements (Phase 2) - AccessibilityConfiguration utility + tests
 - 88f1d6e: Accessibility improvements across key views - Better labels and reduced motion
+- a0a42f6: Sprint summary update with accessibility phase progress
 - da08cae: Sprint summary update with Phase 2 progress
 - cd86e27: Thread-safety fixes (BirthdayCalculator + ReminderManager)
 - de282dc: UX & Tests (ToastView async + Thread-safety tests)
