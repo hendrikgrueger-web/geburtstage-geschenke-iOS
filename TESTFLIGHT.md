@@ -33,7 +33,7 @@
 - [ ] Xcode 16.4+ installiert
 - [ ] Signing Team konfiguriert
 - [ ] Bundle Identifier: `com.hendrikgrueger.aiPresentsApp`
-- [ ] Version: `0.2.0` (Beta)
+- [x] Version: `0.2.0` (Beta) ✅ Info.plist aktualisiert
 - [ ] Build Number: `1` (Auto-Increment aktivieren)
 - [ ] Provisioning Profile erstellt
 - [ ] App Icons alle Größen (1x, 2x, 3x)
@@ -117,13 +117,21 @@ This version includes:
 
 ## Build Prozess (macOS mit Xcode)
 
-### 1. Lokal Build
+### Vorbereitung (Erstmalig)
 
 ```bash
 # Repository klonen
 git clone https://github.com/harryhirsch1878/ai-presents-app-ios.git
 cd ai-presents-app-ios
 
+# Xcode Setup Script ausführen (öffnet Anleitung)
+chmod +x scripts/macos-xcode-setup.sh
+./scripts/macos-xcode-setup.sh
+```
+
+### 1. Lokal Build
+
+```bash
 # Dependencies auflösen
 swift package resolve
 
@@ -140,19 +148,22 @@ swift test --enable-code-coverage
 ### 2. Xcode Build für TestFlight
 
 ```bash
-# Xcode öffnen
+# Xcode öffnen (nach App Target Setup)
 open aiPresentsApp.xcodeproj
-# oder
-open Package.swift
 
-# Build Settings prüfen
-- Product → Archive
-- Signing & Capabilities → Team auswählen
-- Archive erstellen
+# Oder TestFlight Build Script nutzen:
+chmod +x scripts/macos-testflight-build.sh
+./scripts/macos-testflight-build.sh
 ```
 
 ### 3. Upload zu App Store Connect
 
+**Automatisch via Script:**
+```bash
+./scripts/macos-testflight-build.sh
+```
+
+**Manuell:**
 1. Window → Organizer
 2. Select Archive
 3. "Distribute App"
@@ -167,14 +178,32 @@ open Package.swift
 
 ### Vor Release
 
-- [ ] Alle offenen Issues gelöst oder auf Backlog verschoben
-- [ ] CHANGELOG aktualisiert
-- [ ] Versionnummer in `aiPresentsApp.swift` gesetzt
+**Code & Projekt:**
+- [x] Info.plist Version auf 0.2.0 aktualisiert ✅
+- [x] CHANGELOG aktualisiert
 - [ ] Build Number hochgesetzt
+- [ ] Alle Tests grün (636+ Test-Methoden)
+- [ ] Open Issues gelöst oder auf Backlog
+
+**Dokumentation:**
+- [x] TESTFLIGHT.md erstellt
+- [x] BETA_TESTERS.md erstellt
+- [x] RELEASE_CHECKLIST.md erstellt
+- [x] Build Scripts erstellt (scripts/macos-*.sh)
+
+**App Store Connect:**
 - [ ] Release Notes erstellt (Deutsch & Englisch)
 - [ ] Screenshots aufgenommen (min. 3.5", 4.7", 5.5", 6.5", 6.7")
 - [ ] App Preview Video (optional)
+- [ ] Privacy Policy URL erstellt
 - [ ] Beta Tester informiert (Email/Slack)
+
+**Build & Upload:**
+- [ ] Xcode App Target erstellt
+- [ ] Signing konfiguriert
+- [ ] App Icons erstellt
+- [ ] Archive erstellt & validiert
+- [ ] Upload zu TestFlight erfolgreich
 
 ### Nach Release
 
@@ -183,6 +212,7 @@ open Package.swift
 - [ ] Crash Reports prüfen (Xcode Organizer)
 - [ ] Tester Feedback sammeln
 - [ ] Next Version Planung starten
+- [ ] RELEASE_CHECKLIST.md für v0.3.0 erstellt
 
 ---
 
