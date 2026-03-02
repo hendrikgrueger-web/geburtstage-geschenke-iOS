@@ -594,6 +594,7 @@ struct PersonDetailView: View {
 
     private func saveCSVToDocuments(content: String, fileName: String) -> URL? {
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            AppLogger.ui.error("Failed to access Documents directory for CSV export")
             return nil
         }
 
@@ -601,9 +602,10 @@ struct PersonDetailView: View {
 
         do {
             try content.write(to: fileURL, atomically: true, encoding: .utf8)
+            AppLogger.ui.debug("CSV saved successfully: \(fileURL.path)")
             return fileURL
         } catch {
-            print("Failed to save CSV: \(error)")
+            AppLogger.ui.error("Failed to save CSV: \(fileName)", error: error)
             return nil
         }
     }

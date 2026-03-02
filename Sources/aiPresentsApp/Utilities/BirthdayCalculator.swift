@@ -2,12 +2,56 @@ import Foundation
 
 /// Utility for calculating birthdays and upcoming dates
 struct BirthdayCalculator {
-    /// Calculates the next occurrence of a birthday from a reference date
+    /// Internal cache for birthday calculations to improve performance
+    private static var cache: [String: BirthdayCacheEntry] = [:]
+
+    /// Cache entry for birthday calculations
+    private struct BirthdayCacheEntry {
+        let nextBirthday: Date?
+        let daysUntil: Int?
+        let timestamp: Date
+
+        /// Check if cache entry is valid (not older than 5 seconds)
+        var isValid: Bool {
+            Date().timeIntervalSince(timestamp) < 5.0
+        }
+    }
+
+    /// Clear the birthday calculation cache
+    static func clearCache() {
+        cache.removeAll()
+        AppLogger.debug("BirthdayCalculator cache cleared")
+    }
+
+    /// Calculates the next occurrence of a birthday from a reference date (cached)
     /// - Parameters:
     ///   - birthday: The person's birthday
     ///   - from: The reference date (defaults to today)
     /// - Returns: The next birthday date, or nil if calculation fails
     static func nextBirthday(for birthday: Date, from referenceDate: Date = Date()) -> Date? {
+        let cacheKey = generateCacheKey(birthday: birthday, from: referenceDate)
+
+        // Check cache
+        if let entry = cache[cacheKey], entry.isValid, let cachedNextBirthday = entry.nextBirthday {
+            AppLogger.debug("Cache hit for nextBirthday: \(cacheKey)")
+            return cachedNextBirthday
+        }
+
+        // Calculate new value
+        let nextBirthday = calculateNextBirthday(for: birthday, from: referenceDate)
+
+        // Update cache
+        cache[cacheKey] = BirthdayCacheEntry(
+            nextBirthday: nextBirthday,
+            daysUntil: nil,
+            timestamp: Date()
+        )
+
+        return nextBirthday
+    }
+
+    /// Calculates the next occurrence of a birthday from a reference date (uncached)
+    private static func calculateNextBirthday(for birthday: Date, from referenceDate: Date) -> Date? {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: referenceDate)
         let currentYear = calendar.component(.year, from: today)
@@ -28,12 +72,35 @@ struct BirthdayCalculator {
         return nextBirthday
     }
 
-    /// Calculates days until the next birthday
+    /// Calculates days until the next birthday (cached)
     /// - Parameters:
     ///   - birthday: The person's birthday
     ///   - from: The reference date (defaults to today)
     /// - Returns: Days until birthday (0 if today), or nil if calculation fails
     static func daysUntilBirthday(for birthday: Date, from referenceDate: Date = Date()) -> Int? {
+        let cacheKey = generateCacheKey(birthday: birthday, from: referenceDate)
+
+        // Check cache
+        if let entry = cache[cacheKey], entry.isValid, let cachedDaysUntil = entry.daysUntil {
+            AppLogger.debug("Cache hit for daysUntilBirthday: \(cacheKey)")
+            return cachedDaysUntil
+        }
+
+        // Calculate new value
+        let daysUntil = calculateDaysUntilBirthday(for: birthday, from: referenceDate)
+
+        // Update cache
+        cache[cacheKey] = BirthdayCacheEntry(
+            nextBirthday: nil,
+            daysUntil: daysUntil,
+            timestamp: Date()
+        )
+
+        return daysUntil
+    }
+
+    /// Calculates days until the next birthday (uncached)
+    private static func calculateDaysUntilBirthday(for birthday: Date, from referenceDate: Date) -> Int? {
         guard let nextBirthday = nextBirthday(for: birthday, from: referenceDate) else {
             return nil
         }
@@ -43,6 +110,14 @@ struct BirthdayCalculator {
         let daysUntil = calendar.dateComponents([.day], from: today, to: nextBirthday).day ?? 0
 
         return max(0, daysUntil)
+    }
+
+    /// Generates a unique cache key based on birthday and reference date
+    private static func generateCacheKey(birthday: Date, from referenceDate: Date) -> String {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: referenceDate)
+        let birthdayKey = calendar.startOfDay(for: birthday).timeIntervalSince1970
+        return "\(birthdayKey)-\(today.timeIntervalSince1970)"
     }
 
     /// Determines if a birthday is today
