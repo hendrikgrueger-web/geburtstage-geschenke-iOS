@@ -56,8 +56,14 @@
 ✅ Reminder/Timeline korrekt und konsistent
 ✅ QA-Blocker auf 0
 
-## Nächste Schritte (Phase 2)
-- Accessibility vollständig
-- Input-Validierung vollständig
+## Phase 2 (Accessibility & UX) Status
+✅ AccessibilityConfiguration utility erstellt
+✅ Reduced Motion Support implementiert
+✅ Dynamic Type Unterstützung vorbereitet
+✅ AccessibilityConfigurationTests (23 Tests)
+✅ Accessibility Labels verfeinert
+
+## Nächste Schritte (Phase 2 - Fortsetzung)
+- Input-Validierung erweitern
 - Bessere leere Zustände + UX-Feinschliff
 - TestFlight Vorbereitung
