@@ -85,6 +85,36 @@ struct TimelineView: View {
                         } label: {
                             Label("Mit Ideen", systemImage: "lightbulb.fill")
                         }
+
+                        if !availableRelations.isEmpty {
+                            Divider()
+
+                            Menu {
+                                Button {
+                                    filterRelation = nil
+                                    HapticFeedback.selectionChanged()
+                                } label: {
+                                    Label("Alle Beziehungen", systemImage: "list.bullet")
+                                }
+
+                                Divider()
+
+                                ForEach(availableRelations, id: \.self) { relation in
+                                    Button {
+                                        filterRelation = relation
+                                        HapticFeedback.selectionChanged()
+                                    } label: {
+                                        if filterRelation == relation {
+                                            Label(relation, systemImage: "checkmark")
+                                        } else {
+                                            Text(relation)
+                                        }
+                                    }
+                                }
+                            } label: {
+                                Label("Beziehung", systemImage: "person.2")
+                            }
+                        }
                     } label: {
                         Image(systemName: "line.3.horizontal.decrease.circle")
                             .symbolVariant(filterHasIdeas != nil || filterRelation != nil ? .fill : .none)
