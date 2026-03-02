@@ -15,9 +15,9 @@ struct AIService {
         tags: [String],
         pastGifts: [GiftHistory]
     ) async throws -> [GiftSuggestion] {
-        // Check if API key is configured
-        guard !apiKey.isEmpty else {
-            throw AIError.apiKeyNotConfigured
+        // If API key is not configured, use demo mode
+        if apiKey.isEmpty {
+            return generateDemoSuggestions(for: person, budget: budgetMax)
         }
 
         // Build prompt
@@ -34,6 +34,50 @@ struct AIService {
 
         // Parse response
         return try parseResponse(response)
+    }
+
+    // Demo mode: Generate suggestions without API
+    private func generateDemoSuggestions(for person: PersonRef, budget: Double) -> [GiftSuggestion] {
+        let relation = person.relation.lowercased()
+        let name = person.displayName.components(separatedBy: " ").first ?? person.displayName
+
+        let suggestions: [(title: String, reason: String)]
+
+        if relation.contains("familie") || relation.contains("mama") || relation.contains("papa") {
+            suggestions = [
+                ("Fotoalbum mit Erinnerungen", "Persönlich und sentimental - perfekt für Familienmitglieder."),
+                ("Hochwertige Küche/Bar Ausrüstung", "Praktisch und von hoher Qualität - ideal für häufiges Nutzen."),
+                ("Gutschein für Erlebnis", "Gemeinsam Zeit verbringen schafft bleibende Erinnerungen."),
+                ("Buch zum Lieblingsthema", "Zeigt Interesse und Wertschätzung für Hobbys."),
+                ("Schmuck oder Accessoires", "Zeitlos und persönlich - ein Klassiker für besondere Anlässe.")
+            ]
+        } else if relation.contains("freund") || relation.contains("kollege") {
+            suggestions = [
+                ("Tech-Gadget oder Zubehör", "Modern und nützlich - perfekt für Technik-Enthusiasten."),
+                ("Hochwertiges Schreibwaren-Set", "Elegant und professionell - gut für Office oder Schreibtisch."),
+                ("Erlebnis-Gutschein", "Kino, Konzerte oder Ausstellungen - Erlebnisse statt Dinge."),
+                ("Specialty Food & Drink", "Premium Kaffee, Tee oder Craft Beer - genießbar und nachhaltig."),
+                ("Spiel für Abende", "Gesellig und unterhaltsam - bringt Menschen zusammen.")
+            ]
+        } else if relation.contains("partner") {
+            suggestions = [
+                ("Romantisches Wochenend-Ausflug", "Qualitätszeit und neue Erinnerungen schaffen."),
+                ("Hochwertiges Uhrenarmband", "Schick und persönlich - täglicher Nutzen mit sentimentalem Wert."),
+                ("Personalisiertes Geschenk", "Gravur oder eigenes Design - einzigartig und speziell."),
+                ("Erlebnis für Zweit", "Kochkurs, Weinprobe oder Wellness - gemeinsam erleben."),
+                ("Schmuckstück", "Klassisch und zeitlos - ein Symbol für Wertschätzung.")
+            ]
+        } else {
+            suggestions = [
+                ("Personalisiertes Geschenk", "Gravur oder eigenes Design - zeigt besondere Aufmerksamkeit."),
+                ("Erlebnis-Gutschein", "Veranstaltungen oder Kurse - Erinnerungen statt Dinge."),
+                ("Hochwertiges Buch", "Zeigt Interesse für Hobbys - geduldig und nachhaltig."),
+                ("Praktisches Gadget", "Nützlich und modern - guter Alltagsbegleiter."),
+                ("Kreative Bastel-Kits", "Selbstgemacht und kreativ - persönlich und einzigartig.")
+            ]
+        }
+
+        return suggestions.map { GiftSuggestion(title: $0.title, reason: $0.reason) }
     }
 
     private func buildPrompt(

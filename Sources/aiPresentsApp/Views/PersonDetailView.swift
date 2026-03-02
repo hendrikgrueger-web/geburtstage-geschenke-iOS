@@ -269,20 +269,30 @@ struct PersonDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                HStack(spacing: 16) {
+                Menu {
                     Button {
                         shareText = person.exportAllGiftIdeasAsText()
                         showingShareSheet = true
                         HapticFeedback.light()
                     } label: {
-                        Image(systemName: "square.and.arrow.up")
+                        Label("Teilen", systemImage: "square.and.arrow.up")
                     }
+
+                    Button {
+                        exportAsCSV()
+                    } label: {
+                        Label("Als CSV exportieren", systemImage: "doc.text")
+                    }
+
+                    Divider()
 
                     Button {
                         showingAddGiftIdea = true
                     } label: {
-                        Image(systemName: "plus")
+                        Label("Neue Idee", systemImage: "plus")
                     }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
                 }
             }
         }
@@ -492,5 +502,48 @@ struct PersonDetailView: View {
 
         shareText = text
         showingShareSheet = true
+    }
+
+    private func exportAsCSV() {
+        let csvContent = person.exportGiftIdeasAsCSV()
+
+        if !csvContent.isEmpty {
+            let fileName = "geschenkideen-\(person.displayName.replacingOccurrences(of: " ", with: "_")).csv"
+            if let url = saveCSVToDocuments(content: csvContent, fileName: fileName) {
+                shareCSV(url: url)
+            }
+        } else {
+            HapticFeedback.error()
+        }
+    }
+
+    private func saveCSVToDocuments(content: String, fileName: String) -> URL? {
+        guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+
+        do {
+            try content.write(to: fileURL, atomically: true, encoding: .utf8)
+            return fileURL
+        } catch {
+            print("Failed to save CSV: \(error)")
+            return nil
+        }
+    }
+
+    private func shareCSV(url: URL) {
+        let activityVC = UIActivityViewController(
+            activityItems: [url],
+            applicationActivities: nil
+        )
+
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController {
+            rootViewController.present(activityVC, animated: true)
+        }
+
+        HapticFeedback.success()
     }
 }
