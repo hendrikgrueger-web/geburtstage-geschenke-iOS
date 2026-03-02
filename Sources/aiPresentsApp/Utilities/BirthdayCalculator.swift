@@ -11,6 +11,7 @@ struct BirthdayCalculator {
     private struct BirthdayCacheEntry {
         let nextBirthday: Date?
         let daysUntil: Int?
+        let age: Int?
         let timestamp: Date
 
         /// Check if cache entry is valid (not older than 5 seconds)
@@ -52,6 +53,7 @@ struct BirthdayCalculator {
         cache[cacheKey] = BirthdayCacheEntry(
             nextBirthday: nextBirthday,
             daysUntil: nil,
+            age: nil,
             timestamp: Date()
         )
         cacheLock.unlock()
@@ -106,6 +108,7 @@ struct BirthdayCalculator {
         cache[cacheKey] = BirthdayCacheEntry(
             nextBirthday: nil,
             daysUntil: daysUntil,
+            age: nil,
             timestamp: Date()
         )
         cacheLock.unlock()
@@ -157,12 +160,40 @@ struct BirthdayCalculator {
         return daysUntil >= 0 && daysUntil <= days
     }
 
-    /// Calculates age for a given birthday on a specific date
+    /// Calculates age for a given birthday on a specific date (cached)
     /// - Parameters:
     ///   - birthday: The person's birthday
     ///   - on: The date to calculate age for (defaults to today)
     /// - Returns: The age, or nil if calculation fails
     static func age(for birthday: Date, on date: Date = Date()) -> Int? {
+        let cacheKey = "age-\(generateCacheKey(birthday: birthday, from: date))"
+
+        // Check cache (thread-safe)
+        cacheLock.lock()
+        if let entry = cache[cacheKey], entry.isValid, let cachedAge = entry.age {
+            cacheLock.unlock()
+            return cachedAge
+        }
+        cacheLock.unlock()
+
+        // Calculate new value (outside lock)
+        let calculatedAge = calculateAge(for: birthday, on: date)
+
+        // Update cache (thread-safe)
+        cacheLock.lock()
+        cache[cacheKey] = BirthdayCacheEntry(
+            nextBirthday: nil,
+            daysUntil: nil,
+            age: calculatedAge,
+            timestamp: Date()
+        )
+        cacheLock.unlock()
+
+        return calculatedAge
+    }
+
+    /// Calculates age for a given birthday on a specific date (uncached)
+    private static func calculateAge(for birthday: Date, on date: Date) -> Int? {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: date)
         var components = calendar.dateComponents([.year, .month, .day], from: birthday)
