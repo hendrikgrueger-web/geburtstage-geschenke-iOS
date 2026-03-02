@@ -16,6 +16,9 @@ struct AddGiftIdeaSheet: View {
     @State private var status: GiftStatus
     @State private var formState = FormState()
     @State private var showingValidationError = false
+    @State private var budgetMinSlider: Double = 0
+    @State private var budgetMaxSlider: Double = 0
+    @State private var useSlider = false
 
     init(person: PersonRef) {
         self.person = person
@@ -98,17 +101,58 @@ struct AddGiftIdeaSheet: View {
                 }
 
                 Section("Budget") {
-                    HStack {
-                        Text("Min")
-                        TextField("€", text: $budgetMin)
-                            .keyboardType(.decimalPad)
-                    }
+                    Toggle("Slider verwenden", isOn: $useSlider.animation())
 
-                    HStack {
-                        Text("Max")
-                        TextField("€", text: $budgetMax)
-                            .keyboardType(.decimalPad)
-                            .foregroundColor(isBudgetInvalid ? .red : .primary)
+                    if useSlider {
+                        VStack(spacing: 16) {
+                            HStack {
+                                Text("Min")
+                                Text("\(Int(budgetMinSlider)) €")
+                                    .foregroundColor(AppColor.primary)
+                                    .fontWeight(.semibold)
+                                Spacer()
+                            }
+
+                            Slider(value: $budgetMinSlider, in: 0...500, step: 5) {
+                                Text("Min Budget")
+                            } minimumValueLabel: {
+                                Text("0€").font(.caption2).foregroundColor(.secondary)
+                            } maximumValueLabel: {
+                                Text("500€").font(.caption2).foregroundColor(.secondary)
+                            }
+                            .tint(AppColor.primary)
+
+                            HStack {
+                                Text("Max")
+                                Text("\(Int(budgetMaxSlider)) €")
+                                    .foregroundColor(AppColor.accent)
+                                    .fontWeight(.semibold)
+                                Spacer()
+                            }
+
+                            Slider(value: $budgetMaxSlider, in: 0...500, step: 5) {
+                                Text("Max Budget")
+                            } minimumValueLabel: {
+                                Text("0€").font(.caption2).foregroundColor(.secondary)
+                            } maximumValueLabel: {
+                                Text("500€").font(.caption2).foregroundColor(.secondary)
+                            }
+                            .tint(AppColor.accent)
+                        }
+                        .padding(.vertical, 8)
+                    } else {
+                        HStack {
+                            Text("Min")
+                            TextField("€", text: $budgetMin)
+                                .keyboardType(.decimalPad)
+                        }
+
+                        HStack {
+                            Text("Max")
+                            TextField("€", text: $budgetMax)
+                                .keyboardType(.decimalPad)
+                                .foregroundColor(isBudgetInvalid ? .red : .primary)
+                        }
                     }
 
                     if isBudgetInvalid {
@@ -197,12 +241,16 @@ struct AddGiftIdeaSheet: View {
             .filter { !$0.isEmpty }
 
         let linkValue = linkValidation.isValid ? linkValidation.sanitized : link.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        let minBudget = useSlider ? budgetMinSlider : (Double(budgetMin) ?? 0)
+        let maxBudget = useSlider ? budgetMaxSlider : (Double(budgetMax) ?? 0)
+
         let idea = GiftIdea(
             personId: person.id,
             title: title,
             note: note,
-            budgetMin: Double(budgetMin) ?? 0,
-            budgetMax: Double(budgetMax) ?? 0,
+            budgetMin: minBudget,
+            budgetMax: maxBudget,
             link: linkValue,
             status: status,
             tags: tags
