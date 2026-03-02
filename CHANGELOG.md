@@ -21,6 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - URL validation with alert guidance for invalid entries
 - BirthdayCalculator caching with 5s TTL for better performance
 - BirthdayCalculator cache validation tests
+- FormatterHelperTests: 50+ tests for date, currency, budget, list, and duration formatting
+- AccessibilityHelperTests: 40+ tests for accessibility labels and formatting
+- AppConfigTests: comprehensive tests for app configuration constants
+- HapticFeedbackTests: non-crash tests for all haptic feedback methods
+- ValidationHelperTests: 60+ tests covering all validation methods
+- AnimationHelperTests: tests for all animation utilities and factories
+- AppColorTests: comprehensive tests for color system and gradients
 
 ### Changed
 - Replace all print() statements with proper AppLogger for consistent logging
