@@ -59,15 +59,15 @@ struct DebugMenu {
     static func resetAllData(modelContext: ModelContext) {
         do {
             try modelContext.deleteContainer()
-            print("✅ Debug: All data reset")
+            AppLogger.debug("✅ Debug: All data reset")
         } catch {
-            print("❌ Debug: Failed to reset data: \(error)")
+            AppLogger.error("❌ Debug: Failed to reset data", error: error)
         }
     }
 
     static func createSampleData(modelContext: ModelContext) {
         SampleDataService.createSampleData(in: modelContext)
-        print("✅ Debug: Sample data created")
+        AppLogger.debug("✅ Debug: Sample data created")
     }
 
     static func exportDatabaseStats(modelContext: ModelContext) -> String {
@@ -79,23 +79,28 @@ struct DebugMenu {
         let ideaCount = (try? modelContext.fetchCount(ideaDescriptor)) ?? 0
         let historyCount = (try? modelContext.fetchCount(historyDescriptor)) ?? 0
 
-        return """
+        let stats = """
         📊 Database Stats:
         - People: \(personCount)
         - Gift Ideas: \(ideaCount)
         - Gift History: \(historyCount)
         """
+        AppLogger.debug(stats)
+        return stats
     }
 
     static func logReminderStatus(modelContext: ModelContext) {
         let ruleDescriptor = FetchDescriptor<ReminderRule>()
         if let rule = try? modelContext.fetch(ruleDescriptor).first {
-            print("🔔 Reminder Rule:")
-            print("   - Enabled: \(rule.enabled)")
-            print("   - Lead Days: \(rule.leadDays)")
-            print("   - Quiet Hours: \(rule.quietHoursStart):00 - \(rule.quietHoursEnd):00")
+            let status = """
+            🔔 Reminder Rule:
+               - Enabled: \(rule.enabled)
+               - Lead Days: \(rule.leadDays)
+               - Quiet Hours: \(rule.quietHoursStart):00 - \(rule.quietHoursEnd):00
+            """
+            AppLogger.debug(status)
         } else {
-            print("⚠️ No reminder rule configured")
+            AppLogger.debug("⚠️ No reminder rule configured")
         }
     }
 }

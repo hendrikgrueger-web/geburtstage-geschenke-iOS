@@ -100,8 +100,9 @@ class SampleDataService {
     static func clearSampleData(in context: ModelContext) {
         do {
             try context.deleteContainer()
+            AppLogger.data.info("Sample data cleared successfully")
         } catch {
-            print("Failed to clear sample data: \(error)")
+            AppLogger.data.error("Failed to clear sample data", error: error)
         }
     }
 }

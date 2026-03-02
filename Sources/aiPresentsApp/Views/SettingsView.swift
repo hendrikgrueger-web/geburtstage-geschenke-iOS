@@ -324,8 +324,9 @@ struct SettingsView: View {
     private func resetAllData() {
         do {
             try modelContext.deleteContainer()
+            AppLogger.data.info("All data reset successfully")
         } catch {
-            print("Failed to reset data: \(error)")
+            AppLogger.data.error("Failed to reset data", error: error)
         }
     }
 
@@ -335,7 +336,11 @@ struct SettingsView: View {
         let body = "Was funktioniert gut?\n\nWas könnte besser sein?\n\n"
 
         if let url = URL(string: "mailto:\(feedbackEmail)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") {
-            UIApplication.shared.open(url)
+            UIApplication.shared.open(url) { success in
+                if !success {
+                    AppLogger.ui.warning("Failed to open mail feedback link")
+                }
+            }
         }
     }
 
@@ -366,7 +371,11 @@ struct SettingsView: View {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         alert.addAction(UIAlertAction(title: "GitHub", style: .default) { _ in
             if let url = URL(string: "https://github.com/harryhirsch1878/ai-presents-app-ios") {
-                UIApplication.shared.open(url)
+                UIApplication.shared.open(url) { success in
+                    if !success {
+                        AppLogger.ui.warning("Failed to open GitHub URL")
+                    }
+                }
             }
         })
 
