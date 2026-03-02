@@ -341,7 +341,9 @@ struct SettingsView: View {
 
     private func openAbout() {
         let aboutText = """
-        ai-presents-app v\(appVersion)
+        ai-presents-app
+
+        Version \(appVersion) (Build \(buildNumber))
 
         Eine private iOS App zum Verwalten von Geburtstagen und Geschenkideen.
 
