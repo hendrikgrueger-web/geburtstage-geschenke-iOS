@@ -41,7 +41,6 @@ struct ToastItem: Identifiable {
         self.duration = duration
     }
 
-    // Convenience initializers
     static func success(_ title: String, message: String? = nil) -> ToastItem {
         ToastItem(type: .success, title: title, message: message)
     }
@@ -63,16 +62,13 @@ struct ToastItem: Identifiable {
 struct ToastView: View {
     let item: ToastItem
     @Binding var isPresented: Bool
-
     @State private var offset: CGFloat = 0
     @State private var opacity: Double = 0
 
     var body: some View {
         VStack {
             Spacer()
-
             HStack(spacing: 12) {
-                // Icon
                 Image(systemName: item.type.icon)
                     .font(.title2)
                     .foregroundColor(.white)
@@ -80,25 +76,18 @@ struct ToastView: View {
                     .background(item.type.color)
                     .clipShape(Circle())
 
-                // Content
                 VStack(alignment: .leading, spacing: 4) {
                     Text(item.title)
                         .font(.headline)
                         .foregroundColor(AppColor.textPrimary)
-
                     if let message = item.message {
                         Text(message)
                             .font(.subheadline)
                             .foregroundColor(AppColor.textSecondary)
                     }
                 }
-
                 Spacer()
-
-                // Dismiss button
-                Button {
-                    dismiss()
-                } label: {
+                Button { dismiss() } label: {
                     Image(systemName: "xmark")
                         .font(.caption)
                         .foregroundColor(AppColor.textSecondary)
@@ -118,25 +107,27 @@ struct ToastView: View {
                 offset = 0
                 opacity = 1
             }
-
-            // Auto-dismiss after duration
-            DispatchQueue.main.asyncAfter(deadline: .now() + item.duration) {
-                if isPresented {
-                    dismiss()
-                }
+            // Modern Swift Concurrency for auto-dismiss
+            Task {
+                try? await Task.sleep(for: .seconds(item.duration))
+                if isPresented { dismissWithAnimation() }
             }
         }
     }
 
-    private func dismiss() {
+    private func dismissWithAnimation() {
         withAnimation(AnimationHelper.easeOut) {
             offset = 0
             opacity = 0
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        Task {
+            try? await Task.sleep(for: .milliseconds(300))
             isPresented = false
         }
+    }
+
+    private func dismiss() {
+        dismissWithAnimation()
     }
 }
 
@@ -159,41 +150,7 @@ struct ToastModifier: ViewModifier {
 
 // MARK: - View Extension
 extension View {
-    /// Adds toast notification support
     func toast(item: Binding<ToastItem?>) -> some View {
         self.modifier(ToastModifier(toast: item))
     }
-}
-
-// MARK: - Preview
-#Preview("Success Toast") {
-    VStack {
-        Text("Content")
-    }
-    .toast(item: .constant(ToastItem.success("Erfolgreich", message: "Änderungen gespeichert")))
-    .background(AppColor.background)
-}
-
-#Preview("Error Toast") {
-    VStack {
-        Text("Content")
-    }
-    .toast(item: .constant(ToastItem.error("Fehler", message: "Bitte versuchen Sie es erneut")))
-    .background(AppColor.background)
-}
-
-#Preview("Warning Toast") {
-    VStack {
-        Text("Content")
-    }
-    .toast(item: .constant(ToastItem.warning("Warnung", message: "Dies ist eine Warnung")))
-    .background(AppColor.background)
-}
-
-#Preview("Info Toast") {
-    VStack {
-        Text("Content")
-    }
-    .toast(item: .constant(ToastItem.info("Info", message: "Zusätzliche Informationen")))
-    .background(AppColor.background)
 }
