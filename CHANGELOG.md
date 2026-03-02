@@ -8,6 +8,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Phase 3: AI Quality Enhancements**
+  - AI Context Helper with age and milestone detection
+  - Enhanced demo suggestions with milestone-specific gift ideas (18, 30, 40+)
+  - Personalized birthday message generation feature
+  - Age-aware gift suggestions based on life stage
+  - Birthday message drafts with warm, appreciative tone
+  - Zodiac sign context for AI prompts
+  - Birthday timing context (today, tomorrow, X days)
+- **Tests**
+  - Tests for milestone-based gift suggestions (18th, 30th birthday)
+  - Tests for birthday message generation across age groups
+  - Tests for birthday message structure and past gifts context
+
+### Changed
+- AI prompts now include age, milestone, zodiac, and timing context
+- Demo mode suggestions are now personalized based on age and milestones
+- Gift suggestions are more relevant to person's life stage and relationship
+
+### Improved
+- AI suggestions are now more context-aware and personalized
+- Birthday messages can be generated automatically with personalized drafts
+- Demo mode provides better, more relevant suggestions for different age groups
+- Milestone birthdays (18, 21, 30, 40, 50...) get special attention in suggestions
+
+### Added
+
+### Added
 - TestFlight preparation documentation (TESTFLIGHT.md) with comprehensive checklist
 - TestFlight release notes (German & English) for v0.2.0 Beta
 - App Store Connect setup guide and build process documentation
