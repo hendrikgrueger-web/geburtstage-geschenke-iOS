@@ -7,6 +7,8 @@ struct SettingsView: View {
     @State private var showingResetConfirmation = false
     @State private var hasNotificationPermission = false
     @State private var showingReminderSettings = false
+    @State private var isRefreshingReminders = false
+    @State private var refreshAlertMessage: String?
 
     @StateObject private var reminderManager = ReminderManager(modelContext: ModelContext.placeholder)
 
@@ -81,6 +83,30 @@ struct SettingsView: View {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.secondary)
                         }
+                    }
+
+                    if hasNotificationPermission {
+                        Button {
+                            Task {
+                                await refreshReminders()
+                            }
+                        } label: {
+                            HStack {
+                                if isRefreshingReminders {
+                                    ProgressView()
+                                        .scaleEffect(0.8)
+                                } else {
+                                    Image(systemName: "arrow.clockwise")
+                                }
+
+                                Text("Erinnerungen neu laden")
+                                    .foregroundColor(.primary)
+
+                                Spacer()
+                            }
+                        }
+                        .disabled(isRefreshingReminders)
+                        .accessibilityLabel("Erinnerungen neu laden")
                     }
                 }
 
@@ -181,6 +207,18 @@ struct SettingsView: View {
             } message: {
                 Text("Das löscht alle Kontakte und Geschenkideen. Diese Aktion kann nicht rückgängig gemacht werden.")
             }
+            .alert("Erinnerungen", isPresented: Binding(
+                get: { refreshAlertMessage != nil },
+                set: { if !$0 { refreshAlertMessage = nil } }
+            )) {
+                Button("OK") {
+                    refreshAlertMessage = nil
+                }
+            } message: {
+                if let message = refreshAlertMessage {
+                    Text(message)
+                }
+            }
         }
     }
 
@@ -201,6 +239,23 @@ struct SettingsView: View {
         } else {
             await reminderManager.cancelAllReminders()
         }
+    }
+
+    private func refreshReminders() async {
+        isRefreshingReminders = true
+        HapticFeedback.light()
+
+        await reminderManager?.cancelAllReminders()
+        await reminderManager?.scheduleAllReminders()
+
+        isRefreshingReminders = false
+        HapticFeedback.success()
+
+        // Count pending reminders
+        let center = UNUserNotificationCenter.current()
+        let pendingRequests = await center.pendingNotificationRequests()
+
+        refreshAlertMessage = "\(pendingRequests.count) Erinnerung\(pendingRequests.count == 1 ? "" : "en") neu geplant."
     }
 
     private func resetAllData() {
