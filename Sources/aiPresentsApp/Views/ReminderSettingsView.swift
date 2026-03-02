@@ -25,26 +25,38 @@ struct ReminderSettingsView: View {
         Form {
             Section {
                 Toggle("Erinnerungen aktivieren", isOn: $enabled)
+                    .accessibilityLabel("Erinnerungen aktivieren")
             } header: {
                 Text("Allgemein")
+            } footer: {
+                Text("Wenn deaktiviert, erhältst du keine Benachrichtigungen.")
             }
 
             Section {
                 ForEach([30, 14, 7, 2], id: \.self) { day in
-                    Toggle(
-                        "\(day) Tage vorher",
-                        isOn: Binding(
-                            get: { leadDays.contains(day) },
-                            set: { isSelected in
-                                if isSelected {
-                                    leadDays.insert(day)
-                                } else {
-                                    leadDays.remove(day)
+                    HStack {
+                        Text(dayText(for: day))
+                            .foregroundColor(AppColor.textPrimary)
+
+                        Spacer()
+
+                        Toggle(
+                            "",
+                            isOn: Binding(
+                                get: { leadDays.contains(day) },
+                                set: { isSelected in
+                                    if isSelected {
+                                        leadDays.insert(day)
+                                        HapticFeedback.light()
+                                    } else {
+                                        leadDays.remove(day)
+                                    }
                                 }
-                            }
+                            )
                         )
-                    )
-                    .accessibilityLabel("\(day) Tage vorher erinnern")
+                        .labelsHidden()
+                        .accessibilityLabel("\(dayText(for: day))")
+                    }
                 }
             } header: {
                 Text("Vorwarnungen")
@@ -53,32 +65,69 @@ struct ReminderSettingsView: View {
                     Text("⚠️ Keine Vorwarnungen ausgewählt. Du wirst nicht erinnert.")
                         .foregroundColor(.orange)
                 } else {
-                    Text("Wähle aus, wann du erinnert werden möchtest.")
+                    Text("Du wirst \(leadDays.count)-mal erinnert: \(sortedLeadDays.map { "\($0)T" }.joined(separator: ", ")) vor dem Geburtstag.")
                 }
             }
 
             Section {
-                Picker("Beginn Ruhestunden", selection: $quietHoursStart) {
-                    ForEach(0..<24) { hour in
-                        Text(String(format: "%02d:00", hour)).tag(hour)
-                    }
-                }
-                .accessibilityLabel("Beginn Ruhestunden")
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Zeitraum ohne Benachrichtigungen")
+                        .font(.caption)
+                        .foregroundColor(AppColor.textSecondary)
 
-                Picker("Ende Ruhestunden", selection: $quietHoursEnd) {
-                    ForEach(0..<24) { hour in
-                        Text(String(format: "%02d:00", hour)).tag(hour)
+                    HStack {
+                        Text("Ab")
+                            .foregroundColor(AppColor.textSecondary)
+
+                        Picker("", selection: $quietHoursStart) {
+                            ForEach(0..<24) { hour in
+                                Text(String(format: "%02d:00", hour)).tag(hour)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                        .accessibilityLabel("Beginn Ruhestunden")
+
+                        Spacer()
+
+                        Text("Bis")
+                            .foregroundColor(AppColor.textSecondary)
+
+                        Picker("", selection: $quietHoursEnd) {
+                            ForEach(0..<24) { hour in
+                                Text(String(format: "%02d:00", hour)).tag(hour)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                        .accessibilityLabel("Ende Ruhestunden")
                     }
                 }
-                .accessibilityLabel("Ende Ruhestunden")
             } header: {
                 Text("Ruhestunden")
             } footer: {
                 if quietHoursStart == quietHoursEnd {
-                    Text("⚠️ Beginn und Ende können nicht identisch sein. Setze einen anderen Wert.")
+                    Text("⚠️ Beginn und Ende können nicht identisch sein.")
                         .foregroundColor(.red)
                 } else {
-                    Text("Keine Benachrichtigungen in diesem Zeitraum.")
+                    let quietRange = quietHoursRange
+                    Text("Keine Benachrichtigungen zwischen \(quietRange.start) und \(quietRange.end).")
+                }
+            }
+
+            Section {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Info")
+                            .font(.headline)
+                        Text("Erinnerungen werden automatisch mit iOS-Benachrichtigungen erstellt.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "bell.badge")
+                        .font(.title2)
+                        .foregroundColor(AppColor.primary)
                 }
             }
         }
@@ -87,6 +136,16 @@ struct ReminderSettingsView: View {
         .onAppear {
             if reminderManager == nil {
                 reminderManager = ReminderManager(modelContext: modelContext)
+            }
+        }
+        .onChange(of: quietHoursStart) { oldValue, newValue in
+            if newValue == quietHoursEnd {
+                HapticFeedback.warning()
+            }
+        }
+        .onChange(of: quietHoursEnd) { oldValue, newValue in
+            if newValue == quietHoursStart {
+                HapticFeedback.warning()
             }
         }
         .toolbar {
@@ -104,15 +163,35 @@ struct ReminderSettingsView: View {
         }
     }
 
+    private var sortedLeadDays: [Int] {
+        leadDays.sorted(by: >)
+    }
+
+    private func dayText(for day: Int) -> String {
+        switch day {
+        case 30: return "30 Tage vorher (frühzeitig)"
+        case 14: return "14 Tage vorher (2 Wochen)"
+        case 7: return "7 Tage vorher (1 Woche)"
+        case 2: return "2 Tage vorher (kurzfristig)"
+        default: return "\(day) Tage vorher"
+        }
+    }
+
+    private var quietHoursRange: (start: String, end: String) {
+        let start = String(format: "%02d:00", quietHoursStart)
+        let end = String(format: "%02d:00", quietHoursEnd)
+        return (start, end)
+    }
+
     private func saveSettings() {
         if let rule = rules.first {
-            rule.leadDays = Array(leadDays).sorted()
+            rule.leadDays = sortedLeadDays
             rule.quietHoursStart = quietHoursStart
             rule.quietHoursEnd = quietHoursEnd
             rule.enabled = enabled
         } else {
             let newRule = ReminderRule(
-                leadDays: Array(leadDays).sorted(),
+                leadDays: sortedLeadDays,
                 quietHoursStart: quietHoursStart,
                 quietHoursEnd: quietHoursEnd,
                 enabled: enabled
