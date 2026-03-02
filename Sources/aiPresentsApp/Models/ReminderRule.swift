@@ -11,9 +11,9 @@ final class ReminderRule {
 
     init(
         id: UUID = UUID(),
-        leadDays: [Int] = [30, 14, 7, 2],
-        quietHoursStart: Int = 22,
-        quietHoursEnd: Int = 8,
+        leadDays: [Int] = AppConfig.Reminder.defaultLeadDays,
+        quietHoursStart: Int = AppConfig.Reminder.defaultQuietHoursStart,
+        quietHoursEnd: Int = AppConfig.Reminder.defaultQuietHoursEnd,
         enabled: Bool = true
     ) {
         self.id = id

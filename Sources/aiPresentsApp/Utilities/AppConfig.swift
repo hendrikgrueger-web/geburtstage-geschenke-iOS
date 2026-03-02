@@ -23,6 +23,34 @@ struct AppConfig {
     static var versionString: String {
         "\(appVersion) (\(buildNumber))"
     }
+
+    // MARK: - UI Constants
+    struct Budget {
+        static let sliderMinimum: Double = 0
+        static let sliderMaximum: Double = 500
+        static let sliderStep: Double = 5
+    }
+
+    struct Timeline {
+        static let defaultUpcomingDays: Int = 30
+        static let todayDays: Int = 0
+        static let weekDays: Int = 7
+        static let monthDays: Int = 30
+    }
+
+    struct Reminder {
+        static let defaultLeadDays: [Int] = [30, 14, 7, 2]
+        static let defaultQuietHoursStart: Int = 22
+        static let defaultQuietHoursEnd: Int = 8
+    }
+
+    struct Limits {
+        static let maxTitleLength: Int = 100
+        static let maxNoteLength: Int = 500
+        static let maxTags: Int = 10
+        static let maxTagLength: Int = 30
+        static let maxCategoryLength: Int = 50
+    }
 }
 
 // MARK: - Debug Helpers

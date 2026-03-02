@@ -118,6 +118,8 @@ struct PersonDetailView: View {
                                 Label("Vor", systemImage: "arrow.right.circle.fill")
                             }
                             .tint(AppColor.primary)
+                            .accessibilityLabel("Status ändern")
+                            .accessibilityHint("Ändert den Status der Geschenkidee zum nächsten Schritt")
                         }
                         .contextMenu {
                             Button {
@@ -127,18 +129,21 @@ struct PersonDetailView: View {
                             } label: {
                                 Label("Teilen", systemImage: "square.and.arrow.up")
                             }
+                            .accessibilityLabel("Geschenkidee teilen")
 
                             Button {
                                 duplicateGiftIdea(idea)
                             } label: {
                                 Label("Duplizieren", systemImage: "doc.on.doc")
                             }
+                            .accessibilityLabel("Geschenkidee duplizieren")
 
                             Button {
                                 advanceStatus(for: idea)
                             } label: {
                                 Label("Status vorwärts", systemImage: "arrow.right.circle.fill")
                             }
+                            .accessibilityLabel("Status ändern")
 
                             Button(role: .destructive) {
                                 if let index = filteredGiftIdeas.firstIndex(where: { $0.id == idea.id }) {
@@ -147,6 +152,7 @@ struct PersonDetailView: View {
                             } label: {
                                 Label("Löschen", systemImage: "trash")
                             }
+                            .accessibilityLabel("Geschenkidee löschen")
                         }
                     }
                     .onDelete(perform: deleteGiftIdeas)
@@ -194,6 +200,8 @@ struct PersonDetailView: View {
                                 .font(.subheadline)
                         }
                     }
+                    .accessibilityLabel("KI-Vorschläge generieren")
+                    .accessibilityHint("Generiert neue Geschenkideen basierend auf KI")
 
                     if !filteredGiftIdeas.isEmpty && hasPurchasedGifts {
                         Button(action: { showingMarkAllAsGivenConfirmation = true }) {

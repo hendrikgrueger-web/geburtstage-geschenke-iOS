@@ -67,16 +67,16 @@ struct FormValidator {
         if trimmed.isEmpty {
             return .emptyField("Titel")
         }
-        if trimmed.count > 100 {
-            return .tooLong(maxLength: 100)
+        if trimmed.count > AppConfig.Limits.maxTitleLength {
+            return .tooLong(maxLength: AppConfig.Limits.maxTitleLength)
         }
         return nil
     }
 
     /// Validates note length
     static func validateNote(_ text: String) -> ValidationError? {
-        if text.count > 500 {
-            return .tooLong(maxLength: 500)
+        if text.count > AppConfig.Limits.maxNoteLength {
+            return .tooLong(maxLength: AppConfig.Limits.maxNoteLength)
         }
         return nil
     }
@@ -103,13 +103,13 @@ struct FormValidator {
             .filter { !$0.isEmpty }
 
         for tag in tags {
-            if tag.count > 30 {
-                return .tooLong(maxLength: 30)
+            if tag.count > AppConfig.Limits.maxTagLength {
+                return .tooLong(maxLength: AppConfig.Limits.maxTagLength)
             }
         }
 
-        if tags.count > 10 {
-            return .tooLong(maxLength: 10)
+        if tags.count > AppConfig.Limits.maxTags {
+            return .tooLong(maxLength: AppConfig.Limits.maxTags)
         }
 
         return nil
@@ -118,8 +118,8 @@ struct FormValidator {
     /// Validates category field
     static func validateCategory(_ category: String) -> ValidationError? {
         let trimmed = category.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed.count > 50 {
-            return .tooLong(maxLength: 50)
+        if trimmed.count > AppConfig.Limits.maxCategoryLength {
+            return .tooLong(maxLength: AppConfig.Limits.maxCategoryLength)
         }
         return nil
     }

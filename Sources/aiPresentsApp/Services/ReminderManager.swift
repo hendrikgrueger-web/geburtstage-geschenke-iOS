@@ -64,9 +64,19 @@ class ReminderManager: ObservableObject {
     private func currentRule() -> ReminderRule? {
         let descriptor = FetchDescriptor<ReminderRule>()
         guard let rules = try? modelContext.fetch(descriptor) else {
-            return ReminderRule(leadDays: [30, 14, 7, 2], quietHoursStart: 22, quietHoursEnd: 8, enabled: true)
+            return ReminderRule(
+                leadDays: AppConfig.Reminder.defaultLeadDays,
+                quietHoursStart: AppConfig.Reminder.defaultQuietHoursStart,
+                quietHoursEnd: AppConfig.Reminder.defaultQuietHoursEnd,
+                enabled: true
+            )
         }
-        return rules.first ?? ReminderRule(leadDays: [30, 14, 7, 2], quietHoursStart: 22, quietHoursEnd: 8, enabled: true)
+        return rules.first ?? ReminderRule(
+            leadDays: AppConfig.Reminder.defaultLeadDays,
+            quietHoursStart: AppConfig.Reminder.defaultQuietHoursStart,
+            quietHoursEnd: AppConfig.Reminder.defaultQuietHoursEnd,
+            enabled: true
+        )
     }
 
     private func isWithinQuietHours(hour: Int, start: Int, end: Int) -> Bool {

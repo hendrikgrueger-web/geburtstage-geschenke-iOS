@@ -113,12 +113,14 @@ struct AddGiftIdeaSheet: View {
                                 Spacer()
                             }
 
-                            Slider(value: $budgetMinSlider, in: 0...500, step: 5) {
+                            Slider(value: $budgetMinSlider,
+                                   in: AppConfig.Budget.sliderMinimum...AppConfig.Budget.sliderMaximum,
+                                   step: AppConfig.Budget.sliderStep) {
                                 Text("Min Budget")
                             } minimumValueLabel: {
-                                Text("0€").font(.caption2).foregroundColor(.secondary)
+                                Text("\(Int(AppConfig.Budget.sliderMinimum))€").font(.caption2).foregroundColor(.secondary)
                             } maximumValueLabel: {
-                                Text("500€").font(.caption2).foregroundColor(.secondary)
+                                Text("\(Int(AppConfig.Budget.sliderMaximum))€").font(.caption2).foregroundColor(.secondary)
                             }
                             .tint(AppColor.primary)
 
@@ -130,12 +132,14 @@ struct AddGiftIdeaSheet: View {
                                 Spacer()
                             }
 
-                            Slider(value: $budgetMaxSlider, in: 0...500, step: 5) {
+                            Slider(value: $budgetMaxSlider,
+                                   in: AppConfig.Budget.sliderMinimum...AppConfig.Budget.sliderMaximum,
+                                   step: AppConfig.Budget.sliderStep) {
                                 Text("Max Budget")
                             } minimumValueLabel: {
-                                Text("0€").font(.caption2).foregroundColor(.secondary)
+                                Text("\(Int(AppConfig.Budget.sliderMinimum))€").font(.caption2).foregroundColor(.secondary)
                             } maximumValueLabel: {
-                                Text("500€").font(.caption2).foregroundColor(.secondary)
+                                Text("\(Int(AppConfig.Budget.sliderMaximum))€").font(.caption2).foregroundColor(.secondary)
                             }
                             .tint(AppColor.accent)
                         }

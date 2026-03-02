@@ -21,9 +21,9 @@ struct TimelineView: View {
 
         var days: Int {
             switch self {
-            case .today: return 0
-            case .week: return 7
-            case .month: return 30
+            case .today: return AppConfig.Timeline.todayDays
+            case .week: return AppConfig.Timeline.weekDays
+            case .month: return AppConfig.Timeline.monthDays
             }
         }
     }
@@ -70,6 +70,7 @@ struct TimelineView: View {
                         } label: {
                             Label("Alle", systemImage: "list.bullet")
                         }
+                        .accessibilityLabel("Alle Kontakte anzeigen")
 
                         Divider()
 
@@ -79,6 +80,7 @@ struct TimelineView: View {
                         } label: {
                             Label("Ohne Ideen", systemImage: "lightbulb.slash")
                         }
+                        .accessibilityLabel("Kontakte ohne Geschenkideen anzeigen")
 
                         Button {
                             filterHasIdeas = true
@@ -86,6 +88,7 @@ struct TimelineView: View {
                         } label: {
                             Label("Mit Ideen", systemImage: "lightbulb.fill")
                         }
+                        .accessibilityLabel("Kontakte mit Geschenkideen anzeigen")
 
                         if !availableRelations.isEmpty {
                             Divider()
@@ -97,6 +100,7 @@ struct TimelineView: View {
                                 } label: {
                                     Label("Alle Beziehungen", systemImage: "list.bullet")
                                 }
+                                .accessibilityLabel("Alle Beziehungen")
 
                                 Divider()
 
@@ -111,19 +115,24 @@ struct TimelineView: View {
                                             Text(relation)
                                         }
                                     }
+                                    .accessibilityLabel("Beziehung: \(relation)")
                                 }
                             } label: {
                                 Label("Beziehung", systemImage: "person.2")
                             }
+                            .accessibilityLabel("Nach Beziehung filtern")
                         }
                     } label: {
                         Image(systemName: "line.3.horizontal.decrease.circle")
                             .symbolVariant(filterHasIdeas != nil || filterRelation != nil ? .fill : .none)
                     }
+                    .accessibilityLabel("Filter")
+                    .accessibilityHint("Filteroptionen für Kontakte")
 
                     NavigationLink(destination: ContactsImportView()) {
                         Image(systemName: "person.badge.plus")
                     }
+                    .accessibilityLabel("Kontakte importieren")
                 }
             }
         }
@@ -213,6 +222,7 @@ struct TimelineView: View {
                             Label("Planen", systemImage: "checkmark.circle.fill")
                         }
                         .tint(.orange)
+                        .accessibilityLabel("Als geplant markieren")
                     }
 
                     Button {
@@ -222,6 +232,7 @@ struct TimelineView: View {
                         Label("Idee", systemImage: "plus.circle.fill")
                     }
                     .tint(.blue)
+                    .accessibilityLabel("Geschenkidee hinzufügen")
                 }
             }
         }
@@ -276,6 +287,7 @@ struct TimelineView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .buttonStyle(.pressable)
+                .accessibilityLabel("Kontakte aus dem Adressbuch importieren")
             }
         }
         .padding()
