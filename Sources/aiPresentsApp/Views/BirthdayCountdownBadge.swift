@@ -3,6 +3,7 @@ import SwiftUI
 struct BirthdayCountdownBadge: View {
     let daysUntil: Int
     @State private var isAnimating = false
+    @State private var pulseScale: CGFloat = 1.0
 
     var body: some View {
         VStack(spacing: 2) {
@@ -35,11 +36,16 @@ struct BirthdayCountdownBadge: View {
         .background(badgeGradient)
         .cornerRadius(14)
         .shadow(color: badgeColor.opacity(0.3), radius: 4, x: 0, y: 2)
+        .scaleEffect(pulseScale)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
         .onAppear {
             if daysUntil == 0 {
                 isAnimating = true
+            } else if daysUntil <= 2 {
+                withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
+                    pulseScale = 1.05
+                }
             }
         }
     }
