@@ -6,7 +6,9 @@ extension ModelContext {
     static var placeholder: ModelContext {
         let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self])
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try! ModelContainer(for: schema, configurations: [config])
+        guard let container = try? ModelContainer(for: schema, configurations: [config]) else {
+            fatalError("Failed to create placeholder ModelContainer")
+        }
         return container.mainContext
     }
 }
