@@ -61,6 +61,10 @@ Docs/                           # Produkt-/Technik-/Roadmap-Doku
 - `Docs/EXECUTION-PLAN-4-WEEKS.md` – Umsetzungsplan mit Gates
 - `Docs/LEGAL-OSS-REUSE.md` – OSS/Lizenzregeln
 - `Docs/DEVELOPMENT.md` – Entwicklungs- und QA-Workflow
+- `Docs/PRIVACY.md` – Datenschutzrichtlinie (Deutsch)
+- `Docs/PRIVACY_EN.md` – Privacy Policy (English)
+- `Docs/TERMS.md` – Nutzungsbedingungen (Deutsch)
+- `Docs/TERMS_EN.md` – Terms of Service (English)
 
 ---
 

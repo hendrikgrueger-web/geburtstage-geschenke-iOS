@@ -55,7 +55,9 @@
 
 - [x] Contacts Permission: `NSContactsUsageDescription`
 - [x] Notifications Permission: `NSUserNotificationsUsageDescription`
-- [ ] Privacy Policy URL hinterlegt
+- [x] Privacy Policy erstellt: `Docs/PRIVACY.md` (Deutsch) & `Docs/PRIVACY_EN.md` (English)
+- [ ] Privacy Policy URL in App Store Connect hinterlegt (verweise auf GitHub Repo oder gehostete Version)
+- [ ] Terms of Service erstellt: `Docs/TERMS.md` (Deutsch) & `Docs/TERMS_EN.md` (English)
 - [ ] Data Collection Info (App Store Privacy)
 
 ### 5. TestFlight Konfiguration

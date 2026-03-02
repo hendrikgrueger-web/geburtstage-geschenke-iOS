@@ -75,8 +75,10 @@
 - [x] `NSContactsUsageDescription` present
 - [x] `NSUserNotificationsUsageDescription` present
 - [x] `NSUbiquitousContainersUsageDescription` present
-- [ ] Privacy Policy URL added
-- [ ] Terms of Service URL (if applicable)
+- [x] Privacy Policy documentation created: `Docs/PRIVACY.md` (Deutsch) & `Docs/PRIVACY_EN.md` (English)
+- [ ] Privacy Policy URL added to App Store Connect (host version or link to GitHub)
+- [x] Terms of Service documentation created: `Docs/TERMS.md` (Deutsch) & `Docs/TERMS_EN.md` (English)
+- [ ] Terms of Service URL added to App Store Connect (if applicable)
 
 ### App Store Privacy
 - [ ] Data collection types documented
