@@ -35,11 +35,12 @@ class ReminderManager: ObservableObject {
 
     func scheduleAllReminders() async {
         guard await checkPermission() else {
-            print("Notification permission not granted")
+            AppLogger.reminder.warning("Notification permission not granted")
             return
         }
 
         guard let rule = currentRule(), rule.enabled else {
+            AppLogger.reminder.debug("Reminder rule disabled or not found")
             return
         }
 
@@ -174,8 +175,9 @@ class ReminderManager: ObservableObject {
         // Add request
         do {
             try await center.add(request)
+            AppLogger.reminder.debug("Scheduled reminder for \(person.displayName): \(leadDay) days before")
         } catch {
-            print("Failed to schedule notification: \(error)")
+            AppLogger.reminder.error("Failed to schedule notification for \(person.displayName)", error: error)
         }
     }
 
