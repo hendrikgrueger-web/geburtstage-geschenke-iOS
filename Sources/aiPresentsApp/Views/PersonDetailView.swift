@@ -279,6 +279,7 @@ struct PersonDetailView: View {
                         Image(systemName: "trash")
                     }
                 }
+                .accessibleButton(label: "Kontakt löschen", hint: "Löscht \(person.displayName) und alle Geschenkideen permanent")
             }
         }
         .sheet(isPresented: $showingAddGiftIdea) {
@@ -325,12 +326,14 @@ struct PersonDetailView: View {
                     } label: {
                         Label("Teilen", systemImage: "square.and.arrow.up")
                     }
+                    .accessibleButton(label: "Teilen", hint: "Teilt alle Geschenkideen")
 
                     Button {
                         exportAsCSV()
                     } label: {
                         Label("Als CSV exportieren", systemImage: "doc.text")
                     }
+                    .accessibleButton(label: "CSV exportieren", hint: "Exportiert Geschenkideen als CSV-Datei")
 
                     Divider()
 
@@ -339,9 +342,12 @@ struct PersonDetailView: View {
                     } label: {
                         Label("Neue Idee", systemImage: "plus")
                     }
+                    .accessibleButton(label: "Neue Idee", hint: "Fügt eine neue Geschenkidee hinzu")
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
+                .accessibilityLabel("Optionen")
+                .accessibilityHint("Doppeltippen für weitere Optionen")
             }
         }
         .sheet(isPresented: $showingShareSheet) {

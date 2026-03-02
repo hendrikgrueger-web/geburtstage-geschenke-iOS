@@ -8,6 +8,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- AccessibilityConfiguration utility for consistent accessibility patterns
+- Reduced Motion support for animations (EmptyStateView, TimelineView)
+- Dynamic Type support with accessible view extensions
+- AccessibilityConfigurationTests (23 tests covering all utility methods)
+- Helper methods: formatNumber, formatDuration, relativeDateDescription, formatDate
+- AccessibleButton, accessibleToggle, accessibleNavigation view extensions
+- AccessibilityConfiguration animation helper for reduced motion support
+
+### Changed
+- EmptyStateView: Respects reduced motion for icon animations (bounce → pulse when reduced)
+- TimelineView: Respects reduced motion for list animations and empty state icons
+- BirthdayRow: Enhanced accessibility hints for quick-add button
+- AddGiftIdeaSheet: Improved accessible toggle for budget slider
+- PersonDetailView: Enhanced accessibility labels for delete button and menu options
+- Better accessibility support across key views (SettingsView, PersonDetailView, TimelineView)
+
+### Improved
+- AccessibilityConfiguration provides centralized accessibility helpers
+- Reduced Motion is automatically detected from UIAccessibility
+- All symbol effects respect user's motion preferences
+- VoiceOver navigation improved with better element grouping and labels
+
+### Added
 - Pull-to-refresh gesture for TimelineView to manually refresh birthday calculations
 - Toast notifications for SettingsView actions (permission changes, reminders, data reset, feedback)
 - Finalized App Icon design with Gift Box + Calendar concept
