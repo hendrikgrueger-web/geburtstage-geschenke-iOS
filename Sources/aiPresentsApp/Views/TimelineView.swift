@@ -12,6 +12,7 @@ struct TimelineView: View {
     @State private var filterRelation: String? = nil
     @State private var showingAddGiftIdeaFor: PersonRef?
     @State private var quickAddPerson: PersonRef?
+    @State private var listAnimation = false
 
     enum TimelineTab: String, CaseIterable {
         case today = "Heute"
@@ -193,12 +194,16 @@ struct TimelineView: View {
 
     private var birthdayList: some View {
         List {
-            ForEach(filteredBirthdays) { person in
+            ForEach(Array(filteredBirthdays.enumerated()), id: \.element.id) { index, person in
                 NavigationLink(destination: PersonDetailView(person: person)) {
                     BirthdayRow(person: person, onQuickAdd: {
                         quickAddPerson = person
                     })
                 }
+                .transition(.asymmetric(
+                    insertion: .scale.combined(with: .opacity),
+                    removal: .scale.combined(with: .opacity)
+                ))
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     if let firstIdea = person.giftIdeas?.first,
                        firstIdea.status == .idea {
@@ -221,6 +226,10 @@ struct TimelineView: View {
             }
         }
         .listStyle(.insetGrouped)
+        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: selectedTab)
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: searchText)
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: filterHasIdeas)
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: filterRelation)
         .sheet(item: $showingAddGiftIdeaFor) { person in
             AddGiftIdeaSheet(person: person)
         }
