@@ -9,6 +9,7 @@ struct SettingsView: View {
     @State private var showingReminderSettings = false
     @State private var isRefreshingReminders = false
     @State private var refreshAlertMessage: String?
+    @State private var toast: ToastItem?
 
     @StateObject private var reminderManager = ReminderManager(modelContext: ModelContext.placeholder)
 
@@ -298,9 +299,13 @@ struct SettingsView: View {
 
             if granted {
                 await reminderManager.scheduleAllReminders()
+                toast = ToastItem.success("Erinnerungen aktiviert", message: "Du erhältst Benachrichtigungen für Geburtstage.")
+            } else {
+                toast = ToastItem.warning("Berechtigung verweigert", message: "Bitte erlaube Benachrichtigungen in den Systemeinstellungen.")
             }
         } else {
             await reminderManager.cancelAllReminders()
+            toast = ToastItem.info("Erinnerungen deaktiviert", message: "Du erhältst keine Benachrichtigungen mehr.")
         }
     }
 
@@ -318,15 +323,18 @@ struct SettingsView: View {
         let center = UNUserNotificationCenter.current()
         let pendingRequests = await center.pendingNotificationRequests()
 
-        refreshAlertMessage = "\(pendingRequests.count) Erinnerung\(pendingRequests.count == 1 ? "" : "en") neu geplant."
+        let count = pendingRequests.count
+        toast = ToastItem.success("Erinnerungen aktualisiert", message: "\(count) Erinnerung\(count == 1 ? "" : "en") neu geplant.")
     }
 
     private func resetAllData() {
         do {
             try modelContext.deleteContainer()
             AppLogger.data.info("All data reset successfully")
+            toast = ToastItem.success("Daten gelöscht", message: "Alle Kontakte und Geschenkideen wurden entfernt.")
         } catch {
             AppLogger.data.error("Failed to reset data", error: error)
+            toast = ToastItem.error("Fehler beim Löschen", message: "Ein Fehler ist aufgetreten. Bitte versuche es erneut.")
         }
     }
 
@@ -337,8 +345,11 @@ struct SettingsView: View {
 
         if let url = URL(string: "mailto:\(feedbackEmail)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") {
             UIApplication.shared.open(url) { success in
-                if !success {
+                if success {
+                    toast = ToastItem.info("Mail-App geöffnet", message: "Vielen Dank für dein Feedback!")
+                } else {
                     AppLogger.ui.warning("Failed to open mail feedback link")
+                    toast = ToastItem.warning("Fehler", message: "Mail-App konnte nicht geöffnet werden.")
                 }
             }
         }
@@ -384,4 +395,5 @@ struct SettingsView: View {
             rootViewController.present(alert, animated: true)
         }
     }
+    .toast(item: $toast)
 }
