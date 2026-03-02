@@ -71,7 +71,7 @@ aiPresents ist eine iOS App, die dir hilft:
 - [ ] Dev Settings (nur DEBUG build)
 - [ ] iCloud Sync Status
 - [ ] Daten löschen (mit Bestätigung)
-- [ ] Datenschutz & Impressum
+- [ ] Datenschutz & Impressum (Privacy Policy & Terms of Service)
 
 #### 8. iCloud Sync
 - [ ] Daten auf zwei iOS Geräten testen
@@ -182,6 +182,15 @@ Vielen Dank für deine Unterstützung beim Testen von aiPresents! Dein Feedback 
 ## Haftungsausschluss
 
 Dies ist eine Beta-Version. Daten können verloren gehen oder inkorrekt sein. Verwende keine kritischen Daten, die du nicht manuell backuppen kannst.
+
+## Rechtliche Dokumente
+
+- [Datenschutzrichtlinie (Privacy Policy)](Docs/PRIVACY.md) - Wie wir mit deinen Daten umgehen
+- [Terms of Service](Docs/TERMS.md) - Nutzungsbedingungen der App
+
+Beide Dokumente sind auch auf Englisch verfügbar: [Privacy Policy (English)](Docs/PRIVACY_EN.md), [Terms of Service (English)](Docs/TERMS_EN.md)
+
+---
 
 **iOS Version:** iOS 17.0+
 **iPhone Modelle:** Alle iPhone-Modelle mit iOS 17+
