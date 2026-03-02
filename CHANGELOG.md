@@ -12,10 +12,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ReminderManagerTests for comprehensive reminder rule testing
 - Data statistics display in DevSettingsView
 - Alert system for dev operations feedback
+- Comprehensive form validation across all data entry sheets
+- Visual feedback for form validation errors (red text, alerts)
+- FormState integration with proper error tracking
+- Tags validation (max 10 tags, max 30 chars per tag)
+- Category validation (max 50 chars)
+- Budget validation with real-time feedback
+- URL validation with alert guidance for invalid entries
 
 ### Fixed
 - Missing DevSettingsView referenced in SettingsView
 - Navigation to non-existent DevSettingsView in DEBUG builds
+- Form validation gaps in Add/Edit sheets for gifts and history
+- Missing validation feedback for tags and categories
+- Insufficient error messages when saving with invalid data
+- Save button disabled too aggressively (only for title, not for other fields)
+- Missing visual feedback for budget validation errors
 
 ## [0.1.0] - 2026-03-02
 
