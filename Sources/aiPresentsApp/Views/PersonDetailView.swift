@@ -512,9 +512,27 @@ struct PersonDetailView: View {
     }
 
     private func duplicateGiftIdea(_ idea: GiftIdea) {
+        // Check if duplicate already exists
+        let existingTitles = giftIdeas
+            .filter { $0.personId == person.id }
+            .map { $0.title.lowercased().trimmingCharacters(in: .whitespaces) }
+
+        let titleWithoutCopy = idea.title
+            .replacingOccurrences(of: " (Kopie)", with: "")
+            .replacingOccurrences(of: " (Copy)", with: "")
+            .trimmingCharacters(in: .whitespaces)
+
+        // Generate unique title
+        var newTitle = titleWithoutCopy
+        var counter = 1
+        while existingTitles.contains(newTitle.lowercased()) {
+            counter += 1
+            newTitle = "\(titleWithoutCopy) (\(counter))"
+        }
+
         let newIdea = GiftIdea(
             personId: person.id,
-            title: idea.title + " (Kopie)",
+            title: newTitle,
             note: idea.note,
             budgetMin: idea.budgetMin,
             budgetMax: idea.budgetMax,
