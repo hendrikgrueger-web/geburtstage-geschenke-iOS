@@ -422,7 +422,14 @@ struct PersonDetailView: View {
     private var daysUntilBirthday: Int {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-        let birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
+        var birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
+
+        // If birthday already passed this year, use next year
+        if birthdayThisYear < today {
+            let nextYear = calendar.component(.year, from: today) + 1
+            birthdayThisYear = calendar.date(bySetting: .year, value: nextYear, of: person.birthday) ?? birthdayThisYear
+        }
+
         return calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
     }
 
@@ -431,8 +438,6 @@ struct PersonDetailView: View {
             return "🎉 Heute!"
         } else if daysUntilBirthday == 1 {
             return "Morgen"
-        } else if daysUntilBirthday < 0 {
-            return "Vor \(-daysUntilBirthday) Tagen"
         } else if daysUntilBirthday == 365 {
             return "Nächstes Jahr"
         } else if daysUntilBirthday < 7 {
