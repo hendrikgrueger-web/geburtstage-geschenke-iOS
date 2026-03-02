@@ -180,6 +180,64 @@ final class BirthdayCalculatorTests: XCTestCase {
         XCTAssertEqual(days2, days1! + 1)
     }
 
+    func testClearCacheInvalidatesStoredCalculations() {
+        let today = createDate(month: 3, day: 2)
+        let birthday = createDate(month: 6, day: 15)
+
+        // Calculate first (will be cached)
+        let firstCalculation = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today)
+        XCTAssertNotNil(firstCalculation)
+
+        // Clear cache
+        BirthdayCalculator.clearCache()
+
+        // Calculate again (should not use old cache)
+        let secondCalculation = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today)
+        XCTAssertNotNil(secondCalculation)
+
+        // Results should be the same
+        XCTAssertEqual(firstCalculation, secondCalculation)
+    }
+
+    func testClearCacheWorksForNextBirthday() {
+        let today = createDate(month: 3, day: 2)
+        let birthday = createDate(month: 6, day: 15)
+
+        // Calculate first (will be cached)
+        let firstCalculation = BirthdayCalculator.nextBirthday(for: birthday, from: today)
+        XCTAssertNotNil(firstCalculation)
+
+        // Clear cache
+        BirthdayCalculator.clearCache()
+
+        // Calculate again (should not use old cache)
+        let secondCalculation = BirthdayCalculator.nextBirthday(for: birthday, from: today)
+        XCTAssertNotNil(secondCalculation)
+
+        // Results should be the same
+        XCTAssertEqual(firstCalculation, secondCalculation)
+    }
+
+    func testClearCacheAllowsRecalculationAfterDateChange() {
+        let today1 = createDate(month: 3, day: 2)
+        let today2 = createDate(month: 3, day: 3)
+        let birthday = createDate(month: 6, day: 15)
+
+        // Calculate for first date (will be cached)
+        let daysBeforeClear = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today1)
+        XCTAssertNotNil(daysBeforeClear)
+
+        // Clear cache
+        BirthdayCalculator.clearCache()
+
+        // Calculate for new date after cache clear (should recalculate)
+        let daysAfterClear = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today2)
+        XCTAssertNotNil(daysAfterClear)
+
+        // Results should be different (one day difference)
+        XCTAssertEqual(daysBeforeClear, daysAfterClear! + 1)
+    }
+
     // Helper to create a date in the current year
     private func createDate(month: Int, day: Int, year: Int? = nil) -> Date {
         let calendar = Calendar.current
