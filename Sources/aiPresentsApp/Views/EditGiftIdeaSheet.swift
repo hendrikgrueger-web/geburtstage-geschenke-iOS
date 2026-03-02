@@ -65,15 +65,21 @@ struct EditGiftIdeaSheet: View {
             Form {
                 Section("Geschenk") {
                     TextField("Titel", text: $title)
+                        .accessibilityLabel("Geschenk-Titel")
+                        .accessibilityHint("Gib den Namen des Geschenks ein")
 
                     TextField("Notizen", text: $note, axis: .vertical)
                         .lineLimit(3...6)
+                        .accessibilityLabel("Notizen zum Geschenk")
+                        .accessibilityHint("Optionale zusätzliche Informationen")
 
                     HStack {
                         Text("Link")
                         TextField("URL", text: $link)
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
+                            .accessibilityLabel("Link zum Geschenk")
+                            .accessibilityHint("Optional: Link zur Webseite")
 
                         if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {
@@ -88,6 +94,8 @@ struct EditGiftIdeaSheet: View {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundColor(.blue)
                             }
+                            .accessibilityLabel("Link öffnen")
+                            .accessibilityHint("Öffnet den Link im Browser")
                         }
                     }
                 }
@@ -97,6 +105,8 @@ struct EditGiftIdeaSheet: View {
                         Text("Min")
                         TextField("€", text: $budgetMin)
                             .keyboardType(.decimalPad)
+                            .accessibilityLabel("Mindestbudget")
+                            .accessibilityHint("Gib das Mindestbudget in Euro ein")
                     }
 
                     HStack {
@@ -104,23 +114,29 @@ struct EditGiftIdeaSheet: View {
                         TextField("€", text: $budgetMax)
                             .keyboardType(.decimalPad)
                             .foregroundColor(isBudgetInvalid ? .red : .primary)
+                            .accessibilityLabel("Maximalbudget")
+                            .accessibilityHint("Gib das Maximalbudget in Euro ein")
                     }
 
                     if isBudgetInvalid {
                         Text("Max darf nicht kleiner als Min sein")
                             .font(.caption)
                             .foregroundColor(.red)
+                            .accessibilityLabel("Fehler: Ungültiges Budget")
                     }
                 }
 
                 Section("Tags") {
                     TextField("Getrennt durch Kommas", text: $tagsInput)
                         .textInputAutocapitalization(.never)
+                        .accessibilityLabel("Tags")
+                        .accessibilityHint("Gib bis zu 10 Tags getrennt durch Kommas ein, max 30 Zeichen pro Tag")
 
                     if let error = tagsValidation {
                         Text(error.errorDescription ?? "")
                             .font(.caption)
                             .foregroundColor(.red)
+                            .accessibilityLabel("Fehler: \(error.errorDescription ?? "")")
                     }
                 }
 
@@ -132,6 +148,7 @@ struct EditGiftIdeaSheet: View {
                     }
                     .pickerStyle(.segmented)
                     .accessibilityLabel("Geschenkstatus")
+                    .accessibilityHint("Wähle den Status der Geschenkidee aus")
                 }
             }
             .navigationTitle("Idee bearbeiten")
@@ -141,6 +158,8 @@ struct EditGiftIdeaSheet: View {
                     Button("Abbrechen") {
                         dismiss()
                     }
+                    .accessibilityLabel("Abbrechen")
+                    .accessibilityHint("Schließt das Formular ohne zu speichern")
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -155,6 +174,8 @@ struct EditGiftIdeaSheet: View {
                         }
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .accessibilityLabel("Speichern")
+                    .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? "Titel muss ausgefüllt sein" : "Speichert die Änderungen")
                 }
             }
         }
