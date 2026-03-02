@@ -173,14 +173,20 @@ struct PersonDetailView: View {
                         }
                         .pickerStyle(.menu)
                         .buttonStyle(.plain)
-                        Button(action: { showingAddGiftIdea = true }) {
+                        Button(action: {
+                            showingAddGiftIdea = true
+                            HapticFeedback.medium()
+                        }) {
                             Image(systemName: "plus.circle.fill")
                         }
                     }
                 }
             } footer: {
                 VStack(alignment: .leading, spacing: 12) {
-                    Button(action: { showingAISuggestions = true }) {
+                    Button(action: {
+                        showingAISuggestions = true
+                        HapticFeedback.medium()
+                    }) {
                         HStack {
                             Image(systemName: "sparkles")
                                 .foregroundColor(.orange)
