@@ -69,6 +69,8 @@
 - **DebouncerTests.swift**: 30 Tests für alle Szenarien
 
 ## Commits
+- e05609e: Comprehensive tests for new utilities (SmartInputField, BirthdayDateHelper, FormState)
+- a9177f6: Update sprint summary with system utilities
 - acff469: NotificationPermissionHelper + FormState utilities
 - d134662: Update sprint summary with new UX components
 - 6eb7db4: Enhanced UX components (SmartInputField, QuickActionCard, BirthdayDateHelper, TimelineFilterView)
@@ -87,12 +89,13 @@
 
 ## Test-Statistik
 - Vorher: 18 Test-Dateien, ~475 Test-Methoden
-- Nachher: **26 Test-Dateien, 589+ Test-Methoden**
-- Neu: +8 Test-Dateien, +114+ Test-Methoden
+- Nachher: **29 Test-Dateien, 636+ Test-Methoden**
+- Neu: +11 Test-Dateien, +161+ Test-Methoden
 - Service Layer: 100% mit Unit Tests abgedeckt
 - Performance Utils: 100% mit Unit Tests abgedeckt
 - CloudKit: 100% mit Unit Tests abgedeckt
 - Accessibility: 100% mit Unit Tests abgedeckt (AccessibilityConfiguration)
+- UX Components: 100% mit Unit Tests abgedeckt (SmartInputField, BirthdayDateHelper, FormState)
 
 ## Code Quality
 - Thread-Safety: BirthdayCalculator + ReminderManager (NSLock)
