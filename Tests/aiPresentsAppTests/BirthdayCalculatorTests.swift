@@ -238,6 +238,78 @@ final class BirthdayCalculatorTests: XCTestCase {
         XCTAssertEqual(daysBeforeClear, daysAfterClear! + 1)
     }
 
+    // MARK: - Age Caching Tests
+
+    func testAgeCacheReturnsSameResult() {
+        let today = createDate(month: 6, day: 16, year: 2026)
+        let birthday = createDate(month: 6, day: 15, year: 1990)
+
+        // First call
+        let age1 = BirthdayCalculator.age(for: birthday, on: today)
+
+        // Second call (should hit cache)
+        let age2 = BirthdayCalculator.age(for: birthday, on: today)
+
+        // Both should return same value
+        XCTAssertEqual(age1, age2)
+        XCTAssertNotNil(age1)
+        XCTAssertNotNil(age2)
+    }
+
+    func testAgeCacheDoesNotInterfereWithOtherCalculations() {
+        let today = createDate(month: 6, day: 16, year: 2026)
+        let birthday = createDate(month: 6, day: 15, year: 1990)
+
+        // Calculate age
+        let age = BirthdayCalculator.age(for: birthday, on: today)
+
+        // Calculate other values (should use different cache entries)
+        let nextBirthday = BirthdayCalculator.nextBirthday(for: birthday, from: today)
+        let daysUntil = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today)
+
+        // All should return correct values
+        XCTAssertNotNil(age)
+        XCTAssertNotNil(nextBirthday)
+        XCTAssertNotNil(daysUntil)
+        XCTAssertEqual(age, 36)
+        XCTAssertEqual(daysUntil, 0)
+    }
+
+    func testAgeCacheClearedCorrectly() {
+        let today = createDate(month: 6, day: 16, year: 2026)
+        let birthday = createDate(month: 6, day: 15, year: 1990)
+
+        // Calculate age (will be cached)
+        let firstAge = BirthdayCalculator.age(for: birthday, on: today)
+        XCTAssertNotNil(firstAge)
+
+        // Clear cache
+        BirthdayCalculator.clearCache()
+
+        // Calculate again (should not use old cache)
+        let secondAge = BirthdayCalculator.age(for: birthday, on: today)
+        XCTAssertNotNil(secondAge)
+
+        // Results should be same
+        XCTAssertEqual(firstAge, secondAge)
+    }
+
+    func testAgeDifferentDatesDoNotInterfere() {
+        let today1 = createDate(month: 6, day: 16, year: 2026)
+        let today2 = createDate(month: 6, day: 10, year: 2026)
+        let birthday = createDate(month: 6, day: 15, year: 1990)
+
+        // Calculate age from two different dates
+        let age1 = BirthdayCalculator.age(for: birthday, on: today1)
+        let age2 = BirthdayCalculator.age(for: birthday, on: today2)
+
+        // Results should be different (before vs after birthday)
+        XCTAssertNotNil(age1)
+        XCTAssertNotNil(age2)
+        XCTAssertEqual(age1, 36) // After birthday
+        XCTAssertEqual(age2, 35) // Before birthday
+    }
+
     // Helper to create a date in the current year
     private func createDate(month: Int, day: Int, year: Int? = nil) -> Date {
         let calendar = Calendar.current
