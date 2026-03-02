@@ -2,32 +2,59 @@ import SwiftUI
 import SwiftData
 
 struct BirthdayWidgetView: View {
-    @Query private var people: [PersonRef]
+    @Environment(\.modelContext) private var modelContext
     @State private var selectedIndex = 0
+    @State private var widgetData: BirthdayWidgetData.WidgetSummary?
 
     private var upcomingBirthdays: [PersonRef] {
-        let today = Calendar.current.startOfDay(for: Date())
+        // Use BirthdayWidgetData for efficient widget data preparation
+        guard let data = widgetData else { return [] }
 
-        return people.compactMap { person -> (PersonRef, Date)? in
-            guard let nextBirthday = BirthdayCalculator.nextBirthday(for: person.birthday, from: today) else {
-                return nil
-            }
-
-            guard let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
-                return nil
-            }
-
-            if daysUntil >= 0 && daysUntil <= 14 {
-                return (person, nextBirthday)
-            }
-            return nil
+        // Map back to PersonRef for compatibility with existing UI
+        return data.upcomingBirthdays.compactMap { entry -> PersonRef? in
+            let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id.uuidString == entry.id })
+            return try? modelContext.fetch(descriptor).first
         }
-        .sorted { $0.1 < $1.1 }
-        .prefix(3)
-        .map { $0.0 }
     }
 
     var body: some View {
+        VStack(spacing: 16) {
+            if upcomingBirthdays.isEmpty {
+                emptyWidgetState
+            } else {
+                TabView(selection: $selectedIndex) {
+                    ForEach(Array(upcomingBirthdays.enumerated()), id: \.offset) { index, person in
+                        birthdayCard(for: person)
+                            .tag(index)
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .frame(height: 120)
+
+                if upcomingBirthdays.count > 1 {
+                    HStack(spacing: 4) {
+                        ForEach(0..<upcomingBirthdays.count, id: \.self) { index in
+                            Circle()
+                                .fill(index == selectedIndex ? AppColor.primary : Color.gray.opacity(0.3))
+                                .frame(width: 6, height: 6)
+                        }
+                    }
+                    .transition(.opacity)
+                }
+            }
+        }
+        .padding()
+        .background(AppColor.cardBackground)
+        .cornerRadius(16)
+        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
+        .onAppear {
+            loadWidgetData()
+        }
+    }
+
+    private func loadWidgetData() {
+        widgetData = BirthdayWidgetData.fetchWidgetData(from: modelContext, limit: 3)
+    }
         VStack(spacing: 16) {
             if upcomingBirthdays.isEmpty {
                 emptyWidgetState
