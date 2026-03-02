@@ -14,7 +14,7 @@ struct PersonAvatar: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
             }
-            .shadow(color: AppColor.gradientForRelation(person.relation).opacity(0.3), radius: 8, x: 0, y: 4)
+            .shadow(color: AppColor.primary.opacity(0.3), radius: 8, x: 0, y: 4)
             .accessibilityElement(children: .combine)
             .accessibilityLabel("Avatar für \(person.displayName)")
             .accessibilityHint("\(person.relation)")

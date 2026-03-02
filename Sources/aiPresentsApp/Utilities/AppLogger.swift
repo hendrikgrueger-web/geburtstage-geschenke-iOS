@@ -21,7 +21,41 @@ import OSLog
 /// // Debug only
 /// AppLogger.debug("API request payload", context: ["body": requestBody])
 /// ```
+struct AppLoggerCategory {
+    let name: String
+
+    func debug(_ message: String, context: [String: Any]? = nil) {
+        AppLogger.debug("[\(name)] \(message)", context: context)
+    }
+
+    func info(_ message: String, context: [String: Any]? = nil) {
+        AppLogger.info("[\(name)] \(message)", context: context)
+    }
+
+    func warning(_ message: String, context: [String: Any]? = nil) {
+        AppLogger.warning("[\(name)] \(message)", context: context)
+    }
+
+    func error(_ message: String, context: [String: Any]? = nil) {
+        AppLogger.error("[\(name)] \(message)", context: context)
+    }
+
+    func error(_ message: String, error: Error, context: [String: Any]? = nil) {
+        var ctx = context ?? [:]
+        ctx["error"] = error.localizedDescription
+        AppLogger.error("[\(name)] \(message)", context: ctx)
+    }
+}
+
 struct AppLogger {
+
+    // MARK: - Categories
+
+    static let ui = AppLoggerCategory(name: "UI")
+    static let data = AppLoggerCategory(name: "Data")
+    static let forms = AppLoggerCategory(name: "Forms")
+    static let reminder = AppLoggerCategory(name: "Reminder")
+    static let notifications = AppLoggerCategory(name: "Notifications")
 
     // MARK: - Configuration
 
@@ -248,7 +282,7 @@ struct AppLogger {
     static func exportLogs() -> URL? {
         guard let logURL = logFileURL else { return nil }
 
-        let exporter = logURL.deletingLastPathComponent().appingPathComponent("aipresents-export-\(Date().timeIntervalSince1970).log")
+        let exporter = logURL.deletingLastPathComponent().appendingPathComponent("aipresents-export-\(Date().timeIntervalSince1970).log")
 
         // Copy log file
         try? FileManager.default.copyItem(at: logURL, to: exporter)

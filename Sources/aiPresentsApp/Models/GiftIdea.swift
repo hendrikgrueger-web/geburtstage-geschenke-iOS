@@ -39,7 +39,7 @@ final class GiftIdea {
     }
 }
 
-enum GiftStatus: String, Codable {
+enum GiftStatus: String, Codable, CaseIterable {
     case idea = "idea"
     case planned = "planned"
     case purchased = "purchased"

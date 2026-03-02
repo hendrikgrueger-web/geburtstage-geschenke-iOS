@@ -9,7 +9,7 @@ struct ContactsImportView: View {
     @State private var hasPermission = false
     @State private var isImporting = false
     @State private var importedCount = 0
-    @State private importError: String?
+    @State private var importError: String?
     @State private var useSampleData = false
 
     var body: some View {

@@ -174,7 +174,7 @@ struct SettingsView: View {
                     }
                 }
 
-                Section("iCloud Sync") {
+                Section {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("iCloud Sync")
@@ -193,11 +193,13 @@ struct SettingsView: View {
                     .accessibilityElement(children: .combine)
                     .accessibilityLabel("iCloud Sync, automatisch synchronisiert")
                     .accessibilityHint("Daten werden automatisch über deine Apple-Geräte synchronisiert")
+                } header: {
+                    Text("iCloud Sync")
                 } footer: {
                     Text("Daten werden automatisch über deine Apple-Geräte synchronisiert.")
                 }
 
-                Section("KI-Assistent") {
+                Section {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("KI-Vorschläge")
@@ -213,6 +215,8 @@ struct SettingsView: View {
                         Image(systemName: "sparkles")
                             .foregroundColor(.orange)
                     }
+                } header: {
+                    Text("KI-Assistent")
                 } footer: {
                     Text("Die KI hilft dir, passende Geschenkideen zu finden. Optional und kann deaktiviert werden.")
                 }
@@ -264,7 +268,7 @@ struct SettingsView: View {
                 Button("Abbrechen", role: .cancel) { }
                 Button("Löschen", role: .destructive) {
                     Task {
-                        await reminderManager?.cancelAllReminders()
+                        await reminderManager.cancelAllReminders()
                     }
                     resetAllData()
                 }
@@ -284,6 +288,7 @@ struct SettingsView: View {
                 }
             }
         }
+        .toast(item: $toast)
     }
 
     private func checkNotificationPermission() async {
@@ -313,8 +318,8 @@ struct SettingsView: View {
         isRefreshingReminders = true
         HapticFeedback.light()
 
-        await reminderManager?.cancelAllReminders()
-        await reminderManager?.scheduleAllReminders()
+        await reminderManager.cancelAllReminders()
+        await reminderManager.scheduleAllReminders()
 
         isRefreshingReminders = false
         HapticFeedback.success()
@@ -329,7 +334,11 @@ struct SettingsView: View {
 
     private func resetAllData() {
         do {
-            try modelContext.deleteContainer()
+            try modelContext.delete(model: ReminderRule.self)
+            try modelContext.delete(model: GiftHistory.self)
+            try modelContext.delete(model: GiftIdea.self)
+            try modelContext.delete(model: PersonRef.self)
+            try modelContext.delete(model: SuggestionFeedback.self)
             AppLogger.data.info("All data reset successfully")
             toast = ToastItem.success("Daten gelöscht", message: "Alle Kontakte und Geschenkideen wurden entfernt.")
         } catch {
@@ -395,5 +404,4 @@ struct SettingsView: View {
             rootViewController.present(alert, animated: true)
         }
     }
-    .toast(item: $toast)
 }

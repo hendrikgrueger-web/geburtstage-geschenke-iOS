@@ -15,7 +15,7 @@ struct DevSettingsView: View {
 
     var body: some View {
         List {
-            Section("Test-Daten") {
+            Section {
                 Button {
                     createSampleData()
                 } label: {
@@ -47,6 +47,8 @@ struct DevSettingsView: View {
                     }
                 }
                 .disabled(isClearingData)
+            } header: {
+                Text("Test-Daten")
             } footer: {
                 Text("Demo-Daten für Tests und Screenshots")
             }
@@ -114,7 +116,11 @@ struct DevSettingsView: View {
         isClearingData = true
 
         do {
-            try modelContext.deleteContainer()
+            try modelContext.delete(model: ReminderRule.self)
+            try modelContext.delete(model: GiftHistory.self)
+            try modelContext.delete(model: GiftIdea.self)
+            try modelContext.delete(model: PersonRef.self)
+            try modelContext.delete(model: SuggestionFeedback.self)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 isClearingData = false
                 dataCleared = true

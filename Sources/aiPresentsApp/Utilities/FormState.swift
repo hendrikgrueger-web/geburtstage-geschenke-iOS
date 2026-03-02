@@ -83,16 +83,14 @@ final class FormState: ObservableObject {
             return false
         }
 
-        if let initialTyped = initial as? T, let currentTyped = current as? T {
-            return initialTyped != currentTyped
-        }
-
         return String(describing: initial) != String(describing: current)
     }
 
     /// Update the overall dirty state
     private func updateDirtyState() {
-        isDirty = !initialValues.isEmpty && initialValues != currentValues
+        isDirty = !initialValues.isEmpty && initialValues.keys.contains { key in
+            String(describing: initialValues[key]) != String(describing: currentValues[key])
+        }
     }
 
     /// Reset to initial values (clear dirty state)
@@ -217,7 +215,7 @@ enum FormError: LocalizedError {
 
 extension View {
     /// Bind a text field to a FormState with validation
-    func formField<T>(
+    func formField<T: Equatable>(
         _ value: Binding<T>,
         for field: String,
         validator: @escaping (T) -> ValidationResult

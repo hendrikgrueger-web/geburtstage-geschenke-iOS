@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 // MARK: - Formatter Helper
 struct FormatterHelper {

@@ -16,7 +16,7 @@ struct TimelineView: View {
     @State private var listAnimation = false
     @State private var isRefreshing = false
     @State private var debouncedSearchText = ""
-    @State private var searchDebouncer = Debouncer(delay: .milliseconds(300))
+    @State private var searchDebouncer = Debouncer(delay: 0.3)
 
     enum TimelineTab: String, CaseIterable {
         case today = "Heute"
@@ -166,7 +166,7 @@ struct TimelineView: View {
 
             // Apply gift ideas filter
             if let hasIdeas = filterHasIdeas {
-                let personHasIdeas = !person.giftIdeas?.isEmpty ?? false
+                let personHasIdeas = !(person.giftIdeas?.isEmpty ?? true)
                 if hasIdeas != personHasIdeas {
                     return nil
                 }
@@ -211,69 +211,62 @@ struct TimelineView: View {
         return Array(Set(allRelations)).sorted()
     }
 
+    private func birthdayRow(for person: PersonRef) -> some View {
+        NavigationLink(destination: PersonDetailView(person: person)) {
+            BirthdayRow(person: person, onQuickAdd: {
+                quickAddPerson = person
+            })
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+            Button {
+                showingAISuggestionsFor = person
+                HapticFeedback.light()
+            } label: {
+                Label("KI", systemImage: "sparkles")
+            }
+            .tint(.orange)
+
+            if let firstIdea = person.giftIdeas?.first,
+               firstIdea.status == .idea {
+                Button {
+                    markAsPlanned(firstIdea)
+                } label: {
+                    Label("Planen", systemImage: "checkmark.circle.fill")
+                }
+                .tint(.blue)
+            }
+
+            Button {
+                showingAddGiftIdeaFor = person
+                HapticFeedback.light()
+            } label: {
+                Label("Idee", systemImage: "plus.circle.fill")
+            }
+            .tint(.green)
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+            let days = BirthdayDateHelper.daysUntilBirthday(from: person.birthday) ?? Int.max
+            if days <= 7 {
+                Button {
+                    markAsPlannedFirstIdea(person)
+                } label: {
+                    Label("Erste Idee planen", systemImage: "checkmark.circle")
+                }
+                .tint(.blue)
+            }
+        }
+    }
+
     private var birthdayList: some View {
         List {
-            ForEach(Array(filteredBirthdays.enumerated()), id: \.element.id) { index, person in
-                NavigationLink(destination: PersonDetailView(person: person)) {
-                    BirthdayRow(person: person, onQuickAdd: {
-                        quickAddPerson = person
-                    })
-                }
-                .transition(.asymmetric(
-                    insertion: .scale.combined(with: .opacity),
-                    removal: .scale.combined(with: .opacity)
-                ))
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button {
-                        showingAISuggestionsFor = person
-                        HapticFeedback.light()
-                    } label: {
-                        Label("KI", systemImage: "sparkles")
-                    }
-                    .tint(.orange)
-                    .accessibilityLabel("KI-Geschenkideen generieren")
-
-                    if let firstIdea = person.giftIdeas?.first,
-                       firstIdea.status == .idea {
-                        Button {
-                            markAsPlanned(firstIdea)
-                        } label: {
-                            Label("Planen", systemImage: "checkmark.circle.fill")
-                        }
-                        .tint(.blue)
-                        .accessibilityLabel("Als geplant markieren")
-                    }
-
-                    Button {
-                        showingAddGiftIdeaFor = person
-                        HapticFeedback.light()
-                    } label: {
-                        Label("Idee", systemImage: "plus.circle.fill")
-                    }
-                    .tint(.green)
-                    .accessibilityLabel("Geschenkidee hinzufügen")
-                }
-
-                .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                    if daysUntilBirthday <= 7 {
-                        Button {
-                            markAsPlannedFirstIdea(person)
-                        } label: {
-                            Label("Erste Idee planen", systemImage: "checkmark.circle")
-                        }
-                        .tint(.blue)
-                    }
-                }
+            ForEach(filteredBirthdays) { person in
+                birthdayRow(for: person)
             }
         }
         .listStyle(.insetGrouped)
         .refreshable {
             await refreshTimeline()
         }
-        .animation(AccessibilityConfiguration.animation(.spring(response: 0.4, dampingFraction: 0.8)), value: selectedTab)
-        .animation(AccessibilityConfiguration.animation(.spring(response: 0.3, dampingFraction: 0.8)), value: searchText)
-        .animation(AccessibilityConfiguration.animation(.spring(response: 0.3, dampingFraction: 0.8)), value: filterHasIdeas)
-        .animation(AccessibilityConfiguration.animation(.spring(response: 0.3, dampingFraction: 0.8)), value: filterRelation)
         .sheet(item: $showingAddGiftIdeaFor) { person in
             AddGiftIdeaSheet(person: person)
         }
@@ -323,20 +316,12 @@ struct TimelineView: View {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 60))
                     .foregroundColor(AppColor.textSecondary.opacity(0.4))
-                    .symbolEffect(
-                        AccessibilityConfiguration.isReducedMotionEnabled ? .pulse : .bounce,
-                        options: .repeating,
-                        isActive: true
-                    )
+                    .symbolEffect(.bounce, options: .repeating, isActive: !AccessibilityConfiguration.isReducedMotionEnabled)
             } else {
                 Image(systemName: "giftcard")
                     .font(.system(size: 60))
                     .foregroundColor(AppColor.textSecondary.opacity(0.4))
-                    .symbolEffect(
-                        AccessibilityConfiguration.isReducedMotionEnabled ? .pulse : .bounce,
-                        options: .repeating,
-                        isActive: true
-                    )
+                    .symbolEffect(.bounce, options: .repeating, isActive: !AccessibilityConfiguration.isReducedMotionEnabled)
             }
 
             VStack(spacing: 8) {

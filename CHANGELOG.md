@@ -14,6 +14,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Fixed: ♍ Jungfrau, ♎ Waage, ♏ Skorpion, ♐ Schütze
   - Fixed: ♑ Steinbock, ♒ Wassermann, ♓ Fische
   - Impact: Zodiac signs now display correctly across the app
+- **Build-Fehler behoben (~50+ Compile-Errors über 34 Dateien)**
+  - **AppLogger**: `AppLoggerCategory` Struct mit `.ui`, `.data`, `.forms`, `.reminder`, `.notifications` hinzugefügt; Typo `.appingPathComponent` → `.appendingPathComponent`
+  - **CloudKitContainer + aiPresentsApp**: `ModelConfiguration(identifier:)` → positional Parameter; `cloudKitDatabase: nil` → `.none`
+  - **ContactsService**: `await` → `try await` für `requestAccess`; `.granted` entfernt (Bool direkt)
+  - **ReminderManager**: `@MainActor` auf `ModelContext.placeholder`; `nonisolated(unsafe)` auf statische Properties
+  - **SampleDataService**: `contactIdentifier: ""` ergänzt; `status:`/`tags:` Reihenfolge korrigiert; `deleteContainer()` → `delete(model:)`
+  - **FormValidator**: `FormState` → `AppFormState` umbenannt (Namenskollision mit SwiftUI)
+  - **AIGiftSuggestionsSheet**: `-> View` → `-> some View` (8 Computed Properties + Funktionen); `Identifiable` auf `GiftSuggestion`
+  - **Section-Syntax**: `Section("title") { } footer:` → `Section { } header: { } footer: { }` (6 Stellen in 4 Dateien)
+  - **symbolEffect**: `.pulse`/`.bounce` Ternary-Typ-Mismatch → `.symbolEffect(.bounce, isActive:)` (5 Dateien)
+  - **Alert message-Closures**: Conditional Logic in Computed Properties extrahiert (4 Sheet-Views)
+  - **Duplikate entfernt**: `PressableButtonStyle`, `accessibleButton`, `exportAsText`, `DevSettingsView` (je 2× definiert)
+  - **AccessibilityConfiguration**: `Date.Style` → `DateFormatter.Style`; `.isNotEnabled` → `.isStaticText`
+  - **SmartInputField**: `TimeInterval.milliseconds(300)` → `0.3`; Parameter-Reihenfolge korrigiert
+  - **PersonAvatar**: `LinearGradient` als Shadow-Color → `AppColor.primary`
+  - **TimelineView**: Optional-Unwrap korrigiert; Body in Sub-Views aufgeteilt (Type-Check-Timeout)
+  - **EditGiftIdeaSheet**: Body in Sub-Views aufgeteilt (Type-Check-Timeout)
+  - **GiftIdeaRow**: `budgetString` (String) in `Text()` gewrappt
+  - **BirthdayDateHelper**: `calendar.daysBetween` → `dateComponents([.day], ...)`
+  - **Debouncer**: Fehlendes `import SwiftUI` ergänzt
+  - **GiftIdea**: `CaseIterable` auf `GiftStatus` Enum ergänzt
 
 ### Added
 - **Phase 4: TestFlight Documentation**

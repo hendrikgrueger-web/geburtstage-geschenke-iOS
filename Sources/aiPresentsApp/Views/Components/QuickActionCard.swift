@@ -316,7 +316,6 @@ struct StatCard: View {
                 .padding(.horizontal)
 
             QuickActionGrid(
-                columns: 2,
                 actions: [
                     .addPerson(action: {}),
                     .importContacts(action: {}),

@@ -34,7 +34,7 @@ enum AccessibilityConfiguration {
     }
 
     /// Provides accessible date formatting
-    static func formatDate(_ date: Date, style: Date.Style = .medium) -> String {
+    static func formatDate(_ date: Date, style: DateFormatter.Style = .medium) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = style
         formatter.timeStyle = .none
@@ -63,7 +63,7 @@ enum AccessibilityConfiguration {
     static func buttonTraits(isEnabled: Bool = true) -> AccessibilityTraits {
         var traits: AccessibilityTraits = [.isButton]
         if !isEnabled {
-            traits.insert(.isNotEnabled)
+            traits.insert(.isStaticText)
         }
         return traits
     }
@@ -124,14 +124,6 @@ extension View {
             .accessibilityHint(hint ?? "")
             .accessibilityValue(value ?? "")
             .accessibilityAddTraits(traits)
-    }
-
-    /// Applies accessible button configuration
-    func accessibleButton(label: String, hint: String? = nil) -> some View {
-        self
-            .accessibilityLabel(label)
-            .accessibilityHint(hint ?? AccessibilityConfiguration.actionHint(label))
-            .accessibilityAddTraits(.isButton)
     }
 
     /// Applies accessible toggle configuration

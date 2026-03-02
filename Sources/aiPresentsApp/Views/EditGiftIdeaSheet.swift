@@ -15,7 +15,7 @@ struct EditGiftIdeaSheet: View {
     @State private var link: String
     @State private var tagsInput: String
     @State private var status: GiftStatus
-    @State private var formState = FormState()
+    @State private var formState = AppFormState()
     @State private var showingValidationError = false
 
     init(person: PersonRef, idea: GiftIdea) {
@@ -28,7 +28,7 @@ struct EditGiftIdeaSheet: View {
         self._link = State(initialValue: idea.link)
         self._tagsInput = State(initialValue: idea.tags.joined(separator: ", "))
         self._status = State(initialValue: idea.status)
-        self._formState = State(initialValue: FormState())
+        self._formState = State(initialValue: AppFormState())
     }
 
     private var isBudgetInvalid: Bool {
@@ -60,101 +60,80 @@ struct EditGiftIdeaSheet: View {
         linkValidation.isValid
     }
 
+    private var validationMessages: String {
+        var messages: [String] = []
+        if title.trimmingCharacters(in: .whitespaces).isEmpty { messages.append("- Titel darf nicht leer sein") }
+        if isBudgetInvalid { messages.append("- Ungültiges Budget") }
+        if let error = tagsValidation { messages.append("- \(error.errorDescription ?? "")") }
+        if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty { messages.append("- Ungültige URL") }
+        return messages.joined(separator: "\n")
+    }
+
+    private var giftSection: some View {
+        Section("Geschenk") {
+            SmartInputField.titleField(text: $title, minLength: 2, maxLength: 100, placeholder: "Name des Geschenks")
+            SmartInputField.noteField(text: $note, maxLength: 500, placeholder: "Optionale Notizen")
+            HStack {
+                SmartInputField.urlField(text: $link, placeholder: "https://example.com")
+                if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
+                    Button {
+                        if let url = URL(string: linkValidation.sanitized) {
+                            UIApplication.shared.open(url) { success in
+                                if !success { AppLogger.ui.warning("Failed to open URL: \(linkValidation.sanitized)") }
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.right.square").foregroundColor(.blue)
+                    }
+                    .accessibilityLabel("Link öffnen")
+                }
+            }
+        }
+    }
+
+    private var budgetSection: some View {
+        Section("Budget") {
+            HStack {
+                Text("Min")
+                TextField("€", text: $budgetMin).keyboardType(.decimalPad)
+            }
+            HStack {
+                Text("Max")
+                TextField("€", text: $budgetMax).keyboardType(.decimalPad).foregroundColor(isBudgetInvalid ? .red : .primary)
+            }
+            if isBudgetInvalid {
+                Text("Max darf nicht kleiner als Min sein").font(.caption).foregroundColor(.red)
+            }
+        }
+    }
+
+    private var tagsSection: some View {
+        Section("Tags") {
+            TextField("Getrennt durch Kommas", text: $tagsInput).textInputAutocapitalization(.never)
+            if let error = tagsValidation {
+                Text(error.errorDescription ?? "").font(.caption).foregroundColor(.red)
+            }
+        }
+    }
+
+    private var statusSection: some View {
+        Section("Status") {
+            Picker("Status", selection: $status) {
+                ForEach(GiftStatus.allCases, id: \.self) { s in
+                    Text(statusText(for: s)).tag(s)
+                }
+            }
+            .pickerStyle(.segmented)
+        }
+    }
+
     var body: some View {
         NavigationStack {
             Form {
-                Section("Geschenk") {
-                    // SmartInputField for title with real-time validation
-                    SmartInputField.titleField(
-                        text: $title,
-                        minLength: 2,
-                        maxLength: 100,
-                        placeholder: "Name des Geschenks"
-                    )
-
-                    // SmartInputField for notes with character limit
-                    SmartInputField.noteField(
-                        text: $note,
-                        maxLength: 500,
-                        placeholder: "Optionale Notizen"
-                    )
-
-                    // SmartInputField for URL with auto-https normalization
-                    HStack {
-                        SmartInputField.urlField(
-                            text: $link,
-                            placeholder: "https://example.com"
-                        )
-
-                        if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
-                            Button {
-                                if let url = URL(string: linkValidation.sanitized) {
-                                    UIApplication.shared.open(url) { success in
-                                        if !success {
-                                            AppLogger.ui.warning("Failed to open URL: \(linkValidation.sanitized)")
-                                        }
-                                    }
-                                }
-                            } label: {
-                                Image(systemName: "arrow.up.right.square")
-                                    .foregroundColor(.blue)
-                            }
-                            .accessibilityLabel("Link öffnen")
-                            .accessibilityHint("Öffnet den Link im Browser")
-                        }
-                    }
-                }
-
-                Section("Budget") {
-                    HStack {
-                        Text("Min")
-                        TextField("€", text: $budgetMin)
-                            .keyboardType(.decimalPad)
-                            .accessibilityLabel("Mindestbudget")
-                            .accessibilityHint("Gib das Mindestbudget in Euro ein")
-                    }
-
-                    HStack {
-                        Text("Max")
-                        TextField("€", text: $budgetMax)
-                            .keyboardType(.decimalPad)
-                            .foregroundColor(isBudgetInvalid ? .red : .primary)
-                            .accessibilityLabel("Maximalbudget")
-                            .accessibilityHint("Gib das Maximalbudget in Euro ein")
-                    }
-
-                    if isBudgetInvalid {
-                        Text("Max darf nicht kleiner als Min sein")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                            .accessibilityLabel("Fehler: Ungültiges Budget")
-                    }
-                }
-
-                Section("Tags") {
-                    TextField("Getrennt durch Kommas", text: $tagsInput)
-                        .textInputAutocapitalization(.never)
-                        .accessibilityLabel("Tags")
-                        .accessibilityHint("Gib bis zu 10 Tags getrennt durch Kommas ein, max 30 Zeichen pro Tag")
-
-                    if let error = tagsValidation {
-                        Text(error.errorDescription ?? "")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                            .accessibilityLabel("Fehler: \(error.errorDescription ?? "")")
-                    }
-                }
-
-                Section("Status") {
-                    Picker("Status", selection: $status) {
-                        ForEach(GiftStatus.allCases, id: \.self) { status in
-                            Text(statusText(for: status)).tag(status)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .accessibilityLabel("Geschenkstatus")
-                    .accessibilityHint("Wähle den Status der Geschenkidee aus")
-                }
+                giftSection
+                budgetSection
+                tagsSection
+                statusSection
             }
             .navigationTitle("Idee bearbeiten")
             .navigationBarTitleDisplayMode(.inline)
@@ -187,27 +166,7 @@ struct EditGiftIdeaSheet: View {
         .alert("Eingabe prüfen", isPresented: $showingValidationError) {
             Button("OK", role: .cancel) { }
         } message: {
-            if !canSave {
-                var messages: [String] = []
-
-                if title.trimmingCharacters(in: .whitespaces).isEmpty {
-                    messages.append("- Titel darf nicht leer sein")
-                }
-
-                if isBudgetInvalid {
-                    messages.append("- Ungültiges Budget")
-                }
-
-                if let error = tagsValidation {
-                    messages.append("- \(error.errorDescription ?? "")")
-                }
-
-                if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty {
-                    messages.append("- Ungültige URL")
-                }
-
-                Text(messages.joined(separator: "\n"))
-            }
+            Text(validationMessages)
         }
     }
 

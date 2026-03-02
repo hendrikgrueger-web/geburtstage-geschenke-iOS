@@ -14,7 +14,7 @@ struct EditGiftHistorySheet: View {
     @State private var budget: String
     @State private var note: String
     @State private var link = ""
-    @State private var formState = FormState()
+    @State private var formState = AppFormState()
     @State private var showingValidationError = false
 
     private let calendar = Calendar.current
@@ -29,8 +29,7 @@ struct EditGiftHistorySheet: View {
         self._budget = State(initialValue: history.budget == 0 ? "" : "\(history.budget)")
         self._note = State(initialValue: history.note)
         self._link = State(initialValue: history.link)
-        calendar = Calendar.current
-        currentYear = calendar.component(.year, from: Date())
+        currentYear = Calendar.current.component(.year, from: Date())
     }
 
     private var isTitleValid: Bool {
@@ -69,10 +68,19 @@ struct EditGiftHistorySheet: View {
         isTitleValid && isBudgetValid && linkValidation.isValid && categoryValidation == nil
     }
 
+    private var validationMessages: String {
+        var messages: [String] = []
+        if !isTitleValid { messages.append("- Titel darf nicht leer sein") }
+        if !isBudgetValid && !budget.isEmpty { messages.append("- Ungültiges Budget") }
+        if let error = categoryValidation { messages.append("- \(error.errorDescription ?? "")") }
+        if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty { messages.append("- Ungültige URL") }
+        return messages.joined(separator: "\n")
+    }
+
     var body: some View {
         NavigationStack {
             Form {
-                Section("Geschenk") {
+                Section {
                     // SmartInputField for title with validation
                     SmartInputField.titleField(
                         text: $title,
@@ -93,11 +101,13 @@ struct EditGiftHistorySheet: View {
                             return .valid
                         }
                     )
+                } header: {
+                    Text("Geschenk")
                 } footer: {
                     Text("z.B. Schmuck, Buch, Erlebnis, Geld")
                 }
 
-                Section("Wann") {
+                Section {
                     Picker("Jahr", selection: $year) {
                         ForEach((currentYear - 10)...currentYear, id: \.self) { y in
                             Text("\(y)").tag(y)
@@ -183,27 +193,7 @@ struct EditGiftHistorySheet: View {
         .alert("Eingabe prüfen", isPresented: $showingValidationError) {
             Button("OK", role: .cancel) { }
         } message: {
-            if !canSave {
-                var messages: [String] = []
-
-                if !isTitleValid {
-                    messages.append("- Titel darf nicht leer sein")
-                }
-
-                if !isBudgetValid && !budget.isEmpty {
-                    messages.append("- Ungültiges Budget")
-                }
-
-                if let error = categoryValidation {
-                    messages.append("- \(error.errorDescription ?? "")")
-                }
-
-                if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty {
-                    messages.append("- Ungültige URL")
-                }
-
-                Text(messages.joined(separator: "\n"))
-            }
+            Text(validationMessages)
         }
     }
 

@@ -14,7 +14,7 @@ struct AddGiftIdeaSheet: View {
     @State private var link: String
     @State private var tagsInput: String
     @State private var status: GiftStatus
-    @State private var formState = FormState()
+    @State private var formState = AppFormState()
     @State private var showingValidationError = false
     @State private var budgetMinSlider: Double = 0
     @State private var budgetMaxSlider: Double = 0
@@ -29,7 +29,7 @@ struct AddGiftIdeaSheet: View {
         self._link = State(initialValue: "")
         self._tagsInput = State(initialValue: "")
         self._status = State(initialValue: .idea)
-        self._formState = State(initialValue: FormState())
+        self._formState = State(initialValue: AppFormState())
     }
 
     init(person: PersonRef, prefillTitle: String, prefillNote: String) {
@@ -41,7 +41,7 @@ struct AddGiftIdeaSheet: View {
         self._link = State(initialValue: "")
         self._tagsInput = State(initialValue: "")
         self._status = State(initialValue: .idea)
-        self._formState = State(initialValue: FormState())
+        self._formState = State(initialValue: AppFormState())
     }
 
     private var isBudgetInvalid: Bool {
@@ -71,6 +71,15 @@ struct AddGiftIdeaSheet: View {
         !isBudgetInvalid &&
         tagsValidation == nil &&
         linkValidation.isValid
+    }
+
+    private var validationMessages: String {
+        var messages: [String] = []
+        if title.trimmingCharacters(in: .whitespaces).isEmpty { messages.append("- Titel darf nicht leer sein") }
+        if isBudgetInvalid { messages.append("- Ungültiges Budget") }
+        if let error = tagsValidation { messages.append("- \(error.errorDescription ?? "")") }
+        if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty { messages.append("- Ungültige URL") }
+        return messages.joined(separator: "\n")
     }
 
     var body: some View {
@@ -250,27 +259,7 @@ struct AddGiftIdeaSheet: View {
         .alert("Eingabe prüfen", isPresented: $showingValidationError) {
             Button("OK", role: .cancel) { }
         } message: {
-            if !canSave {
-                var messages: [String] = []
-
-                if title.trimmingCharacters(in: .whitespaces).isEmpty {
-                    messages.append("- Titel darf nicht leer sein")
-                }
-
-                if isBudgetInvalid {
-                    messages.append("- Ungültiges Budget")
-                }
-
-                if let error = tagsValidation {
-                    messages.append("- \(error.errorDescription ?? "")")
-                }
-
-                if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty {
-                    messages.append("- Ungültige URL")
-                }
-
-                Text(messages.joined(separator: "\n"))
-            }
+            Text(validationMessages)
         }
     }
 

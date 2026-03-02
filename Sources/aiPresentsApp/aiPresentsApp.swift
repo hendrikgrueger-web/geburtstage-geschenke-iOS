@@ -12,7 +12,7 @@ struct aiPresentsApp: App {
 
             // CloudKit configuration
             let config = ModelConfiguration(
-                identifier: "ai-presents-app",
+                "ai-presents-app",
                 schema: schema,
                 isStoredInMemoryOnly: false,
                 allowsSave: true,
@@ -27,7 +27,7 @@ struct aiPresentsApp: App {
             // Fallback to local-only if CloudKit fails
             do {
                 let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self, SuggestionFeedback.self])
-                let config = ModelConfiguration(isStoredInMemoryOnly: false, cloudKitDatabase: nil)
+                let config = ModelConfiguration(isStoredInMemoryOnly: false, cloudKitDatabase: .none)
                 modelContainer = try ModelContainer(for: schema, configurations: [config])
 
                 let manager = ReminderManager(modelContext: modelContainer.mainContext)

@@ -1,4 +1,5 @@
 import Foundation
+import SwiftData
 import SwiftUI
 
 enum AppEnvironment {
@@ -58,10 +59,13 @@ struct AppConfig {
 struct DebugMenu {
     static func resetAllData(modelContext: ModelContext) {
         do {
-            try modelContext.deleteContainer()
-            AppLogger.debug("✅ Debug: All data reset")
+            try modelContext.delete(model: ReminderRule.self)
+            try modelContext.delete(model: GiftHistory.self)
+            try modelContext.delete(model: GiftIdea.self)
+            try modelContext.delete(model: PersonRef.self)
+            AppLogger.debug("Debug: All data reset")
         } catch {
-            AppLogger.error("❌ Debug: Failed to reset data", error: error)
+            AppLogger.error("Debug: Failed to reset data", context: ["error": error.localizedDescription])
         }
     }
 
@@ -143,83 +147,3 @@ struct TestDataGenerator {
     }
 }
 
-// MARK: - Development Settings View
-#if DEBUG
-struct DevSettingsView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Environment(\.dismiss) private var dismiss
-
-    @State private var dbStats: String = ""
-
-    var body: some View {
-        NavigationStack {
-            List {
-                Section("Info") {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text(AppConfig.versionString)
-                            .foregroundColor(.secondary)
-                    }
-
-                    HStack {
-                        Text("Environment")
-                        Spacer()
-                        Text(AppConfig.currentEnvironment == .development ? "Development" : "Production")
-                            .foregroundColor(.secondary)
-                    }
-
-                    HStack {
-                        Text("OpenRouter")
-                        Spacer()
-                        Text(AppConfig.isOpenRouterConfigured ? "✅ Configured" : "❌ Not configured")
-                            .foregroundColor(AppConfig.isOpenRouterConfigured ? .green : .red)
-                    }
-                }
-
-                Section("Database") {
-                    Button("Show Stats") {
-                        dbStats = DebugMenu.exportDatabaseStats(modelContext: modelContext)
-                    }
-
-                    if !dbStats.isEmpty {
-                        Text(dbStats)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .padding(.vertical, 4)
-                    }
-
-                    Button(role: .destructive) {
-                        DebugMenu.resetAllData(modelContext: modelContext)
-                    } label: {
-                        Text("Reset All Data")
-                    }
-
-                    Button {
-                        DebugMenu.createSampleData(modelContext: modelContext)
-                    } label: {
-                        Text("Create Sample Data")
-                    }
-                }
-
-                Section("Reminders") {
-                    Button {
-                        DebugMenu.logReminderStatus(modelContext: modelContext)
-                    } label: {
-                        Text("Log Reminder Status to Console")
-                    }
-                }
-            }
-            .navigationTitle("Dev Settings")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
-            }
-        }
-    }
-}
-#endif

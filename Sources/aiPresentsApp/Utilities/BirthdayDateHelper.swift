@@ -73,7 +73,7 @@ struct BirthdayDateHelper {
         guard let next = nextBirthday(from: birthday, after: date) else {
             return nil
         }
-        return calendar.daysBetween(from: date, to: next)
+        return calendar.dateComponents([.day], from: calendar.startOfDay(for: date), to: calendar.startOfDay(for: next)).day
     }
 
     /// Check if birthday is today
@@ -83,7 +83,7 @@ struct BirthdayDateHelper {
 
     /// Check if birthday is tomorrow
     static func isBirthdayTomorrow(from birthday: Date, asOf date: Date = today) -> Bool {
-        daysUntilBirthday(from: birthday, asOf date) == 1
+        daysUntilBirthday(from: birthday, asOf: date) == 1
     }
 
     /// Check if birthday is within the next N days

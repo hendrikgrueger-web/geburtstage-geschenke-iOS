@@ -167,7 +167,7 @@ extension View {
 // MARK: - Validation State Helper
 
 @Observable
-class FormState {
+class AppFormState {
     var errors: [String: ValidationError] = [:]
 
     func setError(_ error: ValidationError?, for field: String) {

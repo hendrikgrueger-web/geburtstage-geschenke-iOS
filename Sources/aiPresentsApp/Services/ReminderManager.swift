@@ -3,7 +3,7 @@ import SwiftData
 import UserNotifications
 
 extension ModelContext {
-    static var placeholder: ModelContext {
+    @MainActor static var placeholder: ModelContext {
         let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self])
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         guard let container = try? ModelContainer(for: schema, configurations: [config]) else {
@@ -18,8 +18,8 @@ class ReminderManager: ObservableObject {
     private var modelContext: ModelContext
     private let center = UNUserNotificationCenter.current()
 
-    private static var _shared: ReminderManager?
-    private static let lock = NSLock()
+    nonisolated(unsafe) private static var _shared: ReminderManager?
+    nonisolated(unsafe) private static let lock = NSLock()
 
     static var shared: ReminderManager? {
         lock.lock()

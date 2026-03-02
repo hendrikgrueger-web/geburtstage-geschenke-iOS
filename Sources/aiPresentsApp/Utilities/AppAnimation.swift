@@ -56,17 +56,3 @@ extension View {
     }
 }
 
-// Button press effect
-struct PressableButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
-            .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
-    }
-}
-
-extension ButtonStyle where Self == PressableButtonStyle {
-    static var pressable: PressableButtonStyle {
-        PressableButtonStyle()
-    }
-}

@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 /// Debounces rapid changes to a value, only emitting the final value after a delay.
 /// Useful for search fields and other inputs where processing should wait until the user stops typing.
@@ -225,6 +226,7 @@ enum DebounceStrategy {
 
 // MARK: - Usage Examples
 #if DEBUG
+@MainActor
 struct DebouncerPreview: View {
     @State private var searchText = ""
     @State private var debouncedText = ""

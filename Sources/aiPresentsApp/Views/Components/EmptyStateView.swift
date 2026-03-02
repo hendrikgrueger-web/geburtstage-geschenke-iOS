@@ -47,6 +47,16 @@ enum EmptyStateType {
         }
     }
 
+    var color: Color {
+        switch self {
+        case .noBirthdays: return AppColor.primary
+        case .noGiftIdeas: return .orange
+        case .noHistory: return .blue
+        case .noSearchResults: return .gray
+        case .noContacts: return AppColor.primary
+        }
+    }
+
     var actionIcon: String {
         switch self {
         case .noBirthdays: return "person.badge.plus"
@@ -89,9 +99,9 @@ struct EmptyStateView: View {
             // Action using QuickActionCard for better visual hierarchy
             if let actionTitle = type.actionTitle, let action = action {
                 QuickActionCard(
-                    title: actionTitle,
-                    icon: type.actionIcon,
                     style: .primary,
+                    icon: type.actionIcon,
+                    title: actionTitle,
                     action: action
                 )
                 .padding(.horizontal, 32)
@@ -113,10 +123,7 @@ struct EmptyStateView: View {
             Image(systemName: type.iconName)
                 .font(.system(size: 50))
                 .foregroundColor(type.color)
-                .symbolEffect(
-                    AccessibilityConfiguration.isReducedMotionEnabled ? .pulse : .bounce,
-                    options: .repeating,
-                    isActive: true
+                .symbolEffect(.bounce, options: .repeating, isActive: !AccessibilityConfiguration.isReducedMotionEnabled
                 )
         }
     }

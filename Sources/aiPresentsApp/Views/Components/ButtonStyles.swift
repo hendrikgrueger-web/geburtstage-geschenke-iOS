@@ -71,6 +71,12 @@ struct GradientButtonStyle: ButtonStyle {
     }
 }
 
+extension ButtonStyle where Self == PressableButtonStyle {
+    static var pressable: PressableButtonStyle {
+        PressableButtonStyle()
+    }
+}
+
 // MARK: - View Extensions for Button Styles
 extension View {
     func pressable() -> some View {

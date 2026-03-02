@@ -22,7 +22,7 @@ actor CloudKitContainer {
         ])
 
         let config = ModelConfiguration(
-            identifier: "ai-presents-app",
+            "ai-presents-app",
             schema: schema,
             isStoredInMemoryOnly: false,
             allowsSave: true,
@@ -61,7 +61,7 @@ actor CloudKitContainer {
         ])
 
         let config = ModelConfiguration(
-            identifier: "ai-presents-app",
+            "ai-presents-app",
             schema: schema,
             isStoredInMemoryOnly: false,
             allowsSave: true,
@@ -81,11 +81,11 @@ actor CloudKitContainer {
         ])
 
         let config = ModelConfiguration(
-            identifier: "ai-presents-app-local",
+            "ai-presents-app-local",
             schema: schema,
             isStoredInMemoryOnly: false,
             allowsSave: true,
-            cloudKitDatabase: nil
+            cloudKitDatabase: .none
         )
 
         container = try ModelContainer(for: schema, configurations: [config])

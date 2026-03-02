@@ -36,7 +36,7 @@ struct GiftIdeaRow: View {
 
             if idea.budgetMax > 0 {
                 HStack {
-                    budgetString
+                    Text(budgetString)
                         .font(.caption)
                         .foregroundColor(.secondary)
 

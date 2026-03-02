@@ -9,8 +9,7 @@ class ContactsService: ObservableObject {
     private init() {}
 
     func requestPermission() async throws -> Bool {
-        let status = await store.requestAccess(for: .contacts)
-        return status.granted
+        return try await store.requestAccess(for: .contacts)
     }
 
     func importBirthdays() async throws -> [PersonRef] {

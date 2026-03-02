@@ -544,7 +544,8 @@ struct AIService {
     }
 }
 
-struct GiftSuggestion {
+struct GiftSuggestion: Identifiable {
+    let id = UUID()
     let title: String
     let reason: String
 }

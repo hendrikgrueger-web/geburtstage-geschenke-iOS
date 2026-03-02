@@ -8,18 +8,21 @@ class SampleDataService {
 
         // Create people with upcoming birthdays
         let person1 = PersonRef(
+            contactIdentifier: "",
             displayName: "Anna Müller",
             birthday: calendar.date(byAdding: .day, value: 5, to: today) ?? today,
             relation: "Schwester"
         )
 
         let person2 = PersonRef(
+            contactIdentifier: "",
             displayName: "Thomas Schmidt",
             birthday: calendar.date(byAdding: .day, value: 12, to: today) ?? today,
             relation: "Freund"
         )
 
         let person3 = PersonRef(
+            contactIdentifier: "",
             displayName: "Lisa Weber",
             birthday: calendar.date(byAdding: .day, value: 25, to: today) ?? today,
             relation: "Kollegin"
@@ -32,8 +35,8 @@ class SampleDataService {
             note: "Liebt weiße Rosen",
             budgetMin: 25,
             budgetMax: 50,
-            tags: ["Blumen", "Romantisch"],
-            status: .idea
+            status: .idea,
+            tags: ["Blumen", "Romantisch"]
         )
 
         let idea2 = GiftIdea(
@@ -43,8 +46,8 @@ class SampleDataService {
             budgetMin: 80,
             budgetMax: 150,
             link: "https://example.com/jewelry",
-            tags: ["Schmuck", "Accessoires"],
-            status: .planned
+            status: .planned,
+            tags: ["Schmuck", "Accessoires"]
         )
 
         let idea3 = GiftIdea(
@@ -53,8 +56,8 @@ class SampleDataService {
             note: "Spezialbiere aus Craft-Brauerei",
             budgetMin: 30,
             budgetMax: 60,
-            tags: ["Bier", "Essen"],
-            status: .idea
+            status: .idea,
+            tags: ["Bier", "Essen"]
         )
 
         let idea4 = GiftIdea(
@@ -63,8 +66,8 @@ class SampleDataService {
             note: "Hochwertiges Papier, Leder-Einband",
             budgetMin: 20,
             budgetMax: 40,
-            tags: ["Büro", "Kreativ"],
-            status: .idea
+            status: .idea,
+            tags: ["Büro", "Kreativ"]
         )
 
         // Add gift history
@@ -99,7 +102,10 @@ class SampleDataService {
 
     static func clearSampleData(in context: ModelContext) {
         do {
-            try context.deleteContainer()
+            try context.delete(model: ReminderRule.self)
+            try context.delete(model: GiftHistory.self)
+            try context.delete(model: GiftIdea.self)
+            try context.delete(model: PersonRef.self)
             AppLogger.data.info("Sample data cleared successfully")
         } catch {
             AppLogger.data.error("Failed to clear sample data", error: error)

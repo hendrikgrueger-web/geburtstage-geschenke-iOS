@@ -17,7 +17,7 @@ struct SmartInputField: View {
     @FocusState private var fieldFocus: Bool
 
     private var debouncer: Debouncer {
-        Debouncer(delay: .milliseconds(300))
+        Debouncer(delay: 0.3)
     }
 
     // MARK: - Computed Properties
@@ -241,8 +241,6 @@ extension SmartInputField {
             title: "Link",
             text: text,
             placeholder: placeholder,
-            keyboardType: .URL,
-            autocapitalization: .never,
             validator: { value in
                 // Auto-normalize URL on focus loss
                 if let url = URL(string: value), url.scheme == nil, !value.isEmpty {
@@ -251,7 +249,9 @@ extension SmartInputField {
                     }
                 }
                 return ValidationHelper.validateURL(value)
-            }
+            },
+            keyboardType: .URL,
+            autocapitalization: .never
         )
     }
 
@@ -263,9 +263,9 @@ extension SmartInputField {
             title: "E-Mail",
             text: text,
             placeholder: placeholder,
+            validator: ValidationHelper.validateEmail,
             keyboardType: .emailAddress,
-            autocapitalization: .never,
-            validator: ValidationHelper.validateEmail
+            autocapitalization: .never
         )
     }
 
@@ -291,8 +291,8 @@ extension SmartInputField {
         value: Binding<Double>,
         title: String = "Budget",
         placeholder: String = "€0.00",
-        min: Double = 0,
-        max: Double = 10000
+        minValue: Double = 0,
+        maxValue: Double = 10000
     ) -> some View {
         HStack(alignment: .top, spacing: 8) {
             SmartInputField(
@@ -301,13 +301,11 @@ extension SmartInputField {
                     get: { value.wrappedValue == 0 ? "" : String(format: "%.2f", value.wrappedValue) },
                     set: { newValue in
                         if let parsed = Double(newValue) {
-                            value.wrappedValue = min(max, max(min, parsed))
+                            value.wrappedValue = Swift.min(maxValue, Swift.max(minValue, parsed))
                         }
                     }
                 ),
                 placeholder: placeholder,
-                keyboardType: .decimalPad,
-                autocapitalization: .never,
                 validator: { valueText in
                     if valueText.isEmpty {
                         return .valid
@@ -315,14 +313,16 @@ extension SmartInputField {
                     guard let parsed = Double(valueText) else {
                         return ValidationResult(isValid: false, errorMessage: "Bitte gib eine gültige Zahl ein", errorKey: "invalidNumber")
                     }
-                    if parsed < min {
-                        return ValidationResult(isValid: false, errorMessage: "Minimum: \(min)€", errorKey: "minValue")
+                    if parsed < minValue {
+                        return ValidationResult(isValid: false, errorMessage: "Minimum: \(minValue)€", errorKey: "minValue")
                     }
-                    if parsed > max {
-                        return ValidationResult(isValid: false, errorMessage: "Maximum: \(max)€", errorKey: "maxValue")
+                    if parsed > maxValue {
+                        return ValidationResult(isValid: false, errorMessage: "Maximum: \(maxValue)€", errorKey: "maxValue")
                     }
                     return .valid
-                }
+                },
+                keyboardType: .decimalPad,
+                autocapitalization: .never
             )
         }
     }

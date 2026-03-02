@@ -99,7 +99,7 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 
-    private var personDetailsCard: View {
+    private var personDetailsCard: some View {
         HStack(spacing: 16) {
             PersonAvatar(person: person, size: 60)
 
@@ -124,7 +124,7 @@ struct AIGiftSuggestionsSheet: View {
         .padding(.vertical, 4)
     }
 
-    private func qualityMetricsSection(_ viewModel: SuggestionQualityViewModel) -> View {
+    private func qualityMetricsSection(_ viewModel: SuggestionQualityViewModel) -> some View {
         let personMetrics = viewModel.metricsFor(personId: person.id)
 
         return Section {
@@ -198,7 +198,7 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 
-    private var loadingState: View {
+    private var loadingState: some View {
         Section {
             VStack(spacing: 16) {
                 ZStack {
@@ -232,7 +232,7 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 
-    private func errorState(_ error: String) -> View {
+    private func errorState(_ error: String) -> some View {
         Section {
             VStack(spacing: 16) {
                 Image(systemName: "exclamationmark.triangle.fill")
@@ -259,12 +259,12 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 
-    private var suggestionsList: View {
+    private var suggestionsList: some View {
         let filteredSuggestions = suggestions.filter { suggestion in
             !existingGiftIdeaTitles.contains(suggestion.title.lowercased().trimmingCharacters(in: .whitespaces))
         }
 
-        Section {
+        return Section {
             if filteredSuggestions.isEmpty {
                 VStack(alignment: .leading, spacing: 12) {
                     Image(systemName: "lightbulb.fill")
@@ -334,7 +334,7 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 
-    private func suggestionCard(suggestion: GiftSuggestion, index: Int) -> View {
+    private func suggestionCard(suggestion: GiftSuggestion, index: Int) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(suggestion.title)
@@ -356,7 +356,7 @@ struct AIGiftSuggestionsSheet: View {
         .padding(.vertical, 4)
     }
 
-    private var budgetSection: View {
+    private var budgetSection: some View {
         Section {
             budgetPicker
             budgetDetailCard
@@ -377,7 +377,7 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 
-    private var budgetPicker: View {
+    private var budgetPicker: some View {
         Picker("Budget-Bereich", selection: $selectedBudget) {
             ForEach(BudgetRange.allCases, id: \.self) { budget in
                 BudgetRangeCompactView(budgetRange: budget, isSelected: selectedBudget == budget)
@@ -388,12 +388,12 @@ struct AIGiftSuggestionsSheet: View {
         .accessibilityLabel("Budget-Bereich wählen")
     }
 
-    private var budgetDetailCard: View {
+    private var budgetDetailCard: some View {
         BudgetRangeView(budgetRange: selectedBudget)
             .padding(.vertical, 4)
     }
 
-    private var generateButton: View {
+    private var generateButton: some View {
         Button(action: {
             loadSuggestions()
         }) {
