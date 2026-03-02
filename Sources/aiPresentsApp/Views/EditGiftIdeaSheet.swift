@@ -16,6 +16,7 @@ struct EditGiftIdeaSheet: View {
     @State private var tagsInput: String
     @State private var status: GiftStatus
     @State private var formState = FormState()
+    @State private var showingValidationError = false
 
     init(person: PersonRef, idea: GiftIdea) {
         self.person = person
@@ -31,11 +32,32 @@ struct EditGiftIdeaSheet: View {
     }
 
     private var isBudgetInvalid: Bool {
-        FormValidator.validateBudget(minString: budgetMin, maxString: budgetMax) != nil
+        let error = FormValidator.validateBudget(minString: budgetMin, maxString: budgetMax)
+        formState.setError(error, for: "budget")
+        return error != nil
     }
 
     private var linkValidation: (sanitized: String, isValid: Bool) {
-        URLValidator.validate(link)
+        let (sanitized, isValid) = URLValidator.validate(link)
+        if !isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty {
+            formState.setError(.invalidURL, for: "link")
+        } else {
+            formState.clearError(for: "link")
+        }
+        return (sanitized, isValid)
+    }
+
+    private var tagsValidation: ValidationError? {
+        let error = FormValidator.validateTags(tagsInput)
+        formState.setError(error, for: "tags")
+        return error
+    }
+
+    private var canSave: Bool {
+        !title.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !isBudgetInvalid &&
+        tagsValidation == nil &&
+        linkValidation.isValid
     }
 
     var body: some View {
@@ -88,6 +110,12 @@ struct EditGiftIdeaSheet: View {
                 Section("Tags") {
                     TextField("Getrennt durch Kommas", text: $tagsInput)
                         .textInputAutocapitalization(.never)
+
+                    if let error = tagsValidation {
+                        Text(error.errorDescription ?? "")
+                            .font(.caption)
+                            .foregroundColor(.red)
+                    }
                 }
 
                 Section("Status") {
@@ -111,12 +139,42 @@ struct EditGiftIdeaSheet: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Speichern") {
-                        saveGiftIdea()
-                        HapticFeedback.success()
-                        dismiss()
+                        if canSave {
+                            saveGiftIdea()
+                            HapticFeedback.success()
+                            dismiss()
+                        } else {
+                            showingValidationError = true
+                            HapticFeedback.error()
+                        }
                     }
-                    .disabled(title.isEmpty || isBudgetInvalid)
+                    .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
+            }
+        }
+        .alert("Eingabe prüfen", isPresented: $showingValidationError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            if !canSave {
+                var messages: [String] = []
+
+                if title.trimmingCharacters(in: .whitespaces).isEmpty {
+                    messages.append("- Titel darf nicht leer sein")
+                }
+
+                if isBudgetInvalid {
+                    messages.append("- Ungültiges Budget")
+                }
+
+                if let error = tagsValidation {
+                    messages.append("- \(error.errorDescription ?? "")")
+                }
+
+                if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty {
+                    messages.append("- Ungültige URL")
+                }
+
+                Text(messages.joined(separator: "\n"))
             }
         }
     }
