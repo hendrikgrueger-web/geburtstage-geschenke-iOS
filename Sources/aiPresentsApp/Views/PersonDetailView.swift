@@ -430,17 +430,8 @@ struct PersonDetailView: View {
     }
 
     private var daysUntilBirthday: Int {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        var birthdayThisYear = calendar.date(bySetting: .year, value: calendar.component(.year, from: today), of: person.birthday) ?? person.birthday
-
-        // If birthday already passed this year, use next year
-        if birthdayThisYear < today {
-            let nextYear = calendar.component(.year, from: today) + 1
-            birthdayThisYear = calendar.date(bySetting: .year, value: nextYear, of: person.birthday) ?? birthdayThisYear
-        }
-
-        return calendar.dateComponents([.day], from: today, to: birthdayThisYear).day ?? 0
+        let today = Calendar.current.startOfDay(for: Date())
+        return BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) ?? 0
     }
 
     private var nextBirthdayInfo: String {
