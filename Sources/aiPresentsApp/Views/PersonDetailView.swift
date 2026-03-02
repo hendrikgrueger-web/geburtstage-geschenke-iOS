@@ -17,6 +17,7 @@ struct PersonDetailView: View {
     @State private var showingDeletePerson = false
     @State private var showingAISuggestions = false
     @State private var giftSortOption: GiftSortOption = .status
+    @State private var giftStatusFilter: GiftStatusFilter = .all
     @State private var showingShareSheet = false
     @State private var shareText: String = ""
     @State private var showingEditRelation = false
@@ -27,6 +28,14 @@ struct PersonDetailView: View {
         case budget = "Budget"
         case title = "Titel"
         case date = "Datum"
+    }
+
+    enum GiftStatusFilter: String, CaseIterable {
+        case all = "Alle"
+        case idea = "Ideen"
+        case planned = "Geplant"
+        case purchased = "Gekauft"
+        case given = "Verschenkt"
     }
 
     var body: some View {
@@ -142,18 +151,30 @@ struct PersonDetailView: View {
                     .onDelete(perform: deleteGiftIdeas)
                 }
             } header: {
-                HStack {
+                VStack(alignment: .leading, spacing: 8) {
                     Text("Geschenkideen")
-                    Spacer()
-                    Picker("", selection: $giftSortOption) {
-                        ForEach(GiftSortOption.allCases, id: \.self) { option in
-                            Text(option.rawValue).tag(option)
+
+                    HStack(spacing: 8) {
+                        Picker("", selection: $giftStatusFilter) {
+                            ForEach(GiftStatusFilter.allCases, id: \.self) { filter in
+                                Text(filter.rawValue).tag(filter)
+                            }
                         }
-                    }
-                    .pickerStyle(.menu)
-                    .buttonStyle(.plain)
-                    Button(action: { showingAddGiftIdea = true }) {
-                        Image(systemName: "plus.circle.fill")
+                        .pickerStyle(.segmented)
+                        .buttonStyle(.plain)
+
+                        Spacer()
+
+                        Picker("", selection: $giftSortOption) {
+                            ForEach(GiftSortOption.allCases, id: \.self) { option in
+                                Text(option.rawValue).tag(option)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                        .buttonStyle(.plain)
+                        Button(action: { showingAddGiftIdea = true }) {
+                            Image(systemName: "plus.circle.fill")
+                        }
                     }
                 }
             } footer: {
@@ -346,25 +367,39 @@ struct PersonDetailView: View {
     private var filteredGiftIdeas: [GiftIdea] {
         let statusOrder: [GiftStatus] = [.idea, .planned, .purchased, .given]
 
-        return giftIdeas
-            .filter { $0.personId == person.id }
-            .sorted { idea1, idea2 in
-                switch giftSortOption {
-                case .status:
-                    let index1 = statusOrder.firstIndex(of: idea1.status) ?? 0
-                    let index2 = statusOrder.firstIndex(of: idea2.status) ?? 0
-                    if index1 != index2 {
-                        return index1 < index2
-                    }
-                    return idea1.title < idea2.title
-                case .budget:
-                    return idea1.budgetMax > idea2.budgetMax
-                case .title:
-                    return idea1.title < idea2.title
-                case .date:
-                    return idea1.createdAt > idea2.createdAt
+        var ideas = giftIdeas.filter { $0.personId == person.id }
+
+        // Apply status filter
+        switch giftStatusFilter {
+        case .all:
+            break // Show all
+        case .idea:
+            ideas = ideas.filter { $0.status == .idea }
+        case .planned:
+            ideas = ideas.filter { $0.status == .planned }
+        case .purchased:
+            ideas = ideas.filter { $0.status == .purchased }
+        case .given:
+            ideas = ideas.filter { $0.status == .given }
+        }
+
+        return ideas.sorted { idea1, idea2 in
+            switch giftSortOption {
+            case .status:
+                let index1 = statusOrder.firstIndex(of: idea1.status) ?? 0
+                let index2 = statusOrder.firstIndex(of: idea2.status) ?? 0
+                if index1 != index2 {
+                    return index1 < index2
                 }
+                return idea1.title < idea2.title
+            case .budget:
+                return idea1.budgetMax > idea2.budgetMax
+            case .title:
+                return idea1.title < idea2.title
+            case .date:
+                return idea1.createdAt > idea2.createdAt
             }
+        }
     }
 
     private var filteredGiftHistory: [GiftHistory] {
