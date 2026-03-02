@@ -5,6 +5,7 @@ struct BirthdayRow: View {
     let onTap: (() -> Void)?
     let onQuickAdd: (() -> Void)?
     let showCountdown: Bool
+    @State private var isAnimating = false
 
     init(person: PersonRef, onTap: (() -> Void)? = nil, onQuickAdd: (() -> Void)? = nil, showCountdown: Bool = true) {
         self.person = person
@@ -25,7 +26,7 @@ struct BirthdayRow: View {
 
                 Text(birthdayInfo)
                     .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundColor(birthdayTextColor)
 
                 // Progress bar for birthdays < 30 days away
                 if daysUntilBirthday <= 30 && daysUntilBirthday >= 0 {
@@ -70,7 +71,7 @@ struct BirthdayRow: View {
             }
         }
         .padding(.vertical, 8)
-        .listRowBackground(AppColor.cardBackground)
+        .listRowBackground(daysUntilBirthday <= 7 ? urgentBackgroundColor : AppColor.cardBackground)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityHint("Tap für Details und Geschenkideen")
@@ -78,6 +79,11 @@ struct BirthdayRow: View {
         .onTapGesture {
             HapticFeedback.light()
             onTap?()
+        }
+        .onAppear {
+            if daysUntilBirthday <= 7 {
+                isAnimating = true
+            }
         }
     }
 
@@ -164,6 +170,28 @@ struct BirthdayRow: View {
             return "\(daysUntil) Tage bis zum \(age). Geburtstag"
         } else {
             return "Wird \(age) (\(daysUntil) Tage)"
+        }
+    }
+
+    private var birthdayTextColor: Color {
+        if daysUntilBirthday == 0 {
+            return AppColor.birthdayToday
+        } else if daysUntilBirthday <= 7 {
+            return AppColor.birthdaySoon
+        } else {
+            return AppColor.textSecondary
+        }
+    }
+
+    private var urgentBackgroundColor: Color {
+        if daysUntilBirthday == 0 {
+            return AppColor.birthdayToday.opacity(0.15)
+        } else if daysUntilBirthday <= 3 {
+            return AppColor.birthdaySoon.opacity(0.12)
+        } else if daysUntilBirthday <= 7 {
+            return AppColor.accent.opacity(0.1)
+        } else {
+            return AppColor.cardBackground
         }
     }
 }
