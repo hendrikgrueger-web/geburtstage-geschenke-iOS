@@ -1,6 +1,16 @@
 # Sprint Zusammenfassung: 8h Day-Sprint (2026-03-02)
 
-## Erledigt
+## Erledigt (Phase 2 Fortsetzung - Integration neuer Komponenten)
+
+### 7. Komponenten-Integration in bestehende Views
+- **TimelineView.swift**: Debouncer Utility Integration
+  - Ersetzt manuelles `Task.sleep()` Debouncing mit Debouncer utility
+  - Sauberer Code, bessere Wartbarkeit
+  - Konsistente Debounce-Zeit (300ms) über die gesamte App
+- **EmptyStateView.swift**: QuickActionCard Integration
+  - Verbesserte Aktion-Darstellung mit QuickActionCard Komponente
+  - Bessere visuelle Hierarchie und Discoverability
+  - Konsistent mit dem neuen Design-System
 
 ### 1. Stabilitäts-Fixes (Priority #1)
 - **BirthdayCalculator.swift**: Thread-safe cache mit NSLock
@@ -69,6 +79,7 @@
 - **DebouncerTests.swift**: 30 Tests für alle Szenarien
 
 ## Commits
+- aa562e1: Integrate new utilities into existing views (Debouncer + QuickActionCard)
 - e05609e: Comprehensive tests for new utilities (SmartInputField, BirthdayDateHelper, FormState)
 - a9177f6: Update sprint summary with system utilities
 - acff469: NotificationPermissionHelper + FormState utilities
@@ -122,6 +133,7 @@
 ✅ TimelineFilterView
 
 ## Nächste Schritte (Phase 2 - Fortsetzung)
-- Komponenten in bestehende Views integrieren
+- ~~Komponenten in bestehende Views integrieren~~ (in Arbeit: TimelineView + EmptyStateView)
+- SmartInputField in Add/Edit Sheets integrieren (AddGiftIdeaSheet, AddGiftHistorySheet, Edit*)
 - Bessere leere Zustände + UX-Feinschliff
 - TestFlight Vorbereitung
