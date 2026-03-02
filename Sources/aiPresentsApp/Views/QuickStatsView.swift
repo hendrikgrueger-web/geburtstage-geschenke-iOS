@@ -6,7 +6,7 @@ struct QuickStatsView: View {
     @Query private var giftIdeas: [GiftIdea]
 
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 12) {
             statCard(
                 icon: "person.2.fill",
                 value: "\(people.count)",
@@ -15,8 +15,8 @@ struct QuickStatsView: View {
             )
 
             statCard(
-                icon: "lightbulb.fill",
-                value: "\(upcomingBirthdaysCount)",
+                icon: "bell.fill",
+                value: upcomingBirthdaysCount > 0 ? "\(upcomingBirthdaysCount)" : "Keine",
                 label: "Diese Woche",
                 color: AppColor.accent
             )
@@ -48,6 +48,23 @@ struct QuickStatsView: View {
 
     private var totalGiftIdeas: Int {
         giftIdeas.count
+    }
+
+    // Get the next upcoming birthday with countdown
+    private var nextBirthdayInfo: (person: PersonRef, daysUntil: Int)? {
+        let today = Calendar.current.startOfDay(for: Date())
+
+        let sorted = people.compactMap { person -> (PersonRef, Int)? in
+            guard let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
+                return nil
+            }
+            if daysUntil >= 0 && daysUntil <= 30 {
+                return (person, daysUntil)
+            }
+            return nil
+        }.sorted { $0.1 < $1.1 }
+
+        return sorted.first
     }
 
     @ViewBuilder
