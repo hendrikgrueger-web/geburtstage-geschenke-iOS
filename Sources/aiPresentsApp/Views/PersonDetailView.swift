@@ -23,6 +23,7 @@ struct PersonDetailView: View {
     @State private var showingEditRelation = false
     @State private var editedRelation: String = ""
     @State private var showingMarkAllAsGivenConfirmation = false
+    @State private var toast: ToastItem?
 
     enum GiftSortOption: String, CaseIterable {
         case status = "Status"
@@ -377,6 +378,7 @@ struct PersonDetailView: View {
                 }
             }
         }
+        .toast(item: $toast)
     }
 
     private var avatarRow: some View {
@@ -577,6 +579,7 @@ struct PersonDetailView: View {
 
         shareText = text
         showingShareSheet = true
+        toast = ToastItem.info("Teilen", message: "Teilen-Dialog geöffnet")
     }
 
     private func exportAsCSV() {
@@ -586,8 +589,13 @@ struct PersonDetailView: View {
             let fileName = "geschenkideen-\(person.displayName.replacingOccurrences(of: " ", with: "_")).csv"
             if let url = saveCSVToDocuments(content: csvContent, fileName: fileName) {
                 shareCSV(url: url)
+                toast = ToastItem.success("Export erfolgreich", message: "CSV-Datei wurde erstellt")
+            } else {
+                toast = ToastItem.error("Export fehlgeschlagen", message: "Datei konnte nicht gespeichert werden")
+                HapticFeedback.error()
             }
         } else {
+            toast = ToastItem.warning("Keine Daten", message: "Keine Geschenkideen zum Exportieren vorhanden")
             HapticFeedback.error()
         }
     }
