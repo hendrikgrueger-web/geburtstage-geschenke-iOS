@@ -30,32 +30,84 @@ struct AIService {
 
         // Age context
         let currentAge = age(for: person, on: date)
-        context += "- Alter: \(currentAge) Jahre\n"
+        context += "- Alter: \(currentAge) Jahre"
+
+        // Add age group context
+        if currentAge < 18 {
+            context += " (Kind/Jugendlicher)\n"
+        } else if currentAge < 30 {
+            context += " (Junge Erwachsene)\n"
+        } else if currentAge < 50 {
+            context += " (Erwachsene)\n"
+        } else {
+            context += " (Reif/Erfahrung)\n"
+        }
 
         // Milestone context
         if let milestone = milestone(for: person, on: date) {
-            context += "- Meilenstein: \(milestone.name!)\n"
+            context += "- Meilenstein: \(milestone.name!) - Besonderer Anlass!\n"
         }
 
-        // Zodiac sign (optional context)
+        // Zodiac sign with personality hints
         let zodiac = BirthdayDateHelper.zodiacSign(from: person.birthday)
         if !zodiac.isEmpty {
-            context += "- Sternzeichen: \(zodiac)\n"
+            let personalityHint = personalityHint(for: zodiac)
+            context += "- Sternzeichen: \(zodiac) (\(personalityHint))\n"
         }
 
-        // Relative birthday timing
+        // Relative birthday timing with urgency context
         let daysUntil = BirthdayDateHelper.daysUntilBirthday(from: person.birthday, asOf: date)
         if let days = daysUntil {
             if days == 0 {
-                context += "- Anlass: Geburtstag ist HEUTE! 🎉\n"
+                context += "- Anlass: Geburtstag ist HEUTE! 🎉 (Sofortige Idee nötig)\n"
             } else if days == 1 {
-                context += "- Anlass: Geburtstag ist morgen\n"
+                context += "- Anlass: Geburtstag ist morgen (Zeit für etwas Persönliches)\n"
+            } else if days <= 7 {
+                context += "- Anlass: Geburtstag in \(days) Tagen (Zeit für Planung)\n"
             } else {
-                context += "- Anlass: Geburtstag in \(days) Tagen\n"
+                context += "- Anlass: Geburtstag in \(days) Tagen (Genug Zeit für etwas Besonderes)\n"
             }
         }
 
         return context
+    }
+
+    /// Personality hints based on zodiac sign (for AI context)
+    private func personalityHint(for zodiac: String) -> String {
+        switch zodiac.lowercased() {
+        case "widder": return "energisch, spontan"
+        case "stier": return "genussvoll, bodenständig"
+        case "zwillinge": return "neugierig, kommunikativ"
+        case "krebs": return "fürsorglich, emotional"
+        case "löwe": return "kreativ, selbstbewusst"
+        case "jungfrau": return "perfektionistisch, praktisch"
+        case "waage": return "harmonisch, ästhetisch"
+        case "skorpion": return "intensiv, leidenschaftlich"
+        case "schütze": return "abenteuerlustig, optimistisch"
+        case "steinbock": return "ehrgeizig, diszipliniert"
+        case "wassermann": return "eigenständig, innovativ"
+        case "fische": return "künstlerisch, einfühlsam"
+        default: return "einzigartig"
+        }
+    }
+
+    /// Zodiac-based birthday wishes for demo mode
+    private func zodiacWish(for zodiac: String) -> String {
+        switch zodiac.lowercased() {
+        case "widder": return "Möge deine Energie und Spontaneität dich weiterbringen!"
+        case "stier": return "Genieß die schönen Momente des Lebens!"
+        case "zwillinge": return "Möge deine Neugier immer neue Wege öffnen!"
+        case "krebs": return "Deine Fürsorge ist unbezahlbar - genieß diesen Tag!"
+        case "löwe": return "Strahle weiter hell und inspiriere uns alle!"
+        case "jungfrau": return "Deine Perfektion ist beeindruckend - bleib so!"
+        case "waage": return "Bringe weiterhin Harmonie und Schönheit in die Welt!"
+        case "skorpion": return "Deine Leidenschaft und Tiefe sind einzigartig!"
+        case "schütze": return "Möge dein Optimismus dich zu neuen Höhen führen!"
+        case "steinbock": return "Dein Ehrgeiz und Disziplin sind vorbildlich!"
+        case "wassermann": return "Deine Kreativität und Unabhängigkeit inspirieren!"
+        case "fische": return "Deine Empathie und Kreativität sind ein Geschenk!"
+        default: return "Bleib so einzigartig wie du bist!"
+        }
     }
 
     func generateGiftIdeas(
@@ -109,6 +161,7 @@ struct AIService {
         let relation = person.relation
         let currentAge = age(for: person)
         let milestone = milestone(for: person)
+        let zodiac = BirthdayDateHelper.zodiacSign(from: person.birthday)
 
         var greeting = "Liebe(r) \(name),"
         var body = ""
@@ -117,7 +170,7 @@ struct AIService {
             body = """
             alles Gute zum \(currentAge). Geburtstag! 🎉
 
-            Das ist ein ganz besonderer Meilenstein, den du jetzt erreichst. Ich wünsche dir für dieses neue Lebensjahr alles Gute - Gesundheit, Glück und dass alle deine Träume und Wünsche in Erfüllung gehen.
+            Das ist ein ganz besonderer Meilenstein, den du jetzt erreichst. Ich wünsche dir für dieses neue Lebensjahr alles Gute - Gesundheit, Glück und dass alle deine Träume und Wünsche in Erfüllung gehen. \(zodiacWish(for: zodiac))
 
             Du bist ein wertvoller Teil meines Lebens und ich freue mich darauf, viele weitere schöne Momente mit dir zu erleben. Feier diesen Tag so, wie du es verdienst!
 
@@ -128,7 +181,7 @@ struct AIService {
             body = """
             alles Gute zum \(currentAge). Geburtstag! 🎂
 
-            Ich wünsche dir einen fantastischen Tag, an dem du rundum verwöhnt wirst. Möge das kommende Jahr voller toller Erlebnisse und glücklicher Momente sein.
+            Ich wünsche dir einen fantastischen Tag, an dem du rundum verwöhnt wirst. Möge das kommende Jahr voller toller Erlebnisse und glücklicher Momente sein. \(zodiacWish(for: zodiac))
 
             Lass dich feiern und genieß jeden Augenblick dieses besonderen Tages!
 
@@ -139,9 +192,9 @@ struct AIService {
             body = """
             herzlichen Glückwunsch zum \(currentAge). Geburtstag! 🎉
 
-            Möge dieser Tag so schön sein wie du. Ich wünsche dir Gesundheit, Freude und alles Gute für das kommende Jahr. Danke, dass du Teil meines Lebens bist.
+            Möge dieser Tag so schön sein wie du. Ich wünsche dir Gesundheit, Freude und alles Gute für das kommende Jahr. \(zodiacWish(for: zodiac))
 
-            Genieß deinen Festtag und feiere ordentlich!
+            Danke, dass du Teil meines Lebens bist. Genieß deinen Festtag und feiere ordentlich!
 
             Warmherzig,
             Dein(e) \(relation)
@@ -153,35 +206,51 @@ struct AIService {
 
     private func buildBirthdayMessagePrompt(for person: PersonRef, pastGifts: [GiftHistory]) -> String {
         var prompt = """
-        Schreibe eine persönliche Geburtstagsgrußkarte für \(person.displayName).
+        Als erfahrener Texter: Schreibe eine herzliche, persönliche Geburtstagsgrußkarte für \(person.displayName).
 
-        Kontext:
+        ===== PERSON KONTEXT =====
         \(contextString(for: person))
         - Beziehung: \(person.relation)
+        =====
         """
 
         if !pastGifts.isEmpty {
             let lastGift = pastGifts.sorted { $0.year > $1.year }.first
             if let gift = lastGift {
+                prompt += "\n===== GESCHICHTE =====\n"
                 prompt += "- Letztes Geschenk (\(gift.year)): \(gift.title)\n"
+                if !gift.note.isEmpty {
+                    prompt += "- Anmerkung: \(gift.note)\n"
+                }
+                prompt += "===== Nutze dies für einen persönlichen Bezug =====\n"
             }
         }
 
         prompt += """
-        \nBitte schreibe eine herzliche, persönliche Nachricht auf Deutsch. Der Ton sollte warm und wertschätzend sein, angemessen für die Beziehung.
+        ===== TONFALL & STIL =====
+        - Herzlich, wertschätzend und authentisch
+        - Angemessen für die Beziehung (\(person.relation))
+        - Bei Meilensteinen: Besondere Erwähnung des Anlasses
+        - Keine Floskeln, echte Emotionen
+        =====
 
-        Die Nachricht sollte:
-        1. Eine persönliche Anrede haben
-        2. Wünsche für das neue Jahr enthalten
-        3. Ein Gefühl von Wertschätzung ausdrücken
-        4. Bei Meilensteinen diesen besonderen Tag erwähnen
-        5. Eine freundliche Schlusszeile haben
+        ===== STRUKTUR =====
+        1. Greeting: Persönliche Anrede (nicht "Sehr geehrter/r")
+        2. Body: 3-5 Sätze mit:
+           - Glückwünsche für das neue Jahr
+           - Wertschätzung der Beziehung
+           - Eventuell persönlicher Bezug aus der Vergangenheit
+           - Bei Meilenstein: Bedeutung dieses Anlasses
+        =====
 
-        Format als JSON:
+        ===== AUSGABE FORMAT =====
         {
-            "greeting": "Anrede",
-            "body": "Vollständige Nachrichtentext"
+            "greeting": "Persönliche Anrede (z.B. 'Liebe Anna,' oder 'Hallo Thomas,')",
+            "body": "Vollständiger Nachrichtentext (3-5 Sätze, herzlich und persönlich)"
         }
+        =====
+
+        Jetzt: Eine einzigartige, herzliche Geburtstagsnachricht schreiben.
         """
 
         return prompt
@@ -213,33 +282,40 @@ struct AIService {
         let name = person.displayName.components(separatedBy: " ").first ?? person.displayName
         let currentAge = age(for: person)
         let milestone = milestone(for: person)
+        let zodiac = BirthdayDateHelper.zodiacSign(from: person.birthday)
 
         var suggestions: [(title: String, reason: String)]
+
+        // Zodiak-basierte Variationen
+        func zodiacSuffix() -> String {
+            let personality = personalityHint(for: zodiac)
+            return "Passt perfekt zu einem \(zodiac) (\(personalityHint(for: zodiac)))."
+        }
 
         // Milestone-based suggestions
         if let milestone = milestone {
             if milestone.age == 18 {
                 suggestions = [
-                    ("Erlebnis-Gutschein für etwas Spezielles", "Zum 18. Geburtstag unvergessliche Erinnerungen schaffen."),
-                    ("Hochwertiges Technik-Gadget", "Einstieg ins Erwachsenenleben - modern und nützlich."),
-                    ("Reisegutschein oder Weekend-Trip", "Freiheit erleben und neue Orte entdecken."),
+                    ("Erlebnis-Gutschein für etwas Spezielles", "Zum 18. Geburtstag unvergessliche Erinnerungen schaffen. \(zodiacSuffix())"),
+                    ("Hochwertiges Technik-Gadget", "Einstieg ins Erwachsenenleben - modern und nützlich. \(zodiacSuffix())"),
+                    ("Reisegutschein oder Weekend-Trip", "Freiheit erleben und neue Orte entdecken. \(zodiacSuffix())"),
                     ("Personalisiertes Geschenk mit Gravur", "Einzigartiges Andenken an diesen besonderen Meilenstein."),
-                    ("Abo für Streaming/Musik/etc.", "Jahrlange Freude an digitalen Diensten.")
+                    ("Abo für Streaming/Musik/etc.", "Jahrlange Freude an digitalen Diensten. \(zodiacSuffix())")
                 ]
             } else if milestone.age >= 30 && milestone.age <= 60 {
                 suggestions = [
-                    ("Erlebnis für zwei Personen", "Qualitätszeit und gemeinsame Erlebnisse schätzen."),
+                    ("Erlebnis für zwei Personen", "Qualitätszeit und gemeinsame Erlebnisse schätzen. \(zodiacSuffix())"),
                     ("Hochwertiges Lifestyle-Produkt", "Qualität vor Quantität - für den genussvollen Alltag."),
                     ("Personalisiertes Geschenk mit Foto", "Erinnerungen hochleben lassen - besonders wertvoll."),
-                    ("Gourmet-Essen oder Weinprobe", "Genussmomente zum Anlass genießen."),
+                    ("Gourmet-Essen oder Weinprobe", "Genussmomente zum Anlass genießen. \(zodiacSuffix())"),
                     ("Praktisches aber elegantes Zubehör", "Nützlich und ästhetisch - für den gepflegten Alltag.")
                 ]
             } else {
                 suggestions = [
-                    ("Besonderes Erlebnis", "Für diesen Meilenstein etwas unvergessliches erleben."),
+                    ("Besonderes Erlebnis", "Für diesen Meilenstein etwas unvergessliches erleben. \(zodiacSuffix())"),
                     ("Hochwertiges Geschenk mit persönlichem Touch", "Zeigt Wertschätzung für diese besondere Stufe im Leben."),
                     ("Erinnerungsstück scrapen oder Album", "Auf das bisherige Leben zurückblicken und feiern."),
-                    ("Gutschein für das Lieblingshobby", "Interessen fördern und Freude schenken."),
+                    ("Gutschein für das Lieblingshobby", "Interessen fördern und Freude schenken. \(zodiacSuffix())"),
                     ("Zeitloses Accessoire", "Klassisch und elegant - ein Bleibendes zum Meilenstein.")
                 ]
             }
@@ -248,16 +324,16 @@ struct AIService {
         else if relation.contains("familie") || relation.contains("mama") || relation.contains("papa") {
             suggestions = [
                 ("Fotoalbum mit Erinnerungen", "Persönlich und sentimental - perfekt für Familienmitglieder."),
-                ("Hochwertige Küche/Bar Ausrüstung", "Praktisch und von hoher Qualität - ideal für häufiges Nutzen."),
+                ("Hochwertige Küche/Bar Ausrüstung", "Praktisch und von hoher Qualität - ideal für häufiges Nutzen. \(zodiacSuffix())"),
                 ("Gutschein für Erlebnis", "Gemeinsam Zeit verbringen schafft bleibende Erinnerungen."),
-                ("Buch zum Lieblingsthema", "Zeigt Interesse und Wertschätzung für Hobbys."),
+                ("Buch zum Lieblingsthema", "Zeigt Interesse und Wertschätzung für Hobbys. \(zodiacSuffix())"),
                 ("Schmuck oder Accessoires", "Zeitlos und persönlich - ein Klassiker für besondere Anlässe.")
             ]
         } else if relation.contains("freund") || relation.contains("kollege") {
             suggestions = [
-                ("Tech-Gadget oder Zubehör", "Modern und nützlich - perfekt für Technik-Enthusiasten."),
+                ("Tech-Gadget oder Zubehör", "Modern und nützlich - perfekt für Technik-Enthusiasten. \(zodiacSuffix())"),
                 ("Hochwertiges Schreibwaren-Set", "Elegant und professionell - gut für Office oder Schreibtisch."),
-                ("Erlebnis-Gutschein", "Kino, Konzerte oder Ausstellungen - Erlebnisse statt Dinge."),
+                ("Erlebnis-Gutschein", "Kino, Konzerte oder Ausstellungen - Erlebnisse statt Dinge. \(zodiacSuffix())"),
                 ("Specialty Food & Drink", "Premium Kaffee, Tee oder Craft Beer - genießbar und nachhaltig."),
                 ("Spiel für Abende", "Gesellig und unterhaltsam - bringt Menschen zusammen.")
             ]
@@ -265,15 +341,15 @@ struct AIService {
             suggestions = [
                 ("Romantisches Wochenend-Ausflug", "Qualitätszeit und neue Erinnerungen schaffen."),
                 ("Hochwertiges Uhrenarmband", "Schick und persönlich - täglicher Nutzen mit sentimentalem Wert."),
-                ("Personalisiertes Geschenk", "Gravur oder eigenes Design - einzigartig und speziell."),
-                ("Erlebnis für Zweit", "Kochkurs, Weinprobe oder Wellness - gemeinsam erleben."),
+                ("Personalisiertes Geschenk", "Gravur oder eigenes Design - einzigartig und speziell. \(zodiacSuffix())"),
+                ("Erlebnis für Zweit", "Kochkurs, Weinprobe oder Wellness - gemeinsam erleben. \(zodiacSuffix())"),
                 ("Schmuckstück", "Klassisch und zeitlos - ein Symbol für Wertschätzung.")
             ]
         } else {
             suggestions = [
                 ("Personalisiertes Geschenk", "Gravur oder eigenes Design - zeigt besondere Aufmerksamkeit."),
-                ("Erlebnis-Gutschein", "Veranstaltungen oder Kurse - Erinnerungen statt Dinge."),
-                ("Hochwertiges Buch", "Zeigt Interesse für Hobbys - geduldig und nachhaltig."),
+                ("Erlebnis-Gutschein", "Veranstaltungen oder Kurse - Erinnerungen statt Dinge. \(zodiacSuffix())"),
+                ("Hochwertiges Buch", "Zeigt Interesse für Hobbys - geduldig und nachhaltig. \(zodiacSuffix())"),
                 ("Praktisches Gadget", "Nützlich und modern - guter Alltagsbegleiter."),
                 ("Kreative Bastel-Kits", "Selbstgemacht und kreativ - persönlich und einzigartig.")
             ]
@@ -290,39 +366,57 @@ struct AIService {
         pastGifts: [GiftHistory]
     ) -> String {
         var prompt = """
-        Ich brauche 5 Geschenkideen für \(person.displayName).
+        Als erfahrener Geschenkberater: Erstelle 5 hochqualitative Geschenkideen für \(person.displayName).
 
-        Kontext:
+        ===== PERSON KONTEXT =====
         \(contextString(for: person))
         - Beziehung: \(person.relation)
-        - Budget: \(Int(budgetMin))€ - \(Int(budgetMax))€
+        =====
+
+        ===== BESCHRÄNKUNGEN =====
+        - Budget: \(Int(budgetMin))€ - \(Int(budgetMax))€ (STRIKT - keine Vorschläge außerhalb dieses Bereichs)
         """
 
         if !tags.isEmpty {
-            prompt += "- Interessen/Tags: \(tags.joined(separator: ", "))\n"
+            prompt += "- Interessen/Tags: \(tags.joined(separator: ", ")) (nutze diese als Inspiration)\n"
         }
 
         if !pastGifts.isEmpty {
-            prompt += "\nBereits verschenkt (vermeide ähnliche Geschenke):\n"
+            prompt += "\n===== BEREITS VERSCHENKT (NICHT NOCHMAL) =====\n"
             for gift in pastGifts {
                 prompt += "- \(gift.title) (\(gift.category))\n"
             }
+            prompt += "===== ACHTUNG: Keine ähnlichen Geschenke vorschlagen!\n"
         }
 
         prompt += """
-        \nBitte gib mir 5 konkrete, kreative Geschenkideen, die zum Alter, der Beziehung und den Interessen passen.
-        Berücksichtige bei Meilensteinen besondere Bedeutung und bei Sternzeichen typische Eigenschaften.
-        Für jede Idee:
-        1. Name des Geschenks
-        2. Kurze Begründung (1-2 Sätze)
+        =====
 
-        Format als JSON:
+        ===== QUALITÄTSKRITERIEN =====
+        1. Jede Idee muss einzigartig sein (keine Dopplungen untereinander)
+        2. Preisgenau im Budget-Bereich (keine "ca" - konkrete Preisschätzung)
+        3. Altersgerecht (Kind/Jugendlicher/Erwachsener/Reif)
+        4. Beziehungsgemäß (Familie/Freunde/Partner/Kollege - unterschiedliche Tonart)
+        5. Persönlich (nutze Alter, Sternzeichen-Charakter, Meilenstein-Bedeutung)
+        6. Meilenstein-Sensibilität: Besondere Bedeutung für runde Geburtstage
+        7. Sternzeichen: Berücksichtige typische Eigenschaften (\(personalityHint(for: BirthdayDateHelper.zodiacSign(from: person.birthday))))
+        =====
+
+        ===== AUSGABE FORMAT =====
+        Für jede Idee:
+        - title: Konkreter Geschenkname (keine allgemeinen Begriffe)
+        - reason: Kurze Begründung (max 2 Sätze) mit persönlichem Bezug zur Person
+
+        Striktes JSON-Array:
         [
             {
-                "title": "Geschenkname",
-                "reason": "Begründung"
+                "title": "Konkreter Geschenkname",
+                "reason": "Begründung mit persönlichem Bezug"
             }
         ]
+        =====
+
+        Jetzt: 5 einzigartige, budgetgerechte, personalisierte Geschenkideen generieren.
         """
 
         return prompt
