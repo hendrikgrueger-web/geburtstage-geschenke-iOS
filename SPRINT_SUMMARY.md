@@ -26,7 +26,36 @@
   - DebounceStrategy (standard, aggressive, conservative)
 - **DebouncerTests.swift**: 30 Tests für alle Szenarien
 
+### 5. UX-Komponenten (Priority #2 - Fortsetzung)
+- **SmartInputField.swift**: Intelligente Textfelder mit Real-Time-Validierung
+  - Debounced Feedback (300ms) für bessere UX
+  - Visuelle Validierung (Icons, Farben)
+  - Vorgefertigte Feld-Typen (Titel, URL, E-Mail, Budget, Notiz)
+  - Accessibility-Support
+- **QuickActionCard.swift**: Wiederverwendbare Aktions-Karten
+  - Verschiedene Styles (Primary, Secondary, Success, Warning, Info)
+  - Grid-Layout für mehrere Aktionen
+  - StatCard für Dashboard-Ansichten
+  - Vorgefertigte Aktionen (Kontakt hinzufügen, Importieren, AI-Vorschläge)
+- **BirthdayDateHelper.swift**: Umfassende Birthday-Daten-Hilfsfunktionen
+  - Altersberechnung und Meilensteine (18, 21, 30, 40...)
+  - Zeitraum-Filterung (Heute, Morgen, Diese Woche, Dieser Monat)
+  - Zodiac-Sign Berechnung
+  - Relative Beschreibungen (Heute, Morgen, X Tage)
+- **TimelineFilterView.swift**: Erweiterte Timeline-Filterung
+  - Period-Selektor (Alle, Heute, 7 Tage, 30 Tage)
+  - Echtzeit-Suche mit Debouncing
+  - Favoriten-Filter
+  - Filter-Zusammenfassung
+- **Debouncer.swift**: Utility für Debouncing und Throttling
+  - Debouncer class für rapid value changes
+  - Throttler für rate-limiting
+  - DebouncedPublisher für Combine
+  - DebounceStrategy (standard, aggressive, conservative)
+- **DebouncerTests.swift**: 30 Tests für alle Szenarien
+
 ## Commits
+- 6eb7db4: Enhanced UX components (SmartInputField, QuickActionCard, BirthdayDateHelper, TimelineFilterView)
 - 498dcde: Reduced motion support for OnboardingView + BirthdayWidgetView
 - 3fae581: Accessibility enhancements (Phase 2) - AccessibilityConfiguration utility + tests
 - 88f1d6e: Accessibility improvements across key views - Better labels and reduced motion
@@ -68,8 +97,12 @@
 ✅ Dynamic Type Unterstützung vorbereitet
 ✅ AccessibilityConfigurationTests (23 Tests)
 ✅ Accessibility Labels verfeinert
+✅ SmartInputField mit Real-Time-Validierung
+✅ QuickActionCard Komponenten
+✅ BirthdayDateHelper utility
+✅ TimelineFilterView
 
 ## Nächste Schritte (Phase 2 - Fortsetzung)
-- Input-Validierung erweitern
+- Komponenten in bestehende Views integrieren
 - Bessere leere Zustände + UX-Feinschliff
 - TestFlight Vorbereitung
