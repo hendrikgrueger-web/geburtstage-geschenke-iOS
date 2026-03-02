@@ -77,7 +77,13 @@ struct EditGiftIdeaSheet: View {
 
                         if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
                             Button {
-                                UIApplication.shared.open(URL(string: linkValidation.sanitized)!)
+                                if let url = URL(string: linkValidation.sanitized) {
+                                    UIApplication.shared.open(url) { success in
+                                        if !success {
+                                            AppLogger.ui.warning("Failed to open URL: \(linkValidation.sanitized)")
+                                        }
+                                    }
+                                }
                             } label: {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundColor(.blue)
