@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TestFlight release notes (German & English) for v0.2.0 Beta
 - App Store Connect setup guide and build process documentation
 - Test coverage statistics in README (29 test files, 636+ test methods)
+- Beta Tester Guide (BETA_TESTERS.md) with detailed testing checklist
+- Test focus areas for core functionality and accessibility
+- Known issues and workarounds section for beta testers
 - SmartInputField integration in Add/Edit sheets for enhanced UX
 - Real-time debounced validation (300ms) for all form inputs
 - Visual feedback with icons, colors, and error messages in forms
