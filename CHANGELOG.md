@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ValidationHelperTests: 60+ tests covering all validation methods
 - AnimationHelperTests: tests for all animation utilities and factories
 - AppColorTests: comprehensive tests for color system and gradients
+- Toast notification system for non-intrusive user feedback
+- ToastItem with success/error/warning/info types
+- ToastView with smooth slide-in/fade-out animations
+- Auto-dismiss with configurable duration
+- View modifier for easy toast integration
 
 ### Changed
 - Replace all print() statements with proper AppLogger for consistent logging
