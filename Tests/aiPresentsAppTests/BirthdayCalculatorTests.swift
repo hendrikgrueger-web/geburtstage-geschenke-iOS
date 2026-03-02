@@ -116,6 +116,70 @@ final class BirthdayCalculatorTests: XCTestCase {
         XCTAssertEqual(age!, 35) // Haven't had birthday yet in 2026
     }
 
+    // MARK: - Caching Tests
+
+    func testCacheClearWorks() {
+        let today = createDate(month: 6, day: 15)
+        let birthday = createDate(month: 6, day: 15)
+
+        // First call populates cache
+        _ = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today)
+
+        // Clear cache
+        BirthdayCalculator.clearCache()
+
+        // Second call should still work after cache clear
+        let daysAfterClear = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today)
+        XCTAssertNotNil(daysAfterClear)
+        XCTAssertEqual(daysAfterClear, 0)
+    }
+
+    func testCacheReturnsSameResult() {
+        let today = createDate(month: 3, day: 2)
+        let birthday = createDate(month: 6, day: 15)
+
+        // First call
+        let days1 = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today)
+
+        // Second call (should hit cache)
+        let days2 = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today)
+
+        // Both should return the same value
+        XCTAssertEqual(days1, days2)
+        XCTAssertNotNil(days1)
+        XCTAssertNotNil(days2)
+    }
+
+    func testCacheDifferentDatesDoNotInterfere() {
+        let today1 = createDate(month: 3, day: 2)
+        let today2 = createDate(month: 3, day: 3)
+        let birthday = createDate(month: 6, day: 15)
+
+        // Calculate from two different reference dates
+        let days1 = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today1)
+        let days2 = BirthdayCalculator.daysUntilBirthday(for: birthday, from: today2)
+
+        // Results should be different (one day apart)
+        XCTAssertNotNil(days1)
+        XCTAssertNotNil(days2)
+        XCTAssertEqual(days2, days1! - 1)
+    }
+
+    func testCacheDifferentBirthdaysDoNotInterfere() {
+        let today = createDate(month: 3, day: 2)
+        let birthday1 = createDate(month: 6, day: 15)
+        let birthday2 = createDate(month: 6, day: 16)
+
+        // Calculate for two different birthdays
+        let days1 = BirthdayCalculator.daysUntilBirthday(for: birthday1, from: today)
+        let days2 = BirthdayCalculator.daysUntilBirthday(for: birthday2, from: today)
+
+        // Results should be different (one day apart)
+        XCTAssertNotNil(days1)
+        XCTAssertNotNil(days2)
+        XCTAssertEqual(days2, days1! + 1)
+    }
+
     // Helper to create a date in the current year
     private func createDate(month: Int, day: Int, year: Int? = nil) -> Date {
         let calendar = Calendar.current
