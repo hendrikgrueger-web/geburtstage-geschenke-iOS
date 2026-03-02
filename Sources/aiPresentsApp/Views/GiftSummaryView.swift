@@ -4,6 +4,7 @@ import SwiftData
 struct GiftSummaryView: View {
     @Query private var giftIdeas: [GiftIdea]
     let person: PersonRef
+    @State private var animatingBar = false
 
     private var personGiftIdeas: [GiftIdea] {
         giftIdeas.filter { $0.personId == person.id }
@@ -64,13 +65,19 @@ struct GiftSummaryView: View {
                     ForEach([GiftStatus.idea, .planned, .purchased, .given], id: \.self) { status in
                         Rectangle()
                             .fill(status.color)
-                            .frame(width: geometry.size.width * CGFloat(breakdownPercentage(for: status)))
+                            .frame(width: geometry.size.width * CGFloat(breakdownPercentage(for: status)) * (animatingBar ? 1.0 : 0.0))
                             .frame(height: 6)
+                            .animation(.spring(response: 0.6, dampingFraction: 0.7), value: animatingBar)
                     }
                 }
                 .cornerRadius(3)
             }
             .frame(height: 6)
+        }
+        .onAppear {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.7)) {
+                animatingBar = true
+            }
         }
     }
 
