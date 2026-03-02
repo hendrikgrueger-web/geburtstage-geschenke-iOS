@@ -132,8 +132,7 @@ struct TimelineView: View {
     }
 
     private var filteredBirthdays: [PersonRef] {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
+        let today = Calendar.current.startOfDay(for: Date())
 
         return people.compactMap { person -> (PersonRef, Date)? in
             // Apply search text filter
@@ -160,12 +159,12 @@ struct TimelineView: View {
                 }
             }
 
-            // Apply date filter
-            guard let nextBirthday = nextBirthday(for: person, from: today) else {
+            // Apply date filter using BirthdayCalculator
+            let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today)
+
+            guard let nextBirthday = BirthdayCalculator.nextBirthday(for: person.birthday, from: today) else {
                 return nil
             }
-
-            let daysUntil = calendar.dateComponents([.day], from: today, to: nextBirthday).day ?? 0
 
             switch selectedTab {
             case .today:
@@ -173,11 +172,11 @@ struct TimelineView: View {
                     return (person, nextBirthday)
                 }
             case .week:
-                if daysUntil <= 7 && daysUntil >= 0 {
+                if let days = daysUntil, days <= 7 && days >= 0 {
                     return (person, nextBirthday)
                 }
             case .month:
-                if daysUntil <= 30 && daysUntil >= 0 {
+                if let days = daysUntil, days <= 30 && days >= 0 {
                     return (person, nextBirthday)
                 }
             }
@@ -190,25 +189,6 @@ struct TimelineView: View {
     private var availableRelations: [String] {
         let allRelations = people.map { $0.relation }
         return Array(Set(allRelations)).sorted()
-    }
-
-    private func nextBirthday(for person: PersonRef, from today: Date) -> Date? {
-        let calendar = Calendar.current
-        let currentYear = calendar.component(.year, from: today)
-
-        var components = calendar.dateComponents([.month, .day], from: person.birthday)
-        components.year = currentYear
-
-        guard var birthday = calendar.date(from: components) else {
-            return nil
-        }
-
-        if birthday < today {
-            components.year = currentYear + 1
-            birthday = calendar.date(from: components) ?? birthday
-        }
-
-        return birthday
     }
 
     private var birthdayList: some View {

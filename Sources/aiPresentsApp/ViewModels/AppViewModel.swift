@@ -18,8 +18,7 @@ class AppViewModel: ObservableObject {
     }
 
     func getUpcomingBirthdays(limit: Int = 10) -> [PersonRef] {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
+        let today = Calendar.current.startOfDay(for: Date())
 
         let descriptor = FetchDescriptor<PersonRef>()
 
@@ -28,11 +27,11 @@ class AppViewModel: ObservableObject {
         }
 
         return people.compactMap { person -> (PersonRef, Date)? in
-            guard let nextBirthday = nextBirthday(for: person, from: today) else {
+            guard let nextBirthday = BirthdayCalculator.nextBirthday(for: person.birthday, from: today) else {
                 return nil
             }
 
-            let daysUntil = calendar.dateComponents([.day], from: today, to: nextBirthday).day ?? 0
+            let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) ?? 0
 
             if daysUntil >= 0 && daysUntil <= 30 {
                 return (person, nextBirthday)
@@ -42,24 +41,5 @@ class AppViewModel: ObservableObject {
         .sorted { $0.1 < $1.1 }
         .prefix(limit)
         .map { $0.0 }
-    }
-
-    private func nextBirthday(for person: PersonRef, from today: Date) -> Date? {
-        let calendar = Calendar.current
-        let currentYear = calendar.component(.year, from: today)
-
-        var components = calendar.dateComponents([.month, .day], from: person.birthday)
-        components.year = currentYear
-
-        guard var birthday = calendar.date(from: components) else {
-            return nil
-        }
-
-        if birthday < today {
-            components.year = currentYear + 1
-            birthday = calendar.date(from: components) ?? birthday
-        }
-
-        return birthday
     }
 }
