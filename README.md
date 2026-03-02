@@ -65,10 +65,32 @@ Docs/                           # Produkt-/Technik-/Roadmap-Doku
 ---
 
 ## Nächste Meilensteine
-1. QA-Härtung (Blocker/Crash-Prävention)
-2. TestFlight-Stabilisierung
+1. ✅ QA-Härtung (Blocker/Crash-Prävention)
+2. 🔄 TestFlight Vorbereitung (v0.2.0 Beta)
 3. KI-Qualität & Prompting verbessern
 4. Widget + App Intents (nach MVP-Stabilität)
+
+## TestFlight & Release
+
+### Aktueller Status
+- **Phase 1 (MVP Stabilität)**: ✅ Abgeschlossen (2026-03-02)
+- **Phase 2 (Accessibility & UX)**: ✅ Abgeschlossen (2026-03-02)
+- **TestFlight Vorbereitung**: 🔄 In Arbeit (v0.2.0 Beta)
+
+### Für Beta-Tester
+TestFlight Beta ist in Vorbereitung. Release Notes und Checkliste siehe `TESTFLIGHT.md`.
+
+### Für Entwickler
+Detaillierte TestFlight-Vorbereitung siehe `TESTFLIGHT.md`.
+
+## Test-Abdeckung
+
+- **Service Layer**: 100% Unit Tests
+- **Utilities**: 100% Unit Tests
+- **CloudKit**: 100% Unit Tests
+- **Accessibility**: 100% Unit Tests
+- **UX Components**: 100% Unit Tests
+- **Total**: 29 Test-Dateien, 636+ Test-Methoden
 
 ---
 

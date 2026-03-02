@@ -150,6 +150,8 @@
 ## Nächste Schritte (Phase 2 - Fortsetzung)
 - ~~Komponenten in bestehende Views integrieren~~ ✅ (TimelineView, EmptyStateView, Formulare)
 - ~~SmartInputField in Add/Edit Sheets integrieren~~ ✅ (Alle 4 Formulare)
+- ~~TestFlight Vorbereitung~~ ✅ (TESTFLIGHT.md erstellt)
 - Weitere UX-Feinschliff und leere Zustände optimieren
 - TimelineFilterView als echte Komponente nutzen (optional)
-- TestFlight Vorbereitung
+- App Store Connect Setup ausstehend
+- TestFlight Build auf macOS mit Xcode ausstehend

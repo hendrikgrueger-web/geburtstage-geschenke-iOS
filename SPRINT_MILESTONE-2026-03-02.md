@@ -49,10 +49,12 @@ Alle 4 Add/Edit Sheets aktualisiert:
 
 ## Nächste Schritte (Priorität)
 
-1. **UX-Feinschliff**: Weitere leere Zustände optimieren
-2. **Optional**: TimelineFilterView als echte Komponente nutzen
-3. **TestFlight Vorbereitung**: Build-Check, Release Notes
-4. **Phase 2 Abschluss**: Final Review
+1. ~~**TestFlight Vorbereitung**~~ ✅ (TESTFLIGHT.md erstellt, README aktualisiert)
+2. **UX-Feinschliff**: Weitere leere Zustände optimieren
+3. **Optional**: TimelineFilterView als echte Komponente nutzen
+4. **App Store Connect Setup**: App in App Store Connect erstellen
+5. **Xcode Build**: TestFlight Build auf macOS erstellen
+6. **Phase 2 Abschluss**: Final Review
 
 ## Phase 2 Status
 
