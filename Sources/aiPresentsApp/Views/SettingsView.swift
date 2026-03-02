@@ -13,6 +13,7 @@ struct SettingsView: View {
     @StateObject private var reminderManager = ReminderManager(modelContext: ModelContext.placeholder)
 
     @Query private var reminderRule: [ReminderRule]
+    @Query private var people: [PersonRef]
 
     private var appVersion: String {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
@@ -22,9 +23,91 @@ struct SettingsView: View {
         Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
     }
 
+    private var nextBirthday: (person: PersonRef, date: Date)? {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+
+        let sorted = people.compactMap { person -> (PersonRef, Date)? in
+            guard let nextBirthday = nextBirthday(for: person, from: today) else {
+                return nil
+            }
+            let daysUntil = calendar.dateComponents([.day], from: today, to: nextBirthday).day ?? 0
+            if daysUntil >= 0 && daysUntil <= 365 {
+                return (person, nextBirthday)
+            }
+            return nil
+        }.sorted { $0.1 < $1.1 }
+
+        return sorted.first
+    }
+
+    private func nextBirthday(for person: PersonRef, from today: Date) -> Date? {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: today)
+
+        var components = calendar.dateComponents([.month, .day], from: person.birthday)
+        components.year = currentYear
+
+        guard var birthday = calendar.date(from: components) else {
+            return nil
+        }
+
+        if birthday < today {
+            components.year = currentYear + 1
+            birthday = calendar.date(from: components) ?? birthday
+        }
+
+        return birthday
+    }
+
+    private func daysUntil(from date: Date) -> Int {
+        Calendar.current.dateComponents([.day], from: Date(), to: date).day ?? 0
+    }
+
+    private func birthdayText(for days: Int) -> String {
+        if days == 0 {
+            return "Heute!"
+        } else if days == 1 {
+            return "Morgen"
+        } else if days <= 7 {
+            return "In \(days) Tagen"
+        } else {
+            return "In \(days) Tagen"
+        }
+    }
+
     var body: some View {
         NavigationStack {
             List {
+                // Next Birthday Card
+                if let next = nextBirthday {
+                    Section {
+                        HStack(spacing: 16) {
+                            PersonAvatar(person: next.person, size: 50)
+
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Nächster Geburtstag")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+
+                                Text(next.person.displayName)
+                                    .font(.headline)
+
+                                Text(birthdayText(for: daysUntil(from: next.date)))
+                                    .font(.subheadline)
+                                    .foregroundColor(daysUntil(from: next.date) <= 7 ? .orange : .secondary)
+                            }
+
+                            Spacer()
+
+                            BirthdayCountdownBadge(daysUntil: daysUntil(from: next.date))
+                        }
+                        .padding(.vertical, 4)
+                    } header: {
+                        Text("Übersicht")
+                    }
+                }
+
                 Section {
                     HStack {
                         Text("Version")
