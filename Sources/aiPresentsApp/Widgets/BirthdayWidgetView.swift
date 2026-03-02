@@ -122,7 +122,11 @@ struct BirthdayWidgetView: View {
             Image(systemName: "gift")
                 .font(.system(size: 40))
                 .foregroundColor(AppColor.textSecondary.opacity(0.4))
-                .symbolEffect(.pulse, options: .repeating, isActive: true)
+                .symbolEffect(
+                    AccessibilityConfiguration.isReducedMotionEnabled ? .pulse : .bounce,
+                    options: .repeating,
+                    isActive: true
+                )
 
             Text("Keine Geburtstage")
                 .font(.subheadline)

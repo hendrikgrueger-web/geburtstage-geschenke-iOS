@@ -87,7 +87,11 @@ struct OnboardingPageView: View {
             Image(systemName: page.icon)
                 .font(.system(size: 80))
                 .foregroundColor(AppColor.primary)
-                .symbolEffect(.bounce, options: .repeating, isActive: true)
+                .symbolEffect(
+                    AccessibilityConfiguration.isReducedMotionEnabled ? .pulse : .bounce,
+                    options: .repeating,
+                    isActive: true
+                )
 
             VStack(spacing: 16) {
                 Text(page.title)
