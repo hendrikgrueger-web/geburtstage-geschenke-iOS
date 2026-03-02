@@ -112,6 +112,7 @@ struct EditGiftIdeaSheet: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Speichern") {
                         saveGiftIdea()
+                        HapticFeedback.success()
                         dismiss()
                     }
                     .disabled(title.isEmpty || isBudgetInvalid)
