@@ -1,36 +1,84 @@
 import Foundation
 
-// Foundation Models (Apple Intelligence) — auf iOS 26+ mit A17 Pro / M1 oder neuer.
-// Der Import ist mit #if canImport abgesichert, damit das Projekt auch mit älteren
-// Xcode-Versionen kompiliert (Demo-Modus greift dann automatisch).
+// Foundation Models (Apple Intelligence) — iOS 26+, A17 Pro / A18 / A19.
+// #if canImport sorgt für Kompatibilität mit älterem Xcode.
 #if canImport(FoundationModels)
 import FoundationModels
 #endif
 
+// MARK: - @Generable Ausgabe-Structs
+//
+// Apple's empfohlener Weg für strukturierte Ausgaben ("Guided Generation").
+// JSON im Prompt führt zu GenerationError -1 — @Generable ist die korrekte Methode.
+// Das Modell befüllt die Swift-Struct direkt, ohne JSON-Parsing.
+
+#if canImport(FoundationModels)
+@available(iOS 26.0, *)
+@Generable
+struct GiftSuggestionsOutput {
+    var suggestions: [GiftItem]
+
+    @Generable
+    struct GiftItem {
+        /// Konkreter, kaufbarer Geschenkname (z.B. "Kochkurs Pasta & Risotto")
+        var title: String
+        /// Kurze persönliche Begründung, warum dieses Geschenk passt (1–2 Sätze)
+        var reason: String
+    }
+}
+
+@available(iOS 26.0, *)
+@Generable
+struct BirthdayMessageOutput {
+    /// Persönliche Anrede (z.B. "Lieber Max,")
+    var greeting: String
+    /// Herzlicher Nachrichtentext, 3–5 Sätze
+    var body: String
+}
+#endif
+
+// MARK: - Sendable Kontext-Structs
+// Werden genutzt, um SwiftData-Objekte (non-Sendable) sicher über Actor-Grenzen zu übergeben.
+
+private struct GiftContext: Sendable {
+    let name: String
+    let age: Int
+    let relation: String
+    let zodiac: String
+    let daysUntil: Int?
+    let tags: [String]
+    let pastGiftTitles: [String] // Nur Titel, kein ganzes GiftHistory-Objekt
+}
+
+private struct BirthdayContext: Sendable {
+    let name: String
+    let age: Int
+    let relation: String
+    let zodiac: String
+    let lastGiftTitle: String?
+    let lastGiftYear: Int?
+}
+
+// MARK: - AIService
+
 /// KI-Service für Geschenkvorschläge und Geburtstagsgrüße.
 ///
-/// ## Datenschutz-Architektur: 100% lokal
+/// ## Datenschutz: 100% lokal
+/// Alle Verarbeitung findet via Apple Intelligence auf dem Gerät statt.
+/// Kein Netzwerkzugriff, kein API-Key, kein Drittanbieter.
 ///
-/// Die gesamte KI-Verarbeitung findet auf dem Gerät statt (Apple Intelligence).
-/// Es werden **keinerlei Daten an externe Server gesendet**. Kein API-Key,
-/// kein Netzwerkzugriff, keine Drittanbieter.
-///
-/// ## Voraussetzungen für Apple Intelligence
-/// - iOS 26.0 oder neuer
-/// - iPhone 15 Pro oder alle iPhone 16 (A17 Pro / A18 Chip)
-/// - Apple Intelligence in den Einstellungen aktiviert
+/// ## Voraussetzungen
+/// - iOS 26.0+, A17 Pro / A18 / A19 (iPhone 16e / A16 wird NICHT unterstützt)
+/// - Apple Intelligence in Einstellungen aktiviert
 ///
 /// ## Fallback
-/// Wenn Apple Intelligence nicht verfügbar ist (Gerät nicht unterstützt oder
-/// nicht aktiviert), liefert die App Demo-Vorschläge ohne KI.
+/// Demo-Modus wenn Apple Intelligence nicht verfügbar ist.
 struct AIService {
     static let shared = AIService()
-
     private init() {}
 
     // MARK: - Verfügbarkeit
 
-    /// Gibt an, ob Apple Intelligence auf diesem Gerät verfügbar ist.
     static var isAvailable: Bool {
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *) {
@@ -40,7 +88,7 @@ struct AIService {
         return false
     }
 
-    // MARK: - Öffentliche API
+    // MARK: - Öffentliche API (@MainActor — SwiftData-Objekte extrahieren)
 
     @MainActor
     func generateGiftIdeas(
@@ -50,169 +98,123 @@ struct AIService {
         tags: [String],
         pastGifts: [GiftHistory]
     ) async throws -> [GiftSuggestion] {
+
+        // Daten auf @MainActor in Sendable-Struct extrahieren
+        let context = GiftContext(
+            name: person.displayName,
+            age: BirthdayDateHelper.age(from: person.birthday),
+            relation: person.relation,
+            zodiac: BirthdayDateHelper.zodiacSign(from: person.birthday),
+            daysUntil: BirthdayDateHelper.daysUntilBirthday(from: person.birthday),
+            tags: tags,
+            pastGiftTitles: pastGifts.map { "\($0.title) (\($0.year))" }
+        )
+        let budgetRange = (min: budgetMin, max: budgetMax)
+
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *), SystemLanguageModel.default.isAvailable {
-            let prompt = buildGiftPrompt(person: person, budgetMin: budgetMin,
-                                         budgetMax: budgetMax, tags: tags, pastGifts: pastGifts)
-            return try await generateWithFoundationModels(prompt: prompt, parse: parseJSONSuggestions)
+            return try await generateGiftIdeasWithAI(context: context, budget: budgetRange)
         }
         #endif
-        return generateDemoSuggestions(for: person, budget: budgetMax)
+        return demoSuggestions(relation: context.relation, zodiac: context.zodiac, age: context.age)
     }
 
     @MainActor
     func generateBirthdayMessage(for person: PersonRef, pastGifts: [GiftHistory] = []) async throws -> BirthdayMessage {
+
+        let lastGift = pastGifts.sorted(by: { $0.year > $1.year }).first
+        let context = BirthdayContext(
+            name: person.displayName,
+            age: BirthdayDateHelper.age(from: person.birthday),
+            relation: person.relation,
+            zodiac: BirthdayDateHelper.zodiacSign(from: person.birthday),
+            lastGiftTitle: lastGift?.title,
+            lastGiftYear: lastGift.map { $0.year }
+        )
+
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *), SystemLanguageModel.default.isAvailable {
-            let prompt = buildBirthdayPrompt(for: person, pastGifts: pastGifts)
-            return try await generateWithFoundationModels(prompt: prompt, parse: parseJSONBirthdayMessage)
+            return try await generateBirthdayMessageWithAI(context: context)
         }
         #endif
-        return generateDemoBirthdayMessage(for: person)
+        return demoBirthdayMessage(name: context.name, relation: context.relation, zodiac: context.zodiac)
     }
 
-    // MARK: - Foundation Models (lokal, kein Netzwerk)
+    // MARK: - Foundation Models (nonisolated, empfängt nur Sendable-Typen)
 
     @available(iOS 26.0, *)
-    private func generateWithFoundationModels<T>(
-        prompt: String,
-        parse: (String) throws -> T
-    ) async throws -> T {
+    private func generateGiftIdeasWithAI(
+        context: GiftContext,
+        budget: (min: Double, max: Double)
+    ) async throws -> [GiftSuggestion] {
         #if canImport(FoundationModels)
-        guard SystemLanguageModel.default.isAvailable else {
-            throw AIError.notAvailable
+
+        var prompt = """
+        Erstelle 5 passende Geschenkideen für \(context.name), \(context.age) Jahre, \(context.relation).
+        Sternzeichen: \(context.zodiac).
+        Budget: \(Int(budget.min))–\(Int(budget.max)) Euro (strikt einhalten).
+        """
+
+        if !context.tags.isEmpty {
+            prompt += "\nInteressen: \(context.tags.joined(separator: ", "))."
         }
-        let session = LanguageModelSession()
-        let response = try await session.respond(to: prompt)
-        return try parse(response.content)
+
+        if !context.pastGiftTitles.isEmpty {
+            prompt += "\nBereits verschenkt (nicht wiederholen): \(context.pastGiftTitles.joined(separator: ", "))."
+        }
+
+        if let days = context.daysUntil {
+            switch days {
+            case 0:     prompt += "\nWichtig: Geburtstag ist HEUTE!"
+            case 1:     prompt += "\nWichtig: Geburtstag ist morgen!"
+            case 2...7: prompt += "\nWichtig: Geburtstag in \(days) Tagen — schnell verfügbare Ideen bevorzugen."
+            default: break
+            }
+        }
+
+        let session = LanguageModelSession(
+            instructions: "Du bist ein erfahrener Geschenkberater. Antworte auf Deutsch. Schlage konkrete, kaufbare Geschenke vor."
+        )
+        let response = try await session.respond(to: prompt, generating: GiftSuggestionsOutput.self)
+        return response.content.suggestions.map { GiftSuggestion(title: $0.title, reason: $0.reason) }
+
         #else
         throw AIError.notAvailable
         #endif
     }
 
-    // MARK: - Prompt-Builder
-    // Da alles lokal verarbeitet wird, können Name und exaktes Alter
-    // direkt im Prompt verwendet werden — kein Datenschutzproblem.
-
-    private func buildGiftPrompt(
-        person: PersonRef,
-        budgetMin: Double,
-        budgetMax: Double,
-        tags: [String],
-        pastGifts: [GiftHistory]
-    ) -> String {
-        let exactAge = BirthdayDateHelper.age(from: person.birthday)
-        let zodiac = BirthdayDateHelper.zodiacSign(from: person.birthday)
-        let daysUntil = BirthdayDateHelper.daysUntilBirthday(from: person.birthday)
-
-        var urgencyHint = ""
-        if let days = daysUntil {
-            switch days {
-            case 0:     urgencyHint = " — Geburtstag ist heute!"
-            case 1:     urgencyHint = " — Geburtstag ist morgen!"
-            case 2...7: urgencyHint = " — Geburtstag in \(days) Tagen"
-            default:    break
-            }
-        }
+    @available(iOS 26.0, *)
+    private func generateBirthdayMessageWithAI(context: BirthdayContext) async throws -> BirthdayMessage {
+        #if canImport(FoundationModels)
 
         var prompt = """
-        Erstelle 5 passende Geschenkideen für \(person.displayName), \(exactAge) Jahre (\(person.relation))\(urgencyHint).
-
-        Sternzeichen: \(zodiac)
-        Budget: \(Int(budgetMin))€–\(Int(budgetMax))€ (strikt einhalten)
+        Schreibe eine herzliche Geburtstagsgrußkarte für \(context.name), \(context.age) Jahre, \(context.relation).
+        Sternzeichen: \(context.zodiac).
         """
 
-        if !tags.isEmpty {
-            prompt += "\nInteressen: \(tags.joined(separator: ", "))"
+        if let title = context.lastGiftTitle, let year = context.lastGiftYear {
+            prompt += "\nLetztes Geschenk: \(title) (\(year))."
         }
 
-        if !pastGifts.isEmpty {
-            let previous = pastGifts.map { "- \($0.title) (\($0.year))" }.joined(separator: "\n")
-            prompt += "\n\nBereits verschenkt (nicht wiederholen):\n\(previous)"
-        }
+        let session = LanguageModelSession(
+            instructions: "Du bist ein herzlicher Texter für Geburtstagsgrüße. Schreibe auf Deutsch, persönlich und authentisch, ohne Floskeln."
+        )
+        let response = try await session.respond(to: prompt, generating: BirthdayMessageOutput.self)
+        return BirthdayMessage(greeting: response.content.greeting, body: response.content.body)
 
-        prompt += """
-
-
-        Ausgabe als JSON-Array (kein Markdown, kein Text drumherum):
-        [{"title": "Konkreter Geschenkname", "reason": "Kurze Begründung (1–2 Sätze)"}]
-        """
-
-        return prompt
+        #else
+        throw AIError.notAvailable
+        #endif
     }
 
-    private func buildBirthdayPrompt(for person: PersonRef, pastGifts: [GiftHistory]) -> String {
-        let exactAge = BirthdayDateHelper.age(from: person.birthday)
-        let zodiac = BirthdayDateHelper.zodiacSign(from: person.birthday)
+    // MARK: - Demo-Modus (vollständig offline)
 
-        var prompt = """
-        Schreibe eine herzliche Geburtstagsgrußkarte für \(person.displayName), \(exactAge) Jahre (\(person.relation)).
-        Sternzeichen: \(zodiac)
-        Tonfall: persönlich, warm, nicht floskelhaft
-        """
-
-        if let lastGift = pastGifts.sorted(by: { $0.year > $1.year }).first {
-            prompt += "\nLetztes Geschenk: \(lastGift.title) (\(lastGift.year))"
-        }
-
-        prompt += """
-
-
-        Ausgabe als JSON (kein Markdown):
-        {"greeting": "Anrede (z.B. Liebe/r ...)", "body": "Nachrichtentext (3–5 Sätze)"}
-        """
-
-        return prompt
-    }
-
-    // MARK: - JSON-Parser
-
-    private func parseJSONSuggestions(_ text: String) throws -> [GiftSuggestion] {
-        let cleaned = stripMarkdown(text)
-        guard let data = cleaned.data(using: .utf8),
-              let array = try JSONSerialization.jsonObject(with: data) as? [[String: Any]] else {
-            throw AIError.invalidResponse
-        }
-        return array.compactMap { item -> GiftSuggestion? in
-            guard let title = item["title"] as? String,
-                  let reason = item["reason"] as? String else { return nil }
-            return GiftSuggestion(title: title, reason: reason)
-        }
-    }
-
-    private func parseJSONBirthdayMessage(_ text: String) throws -> BirthdayMessage {
-        let cleaned = stripMarkdown(text)
-        guard let data = cleaned.data(using: .utf8),
-              let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let greeting = json["greeting"] as? String,
-              let body = json["body"] as? String else {
-            throw AIError.invalidResponse
-        }
-        return BirthdayMessage(greeting: greeting, body: body)
-    }
-
-    /// Entfernt Markdown-Codeblöcke (```json ... ```) aus LLM-Antworten.
-    private func stripMarkdown(_ text: String) -> String {
-        var result = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if result.hasPrefix("```") {
-            result = result.components(separatedBy: "\n").dropFirst().joined(separator: "\n")
-            if result.hasSuffix("```") { result = String(result.dropLast(3)) }
-        }
-        return result.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-
-    // MARK: - Demo-Modus (offline, wenn Apple Intelligence nicht verfügbar)
-
-    private func generateDemoSuggestions(for person: PersonRef, budget: Double) -> [GiftSuggestion] {
-        let relation = person.relation.lowercased()
-        let zodiac = BirthdayDateHelper.zodiacSign(from: person.birthday)
-        let age = BirthdayDateHelper.age(from: person.birthday)
+    private func demoSuggestions(relation: String, zodiac: String, age: Int) -> [GiftSuggestion] {
+        let rel = relation.lowercased()
         let isMilestone = BirthdayDateHelper.isMilestoneAge(age: age)
-
-        func note() -> String { "\(zodiac)-Energie (\(personalityHint(for: zodiac)))." }
+        func note() -> String { "Passt gut zu \(zodiac) (\(personalityHint(for: zodiac)))." }
 
         var items: [(String, String)]
-
         if isMilestone {
             items = [
                 ("Erlebnis-Gutschein", "Unvergessliches für diesen runden Geburtstag. \(note())"),
@@ -221,7 +223,7 @@ struct AIService {
                 ("Hochwertige Genuss-Erfahrung", "Genuss als Ausdruck von Wertschätzung. \(note())"),
                 ("Fotobook oder Erinnerungsalbum", "Die schönsten Momente festhalten.")
             ]
-        } else if relation.contains("partner") {
+        } else if rel.contains("partner") {
             items = [
                 ("Romantisches Wochenend-Erlebnis", "Qualitätszeit zu zweit."),
                 ("Personalisiertes Geschenk", "Einzigartig und mit persönlichem Bezug. \(note())"),
@@ -229,7 +231,8 @@ struct AIService {
                 ("Erlebnis für zwei", "Kochkurs, Weinprobe oder Wellness. \(note())"),
                 ("Hochwertige Parfümerie", "Ein klassisches, elegantes Geschenk.")
             ]
-        } else if relation.contains("familie") || relation.contains("mama") || relation.contains("papa") {
+        } else if rel.contains("mutter") || rel.contains("vater") || rel.contains("oma") ||
+                  rel.contains("opa") || rel.contains("tante") || rel.contains("onkel") {
             items = [
                 ("Fotoalbum mit gemeinsamen Erinnerungen", "Persönlich und sentimental."),
                 ("Hochwertiges Küchen-Accessoire", "Praktisch und von dauerhaftem Nutzen."),
@@ -246,21 +249,19 @@ struct AIService {
                 ("Specialty-Kaffee oder Tee-Set", "Genussmoment für zu Hause.")
             ]
         }
-
         return items.map { GiftSuggestion(title: $0.0, reason: $0.1) }
     }
 
-    private func generateDemoBirthdayMessage(for person: PersonRef) -> BirthdayMessage {
-        let zodiac = BirthdayDateHelper.zodiacSign(from: person.birthday)
-        return BirthdayMessage(
-            greeting: "Liebe/r \(person.displayName),",
+    private func demoBirthdayMessage(name: String, relation: String, zodiac: String) -> BirthdayMessage {
+        BirthdayMessage(
+            greeting: "Liebe/r \(name),",
             body: """
             alles Gute zum Geburtstag! Ich wünsche dir einen wunderschönen Tag, an dem du rundum verwöhnt wirst. \(zodiacWish(for: zodiac))
 
             Genieß diesen besonderen Tag!
 
             Herzlichst,
-            Dein(e) \(person.relation)
+            Dein(e) \(relation)
             """.trimmingCharacters(in: .whitespacesAndNewlines)
         )
     }
@@ -307,15 +308,9 @@ struct AIService {
 
     enum AIError: LocalizedError {
         case notAvailable
-        case invalidResponse
 
         var errorDescription: String? {
-            switch self {
-            case .notAvailable:
-                return "Apple Intelligence ist auf diesem Gerät nicht verfügbar. Bitte aktiviere Apple Intelligence in den Einstellungen."
-            case .invalidResponse:
-                return "Die KI hat eine ungültige Antwort geliefert. Bitte erneut versuchen."
-            }
+            "Apple Intelligence ist auf diesem Gerät nicht verfügbar. Bitte in den Einstellungen aktivieren."
         }
     }
 }
