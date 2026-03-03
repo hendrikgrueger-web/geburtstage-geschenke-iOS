@@ -36,12 +36,26 @@ struct aiPresentsApp: App {
                 fatalError("Failed to create ModelContainer: \(error)")
             }
         }
+
+        #if DEBUG
+        if CommandLine.arguments.contains("--reset-sample-data") {
+            let ctx = modelContainer.mainContext
+            try? ctx.delete(model: ReminderRule.self)
+            try? ctx.delete(model: GiftHistory.self)
+            try? ctx.delete(model: GiftIdea.self)
+            try? ctx.delete(model: PersonRef.self)
+            SampleDataService.createSampleData(in: ctx)
+            UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+        }
+        #endif
     }
+
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
     var body: some Scene {
         WindowGroup {
             ZStack {
-                if UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") {
+                if hasCompletedOnboarding {
                     ContentView()
                         .onAppear {
                             Task {

@@ -32,25 +32,15 @@ struct EditGiftIdeaSheet: View {
     }
 
     private var isBudgetInvalid: Bool {
-        let error = FormValidator.validateBudget(minString: budgetMin, maxString: budgetMax)
-        formState.setError(error, for: "budget")
-        return error != nil
+        FormValidator.validateBudget(minString: budgetMin, maxString: budgetMax) != nil
     }
 
     private var linkValidation: (sanitized: String, isValid: Bool) {
-        let (sanitized, isValid) = URLValidator.validate(link)
-        if !isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty {
-            formState.setError(.invalidURL, for: "link")
-        } else {
-            formState.clearError(for: "link")
-        }
-        return (sanitized, isValid)
+        URLValidator.validate(link)
     }
 
     private var tagsValidation: ValidationError? {
-        let error = FormValidator.validateTags(tagsInput)
-        formState.setError(error, for: "tags")
-        return error
+        FormValidator.validateTags(tagsInput)
     }
 
     private var canSave: Bool {

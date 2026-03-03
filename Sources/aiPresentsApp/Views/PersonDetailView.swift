@@ -388,7 +388,7 @@ struct PersonDetailView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("Abbrechen") {
-                            editedRelation = person.relation
+                            showingEditRelation = false
                         }
                     }
 
@@ -396,6 +396,7 @@ struct PersonDetailView: View {
                         Button("Speichern") {
                             person.relation = editedRelation
                             HapticFeedback.success()
+                            showingEditRelation = false
                         }
                         .disabled(editedRelation.trimmingCharacters(in: .whitespaces).isEmpty)
                     }

@@ -10,7 +10,7 @@ enum AppEnvironment {
 struct AppConfig {
     static let currentEnvironment: AppEnvironment = .development
 
-    static let isOpenRouterConfigured = false // Set to true when API key is added
+    static let isOpenRouterConfigured = true
 
     #if DEBUG
     static let isDebugBuild = true

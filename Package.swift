@@ -15,7 +15,8 @@ let package = Package(
     targets: [
         .target(
             name: "aiPresentsApp",
-            path: "Sources/aiPresentsApp"
+            path: "Sources/aiPresentsApp",
+            exclude: ["aiPresentsApp.swift"]
         ),
         .testTarget(
             name: "aiPresentsAppTests",

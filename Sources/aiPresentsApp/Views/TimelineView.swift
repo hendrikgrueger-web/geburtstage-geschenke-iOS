@@ -34,6 +34,27 @@ struct TimelineView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            // Suchfeld
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.secondary)
+                TextField("Suche...", text: $searchText)
+                    .textFieldStyle(.plain)
+                    .onChange(of: searchText) { _, newValue in
+                        searchDebouncer.debounce { debouncedSearchText = newValue }
+                    }
+                if !searchText.isEmpty {
+                    Button { searchText = "" } label: {
+                        Image(systemName: "xmark.circle.fill").foregroundColor(.secondary)
+                    }
+                }
+            }
+            .padding(10)
+            .background(Color(.systemGray6))
+            .cornerRadius(10)
+            .padding(.horizontal)
+            .padding(.top, 8)
+
             // Tab Picker
             Picker("", selection: $selectedTab) {
                 ForEach(TimelineTab.allCases, id: \.self) { tab in
@@ -61,14 +82,7 @@ struct TimelineView: View {
             }
         }
         .navigationTitle("Geburtstage")
-        .navigationBarTitleDisplayMode(.large)
-        .searchable(text: $searchText, prompt: "Suche...")
-        .onChange(of: searchText) { oldValue, newValue in
-            // Use Debouncer utility for better performance and cleaner code
-            searchDebouncer.debounce {
-                debouncedSearchText = newValue
-            }
-        }
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack(spacing: 12) {
@@ -348,7 +362,8 @@ struct TimelineView: View {
             }
         }
         .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.bottom, 60)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(AppColor.background)
         .sheet(isPresented: $showingContactsImport) {
             ContactsImportView()

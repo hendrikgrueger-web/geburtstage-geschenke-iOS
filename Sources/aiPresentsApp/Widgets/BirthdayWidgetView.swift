@@ -7,13 +7,10 @@ struct BirthdayWidgetView: View {
     @State private var widgetData: BirthdayWidgetData.WidgetSummary?
 
     private var upcomingBirthdays: [PersonRef] {
-        // Use BirthdayWidgetData for efficient widget data preparation
         guard let data = widgetData else { return [] }
-
-        // Map back to PersonRef for compatibility with existing UI
         return data.upcomingBirthdays.compactMap { entry -> PersonRef? in
-            let entryId = entry.id
-            let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id.uuidString == entryId })
+            guard let entryUUID = UUID(uuidString: entry.id) else { return nil }
+            let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id == entryUUID })
             return try? modelContext.fetch(descriptor).first
         }
     }
@@ -25,8 +22,11 @@ struct BirthdayWidgetView: View {
             } else {
                 TabView(selection: $selectedIndex) {
                     ForEach(Array(upcomingBirthdays.enumerated()), id: \.offset) { index, person in
-                        birthdayCard(for: person)
-                            .tag(index)
+                        NavigationLink(destination: PersonDetailView(person: person)) {
+                            birthdayCard(for: person)
+                        }
+                        .buttonStyle(.plain)
+                        .tag(index)
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))

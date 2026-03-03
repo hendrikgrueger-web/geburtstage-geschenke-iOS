@@ -102,3 +102,6 @@ iOSInjectionProject/
 
 # MacOS
 .DS_Store
+
+# Secrets — niemals committen!
+Config/Secrets.xcconfig

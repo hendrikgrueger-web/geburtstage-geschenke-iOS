@@ -3,7 +3,8 @@ import Foundation
 struct AIService {
     static let shared = AIService()
 
-    private let apiKey = "" // OpenRouter API Key - needs to be configured
+    private let apiKey: String = Bundle.main.infoDictionary?["OpenRouterAPIKey"] as? String ?? ""
+    private let model = "google/gemini-3-flash-preview"
     private let baseURL = "https://openrouter.ai/api/v1"
 
     private init() {}
@@ -434,7 +435,7 @@ struct AIService {
                 request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
 
                 let body: [String: Any] = [
-                    "model": "anthropic/claude-3-haiku",
+                    "model": model,
                     "messages": [
                         [
                             "role": "user",

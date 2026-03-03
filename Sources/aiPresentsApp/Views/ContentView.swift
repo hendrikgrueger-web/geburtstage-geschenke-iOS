@@ -16,20 +16,24 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            TimelineView()
-                .tabItem {
-                    Label("Geburtstage", systemImage: selectedTab == .timeline ? "gift.fill" : "gift")
-                        .badge(birthdaysTodayCount > 0 ? birthdaysTodayCount : 0)
-                }
-                .tag(MainTab.timeline)
-                .accessibilityLabel("Geburtstage")
+            NavigationStack {
+                TimelineView()
+            }
+            .tabItem {
+                Label("Geburtstage", systemImage: selectedTab == .timeline ? "gift.fill" : "gift")
+                    .badge(birthdaysTodayCount > 0 ? birthdaysTodayCount : 0)
+            }
+            .tag(MainTab.timeline)
+            .accessibilityLabel("Geburtstage")
 
-            SettingsView()
-                .tabItem {
-                    Label("Einstellungen", systemImage: selectedTab == .settings ? "gearshape.fill" : "gearshape")
-                }
-                .tag(MainTab.settings)
-                .accessibilityLabel("Einstellungen")
+            NavigationStack {
+                SettingsView()
+            }
+            .tabItem {
+                Label("Einstellungen", systemImage: selectedTab == .settings ? "gearshape.fill" : "gearshape")
+            }
+            .tag(MainTab.settings)
+            .accessibilityLabel("Einstellungen")
         }
         .sheet(isPresented: $showingContactsImport) {
             ContactsImportView()

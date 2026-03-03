@@ -9,21 +9,27 @@ struct QuickStatsView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            statCard(
-                icon: "person.2.fill",
-                value: "\(people.count)",
-                label: "Kontakte",
-                color: AppColor.primary,
-                animationDelay: 0
-            )
+            NavigationLink(destination: AllContactsView()) {
+                statCard(
+                    icon: "person.2.fill",
+                    value: "\(people.count)",
+                    label: "Kontakte",
+                    color: AppColor.primary,
+                    animationDelay: 0
+                )
+            }
+            .buttonStyle(.plain)
 
-            statCard(
-                icon: "bell.fill",
-                value: upcomingBirthdaysCount > 0 ? "\(upcomingBirthdaysCount)" : "Keine",
-                label: "Diese Woche",
-                color: AppColor.accent,
-                animationDelay: 0.1
-            )
+            NavigationLink(destination: UpcomingBirthdaysView(days: 7)) {
+                statCard(
+                    icon: "bell.fill",
+                    value: upcomingBirthdaysCount > 0 ? "\(upcomingBirthdaysCount)" : "Keine",
+                    label: "Diese Woche",
+                    color: AppColor.accent,
+                    animationDelay: 0.1
+                )
+            }
+            .buttonStyle(.plain)
 
             statCard(
                 icon: "gift.fill",
@@ -35,9 +41,6 @@ struct QuickStatsView: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
-        .onTapGesture {
-            HapticFeedback.light()
-        }
         .onAppear {
             withAnimation(.easeOut(duration: 0.5)) {
                 animateIn = true

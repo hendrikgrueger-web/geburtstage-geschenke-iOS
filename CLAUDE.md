@@ -77,8 +77,15 @@ try context.delete(model: SuggestionFeedback.self)
 - `FormState` in `FormState.swift` = ObservableObject-Version (für FormField, FormSubmitButton)
 - `AppFormState` in `FormValidator.swift` = @Observable-Version (für Sheet-Views)
 
+## Offene Aufgaben
+
+- **App auf Simulator lauffähig machen** → siehe [Docs/PLAN-xcode-project-setup.md](Docs/PLAN-xcode-project-setup.md)
+  - Projekt ist nur ein Swift Package (Library) — kein `.app` Bundle
+  - Lösung: `.xcodeproj` via xcodegen erstellen
+
 ## Bekannte Einschränkungen
 
+- Kein `.xcodeproj` vorhanden — App kann nicht auf Simulator installiert werden (nur Library-Build + Tests)
 - OpenRouter API-Key nicht konfiguriert → Demo-Vorschläge
 - App wurde initial von KI generiert — Code-Qualität variiert
 
