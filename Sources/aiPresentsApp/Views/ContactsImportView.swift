@@ -5,174 +5,126 @@ struct ContactsImportView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
-    @State private var isRequestingPermission = false
-    @State private var hasPermission = false
     @State private var isImporting = false
-    @State private var importedCount = 0
     @State private var importError: String?
-    @State private var useSampleData = false
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 24) {
-                // Icon
-                Image(systemName: "person.badge.plus")
-                    .font(.system(size: 60))
-                    .foregroundColor(.blue)
+            VStack(spacing: 0) {
+                Spacer()
 
-                // Title
-                Text("Kontakte importieren")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                // Icon + Titel
+                VStack(spacing: 16) {
+                    Image(systemName: "person.badge.plus")
+                        .font(.system(size: 64))
+                        .foregroundColor(.blue)
 
-                // Description
-                Text("Importiere Kontakte mit Geburtstagen aus deinem Adressbuch oder verwende Demo-Daten zum Testen.")
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-
-                // Import Mode Toggle
-                Picker("Modus", selection: $useSampleData) {
-                    Text(" echte Kontakte").tag(false)
-                    Text(" Demo-Daten").tag(true)
+                    Text("Kontakte importieren")
+                        .font(.title2)
+                        .fontWeight(.bold)
                 }
-                .pickerStyle(.segmented)
+
+                Spacer().frame(height: 48)
+
+                // Aktions-Buttons
+                VStack(spacing: 12) {
+                    if isImporting {
+                        ProgressView()
+                            .controlSize(.large)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 32)
+                    } else {
+                        // Primär: Adressbuch
+                        Button {
+                            importFromContacts()
+                        } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: "person.2.fill")
+                                Text("Aus Adressbuch importieren")
+                                    .fontWeight(.semibold)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(14)
+                        }
+
+                        // Sekundär: Demo
+                        Button {
+                            loadSampleData()
+                        } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: "wand.and.stars")
+                                Text("Demo-Daten laden")
+                                    .fontWeight(.medium)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(.systemGray5))
+                            .foregroundColor(.primary)
+                            .cornerRadius(14)
+                        }
+                    }
+
+                    if let error = importError {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(.orange)
+                            Text(error)
+                                .font(.caption)
+                        }
+                        .padding(.top, 4)
+                    }
+                }
                 .padding(.horizontal)
-                .accessibilityLabel("Import-Modus wählen")
 
-                // Permission Status
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack(spacing: 12) {
-                        Image(systemName: hasPermission ? "checkmark.circle.fill" : "circle")
-                            .foregroundColor(hasPermission ? .green : .gray)
+                Spacer().frame(height: 24)
 
-                        Text(useSampleData ? "Demo-Daten verwenden" : "Zugriff auf Kontakte")
+                // Datenschutz-Info — Caption, kein Checkbox
+                VStack(spacing: 6) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "lock.fill")
+                            .font(.caption)
+                        Text("Nur Namen & Geburtstage · Lokal gespeichert")
+                            .font(.caption)
                     }
-
-                    HStack(spacing: 12) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-
-                        Text(useSampleData ? "3 Beispiel-Kontakte" : "Nur Geburtstage & Namen")
-                    }
-
-                    HStack(spacing: 12) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-
-                        Text("Lokal gespeichert")
-                    }
-                }
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(12)
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("Kontaktoptionen")
-
-                if importedCount > 0 {
-                    Text("✓ \(importedCount) Kontakte importiert")
-                        .font(.headline)
-                        .foregroundColor(.green)
-                }
-
-                if let error = importError {
-                    Text(error)
-                        .font(.caption)
-                        .foregroundColor(.red)
-                        .padding()
-                        .background(Color.red.opacity(0.1))
-                        .cornerRadius(8)
+                    .foregroundColor(.secondary)
                 }
 
                 Spacer()
-
-                // Action Button
-                Button(action: mainAction) {
-                    if isRequestingPermission || isImporting {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                    } else if importedCount > 0 {
-                        Text("Fertig")
-                            .fontWeight(.semibold)
-                    } else {
-                        Text(useSampleData ? "Demo-Daten laden" : "Importieren")
-                            .fontWeight(.semibold)
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(importedCount > 0 ? Color.gray : Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(12)
-                .disabled(isRequestingPermission || isImporting || importedCount > 0)
             }
-            .padding()
-            .navigationTitle("Import")
+            .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Abbrechen") {
-                        dismiss()
-                    }
+                    Button("Abbrechen") { dismiss() }
                 }
             }
         }
     }
 
-    private func mainAction() {
-        if useSampleData {
-            loadSampleData()
-        } else if hasPermission {
-            importContacts()
-        } else {
-            requestPermission()
-        }
-    }
-
-    private func requestPermission() {
-        isRequestingPermission = true
-        importError = nil
-
-        Task {
-            do {
-                let granted = try await ContactsService.shared.requestPermission()
-
-                await MainActor.run {
-                    isRequestingPermission = false
-                    hasPermission = granted
-
-                    if !granted {
-                        importError = "Zugriff verweigert. Bitte in Settings erlauben."
-                    }
-                }
-            } catch {
-                await MainActor.run {
-                    isRequestingPermission = false
-                    importError = error.localizedDescription
-                }
-            }
-        }
-    }
-
-    private func importContacts() {
+    private func importFromContacts() {
         isImporting = true
         importError = nil
 
         Task {
             do {
-                let importedPeople = try await ContactsService.shared.importBirthdays()
-
-                await MainActor.run {
-                    isImporting = false
-                    importedCount = importedPeople.count
-
-                    // Save to SwiftData
-                    for person in importedPeople {
-                        modelContext.insert(person)
+                let granted = try await ContactsService.shared.requestPermission()
+                guard granted else {
+                    await MainActor.run {
+                        isImporting = false
+                        importError = "Zugriff verweigert – bitte in den Systemeinstellungen erlauben."
                     }
+                    return
                 }
 
-                try? await Task.sleep(nanoseconds: 800_000_000)
+                let people = try await ContactsService.shared.importBirthdays()
+                await MainActor.run {
+                    for person in people { modelContext.insert(person) }
+                    isImporting = false
+                }
+                try? await Task.sleep(nanoseconds: 600_000_000)
                 await MainActor.run { dismiss() }
             } catch {
                 await MainActor.run {
@@ -186,13 +138,10 @@ struct ContactsImportView: View {
     private func loadSampleData() {
         isImporting = true
         importError = nil
-
         SampleDataService.createSampleData(in: modelContext)
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             isImporting = false
-            importedCount = 3
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 dismiss()
             }
         }
