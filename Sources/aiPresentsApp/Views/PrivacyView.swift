@@ -31,10 +31,10 @@ struct PrivacyView: View {
 
                     // KI-Vorschläge
                     PrivacySection(
-                        icon: "sparkles",
-                        iconColor: .purple,
-                        title: "KI-Vorschläge (optional)",
-                        content: "Wenn du KI-Geschenkvorschläge anforderst, werden folgende Daten an OpenRouter / Google Gemini übermittelt:\n\n• Vorname der Person\n• Beziehungstyp (z. B. \"Freund\", \"Mutter\")\n• Alter\n• Sternzeichen\n\nWeitere Kontaktdaten oder Geschenkhistorie werden nicht gesendet. Der Betreiber speichert diese Daten nicht — die Anfrage geht direkt von deinem Gerät an die KI-Dienste.\n\nDatenschutz der Drittanbieter:\n• openrouter.ai/privacy\n• policies.google.com/privacy"
+                        icon: "iphone",
+                        iconColor: .green,
+                        title: "KI-Vorschläge — vollständig lokal",
+                        content: "Alle KI-Geschenkvorschläge werden ausschließlich auf deinem Gerät berechnet — durch Apple Intelligence (iOS 26+, iPhone 15 Pro oder neuer).\n\n• Kein Netzwerkzugriff\n• Keine Daten verlassen dein iPhone\n• Kein externer KI-Dienst\n• Kein API-Key oder Account nötig\n\nWenn Apple Intelligence auf deinem Gerät nicht verfügbar ist, zeigt die App Demo-Vorschläge an."
                     )
 
                     // Kontakte

@@ -4,7 +4,7 @@ import Foundation
 struct BirthdayCalculator {
     /// Internal cache for birthday calculations to improve performance
     /// Protected by cacheLock for thread safety
-    private static var cache: [String: BirthdayCacheEntry] = [:]
+    nonisolated(unsafe) private static var cache: [String: BirthdayCacheEntry] = [:]
     private static let cacheLock = NSLock()
 
     /// Cache entry for birthday calculations

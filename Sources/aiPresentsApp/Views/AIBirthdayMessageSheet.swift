@@ -303,20 +303,17 @@ struct AIBirthdayMessageSheet: View {
         birthdayMessage = nil
         HapticFeedback.light()
 
-        Task {
+        let p = person
+        Task { @MainActor in
             do {
-                let message = try await AIService.shared.generateBirthdayMessage(for: person)
-                await MainActor.run {
-                    isLoading = false
-                    birthdayMessage = message
-                    HapticFeedback.success()
-                }
+                let message = try await AIService.shared.generateBirthdayMessage(for: p)
+                isLoading = false
+                birthdayMessage = message
+                HapticFeedback.success()
             } catch {
-                await MainActor.run {
-                    isLoading = false
-                    errorMessage = error.localizedDescription
-                    HapticFeedback.error()
-                }
+                isLoading = false
+                errorMessage = error.localizedDescription
+                HapticFeedback.error()
             }
         }
     }

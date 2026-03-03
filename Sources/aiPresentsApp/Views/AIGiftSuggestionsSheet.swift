@@ -39,11 +39,12 @@ struct AIGiftSuggestionsSheet: View {
     @State private var errorMessage: String?
     @State private var selectedSuggestion: GiftSuggestion?
     @State private var selectedBudget: BudgetRange = .medium
-    @State private var showDemoModeNotice = false
     @State private var qualityViewModel: SuggestionQualityViewModel?
 
     // Track which suggestions have received feedback
     @State private var feedbackGivenForSuggestions = Set<String>()
+
+    private var isUsingAppleIntelligence: Bool { AIService.isAvailable }
 
     var body: some View {
         NavigationStack {
@@ -89,14 +90,7 @@ struct AIGiftSuggestionsSheet: View {
                     prefillNote: suggestion.reason
                 )
             }
-            .alert("Demo-Mode", isPresented: $showDemoModeNotice) {
-                Button("OK") {
-                    loadSuggestions()
-                }
-            } message: {
-                Text("Da kein API-Key konfiguriert ist, werden Demo-Vorschläge angezeigt.")
             }
-        }
     }
 
     private var personDetailsCard: some View {
@@ -345,7 +339,14 @@ struct AIGiftSuggestionsSheet: View {
             Text("KI-Assistent")
         } footer: {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Die KI analysiert vergangene Geschenke und die Beziehung, um passende Vorschläge zu generieren.")
+                HStack(spacing: 4) {
+                    Image(systemName: isUsingAppleIntelligence ? "iphone" : "sparkles")
+                        .foregroundColor(isUsingAppleIntelligence ? .green : .orange)
+                    Text(isUsingAppleIntelligence
+                         ? "Apple Intelligence — läuft vollständig auf diesem Gerät. Keine Daten verlassen dein iPhone."
+                         : "Demo-Modus — Apple Intelligence auf diesem Gerät nicht verfügbar. Bitte in den iOS-Einstellungen aktivieren.")
+                        .foregroundColor(isUsingAppleIntelligence ? .green : .orange)
+                }
 
                 if !filteredGiftHistory.isEmpty {
                     Text("📋 Basiert auf \(filteredGiftHistory.count) vergangenen Geschenk\(filteredGiftHistory.count == 1 ? "" : "en").")
@@ -406,27 +407,25 @@ struct AIGiftSuggestionsSheet: View {
         suggestions = []
         HapticFeedback.light()
 
-        Task {
+        let budget = selectedBudget
+        let history = filteredGiftHistory
+        let p = person
+        Task { @MainActor in
             do {
                 let newSuggestions = try await AIService.shared.generateGiftIdeas(
-                    for: person,
-                    budgetMin: selectedBudget.min,
-                    budgetMax: selectedBudget.max,
+                    for: p,
+                    budgetMin: budget.min,
+                    budgetMax: budget.max,
                     tags: [],
-                    pastGifts: filteredGiftHistory
+                    pastGifts: history
                 )
-
-                await MainActor.run {
-                    isLoading = false
-                    suggestions = newSuggestions
-                    HapticFeedback.success()
-                }
+                isLoading = false
+                suggestions = newSuggestions
+                HapticFeedback.success()
             } catch {
-                await MainActor.run {
-                    isLoading = false
-                    errorMessage = error.localizedDescription
-                    HapticFeedback.error()
-                }
+                isLoading = false
+                errorMessage = error.localizedDescription
+                HapticFeedback.error()
             }
         }
     }

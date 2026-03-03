@@ -1,6 +1,7 @@
 import Foundation
 import Contacts
 
+@MainActor
 class ContactsService: ObservableObject {
     static let shared = ContactsService()
 
