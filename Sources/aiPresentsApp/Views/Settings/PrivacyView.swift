@@ -31,10 +31,10 @@ struct PrivacyView: View {
 
                     // KI-Vorschläge
                     PrivacySection(
-                        icon: "iphone",
-                        iconColor: .green,
-                        title: "KI-Vorschläge — vollständig lokal",
-                        content: "Alle KI-Geschenkvorschläge werden ausschließlich auf deinem Gerät berechnet — durch Apple Intelligence (iOS 26+, iPhone 15 Pro oder neuer).\n\n• Kein Netzwerkzugriff\n• Keine Daten verlassen dein iPhone\n• Kein externer KI-Dienst\n• Kein API-Key oder Account nötig\n\nWenn Apple Intelligence auf deinem Gerät nicht verfügbar ist, zeigt die App Demo-Vorschläge an."
+                        icon: "sparkles",
+                        iconColor: .purple,
+                        title: "KI-Vorschläge (optional, mit Einwilligung)",
+                        content: "Wenn du die KI-Funktion aktivierst (nach expliziter Einwilligung), werden folgende Daten an externe Dienste übertragen:\n\n• Vorname der Person\n• Alter (berechnet, nicht das Geburtsdatum)\n• Beziehungstyp (z.B. \"Freund\", \"Mutter\")\n• Sternzeichen (berechnet)\n• Interessen/Tags (sofern eingetragen)\n• Titel vergangener Geschenke\n\nNICHT übertragen werden: Geburtsdatum, Budget, Links, Notizen, Telefonnummern.\n\nDie Daten werden weitergeleitet an:\n• OpenRouter Inc. (USA) — Auftragsverarbeiter gem. Art. 28 DSGVO\n• Google Vertex AI / Google AI Studio (USA)\n\nDatenübertragung in die USA auf Basis von Standardvertragsklauseln (Art. 46 DSGVO).\nRechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).\n\nOhne Einwilligung oder bei fehlendem API-Key werden Demo-Vorschläge ohne Netzwerkzugriff angezeigt."
                     )
 
                     // Kontakte

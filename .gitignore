@@ -105,3 +105,4 @@ iOSInjectionProject/
 
 # Secrets — niemals committen!
 Config/Secrets.xcconfig
+App/Secrets.xcconfig

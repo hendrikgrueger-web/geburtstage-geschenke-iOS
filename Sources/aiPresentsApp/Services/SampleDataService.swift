@@ -75,12 +75,16 @@ class SampleDataService {
         let Sebastian = person("demo-sebastian","Sebastian Muster",   bday(290, 33), "Freund")
         let irene    = person("demo-irene",  "Irene Musterdame",      bday(350, 69), "Tante")
 
+        // Test: Geburtstag gestern + gekauftes Geschenk → Auto-Transition testen
+        let gestern  = person("demo-gestern","Gestern Geburtstag",   bday(-1, 30), "Freund")
+
         let allPeople: [PersonRef] = [
             max, erika, hans, anna, peter, lisa, thomas, julia, sophie, michael,
             maria, felix, klara, otto, emma, paul, kurt, sarah, markus, ingrid,
             gerhard, nina, stefan, lena, tobias, petra, daniel, monika, jan, laura,
             bernhard, karin, florian, ursula, dominik, helga, patrick, andrea, tim, sandra,
-            christian, brigitte, oliver, katrin, werner, melanie, hubert, tanja, Sebastian, irene
+            christian, brigitte, oliver, katrin, werner, melanie, hubert, tanja, Sebastian, irene,
+            gestern
         ]
         allPeople.forEach { context.insert($0) }
 
@@ -125,6 +129,9 @@ class SampleDataService {
 
         // maria (Tante)
         idea(maria, "Garten-Kräuterset", "Hat großen Garten, kocht mit frischen Kräutern", 30, 50, .idea, ["Garten", "Kochen"], context)
+
+        // Gestern (Auto-Transition Test: purchased → given)
+        idea(gestern, "Bluetooth-Lautsprecher JBL", "Mag Musik", 50, 80, .purchased, ["Technik", "Musik"], context)
 
         // MARK: - Geschenkhistorie
 

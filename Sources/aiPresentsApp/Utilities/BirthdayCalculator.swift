@@ -71,7 +71,19 @@ struct BirthdayCalculator {
         components.year = currentYear
 
         guard var nextBirthday = calendar.date(from: components) else {
-            return nil
+            // Schaltjahr-Fallback: 29.02. → 28.02. im Nicht-Schaltjahr
+            components.day = 28
+            guard var fallback = calendar.date(from: components) else { return nil }
+            if fallback < today {
+                components.year = currentYear + 1
+                components.day = 29
+                if let leapYear = calendar.date(from: components) {
+                    return leapYear
+                }
+                components.day = 28
+                fallback = calendar.date(from: components) ?? fallback
+            }
+            return fallback
         }
 
         // If the birthday this year has already passed, use next year

@@ -17,8 +17,9 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: "AI Präsente"
-        CFBundleShortVersionString: "0.4.0"
-        CFBundleVersion: "7"
+        CFBundleShortVersionString: "0.6.0"
+        CFBundleVersion: "9"
+        OpenRouterAPIKey: "$(OPENROUTER_API_KEY)"
         LSRequiresIPhoneOS: true
         UILaunchScreen: {}
         UIRequiredDeviceCapabilities:
@@ -39,6 +40,9 @@ targets:
             UIWindowSceneSessionRoleApplication:
               - UISceneConfigurationName: "Default Configuration"
     settings:
+      configFiles:
+        Debug: App/Secrets.xcconfig
+        Release: App/Secrets.xcconfig
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.harryhirsch1878.ai-presents-app
         SWIFT_VERSION: "6.0"

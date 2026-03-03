@@ -10,7 +10,7 @@ enum AppEnvironment {
 struct AppConfig {
     static let currentEnvironment: AppEnvironment = .development
 
-    static let isOpenRouterConfigured = true
+    static var isOpenRouterConfigured: Bool { AI.isAPIKeyConfigured }
 
     #if DEBUG
     static let isDebugBuild = true
@@ -25,6 +25,19 @@ struct AppConfig {
         "\(appVersion) (\(buildNumber))"
     }
 
+    // MARK: - OpenRouter
+    struct AI {
+        static var openRouterAPIKey: String {
+            Bundle.main.infoDictionary?["OpenRouterAPIKey"] as? String ?? ""
+        }
+        static var isAPIKeyConfigured: Bool {
+            let key = openRouterAPIKey
+            return !key.isEmpty && !key.hasPrefix("sk-or-v1-YOUR") && key.count > 20
+        }
+        static let model = "google/gemini-3.1-flash-lite-preview"
+        static let openRouterBaseURL = "https://openrouter.ai/api/v1/chat/completions"
+    }
+
     // MARK: - UI Constants
     struct Budget {
         static let sliderMinimum: Double = 0
@@ -37,6 +50,11 @@ struct AppConfig {
         static let todayDays: Int = 0
         static let weekDays: Int = 7
         static let monthDays: Int = 30
+    }
+
+    struct GiftReminder {
+        static let lookAheadDays: Int = 60
+        static let maxDisplay: Int = 5
     }
 
     struct Reminder {

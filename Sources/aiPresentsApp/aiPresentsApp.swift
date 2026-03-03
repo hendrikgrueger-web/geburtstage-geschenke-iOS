@@ -61,6 +61,7 @@ struct aiPresentsApp: App {
                 if hasCompletedOnboarding {
                     ContentView()
                         .onAppear {
+                            GiftTransitionService.autoTransitionPurchasedGifts(in: modelContainer.mainContext)
                             Task {
                                 await reminderManager.scheduleAllReminders()
                             }

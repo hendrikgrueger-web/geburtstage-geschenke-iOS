@@ -9,6 +9,7 @@ final class PersonRef {
     var birthday: Date
     var relation: String
     var updatedAt: Date
+    var skipGift: Bool = false
 
     @Relationship(deleteRule: .cascade)
     var giftIdeas: [GiftIdea]?

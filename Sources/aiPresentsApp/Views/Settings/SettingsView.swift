@@ -13,8 +13,10 @@ struct SettingsView: View {
     @AppStorage("iCloudSyncEnabled") private var iCloudSyncEnabled = true
     @State private var showingICloudRestartNotice = false
     @State private var showingAbout = false
+    @State private var showingRevokeConsentConfirmation = false
 
     @StateObject private var reminderManager = ReminderManager(modelContext: ModelContext.placeholder)
+    @StateObject private var consentManager = AIConsentManager.shared
 
     @Query private var reminderRule: [ReminderRule]
     @Query private var people: [PersonRef]
@@ -203,25 +205,42 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("KI-Vorschläge")
-                                .font(.body)
+                    Toggle("KI-Vorschläge aktiviert", isOn: $consentManager.aiEnabled)
+                        .disabled(!consentManager.consentGiven)
 
-                            Text("Geschenkideen mit OpenRouter")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                    if consentManager.consentGiven {
+                        HStack {
+                            Label("Einwilligung erteilt", systemImage: "checkmark.shield.fill")
+                                .foregroundColor(.green)
+                            Spacer()
+                            Button("Widerrufen") {
+                                showingRevokeConsentConfirmation = true
+                            }
+                            .foregroundColor(.red)
+                            .font(.subheadline)
                         }
+                    } else {
+                        Label("Keine Einwilligung erteilt", systemImage: "shield.slash")
+                            .foregroundColor(.secondary)
+                    }
 
-                        Spacer()
-
-                        Image(systemName: "sparkles")
+                    if !AIService.isAPIKeyConfigured {
+                        Label("API-Key nicht konfiguriert (Demo-Modus)", systemImage: "key.slash")
+                            .font(.caption)
                             .foregroundColor(.orange)
                     }
                 } header: {
                     Text("KI-Assistent")
                 } footer: {
-                    Text("Die KI hilft dir, passende Geschenkideen zu finden. Optional und kann deaktiviert werden.")
+                    Text("Die KI-Funktionen nutzen OpenRouter → Google Gemini (USA). Es werden Vorname, Alter, Beziehungstyp und Sternzeichen übertragen. Widerruf jederzeit möglich.")
+                }
+                .alert("Einwilligung widerrufen?", isPresented: $showingRevokeConsentConfirmation) {
+                    Button("Abbrechen", role: .cancel) { }
+                    Button("Widerrufen", role: .destructive) {
+                        consentManager.revokeConsent()
+                    }
+                } message: {
+                    Text("Die KI-Funktionen werden deaktiviert. Du kannst die Einwilligung jederzeit erneut erteilen.")
                 }
 
                 Section("Daten") {

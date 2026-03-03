@@ -60,11 +60,25 @@ struct BirthdayDateHelper {
             if thisYearBirthday >= date {
                 return thisYearBirthday
             }
+        } else {
+            // Schaltjahr-Fallback: 29.02. → 28.02. im Nicht-Schaltjahr
+            birthdayComponents.day = 28
+            if let fallback = calendar.date(from: birthdayComponents), fallback >= date {
+                return fallback
+            }
         }
 
         // If this year's birthday has passed, try next year
         currentYear += 1
         birthdayComponents.year = currentYear
+        // 29.02. im nächsten Jahr probieren
+        let originalDay = calendar.component(.day, from: birthday)
+        birthdayComponents.day = originalDay
+        if let nextYear = calendar.date(from: birthdayComponents) {
+            return nextYear
+        }
+        // Fallback: 28.02.
+        birthdayComponents.day = 28
         return calendar.date(from: birthdayComponents)
     }
 

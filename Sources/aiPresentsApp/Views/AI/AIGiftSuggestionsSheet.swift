@@ -290,18 +290,34 @@ struct AIGiftSuggestionsSheet: View {
                     }
                 }
             }
+            if suggestions.count < 30 {
+                Button {
+                    loadMoreSuggestions()
+                } label: {
+                    HStack {
+                        if isLoading {
+                            ProgressView()
+                                .controlSize(.small)
+                        } else {
+                            Image(systemName: "sparkles")
+                        }
+                        Text("5 weitere generieren")
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(isLoading)
+                .padding(.vertical, 4)
+            }
         } header: {
             Text("Vorschläge (\(filteredSuggestions.count))")
         } footer: {
             VStack(alignment: .leading, spacing: 8) {
-                Text("💡 Tippe auf einen Vorschlag, um ihn als Geschenkidee zu speichern.")
-                Text("👍👎 Gib Feedback, um die KI-Qualität zu verbessern.")
+                Text("Tippe auf einen Vorschlag, um ihn als Geschenkidee zu speichern.")
                 if suggestions.count != filteredSuggestions.count {
-                    Text("ℹ️ \(suggestions.count - filteredSuggestions.count) Vorschlag\(suggestions.count - filteredSuggestions.count == 1 ? "" : "e") bereits vorhanden.")
+                    Text("\(suggestions.count - filteredSuggestions.count) Vorschlag\(suggestions.count - filteredSuggestions.count == 1 ? "" : "e") bereits vorhanden.")
                 }
-                if suggestions.count >= 3 {
-                    Text("✨ Möchtest du mehr Vorschläge? Tippe oben auf 'Aktualisieren'.")
-                }
+                Text("\(suggestions.count)/30 Vorschläge generiert")
             }
             .font(.caption)
             .foregroundColor(AppColor.textSecondary)
@@ -406,9 +422,21 @@ struct AIGiftSuggestionsSheet: View {
         errorMessage = nil
         suggestions = []
         HapticFeedback.light()
+        fetchSuggestions()
+    }
 
+    private func loadMoreSuggestions() {
+        guard suggestions.count < 30 else { return }
+        isLoading = true
+        errorMessage = nil
+        HapticFeedback.light()
+        fetchSuggestions()
+    }
+
+    private func fetchSuggestions() {
         let budget = selectedBudget
         let history = filteredGiftHistory
+        let existingTitles = suggestions.map { $0.title }
         let p = person
         Task { @MainActor in
             do {
@@ -417,10 +445,18 @@ struct AIGiftSuggestionsSheet: View {
                     budgetMin: budget.min,
                     budgetMax: budget.max,
                     tags: [],
-                    pastGifts: history
+                    pastGifts: history,
+                    excludeTitles: existingTitles
                 )
+                // Deduplizieren und anhängen
+                let existingSet = Set(suggestions.map { $0.title.lowercased() })
+                let unique = newSuggestions.filter { !existingSet.contains($0.title.lowercased()) }
+                suggestions.append(contentsOf: unique)
+                // Max 30
+                if suggestions.count > 30 {
+                    suggestions = Array(suggestions.prefix(30))
+                }
                 isLoading = false
-                suggestions = newSuggestions
                 HapticFeedback.success()
             } catch {
                 isLoading = false

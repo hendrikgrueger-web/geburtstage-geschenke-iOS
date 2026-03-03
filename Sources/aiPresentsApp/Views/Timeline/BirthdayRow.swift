@@ -2,13 +2,15 @@ import SwiftUI
 
 struct BirthdayRow: View {
     let person: PersonRef
+    let giftIdeas: [GiftIdea]
     let onTap: (() -> Void)?
     let onQuickAdd: (() -> Void)?
     let showCountdown: Bool
     @State private var isAnimating = false
 
-    init(person: PersonRef, onTap: (() -> Void)? = nil, onQuickAdd: (() -> Void)? = nil, showCountdown: Bool = true) {
+    init(person: PersonRef, giftIdeas: [GiftIdea] = [], onTap: (() -> Void)? = nil, onQuickAdd: (() -> Void)? = nil, showCountdown: Bool = true) {
         self.person = person
+        self.giftIdeas = giftIdeas
         self.onTap = onTap
         self.onQuickAdd = onQuickAdd
         self.showCountdown = showCountdown
@@ -41,34 +43,7 @@ struct BirthdayRow: View {
                     BirthdayCountdownBadge(daysUntil: daysUntilBirthday)
                 }
 
-                if let giftCount = person.giftIdeas?.count, giftCount > 0 {
-                    HStack(spacing: 4) {
-                        Text("\(giftCount)")
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .foregroundColor(AppColor.accent)
-                        Text("Ideen")
-                            .font(.caption2)
-                            .foregroundColor(AppColor.textSecondary)
-                    }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(AppColor.accent.opacity(0.15))
-                    .clipShape(.rect(cornerRadius: 8))
-                }
-
-                if let onQuickAdd = onQuickAdd {
-                    Button(action: {
-                        HapticFeedback.light()
-                        onQuickAdd()
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title3)
-                            .foregroundColor(AppColor.primary)
-                    }
-                    .buttonStyle(.plain)
-                    .accessibleButton(label: "Geschenkidee hinzufügen", hint: "Fügt eine neue Geschenkidee für \(person.displayName) hinzu")
-                }
+                giftStatusBadge
             }
         }
         .padding(.vertical, 8)
@@ -88,6 +63,52 @@ struct BirthdayRow: View {
         }
     }
 
+    // MARK: - Gift Status Badge
+
+    @ViewBuilder
+    private var giftStatusBadge: some View {
+        if person.skipGift {
+            statusPill(text: "—", color: .gray)
+        } else if hasGiftWithStatus(.purchased) || hasGiftWithStatus(.given) {
+            statusPill(icon: "checkmark", color: AppColor.success)
+        } else if hasGiftWithStatus(.planned) {
+            statusPill(text: "Geplant", color: .blue)
+        } else if ideaCount > 0 {
+            statusPill(text: "\(ideaCount) Ideen", color: AppColor.accent)
+        }
+    }
+
+    private func statusPill(text: String? = nil, icon: String? = nil, color: Color) -> some View {
+        HStack(spacing: 4) {
+            if let icon = icon {
+                Image(systemName: icon)
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundColor(color)
+            }
+            if let text = text {
+                Text(text)
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(color)
+            }
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(color.opacity(0.15))
+        .clipShape(.rect(cornerRadius: 8))
+    }
+
+    private var ideaCount: Int {
+        giftIdeas.count
+    }
+
+    private func hasGiftWithStatus(_ status: GiftStatus) -> Bool {
+        giftIdeas.contains { $0.status == status }
+    }
+
+    // MARK: - Computed Properties
+
     private var daysUntilBirthday: Int {
         let today = Calendar.current.startOfDay(for: Date())
         return BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) ?? 0
@@ -96,13 +117,11 @@ struct BirthdayRow: View {
     private var progressView: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
-                // Background
                 Rectangle()
                     .fill(AppColor.textSecondary.opacity(0.2))
                     .frame(height: 4)
                     .clipShape(.rect(cornerRadius: 2))
 
-                // Progress
                 Rectangle()
                     .fill(progressColor)
                     .frame(width: geometry.size.width * CGFloat(progressFraction), height: 4)
@@ -139,8 +158,10 @@ struct BirthdayRow: View {
         var label = "\(person.displayName), "
         label += "\(age) Jahre alt. "
 
-        if let giftCount = person.giftIdeas?.count, giftCount > 0 {
-            label += "\(giftCount) Geschenkidee\(giftCount == 1 ? "" : "n"). "
+        if person.skipGift {
+            label += "Kein Geschenk nötig. "
+        } else if !giftIdeas.isEmpty {
+            label += "\(giftIdeas.count) Geschenkidee\(giftIdeas.count == 1 ? "" : "n"). "
         }
 
         if daysUntil == 0 {

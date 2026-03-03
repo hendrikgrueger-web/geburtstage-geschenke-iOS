@@ -1,42 +1,5 @@
 import Foundation
 
-// Foundation Models (Apple Intelligence) — iOS 26+, A17 Pro / A18 / A19.
-// #if canImport sorgt für Kompatibilität mit älterem Xcode.
-#if canImport(FoundationModels)
-import FoundationModels
-#endif
-
-// MARK: - @Generable Ausgabe-Structs
-//
-// Apple's empfohlener Weg für strukturierte Ausgaben ("Guided Generation").
-// JSON im Prompt führt zu GenerationError -1 — @Generable ist die korrekte Methode.
-// Das Modell befüllt die Swift-Struct direkt, ohne JSON-Parsing.
-
-#if canImport(FoundationModels)
-@available(iOS 26.0, *)
-@Generable
-struct GiftSuggestionsOutput {
-    var suggestions: [GiftItem]
-
-    @Generable
-    struct GiftItem {
-        /// Konkreter, kaufbarer Geschenkname (z.B. "Kochkurs Pasta & Risotto")
-        var title: String
-        /// Kurze persönliche Begründung, warum dieses Geschenk passt (1–2 Sätze)
-        var reason: String
-    }
-}
-
-@available(iOS 26.0, *)
-@Generable
-struct BirthdayMessageOutput {
-    /// Persönliche Anrede (z.B. "Lieber Max,")
-    var greeting: String
-    /// Herzlicher Nachrichtentext, 3–5 Sätze
-    var body: String
-}
-#endif
-
 // MARK: - Sendable Kontext-Structs
 // Werden genutzt, um SwiftData-Objekte (non-Sendable) sicher über Actor-Grenzen zu übergeben.
 
@@ -61,31 +24,40 @@ private struct BirthdayContext: Sendable {
 
 // MARK: - AIService
 
-/// KI-Service für Geschenkvorschläge und Geburtstagsgrüße.
+/// KI-Service für Geschenkvorschläge und Geburtstagsgrüße via OpenRouter (Google Gemini).
 ///
-/// ## Datenschutz: 100% lokal
-/// Alle Verarbeitung findet via Apple Intelligence auf dem Gerät statt.
-/// Kein Netzwerkzugriff, kein API-Key, kein Drittanbieter.
+/// ## Datenschutz: Cloud-Verarbeitung
+/// Ausgewählte Daten werden an OpenRouter → Google Gemini (USA) übertragen.
+/// Übertragen werden: Vorname, Alter, Beziehungstyp, Sternzeichen, Interessen/Tags,
+/// Budget-Rahmen (Min/Max), Titel vergangener Geschenke.
+/// NICHT übertragen: Geburtsdatum, Links, Notizen, Telefonnummer.
 ///
 /// ## Voraussetzungen
-/// - iOS 26.0+, A17 Pro / A18 / A19 (iPhone 16e / A16 wird NICHT unterstützt)
-/// - Apple Intelligence in Einstellungen aktiviert
+/// - API-Key in Info.plist (OpenRouterAPIKey)
+/// - Einwilligung via AIConsentManager
 ///
 /// ## Fallback
-/// Demo-Modus wenn Apple Intelligence nicht verfügbar ist.
+/// Demo-Modus wenn API-Key fehlt oder bei Netzwerkfehler.
 struct AIService {
     static let shared = AIService()
     private init() {}
 
     // MARK: - Verfügbarkeit
 
+    /// True wenn API-Key konfiguriert ist UND Einwilligung gegeben wurde.
+    /// Nur auf dem MainActor aufrufbar (da AIConsentManager MainActor-isoliert ist).
+    @MainActor
     static var isAvailable: Bool {
-        #if canImport(FoundationModels)
-        if #available(iOS 26.0, *) {
-            return SystemLanguageModel.default.isAvailable
-        }
-        #endif
-        return false
+        isAPIKeyConfigured && AIConsentManager.shared.consentGiven
+    }
+
+    static var isAPIKeyConfigured: Bool {
+        let key = Bundle.main.infoDictionary?["OpenRouterAPIKey"] as? String ?? ""
+        return !key.isEmpty && !key.hasPrefix("sk-or-v1-YOUR") && !key.hasPrefix("PLACEHOLDER") && key.count > 20
+    }
+
+    private static var apiKey: String {
+        Bundle.main.infoDictionary?["OpenRouterAPIKey"] as? String ?? ""
     }
 
     // MARK: - Öffentliche API (@MainActor — SwiftData-Objekte extrahieren)
@@ -96,7 +68,8 @@ struct AIService {
         budgetMin: Double,
         budgetMax: Double,
         tags: [String],
-        pastGifts: [GiftHistory]
+        pastGifts: [GiftHistory],
+        excludeTitles: [String] = []
     ) async throws -> [GiftSuggestion] {
 
         // Daten auf @MainActor in Sendable-Struct extrahieren
@@ -111,11 +84,13 @@ struct AIService {
         )
         let budgetRange = (min: budgetMin, max: budgetMax)
 
-        #if canImport(FoundationModels)
-        if #available(iOS 26.0, *), SystemLanguageModel.default.isAvailable {
-            return try await generateGiftIdeasWithAI(context: context, budget: budgetRange)
+        if AIService.isAvailable && AIConsentManager.shared.canUseAI {
+            do {
+                return try await generateGiftIdeasWithOpenRouter(context: context, budget: budgetRange, excludeTitles: excludeTitles)
+            } catch {
+                AppLogger.data.warning("OpenRouter Fehler, verwende Demo-Modus: \(error.localizedDescription)")
+            }
         }
-        #endif
         return demoSuggestions(relation: context.relation, zodiac: context.zodiac, age: context.age)
     }
 
@@ -132,79 +107,140 @@ struct AIService {
             lastGiftYear: lastGift.map { $0.year }
         )
 
-        #if canImport(FoundationModels)
-        if #available(iOS 26.0, *), SystemLanguageModel.default.isAvailable {
-            return try await generateBirthdayMessageWithAI(context: context)
+        if AIService.isAvailable && AIConsentManager.shared.canUseAI {
+            do {
+                return try await generateBirthdayMessageWithOpenRouter(context: context)
+            } catch {
+                AppLogger.data.warning("OpenRouter Fehler, verwende Demo-Modus: \(error.localizedDescription)")
+            }
         }
-        #endif
         return demoBirthdayMessage(name: context.name, relation: context.relation, zodiac: context.zodiac)
     }
 
-    // MARK: - Foundation Models (nonisolated, empfängt nur Sendable-Typen)
+    // MARK: - OpenRouter API
 
-    @available(iOS 26.0, *)
-    private func generateGiftIdeasWithAI(
+    private func generateGiftIdeasWithOpenRouter(
         context: GiftContext,
-        budget: (min: Double, max: Double)
+        budget: (min: Double, max: Double),
+        excludeTitles: [String] = []
     ) async throws -> [GiftSuggestion] {
-        #if canImport(FoundationModels)
 
-        var prompt = """
+        var userPrompt = """
         Erstelle 5 passende Geschenkideen für \(context.name), \(context.age) Jahre, \(context.relation).
         Sternzeichen: \(context.zodiac).
         Budget: \(Int(budget.min))–\(Int(budget.max)) Euro (strikt einhalten).
         """
 
         if !context.tags.isEmpty {
-            prompt += "\nInteressen: \(context.tags.joined(separator: ", "))."
+            userPrompt += "\nInteressen: \(context.tags.joined(separator: ", "))."
         }
 
-        if !context.pastGiftTitles.isEmpty {
-            prompt += "\nBereits verschenkt (nicht wiederholen): \(context.pastGiftTitles.joined(separator: ", "))."
+        let allExcluded = context.pastGiftTitles + excludeTitles
+        if !allExcluded.isEmpty {
+            userPrompt += "\nBereits vorgeschlagen oder verschenkt (NICHT wiederholen): \(allExcluded.joined(separator: ", "))."
         }
 
         if let days = context.daysUntil {
             switch days {
-            case 0:     prompt += "\nWichtig: Geburtstag ist HEUTE!"
-            case 1:     prompt += "\nWichtig: Geburtstag ist morgen!"
-            case 2...7: prompt += "\nWichtig: Geburtstag in \(days) Tagen — schnell verfügbare Ideen bevorzugen."
+            case 0:     userPrompt += "\nWichtig: Geburtstag ist HEUTE!"
+            case 1:     userPrompt += "\nWichtig: Geburtstag ist morgen!"
+            case 2...7: userPrompt += "\nWichtig: Geburtstag in \(days) Tagen — schnell verfügbare Ideen bevorzugen."
             default: break
             }
         }
 
-        let session = LanguageModelSession(
-            instructions: "Du bist ein erfahrener Geschenkberater. Antworte auf Deutsch. Schlage konkrete, kaufbare Geschenke vor."
-        )
-        let response = try await session.respond(to: prompt, generating: GiftSuggestionsOutput.self)
-        return response.content.suggestions.map { GiftSuggestion(title: $0.title, reason: $0.reason) }
+        let systemPrompt = "Du bist ein Geschenkberater. Regeln: 1) title = konkretes Geschenk in 1-3 Worten (z.B. \"Espressomaschine\", \"Yoga-Matte\", \"Konzertkarten\"). 2) reason = kurze Begründung warum es passt (1 Satz, ANDERS als title). Antworte NUR mit validem JSON ohne Markdown-Codeblöcke. Format: {\"suggestions\":[{\"title\":\"...\",\"reason\":\"...\"}]}"
 
-        #else
-        throw AIError.notAvailable
-        #endif
+        let responseData = try await callOpenRouter(system: systemPrompt, user: userPrompt)
+
+        guard let json = try? JSONDecoder().decode(GiftSuggestionsJSON.self, from: responseData) else {
+            AppLogger.data.warning("JSON-Parse-Fehler bei Gift Ideas, verwende Demo-Modus")
+            return demoSuggestions(relation: context.relation, zodiac: context.zodiac, age: context.age)
+        }
+
+        return json.suggestions.map { GiftSuggestion(title: $0.title, reason: $0.reason) }
     }
 
-    @available(iOS 26.0, *)
-    private func generateBirthdayMessageWithAI(context: BirthdayContext) async throws -> BirthdayMessage {
-        #if canImport(FoundationModels)
+    private func generateBirthdayMessageWithOpenRouter(context: BirthdayContext) async throws -> BirthdayMessage {
 
-        var prompt = """
+        var userPrompt = """
         Schreibe eine herzliche Geburtstagsgrußkarte für \(context.name), \(context.age) Jahre, \(context.relation).
         Sternzeichen: \(context.zodiac).
         """
 
         if let title = context.lastGiftTitle, let year = context.lastGiftYear {
-            prompt += "\nLetztes Geschenk: \(title) (\(year))."
+            userPrompt += "\nLetztes Geschenk: \(title) (\(year))."
         }
 
-        let session = LanguageModelSession(
-            instructions: "Du bist ein herzlicher Texter für Geburtstagsgrüße. Schreibe auf Deutsch, persönlich und authentisch, ohne Floskeln."
-        )
-        let response = try await session.respond(to: prompt, generating: BirthdayMessageOutput.self)
-        return BirthdayMessage(greeting: response.content.greeting, body: response.content.body)
+        let systemPrompt = "Du bist ein Texter für Geburtstagsgrüße. Antworte NUR mit validem JSON ohne Markdown-Codeblöcke. Format: {\"greeting\":\"...\",\"body\":\"...\"}"
 
-        #else
-        throw AIError.notAvailable
-        #endif
+        let responseData = try await callOpenRouter(system: systemPrompt, user: userPrompt)
+
+        guard let json = try? JSONDecoder().decode(BirthdayMessageJSON.self, from: responseData) else {
+            AppLogger.data.warning("JSON-Parse-Fehler bei Birthday Message, verwende Demo-Modus")
+            return demoBirthdayMessage(name: context.name, relation: context.relation, zodiac: context.zodiac)
+        }
+
+        return BirthdayMessage(greeting: json.greeting, body: json.body)
+    }
+
+    private func callOpenRouter(system: String, user: String) async throws -> Data {
+        let key = AIService.apiKey
+        guard !key.isEmpty else { throw AIError.noAPIKey }
+
+        let url = URL(string: "https://openrouter.ai/api/v1/chat/completions")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("https://github.com/harryhirsch1878/ai-presents-app-ios", forHTTPHeaderField: "HTTP-Referer")
+        request.setValue("AI Präsente", forHTTPHeaderField: "X-Title")
+
+        let body: [String: Any] = [
+            "model": "google/gemini-3.1-flash-lite-preview",
+            "messages": [
+                ["role": "system", "content": system],
+                ["role": "user", "content": user]
+            ]
+        ]
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+            AppLogger.data.error("OpenRouter HTTP \(httpResponse.statusCode)")
+            throw AIError.httpError(httpResponse.statusCode)
+        }
+
+        let decoded = try JSONDecoder().decode(OpenRouterResponse.self, from: data)
+        guard let content = decoded.choices.first?.message.content else {
+            throw AIError.emptyResponse
+        }
+
+        guard let contentData = content.data(using: .utf8) else {
+            throw AIError.emptyResponse
+        }
+        return contentData
+    }
+
+    // MARK: - Response Structs (privat)
+
+    private struct OpenRouterResponse: Decodable {
+        struct Choice: Decodable {
+            struct Message: Decodable { let content: String }
+            let message: Message
+        }
+        let choices: [Choice]
+    }
+
+    private struct GiftSuggestionsJSON: Decodable {
+        struct Item: Decodable { let title: String; let reason: String }
+        let suggestions: [Item]
+    }
+
+    private struct BirthdayMessageJSON: Decodable {
+        let greeting: String
+        let body: String
     }
 
     // MARK: - Demo-Modus (vollständig offline)
@@ -307,10 +343,19 @@ struct AIService {
     // MARK: - Fehler
 
     enum AIError: LocalizedError {
-        case notAvailable
+        case noAPIKey
+        case httpError(Int)
+        case emptyResponse
 
         var errorDescription: String? {
-            "Apple Intelligence ist auf diesem Gerät nicht verfügbar. Bitte in den Einstellungen aktivieren."
+            switch self {
+            case .noAPIKey:
+                return "Kein API-Key konfiguriert. Bitte trage deinen OpenRouter-Key ein."
+            case .httpError(let code):
+                return "OpenRouter API-Fehler (HTTP \(code)). Bitte prüfe deinen API-Key."
+            case .emptyResponse:
+                return "Leere Antwort vom KI-Dienst erhalten."
+            }
         }
     }
 }

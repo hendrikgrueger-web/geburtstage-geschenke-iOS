@@ -1,97 +1,75 @@
 import SwiftUI
 import SwiftData
 
-struct BirthdayWidgetView: View {
-    @Environment(\.modelContext) private var modelContext
-    @State private var selectedIndex = 0
-    @State private var widgetData: BirthdayWidgetData.WidgetSummary?
+struct UpcomingBirthdayHero: View {
+    @Query private var allPeople: [PersonRef]
 
     private var upcomingBirthdays: [PersonRef] {
-        guard let data = widgetData else { return [] }
-        return data.upcomingBirthdays.compactMap { entry -> PersonRef? in
-            guard let entryUUID = UUID(uuidString: entry.id) else { return nil }
-            let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id == entryUUID })
-            return try? modelContext.fetch(descriptor).first
+        let today = Calendar.current.startOfDay(for: Date())
+        return allPeople.compactMap { person -> (PersonRef, Int)? in
+            guard let days = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today),
+                  days >= 0 else { return nil }
+            return (person, days)
         }
+        .sorted { $0.1 < $1.1 }
+        .prefix(3)
+        .map { $0.0 }
     }
 
     var body: some View {
-        VStack(spacing: 16) {
-            if upcomingBirthdays.isEmpty {
-                emptyWidgetState
-            } else {
-                TabView(selection: $selectedIndex) {
-                    ForEach(Array(upcomingBirthdays.enumerated()), id: \.offset) { index, person in
-                        NavigationLink(destination: PersonDetailView(person: person)) {
-                            birthdayCard(for: person)
-                        }
-                        .buttonStyle(.plain)
-                        .tag(index)
+        if upcomingBirthdays.isEmpty {
+            emptyState
+        } else {
+            VStack(spacing: 10) {
+                ForEach(upcomingBirthdays) { person in
+                    NavigationLink(value: person) {
+                        birthdayCard(for: person)
                     }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 120)
-
-                if upcomingBirthdays.count > 1 {
-                    HStack(spacing: 4) {
-                        ForEach(0..<upcomingBirthdays.count, id: \.self) { index in
-                            Circle()
-                                .fill(index == selectedIndex ? AppColor.primary : Color.gray.opacity(0.3))
-                                .frame(width: 6, height: 6)
-                        }
-                    }
-                    .transition(.opacity)
+                    .buttonStyle(.plain)
                 }
             }
         }
-        .padding()
-        .background(AppColor.cardBackground)
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
-        .onAppear {
-            loadWidgetData()
-        }
-    }
-
-    private func loadWidgetData() {
-        widgetData = BirthdayWidgetData.fetchWidgetData(from: modelContext, limit: 3)
     }
 
     private func birthdayCard(for person: PersonRef) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                PersonAvatar(person: person, size: 50)
+        HStack(spacing: 12) {
+            PersonAvatar(person: person, size: 44)
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(person.displayName)
-                        .font(.headline)
-                        .foregroundColor(AppColor.textPrimary)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(person.displayName)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(AppColor.textPrimary)
 
-                    Text(birthdayInfo(for: person))
-                        .font(.subheadline)
-                        .foregroundColor(AppColor.textSecondary)
+                Text(birthdayInfo(for: person))
+                    .font(.caption)
+                    .foregroundColor(AppColor.textSecondary)
+            }
+
+            Spacer()
+
+            HStack(spacing: 8) {
+                if let giftCount = person.giftIdeas?.count, giftCount > 0 {
+                    HStack(spacing: 3) {
+                        Image(systemName: "lightbulb.fill")
+                            .font(.caption2)
+                        Text("\(giftCount)")
+                            .font(.caption2)
+                            .fontWeight(.medium)
+                    }
+                    .foregroundColor(AppColor.accent)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 3)
+                    .background(AppColor.accent.opacity(0.12), in: Capsule())
                 }
-
-                Spacer()
 
                 BirthdayCountdownBadge(daysUntil: daysUntilBirthday(for: person))
             }
-
-            if let giftCount = person.giftIdeas?.count, giftCount > 0 {
-                HStack(spacing: 4) {
-                    Image(systemName: "lightbulb.fill")
-                        .font(.caption)
-                        .foregroundColor(AppColor.accent)
-                    Text("\(giftCount) Idee\(giftCount == 1 ? "" : "n")")
-                        .font(.caption)
-                        .foregroundColor(AppColor.textSecondary)
-                }
-            }
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(AppColor.gradientForRelation(person.relation).opacity(0.1))
-        .cornerRadius(12)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(AppColor.gradientForRelation(person.relation).opacity(0.12))
+        .clipShape(RoundedRectangle(cornerRadius: 14))
     }
 
     private func daysUntilBirthday(for person: PersonRef) -> Int {
@@ -107,7 +85,7 @@ struct BirthdayWidgetView: View {
         let daysUntil = daysUntilBirthday(for: person)
 
         if daysUntil == 0 {
-            return "🎉 Heute wird \(age)!"
+            return "Heute wird \(age)!"
         } else if daysUntil == 1 {
             return "Morgen wird \(age)"
         } else {
@@ -115,28 +93,22 @@ struct BirthdayWidgetView: View {
         }
     }
 
-    private var emptyWidgetState: some View {
-        VStack(spacing: 12) {
+    private var emptyState: some View {
+        VStack(spacing: 8) {
             Image(systemName: "gift")
-                .font(.system(size: 40))
+                .font(.system(size: 32))
                 .foregroundColor(AppColor.textSecondary.opacity(0.4))
-
             Text("Keine Geburtstage")
                 .font(.subheadline)
                 .foregroundColor(AppColor.textSecondary)
-
-            Text("in den nächsten 14 Tagen")
-                .font(.caption)
-                .foregroundColor(AppColor.textTertiary)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity)
         .padding()
     }
 }
 
 #Preview {
-    BirthdayWidgetView()
+    UpcomingBirthdayHero()
         .modelContainer(for: [PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self], inMemory: true)
-        .frame(width: 340, height: 200)
         .padding()
 }

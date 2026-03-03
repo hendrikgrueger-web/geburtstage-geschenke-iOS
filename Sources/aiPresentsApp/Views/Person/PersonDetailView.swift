@@ -17,7 +17,11 @@ struct PersonDetailView: View {
     @State private var showingDeletePerson = false
     @State private var showingAISuggestions = false
     @State private var showingBirthdayMessage = false
+    @State private var showingAIConsent = false
+    @State private var pendingAIAction: AIAction? = nil
     @State private var giftSortOption: GiftSortOption = .status
+
+    enum AIAction { case suggestions, birthdayMessage }
     @State private var giftStatusFilter: GiftStatusFilter = .all
     @State private var showingShareSheet = false
     @State private var shareText: String = ""
@@ -95,10 +99,19 @@ struct PersonDetailView: View {
                     }
                     .buttonStyle(.plain)
                 }
+
+                Toggle("Kein Geschenk nötig", isOn: Binding(
+                    get: { person.skipGift },
+                    set: { newValue in
+                        person.skipGift = newValue
+                        HapticFeedback.selectionChanged()
+                    }
+                ))
             }
             .accessibilityElement(children: .combine)
             .accessibilityLabel("Informationen zu \(person.displayName)")
 
+            if !person.skipGift {
             // Gift Ideas
             Section {
                 GiftSummaryView(person: person)
@@ -115,7 +128,19 @@ struct PersonDetailView: View {
                         Button {
                             showingEditGiftIdea = idea
                         } label: {
-                            GiftIdeaRow(idea: idea)
+                            VStack(alignment: .leading, spacing: 4) {
+                                GiftIdeaRow(idea: idea)
+                                if !idea.statusLog.isEmpty {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        ForEach(idea.statusLog, id: \.self) { entry in
+                                            Text(entry)
+                                                .font(.caption2)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                    }
+                                    .padding(.leading, 4)
+                                }
+                            }
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                             Button {
@@ -164,92 +189,79 @@ struct PersonDetailView: View {
                     .onDelete(perform: deleteGiftIdeas)
                 }
             } header: {
-                VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 6) {
                     Text("Geschenkideen")
 
-                    HStack(spacing: 8) {
-                        Menu {
-                            ForEach(GiftStatusFilter.allCases, id: \.self) { filter in
-                                Button {
-                                    giftStatusFilter = filter
-                                    HapticFeedback.selectionChanged()
-                                } label: {
-                                    if giftStatusFilter == filter {
-                                        Label(filter.rawValue, systemImage: "checkmark")
-                                    } else {
-                                        Text(filter.rawValue)
-                                    }
+                    Spacer()
+
+                    // Status-Filter
+                    Menu {
+                        ForEach(GiftStatusFilter.allCases, id: \.self) { filter in
+                            Button {
+                                giftStatusFilter = filter
+                                HapticFeedback.selectionChanged()
+                            } label: {
+                                if giftStatusFilter == filter {
+                                    Label(filter.rawValue, systemImage: "checkmark")
+                                } else {
+                                    Text(filter.rawValue)
                                 }
                             }
-                        } label: {
-                            HStack(spacing: 4) {
-                                Text(giftStatusFilter.rawValue)
-                                    .font(.subheadline)
-                                Image(systemName: "chevron.down")
-                                    .font(.caption2)
+                        }
+                    } label: {
+                        controlPill(
+                            icon: "line.3.horizontal.decrease",
+                            label: giftStatusFilter == .all ? "Filter" : giftStatusFilter.rawValue,
+                            isActive: giftStatusFilter != .all
+                        )
+                    }
+
+                    // Sortierung
+                    Menu {
+                        ForEach(GiftSortOption.allCases, id: \.self) { option in
+                            Button {
+                                giftSortOption = option
+                                HapticFeedback.selectionChanged()
+                            } label: {
+                                if giftSortOption == option {
+                                    Label(option.rawValue, systemImage: "checkmark")
+                                } else {
+                                    Text(option.rawValue)
+                                }
                             }
-                            .foregroundColor(.secondary)
                         }
+                    } label: {
+                        controlPill(
+                            icon: "arrow.up.arrow.down",
+                            label: giftSortOption == .status ? "Sortierung" : giftSortOption.rawValue,
+                            isActive: giftSortOption != .status
+                        )
+                    }
 
-                        Spacer()
-
-                        Picker("", selection: $giftSortOption) {
-                            ForEach(GiftSortOption.allCases, id: \.self) { option in
-                                Text(option.rawValue).tag(option)
-                            }
-                        }
-                        .pickerStyle(.menu)
-
-                        Button(action: {
-                            showingAddGiftIdea = true
-                            HapticFeedback.medium()
-                        }) {
-                            Image(systemName: "plus.circle.fill")
-                        }
+                    Button(action: {
+                        showingAddGiftIdea = true
+                        HapticFeedback.medium()
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundStyle(AppColor.primary)
                     }
                 }
             } footer: {
-                VStack(alignment: .leading, spacing: 12) {
-                    Button(action: {
-                        showingAISuggestions = true
-                        HapticFeedback.medium()
-                    }) {
+                if !filteredGiftIdeas.isEmpty && hasPurchasedGifts {
+                    Button(action: { showingMarkAllAsGivenConfirmation = true }) {
                         HStack {
-                            Image(systemName: "sparkles")
-                                .foregroundColor(.orange)
-                            Text("KI-Vorschläge generieren")
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(AppColor.success)
+                            Text("Alle als verschenkt markieren")
                                 .font(.subheadline)
-                        }
-                    }
-                    .accessibilityLabel("KI-Vorschläge generieren")
-                    .accessibilityHint("Generiert neue Geschenkideen basierend auf KI")
-
-                    Button(action: {
-                        showingBirthdayMessage = true
-                        HapticFeedback.medium()
-                    }) {
-                        HStack {
-                            Image(systemName: "envelope.badge")
-                                .foregroundColor(.blue)
-                            Text("Geburtstagsnachricht")
-                                .font(.subheadline)
-                        }
-                    }
-                    .accessibilityLabel("Geburtstagsnachricht")
-                    .accessibilityHint("Erstellt eine personalisierte Geburtstagsnachricht")
-
-                    if !filteredGiftIdeas.isEmpty && hasPurchasedGifts {
-                        Button(action: { showingMarkAllAsGivenConfirmation = true }) {
-                            HStack {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(AppColor.success)
-                                Text("Alle als verschenkt markieren")
-                                    .font(.subheadline)
-                            }
                         }
                     }
                 }
             }
+
+            // Apple Intelligence
+            appleIntelligenceSection
+            } // end if !person.skipGift
 
             // Gift History
             Section {
@@ -485,7 +497,144 @@ struct PersonDetailView: View {
                 }
             }
         }
+        .sheet(isPresented: $showingAIConsent) {
+            AIConsentSheet(isPresented: $showingAIConsent) {
+                if let action = pendingAIAction {
+                    switch action {
+                    case .suggestions:
+                        showingAISuggestions = true
+                    case .birthdayMessage:
+                        showingBirthdayMessage = true
+                    }
+                    pendingAIAction = nil
+                }
+            }
+        }
         .toast(item: $toast)
+    }
+
+    private var appleIntelligenceSection: some View {
+        Section {
+            Button(action: {
+                handleAIButtonTap(.suggestions)
+            }) {
+                aiActionRow(
+                    icon: "sparkles",
+                    color: .orange,
+                    title: "Geschenkideen vorschlagen",
+                    subtitle: "5 personalisierte Vorschläge"
+                )
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Geschenkideen vorschlagen")
+            .accessibilityHint("Generiert 5 personalisierte Geschenkideen mit KI-Assistent")
+
+            Button(action: {
+                handleAIButtonTap(.birthdayMessage)
+            }) {
+                aiActionRow(
+                    icon: "text.quote",
+                    color: .blue,
+                    title: "Geburtstagsnachricht erstellen",
+                    subtitle: "Herzlicher Text zum Geburtstag"
+                )
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Geburtstagsnachricht erstellen")
+            .accessibilityHint("Erstellt eine personalisierte Geburtstagsnachricht mit KI-Assistent")
+        } header: {
+            HStack(spacing: 6) {
+                Image(systemName: "sparkles")
+                    .foregroundColor(.purple)
+                Text("KI-Assistent")
+            }
+        } footer: {
+            HStack(alignment: .top, spacing: 4) {
+                Image(systemName: "lock.shield.fill")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .padding(.top, 1)
+                Text(aiFooterText)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+
+    private var aiFooterText: String {
+        if !AIService.isAPIKeyConfigured {
+            return "Demo-Modus — kein API-Key konfiguriert"
+        } else if AIConsentManager.shared.consentGiven && AIConsentManager.shared.aiEnabled {
+            return "Einwilligung erteilt · Cloud-Verarbeitung via OpenRouter"
+        } else if AIConsentManager.shared.consentGiven && !AIConsentManager.shared.aiEnabled {
+            return "KI deaktiviert · Einstellungen → KI-Assistent"
+        } else {
+            return "Einwilligung erforderlich · Tippe für Details"
+        }
+    }
+
+    private func handleAIButtonTap(_ action: AIAction) {
+        HapticFeedback.medium()
+        if AIConsentManager.shared.consentGiven {
+            if AIConsentManager.shared.aiEnabled {
+                switch action {
+                case .suggestions:
+                    showingAISuggestions = true
+                case .birthdayMessage:
+                    showingBirthdayMessage = true
+                }
+            } else {
+                toast = ToastItem.warning("KI deaktiviert", message: "KI-Assistent ist in den Einstellungen deaktiviert.")
+            }
+        } else {
+            pendingAIAction = action
+            showingAIConsent = true
+        }
+    }
+
+    private func aiActionRow(icon: String, color: Color, title: String, subtitle: String) -> some View {
+        HStack(spacing: 14) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(color.gradient)
+                    .frame(width: 36, height: 36)
+                Image(systemName: icon)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(.white)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.body)
+                    .foregroundStyle(AppColor.textPrimary)
+                Text(subtitle)
+                    .font(.caption)
+                    .foregroundStyle(AppColor.textSecondary)
+            }
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .font(.caption)
+                .foregroundStyle(.tertiary)
+        }
+        .padding(.vertical, 2)
+    }
+
+    private func controlPill(icon: String, label: String, isActive: Bool) -> some View {
+        HStack(spacing: 3) {
+            Image(systemName: icon)
+                .font(.system(size: 10, weight: .semibold))
+            Text(label)
+                .font(.system(size: 11, weight: isActive ? .semibold : .regular))
+        }
+        .foregroundStyle(isActive ? AppColor.primary : Color.secondary)
+        .padding(.horizontal, 7)
+        .padding(.vertical, 4)
+        .background(
+            isActive ? AppColor.primary.opacity(0.12) : Color.secondary.opacity(0.1),
+            in: Capsule()
+        )
     }
 
     private var avatarRow: some View {
@@ -613,6 +762,11 @@ struct PersonDetailView: View {
     }
 
     private func advanceStatus(for idea: GiftIdea) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yy"
+        let dateString = formatter.string(from: Date())
+        let oldStatus = idea.status
+
         switch idea.status {
         case .idea:
             idea.status = .planned
@@ -621,16 +775,24 @@ struct PersonDetailView: View {
         case .purchased:
             idea.status = .given
         case .given:
-            // No further status
             break
+        }
+
+        if oldStatus != idea.status {
+            idea.statusLog.append("\(dateString) - \(statusDisplayName(oldStatus)) \u{2192} \(statusDisplayName(idea.status))")
         }
         HapticFeedback.medium()
     }
 
     private func markAllAsGiven() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yy"
+        let dateString = formatter.string(from: Date())
+
         let purchasedGifts = filteredGiftIdeas.filter { $0.status == .purchased }
         for gift in purchasedGifts {
             gift.status = .given
+            gift.statusLog.append("\(dateString) - Gekauft \u{2192} Verschenkt (Alle markiert)")
         }
         HapticFeedback.success()
     }
@@ -666,6 +828,15 @@ struct PersonDetailView: View {
         )
         modelContext.insert(newIdea)
         HapticFeedback.success()
+    }
+
+    private func statusDisplayName(_ status: GiftStatus) -> String {
+        switch status {
+        case .idea: return "Idee"
+        case .planned: return "Geplant"
+        case .purchased: return "Gekauft"
+        case .given: return "Verschenkt"
+        }
     }
 
     private func shareGiftHistory(_ history: GiftHistory) {

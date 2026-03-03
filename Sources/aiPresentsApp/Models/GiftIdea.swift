@@ -12,6 +12,7 @@ final class GiftIdea {
     var link: String
     var status: GiftStatus
     var tags: [String]
+    var statusLog: [String]
     var createdAt: Date
 
     init(
@@ -24,6 +25,7 @@ final class GiftIdea {
         link: String = "",
         status: GiftStatus = .idea,
         tags: [String] = [],
+        statusLog: [String] = [],
         createdAt: Date = Date()
     ) {
         self.id = id
@@ -35,6 +37,7 @@ final class GiftIdea {
         self.link = link
         self.status = status
         self.tags = tags
+        self.statusLog = statusLog
         self.createdAt = createdAt
     }
 }
