@@ -330,12 +330,11 @@ struct TimelineView: View {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 60))
                     .foregroundColor(AppColor.textSecondary.opacity(0.4))
-                    .symbolEffect(.bounce, options: .repeating, isActive: !AccessibilityConfiguration.isReducedMotionEnabled)
+
             } else {
                 Image(systemName: "giftcard")
                     .font(.system(size: 60))
                     .foregroundColor(AppColor.textSecondary.opacity(0.4))
-                    .symbolEffect(.bounce, options: .repeating, isActive: !AccessibilityConfiguration.isReducedMotionEnabled)
             }
 
             VStack(spacing: 8) {

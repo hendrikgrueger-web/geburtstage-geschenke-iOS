@@ -7,27 +7,29 @@ struct aiPresentsApp: App {
     @StateObject private var reminderManager: ReminderManager
 
     init() {
+        // iCloud-Präferenz lesen (default: true beim ersten Start)
+        let iCloudEnabled = UserDefaults.standard.object(forKey: "iCloudSyncEnabled") as? Bool ?? true
+        let cloudKitDB: ModelConfiguration.CloudKitDatabase = iCloudEnabled ? .automatic : .none
+
         do {
             let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self, SuggestionFeedback.self])
-
-            // CloudKit configuration
             let config = ModelConfiguration(
                 "ai-presents-app",
                 schema: schema,
                 isStoredInMemoryOnly: false,
                 allowsSave: true,
-                cloudKitDatabase: .automatic
+                cloudKitDatabase: cloudKitDB
             )
-
             modelContainer = try ModelContainer(for: schema, configurations: [config])
 
             let manager = ReminderManager(modelContext: modelContainer.mainContext)
             _reminderManager = StateObject(wrappedValue: manager)
         } catch {
-            // Fallback to local-only if CloudKit fails
+            // Fallback: lokal ohne CloudKit
             do {
                 let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self, SuggestionFeedback.self])
-                let config = ModelConfiguration(isStoredInMemoryOnly: false, cloudKitDatabase: .none)
+                let config = ModelConfiguration("ai-presents-app-local", schema: schema,
+                                               isStoredInMemoryOnly: false, cloudKitDatabase: .none)
                 modelContainer = try ModelContainer(for: schema, configurations: [config])
 
                 let manager = ReminderManager(modelContext: modelContainer.mainContext)

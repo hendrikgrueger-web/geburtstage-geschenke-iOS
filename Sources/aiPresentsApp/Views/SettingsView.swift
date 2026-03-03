@@ -10,6 +10,8 @@ struct SettingsView: View {
     @State private var isRefreshingReminders = false
     @State private var refreshAlertMessage: String?
     @State private var toast: ToastItem?
+    @AppStorage("iCloudSyncEnabled") private var iCloudSyncEnabled = true
+    @State private var showingICloudRestartNotice = false
 
     @StateObject private var reminderManager = ReminderManager(modelContext: ModelContext.placeholder)
 
@@ -175,28 +177,28 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
+                    Toggle(isOn: $iCloudSyncEnabled) {
+                        VStack(alignment: .leading, spacing: 2) {
                             Text("iCloud Sync")
-                                .font(.body)
-
-                            Text("Automatisch synchronisiert")
+                            Text(iCloudSyncEnabled ? "Aktiv" : "Nur lokal")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
-
-                        Spacer()
-
-                        Image(systemName: "icloud.fill")
-                            .foregroundColor(.blue)
                     }
-                    .accessibilityElement(children: .combine)
-                    .accessibilityLabel("iCloud Sync, automatisch synchronisiert")
-                    .accessibilityHint("Daten werden automatisch über deine Apple-Geräte synchronisiert")
+                    .onChange(of: iCloudSyncEnabled) { _, _ in
+                        showingICloudRestartNotice = true
+                    }
                 } header: {
                     Text("iCloud Sync")
                 } footer: {
-                    Text("Daten werden automatisch über deine Apple-Geräte synchronisiert.")
+                    Text(iCloudSyncEnabled
+                         ? "Daten werden automatisch über deine Apple-Geräte synchronisiert."
+                         : "Daten werden nur lokal auf diesem Gerät gespeichert.")
+                }
+                .alert("Neustart erforderlich", isPresented: $showingICloudRestartNotice) {
+                    Button("OK") { }
+                } message: {
+                    Text("Die Änderung wird beim nächsten App-Start wirksam.")
                 }
 
                 Section {

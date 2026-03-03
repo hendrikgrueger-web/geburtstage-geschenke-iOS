@@ -200,35 +200,16 @@ struct AIGiftSuggestionsSheet: View {
 
     private var loadingState: some View {
         Section {
-            VStack(spacing: 16) {
-                ZStack {
-                    Circle()
-                        .stroke(AppColor.primary.opacity(0.2), lineWidth: 4)
-                        .frame(width: 80, height: 80)
+            VStack(spacing: 12) {
+                ProgressView()
+                    .controlSize(.large)
 
-                    Circle()
-                        .trim(from: 0, to: 0.7)
-                        .stroke(
-                            AppColor.primary,
-                            style: StrokeStyle(lineWidth: 4, lineCap: .round)
-                        )
-                        .frame(width: 80, height: 80)
-                        .rotationEffect(.degrees(isLoading ? 360 : 0))
-                        .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: isLoading)
-                }
-
-                VStack(spacing: 4) {
-                    Text("KI denkt nach...")
-                        .font(.headline)
-                        .foregroundColor(AppColor.textPrimary)
-
-                    Text("Das kann ein paar Sekunden dauern")
-                        .font(.caption)
-                        .foregroundColor(AppColor.textSecondary)
-                }
+                Text("KI denkt nach…")
+                    .font(.subheadline)
+                    .foregroundColor(AppColor.textSecondary)
             }
             .frame(maxWidth: .infinity, alignment: .center)
-            .padding()
+            .padding(.vertical, 24)
         }
     }
 

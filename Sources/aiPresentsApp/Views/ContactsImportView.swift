@@ -171,6 +171,9 @@ struct ContactsImportView: View {
                         modelContext.insert(person)
                     }
                 }
+
+                try? await Task.sleep(nanoseconds: 800_000_000)
+                await MainActor.run { dismiss() }
             } catch {
                 await MainActor.run {
                     isImporting = false
@@ -186,9 +189,12 @@ struct ContactsImportView: View {
 
         SampleDataService.createSampleData(in: modelContext)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             isImporting = false
             importedCount = 3
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                dismiss()
+            }
         }
     }
 }

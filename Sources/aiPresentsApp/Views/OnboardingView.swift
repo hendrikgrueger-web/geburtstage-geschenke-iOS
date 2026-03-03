@@ -2,7 +2,6 @@ import SwiftUI
 
 struct OnboardingView: View {
     @State private var currentPage = 0
-    @State private var showingOnboarding = true
 
     private let pages: [OnboardingPage] = [
         OnboardingPage(
@@ -18,7 +17,7 @@ struct OnboardingView: View {
         OnboardingPage(
             icon: "bell.fill",
             title: "Smarte Erinnerungen",
-            description: "Wende rechtzeitig erinnert, damit du perfekt vorbereitet bist."
+            description: "Werde rechtzeitig erinnert, damit du perfekt vorbereitet bist."
         ),
         OnboardingPage(
             icon: "sparkles",
@@ -27,31 +26,35 @@ struct OnboardingView: View {
         )
     ]
 
+    // Letzte Seite ist die iCloud-Auswahl
+    private var isICloudPage: Bool { currentPage == pages.count }
+    private var isLastContentPage: Bool { currentPage == pages.count - 1 }
+
     var body: some View {
-        if showingOnboarding {
-            ZStack {
-                AppColor.background.ignoresSafeArea()
+        ZStack {
+            AppColor.background.ignoresSafeArea()
 
-                TabView(selection: $currentPage) {
-                    ForEach(0..<pages.count, id: \.self) { index in
-                        OnboardingPageView(page: pages[index])
-                            .tag(index)
-                    }
+            TabView(selection: $currentPage) {
+                ForEach(0..<pages.count, id: \.self) { index in
+                    OnboardingPageView(page: pages[index])
+                        .tag(index)
                 }
-                .tabViewStyle(.page(indexDisplayMode: .always))
-                .indexViewStyle(.page(backgroundDisplayMode: .always))
+                iCloudOnboardingPage
+                    .tag(pages.count)
+            }
+            .tabViewStyle(.page(indexDisplayMode: .always))
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
 
+            if !isICloudPage {
                 VStack {
                     Spacer()
-
                     Button {
                         withAnimation {
-                            showingOnboarding = false
-                            HapticFeedback.success()
-                            UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+                            currentPage = isLastContentPage ? pages.count : currentPage + 1
                         }
+                        HapticFeedback.selectionChanged()
                     } label: {
-                        Text(currentPage == pages.count - 1 ? "Loslegen" : "Überspringen")
+                        Text(isLastContentPage ? "Weiter" : "Überspringen")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -64,9 +67,73 @@ struct OnboardingView: View {
                     .buttonStyle(.pressable)
                 }
             }
-        } else {
-            EmptyView()
         }
+    }
+
+    private var iCloudOnboardingPage: some View {
+        VStack(spacing: 32) {
+            Spacer()
+
+            Image(systemName: "icloud.fill")
+                .font(.system(size: 80))
+                .foregroundColor(.blue)
+
+            VStack(spacing: 16) {
+                Text("iCloud Sync")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(AppColor.textPrimary)
+
+                Text("Sollen deine Geburtstage und Geschenkideen automatisch auf all deinen Apple-Geräten verfügbar sein?")
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(AppColor.textSecondary)
+                    .padding(.horizontal)
+            }
+
+            VStack(spacing: 12) {
+                Button {
+                    UserDefaults.standard.set(true, forKey: "iCloudSyncEnabled")
+                    completeOnboarding()
+                } label: {
+                    HStack {
+                        Image(systemName: "icloud.fill")
+                        Text("iCloud Sync aktivieren")
+                            .fontWeight(.semibold)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+                }
+                .buttonStyle(.pressable)
+
+                Button {
+                    UserDefaults.standard.set(false, forKey: "iCloudSyncEnabled")
+                    completeOnboarding()
+                } label: {
+                    Text("Nur lokal speichern")
+                        .font(.subheadline)
+                        .foregroundColor(AppColor.textSecondary)
+                }
+            }
+            .padding(.horizontal)
+
+            Text("Du kannst das jederzeit in den Einstellungen ändern.")
+                .font(.caption)
+                .foregroundColor(AppColor.textTertiary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+
+            Spacer()
+        }
+        .padding()
+    }
+
+    private func completeOnboarding() {
+        HapticFeedback.success()
+        UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
     }
 }
 
@@ -87,7 +154,6 @@ struct OnboardingPageView: View {
             Image(systemName: page.icon)
                 .font(.system(size: 80))
                 .foregroundColor(AppColor.primary)
-                .symbolEffect(.bounce, options: .repeating, isActive: !AccessibilityConfiguration.isReducedMotionEnabled)
 
             VStack(spacing: 16) {
                 Text(page.title)

@@ -123,8 +123,6 @@ struct EmptyStateView: View {
             Image(systemName: type.iconName)
                 .font(.system(size: 50))
                 .foregroundColor(type.color)
-                .symbolEffect(.bounce, options: .repeating, isActive: !AccessibilityConfiguration.isReducedMotionEnabled
-                )
         }
     }
 

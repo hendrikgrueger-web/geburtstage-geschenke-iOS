@@ -16,9 +16,9 @@ class SampleDataService {
         // MARK: - Personen
 
         let anna = PersonRef(contactIdentifier: "", displayName: "Anna Müller",
-                             birthday: bday(daysFromNow: 3, age: 32), relation: "Schwester")
+                             birthday: bday(daysFromNow: 0, age: 32), relation: "Schwester")
         let thomas = PersonRef(contactIdentifier: "", displayName: "Thomas Schmidt",
-                               birthday: bday(daysFromNow: 8, age: 38), relation: "Freund")
+                               birthday: bday(daysFromNow: 2, age: 38), relation: "Freund")
         let lisa = PersonRef(contactIdentifier: "", displayName: "Lisa Weber",
                              birthday: bday(daysFromNow: 14, age: 29), relation: "Kollegin")
         let markus = PersonRef(contactIdentifier: "", displayName: "Markus Bauer",
@@ -50,7 +50,7 @@ class SampleDataService {
                          peter, lena, michael, claudia, felix, nina, david, marie]
         allPeople.forEach { context.insert($0) }
 
-        // MARK: - Geschenkideen: Anna (Schwester, in 3 Tagen!)
+        // MARK: - Geschenkideen: Anna (Schwester, Geburtstag heute!)
 
         context.insert(GiftIdea(personId: anna.id, title: "Spa-Gutschein", note: "Liebt Wellness, am liebsten mit Massage",
                                 budgetMin: 80, budgetMax: 120, status: .planned, tags: ["Wellness", "Erholung"]))
