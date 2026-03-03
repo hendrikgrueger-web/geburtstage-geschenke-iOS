@@ -102,6 +102,7 @@
 		DE56A3B1C078CF765FF226DE /* AccessibilityConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34597EBF8E869A576A033613 /* AccessibilityConfiguration.swift */; };
 		DFB1700B4EA9D5C9723CD707 /* SuggestionQualityViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505CF312F2774E4C40670379 /* SuggestionQualityViewModelTests.swift */; };
 		E0023769BF1798B1A13832C0 /* FormValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216B383534F0CBFB6BD6242C /* FormValidatorTests.swift */; };
+		E51E4AE8AE4FBEFD81C752C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24C63E565A13C7B20220F982 /* Assets.xcassets */; };
 		E7086712F1C4D11F26E86747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFD26EDCE7DBFA7399211E8 /* AppColor.swift */; };
 		EC03654945F922BD159E6450 /* EditGiftHistorySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17D4B67981D78B467A46C22 /* EditGiftHistorySheet.swift */; };
 		F1632B641E2ADD434097F145 /* AppColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BE28E623996C74E0FB24BE /* AppColorTests.swift */; };
@@ -134,6 +135,7 @@
 		1F1A02B6D7A77AAD75AE1990 /* BirthdayCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCalculator.swift; sourceTree = "<group>"; };
 		1FCB7E8FECC68A391737DFAF /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		216B383534F0CBFB6BD6242C /* FormValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidatorTests.swift; sourceTree = "<group>"; };
+		24C63E565A13C7B20220F982 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		271E66143DD2D410FCAFD44D /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		27B18845F0E7BC36A990BF92 /* FormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterHelper.swift; sourceTree = "<group>"; };
 		28D31152BCC4A0553B7E2DEB /* UpcomingBirthdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingBirthdaysView.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				EEFD26EDCE7DBFA7399211E8 /* AppColor.swift */,
+				24C63E565A13C7B20220F982 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 			buildConfigurationList = C4490B72513A515B16C386C6 /* Build configuration list for PBXNativeTarget "aiPresentsApp" */;
 			buildPhases = (
 				F0F620C614527F4B6C672843 /* Sources */,
+				A993BD66C7F65FFDBA70A8F6 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -510,6 +514,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A993BD66C7F65FFDBA70A8F6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E51E4AE8AE4FBEFD81C752C4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B29527B0E04DD88F845628C0 /* Sources */ = {

@@ -20,8 +20,8 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: "AI Präsente"
-        CFBundleShortVersionString: "0.2.1"
-        CFBundleVersion: "2"
+        CFBundleShortVersionString: "0.2.4"
+        CFBundleVersion: "5"
         LSRequiresIPhoneOS: true
         UILaunchScreen: {}
         UIRequiredDeviceCapabilities:
@@ -50,6 +50,7 @@ targets:
         CODE_SIGN_STYLE: Automatic
         CODE_SIGNING_REQUIRED: "NO"
         CODE_SIGNING_ALLOWED: "NO"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
 
   aiPresentsAppTests:
     type: bundle.unit-test
