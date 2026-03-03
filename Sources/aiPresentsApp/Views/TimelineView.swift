@@ -52,7 +52,7 @@ struct TimelineView: View {
             }
             .padding(10)
             .background(Color(.systemGray6))
-            .cornerRadius(10)
+            .clipShape(.rect(cornerRadius: 10))
             .padding(.horizontal)
             .padding(.top, 8)
 
@@ -359,7 +359,6 @@ struct TimelineView: View {
                     HapticFeedback.medium()
                 }
                 .buttonStyle(.borderedProminent)
-                .buttonStyle(.pressable)
                 .accessibilityLabel("Kontakte aus dem Adressbuch importieren")
             }
         }

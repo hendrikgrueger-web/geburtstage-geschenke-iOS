@@ -25,6 +25,10 @@ struct PersonDetailView: View {
     @State private var editedRelation: String = ""
     @State private var showingMarkAllAsGivenConfirmation = false
     @State private var toast: ToastItem?
+    @State private var showingEditPerson = false
+    @State private var editedName: String = ""
+    @State private var editedBirthday: Date = Date()
+    @State private var editedPersonRelation: String = ""
 
     enum GiftSortOption: String, CaseIterable {
         case status = "Status"
@@ -164,13 +168,28 @@ struct PersonDetailView: View {
                     Text("Geschenkideen")
 
                     HStack(spacing: 8) {
-                        Picker("", selection: $giftStatusFilter) {
+                        Menu {
                             ForEach(GiftStatusFilter.allCases, id: \.self) { filter in
-                                Text(filter.rawValue).tag(filter)
+                                Button {
+                                    giftStatusFilter = filter
+                                    HapticFeedback.selectionChanged()
+                                } label: {
+                                    if giftStatusFilter == filter {
+                                        Label(filter.rawValue, systemImage: "checkmark")
+                                    } else {
+                                        Text(filter.rawValue)
+                                    }
+                                }
                             }
+                        } label: {
+                            HStack(spacing: 4) {
+                                Text(giftStatusFilter.rawValue)
+                                    .font(.subheadline)
+                                Image(systemName: "chevron.down")
+                                    .font(.caption2)
+                            }
+                            .foregroundColor(.secondary)
                         }
-                        .pickerStyle(.segmented)
-                        .buttonStyle(.plain)
 
                         Spacer()
 
@@ -180,7 +199,7 @@ struct PersonDetailView: View {
                             }
                         }
                         .pickerStyle(.menu)
-                        .buttonStyle(.plain)
+
                         Button(action: {
                             showingAddGiftIdea = true
                             HapticFeedback.medium()
@@ -335,6 +354,18 @@ struct PersonDetailView: View {
         .navigationTitle(person.displayName)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Bearbeiten") {
+                    editedName = person.displayName
+                    editedBirthday = person.birthday
+                    editedPersonRelation = person.relation
+                    showingEditPerson = true
+                    HapticFeedback.light()
+                }
+                .accessibilityLabel("Bearbeiten")
+                .accessibilityHint("Öffnet das Formular zum Bearbeiten von Name, Geburtstag und Beziehung")
+            }
+
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button {
@@ -399,6 +430,57 @@ struct PersonDetailView: View {
                             showingEditRelation = false
                         }
                         .disabled(editedRelation.trimmingCharacters(in: .whitespaces).isEmpty)
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $showingEditPerson) {
+            NavigationStack {
+                Form {
+                    Section("Name") {
+                        TextField("Vorname Nachname", text: $editedName)
+                            .textInputAutocapitalization(.words)
+                    }
+
+                    Section("Geburtstag") {
+                        DatePicker(
+                            "Datum",
+                            selection: $editedBirthday,
+                            displayedComponents: .date
+                        )
+                        .datePickerStyle(.compact)
+                        .environment(\.locale, Locale(identifier: "de_DE"))
+                    }
+
+                    Section("Beziehung") {
+                        TextField("z.B. Familie, Freunde, Kollegen", text: $editedPersonRelation)
+                            .textInputAutocapitalization(.sentences)
+                    }
+                }
+                .navigationTitle("Kontakt bearbeiten")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Abbrechen") {
+                            showingEditPerson = false
+                        }
+                    }
+
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Speichern") {
+                            let trimmedName = editedName.trimmingCharacters(in: .whitespaces)
+                            if !trimmedName.isEmpty {
+                                person.displayName = trimmedName
+                            }
+                            person.birthday = editedBirthday
+                            let trimmedRelation = editedPersonRelation.trimmingCharacters(in: .whitespaces)
+                            if !trimmedRelation.isEmpty {
+                                person.relation = trimmedRelation
+                            }
+                            HapticFeedback.success()
+                            showingEditPerson = false
+                        }
+                        .disabled(editedName.trimmingCharacters(in: .whitespaces).isEmpty)
                     }
                 }
             }

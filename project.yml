@@ -20,8 +20,8 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: "AI Präsente"
-        CFBundleShortVersionString: "0.2.4"
-        CFBundleVersion: "5"
+        CFBundleShortVersionString: "0.3.0"
+        CFBundleVersion: "6"
         LSRequiresIPhoneOS: true
         UILaunchScreen: {}
         UIRequiredDeviceCapabilities:

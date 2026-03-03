@@ -4,78 +4,36 @@ struct LegalView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    // Header
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Impressum")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                VStack(alignment: .leading, spacing: 16) {
+                    // Anbieter
+                    LegalSection(
+                        title: "Anbieter",
+                        content: "Hendrik Grüger\nharryhirsch1878@gmail.com\n\nDiese App ist ein privates, nicht-kommerzielles Projekt und wird kostenlos zur Verfügung gestellt."
+                    )
 
-                        Text("Stand: März 2026")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.bottom, 16)
+                    // Haftungsausschluss
+                    LegalSection(
+                        title: "Haftungsausschluss",
+                        content: "Die App wird ohne Gewährleistung bereitgestellt. Der Anbieter übernimmt keine Haftung für Schäden, die durch die Nutzung entstehen.\n\nKI-generierte Geschenkvorschläge sind unverbindlich. Sie werden algorithmisch erstellt und können unpassend oder fehlerhaft sein. Der Anbieter übernimmt keine Verantwortung für die Qualität oder Eignung der KI-Vorschläge."
+                    )
 
-                    // Legal Information
-                    Group {
-                        legalSection(
-                            title: "Anbieter",
-                            content: """
-                            Hendrik Grüger
-                            """
-                        )
+                    // Urheberrecht
+                    LegalSection(
+                        title: "Urheberrecht",
+                        content: "Der App-Code und das Design sind urheberrechtlich geschützt. Die App verwendet SF Symbols und Standard-UI-Komponenten von Apple Inc., die Apples Nutzungsbedingungen unterliegen."
+                    )
 
-                        legalSection(
-                            title: "Kontakt",
-                            content: """
-                            E-Mail: harryhirsch1878@gmail.com
-                            """
-                        )
+                    // Datenschutz
+                    LegalSection(
+                        title: "Datenschutz",
+                        content: "Informationen zum Datenschutz findest du in der Datenschutzerklärung (Einstellungen → Datenschutz)."
+                    )
 
-                        legalSection(
-                            title: "Haftungsausschluss",
-                            content: """
-                            Diese App wird "wie besehen" bereitgestellt. Der Anbieter übernimmt keine Gewähr für die Vollständigkeit, Richtigkeit oder Aktualität der bereitgestellten Informationen.
-
-                            Der Anbieter haftet nicht für Schäden, die durch die Nutzung oder Nicht-Nutzung der Informationen entstehen. Dies gilt insbesondere bei direkten oder indirekten Schäden, einschließlich entgangenen Gewinns.
-                            """
-                        )
-
-                        legalSection(
-                            title: "Urheberrecht",
-                            content: """
-                            Alle Inhalte dieser App sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung oder Verbreitung bedarf der schriftlichen Zustimmung des Anbieters.
-
-                            Die App verwendet System-Symbols und Standard-UI-Elemente von Apple Inc., die deren Urheberrecht unterliegen.
-                            """
-                        )
-
-                        legalSection(
-                            title: "Links zu Dritten",
-                            content: """
-                            Die App enthält Links zu externen Websites (z.B. für Geschenkideen). Der Anbieter hat keinen Einfluss auf deren Inhalt. Die Verantwortung für diese externen Inhalte liegt bei den jeweiligen Betreibern.
-
-                            Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Sollten sich Inhalte ändern, wird der Link unverzüglich entfernt.
-                            """
-                        )
-
-                        legalSection(
-                            title: "Datenschutz",
-                            content: """
-                            Informationen zum Datenschutz finden Sie in der Datenschutzerklärung in den Einstellungen.
-                            """
-                        )
-
-                        legalSection(
-                            title: "App-Informationen",
-                            content: """
-                            App-Name: ai-presents-app
-                            Version: siehe Einstellungen
-                            Plattform: iOS (iPhone)
-                            """
-                        )
-                    }
+                    // App-Info
+                    LegalSection(
+                        title: "App-Informationen",
+                        content: "Name: AI Präsente\nPlattform: iOS\nVersion: siehe Einstellungen → App-Info\nStand: März 2026"
+                    )
 
                     Spacer(minLength: 32)
                 }
@@ -86,20 +44,28 @@ struct LegalView: View {
             .background(AppColor.background)
         }
     }
+}
 
-    private func legalSection(title: String, content: String) -> some View {
+// MARK: - Section Component
+
+private struct LegalSection: View {
+    let title: String
+    let content: String
+
+    var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
                 .font(.headline)
-                .foregroundColor(AppColor.textPrimary)
+                .foregroundStyle(AppColor.textPrimary)
 
             Text(content)
                 .font(.body)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColor.cardBackground)
-        .cornerRadius(12)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }

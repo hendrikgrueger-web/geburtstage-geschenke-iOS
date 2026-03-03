@@ -148,7 +148,7 @@ struct AIGiftSuggestionsSheet: View {
                         .padding(.vertical, 4)
                         .background(AppColor.primary.opacity(0.1))
                         .foregroundColor(AppColor.primary)
-                        .cornerRadius(8)
+                        .clipShape(.rect(cornerRadius: 8))
                 }
 
                 if personMetrics.totalFeedback >= 5 {
@@ -233,7 +233,6 @@ struct AIGiftSuggestionsSheet: View {
                     loadSuggestions()
                 }
                 .buttonStyle(.borderedProminent)
-                .buttonStyle(.pressable)
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .padding()
@@ -385,7 +384,6 @@ struct AIGiftSuggestionsSheet: View {
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(.borderedProminent)
-        .buttonStyle(.pressable)
     }
 
     private var filteredGiftHistory: [GiftHistory] {

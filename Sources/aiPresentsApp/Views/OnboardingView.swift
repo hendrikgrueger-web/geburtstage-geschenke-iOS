@@ -60,7 +60,7 @@ struct OnboardingView: View {
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(AppColor.primary)
-                            .cornerRadius(12)
+                            .clipShape(.rect(cornerRadius: 12))
                     }
                     .padding(.horizontal)
                     .padding(.bottom, 40)
@@ -105,7 +105,7 @@ struct OnboardingView: View {
                     .padding()
                     .background(Color.blue)
                     .foregroundColor(.white)
-                    .cornerRadius(12)
+                    .clipShape(.rect(cornerRadius: 12))
                 }
                 .buttonStyle(.pressable)
 

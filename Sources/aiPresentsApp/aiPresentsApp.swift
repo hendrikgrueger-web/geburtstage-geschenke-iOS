@@ -42,6 +42,7 @@ struct aiPresentsApp: App {
         #if DEBUG
         if CommandLine.arguments.contains("--reset-sample-data") {
             let ctx = modelContainer.mainContext
+            try? ctx.delete(model: SuggestionFeedback.self)
             try? ctx.delete(model: ReminderRule.self)
             try? ctx.delete(model: GiftHistory.self)
             try? ctx.delete(model: GiftIdea.self)

@@ -12,6 +12,7 @@ struct SettingsView: View {
     @State private var toast: ToastItem?
     @AppStorage("iCloudSyncEnabled") private var iCloudSyncEnabled = true
     @State private var showingICloudRestartNotice = false
+    @State private var showingAbout = false
 
     @StateObject private var reminderManager = ReminderManager(modelContext: ModelContext.placeholder)
 
@@ -291,6 +292,70 @@ struct SettingsView: View {
             }
         }
         .toast(item: $toast)
+        .sheet(isPresented: $showingAbout) {
+            aboutSheet
+        }
+    }
+
+    private var aboutSheet: some View {
+        NavigationStack {
+            List {
+                Section {
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text("\(appVersion) (Build \(buildNumber))")
+                            .foregroundColor(.secondary)
+                    }
+                }
+
+                Section {
+                    Text("""
+                    Eine private iOS App zum Verwalten von Geburtstagen und Geschenkideen.
+                    """)
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                } header: {
+                    Text("Über die App")
+                }
+
+                Section("Features") {
+                    Label("Geburtstags-Übersicht mit Countdowns", systemImage: "calendar")
+                    Label("Geschenkideen mit Budget und Tags", systemImage: "gift")
+                    Label("Smarte Erinnerungen", systemImage: "bell")
+                    Label("iCloud Sync", systemImage: "icloud")
+                    Label("KI-Vorschläge (OpenRouter)", systemImage: "sparkles")
+                }
+
+                Section {
+                    Button {
+                        if let url = URL(string: "https://github.com/harryhirsch1878/ai-presents-app-ios") {
+                            UIApplication.shared.open(url) { success in
+                                if !success {
+                                    AppLogger.ui.warning("Failed to open GitHub URL")
+                                }
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            Text("GitHub")
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Über ai-presents-app")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Fertig") {
+                        showingAbout = false
+                    }
+                }
+            }
+        }
     }
 
     private func checkNotificationPermission() async {
@@ -367,43 +432,6 @@ struct SettingsView: View {
     }
 
     private func openAbout() {
-        let aboutText = """
-        ai-presents-app
-
-        Version \(appVersion) (Build \(buildNumber))
-
-        Eine private iOS App zum Verwalten von Geburtstagen und Geschenkideen.
-
-        Features:
-        • Geburtstags-Übersicht mit Countdowns
-        • Geschenkideen mit Budget und Tags
-        • Smarte Erinnerungen (30/14/7/2 Tage)
-        • iCloud Sync
-        • KI-Vorschläge (OpenRouter)
-
-        Entwickelt mit SwiftUI & SwiftData
-        """
-
-        let alert = UIAlertController(
-            title: "Über ai-presents-app",
-            message: aboutText,
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        alert.addAction(UIAlertAction(title: "GitHub", style: .default) { _ in
-            if let url = URL(string: "https://github.com/harryhirsch1878/ai-presents-app-ios") {
-                UIApplication.shared.open(url) { success in
-                    if !success {
-                        AppLogger.ui.warning("Failed to open GitHub URL")
-                    }
-                }
-            }
-        })
-
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootViewController = windowScene.windows.first?.rootViewController {
-            rootViewController.present(alert, animated: true)
-        }
+        showingAbout = true
     }
 }

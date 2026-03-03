@@ -54,7 +54,7 @@ struct BirthdayRow: View {
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
                     .background(AppColor.accent.opacity(0.15))
-                    .cornerRadius(8)
+                    .clipShape(.rect(cornerRadius: 8))
                 }
 
                 if let onQuickAdd = onQuickAdd {
@@ -100,13 +100,13 @@ struct BirthdayRow: View {
                 Rectangle()
                     .fill(AppColor.textSecondary.opacity(0.2))
                     .frame(height: 4)
-                    .cornerRadius(2)
+                    .clipShape(.rect(cornerRadius: 2))
 
                 // Progress
                 Rectangle()
                     .fill(progressColor)
                     .frame(width: geometry.size.width * CGFloat(progressFraction), height: 4)
-                    .cornerRadius(2)
+                    .clipShape(.rect(cornerRadius: 2))
             }
         }
         .frame(height: 4)

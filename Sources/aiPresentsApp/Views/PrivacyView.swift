@@ -4,70 +4,68 @@ struct PrivacyView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    // Header
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Datenschutz")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                VStack(alignment: .leading, spacing: 16) {
+                    // Auf einen Blick
+                    PrivacySection(
+                        icon: "checkmark.shield.fill",
+                        iconColor: .green,
+                        title: "Auf einen Blick",
+                        content: "Diese App sammelt keine Daten für den Betreiber. Alles, was du eingibst, bleibt auf deinem Gerät. Kein eigener Server, keine eigene Datenbank, kein Tracking."
+                    )
 
-                        Text("Stand: März 2026")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.bottom, 16)
+                    // Lokale Daten
+                    PrivacySection(
+                        icon: "iphone",
+                        iconColor: AppColor.primary,
+                        title: "Welche Daten werden gespeichert?",
+                        content: "Die App speichert lokal auf deinem Gerät:\n\n• Namen und Geburtstage der Personen, die du einträgst\n• Deine Geschenkideen und Notizen\n• Erinnerungsregeln\n\nDiese Daten verlassen dein Gerät nicht — es sei denn, du aktivierst iCloud Sync (siehe unten)."
+                    )
 
-                    // Privacy Overview
-                    Group {
-                        privacySection(
-                            title: "Datenschutzerklärung",
-                            content: """
-                            Die ai-presents-app respektiert Ihre Privatsphäre und schützt Ihre persönlichen Daten. Diese App wurde nach dem Prinzip "Privacy by Design" entwickelt.
-                            """
-                        )
+                    // iCloud
+                    PrivacySection(
+                        icon: "icloud.fill",
+                        iconColor: .blue,
+                        title: "iCloud Sync (optional)",
+                        content: "Wenn du iCloud Sync in den Einstellungen aktivierst, werden deine Daten über Apples eigene iCloud-Infrastruktur zwischen deinen Apple-Geräten synchronisiert.\n\nDer Betreiber dieser App hat keinen Zugriff auf deine iCloud-Daten. Es gelten Apples Datenschutzrichtlinien:\napple.com/legal/privacy/de-ww/"
+                    )
 
-                        privacySection(
-                            title: "Datenverarbeitung",
-                            content: """
-                            Alle persönlichen Daten (Kontakte, Geschenkideen) werden lokal auf Ihrem Gerät gespeichert. Keine personenbezogenen Daten werden an Dritte übermittelt oder in Cloud-Diensten gespeichert.
+                    // KI-Vorschläge
+                    PrivacySection(
+                        icon: "sparkles",
+                        iconColor: .purple,
+                        title: "KI-Vorschläge (optional)",
+                        content: "Wenn du KI-Geschenkvorschläge anforderst, werden folgende Daten an OpenRouter / Google Gemini übermittelt:\n\n• Vorname der Person\n• Beziehungstyp (z. B. \"Freund\", \"Mutter\")\n• Alter\n• Sternzeichen\n\nWeitere Kontaktdaten oder Geschenkhistorie werden nicht gesendet. Der Betreiber speichert diese Daten nicht — die Anfrage geht direkt von deinem Gerät an die KI-Dienste.\n\nDatenschutz der Drittanbieter:\n• openrouter.ai/privacy\n• policies.google.com/privacy"
+                    )
 
-                            Optional können Sie iCloud-Sync aktivieren, um Ihre Daten auf Ihren Apple-Geräten zu synchronisieren. Diese Daten werden verschlüsselt in Ihrem persönlichen iCloud-Account gespeichert.
-                            """
-                        )
+                    // Kontakte
+                    PrivacySection(
+                        icon: "person.2.fill",
+                        iconColor: .orange,
+                        title: "Kontakte-Import (optional)",
+                        content: "Wenn du Kontakte aus deinem Adressbuch importierst, liest die App nur Namen und Geburtstage. Keine Telefonnummern, Adressen oder andere Kontaktdaten werden verwendet.\n\nDie importierten Daten werden ausschließlich lokal auf deinem Gerät gespeichert."
+                    )
 
-                        privacySection(
-                            title: "Zugriffsrechte",
-                            content: """
-                            • Kontakte: Nur für Geburtstags-Import. Nur Namen und Geburtstage werden verwendet.
-                            • Benachrichtigungen: Für Geburtstags-Erinnerungen. Lokal auf Ihrem Gerät.
-                            """
-                        )
+                    // Deine Rechte
+                    PrivacySection(
+                        icon: "hand.raised.fill",
+                        iconColor: .red,
+                        title: "Deine Rechte",
+                        content: "Da alle Daten lokal auf deinem Gerät liegen, hast du die vollständige Kontrolle:\n\n• Alle Daten können jederzeit in den App-Einstellungen gelöscht werden (Einstellungen → Alle Daten löschen)\n• Berechtigungen (Kontakte, Benachrichtigungen) kannst du jederzeit in den iOS-Einstellungen widerrufen\n• Die App deinstallieren löscht alle lokal gespeicherten Daten"
+                    )
 
-                        privacySection(
-                            title: "AI-Funktionen",
-                            content: """
-                            Die optionalen AI-Geschenkideen senden nur minimalen Kontext (Alter, Geschlecht, Beziehung) an OpenRouter. Ihre Kontakte und persönlichen Geschenkideen verlassen niemals Ihr Gerät.
-                            """
-                        )
+                    // Kontakt
+                    PrivacySection(
+                        icon: "envelope.fill",
+                        iconColor: AppColor.primary,
+                        title: "Kontakt",
+                        content: "Bei Fragen zum Datenschutz:\n\nHendrik Grüger\nharryhirsch1878@gmail.com"
+                    )
 
-                        privacySection(
-                            title: "Ihre Rechte",
-                            content: """
-                            Sie haben jederzeit das Recht auf:
-                            • Auskunft über Ihre gespeicherten Daten
-                            • Löschung aller Daten über die App-Einstellungen
-                            • Widerruf der erteilten Berechtigungen in den iOS-Einstellungen
-                            """
-                        )
-
-                        privacySection(
-                            title: "Kontakt",
-                            content: """
-                            Bei Fragen zum Datenschutz erreichen Sie uns unter:
-                            harryhirsch1878@gmail.com
-                            """
-                        )
-                    }
+                    Text("Stand: März 2026")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, 8)
 
                     Spacer(minLength: 32)
                 }
@@ -78,20 +76,37 @@ struct PrivacyView: View {
             .background(AppColor.background)
         }
     }
+}
 
-    private func privacySection(title: String, content: String) -> some View {
+// MARK: - Section Component
+
+private struct PrivacySection: View {
+    let icon: String
+    let iconColor: Color
+    let title: String
+    let content: String
+
+    var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(title)
-                .font(.headline)
-                .foregroundColor(AppColor.textPrimary)
+            HStack(spacing: 10) {
+                Image(systemName: icon)
+                    .foregroundStyle(iconColor)
+                    .font(.system(size: 18, weight: .semibold))
+                    .frame(width: 28)
+
+                Text(title)
+                    .font(.headline)
+                    .foregroundStyle(AppColor.textPrimary)
+            }
 
             Text(content)
                 .font(.body)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppColor.cardBackground)
-        .cornerRadius(12)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }
