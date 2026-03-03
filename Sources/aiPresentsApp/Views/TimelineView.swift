@@ -13,6 +13,7 @@ struct TimelineView: View {
     @State private var showingAddGiftIdeaFor: PersonRef?
     @State private var quickAddPerson: PersonRef?
     @State private var showingAISuggestionsFor: PersonRef?
+    @State private var selectedPerson: PersonRef?
     @State private var listAnimation = false
     @State private var isRefreshing = false
     @State private var debouncedSearchText = ""
@@ -193,26 +194,25 @@ struct TimelineView: View {
                 }
             }
 
-            // Apply date filter using BirthdayCalculator
-            let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today)
-
             guard let nextBirthday = BirthdayCalculator.nextBirthday(for: person.birthday, from: today) else {
                 return nil
             }
 
+            // Bei aktiver Suche: Tab-Filter ignorieren, alle Treffer zeigen
+            if !debouncedSearchText.isEmpty {
+                return (person, nextBirthday)
+            }
+
+            // Apply date filter using BirthdayCalculator
+            let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today)
+
             switch selectedTab {
             case .today:
-                if daysUntil == 0 {
-                    return (person, nextBirthday)
-                }
+                if daysUntil == 0 { return (person, nextBirthday) }
             case .week:
-                if let days = daysUntil, days <= 7 && days >= 0 {
-                    return (person, nextBirthday)
-                }
+                if let days = daysUntil, days >= 0, days <= 7 { return (person, nextBirthday) }
             case .month:
-                if let days = daysUntil, days <= 30 && days >= 0 {
-                    return (person, nextBirthday)
-                }
+                if let days = daysUntil, days >= 0, days <= 30 { return (person, nextBirthday) }
             }
             return nil
         }
@@ -226,11 +226,11 @@ struct TimelineView: View {
     }
 
     private func birthdayRow(for person: PersonRef) -> some View {
-        NavigationLink(destination: PersonDetailView(person: person)) {
-            BirthdayRow(person: person, onQuickAdd: {
-                quickAddPerson = person
-            })
-        }
+        BirthdayRow(person: person, onTap: {
+            selectedPerson = person
+        }, onQuickAdd: {
+            quickAddPerson = person
+        })
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button {
                 showingAISuggestionsFor = person
@@ -280,6 +280,9 @@ struct TimelineView: View {
         .listStyle(.insetGrouped)
         .refreshable {
             await refreshTimeline()
+        }
+        .navigationDestination(item: $selectedPerson) { person in
+            PersonDetailView(person: person)
         }
         .sheet(item: $showingAddGiftIdeaFor) { person in
             AddGiftIdeaSheet(person: person)

@@ -4,7 +4,7 @@ struct AIService {
     static let shared = AIService()
 
     private let apiKey: String = Bundle.main.infoDictionary?["OpenRouterAPIKey"] as? String ?? ""
-    private let model = "google/gemini-3-flash-preview"
+    private let model = "google/gemini-2.0-flash-001"
     private let baseURL = "https://openrouter.ai/api/v1"
 
     private init() {}
@@ -267,7 +267,8 @@ struct AIService {
             throw AIError.invalidResponse
         }
 
-        guard let contentData = content.data(using: .utf8),
+        let cleaned = stripMarkdown(content)
+        guard let contentData = cleaned.data(using: .utf8),
               let parsedMessage = try JSONSerialization.jsonObject(with: contentData) as? [String: Any],
               let greeting = parsedMessage["greeting"] as? String,
               let body = parsedMessage["body"] as? String else {
@@ -441,8 +442,7 @@ struct AIService {
                             "role": "user",
                             "content": prompt
                         ]
-                    ],
-                    "response_format": ["type": "json_object"]
+                    ]
                 ]
 
                 request.httpBody = try JSONSerialization.data(withJSONObject: body)
@@ -485,6 +485,18 @@ struct AIService {
         throw AIError.requestFailed
     }
 
+    /// Entfernt Markdown-Codeblöcke (```json ... ```) aus LLM-Antworten
+    private func stripMarkdown(_ text: String) -> String {
+        var result = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if result.hasPrefix("```") {
+            result = result.components(separatedBy: "\n").dropFirst().joined(separator: "\n")
+            if result.hasSuffix("```") {
+                result = String(result.dropLast(3))
+            }
+        }
+        return result.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     private func parseResponse(_ data: Data) throws -> [GiftSuggestion] {
         let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
 
@@ -495,7 +507,8 @@ struct AIService {
             throw AIError.invalidResponse
         }
 
-        guard let contentData = content.data(using: .utf8),
+        let cleaned = stripMarkdown(content)
+        guard let contentData = cleaned.data(using: .utf8),
               let suggestions = try JSONSerialization.jsonObject(with: contentData) as? [[String: Any]] else {
             throw AIError.invalidResponse
         }
