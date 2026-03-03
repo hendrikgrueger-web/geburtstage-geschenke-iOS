@@ -7,155 +7,179 @@ class SampleDataService {
         let today = Date()
         let year = cal.component(.year, from: today)
 
-        // Helper: birthday mit echtem Geburtsjahr (Alter korrekt)
-        func bday(daysFromNow: Int, age: Int) -> Date {
-            let nextBirthday = cal.date(byAdding: .day, value: daysFromNow, to: today)!
-            return cal.date(byAdding: .year, value: -age, to: nextBirthday)!
+        // Helper: Geburtsdatum mit korrektem Alter (lokal, damit der Compiler keine Labels erwartet)
+        func bday(_ daysFromNow: Int, _ age: Int) -> Date {
+            let next = cal.date(byAdding: .day, value: daysFromNow, to: today)!
+            return cal.date(byAdding: .year, value: -age, to: next)!
         }
 
-        // MARK: - Personen (erkennbare Mustermann-Fiktivnamen)
+        // MARK: - 50 Demo-Personen
 
-        let max = PersonRef(contactIdentifier: "demo-max", displayName: "Max Mustermann",
-                            birthday: bday(daysFromNow: 0, age: 32), relation: "Freund")
-        let erika = PersonRef(contactIdentifier: "demo-erika", displayName: "Erika Musterfrau",
-                              birthday: bday(daysFromNow: 2, age: 38), relation: "Schwester")
-        let hans = PersonRef(contactIdentifier: "demo-hans", displayName: "Hans Beispiel",
-                             birthday: bday(daysFromNow: 14, age: 29), relation: "Kollege")
-        let anna = PersonRef(contactIdentifier: "demo-anna", displayName: "Anna Muster",
-                             birthday: bday(daysFromNow: 21, age: 45), relation: "Mutter")
-        let peter = PersonRef(contactIdentifier: "demo-peter", displayName: "Peter Beispielmann",
-                              birthday: bday(daysFromNow: 28, age: 26), relation: "Bruder")
-        let lisa = PersonRef(contactIdentifier: "demo-lisa", displayName: "Lisa Testmann",
-                             birthday: bday(daysFromNow: 35, age: 41), relation: "Kollegin")
-        let thomas = PersonRef(contactIdentifier: "demo-thomas", displayName: "Thomas Muster",
-                               birthday: bday(daysFromNow: 52, age: 34), relation: "Freund")
-        let maria = PersonRef(contactIdentifier: "demo-maria", displayName: "Maria Beispiel",
-                              birthday: bday(daysFromNow: 67, age: 58), relation: "Tante")
-        let felix = PersonRef(contactIdentifier: "demo-felix", displayName: "Felix Musterknabe",
-                              birthday: bday(daysFromNow: 89, age: 23), relation: "Cousin")
-        let klara = PersonRef(contactIdentifier: "demo-klara", displayName: "Klara Beispielfrau",
-                              birthday: bday(daysFromNow: 112, age: 36), relation: "Freundin")
-        let otto = PersonRef(contactIdentifier: "demo-otto", displayName: "Otto Normalverbraucher",
-                             birthday: bday(daysFromNow: 145, age: 52), relation: "Vater")
-        let emma = PersonRef(contactIdentifier: "demo-emma", displayName: "Emma Musterkind",
-                             birthday: bday(daysFromNow: 178, age: 8), relation: "Nichte")
-        let paul = PersonRef(contactIdentifier: "demo-paul", displayName: "Paul Muster",
-                             birthday: bday(daysFromNow: 210, age: 17), relation: "Neffe")
-        let sophie = PersonRef(contactIdentifier: "demo-sophie", displayName: "Sophie Beispiel",
-                               birthday: bday(daysFromNow: 255, age: 31), relation: "Partnerin")
-        let kurt = PersonRef(contactIdentifier: "demo-kurt", displayName: "Kurt Musterboss",
-                             birthday: bday(daysFromNow: 300, age: 44), relation: "Chef")
+        // --- Bald Geburtstag (Timeline sieht direkt gut aus) ---
+        let max      = person("demo-max",    "Max Mustermann",        bday(0,   32), "Freund")
+        let erika    = person("demo-erika",  "Erika Musterfrau",      bday(2,   38), "Schwester")
+        let hans     = person("demo-hans",   "Hans Beispiel",         bday(5,   29), "Kollege")
+        let anna     = person("demo-anna",   "Anna Muster",           bday(7,   45), "Mutter")
+        let peter    = person("demo-peter",  "Peter Beispielmann",    bday(12,  26), "Bruder")
 
-        let allPeople = [max, erika, hans, anna, peter, lisa, thomas, maria,
-                         felix, klara, otto, emma, paul, sophie, kurt]
+        // --- Diese Woche / diesen Monat ---
+        let lisa     = person("demo-lisa",   "Lisa Testmann",         bday(15,  41), "Kollegin")
+        let thomas   = person("demo-thomas", "Thomas Muster",         bday(18,  34), "Freund")
+        let julia    = person("demo-julia",  "Julia Musterfrau",      bday(22,  27), "Freundin")
+        let sophie   = person("demo-sophie", "Sophie Beispiel",       bday(25,  31), "Partnerin")
+        let michael  = person("demo-michael","Michael Normalverb.",   bday(28,  50), "Onkel")
+
+        // --- Nächste 2 Monate ---
+        let maria    = person("demo-maria",  "Maria Beispiel",        bday(35,  58), "Tante")
+        let felix    = person("demo-felix",  "Felix Musterknabe",     bday(42,  23), "Cousin")
+        let klara    = person("demo-klara",  "Klara Beispielfrau",    bday(48,  36), "Freundin")
+        let otto     = person("demo-otto",   "Otto Normalverbraucher",bday(55,  52), "Vater")
+        let emma     = person("demo-emma",   "Emma Musterkind",       bday(62,   8), "Nichte")
+        let paul     = person("demo-paul",   "Paul Muster",           bday(68,  17), "Neffe")
+        let kurt     = person("demo-kurt",   "Kurt Musterboss",       bday(75,  44), "Chef")
+        let sarah    = person("demo-sarah",  "Sarah Beispielfrau",    bday(82,  33), "Kollegin")
+        let markus   = person("demo-markus", "Markus Testmann",       bday(88,  28), "Freund")
+        let ingrid   = person("demo-ingrid", "Ingrid Muster",         bday(95,  67), "Oma")
+
+        // --- 3–6 Monate ---
+        let gerhard  = person("demo-gerhard","Gerhard Beispiel",      bday(102, 70), "Opa")
+        let nina     = person("demo-nina",   "Nina Musterfee",        bday(108, 22), "Cousine")
+        let stefan   = person("demo-stefan", "Stefan Beispielm.",     bday(115, 39), "Bruder")
+        let lena     = person("demo-lena",   "Lena Musterkind",       bday(120, 11), "Nichte")
+        let tobias   = person("demo-tobias", "Tobias Normalbürger",  bday(128, 25), "Kollege")
+        let petra    = person("demo-petra",  "Petra Beispielfrau",    bday(135, 48), "Tante")
+        let daniel   = person("demo-daniel", "Daniel Muster",         bday(142, 30), "Freund")
+        let monika   = person("demo-monika", "Monika Beispiel",       bday(149, 55), "Mutter")
+        let jan      = person("demo-jan",    "Jan Testmann",          bday(155, 21), "Neffe")
+        let laura    = person("demo-laura",  "Laura Musterfrau",      bday(162, 26), "Freundin")
+
+        // --- 6–12 Monate ---
+        let bernhard = person("demo-bernhard","Bernhard Muster",      bday(168, 43), "Onkel")
+        let karin    = person("demo-karin",  "Karin Beispielfrau",    bday(175, 38), "Kollegin")
+        let florian  = person("demo-florian","Florian Normalv.",      bday(182, 19), "Cousin")
+        let ursula   = person("demo-ursula", "Ursula Musterdame",     bday(188, 72), "Oma")
+        let dominik  = person("demo-dominik","Dominik Beispiel",      bday(195, 24), "Freund")
+        let helga    = person("demo-helga",  "Helga Musterdame",      bday(200, 65), "Tante")
+        let patrick  = person("demo-patrick","Patrick Testperson",    bday(208, 31), "Kollege")
+        let andrea   = person("demo-andrea", "Andrea Musterfrau",     bday(215, 46), "Chefin")
+        let tim      = person("demo-tim",    "Tim Beispielkind",      bday(222, 14), "Neffe")
+        let sandra   = person("demo-sandra", "Sandra Musterperson",   bday(228, 29), "Freundin")
+        let christian = person("demo-christian","Christian Muster",   bday(235, 37), "Bruder")
+        let brigitte = person("demo-brigitte","Brigitte Beispiel",    bday(242, 61), "Oma")
+        let oliver   = person("demo-oliver", "Oliver Normalverb.",    bday(248, 27), "Freund")
+        let katrin   = person("demo-katrin", "Katrin Musterfrau",     bday(255, 34), "Kollegin")
+        let werner   = person("demo-werner", "Werner Beispielm.",     bday(260, 58), "Onkel")
+        let melanie  = person("demo-melanie","Melanie Musterperson",  bday(268, 23), "Cousine")
+        let hubert   = person("demo-hubert", "Hubert Normalverb.",    bday(275, 74), "Opa")
+        let tanja    = person("demo-tanja",  "Tanja Beispielfrau",    bday(280, 41), "Freundin")
+        let Sebastian = person("demo-sebastian","Sebastian Muster",   bday(290, 33), "Freund")
+        let irene    = person("demo-irene",  "Irene Musterdame",      bday(350, 69), "Tante")
+
+        let allPeople: [PersonRef] = [
+            max, erika, hans, anna, peter, lisa, thomas, julia, sophie, michael,
+            maria, felix, klara, otto, emma, paul, kurt, sarah, markus, ingrid,
+            gerhard, nina, stefan, lena, tobias, petra, daniel, monika, jan, laura,
+            bernhard, karin, florian, ursula, dominik, helga, patrick, andrea, tim, sandra,
+            christian, brigitte, oliver, katrin, werner, melanie, hubert, tanja, Sebastian, irene
+        ]
         allPeople.forEach { context.insert($0) }
 
-        // MARK: - Geschenkideen: Max (Freund, Geburtstag heute!)
+        // MARK: - Geschenkideen
 
-        context.insert(GiftIdea(personId: max.id, title: "Whisky Tasting Set",
-                                note: "Mag Single Malt, am liebsten Islay",
-                                budgetMin: 50, budgetMax: 80, status: .idea, tags: ["Alkohol", "Tasting"]))
-        context.insert(GiftIdea(personId: max.id, title: "Kochkurs italienische Küche",
-                                note: "Kocht gerne, liebt Pasta und Risotto",
-                                budgetMin: 60, budgetMax: 90, status: .planned, tags: ["Erlebnis", "Kochen"]))
-        context.insert(GiftIdea(personId: max.id, title: "Grill-Thermometer Bluetooth",
-                                note: "Grillt viel im Sommer",
-                                budgetMin: 30, budgetMax: 60, status: .idea, tags: ["Grillen", "Küche"]))
+        // Max (Freund, Geburtstag HEUTE)
+        idea(max, "Whisky Tasting Set", "Mag Single Malt Islay", 50, 80, .idea, ["Alkohol", "Tasting"], context)
+        idea(max, "Kochkurs Pasta & Risotto", "Kocht leidenschaftlich gerne", 60, 90, .planned, ["Erlebnis", "Kochen"], context)
+        idea(max, "Grill-Thermometer Bluetooth", "Grillt viel im Sommer", 30, 60, .idea, ["Grillen", "Küche"], context)
 
-        // MARK: - Geschenkideen: Erika (Schwester, in 2 Tagen!)
+        // Erika (Schwester, in 2 Tagen)
+        idea(erika, "Spa-Gutschein", "Liebt Wellness und Massagen", 80, 120, .planned, ["Wellness"], context)
+        idea(erika, "Yoga-Matte Manduka PRO", "Macht täglich Yoga", 50, 80, .idea, ["Sport", "Yoga"], context)
 
-        context.insert(GiftIdea(personId: erika.id, title: "Spa-Gutschein",
-                                note: "Liebt Wellness, am liebsten mit Massage",
-                                budgetMin: 80, budgetMax: 120, status: .planned, tags: ["Wellness", "Erholung"]))
-        context.insert(GiftIdea(personId: erika.id, title: "Yoga-Matte Premium",
-                                note: "Macht täglich Yoga, aktuelle Matte ist alt",
-                                budgetMin: 50, budgetMax: 80, status: .idea, tags: ["Sport", "Yoga"]))
+        // Sophie (Partnerin)
+        idea(sophie, "Kurzurlaub Prag", "War noch nie in Prag", 300, 500, .idea, ["Reise", "Erlebnis"], context)
+        idea(sophie, "Fujifilm Instax Mini 12", "Mag Sofortbild-Fotos", 70, 100, .planned, ["Foto", "Kreativ"], context)
 
-        // MARK: - Geschenkideen: Hans (Kollege)
+        // Anna (Mutter)
+        idea(anna, "Weinpaket Bordeaux", "Rotwein-Liebhaberin, Jahrgang 2019", 60, 100, .idea, ["Wein"], context)
+        idea(anna, "Kaffeemaschine DeLonghi", "Trinkt täglich Espresso", 100, 150, .idea, ["Küche", "Kaffee"], context)
 
-        context.insert(GiftIdea(personId: hans.id, title: "Moleskine Notizbuch Set",
-                                note: "Schreibt viel, mag gutes Papier",
-                                budgetMin: 25, budgetMax: 40, status: .idea, tags: ["Büro", "Schreiben"]))
+        // Otto (Vater)
+        idea(otto, "Bosch Akku-Bohrschrauber", "18V System, heimwerkert viel", 80, 130, .planned, ["Werkzeug"], context)
 
-        // MARK: - Geschenkideen: Anna (Mutter)
+        // Emma (Nichte, 8 Jahre)
+        idea(emma, "LEGO Friends Eiscafé", "Liebt LEGO Friends Sets", 35, 55, .idea, ["LEGO", "Spielzeug"], context)
+        idea(emma, "Einhorn-Rucksack", "Mag Einhörner und Lila", 25, 40, .planned, ["Schule"], context)
 
-        context.insert(GiftIdea(personId: anna.id, title: "Bosch Akku-Bohrschrauber",
-                                note: "Werkzeug immer willkommen, 18V System",
-                                budgetMin: 80, budgetMax: 130, status: .planned, tags: ["Werkzeug", "Heimwerken"]))
-        context.insert(GiftIdea(personId: anna.id, title: "Weinpaket Bordeaux",
-                                note: "Rotwein-Liebhaberin, Jahrgang 2018-2020",
-                                budgetMin: 60, budgetMax: 100, status: .idea, tags: ["Wein", "Essen"]))
-        context.insert(GiftIdea(personId: anna.id, title: "Kaffeemaschine DeLonghi",
-                                note: "Trinkt täglich Espresso",
-                                budgetMin: 100, budgetMax: 150, status: .idea, tags: ["Küche", "Kaffee"]))
+        // Paul (Neffe, 17)
+        idea(paul, "Nintendo Switch Zelda: Echoes of Wisdom", "Mag Zelda-Serie", 45, 60, .idea, ["Gaming"], context)
+        idea(paul, "Skateboard Deck Powell", "Fährt Skateboard, 8.0\"", 40, 70, .idea, ["Sport", "Skateboard"], context)
 
-        // MARK: - Geschenkideen: Sophie (Partnerin)
+        // Hans (Kollege)
+        idea(hans, "Moleskine Notizbuch XL", "Schreibt viel, mag gutes Papier", 25, 40, .idea, ["Büro"], context)
 
-        context.insert(GiftIdea(personId: sophie.id, title: "Kurzurlaub Prag",
-                                note: "War noch nie in Prag, liebt Städtetrips",
-                                budgetMin: 300, budgetMax: 500, status: .idea, tags: ["Reise", "Erlebnis"]))
-        context.insert(GiftIdea(personId: sophie.id, title: "Kamera Fujifilm Instax",
-                                note: "Mag Sofortbild-Fotos, Mini-Format",
-                                budgetMin: 70, budgetMax: 100, status: .planned, tags: ["Foto", "Kreativ"]))
+        // thomas (Freund)
+        idea(thomas, "Garmin Forerunner 265", "Läuft Halbmarathon", 280, 350, .idea, ["Sport", "Technik"], context)
 
-        // MARK: - Geschenkideen: Emma (Nichte, 8 Jahre)
+        // andrea (Chefin)
+        idea(andrea, "Porzellan-Tasse handgemacht", "Trinkt immer Tee im Büro", 30, 50, .idea, ["Büro", "Geschirr"], context)
 
-        context.insert(GiftIdea(personId: emma.id, title: "LEGO Friends Eiscafé",
-                                note: "Liebt LEGO Friends",
-                                budgetMin: 35, budgetMax: 55, status: .idea, tags: ["LEGO", "Spielzeug"]))
-        context.insert(GiftIdea(personId: emma.id, title: "Einhorn-Rucksack",
-                                note: "Schule, mag Einhörner und Lila",
-                                budgetMin: 25, budgetMax: 40, status: .planned, tags: ["Schule", "Mode"]))
-
-        // MARK: - Geschenkideen: Paul (Neffe, 17)
-
-        context.insert(GiftIdea(personId: paul.id, title: "Nintendo Switch Spiel",
-                                note: "Mag Zelda und Mario",
-                                budgetMin: 45, budgetMax: 60, status: .idea, tags: ["Gaming", "Nintendo"]))
-        context.insert(GiftIdea(personId: paul.id, title: "Skateboard Deck",
-                                note: "Fährt Skateboard, 8.0\" Breite",
-                                budgetMin: 40, budgetMax: 70, status: .idea, tags: ["Sport", "Skateboard"]))
+        // maria (Tante)
+        idea(maria, "Garten-Kräuterset", "Hat großen Garten, kocht mit frischen Kräutern", 30, 50, .idea, ["Garten", "Kochen"], context)
 
         // MARK: - Geschenkhistorie
 
-        context.insert(GiftHistory(personId: max.id, title: "Craftbier-Paket 12er",
-                                   category: "Getränke", year: year - 1, budget: 55,
-                                   note: "War begeistert, verschiedene Sorten"))
-        context.insert(GiftHistory(personId: max.id, title: "Koffer Samsonite 67cm",
-                                   category: "Reise", year: year - 2, budget: 180,
-                                   note: "Reist viel, sehr praktisch"))
-        context.insert(GiftHistory(personId: erika.id, title: "Parfüm Chanel No. 5",
-                                   category: "Kosmetik", year: year - 1, budget: 90,
-                                   note: "Hat sie sehr gefreut"))
-        context.insert(GiftHistory(personId: erika.id, title: "Aquarell-Set Winsor & Newton",
-                                   category: "Kreativ", year: year - 2, budget: 65,
-                                   note: "Malt als Hobby"))
-        context.insert(GiftHistory(personId: anna.id, title: "Jagdmesser Victorinox",
-                                   category: "Outdoor", year: year - 1, budget: 75,
-                                   note: "Passt zu ihrem Outdoor-Hobby"))
-        context.insert(GiftHistory(personId: thomas.id, title: "Garmin Forerunner 55",
-                                   category: "Sport/Technik", year: year - 1, budget: 180,
-                                   note: "Laufuhr, sehr zufrieden"))
-        context.insert(GiftHistory(personId: sophie.id, title: "Wochenende in München",
-                                   category: "Erlebnis/Reise", year: year - 1, budget: 420,
-                                   note: "Gemeinsamer Trip, war wunderschön"))
-        context.insert(GiftHistory(personId: sophie.id, title: "Apple AirPods Pro",
-                                   category: "Technik", year: year - 2, budget: 249,
-                                   note: "Benutzt sie täglich"))
-        context.insert(GiftHistory(personId: emma.id, title: "LEGO Duplo Farm",
-                                   category: "Spielzeug", year: year - 1, budget: 40,
-                                   note: "Hat tagelang damit gespielt"))
-        context.insert(GiftHistory(personId: paul.id, title: "Longboard Globe",
-                                   category: "Sport", year: year - 1, budget: 110,
-                                   note: "Fährt täglich damit zur Schule"))
+        hist(max, "Craftbier-Paket 12er", "Getränke", year-1, 55, "War begeistert", context)
+        hist(max, "Koffer Samsonite 67cm", "Reise", year-2, 180, "Reist viel, sehr praktisch", context)
+        hist(erika, "Parfüm Chanel No. 5", "Kosmetik", year-1, 90, "Hat sie sehr gefreut", context)
+        hist(erika, "Aquarell-Set Winsor & Newton", "Kreativ", year-2, 65, "Malt als Hobby", context)
+        hist(anna, "Jagdmesser Victorinox", "Outdoor", year-1, 75, "Outdoor-Hobby", context)
+        hist(thomas, "Garmin Forerunner 55", "Sport/Technik", year-1, 180, "Laufuhr, sehr zufrieden", context)
+        hist(sophie, "Wochenende in München", "Erlebnis/Reise", year-1, 420, "War wunderschön", context)
+        hist(sophie, "Apple AirPods Pro", "Technik", year-2, 249, "Benutzt täglich", context)
+        hist(emma, "LEGO Duplo Farm", "Spielzeug", year-1, 40, "Tagelang gespielt", context)
+        hist(paul, "Longboard Globe", "Sport", year-1, 110, "Fährt täglich zur Schule", context)
+        hist(otto, "Weber Grill Q1200", "Grillen", year-1, 160, "Grillt jeden Sommer", context)
+        hist(peter, "Kindle Paperwhite", "Technik/Bücher", year-1, 120, "Liest viel, sehr praktisch", context)
+        hist(ingrid, "Ballonfahrt für zwei", "Erlebnis", year-1, 210, "War ein Traum", context)
+        hist(kurt, "Pen & Pencil Set Lamy", "Büro", year-1, 85, "Benutzt täglich im Büro", context)
 
-        // MARK: - Reminder Rule
+        // MARK: - Erinnerungsregel
         context.insert(ReminderRule(leadDays: [30, 14, 7, 2],
                                     quietHoursStart: 22, quietHoursEnd: 8, enabled: true))
     }
 
+    // MARK: - Hilfsfunktionen
+
+    private static func person(
+        _ id: String, _ name: String, _ birthday: Date, _ relation: String
+    ) -> PersonRef {
+        PersonRef(contactIdentifier: id, displayName: name, birthday: birthday, relation: relation)
+    }
+
+    private static func idea(
+        _ person: PersonRef, _ title: String, _ note: String,
+        _ budgetMin: Double, _ budgetMax: Double, _ status: GiftStatus,
+        _ tags: [String], _ context: ModelContext
+    ) {
+        context.insert(GiftIdea(personId: person.id, title: title, note: note,
+                                budgetMin: budgetMin, budgetMax: budgetMax,
+                                status: status, tags: tags))
+    }
+
+    private static func hist(
+        _ person: PersonRef, _ title: String, _ category: String,
+        _ year: Int, _ budget: Double, _ note: String, _ context: ModelContext
+    ) {
+        context.insert(GiftHistory(personId: person.id, title: title,
+                                   category: category, year: year,
+                                   budget: budget, note: note))
+    }
+
+    // MARK: - Reset
+
     static func clearSampleData(in context: ModelContext) {
         do {
+            try context.delete(model: SuggestionFeedback.self)
             try context.delete(model: ReminderRule.self)
             try context.delete(model: GiftHistory.self)
             try context.delete(model: GiftIdea.self)
@@ -166,3 +190,4 @@ class SampleDataService {
         }
     }
 }
+
