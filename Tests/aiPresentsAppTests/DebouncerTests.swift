@@ -5,14 +5,17 @@ import Combine
 @MainActor
 final class DebouncerTests: XCTestCase {
     var debouncer: Debouncer!
+    var cancellables: Set<AnyCancellable>!
 
     override func setUpWithError() throws {
         debouncer = Debouncer(delay: 0.1) // Short delay for testing
+        cancellables = Set<AnyCancellable>()
     }
 
     override func tearDownWithError() throws {
         debouncer.cancel()
         debouncer = nil
+        cancellables = nil
     }
 
     // MARK: - Basic Debounce Tests
@@ -137,12 +140,15 @@ final class ThrottlerTests: XCTestCase {
         throttler = nil
     }
 
-    func testThrottleExecutesImmediately() {
+    func testThrottleExecutesImmediately() async throws {
         var executed = false
 
         throttler.throttle {
             executed = true
         }
+
+        // Give a small delay for async execution
+        try await Task.sleep(nanoseconds: 20_000_000) // 0.02s
 
         XCTAssertTrue(executed, "Should execute immediately on first call")
     }
@@ -296,17 +302,17 @@ final class DebouncedPublisherTests: XCTestCase {
     // MARK: - DebounceStrategy Tests
 
     func testDebounceStrategyStandard() {
-        let strategy = DebounceStrategy.standard
+        let strategy = DebounceStrategy.standard()
         XCTAssertEqual(strategy.delay, 0.3, "Standard strategy should have 0.3s delay")
     }
 
     func testDebounceStrategyAggressive() {
-        let strategy = DebounceStrategy.aggressive
+        let strategy = DebounceStrategy.aggressive()
         XCTAssertEqual(strategy.delay, 0.15, "Aggressive strategy should have 0.15s delay")
     }
 
     func testDebounceStrategyConservative() {
-        let strategy = DebounceStrategy.conservative
+        let strategy = DebounceStrategy.conservative()
         XCTAssertEqual(strategy.delay, 0.5, "Conservative strategy should have 0.5s delay")
     }
 
@@ -321,6 +327,7 @@ final class DebouncedPublisherTests: XCTestCase {
     // MARK: - Integration Tests
 
     func testDebouncerWithRealWorldScenario() async throws {
+        let debouncer = Debouncer(delay: 0.1)
         var searchResults: [String] = []
         let mockSearchResults = ["Result 1", "Result 2", "Result 3"]
 
@@ -345,6 +352,7 @@ final class DebouncedPublisherTests: XCTestCase {
     }
 
     func testThrottlerWithRealWorldScenario() async throws {
+        let throttler = Throttler(minimumInterval: 0.1)
         var apiCallCount = 0
 
         // Simulate rapid button presses
@@ -363,8 +371,10 @@ final class DebouncedPublisherTests: XCTestCase {
     }
 
     func testDebouncerAndThrottlerTogether() async throws {
+        let debouncer = Debouncer(delay: 0.1)
         var debounceExecutions = 0
         var throttleExecutions = 0
+        let throttler = Throttler(minimumInterval: 0.1)
 
         // Simulate user typing (debounce)
         debouncer.debounce {
@@ -387,6 +397,7 @@ final class DebouncedPublisherTests: XCTestCase {
     // MARK: - Edge Cases
 
     func testDebouncerWithEmptyAction() async throws {
+        let debouncer = Debouncer(delay: 0.1)
         // Should not crash with empty action
         debouncer.debounce {
             // Empty action
@@ -399,6 +410,7 @@ final class DebouncedPublisherTests: XCTestCase {
     }
 
     func testDebouncerMultipleCancels() async throws {
+        let debouncer = Debouncer(delay: 0.1)
         var executed = false
 
         debouncer.debounce {
@@ -416,6 +428,7 @@ final class DebouncedPublisherTests: XCTestCase {
     }
 
     func testThrottlerWithEmptyAction() async throws {
+        let throttler = Throttler(minimumInterval: 0.1)
         throttler.throttle {
             // Empty action
         }
@@ -452,7 +465,7 @@ final class DebouncedPublisherTests: XCTestCase {
             executed = true
         }
 
-        try await Task.sleep(nanos: 20_000_000) // 0.02s
+        try await Task.sleep(nanoseconds: 20_000_000) // 0.02s
 
         XCTAssertTrue(executed)
     }

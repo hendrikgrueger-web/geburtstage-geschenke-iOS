@@ -106,11 +106,11 @@ final class ModelValidationTests: XCTestCase {
         let history = GiftHistory(
             personId: UUID(),
             title: "Test Gift",
+            category: "Books",
             year: 2025,
             budget: 100,
-            category: "Books",
-            link: "https://example.com",
-            note: "Great gift!"
+            note: "Great gift!",
+            link: "https://example.com"
         )
 
         XCTAssertEqual(history.title, "Test Gift")

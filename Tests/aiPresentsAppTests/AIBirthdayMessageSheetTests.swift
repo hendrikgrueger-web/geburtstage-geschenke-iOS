@@ -7,7 +7,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
     var mockPerson: PersonRef!
 
     override func setUpWithError() throws {
-        mockPerson = PersonRef(
+        mockPerson = PersonRef(contactIdentifier: "",
             displayName: "Anna Müller",
             birthday: Date(),
             relation: "Freundin"
@@ -39,7 +39,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let milestonePerson = PersonRef(
+        let milestonePerson = PersonRef(contactIdentifier: "",
             displayName: "Max Erwachsener",
             birthday: birthday,
             relation: "Bruder"
@@ -62,7 +62,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let youngPerson = PersonRef(
+        let youngPerson = PersonRef(contactIdentifier: "",
             displayName: "Lisa Neugeboren",
             birthday: birthday,
             relation: "Tochter"
@@ -85,7 +85,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let olderPerson = PersonRef(
+        let olderPerson = PersonRef(contactIdentifier: "",
             displayName: "Opa Hans",
             birthday: birthday,
             relation: "Opa"
@@ -119,7 +119,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
     // MARK: - Person Data Tests
 
     func testPersonDataBinding() {
-        let customPerson = PersonRef(
+        let customPerson = PersonRef(contactIdentifier: "",
             displayName: "Thomas Weber",
             birthday: Date(),
             relation: "Kollege"
@@ -134,7 +134,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
         let relations = ["Mama", "Papa", "Schwester", "Bruder", "Partner", "Freundin", "Oma", "Opa"]
 
         for relation in relations {
-            let person = PersonRef(
+            let person = PersonRef(contactIdentifier: "",
                 displayName: "Test Person",
                 birthday: Date(),
                 relation: relation
@@ -197,7 +197,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let child = PersonRef(
+        let child = PersonRef(contactIdentifier: "",
             displayName: "Max Kind",
             birthday: birthday,
             relation: "Sohn"
@@ -222,7 +222,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let youngAdult = PersonRef(
+        let youngAdult = PersonRef(contactIdentifier: "",
             displayName: "Lisa Young",
             birthday: birthday,
             relation: "Freundin"
@@ -246,7 +246,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let adult = PersonRef(
+        let adult = PersonRef(contactIdentifier: "",
             displayName: "Thomas Adult",
             birthday: birthday,
             relation: "Bruder"
@@ -270,7 +270,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let senior = PersonRef(
+        let senior = PersonRef(contactIdentifier: "",
             displayName: "Erika Senior",
             birthday: birthday,
             relation: "Mama"
@@ -296,7 +296,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Anna",
             birthday: birthday,
             relation: "Tochter"
@@ -317,7 +317,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Max",
             birthday: birthday,
             relation: "Bruder"
@@ -338,7 +338,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Lisa",
             birthday: birthday,
             relation: "Schwester"
@@ -359,7 +359,7 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Tom",
             birthday: birthday,
             relation: "Freund"
@@ -373,11 +373,11 @@ final class AIBirthdayMessageSheetTests: XCTestCase {
 
     func testZodiacSignCalculation() {
         let testCases: [(Date, String)] = [
-            // Format: (birthday, expected zodiac)
-            (DateComponents(calendar: .current, year: 2020, month: 1, day: 15).date!, "Wassermann"),  // Jan 15
-            (DateComponents(calendar: .current, year: 2020, month: 4, day: 15).date!, "Widder"),     // Apr 15
-            (DateComponents(calendar: .current, year: 2020, month: 7, day: 15).date!, "Krebs"),     // Jul 15
-            (DateComponents(calendar: .current, year: 2020, month: 10, day: 15).date!, "Waage"),   // Oct 15
+            // Format: (birthday, expected zodiac) — implementation returns emoji + name
+            (DateComponents(calendar: .current, year: 2020, month: 1, day: 15).date!, "♑ Steinbock"),  // Jan 15 (Dec 22-Jan 19)
+            (DateComponents(calendar: .current, year: 2020, month: 4, day: 15).date!, "♈ Widder"),     // Apr 15
+            (DateComponents(calendar: .current, year: 2020, month: 7, day: 15).date!, "♋ Krebs"),     // Jul 15
+            (DateComponents(calendar: .current, year: 2020, month: 10, day: 15).date!, "♎ Waage"),   // Oct 15
         ]
 
         for (birthday, expectedZodiac) in testCases {

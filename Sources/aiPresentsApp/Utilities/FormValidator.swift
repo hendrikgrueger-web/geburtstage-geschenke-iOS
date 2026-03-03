@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-enum ValidationError: LocalizedError {
+enum ValidationError: LocalizedError, Equatable {
     case emptyField(String)
     case invalidBudget
     case budgetMinMaxMismatch

@@ -76,13 +76,13 @@ final class AccessibilityConfigurationTests: XCTestCase {
     func testButtonTraitsEnabled() {
         let traits = AccessibilityConfiguration.buttonTraits(isEnabled: true)
         XCTAssertTrue(traits.contains(.isButton))
-        XCTAssertFalse(traits.contains(.isNotEnabled))
+        XCTAssertFalse(traits.contains(.isStaticText))
     }
 
     func testButtonTraitsDisabled() {
         let traits = AccessibilityConfiguration.buttonTraits(isEnabled: false)
         XCTAssertTrue(traits.contains(.isButton))
-        XCTAssertTrue(traits.contains(.isNotEnabled))
+        XCTAssertTrue(traits.contains(.isStaticText))
     }
 
     // MARK: - Selectable Traits Tests

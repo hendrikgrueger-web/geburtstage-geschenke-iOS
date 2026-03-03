@@ -61,7 +61,9 @@ final class SmartInputFieldTests: XCTestCase {
     }
 
     func testURLValidation_InvalidWithoutScheme() {
-        let result = ValidationHelper.validateURL("example.com")
+        // "example.com" is auto-prefixed with http:// and becomes valid
+        // Use truly invalid URL with spaces
+        let result = ValidationHelper.validateURL("not a valid url")
 
         XCTAssertFalse(result.isValid)
         XCTAssertTrue(result.errorMessage?.contains("gültige URL") ?? false)
@@ -282,7 +284,7 @@ final class SmartInputFieldTests: XCTestCase {
             title: "Titel",
             budgetMin: 50,
             budgetMax: 100,
-            link: "invalid-url",
+            link: "not a valid url with spaces",
             tags: []
         )
 

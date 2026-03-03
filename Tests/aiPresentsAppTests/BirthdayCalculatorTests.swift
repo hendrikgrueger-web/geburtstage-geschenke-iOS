@@ -257,7 +257,8 @@ final class BirthdayCalculatorTests: XCTestCase {
     }
 
     func testAgeCacheDoesNotInterfereWithOtherCalculations() {
-        let today = createDate(month: 6, day: 16, year: 2026)
+        // Use the same day as birthday for daysUntil == 0
+        let today = createDate(month: 6, day: 15, year: 2026)
         let birthday = createDate(month: 6, day: 15, year: 1990)
 
         // Calculate age

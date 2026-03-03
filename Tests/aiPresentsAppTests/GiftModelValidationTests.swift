@@ -206,8 +206,9 @@ final class GiftModelValidationTests: XCTestCase {
         modelContext.insert(idea1)
         modelContext.insert(idea2)
 
+        let personId = person.id
         let descriptor = FetchDescriptor<GiftIdea>(
-            predicate: #Predicate { $0.personId == person.id }
+            predicate: #Predicate { $0.personId == personId }
         )
         let ideas = try? modelContext.fetch(descriptor)
 
@@ -220,11 +221,11 @@ final class GiftModelValidationTests: XCTestCase {
         let history = GiftHistory(
             personId: person.id,
             title: "Uhr",
-            year: 2023,
             category: "Elektronik",
+            year: 2023,
             budget: 150,
-            link: "https://example.com",
-            note: "Geburtstagsgeschenk"
+            note: "Geburtstagsgeschenk",
+            link: "https://example.com"
         )
 
         modelContext.insert(history)
@@ -243,11 +244,11 @@ final class GiftModelValidationTests: XCTestCase {
         let history = GiftHistory(
             personId: person.id,
             title: "Geschenk",
-            year: 2023,
             category: "",
+            year: 2023,
             budget: 0,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         modelContext.insert(history)
@@ -263,11 +264,11 @@ final class GiftModelValidationTests: XCTestCase {
         let history = GiftHistory(
             personId: person.id,
             title: "Geschenk",
-            year: 2023,
             category: "",
+            year: 2023,
             budget: 0,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         modelContext.insert(history)
@@ -281,11 +282,11 @@ final class GiftModelValidationTests: XCTestCase {
         let history = GiftHistory(
             personId: person.id,
             title: "Geschenk",
-            year: 2023,
             category: "Bücher",
+            year: 2023,
             budget: 0,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         modelContext.insert(history)
@@ -299,11 +300,11 @@ final class GiftModelValidationTests: XCTestCase {
         let history = GiftHistory(
             personId: person.id,
             title: "Geschenk",
-            year: 2023,
             category: "",
+            year: 2023,
             budget: 50,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         modelContext.insert(history)
@@ -317,28 +318,29 @@ final class GiftModelValidationTests: XCTestCase {
         let history1 = GiftHistory(
             personId: person.id,
             title: "Geschenk 2023",
-            year: 2023,
             category: "Bücher",
+            year: 2023,
             budget: 20,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         let history2 = GiftHistory(
             personId: person.id,
             title: "Geschenk 2024",
-            year: 2024,
             category: "Elektronik",
+            year: 2024,
             budget: 100,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         modelContext.insert(history1)
         modelContext.insert(history2)
 
+        let personId = person.id
         let descriptor = FetchDescriptor<GiftHistory>(
-            predicate: #Predicate { $0.personId == person.id }
+            predicate: #Predicate { $0.personId == personId }
         )
         let historyList = try? modelContext.fetch(descriptor)
 
@@ -349,39 +351,40 @@ final class GiftModelValidationTests: XCTestCase {
         let history1 = GiftHistory(
             personId: person.id,
             title: "Geschenk 2023",
-            year: 2023,
             category: "",
+            year: 2023,
             budget: 0,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         let history2 = GiftHistory(
             personId: person.id,
             title: "Geschenk 2021",
-            year: 2021,
             category: "",
+            year: 2021,
             budget: 0,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         let history3 = GiftHistory(
             personId: person.id,
             title: "Geschenk 2024",
-            year: 2024,
             category: "",
+            year: 2024,
             budget: 0,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         modelContext.insert(history1)
         modelContext.insert(history2)
         modelContext.insert(history3)
 
+        let personId = person.id
         let descriptor = FetchDescriptor<GiftHistory>(
-            predicate: #Predicate { $0.personId == person.id },
+            predicate: #Predicate { $0.personId == personId },
             sortBy: [SortDescriptor(\.year, order: .reverse)]
         )
         let historyList = try? modelContext.fetch(descriptor)
@@ -411,7 +414,8 @@ final class GiftModelValidationTests: XCTestCase {
         // Refresh person to get relationship
         modelContext.insert(idea)
 
-        let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id == person.id })
+        let personId = person.id
+        let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id == personId })
         let fetchedPerson = try? modelContext.fetch(descriptor).first
 
         XCTAssertNotNil(fetchedPerson)
@@ -422,16 +426,17 @@ final class GiftModelValidationTests: XCTestCase {
         let history = GiftHistory(
             personId: person.id,
             title: "Geschenk",
-            year: 2023,
             category: "",
+            year: 2023,
             budget: 0,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         modelContext.insert(history)
 
-        let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id == person.id })
+        let personId = person.id
+        let descriptor = FetchDescriptor<PersonRef>(predicate: #Predicate { $0.id == personId })
         let fetchedPerson = try? modelContext.fetch(descriptor).first
 
         XCTAssertNotNil(fetchedPerson)
@@ -469,11 +474,11 @@ final class GiftModelValidationTests: XCTestCase {
         let history = GiftHistory(
             personId: person.id,
             title: "Geschenk",
-            year: 2023,
             category: "",
+            year: 2023,
             budget: 0,
-            link: "",
-            note: ""
+            note: "",
+            link: ""
         )
 
         modelContext.insert(history)

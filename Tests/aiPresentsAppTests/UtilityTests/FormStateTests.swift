@@ -77,7 +77,8 @@ final class FormStateTests: XCTestCase {
         formState.validateField("title")
 
         XCTAssertNil(formState.error(for: "title"))
-        XCTAssertNil(formState.error(for: "budget")) // budget not validated yet
+        // validateField triggers validateAll(), so budget validator also runs
+        XCTAssertNotNil(formState.error(for: "budget"))
     }
 
     func testRemoveValidator() {
@@ -318,12 +319,12 @@ final class FormStateTests: XCTestCase {
 
         // Step 2: Register validators
         formState.registerValidator(for: "title") {
-            let result = ValidationHelper.validateNotEmpty(formState.currentValues["title"] as? String ?? "", fieldName: "Titel")
+            let result = ValidationHelper.validateNotEmpty(self.formState.currentValues["title"] as? String ?? "", fieldName: "Titel")
             return result
         }
 
         formState.registerValidator(for: "budget") {
-            let result = ValidationHelper.validateMinValue(formState.currentValues["budget"] as? Double ?? 0, minValue: 0, fieldName: "Budget")
+            let result = ValidationHelper.validateMinValue(self.formState.currentValues["budget"] as? Double ?? 0, minValue: 0, fieldName: "Budget")
             return result
         }
 
@@ -340,11 +341,11 @@ final class FormStateTests: XCTestCase {
         XCTAssertTrue(formState.isValid)
 
         // Step 6: Submit
-        let result: Bool = await formState.submit {
+        let result: Bool? = await formState.submit {
             return true
         }
 
-        XCTAssertTrue(result ?? false)
+        XCTAssertEqual(result, true)
         XCTAssertTrue(formState.submitSuccess)
 
         // Step 7: Reset

@@ -29,7 +29,7 @@ final class AppViewModelTests: XCTestCase {
         let calendar = Calendar.current
         let today = Date()
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Test Person",
             birthday: calendar.date(byAdding: .day, value: 10, to: today) ?? today,
             relation: "Friend"
@@ -50,21 +50,21 @@ final class AppViewModelTests: XCTestCase {
         let today = Date()
 
         // Person with birthday in 5 days
-        let person1 = PersonRef(
+        let person1 = PersonRef(contactIdentifier: "",
             displayName: "Anna",
             birthday: calendar.date(byAdding: .day, value: 5, to: today) ?? today,
             relation: "Friend"
         )
 
         // Person with birthday in 15 days
-        let person2 = PersonRef(
+        let person2 = PersonRef(contactIdentifier: "",
             displayName: "Thomas",
             birthday: calendar.date(byAdding: .day, value: 15, to: today) ?? today,
             relation: "Family"
         )
 
         // Person with birthday in 35 days (outside range)
-        let person3 = PersonRef(
+        let person3 = PersonRef(contactIdentifier: "",
             displayName: "Lisa",
             birthday: calendar.date(byAdding: .day, value: 35, to: today) ?? today,
             relation: "Colleague"
@@ -87,7 +87,7 @@ final class AppViewModelTests: XCTestCase {
 
         // Create 15 people with upcoming birthdays
         for i in 1...15 {
-            let person = PersonRef(
+            let person = PersonRef(contactIdentifier: "",
                 displayName: "Person \(i)",
                 birthday: calendar.date(byAdding: .day, value: i, to: today) ?? today,
                 relation: "Test"
@@ -103,19 +103,19 @@ final class AppViewModelTests: XCTestCase {
         let calendar = Calendar.current
         let today = Date()
 
-        let person1 = PersonRef(
+        let person1 = PersonRef(contactIdentifier: "",
             displayName: "Zoe",
             birthday: calendar.date(byAdding: .day, value: 10, to: today) ?? today,
             relation: "Friend"
         )
 
-        let person2 = PersonRef(
+        let person2 = PersonRef(contactIdentifier: "",
             displayName: "Adam",
             birthday: calendar.date(byAdding: .day, value: 2, to: today) ?? today,
             relation: "Family"
         )
 
-        let person3 = PersonRef(
+        let person3 = PersonRef(contactIdentifier: "",
             displayName: "Mia",
             birthday: calendar.date(byAdding: .day, value: 5, to: today) ?? today,
             relation: "Colleague"
@@ -138,7 +138,7 @@ final class AppViewModelTests: XCTestCase {
         let today = Date()
 
         // Person with birthday yesterday (should be next year)
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Past Birthday",
             birthday: calendar.date(byAdding: .day, value: -1, to: today) ?? today,
             relation: "Test"
@@ -154,7 +154,7 @@ final class AppViewModelTests: XCTestCase {
         let calendar = Calendar.current
         let today = Date()
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Today Birthday",
             birthday: today,
             relation: "Test"

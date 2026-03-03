@@ -1,7 +1,9 @@
 import XCTest
 import Contacts
+import SwiftData
 @testable import aiPresentsApp
 
+@MainActor
 final class ContactsServiceTests: XCTestCase {
     var sut: ContactsService!
     var mockModelContext: ModelContext!
@@ -86,7 +88,7 @@ final class ContactsServiceTests: XCTestCase {
 
     func testImportedPersonRefStructure() {
         // Create a PersonRef manually to verify structure
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Test Person",
             birthday: Date(),
             relation: "Freund"
@@ -104,9 +106,9 @@ final class ContactsServiceTests: XCTestCase {
     }
 
     func testMultiplePersonRefs() {
-        let person1 = PersonRef(displayName: "Anna", birthday: Date(), relation: "Familie")
-        let person2 = PersonRef(displayName: "Ben", birthday: Date(), relation: "Freunde")
-        let person3 = PersonRef(displayName: "Clara", birthday: Date(), relation: "Kollegen")
+        let person1 = PersonRef(contactIdentifier: "", displayName: "Anna", birthday: Date(), relation: "Familie")
+        let person2 = PersonRef(contactIdentifier: "", displayName: "Ben", birthday: Date(), relation: "Freunde")
+        let person3 = PersonRef(contactIdentifier: "", displayName: "Clara", birthday: Date(), relation: "Kollegen")
 
         mockModelContext.insert(person1)
         mockModelContext.insert(person2)
@@ -134,7 +136,7 @@ final class ContactsServiceTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Leap Year Baby",
             birthday: leapDayBirthday,
             relation: "Test"
@@ -161,7 +163,7 @@ final class ContactsServiceTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Old Person",
             birthday: oldBirthday,
             relation: "Großeltern"
@@ -194,7 +196,7 @@ final class ContactsServiceTests: XCTestCase {
     }
 
     func testPersonRefWithoutContactIdentifier() {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Manual Entry",
             birthday: Date(),
             relation: "Familie"
@@ -206,15 +208,14 @@ final class ContactsServiceTests: XCTestCase {
         let fetchedPeople = try? mockModelContext.fetch(descriptor)
 
         // Manual entries may not have contact identifiers
-        XCTAssertTrue(fetchedPeople?.first?.contactIdentifier == nil ||
-                      fetchedPeople?.first?.contactIdentifier?.isEmpty == true,
+        XCTAssertTrue(fetchedPeople?.first?.contactIdentifier.isEmpty == true,
                       "Manual entry should have no or empty contact identifier")
     }
 
     // MARK: - Display Name Edge Cases
 
     func testPersonRefWithEmptyDisplayName() {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "",
             birthday: Date(),
             relation: "Test"
@@ -238,7 +239,7 @@ final class ContactsServiceTests: XCTestCase {
         ]
 
         for name in specialNames {
-            let person = PersonRef(displayName: name, birthday: Date(), relation: "Test")
+            let person = PersonRef(contactIdentifier: "", displayName: name, birthday: Date(), relation: "Test")
             mockModelContext.insert(person)
         }
 
@@ -256,7 +257,7 @@ final class ContactsServiceTests: XCTestCase {
     func testPersonRefWithVeryLongDisplayName() {
         let longName = String(repeating: "A", count: 1000)
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: longName,
             birthday: Date(),
             relation: "Test"
@@ -280,7 +281,7 @@ final class ContactsServiceTests: XCTestCase {
         ]
 
         for relation in relations {
-            let person = PersonRef(displayName: "Test \(relation)", birthday: Date(), relation: relation)
+            let person = PersonRef(contactIdentifier: "", displayName: "Test \(relation)", birthday: Date(), relation: relation)
             mockModelContext.insert(person)
         }
 
@@ -304,7 +305,7 @@ final class ContactsServiceTests: XCTestCase {
         ]
 
         for relation in specialRelations {
-            let person = PersonRef(displayName: "Test", birthday: Date(), relation: relation)
+            let person = PersonRef(contactIdentifier: "", displayName: "Test", birthday: Date(), relation: relation)
             mockModelContext.insert(person)
         }
 
@@ -315,7 +316,7 @@ final class ContactsServiceTests: XCTestCase {
     }
 
     func testPersonRelationEmpty() {
-        let person = PersonRef(displayName: "Test", birthday: Date(), relation: "")
+        let person = PersonRef(contactIdentifier: "", displayName: "Test", birthday: Date(), relation: "")
 
         mockModelContext.insert(person)
 

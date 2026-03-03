@@ -15,7 +15,7 @@ final class AIServiceTests: XCTestCase {
     // MARK: - Demo Mode Tests
 
     func testGenerateDemoSuggestionsForFamily() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Anna Müller",
             birthday: Date(),
             relation: "Mama"
@@ -39,7 +39,7 @@ final class AIServiceTests: XCTestCase {
     }
 
     func testGenerateDemoSuggestionsForFriends() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Thomas Schmidt",
             birthday: Date(),
             relation: "Freund"
@@ -62,7 +62,7 @@ final class AIServiceTests: XCTestCase {
     }
 
     func testGenerateDemoSuggestionsForPartners() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Lisa Weber",
             birthday: Date(),
             relation: "Partnerin"
@@ -82,7 +82,7 @@ final class AIServiceTests: XCTestCase {
     }
 
     func testGenerateDemoSuggestionsForUnknownRelation() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Max Fischer",
             birthday: Date(),
             relation: "Unbekannt"
@@ -112,7 +112,7 @@ final class AIServiceTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Lisa Neugeboren",
             birthday: birthday,
             relation: "Tochter"
@@ -149,7 +149,7 @@ final class AIServiceTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Max Erwachsener",
             birthday: birthday,
             relation: "Bruder"
@@ -175,7 +175,7 @@ final class AIServiceTests: XCTestCase {
     }
 
     func testGenerateDemoSuggestionsWithTags() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Julia Klein",
             birthday: Date(),
             relation: "Freundin"
@@ -193,7 +193,7 @@ final class AIServiceTests: XCTestCase {
     }
 
     func testGenerateDemoSuggestionsWithPastGifts() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Peter Meier",
             birthday: Date(),
             relation: "Kollege"
@@ -221,7 +221,7 @@ final class AIServiceTests: XCTestCase {
     }
 
     func testGenerateDemoSuggestionsRespectsBudget() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Sarah Wagner",
             birthday: Date(),
             relation: "Schwester"
@@ -255,7 +255,7 @@ final class AIServiceTests: XCTestCase {
     }
 
     func testMultipleGiftSuggestionsDistinct() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Test Person",
             birthday: Date(),
             relation: "Freund"
@@ -338,7 +338,7 @@ final class AIServiceTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Anna Müller",
             birthday: birthday,
             relation: "Schwester"
@@ -369,7 +369,7 @@ final class AIServiceTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Tom Schmidt",
             birthday: birthday,
             relation: "Freund"
@@ -400,7 +400,7 @@ final class AIServiceTests: XCTestCase {
             return
         }
 
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Elisabeth Wagner",
             birthday: birthday,
             relation: "Mama"
@@ -418,7 +418,7 @@ final class AIServiceTests: XCTestCase {
     }
 
     func testBirthdayMessageStructure() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Test Person",
             birthday: Date(),
             relation: "Partner"
@@ -436,7 +436,7 @@ final class AIServiceTests: XCTestCase {
     }
 
     func testGenerateDemoBirthdayMessageWithPastGifts() async throws {
-        let person = PersonRef(
+        let person = PersonRef(contactIdentifier: "",
             displayName: "Sarah Klein",
             birthday: Date(),
             relation: "Freundin"

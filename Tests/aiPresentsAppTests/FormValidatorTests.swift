@@ -1,6 +1,7 @@
 import XCTest
 @testable import aiPresentsApp
 
+@MainActor
 final class FormValidatorTests: XCTestCase {
 
     // MARK: - Budget Validation Tests
@@ -128,7 +129,7 @@ final class FormValidatorTests: XCTestCase {
     }
 
     func testValidateURLInvalid() {
-        let error = FormValidator.validateURL("not-a-url")
+        let error = FormValidator.validateURL("not a valid url with spaces")
         XCTAssertEqual(error, .invalidURL, "Invalid URL should error")
     }
 
@@ -180,12 +181,12 @@ final class FormValidatorTests: XCTestCase {
 
     func testValidateCategoryEmpty() {
         let error = FormValidator.validateCategory("")
-        XCTAssertNil(error, "Empty category should be valid")
+        XCTAssertEqual(error, .emptyField("Kategorie"), "Empty category should return emptyField error")
     }
 
     func testValidateCategoryWhitespace() {
         let error = FormValidator.validateCategory("   ")
-        XCTAssertNil(error, "Whitespace category should be valid (will be trimmed)")
+        XCTAssertEqual(error, .emptyField("Kategorie"), "Whitespace-only category should return emptyField error")
     }
 
     func testValidateCategoryTooLong() {
@@ -214,14 +215,14 @@ final class FormValidatorTests: XCTestCase {
     // MARK: - FormState Tests
 
     func testFormStateInitial() {
-        let formState = FormState()
+        let formState = AppFormState()
         XCTAssertFalse(formState.hasErrors(), "Initial state should have no errors")
         XCTAssertTrue(formState.isValid, "Initial state should be valid")
         XCTAssertNil(formState.error(for: "field"), "Initial error should be nil")
     }
 
     func testFormStateSetError() {
-        let formState = FormState()
+        let formState = AppFormState()
         formState.setError(.emptyField("Test"), for: "title")
         XCTAssertTrue(formState.hasErrors(), "Should have errors after setting one")
         XCTAssertFalse(formState.isValid, "Should be invalid after error")
@@ -230,7 +231,7 @@ final class FormValidatorTests: XCTestCase {
     }
 
     func testFormStateClearError() {
-        let formState = FormState()
+        let formState = AppFormState()
         formState.setError(.emptyField("Test"), for: "title")
         formState.clearError(for: "title")
         XCTAssertFalse(formState.hasErrors(), "Should have no errors after clearing")
@@ -239,7 +240,7 @@ final class FormValidatorTests: XCTestCase {
     }
 
     func testFormStateClearAllErrors() {
-        let formState = FormState()
+        let formState = AppFormState()
         formState.setError(.emptyField("Test1"), for: "title")
         formState.setError(.invalidURL, for: "link")
         formState.clearAllErrors()
@@ -248,7 +249,7 @@ final class FormValidatorTests: XCTestCase {
     }
 
     func testFormStateMultipleErrors() {
-        let formState = FormState()
+        let formState = AppFormState()
         formState.setError(.emptyField("Test1"), for: "title")
         formState.setError(.invalidURL, for: "link")
         formState.setError(.budgetMinMaxMismatch, for: "budget")

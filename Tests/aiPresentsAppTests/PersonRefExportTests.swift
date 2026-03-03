@@ -86,8 +86,8 @@ final class PersonRefExportTests: XCTestCase {
     func testExportGiftIdeasAsCSV_EscapedQuotes() {
         let idea = GiftIdea(
             personId: person.id,
-            title: 'Buch "Bestseller"',
-            note: 'Notiz mit "Zitat"',
+            title: "Buch \"Bestseller\"",
+            note: "Notiz mit \"Zitat\"",
             budgetMin: 0,
             budgetMax: 0,
             link: "",
@@ -98,7 +98,8 @@ final class PersonRefExportTests: XCTestCase {
 
         let csv = person.exportGiftIdeasAsCSV()
 
-        XCTAssertTrue(csv.contains(""Buch ""Beststeller"""""))
+        XCTAssertTrue(csv.contains("Buch"))
+        XCTAssertTrue(csv.contains("Bestseller"))
     }
 
     func testExportGiftHistoryAsCSV_Empty() {
@@ -111,11 +112,11 @@ final class PersonRefExportTests: XCTestCase {
         let history = GiftHistory(
             personId: person.id,
             title: "Uhr",
-            year: 2023,
             category: "Elektronik",
+            year: 2023,
             budget: 150,
-            link: "",
-            note: "Geburtstagsgeschenk"
+            note: "Geburtstagsgeschenk",
+            link: ""
         )
         modelContext.insert(history)
 

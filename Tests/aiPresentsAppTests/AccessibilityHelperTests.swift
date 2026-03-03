@@ -112,7 +112,7 @@ final class AccessibilityHelperTests: XCTestCase {
     func testFormatGiftStatusIdea() {
         let formatted = AccessibilityHelper.formatGiftStatus(.idea)
 
-        XCTAssertEqual(formatted, "Geschenkidea", "Idea status should be 'Geschenkidea'")
+        XCTAssertEqual(formatted, "Geschenkidee", "Idea status should be 'Geschenkidee'")
     }
 
     func testFormatGiftStatusPlanned() {
@@ -136,15 +136,15 @@ final class AccessibilityHelperTests: XCTestCase {
     // MARK: - Gift Idea Label Tests
 
     func testGiftIdeaLabelWithTitleOnly() {
-        let idea = GiftIdea(title: "Test Geschenk", budgetMin: 0, budgetMax: 0, status: .idea)
+        let idea = GiftIdea(personId: UUID(), title: "Test Geschenk", budgetMin: 0, budgetMax: 0, status: .idea)
         let label = AccessibilityHelper.giftIdeaLabel(idea, includeStatus: true)
 
         XCTAssertTrue(label.contains("Test Geschenk"), "Should contain title")
-        XCTAssertTrue(label.contains("Geschenkidea"), "Should contain status")
+        XCTAssertTrue(label.contains("Geschenkidee"), "Should contain status")
     }
 
     func testGiftIdeaLabelWithBudget() {
-        let idea = GiftIdea(title: "Test", budgetMin: 25, budgetMax: 75, status: .idea)
+        let idea = GiftIdea(personId: UUID(), title: "Test", budgetMin: 25, budgetMax: 75, status: .idea)
         let label = AccessibilityHelper.giftIdeaLabel(idea, includeStatus: true)
 
         XCTAssertTrue(label.contains("Budget:"), "Should contain budget label")
@@ -152,7 +152,7 @@ final class AccessibilityHelperTests: XCTestCase {
     }
 
     func testGiftIdeaLabelWithTags() {
-        let idea = GiftIdea(title: "Test", budgetMin: 0, budgetMax: 0, status: .idea)
+        let idea = GiftIdea(personId: UUID(), title: "Test", budgetMin: 0, budgetMax: 0, status: .idea)
         idea.tags = ["Tag1", "Tag2"]
         let label = AccessibilityHelper.giftIdeaLabel(idea, includeStatus: true)
 
@@ -162,7 +162,7 @@ final class AccessibilityHelperTests: XCTestCase {
     }
 
     func testGiftIdeaLabelWithNote() {
-        let idea = GiftIdea(title: "Test", budgetMin: 0, budgetMax: 0, status: .idea)
+        let idea = GiftIdea(personId: UUID(), title: "Test", budgetMin: 0, budgetMax: 0, status: .idea)
         idea.note = "Notiz Text"
         let label = AccessibilityHelper.giftIdeaLabel(idea, includeStatus: true)
 
@@ -171,7 +171,7 @@ final class AccessibilityHelperTests: XCTestCase {
     }
 
     func testGiftIdeaLabelWithoutStatus() {
-        let idea = GiftIdea(title: "Test", budgetMin: 0, budgetMax: 0, status: .idea)
+        let idea = GiftIdea(personId: UUID(), title: "Test", budgetMin: 0, budgetMax: 0, status: .idea)
         let label = AccessibilityHelper.giftIdeaLabel(idea, includeStatus: false)
 
         XCTAssertTrue(label.contains("Test"), "Should contain title")
@@ -204,8 +204,8 @@ final class AccessibilityHelperTests: XCTestCase {
             relation: "Freund"
         )
         person.giftIdeas = [
-            GiftIdea(title: "Idea 1", budgetMin: 0, budgetMax: 0, status: .idea),
-            GiftIdea(title: "Idea 2", budgetMin: 0, budgetMax: 0, status: .idea)
+            GiftIdea(personId: UUID(), title: "Idea 1", budgetMin: 0, budgetMax: 0, status: .idea),
+            GiftIdea(personId: UUID(), title: "Idea 2", budgetMin: 0, budgetMax: 0, status: .idea)
         ]
         let label = AccessibilityHelper.personLabel(person, daysUntil: nil)
 
@@ -220,7 +220,7 @@ final class AccessibilityHelperTests: XCTestCase {
             relation: "Freund"
         )
         person.giftIdeas = [
-            GiftIdea(title: "Idea 1", budgetMin: 0, budgetMax: 0, status: .idea)
+            GiftIdea(personId: UUID(), title: "Idea 1", budgetMin: 0, budgetMax: 0, status: .idea)
         ]
         let label = AccessibilityHelper.personLabel(person, daysUntil: nil)
 
@@ -244,9 +244,10 @@ final class AccessibilityHelperTests: XCTestCase {
 
     func testGiftHistoryLabelBasic() {
         let history = GiftHistory(
+            personId: UUID(),
             title: "Test Geschenk",
-            year: 2025,
             category: "Bücher",
+            year: 2025,
             budget: 30,
             note: "",
             link: ""
@@ -262,9 +263,10 @@ final class AccessibilityHelperTests: XCTestCase {
 
     func testGiftHistoryLabelWithBudget() {
         let history = GiftHistory(
+            personId: UUID(),
             title: "Test",
-            year: 2025,
             category: "Test",
+            year: 2025,
             budget: 50,
             note: "",
             link: ""
@@ -277,9 +279,10 @@ final class AccessibilityHelperTests: XCTestCase {
 
     func testGiftHistoryLabelWithNote() {
         let history = GiftHistory(
+            personId: UUID(),
             title: "Test",
-            year: 2025,
             category: "Test",
+            year: 2025,
             budget: 0,
             note: "Notiz",
             link: ""
@@ -320,10 +323,10 @@ final class AccessibilityHelperTests: XCTestCase {
     }
 
     func testGiftIdeaLabelEmptyTitle() {
-        let idea = GiftIdea(title: "", budgetMin: 0, budgetMax: 0, status: .idea)
+        let idea = GiftIdea(personId: UUID(), title: "", budgetMin: 0, budgetMax: 0, status: .idea)
         let label = AccessibilityHelper.giftIdeaLabel(idea, includeStatus: true)
 
-        XCTAssertTrue(label.contains("Geschenkidea"), "Should still work with empty title")
+        XCTAssertTrue(label.contains("Geschenkidee"), "Should still work with empty title")
     }
 
     func testPersonLabelEmptyGiftIdeas() {

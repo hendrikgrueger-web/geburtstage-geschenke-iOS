@@ -2,6 +2,7 @@ import XCTest
 import SwiftData
 @testable import aiPresentsApp
 
+@MainActor
 final class SampleDataServiceTests: XCTestCase {
     var sut: SampleDataService.Type { SampleDataService.self }
     var modelContext: ModelContext!

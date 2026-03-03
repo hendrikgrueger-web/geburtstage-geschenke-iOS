@@ -40,7 +40,7 @@ final class BirthdayDateHelperTests: XCTestCase {
 
     func testNextBirthday_ThisYear() {
         let calendar = Calendar.current
-        let today = Date()
+        let today = calendar.startOfDay(for: Date())
         var components = calendar.dateComponents([.year, .month, .day], from: today)
         components.day! += 10  // 10 days from now
 
@@ -74,7 +74,8 @@ final class BirthdayDateHelperTests: XCTestCase {
     // MARK: - Days Until Birthday Tests
 
     func testDaysUntilBirthday_Today() {
-        let today = Date()
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
         let daysUntil = BirthdayDateHelper.daysUntilBirthday(from: today, asOf: today)
 
         XCTAssertEqual(daysUntil, 0)
@@ -109,7 +110,8 @@ final class BirthdayDateHelperTests: XCTestCase {
     // MARK: - Birthday Check Tests
 
     func testIsBirthdayToday_Today() {
-        let today = Date()
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
         let isToday = BirthdayDateHelper.isBirthdayToday(from: today, asOf: today)
 
         XCTAssertTrue(isToday)
@@ -216,7 +218,8 @@ final class BirthdayDateHelperTests: XCTestCase {
     // MARK: - Birthday Period Tests
 
     func testBirthdayPeriod_Today() {
-        let today = Date()
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
         let period = BirthdayDateHelper.period(for: today, asOf: today)
 
         XCTAssertEqual(period, .today)
@@ -293,7 +296,8 @@ final class BirthdayDateHelperTests: XCTestCase {
     // MARK: - Formatting Tests
 
     func testRelativeDateDescription_Today() {
-        let today = Date()
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
         let description = BirthdayDateHelper.relativeDateDescription(from: today, asOf: today)
 
         XCTAssertTrue(description.contains("Heute"))

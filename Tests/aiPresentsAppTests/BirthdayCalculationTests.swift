@@ -98,9 +98,9 @@ final class BirthdayCalculationTests: XCTestCase {
     }
 
     func testQuietHoursNormalRange() {
-        // Test 01:00 is outside 22:00-08:00 when start < end
+        // Test 01:00 is within 22:00-06:00 (wraps around midnight)
         let result = isWithinQuietHours(hour: 1, start: 22, end: 6)
-        XCTAssertFalse(result)
+        XCTAssertTrue(result)
     }
 
     func testQuietHoursNormalWithin() {
