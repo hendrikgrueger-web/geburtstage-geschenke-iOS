@@ -44,7 +44,7 @@ struct AIGiftSuggestionsSheet: View {
     // Track which suggestions have received feedback
     @State private var feedbackGivenForSuggestions = Set<String>()
 
-    private var isUsingAppleIntelligence: Bool { AIService.isAvailable }
+    private var isUsingCloudAI: Bool { AIService.isAvailable }
 
     var body: some View {
         NavigationStack {
@@ -356,12 +356,12 @@ struct AIGiftSuggestionsSheet: View {
         } footer: {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 4) {
-                    Image(systemName: isUsingAppleIntelligence ? "iphone" : "sparkles")
-                        .foregroundColor(isUsingAppleIntelligence ? .green : .orange)
-                    Text(isUsingAppleIntelligence
-                         ? "Apple Intelligence — läuft vollständig auf diesem Gerät. Keine Daten verlassen dein iPhone."
-                         : "Demo-Modus — Apple Intelligence auf diesem Gerät nicht verfügbar. Bitte in den iOS-Einstellungen aktivieren.")
-                        .foregroundColor(isUsingAppleIntelligence ? .green : .orange)
+                    Image(systemName: isUsingCloudAI ? "cloud.fill" : "sparkles")
+                        .foregroundColor(isUsingCloudAI ? .blue : .orange)
+                    Text(isUsingCloudAI
+                         ? "Cloud-KI via OpenRouter · Daten werden verschlüsselt übertragen."
+                         : "Demo-Modus — kein API-Key konfiguriert oder KI nicht aktiviert.")
+                        .foregroundColor(isUsingCloudAI ? .blue : .orange)
                 }
 
                 if !filteredGiftHistory.isEmpty {

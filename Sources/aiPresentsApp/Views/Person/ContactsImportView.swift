@@ -4,9 +4,12 @@ import SwiftData
 struct ContactsImportView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
 
+    @Query private var existingPeople: [PersonRef]
     @State private var isImporting = false
     @State private var importError: String?
+    @State private var showingPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -101,6 +104,7 @@ struct ContactsImportView: View {
                     Button("Abbrechen") { dismiss() }
                 }
             }
+            .paywallSheet(isPresented: $showingPaywall)
         }
     }
 
@@ -119,10 +123,24 @@ struct ContactsImportView: View {
                     return
                 }
 
-                let people = try await ContactsService.shared.importBirthdays()
+                var people = try await ContactsService.shared.importBirthdays()
+
+                // Free-Tier: Maximal freePersonLimit Personen insgesamt
+                if !subscriptionManager.isPremium {
+                    let remaining = max(0, SubscriptionManager.freePersonLimit - existingPeople.count)
+                    if people.count > remaining {
+                        people = Array(people.prefix(remaining))
+                    }
+                }
+
                 await MainActor.run {
                     for person in people { modelContext.insert(person) }
                     isImporting = false
+
+                    // Hinweis wenn Limit erreicht
+                    if !subscriptionManager.isPremium && existingPeople.count + people.count >= SubscriptionManager.freePersonLimit {
+                        importError = "Free-Limit erreicht (\(SubscriptionManager.freePersonLimit) Kontakte). Upgrade für unbegrenzte Kontakte."
+                    }
                 }
                 try? await Task.sleep(nanoseconds: 600_000_000)
                 await MainActor.run { dismiss() }

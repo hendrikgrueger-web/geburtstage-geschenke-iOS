@@ -4,6 +4,7 @@ import UserNotifications
 
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
     @State private var showingResetConfirmation = false
     @State private var hasNotificationPermission = false
     @State private var showingReminderSettings = false
@@ -14,6 +15,7 @@ struct SettingsView: View {
     @State private var showingICloudRestartNotice = false
     @State private var showingAbout = false
     @State private var showingRevokeConsentConfirmation = false
+    @State private var showingPaywall = false
 
     @StateObject private var reminderManager = ReminderManager(modelContext: ModelContext.placeholder)
     @StateObject private var consentManager = AIConsentManager.shared
@@ -91,6 +93,66 @@ struct SettingsView: View {
                         .padding(.vertical, 4)
                     } header: {
                         Text("Übersicht")
+                    }
+                }
+
+                // MARK: - Abo-Verwaltung
+                Section {
+                    if subscriptionManager.isPremium {
+                        HStack {
+                            PremiumBadge(style: .prominent)
+                            Spacer()
+                            if let product = subscriptionManager.activeProduct {
+                                Text(product.displayPrice + "/\(product.id.contains("yearly") ? "Jahr" : "Monat")")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+
+                        Button {
+                            if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
+                                UIApplication.shared.open(url)
+                            }
+                        } label: {
+                            HStack {
+                                Text("Abo verwalten")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    } else {
+                        Button {
+                            showingPaywall = true
+                            HapticFeedback.medium()
+                        } label: {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Premium freischalten")
+                                        .font(.headline)
+                                    Text("Unbegrenzte Kontakte, KI-Vorschläge & mehr")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Image(systemName: "crown.fill")
+                                    .foregroundStyle(.orange)
+                            }
+                        }
+
+                        Button("Käufe wiederherstellen") {
+                            Task {
+                                await subscriptionManager.restorePurchases()
+                            }
+                        }
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    }
+                } header: {
+                    Text("Abo")
+                } footer: {
+                    if !subscriptionManager.isPremium {
+                        Text("Free: \(SubscriptionManager.freePersonLimit) Kontakte · Demo-KI · 1 Erinnerung")
                     }
                 }
 
@@ -314,6 +376,7 @@ struct SettingsView: View {
         .sheet(isPresented: $showingAbout) {
             aboutSheet
         }
+        .paywallSheet(isPresented: $showingPaywall)
     }
 
     private var aboutSheet: some View {

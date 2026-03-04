@@ -21,6 +21,7 @@ struct PersonDetailView: View {
     @State private var pendingAIAction: AIAction? = nil
     @State private var giftSortOption: GiftSortOption = .status
 
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
     enum AIAction { case suggestions, birthdayMessage }
     @State private var giftStatusFilter: GiftStatusFilter = .all
     @State private var showingShareSheet = false
@@ -31,6 +32,7 @@ struct PersonDetailView: View {
     @State private var toast: ToastItem?
     @State private var showingAddReceivedGift = false
     @State private var showingEditPerson = false
+    @State private var showingPaywall = false
     @State private var editedName: String = ""
     @State private var editedBirthday: Date = Date()
     @State private var editedPersonRelation: String = ""
@@ -275,8 +277,8 @@ struct PersonDetailView: View {
                 }
             }
 
-            // Apple Intelligence
-            appleIntelligenceSection
+            // KI-Assistent
+            aiAssistantSection
             } // end if !person.skipGift
 
             // Gift History
@@ -622,9 +624,10 @@ struct PersonDetailView: View {
             }
         }
         .toast(item: $toast)
+        .paywallSheet(isPresented: $showingPaywall)
     }
 
-    private var appleIntelligenceSection: some View {
+    private var aiAssistantSection: some View {
         Section {
             Button(action: {
                 handleAIButtonTap(.suggestions)
@@ -686,6 +689,13 @@ struct PersonDetailView: View {
 
     private func handleAIButtonTap(_ action: AIAction) {
         HapticFeedback.medium()
+
+        // Premium-Check: KI-Features nur für Premium-User
+        guard subscriptionManager.isPremium else {
+            showingPaywall = true
+            return
+        }
+
         if AIConsentManager.shared.consentGiven {
             if AIConsentManager.shared.aiEnabled {
                 switch action {

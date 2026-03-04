@@ -10,7 +10,8 @@ iOS-App für Geburtstags- und Geschenkeverwaltung. Generiert von Open Claw (n8n/
 - **Architektur:** MVVM mit Services
 - **Daten:** SwiftData + iCloud Sync (CloudKit)
 - **KI:** OpenRouter API → Google Gemini 3.1 Flash Lite (Cloud, opt-in, DSGVO-konform)
-- **Version:** 0.7.0 (Build 10)
+- **Widget:** WidgetKit Birthday Widget (Medium + Large) mit Deep-Linking
+- **Version:** 0.8.0 (Build 12)
 - **Target:** iPhone 17 Pro Simulator / iOS 26+
 
 ## Build
@@ -24,7 +25,7 @@ xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp -destina
 ```
 Sources/aiPresentsApp/
 ├── Models/          # SwiftData Models: PersonRef, GiftIdea, GiftHistory, ReminderRule, SuggestionFeedback
-├── Services/        # CloudKitContainer, ContactsService, ReminderManager, AIService, AIConsentManager, SampleDataService
+├── Services/        # CloudKitContainer, ContactsService, ReminderManager, AIService, AIConsentManager, SampleDataService, WidgetDataService
 ├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator, RelationOptions, GiftDirection
 ├── Views/
 │   ├── Timeline/    # TimelineView (eine chronologische Liste), BirthdayRow (mit Status-Badge), BirthdayCountdownBadge
@@ -37,8 +38,14 @@ Sources/aiPresentsApp/
 │   └── (Root)       # ContentView (kein TabView), ShareSheetView, LaunchScreen
 ├── ViewModels/      # AppViewModel, SuggestionQualityViewModel
 ├── Resources/       # AppColor
-├── Widgets/         # BirthdayWidgetView
+├── Widgets/         # BirthdayWidgetView (In-App Hero View)
 └── aiPresentsApp.swift  # App Entry Point
+
+Sources/BirthdayWidget/  # WidgetKit Extension (separates Target)
+├── BirthdayWidget.swift           # Widget Entry Point + WidgetBundle
+├── BirthdayTimelineProvider.swift # TimelineProvider (liest JSON aus App Group)
+├── BirthdayWidgetViews.swift      # Views für Medium + Large
+└── WidgetSharedTypes.swift        # WidgetBirthdayEntry + WidgetDataReader
 ```
 
 ## KI-Architektur (AIService + AIConsentManager)
@@ -109,6 +116,7 @@ Der Key wird via `project.yml` → `OpenRouterAPIKey` in Info.plist geschrieben 
 - `PersonRef.skipGift: Bool = false` — "Kein Geschenk nötig" pro Person
 - `PersonRef.hobbies: [String] = []` — dauerhafte Interessen pro Person (max. 10, fließt in KI-Prompt ein)
 - `PersonRef.relation: String` — Beziehungstyp (wählbar aus 8 Optionen + Sonstige-Freitext)
+- `PersonRef.birthYearKnown: Bool = true` — false wenn Geburtsjahr bei Kontakt-Import unbekannt war; KI-Prompt lässt dann Alter weg
 - `GiftIdea` Init-Reihenfolge: `status` VOR `tags`
 - `GiftStatus` ist `CaseIterable` + `Codable`
 - `GiftHistory.direction: String = "given"` — Richtung: "given" (verschenkt) oder "received" (erhalten); SwiftData speichert als String für Migration
@@ -130,7 +138,7 @@ Der Key wird via `project.yml` → `OpenRouterAPIKey` in Info.plist geschrieben 
 
 ### Swift 6 Concurrency
 - Tasks, die SwiftData-Models senden: `let p = person` lokale Kopie vor Task, dann `Task { @MainActor in ... }`
-- `ContactsService` ist `@MainActor`
+- `ContactsService` ist `@MainActor` — `fetchContactData()` ist `nonisolated` für Background-Kontakt-Enumeration
 - `BirthdayCalculator.cache` braucht `nonisolated(unsafe)` (mutable static state)
 - `ReminderManager` ist `@MainActor` — lock Properties brauchen `nonisolated(unsafe)`
 - `AIConsentManager` ist `@MainActor` — `AIService.isAvailable` ist daher `@MainActor`
@@ -173,15 +181,108 @@ try context.delete(model: PersonRef.self)
 - **GiftHistory Add/Edit Sheet:** Oben Segmented Control ("Verschenkt" / "Erhalten") — bestimmt direction. Felder: Titel (Pflicht), Jahr (Pflicht), Kategorie, Wert, Notiz. Link-Feld nur bei "Verschenkt".
 - **AIGiftSuggestionsSheet:** "5 weitere generieren" Button, Akkumulation bis max. 30 Vorschläge. KI nutzt Hobbies + Tags im Prompt.
 
+## Widget-Architektur
+
+**Daten-Sharing:** JSON-Snapshot via App Group UserDefaults (kein SwiftData im Widget)
+- **App Group:** `group.com.harryhirsch1878.ai-presents-app`
+- **URL-Scheme:** `aipresents://person/{UUID}` für Deep-Linking
+- **WidgetDataService** schreibt Snapshot bei: App-Start, Hintergrund-Wechsel, Pull-to-Refresh
+- **Timeline-Refresh:** Täglich um Mitternacht + App-getriggert via `WidgetCenter.shared.reloadAllTimelines()`
+- **Supported Families:** `.systemMedium` (3 Einträge), `.systemLarge` (7 Einträge)
+- Shared Types sind im Widget dupliziert (~30 Zeilen), da Widget-Extensions keinen Zugriff auf das App-Target haben
+
 ## Design-Prinzip
 
 Wir orientieren uns immer an Apple HIG (Human Interface Guidelines) — natives Design, Standard-Patterns, SF Symbols, System-Farben.
+
+## Subscription-System (StoreKit 2)
+
+**Architektur:** `SubscriptionManager` (@MainActor, ObservableObject) als zentraler Service.
+
+### Product-IDs (App Store Connect)
+```
+Subscription Group: "AI Presents Premium"
+├── com.harryhirsch1878.aipresents.premium.monthly  (4,99 EUR)
+└── com.harryhirsch1878.aipresents.premium.yearly   (29,99 EUR, 14-Tage Free Trial)
+```
+
+### SubscriptionManager
+
+```swift
+// Verfügbarkeit prüfen
+subscriptionManager.isPremium                    // Bool — aktives Abo?
+subscriptionManager.canAddPerson(currentCount:)  // Bool — Personen-Limit prüfen
+subscriptionManager.activeProduct                // Product? — aktives Abo-Produkt
+
+// Kauf
+await subscriptionManager.purchase(product)      // Bool — Kauf erfolgreich?
+await subscriptionManager.restorePurchases()     // Käufe wiederherstellen
+await subscriptionManager.loadProducts()         // Produkte neu laden
+
+// Konstanten
+SubscriptionManager.freePersonLimit              // 5 Personen im Free-Tier
+SubscriptionProduct.allIDs                       // Set<String> aller Product-IDs
+SubscriptionProduct.groupID                      // "premium"
+```
+
+### Integration via EnvironmentObject
+```swift
+// App-Root: aiPresentsApp.swift
+@StateObject private var subscriptionManager = SubscriptionManager()
+// .environmentObject(subscriptionManager)
+
+// In Views:
+@EnvironmentObject private var subscriptionManager: SubscriptionManager
+```
+
+### Premium-Gating
+
+| Feature | Free | Premium |
+|---------|------|---------|
+| Personen | 5 max | Unbegrenzt |
+| KI-Geschenkvorschläge | Demo | Unbegrenzt |
+| KI-Geburtstagsnachricht | - | Ja |
+| Widget | - | Ja |
+| Custom Reminders | 1 | Unbegrenzt |
+| Cloud Sync (iCloud) | Ja | Ja |
+
+### Views
+
+| View | Datei | Zweck |
+|------|-------|-------|
+| `PaywallView` | `Views/Subscription/PaywallView.swift` | Paywall mit Features, Preisvergleich, Kauf |
+| `PremiumBadge` | `Views/Subscription/PremiumBadge.swift` | Kompaktes Premium/Free-Badge |
+| `.paywallSheet(isPresented:)` | Extension auf `View` | Convenience-Modifier für Paywall |
+| `.premiumRequired(action:)` | Extension auf `View` | Lock-Icon + Paywall-Trigger |
+
+### Gating-Punkte
+
+- **ContactsImportView:** Import begrenzt auf `freePersonLimit` Personen
+- **PersonDetailView:** `handleAIButtonTap()` prüft `isPremium` vor KI-Features
+- **SettingsView:** Abo-Section mit Status, Upgrade-Button, Restore
+
+### StoreKit Testing (Xcode)
+
+1. StoreKit Configuration File `App/Products.storekit` in Xcode erstellen
+2. Produkte anlegen (Monthly + Yearly, gleiche Subscription Group)
+3. Scheme → StoreKit Configuration → `Products.storekit` auswählen
+4. Im Simulator: Käufe testen, Renewals simulieren
+
+## App-Start Fehlerbehandlung
+
+- **CloudKit-Fehler:** Automatischer Fallback auf lokalen Store (ohne iCloud Sync)
+- **Lokaler Store-Fehler:** In-Memory-Fallback + `ContentUnavailableView` (kein Crash, aber Daten gehen verloren)
+- Alle Container-Fehler werden via `AppLogger.data.error()` geloggt
 
 ## Bekannte Einschränkungen
 
 - OpenRouter API-Key muss manuell in `App/Secrets.xcconfig` eingetragen werden
 - Ohne Key: Demo-Modus (vollständig offline)
 - App wurde initial von KI generiert — Code-Qualität variiert
+
+## Launch-Plan
+
+Vollständiger Launch-Plan mit 8 Phasen, Skills-Referenz und Revenue-Prognose: **`Docs/LAUNCH-PLAN.md`**
 
 ## GitHub
 

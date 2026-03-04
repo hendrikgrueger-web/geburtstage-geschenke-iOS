@@ -18,6 +18,31 @@ class ContactsService: ObservableObject {
             throw ContactsError.notAuthorized
         }
 
+        // Kontakt-Daten als Sendable-Struct extrahieren (off-MainActor)
+        let contactData = try await fetchContactData()
+
+        // Zurück auf MainActor: PersonRef-Objekte erstellen (SwiftData erfordert MainActor)
+        var importedPeople: [PersonRef] = []
+        for data in contactData {
+            let person = PersonRef(
+                contactIdentifier: data.identifier,
+                displayName: data.displayName,
+                birthday: data.birthday
+            )
+            person.birthYearKnown = data.birthYearKnown
+            importedPeople.append(person)
+        }
+
+        if importedPeople.isEmpty {
+            throw ContactsError.noBirthdaysFound
+        }
+
+        return importedPeople
+    }
+
+    /// Kontakt-Daten vom Gerät lesen — läuft NICHT auf dem Main Thread.
+    private nonisolated func fetchContactData() async throws -> [ImportedContactData] {
+        let store = CNContactStore()
         let keys = [CNContactGivenNameKey,
                     CNContactFamilyNameKey,
                     CNContactBirthdayKey,
@@ -25,39 +50,40 @@ class ContactsService: ObservableObject {
 
         let request = CNContactFetchRequest(keysToFetch: keys)
 
-        var importedPeople: [PersonRef] = []
+        var results: [ImportedContactData] = []
 
         try store.enumerateContacts(with: request) { contact, stop in
             guard let birthday = contact.birthday else { return }
-
-            // Skip invalid birthdays (no month or day)
             guard birthday.month != nil && birthday.day != nil else { return }
 
             let calendar = Calendar.current
+            let yearKnown = birthday.year != nil
             var components = birthday
-            components.year = 2000 // Dummy year for date creation
-            if let date = calendar.date(from: components) {
-                let displayName = "\(contact.givenName) \(contact.familyName)".trimmingCharacters(in: .whitespaces)
-
-                // Skip contacts without names
-                guard !displayName.isEmpty else { return }
-
-                let person = PersonRef(
-                    contactIdentifier: contact.identifier,
-                    displayName: displayName,
-                    birthday: date
-                )
-
-                importedPeople.append(person)
+            if !yearKnown {
+                components.year = 2000
             }
+            guard let date = calendar.date(from: components) else { return }
+
+            let displayName = "\(contact.givenName) \(contact.familyName)".trimmingCharacters(in: .whitespaces)
+            guard !displayName.isEmpty else { return }
+
+            results.append(ImportedContactData(
+                identifier: contact.identifier,
+                displayName: displayName,
+                birthday: date,
+                birthYearKnown: yearKnown
+            ))
         }
 
-        // Check if any contacts were imported
-        if importedPeople.isEmpty {
-            throw ContactsError.noBirthdaysFound
-        }
+        return results
+    }
 
-        return importedPeople
+    /// Sendable-Struct für Kontakt-Daten, die über Actor-Grenzen übergeben werden.
+    private struct ImportedContactData: Sendable {
+        let identifier: String
+        let displayName: String
+        let birthday: Date
+        let birthYearKnown: Bool
     }
 
     enum ContactsError: LocalizedError {

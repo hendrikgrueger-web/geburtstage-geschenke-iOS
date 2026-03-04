@@ -13,6 +13,9 @@ final class PersonRef {
     /// Hobbies und Interessen der Person (max. 10 Einträge).
     /// Fließen in den KI-Prompt ein, um bessere Geschenkvorschläge zu generieren.
     var hobbies: [String] = []
+    /// False wenn das Geburtsjahr unbekannt ist (z.B. beim Kontakt-Import).
+    /// In dem Fall wird das Alter nicht im KI-Prompt verwendet.
+    var birthYearKnown: Bool = true
 
     @Relationship(deleteRule: .cascade)
     var giftIdeas: [GiftIdea]?

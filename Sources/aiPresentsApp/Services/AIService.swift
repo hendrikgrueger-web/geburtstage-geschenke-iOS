@@ -5,7 +5,8 @@ import Foundation
 
 private struct GiftContext: Sendable {
     let name: String
-    let age: Int
+    /// Nil wenn das Geburtsjahr unbekannt ist (Kontakt-Import ohne Jahr).
+    let age: Int?
     let relation: String
     let zodiac: String
     let daysUntil: Int?
@@ -18,7 +19,8 @@ private struct GiftContext: Sendable {
 
 private struct BirthdayContext: Sendable {
     let name: String
-    let age: Int
+    /// Nil wenn das Geburtsjahr unbekannt ist (Kontakt-Import ohne Jahr).
+    let age: Int?
     let relation: String
     let zodiac: String
     let lastGiftTitle: String?
@@ -78,7 +80,7 @@ struct AIService {
         // Daten auf @MainActor in Sendable-Struct extrahieren
         let context = GiftContext(
             name: person.displayName,
-            age: BirthdayDateHelper.age(from: person.birthday),
+            age: person.birthYearKnown ? BirthdayDateHelper.age(from: person.birthday) : nil,
             relation: person.relation,
             zodiac: BirthdayDateHelper.zodiacSign(from: person.birthday),
             daysUntil: BirthdayDateHelper.daysUntilBirthday(from: person.birthday),
@@ -95,7 +97,7 @@ struct AIService {
                 AppLogger.data.warning("OpenRouter Fehler, verwende Demo-Modus: \(error.localizedDescription)")
             }
         }
-        return demoSuggestions(relation: context.relation, zodiac: context.zodiac, age: context.age)
+        return demoSuggestions(relation: context.relation, zodiac: context.zodiac, age: context.age ?? 0)
     }
 
     @MainActor
@@ -104,7 +106,7 @@ struct AIService {
         let lastGift = pastGifts.sorted(by: { $0.year > $1.year }).first
         let context = BirthdayContext(
             name: person.displayName,
-            age: BirthdayDateHelper.age(from: person.birthday),
+            age: person.birthYearKnown ? BirthdayDateHelper.age(from: person.birthday) : nil,
             relation: person.relation,
             zodiac: BirthdayDateHelper.zodiacSign(from: person.birthday),
             lastGiftTitle: lastGift?.title,
@@ -129,8 +131,9 @@ struct AIService {
         excludeTitles: [String] = []
     ) async throws -> [GiftSuggestion] {
 
+        let ageText = context.age.map { "\($0) Jahre, " } ?? ""
         var userPrompt = """
-        Erstelle 5 passende Geschenkideen für \(context.name), \(context.age) Jahre, \(context.relation).
+        Erstelle 5 passende Geschenkideen für \(context.name), \(ageText)\(context.relation).
         Sternzeichen: \(context.zodiac).
         Budget: \(Int(budget.min))–\(Int(budget.max)) Euro (strikt einhalten).
         """
@@ -165,7 +168,7 @@ struct AIService {
 
         guard let json = try? JSONDecoder().decode(GiftSuggestionsJSON.self, from: responseData) else {
             AppLogger.data.warning("JSON-Parse-Fehler bei Gift Ideas, verwende Demo-Modus")
-            return demoSuggestions(relation: context.relation, zodiac: context.zodiac, age: context.age)
+            return demoSuggestions(relation: context.relation, zodiac: context.zodiac, age: context.age ?? 0)
         }
 
         return json.suggestions.map { GiftSuggestion(title: $0.title, reason: $0.reason) }
@@ -173,8 +176,9 @@ struct AIService {
 
     private func generateBirthdayMessageWithOpenRouter(context: BirthdayContext) async throws -> BirthdayMessage {
 
+        let ageText = context.age.map { "\($0) Jahre, " } ?? ""
         var userPrompt = """
-        Schreibe eine herzliche Geburtstagsgrußkarte für \(context.name), \(context.age) Jahre, \(context.relation).
+        Schreibe eine herzliche Geburtstagsgrußkarte für \(context.name), \(ageText)\(context.relation).
         Sternzeichen: \(context.zodiac).
         """
 
@@ -314,11 +318,17 @@ struct AIService {
 
     // MARK: - Hilfsfunktionen
 
+    /// Entfernt Zodiac-Emoji-Prefix (z.B. "♈ Widder" → "widder") für Switch-Matching.
+    private func normalizedZodiac(_ zodiac: String) -> String {
+        // Entferne Unicode-Zodiac-Symbole und Whitespace
+        zodiac.replacingOccurrences(of: #"^[♈♉♊♋♌♍♎♏♐♑♒♓]\s*"#, with: "", options: .regularExpression).lowercased()
+    }
+
     private func personalityHint(for zodiac: String) -> String {
-        switch zodiac.lowercased() {
+        switch normalizedZodiac(zodiac) {
         case "widder":     return "energisch, spontan"
         case "stier":      return "genussvoll, bodenständig"
-        case "zwillinge":  return "neugierig, kommunikativ"
+        case "zwillinge", "zwilling": return "neugierig, kommunikativ"
         case "krebs":      return "fürsorglich, emotional"
         case "löwe":       return "kreativ, selbstbewusst"
         case "jungfrau":   return "perfektionistisch, praktisch"
@@ -333,10 +343,10 @@ struct AIService {
     }
 
     private func zodiacWish(for zodiac: String) -> String {
-        switch zodiac.lowercased() {
+        switch normalizedZodiac(zodiac) {
         case "widder":     return "Möge deine Energie und Spontaneität dich weiterbringen!"
         case "stier":      return "Genieß die schönen Momente des Lebens!"
-        case "zwillinge":  return "Möge deine Neugier immer neue Wege öffnen!"
+        case "zwillinge", "zwilling": return "Möge deine Neugier immer neue Wege öffnen!"
         case "krebs":      return "Deine Fürsorge ist unbezahlbar — genieß diesen Tag!"
         case "löwe":       return "Strahle weiter hell und inspiriere uns alle!"
         case "jungfrau":   return "Deine Akribie ist beeindruckend — bleib so!"
