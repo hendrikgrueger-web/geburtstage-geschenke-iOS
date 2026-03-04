@@ -29,6 +29,14 @@ struct GiftTransitionService {
             // Prüfen: Geburtstag dieses Jahr bereits vorbei?
             var birthdayComponents = calendar.dateComponents([.month, .day], from: person.birthday)
             birthdayComponents.year = currentYear
+
+            // Schaltjahr-Fallback: 29.02. → 28.02. im Nicht-Schaltjahr
+            if birthdayComponents.month == 2 && birthdayComponents.day == 29 {
+                if calendar.date(from: birthdayComponents) == nil {
+                    birthdayComponents.day = 28
+                }
+            }
+
             guard let birthdayThisYear = calendar.date(from: birthdayComponents) else { continue }
 
             let birthdayDate = calendar.startOfDay(for: birthdayThisYear)

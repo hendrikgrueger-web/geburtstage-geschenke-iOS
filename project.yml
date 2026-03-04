@@ -17,8 +17,8 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: "AI Präsente"
-        CFBundleShortVersionString: "0.7.0"
-        CFBundleVersion: "11"
+        CFBundleShortVersionString: "0.8.1"
+        CFBundleVersion: "13"
         OpenRouterAPIKey: "$(OPENROUTER_API_KEY)"
         LSRequiresIPhoneOS: true
         UILaunchScreen: {}
@@ -69,8 +69,8 @@ targets:
       path: Sources/BirthdayWidget/Info.plist
       properties:
         CFBundleDisplayName: "Geburtstage"
-        CFBundleShortVersionString: "0.7.0"
-        CFBundleVersion: "11"
+        CFBundleShortVersionString: "0.8.1"
+        CFBundleVersion: "13"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     settings:

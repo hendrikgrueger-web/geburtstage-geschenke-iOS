@@ -3,11 +3,7 @@ import XCTest
 
 final class AppConfigTests: XCTestCase {
 
-    // MARK: - Environment Tests
-
-    func testCurrentEnvironmentIsDevelopment() {
-        XCTAssertEqual(AppConfig.currentEnvironment, .development, "Should be running in development environment")
-    }
+    // MARK: - Build Tests
 
     func testIsDebugBuild() {
         // Note: This test will pass only in DEBUG builds
@@ -165,15 +161,6 @@ final class AppConfigTests: XCTestCase {
 
     func testDefaultUpcomingDaysMatchesMonthDays() {
         XCTAssertEqual(AppConfig.Timeline.defaultUpcomingDays, AppConfig.Timeline.monthDays, "Default upcoming should match month days")
-    }
-
-    // MARK: - AppEnvironment Enum Tests
-
-    func testAppEnvironmentCasesExist() {
-        let _ = AppEnvironment.development
-        let _ = AppEnvironment.production
-        // If compilation reaches here, both cases exist
-        XCTAssertTrue(true)
     }
 
     // MARK: - Version Format Tests

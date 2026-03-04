@@ -20,18 +20,21 @@ ai Presents ist eine iOS-App für Geburtstags- und Geschenkeverwaltung mit KI-ge
 - [x] **WARN-10:** Kontakt-Import von Main Thread in `nonisolated` Background-Methode verschoben
 - [x] **INFO-3:** Zodiac-Emoji-Bug (`"♈ Widder"` → `personalityHint` matchte nie) behoben mit `normalizedZodiac()`
 
+### Erledigt (2026-03-04, Batch 2)
+
+- [x] **#1:** `CloudKitContainer` dead code entfernt (+ Test-Datei)
+- [x] **#3:** `ReminderManager` Doppel-Instanz → `.environmentObject()` von App-Root
+- [x] **#6:** `GiftTransitionService` Schaltjahr-Bug (29.02. → 28.02. Fallback)
+- [x] **#7:** `AppConfig.currentEnvironment` + `AppEnvironment` enum entfernt
+- [x] **#8:** `SettingsView.birthdayText` redundanter Branch entfernt
+- [x] **#5:** `TimelineView` @State-Variablen: **Kein Bug** — verschiedene UI-Einstiegspunkte (Context-Menu vs. Quick-Add)
+
 ### Noch offen
 
 | # | Priorität | Aufgabe | Skill |
 |---|-----------|---------|-------|
-| 1 | High | `CloudKitContainer` dead code entfernen oder korrekt anbinden | — |
 | 2 | High | `BirthdayCalculator` und `BirthdayDateHelper` zu einer Klasse konsolidieren | — |
-| 3 | Medium | `ReminderManager` Doppel-Instanz in SettingsView fixen | — |
 | 4 | Medium | `PersonDetailView` aufteilen (1041 Zeilen → Extracted Sub-Views) | `/ui-review` |
-| 5 | Medium | `TimelineView` doppelte `@State`-Variable (`showingAddGiftIdeaFor`/`quickAddPerson`) vereinen | — |
-| 6 | Medium | `GiftTransitionService` Schaltjahr-Bug (29.02. wird übersprungen) fixen | — |
-| 7 | Low | `AppConfig.currentEnvironment` dead code entfernen | — |
-| 8 | Low | `SettingsView.birthdayText` redundanter Branch entfernen | — |
 | 9 | Low | Widget-Update bei PersonDetailView-Edits triggern | — |
 
 ---

@@ -63,7 +63,6 @@
 		7646F3A08BCEF6CA391CDB98 /* SuggestionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A00B208967B7E65E8EED20 /* SuggestionFeedback.swift */; };
 		7957F19643497DB441123934 /* ContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29444B6BDF0731546595DE2 /* ContactsService.swift */; };
 		7E5937189CCCD1BF5BB2FB47 /* QuickStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BF0D37EF4691DE87BFEAD0 /* QuickStatsView.swift */; };
-		7FD79FE43C9956FDC4512BE9 /* CloudKitContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF92F2C1CFE11A504F8B36 /* CloudKitContainerTests.swift */; };
 		803759AE778885B8326EB53D /* ContactsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB6E1690ACBC0C41AE04F7 /* ContactsServiceTests.swift */; };
 		831940E5795C3E5929750297 /* SmartInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C1474BF62BF80C2734793F /* SmartInputField.swift */; };
 		83B8D918FDB4ED0D5B20FC62 /* TimelineFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502554517C926AD4B7EF35EE /* TimelineFilterView.swift */; };
@@ -77,7 +76,6 @@
 		9588530C039939683320C67D /* FormStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52099417BCBD7016D7D7C66 /* FormStateTests.swift */; };
 		97207EC8D3DF3E4B7B92D373 /* BirthdayWidgetDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BA551EDF2FC361A5B1CF9 /* BirthdayWidgetDataTests.swift */; };
 		97CA71ECC58101BBEBA9A15F /* PersonAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD126F2E5D15ED3C1A0A867 /* PersonAvatar.swift */; };
-		9B588F5277ED8F1AC7E0EEDF /* CloudKitContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20813A337589F637128FE72 /* CloudKitContainer.swift */; };
 		9BF2F2BB730530A2209C0220 /* PersonRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B65F655134CF6668D50BD9 /* PersonRef.swift */; };
 		9C3438E34DD32FF19D18E93D /* AccessibilityHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92D5A39066D3EB9FAD43895 /* AccessibilityHelperTests.swift */; };
 		9D8A60137B72FF9BB1003B7B /* URLValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4EEB524DA35DA87130A7F8 /* URLValidatorTests.swift */; };
@@ -202,7 +200,6 @@
 		6F4689396F1072DD2D28E078 /* BirthdayDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayDateHelper.swift; sourceTree = "<group>"; };
 		711769EFA88D8FC06C5A5572 /* EditGiftHistorySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGiftHistorySheet.swift; sourceTree = "<group>"; };
 		722036218687E49E95EF8A33 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		72FF92F2C1CFE11A504F8B36 /* CloudKitContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitContainerTests.swift; sourceTree = "<group>"; };
 		7445EDABC3BF7FB4E9809AD8 /* AIBirthdayMessageSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIBirthdayMessageSheet.swift; sourceTree = "<group>"; };
 		78BE49BD68A19D2708B9FF4D /* BirthdayDateHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayDateHelperTests.swift; sourceTree = "<group>"; };
 		7EAA89C692C942FB0A0FCFB3 /* HapticFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackTests.swift; sourceTree = "<group>"; };
@@ -266,7 +263,6 @@
 		EF726314BEDDE5BB6C64E630 /* BirthdayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayRow.swift; sourceTree = "<group>"; };
 		EFE2FA9D61AEDE351B3B7718 /* GiftModelValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftModelValidationTests.swift; sourceTree = "<group>"; };
 		F0E2AFB4F054F2327E661194 /* BirthdayCountdownBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCountdownBadge.swift; sourceTree = "<group>"; };
-		F20813A337589F637128FE72 /* CloudKitContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitContainer.swift; sourceTree = "<group>"; };
 		F4BE28E623996C74E0FB24BE /* AppColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColorTests.swift; sourceTree = "<group>"; };
 		F54F0D5F9397A43CD6A7AA0B /* UpcomingBirthdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingBirthdaysView.swift; sourceTree = "<group>"; };
 		F5693E1132B7D77C5A771711 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -486,7 +482,6 @@
 				FF382AF887CC2A4530148FD7 /* BirthdayCalculatorTests.swift */,
 				3BC3124099F551F5EA373EA7 /* BirthdayCalculatorThreadSafetyTests.swift */,
 				CC8BA551EDF2FC361A5B1CF9 /* BirthdayWidgetDataTests.swift */,
-				72FF92F2C1CFE11A504F8B36 /* CloudKitContainerTests.swift */,
 				95BB6E1690ACBC0C41AE04F7 /* ContactsServiceTests.swift */,
 				063CAB0C081F446D470C7433 /* DebouncerTests.swift */,
 				EC6FCD24AE708AB86CF01C17 /* FormatterHelperTests.swift */,
@@ -545,7 +540,6 @@
 			children = (
 				B1E90FAE8B819BCA02CD3D47 /* AIConsentManager.swift */,
 				49F19315FD9DFE8E8059A7D2 /* AIService.swift */,
-				F20813A337589F637128FE72 /* CloudKitContainer.swift */,
 				A29444B6BDF0731546595DE2 /* ContactsService.swift */,
 				FC7EC86AFD43E7619FFD809C /* GiftTransitionService.swift */,
 				AF5D518273E7BB19D619E0DF /* ReminderManager.swift */,
@@ -706,7 +700,6 @@
 				293D6EBEDA0427F92D55F28D /* BirthdayCalculatorThreadSafetyTests.swift in Sources */,
 				011B23B9E759F14B51EF9A81 /* BirthdayDateHelperTests.swift in Sources */,
 				97207EC8D3DF3E4B7B92D373 /* BirthdayWidgetDataTests.swift in Sources */,
-				7FD79FE43C9956FDC4512BE9 /* CloudKitContainerTests.swift in Sources */,
 				803759AE778885B8326EB53D /* ContactsServiceTests.swift in Sources */,
 				D41082B2ED0E32EFDE1354A9 /* DebouncerTests.swift in Sources */,
 				9588530C039939683320C67D /* FormStateTests.swift in Sources */,
@@ -754,7 +747,6 @@
 				0B105CAA3122D6323CE7824E /* BirthdayWidgetView.swift in Sources */,
 				BF5A0D8F456FEB36868A7A7D /* BudgetRangeView.swift in Sources */,
 				DC9D90107E2252A49DE8F90E /* ButtonStyles.swift in Sources */,
-				9B588F5277ED8F1AC7E0EEDF /* CloudKitContainer.swift in Sources */,
 				C6DC1001E06284F372E00529 /* ContactsImportView.swift in Sources */,
 				7957F19643497DB441123934 /* ContactsService.swift in Sources */,
 				0D6E38A50ABD9ACEF04B8E23 /* ContentView.swift in Sources */,

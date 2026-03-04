@@ -98,6 +98,7 @@ struct aiPresentsApp: App {
                 }
             }
             .environmentObject(subscriptionManager)
+            .environmentObject(reminderManager)
             .onOpenURL { url in
                 handleDeepLink(url)
             }

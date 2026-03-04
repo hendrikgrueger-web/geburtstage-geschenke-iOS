@@ -7,11 +7,12 @@ struct ReminderSettingsView: View {
 
     @Query private var rules: [ReminderRule]
 
+    @EnvironmentObject private var reminderManager: ReminderManager
+
     @State private var leadDays: Set<Int>
     @State private var quietHoursStart: Int
     @State private var quietHoursEnd: Int
     @State private var enabled: Bool
-    @State private var reminderManager: ReminderManager?
 
     init(rule: ReminderRule?) {
         let days = rule?.leadDays ?? [30, 14, 7, 2]
@@ -133,11 +134,6 @@ struct ReminderSettingsView: View {
         }
         .navigationTitle("Erinnerungseinstellungen")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            if reminderManager == nil {
-                reminderManager = ReminderManager(modelContext: modelContext)
-            }
-        }
         .onChange(of: quietHoursStart) { oldValue, newValue in
             if newValue == quietHoursEnd {
                 HapticFeedback.warning()
@@ -201,9 +197,9 @@ struct ReminderSettingsView: View {
 
         // Reschedule reminders with new settings
         Task {
-            await reminderManager?.cancelAllReminders()
+            await reminderManager.cancelAllReminders()
             if enabled {
-                await reminderManager?.scheduleAllReminders()
+                await reminderManager.scheduleAllReminders()
             }
         }
     }

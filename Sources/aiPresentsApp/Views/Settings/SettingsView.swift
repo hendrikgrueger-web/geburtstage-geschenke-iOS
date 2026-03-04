@@ -17,7 +17,7 @@ struct SettingsView: View {
     @State private var showingRevokeConsentConfirmation = false
     @State private var showingPaywall = false
 
-    @StateObject private var reminderManager = ReminderManager(modelContext: ModelContext.placeholder)
+    @EnvironmentObject private var reminderManager: ReminderManager
     @StateObject private var consentManager = AIConsentManager.shared
 
     @Query private var reminderRule: [ReminderRule]
@@ -57,8 +57,6 @@ struct SettingsView: View {
             return "Heute!"
         } else if days == 1 {
             return "Morgen"
-        } else if days <= 7 {
-            return "In \(days) Tagen"
         } else {
             return "In \(days) Tagen"
         }
@@ -343,7 +341,6 @@ struct SettingsView: View {
             }
             .navigationTitle("Einstellungen")
             .onAppear {
-                reminderManager.updateModelContext(modelContext)
                 Task {
                     await checkNotificationPermission()
                 }

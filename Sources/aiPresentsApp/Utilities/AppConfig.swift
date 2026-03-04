@@ -2,14 +2,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-enum AppEnvironment {
-    case development
-    case production
-}
-
 struct AppConfig {
-    static let currentEnvironment: AppEnvironment = .development
-
     static var isOpenRouterConfigured: Bool { AI.isAPIKeyConfigured }
 
     #if DEBUG

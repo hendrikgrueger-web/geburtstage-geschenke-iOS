@@ -11,7 +11,7 @@ iOS-App für Geburtstags- und Geschenkeverwaltung. Generiert von Open Claw (n8n/
 - **Daten:** SwiftData + iCloud Sync (CloudKit)
 - **KI:** OpenRouter API → Google Gemini 3.1 Flash Lite (Cloud, opt-in, DSGVO-konform)
 - **Widget:** WidgetKit Birthday Widget (Medium + Large) mit Deep-Linking
-- **Version:** 0.8.0 (Build 12)
+- **Version:** 0.8.1 (Build 13)
 - **Target:** iPhone 17 Pro Simulator / iOS 26+
 
 ## Build
@@ -25,7 +25,7 @@ xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp -destina
 ```
 Sources/aiPresentsApp/
 ├── Models/          # SwiftData Models: PersonRef, GiftIdea, GiftHistory, ReminderRule, SuggestionFeedback
-├── Services/        # CloudKitContainer, ContactsService, ReminderManager, AIService, AIConsentManager, SampleDataService, WidgetDataService
+├── Services/        # ContactsService, ReminderManager, AIService, AIConsentManager, SampleDataService, WidgetDataService, SubscriptionManager
 ├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator, RelationOptions, GiftDirection
 ├── Views/
 │   ├── Timeline/    # TimelineView (eine chronologische Liste), BirthdayRow (mit Status-Badge), BirthdayCountdownBadge
@@ -140,7 +140,7 @@ Der Key wird via `project.yml` → `OpenRouterAPIKey` in Info.plist geschrieben 
 - Tasks, die SwiftData-Models senden: `let p = person` lokale Kopie vor Task, dann `Task { @MainActor in ... }`
 - `ContactsService` ist `@MainActor` — `fetchContactData()` ist `nonisolated` für Background-Kontakt-Enumeration
 - `BirthdayCalculator.cache` braucht `nonisolated(unsafe)` (mutable static state)
-- `ReminderManager` ist `@MainActor` — lock Properties brauchen `nonisolated(unsafe)`
+- `ReminderManager` ist `@MainActor` — wird via `.environmentObject()` von App-Root durchgereicht, NIE neue Instanz in Views erstellen
 - `AIConsentManager` ist `@MainActor` — `AIService.isAvailable` ist daher `@MainActor`
 
 ### AppLogger Kategorien
