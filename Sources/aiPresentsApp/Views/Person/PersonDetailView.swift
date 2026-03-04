@@ -29,10 +29,13 @@ struct PersonDetailView: View {
     @State private var editedRelation: String = ""
     @State private var showingMarkAllAsGivenConfirmation = false
     @State private var toast: ToastItem?
+    @State private var showingAddReceivedGift = false
     @State private var showingEditPerson = false
     @State private var editedName: String = ""
     @State private var editedBirthday: Date = Date()
     @State private var editedPersonRelation: String = ""
+    @State private var customRelationText: String = ""
+    @State private var customEditPersonRelationText: String = ""
 
     enum GiftSortOption: String, CaseIterable {
         case status = "Status"
@@ -108,8 +111,21 @@ struct PersonDetailView: View {
                     }
                 ))
             }
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel("Informationen zu \(person.displayName)")
+
+            // MARK: - Hobbies & Interessen (fließen in KI-Prompt ein)
+            Section {
+                HobbiesChipView(
+                    hobbies: Binding(
+                        get: { person.hobbies },
+                        set: { person.hobbies = $0 }
+                    ),
+                    isEditable: true
+                )
+            } header: {
+                Text("Hobbies & Interessen")
+            } footer: {
+                Text("Wird für bessere KI-Vorschläge genutzt")
+            }
 
             if !person.skipGift {
             // Gift Ideas
@@ -265,7 +281,7 @@ struct PersonDetailView: View {
 
             // Gift History
             Section {
-                if filteredGiftHistory.isEmpty {
+                if givenGiftHistory.isEmpty {
                     EmptyStateView(type: .noHistory, action: {
                         showingAddGiftHistory = true
                         HapticFeedback.light()
@@ -273,7 +289,7 @@ struct PersonDetailView: View {
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
                 } else {
-                    ForEach(filteredGiftHistory) { history in
+                    ForEach(givenGiftHistory) { history in
                         Button {
                             showingEditGiftHistory = history
                         } label: {
@@ -293,7 +309,7 @@ struct PersonDetailView: View {
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(role: .destructive) {
-                                if let index = filteredGiftHistory.firstIndex(where: { $0.id == history.id }) {
+                                if let index = givenGiftHistory.firstIndex(where: { $0.id == history.id }) {
                                     deleteGiftHistory(at: IndexSet([index]))
                                 }
                             } label: {
@@ -304,14 +320,54 @@ struct PersonDetailView: View {
                 }
             } header: {
                 HStack {
-                    Text("Geschenke-Verlauf")
+                    Text("Verschenkt")
                     Spacer()
                     Button(action: { showingAddGiftHistory = true }) {
                         Image(systemName: "plus.circle.fill")
+                            .font(.title3)
                     }
                 }
             } footer: {
                 Text("In früheren Jahren verschenkt")
+            }
+
+            // MARK: - Erhaltene Geschenke (von dieser Person bekommen)
+            Section {
+                if receivedGiftHistory.isEmpty {
+                    Text("Noch keine erhaltenen Geschenke")
+                        .foregroundStyle(.secondary)
+                        .font(.subheadline)
+                } else {
+                    ForEach(receivedGiftHistory) { history in
+                        Button {
+                            showingEditGiftHistory = history
+                        } label: {
+                            GiftHistoryRow(
+                                history: history,
+                                onShare: { shareGiftHistory(history) },
+                                onReuseAsIdea: nil
+                            )
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            Button(role: .destructive) {
+                                if let index = receivedGiftHistory.firstIndex(where: { $0.id == history.id }) {
+                                    deleteReceivedGiftHistory(at: IndexSet([index]))
+                                }
+                            } label: {
+                                Label("Löschen", systemImage: "trash")
+                            }
+                        }
+                    }
+                }
+            } header: {
+                HStack {
+                    Text("Von \(person.displayName) erhalten")
+                    Spacer()
+                    Button { showingAddReceivedGift = true } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title3)
+                    }
+                }
             }
 
             // Danger Zone
@@ -320,12 +376,12 @@ struct PersonDetailView: View {
                     showingDeletePerson = true
                 } label: {
                     HStack {
-                        Text("Kontakt löschen")
+                        Text("Aus App entfernen")
                         Spacer()
                         Image(systemName: "trash")
                     }
                 }
-                .accessibleButton(label: "Kontakt löschen", hint: "Löscht \(person.displayName) und alle Geschenkideen permanent")
+                .accessibleButton(label: "Aus App entfernen", hint: "Entfernt \(person.displayName) aus der App. Der iOS-Kontakt bleibt unverändert.")
             }
         }
         .sheet(isPresented: $showingAddGiftIdea) {
@@ -336,6 +392,9 @@ struct PersonDetailView: View {
         }
         .sheet(isPresented: $showingAddGiftHistory) {
             AddGiftHistorySheet(person: person)
+        }
+        .sheet(isPresented: $showingAddReceivedGift) {
+            AddGiftHistorySheet(person: person, direction: .received)
         }
         .sheet(item: $showingEditGiftHistory) { history in
             EditGiftHistorySheet(person: person, history: history)
@@ -355,13 +414,13 @@ struct PersonDetailView: View {
             let purchasedCount = filteredGiftIdeas.filter { $0.status == .purchased }.count
             Text("\(purchasedCount) Geschenk\(purchasedCount == 1 ? "" : "e") werden als verschenkt markiert.")
         }
-        .alert("Kontakt löschen?", isPresented: $showingDeletePerson) {
+        .alert("Aus App entfernen?", isPresented: $showingDeletePerson) {
             Button("Abbrechen", role: .cancel) { }
-            Button("Löschen", role: .destructive) {
+            Button("Entfernen", role: .destructive) {
                 deletePerson()
             }
         } message: {
-            Text("Das löscht \(person.displayName) und alle zugehörigen Geschenkideen.")
+            Text("\(person.displayName) wird nur aus dieser App entfernt. Dein iOS-Kontakt bleibt unverändert.")
         }
         .navigationTitle(person.displayName)
         .navigationBarTitleDisplayMode(.inline)
@@ -416,14 +475,27 @@ struct PersonDetailView: View {
                 ShareSheetView(items: [shareText])
             }
         }
+        // Relation-Picker Sheet — Inline-Picker mit Freitext-Option bei "Sonstige"
         .sheet(isPresented: $showingEditRelation) {
             NavigationStack {
                 Form {
                     Section {
-                        TextField("Beziehung", text: $editedRelation)
-                            .textInputAutocapitalization(.sentences)
-                    } footer: {
-                        Text("z.B. Familie, Freunde, Kollegen")
+                        Picker("Beziehung", selection: $editedRelation) {
+                            ForEach(RelationOptions.predefined, id: \.self) { option in
+                                Text(option).tag(option)
+                            }
+                        }
+                        .pickerStyle(.inline)
+                        .labelsHidden()
+                    }
+
+                    if editedRelation == "Sonstige" {
+                        Section {
+                            TextField("Beziehung eingeben", text: $customRelationText)
+                                .textInputAutocapitalization(.sentences)
+                        } footer: {
+                            Text("z.B. Oma, Onkel, Nachbar")
+                        }
                     }
                 }
                 .navigationTitle("Beziehung bearbeiten")
@@ -437,15 +509,29 @@ struct PersonDetailView: View {
 
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("Speichern") {
-                            person.relation = editedRelation
+                            if editedRelation == "Sonstige" {
+                                let trimmed = customRelationText.trimmingCharacters(in: .whitespaces)
+                                person.relation = trimmed.isEmpty ? "Sonstige" : trimmed
+                            } else {
+                                person.relation = editedRelation
+                            }
                             HapticFeedback.success()
                             showingEditRelation = false
                         }
-                        .disabled(editedRelation.trimmingCharacters(in: .whitespaces).isEmpty)
+                    }
+                }
+                .onAppear {
+                    if RelationOptions.isPredefined(person.relation) {
+                        editedRelation = person.relation
+                        customRelationText = ""
+                    } else {
+                        editedRelation = "Sonstige"
+                        customRelationText = person.relation
                     }
                 }
             }
         }
+        // Kontakt-Bearbeitung Sheet — Name, Geburtstag und Beziehung editieren
         .sheet(isPresented: $showingEditPerson) {
             NavigationStack {
                 Form {
@@ -465,8 +551,22 @@ struct PersonDetailView: View {
                     }
 
                     Section("Beziehung") {
-                        TextField("z.B. Familie, Freunde, Kollegen", text: $editedPersonRelation)
-                            .textInputAutocapitalization(.sentences)
+                        Picker("Beziehung", selection: $editedPersonRelation) {
+                            ForEach(RelationOptions.predefined, id: \.self) { option in
+                                Text(option).tag(option)
+                            }
+                        }
+                        .pickerStyle(.inline)
+                        .labelsHidden()
+                    }
+
+                    if editedPersonRelation == "Sonstige" {
+                        Section {
+                            TextField("Beziehung eingeben", text: $customEditPersonRelationText)
+                                .textInputAutocapitalization(.sentences)
+                        } footer: {
+                            Text("z.B. Oma, Onkel, Nachbar")
+                        }
                     }
                 }
                 .navigationTitle("Kontakt bearbeiten")
@@ -485,14 +585,25 @@ struct PersonDetailView: View {
                                 person.displayName = trimmedName
                             }
                             person.birthday = editedBirthday
-                            let trimmedRelation = editedPersonRelation.trimmingCharacters(in: .whitespaces)
-                            if !trimmedRelation.isEmpty {
-                                person.relation = trimmedRelation
+                            if editedPersonRelation == "Sonstige" {
+                                let trimmed = customEditPersonRelationText.trimmingCharacters(in: .whitespaces)
+                                person.relation = trimmed.isEmpty ? "Sonstige" : trimmed
+                            } else {
+                                person.relation = editedPersonRelation
                             }
                             HapticFeedback.success()
                             showingEditPerson = false
                         }
                         .disabled(editedName.trimmingCharacters(in: .whitespaces).isEmpty)
+                    }
+                }
+                .onAppear {
+                    if RelationOptions.isPredefined(person.relation) {
+                        editedPersonRelation = person.relation
+                        customEditPersonRelationText = ""
+                    } else {
+                        editedPersonRelation = "Sonstige"
+                        customEditPersonRelationText = person.relation
                     }
                 }
             }
@@ -684,9 +795,17 @@ struct PersonDetailView: View {
         }
     }
 
-    private var filteredGiftHistory: [GiftHistory] {
+    /// Geschenke, die wir dieser Person gegeben haben — absteigend nach Jahr sortiert.
+    private var givenGiftHistory: [GiftHistory] {
         giftHistory
-            .filter { $0.personId == person.id }
+            .filter { $0.personId == person.id && $0.giftDirection == .given }
+            .sorted { $0.year > $1.year }
+    }
+
+    /// Geschenke, die wir von dieser Person erhalten haben — absteigend nach Jahr sortiert.
+    private var receivedGiftHistory: [GiftHistory] {
+        giftHistory
+            .filter { $0.personId == person.id && $0.giftDirection == .received }
             .sorted { $0.year > $1.year }
     }
 
@@ -732,7 +851,16 @@ struct PersonDetailView: View {
     private func deleteGiftHistory(at offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(filteredGiftHistory[index])
+                modelContext.delete(givenGiftHistory[index])
+            }
+            HapticFeedback.warning()
+        }
+    }
+
+    private func deleteReceivedGiftHistory(at offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(receivedGiftHistory[index])
             }
             HapticFeedback.warning()
         }
@@ -756,7 +884,7 @@ struct PersonDetailView: View {
     private func deletePerson() {
         withAnimation {
             modelContext.delete(person)
-            HapticFeedback.error()
+            HapticFeedback.warning()
         }
         dismiss()
     }

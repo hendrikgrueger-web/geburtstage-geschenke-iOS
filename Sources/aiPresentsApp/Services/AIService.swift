@@ -9,6 +9,9 @@ private struct GiftContext: Sendable {
     let relation: String
     let zodiac: String
     let daysUntil: Int?
+    /// Dauerhafte Hobbies/Interessen der Person (max. 10, aus PersonRef.hobbies).
+    /// Werden im Prompt separat von den einmaligen Tags übergeben.
+    let hobbies: [String]
     let tags: [String]
     let pastGiftTitles: [String] // Nur Titel, kein ganzes GiftHistory-Objekt
 }
@@ -79,6 +82,7 @@ struct AIService {
             relation: person.relation,
             zodiac: BirthdayDateHelper.zodiacSign(from: person.birthday),
             daysUntil: BirthdayDateHelper.daysUntilBirthday(from: person.birthday),
+            hobbies: person.hobbies,
             tags: tags,
             pastGiftTitles: pastGifts.map { "\($0.title) (\($0.year))" }
         )
@@ -130,6 +134,12 @@ struct AIService {
         Sternzeichen: \(context.zodiac).
         Budget: \(Int(budget.min))–\(Int(budget.max)) Euro (strikt einhalten).
         """
+
+        // Hobbies (dauerhaft gespeichert) und Tags (einmalig pro Anfrage) separat im Prompt,
+        // damit die KI zwischen langfristigen Interessen und situativen Hinweisen unterscheiden kann
+        if !context.hobbies.isEmpty {
+            userPrompt += "\nDauerhafte Interessen/Hobbies: \(context.hobbies.joined(separator: ", "))."
+        }
 
         if !context.tags.isEmpty {
             userPrompt += "\nInteressen: \(context.tags.joined(separator: ", "))."

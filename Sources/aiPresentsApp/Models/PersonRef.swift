@@ -10,6 +10,9 @@ final class PersonRef {
     var relation: String
     var updatedAt: Date
     var skipGift: Bool = false
+    /// Hobbies und Interessen der Person (max. 10 Einträge).
+    /// Fließen in den KI-Prompt ein, um bessere Geschenkvorschläge zu generieren.
+    var hobbies: [String] = []
 
     @Relationship(deleteRule: .cascade)
     var giftIdeas: [GiftIdea]?
@@ -62,17 +65,18 @@ final class PersonRef {
             return ""
         }
 
-        var csv = "Titel,Jahr,Kategorie,Budget,Link,Notiz\n"
+        var csv = "Titel,Jahr,Kategorie,Budget,Richtung,Link,Notiz\n"
 
         for item in history {
             let escapedTitle = item.title.replacingOccurrences(of: "\"", with: "\"\"")
             let year = String(item.year)
             let category = item.category.replacingOccurrences(of: "\"", with: "\"\"")
             let budget = String(format: "%.2f", item.budget)
+            let direction = item.giftDirection.displayName
             let link = item.link.replacingOccurrences(of: "\"", with: "\"\"")
             let note = item.note.replacingOccurrences(of: "\"", with: "\"\"").replacingOccurrences(of: "\n", with: " ")
 
-            csv += "\"\(escapedTitle)\",\(year),\"\(category)\",\(budget),\"\(link)\",\"\(note)\"\n"
+            csv += "\"\(escapedTitle)\",\(year),\"\(category)\",\(budget),\"\(direction)\",\"\(link)\",\"\(note)\"\n"
         }
 
         return csv

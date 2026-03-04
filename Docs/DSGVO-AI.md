@@ -28,9 +28,10 @@ Folgende Daten werden pro KI-Anfrage an OpenRouter / Google übertragen:
 - **Alter** — berechnet aus dem Geburtsdatum (nicht das Datum selbst)
 - **Beziehungstyp** — z.B. "Freund", "Mutter", "Kollege"
 - **Sternzeichen** — berechnet aus dem Geburtsdatum (keine Personaldaten)
-- **Interessen/Tags** — sofern der Nutzer welche eingetragen hat
+- **Hobbies/Interessen** — dauerhafte Hobbies pro Person, sofern eingetragen
+- **Tags** — einmalige Interessen/Tags pro Geschenkidee, sofern eingetragen
 - **Budget-Rahmen** — Min/Max-Werte für passende Geschenkvorschläge
-- **Titel vergangener Geschenke** — ohne Notizen oder Links
+- **Titel erhaltener Geschenke** — Geschenke mit Status `.given` (bereits erhalten), ohne Notizen oder Links
 
 ### 2.2 Was NICHT übertragen wird
 
@@ -41,6 +42,7 @@ Folgende Daten verlassen das Gerät niemals im Rahmen der KI-Features:
 - Notizen
 - Telefonnummern, E-Mail-Adressen, Kontaktdaten
 - iCloud-Identitäten
+- **Geplante Geschenke** — nur erhaltene Geschenke (Status `.given`) werden übertragen, geplante (`.purchased`) oder entworfene (`.draft`) bleiben lokal
 
 ---
 
@@ -121,7 +123,7 @@ Für die App Store Connect Privacy-Deklaration sind folgende Labels empfohlen:
 - **Kontaktinfos:** Vorname (wenn Account-Feature vorhanden)
 
 ### Daten, die nicht mit der Person verknüpft werden
-- **Nutzungsdaten:** KI-Anfragen (Vorname, Alter, Relation, Sternzeichen)
+- **Nutzungsdaten:** KI-Anfragen (Vorname, Alter, Relation, Sternzeichen, Hobbies, Tags, Budget-Rahmen, erhaltene Geschenke)
 
 ### Keine Datenverfolgung
 - Kein Tracking im Sinne von ATT

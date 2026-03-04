@@ -52,7 +52,7 @@ struct AllContactsView: View {
                                 personToDelete = person
                                 showingDeleteAlert = true
                             } label: {
-                                Label("Löschen", systemImage: "trash")
+                                Label("Entfernen", systemImage: "trash")
                             }
                         }
                     }
@@ -65,11 +65,11 @@ struct AllContactsView: View {
         .sheet(isPresented: $showingContactsImport) {
             ContactsImportView()
         }
-        .alert("Kontakt löschen?", isPresented: $showingDeleteAlert) {
+        .alert("Aus App entfernen?", isPresented: $showingDeleteAlert) {
             Button("Abbrechen", role: .cancel) {
                 personToDelete = nil
             }
-            Button("Löschen", role: .destructive) {
+            Button("Entfernen", role: .destructive) {
                 if let person = personToDelete {
                     modelContext.delete(person)
                     personToDelete = nil
@@ -77,9 +77,9 @@ struct AllContactsView: View {
             }
         } message: {
             if let person = personToDelete {
-                Text("Das löscht \(person.displayName) und alle zugehörigen Geschenkideen.")
+                Text("\(person.displayName) wird nur aus dieser App entfernt. Dein iOS-Kontakt bleibt unverändert.")
             } else {
-                Text("Kontakt wird gelöscht.")
+                Text("Der Kontakt wird nur aus dieser App entfernt. Dein iOS-Kontakt bleibt unverändert.")
             }
         }
     }

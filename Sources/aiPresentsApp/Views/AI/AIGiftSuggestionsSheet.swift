@@ -405,7 +405,7 @@ struct AIGiftSuggestionsSheet: View {
 
     private var filteredGiftHistory: [GiftHistory] {
         giftHistory
-            .filter { $0.personId == person.id }
+            .filter { $0.personId == person.id && $0.giftDirection == .given }
             .sorted { $0.year > $1.year }
             .prefix(5)
             .map { $0 }

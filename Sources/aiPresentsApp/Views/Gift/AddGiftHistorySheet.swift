@@ -6,6 +6,9 @@ struct AddGiftHistorySheet: View {
     @Environment(\.dismiss) private var dismiss
 
     let person: PersonRef
+    /// Richtung des Geschenks — `.given` (verschenkt) oder `.received` (erhalten).
+    /// Steuert Platzhaltertexte, Titel und Footer-Texte im Formular.
+    let direction: GiftDirection
 
     @State private var title = ""
     @State private var category = ""
@@ -19,8 +22,9 @@ struct AddGiftHistorySheet: View {
     private let calendar = Calendar.current
     private let currentYear: Int
 
-    init(person: PersonRef) {
+    init(person: PersonRef, direction: GiftDirection = .given) {
         self.person = person
+        self.direction = direction
         _year = State(initialValue: Calendar.current.component(.year, from: Date()))
         currentYear = Calendar.current.component(.year, from: Date())
     }
@@ -79,7 +83,7 @@ struct AddGiftHistorySheet: View {
                         text: $title,
                         minLength: 2,
                         maxLength: 100,
-                        placeholder: "Was wurde verschenkt?"
+                        placeholder: direction == .given ? "Was wurde verschenkt?" : "Was hast du erhalten?"
                     )
 
                     // SmartInputField for category
@@ -161,10 +165,10 @@ struct AddGiftHistorySheet: View {
                 } header: {
                     Text("Jahr des Geschenks")
                 } footer: {
-                    Text("Wähle das Jahr, in dem das Geschenk verschenkt wurde")
+                    Text(direction == .given ? "Wähle das Jahr, in dem das Geschenk verschenkt wurde" : "Wähle das Jahr, in dem du das Geschenk erhalten hast")
                 }
             }
-            .navigationTitle("Geschenk vermerken")
+            .navigationTitle(direction == .given ? "Geschenk vermerken" : "Erhaltenes Geschenk")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -207,7 +211,8 @@ struct AddGiftHistorySheet: View {
             year: year,
             budget: Double(budget) ?? 0,
             note: note,
-            link: linkValue
+            link: linkValue,
+            direction: direction
         )
 
         modelContext.insert(history)

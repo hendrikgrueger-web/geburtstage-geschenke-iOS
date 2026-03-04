@@ -10,7 +10,7 @@ iOS-App für Geburtstags- und Geschenkeverwaltung. Generiert von Open Claw (n8n/
 - **Architektur:** MVVM mit Services
 - **Daten:** SwiftData + iCloud Sync (CloudKit)
 - **KI:** OpenRouter API → Google Gemini 3.1 Flash Lite (Cloud, opt-in, DSGVO-konform)
-- **Version:** 0.6.0 (Build 9)
+- **Version:** 0.7.0 (Build 10)
 - **Target:** iPhone 17 Pro Simulator / iOS 26+
 
 ## Build
@@ -25,15 +25,15 @@ xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp -destina
 Sources/aiPresentsApp/
 ├── Models/          # SwiftData Models: PersonRef, GiftIdea, GiftHistory, ReminderRule, SuggestionFeedback
 ├── Services/        # CloudKitContainer, ContactsService, ReminderManager, AIService, AIConsentManager, SampleDataService
-├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator
+├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator, RelationOptions, GiftDirection
 ├── Views/
 │   ├── Timeline/    # TimelineView (eine chronologische Liste), BirthdayRow (mit Status-Badge), BirthdayCountdownBadge
-│   ├── Person/      # PersonDetailView (mit skipGift-Toggle), PersonAvatar, AllContactsView, ContactsImportView
+│   ├── Person/      # PersonDetailView (mit skipGift-Toggle, Hobbies, Received-Gifts), PersonAvatar, AllContactsView, ContactsImportView
 │   ├── Gift/        # GiftIdeaRow, GiftHistoryRow, GiftSummaryView, Add/Edit Sheets
 │   ├── AI/          # AIGiftSuggestionsSheet (bis 30 Vorschläge sammelbar), AIBirthdayMessageSheet, AIConsentSheet
 │   ├── Settings/    # SettingsView (als Sheet via Gear-Icon), ReminderSettingsView, PrivacyView, LegalView, DevSettingsView
 │   ├── Onboarding/  # OnboardingView
-│   ├── Components/  # Wiederverwendbare UI-Komponenten
+│   ├── Components/  # Wiederverwendbare UI-Komponenten: HobbiesChipView, RelationPickerView, FlowLayout, etc.
 │   └── (Root)       # ContentView (kein TabView), ShareSheetView, LaunchScreen
 ├── ViewModels/      # AppViewModel, SuggestionQualityViewModel
 ├── Resources/       # AppColor
@@ -84,7 +84,7 @@ AppConfig.AI.openRouterBaseURL    // "https://openrouter.ai/api/v1/chat/completi
 
 ## DSGVO — KI-Features
 
-**Übertragene Daten:** Vorname, Alter (berechnet), Beziehungstyp, Sternzeichen, Tags, Budget-Rahmen (Min/Max), Geschenktitel
+**Übertragene Daten:** Vorname, Alter (berechnet), Beziehungstyp, Sternzeichen, Hobbies/Interessen, Tags, Budget-Rahmen (Min/Max), Geschenktitel
 **NICHT übertragen:** Geburtsdatum, Links, Notizen, Telefonnummer
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)
 **Auftragsverarbeiter:** OpenRouter Inc. (USA) → Google LLC (USA)
@@ -107,8 +107,13 @@ Der Key wird via `project.yml` → `OpenRouterAPIKey` in Info.plist geschrieben 
 ### SwiftData Models
 - `PersonRef` erwartet `contactIdentifier:` als required Parameter
 - `PersonRef.skipGift: Bool = false` — "Kein Geschenk nötig" pro Person
+- `PersonRef.hobbies: [String] = []` — dauerhafte Interessen pro Person (max. 10, fließt in KI-Prompt ein)
+- `PersonRef.relation: String` — Beziehungstyp (wählbar aus 8 Optionen + Sonstige-Freitext)
 - `GiftIdea` Init-Reihenfolge: `status` VOR `tags`
 - `GiftStatus` ist `CaseIterable` + `Codable`
+- `GiftHistory.direction: String = "given"` — Richtung: "given" (verschenkt) oder "received" (erhalten); SwiftData speichert als String für Migration
+- `GiftDirection` enum: `.given`/`.received`, ist `Sendable` + `Codable` + `CaseIterable` (Utilities, nicht Models)
+- `RelationOptions.predefined` — 8 vordefinierte Beziehungstypen + "Sonstige": Partner/in, Mutter, Vater, Schwester, Bruder, Freund/in, Kollege/in, Kind
 
 ### ModelConfiguration
 - Positional String statt `identifier:` Label: `ModelConfiguration("name", ...)`
@@ -152,14 +157,21 @@ try context.delete(model: PersonRef.self)
 - `FormState` in `FormState.swift` = ObservableObject-Version (für FormField, FormSubmitButton)
 - `AppFormState` in `FormValidator.swift` = @Observable-Version (für Sheet-Views)
 
+### UI-Komponenten & Patterns
+- **HobbiesChipView:** FlowLayout mit Chips (wie Erinnerungen-Tags). Return-Taste → neuer Chip, ✕-Tap → löschen. Max. 10.
+- **RelationPickerView:** Standard Picker (Menu oder Wheel) mit 8 Optionen + "Sonstige"-Freitext. Bestehende Werte außerhalb der Liste → unter "Sonstige" angezeigt.
+- **FlowLayout:** Custom Layout für Chip-Anordnung (wrapping, centered, spacing). Wird für Hobbies, Tags und GiftIdea-Chips verwendet.
+- **GiftHistoryDirectionSegmented:** Segmented Control ("Verschenkt" / "Erhalten") — bestimmt `GiftHistory.direction`.
+
 ## UI-Architektur
 
 - **Kein TabView** — nur ein Screen (TimelineView) mit Settings als Sheet (Gear-Icon links oben)
 - **TimelineView:** Stats-Leiste → Suchfeld → chronologische Liste ALLER Geburtstage
 - **BirthdayRow:** Avatar, Name, Countdown, Geschenk-Status-Badge (skipGift/gekauft/geplant/Ideen)
 - **Swipe-Actions:** Links-Swipe auf BirthdayRow → "Kein Geschenk" Toggle
-- **PersonDetailView:** skipGift-Toggle blendet Geschenk- und KI-Sections aus
-- **AIGiftSuggestionsSheet:** "5 weitere generieren" Button, Akkumulation bis max. 30 Vorschläge
+- **PersonDetailView:** Name + Avatar oben → Relation Picker → Hobbies-Section → skipGift-Toggle → Gift-Ideen-Section → "In früheren Jahren verschenkt"-Section → "Von mir erhalten"-Section → "Aus App entfernen"-Button (mit Confirmation Alert)
+- **GiftHistory Add/Edit Sheet:** Oben Segmented Control ("Verschenkt" / "Erhalten") — bestimmt direction. Felder: Titel (Pflicht), Jahr (Pflicht), Kategorie, Wert, Notiz. Link-Feld nur bei "Verschenkt".
+- **AIGiftSuggestionsSheet:** "5 weitere generieren" Button, Akkumulation bis max. 30 Vorschläge. KI nutzt Hobbies + Tags im Prompt.
 
 ## Design-Prinzip
 

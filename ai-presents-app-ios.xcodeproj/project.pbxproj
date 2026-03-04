@@ -41,6 +41,7 @@
 		44475B6B9052225B83F66E8D /* EditGiftHistorySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711769EFA88D8FC06C5A5572 /* EditGiftHistorySheet.swift */; };
 		4688F631BAAFB6A1850550F0 /* BirthdayWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0FFC29100B5746FDA7B170 /* BirthdayWidgetData.swift */; };
 		536C68C701B7445374355897 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633E1C1B18B0D830A8E305E3 /* ToastView.swift */; };
+		F3A7B8C1D2E4F5061789AB01 /* HobbiesChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A7B8C1D2E4F5061789AB02 /* HobbiesChipView.swift */; };
 		5588AE9AB8463F7BF41CD246 /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FEF71AF911AEF88A1FD15D /* PersonDetailView.swift */; };
 		5AB38A2B566D33FAAC8D5B5A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9625CCD9B5CF0D4CD77D3C0 /* AppConfig.swift */; };
 		5CB56DD85D350BE96FD24FDD /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F19315FD9DFE8E8059A7D2 /* AIService.swift */; };
@@ -82,6 +83,7 @@
 		A698099C64A398F9C86E12D7 /* ValidationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8502AF01206747446F5E2EED /* ValidationHelper.swift */; };
 		A7C4BDBF71BC24782E5BCB1D /* GiftHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402FEFE3F505A5104FC535A3 /* GiftHistory.swift */; };
 		AC138672CE067DF6B4308C1E /* BirthdayCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A02B6D7A77AAD75AE1990 /* BirthdayCalculator.swift */; };
+		E6D5C4B3A2F1E0D9C8B7A6F4 /* RelationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A3B2C1D8E9F0A1B2C3D4E5 /* RelationOptions.swift */; };
 		ACF2CFCF45EB2312F56815E0 /* ValidationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC88C885EE88547724D7673C /* ValidationHelperTests.swift */; };
 		ADE1CC765E156F4853A4DDF8 /* BirthdayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF726314BEDDE5BB6C64E630 /* BirthdayRow.swift */; };
 		B6F30405FEBA5F73D16CEA09 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEA4ED4260D661E8A6F60F /* Debouncer.swift */; };
@@ -161,6 +163,7 @@
 		5FB7DAD883234BC09E12C476 /* aiPresentsAppTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = aiPresentsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		624B827CFCB9D3C7D8C92841 /* AddGiftHistorySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGiftHistorySheet.swift; sourceTree = "<group>"; };
 		633E1C1B18B0D830A8E305E3 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		F3A7B8C1D2E4F5061789AB02 /* HobbiesChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbiesChipView.swift; sourceTree = "<group>"; };
 		639A800C081194B19F639DD7 /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		6A5FC754F1167DC0929B2495 /* HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		6F4689396F1072DD2D28E078 /* BirthdayDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayDateHelper.swift; sourceTree = "<group>"; };
@@ -215,6 +218,7 @@
 		D654609E73AC420D24EAFCA2 /* NotificationPermissionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionHelper.swift; sourceTree = "<group>"; };
 		DBC502D8F73D78DC65FF08F9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E51FAE4D15E483A6BD00D955 /* ModelValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelValidationTests.swift; sourceTree = "<group>"; };
+		F7A3B2C1D8E9F0A1B2C3D4E5 /* RelationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationOptions.swift; sourceTree = "<group>"; };
 		E7A00B208967B7E65E8EED20 /* SuggestionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionFeedback.swift; sourceTree = "<group>"; };
 		E9625CCD9B5CF0D4CD77D3C0 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		EC6FCD24AE708AB86CF01C17 /* FormatterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterHelperTests.swift; sourceTree = "<group>"; };
@@ -303,6 +307,7 @@
 				C2F149C279E46939E0E5D0A0 /* BudgetRangeView.swift */,
 				271E66143DD2D410FCAFD44D /* ButtonStyles.swift */,
 				84458F69E06194AA2FA07A2F /* EmptyStateView.swift */,
+				F3A7B8C1D2E4F5061789AB02 /* HobbiesChipView.swift */,
 				D193311408BB3D5C00C5C7D6 /* QuickActionCard.swift */,
 				C7C1474BF62BF80C2734793F /* SmartInputField.swift */,
 				A3185DD71D459EE21A6A0461 /* SuggestionFeedbackView.swift */,
@@ -461,6 +466,7 @@
 				BB4A238B9D3BB1782F13C829 /* FormValidator.swift */,
 				6A5FC754F1167DC0929B2495 /* HapticFeedback.swift */,
 				D654609E73AC420D24EAFCA2 /* NotificationPermissionHelper.swift */,
+				F7A3B2C1D8E9F0A1B2C3D4E5 /* RelationOptions.swift */,
 				AB5F559491D1986B505C9C84 /* URLValidator.swift */,
 				8502AF01206747446F5E2EED /* ValidationHelper.swift */,
 			);
@@ -675,6 +681,7 @@
 				6448766B18F8AAA964555537 /* ReminderManager.swift in Sources */,
 				927932D1E34BB9B96838198B /* ReminderRule.swift in Sources */,
 				288B939B5B82311CC9271EB9 /* ReminderSettingsView.swift in Sources */,
+				E6D5C4B3A2F1E0D9C8B7A6F4 /* RelationOptions.swift in Sources */,
 				C03A75E3B72AEF439DCE247B /* SampleDataService.swift in Sources */,
 				AA11BB22CC33DD44EE55FF01 /* NochOhneGeschenkSection.swift in Sources */,
 				AA11BB22CC33DD44EE55FF03 /* GiftTransitionService.swift in Sources */,
@@ -687,6 +694,7 @@
 				83B8D918FDB4ED0D5B20FC62 /* TimelineFilterView.swift in Sources */,
 				19E9A3274F1DEA8DBD575123 /* TimelineView.swift in Sources */,
 				536C68C701B7445374355897 /* ToastView.swift in Sources */,
+				F3A7B8C1D2E4F5061789AB01 /* HobbiesChipView.swift in Sources */,
 				618B54FA2FCE6FEDA3840D24 /* URLValidator.swift in Sources */,
 				F775D86C4C0D3228D7B84D79 /* UpcomingBirthdaysView.swift in Sources */,
 				A698099C64A398F9C86E12D7 /* ValidationHelper.swift in Sources */,

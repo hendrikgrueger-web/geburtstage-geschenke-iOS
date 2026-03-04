@@ -25,9 +25,16 @@ struct GiftHistoryRow: View {
                 .cornerRadius(12)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(history.title)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
+                HStack(spacing: 4) {
+                    Text(history.title)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+
+                    // Richtungs-Icon: arrow.up.right = von uns verschenkt, arrow.down.left = von Person erhalten
+                    Image(systemName: history.giftDirection == .received ? "arrow.down.left" : "arrow.up.right")
+                        .font(.caption2)
+                        .foregroundStyle(history.giftDirection == .received ? AppColor.accent : AppColor.textSecondary)
+                }
 
                 HStack(spacing: 8) {
                     Text(history.category)
@@ -83,7 +90,7 @@ struct GiftHistoryRow: View {
         }
         .padding(.vertical, 2)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(history.title), \(history.category), \(history.year)")
+        .accessibilityLabel("\(history.giftDirection == .given ? "Verschenkt" : "Erhalten"): \(history.title), \(history.category), \(history.year)")
         .accessibilityHint("Geschenk vermerkt im Jahr \(history.year)")
     }
 

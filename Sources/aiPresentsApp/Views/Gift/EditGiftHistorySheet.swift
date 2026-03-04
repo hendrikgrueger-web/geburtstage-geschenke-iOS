@@ -86,7 +86,7 @@ struct EditGiftHistorySheet: View {
                         text: $title,
                         minLength: 2,
                         maxLength: 100,
-                        placeholder: "Was wurde verschenkt?"
+                        placeholder: history.giftDirection == .received ? "Was hast du erhalten?" : "Was wurde verschenkt?"
                     )
 
                     // SmartInputField for category
@@ -167,7 +167,7 @@ struct EditGiftHistorySheet: View {
                     }
                 }
             }
-            .navigationTitle("Geschenk bearbeiten")
+            .navigationTitle(history.giftDirection == .given ? "Geschenk bearbeiten" : "Erhaltenes Geschenk bearbeiten")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

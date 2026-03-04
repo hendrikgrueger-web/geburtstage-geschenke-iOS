@@ -86,6 +86,14 @@ class SampleDataService {
             christian, brigitte, oliver, katrin, werner, melanie, hubert, tanja, Sebastian, irene,
             gestern
         ]
+        // Demo-Hobbies fuer einige Personen
+        max.hobbies = ["Kochen", "Whisky", "Grillen"]
+        erika.hobbies = ["Yoga", "Wellness", "Aquarell"]
+        sophie.hobbies = ["Fotografie", "Reisen", "Lesen"]
+        anna.hobbies = ["Wein", "Garten", "Kochen"]
+        thomas.hobbies = ["Laufen", "Technik", "Gaming"]
+        emma.hobbies = ["LEGO", "Basteln", "Malen"]
+
         allPeople.forEach { context.insert($0) }
 
         // MARK: - Geschenkideen
@@ -150,6 +158,11 @@ class SampleDataService {
         hist(ingrid, "Ballonfahrt für zwei", "Erlebnis", year-1, 210, "War ein Traum", context)
         hist(kurt, "Pen & Pencil Set Lamy", "Büro", year-1, 85, "Benutzt täglich im Büro", context)
 
+        // Erhaltene Geschenke (received)
+        hist(max, "Bluetooth-Kopfhörer Sony", "Technik", year-1, 120, "Zum Geburtstag bekommen", context, direction: .received)
+        hist(erika, "Handgemachte Kerze", "Deko", year-1, 25, "Weihnachtsgeschenk", context, direction: .received)
+        hist(sophie, "Fotobuch Jahresrückblick", "Kreativ", year-1, 45, "Sehr persönlich, wunderschön", context, direction: .received)
+
         // MARK: - Erinnerungsregel
         context.insert(ReminderRule(leadDays: [30, 14, 7, 2],
                                     quietHoursStart: 22, quietHoursEnd: 8, enabled: true))
@@ -175,11 +188,13 @@ class SampleDataService {
 
     private static func hist(
         _ person: PersonRef, _ title: String, _ category: String,
-        _ year: Int, _ budget: Double, _ note: String, _ context: ModelContext
+        _ year: Int, _ budget: Double, _ note: String, _ context: ModelContext,
+        direction: GiftDirection = .given
     ) {
         context.insert(GiftHistory(personId: person.id, title: title,
                                    category: category, year: year,
-                                   budget: budget, note: note))
+                                   budget: budget, note: note,
+                                   direction: direction))
     }
 
     // MARK: - Reset
