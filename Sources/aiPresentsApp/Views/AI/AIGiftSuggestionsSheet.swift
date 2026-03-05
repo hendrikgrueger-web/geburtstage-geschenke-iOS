@@ -35,6 +35,7 @@ struct AIGiftSuggestionsSheet: View {
     @Query private var existingGiftIdeas: [GiftIdea]
 
     @State private var isLoading = false
+    @State private var isLoadingMore = false
     @State private var suggestions: [GiftSuggestion] = []
     @State private var errorMessage: String?
     @State private var selectedSuggestion: GiftSuggestion?
@@ -59,9 +60,9 @@ struct AIGiftSuggestionsSheet: View {
                     qualityMetricsSection(viewModel)
                 }
 
-                if isLoading {
+                if isLoading && suggestions.isEmpty {
                     loadingState
-                } else if let error = errorMessage {
+                } else if let error = errorMessage, suggestions.isEmpty {
                     errorState(error)
                 } else if !suggestions.isEmpty {
                     suggestionsList
@@ -295,7 +296,7 @@ struct AIGiftSuggestionsSheet: View {
                     loadMoreSuggestions()
                 } label: {
                     HStack {
-                        if isLoading {
+                        if isLoadingMore {
                             ProgressView()
                                 .controlSize(.small)
                         } else {
@@ -306,7 +307,7 @@ struct AIGiftSuggestionsSheet: View {
                     .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(isLoading)
+                .disabled(isLoadingMore)
                 .padding(.vertical, 4)
             }
         } header: {
@@ -426,8 +427,8 @@ struct AIGiftSuggestionsSheet: View {
     }
 
     private func loadMoreSuggestions() {
-        guard suggestions.count < 30 else { return }
-        isLoading = true
+        guard suggestions.count < 30, !isLoadingMore else { return }
+        isLoadingMore = true
         errorMessage = nil
         HapticFeedback.light()
         fetchSuggestions()
@@ -457,9 +458,11 @@ struct AIGiftSuggestionsSheet: View {
                     suggestions = Array(suggestions.prefix(30))
                 }
                 isLoading = false
+                isLoadingMore = false
                 HapticFeedback.success()
             } catch {
                 isLoading = false
+                isLoadingMore = false
                 errorMessage = error.localizedDescription
                 HapticFeedback.error()
             }

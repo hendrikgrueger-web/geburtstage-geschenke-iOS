@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct PersonDetailView: View {
     @Environment(\.modelContext) private var modelContext
@@ -518,6 +519,7 @@ struct PersonDetailView: View {
                                 person.relation = editedRelation
                             }
                             HapticFeedback.success()
+                            triggerWidgetUpdate()
                             showingEditRelation = false
                         }
                     }
@@ -594,6 +596,7 @@ struct PersonDetailView: View {
                                 person.relation = editedPersonRelation
                             }
                             HapticFeedback.success()
+                            triggerWidgetUpdate()
                             showingEditPerson = false
                         }
                         .disabled(editedName.trimmingCharacters(in: .whitespaces).isEmpty)
@@ -896,6 +899,7 @@ struct PersonDetailView: View {
             modelContext.delete(person)
             HapticFeedback.warning()
         }
+        triggerWidgetUpdate()
         dismiss()
     }
 
@@ -918,6 +922,7 @@ struct PersonDetailView: View {
 
         if oldStatus != idea.status {
             idea.statusLog.append("\(dateString) - \(statusDisplayName(oldStatus)) \u{2192} \(statusDisplayName(idea.status))")
+            triggerWidgetUpdate()
         }
         HapticFeedback.medium()
     }
@@ -1032,6 +1037,11 @@ struct PersonDetailView: View {
             AppLogger.ui.error("Failed to save CSV: \(fileName)", error: error)
             return nil
         }
+    }
+
+    private func triggerWidgetUpdate() {
+        WidgetDataService.shared.updateWidgetData(from: modelContext)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     private func shareCSV(url: URL) {

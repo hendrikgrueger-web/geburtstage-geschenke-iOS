@@ -38,74 +38,36 @@ struct BirthdayDateHelper {
         today...daysFromNow(7)
     }
 
-    // MARK: - Birthday Calculations
+    // MARK: - Birthday Calculations (delegiert an BirthdayCalculator für Cache + Thread-Safety)
 
     /// Calculate age based on birthday
     static func age(from birthday: Date, asOf date: Date = today) -> Int {
-        let calendar = Calendar.current
-        let ageComponents = calendar.dateComponents([.year], from: birthday, to: date)
-        return max(0, ageComponents.year ?? 0)
+        BirthdayCalculator.age(for: birthday, on: date) ?? 0
     }
 
     /// Get the next occurrence of a birthday after a given date
     static func nextBirthday(from birthday: Date, after date: Date = today) -> Date? {
-        let calendar = Calendar.current
-
-        var birthdayComponents = calendar.dateComponents([.month, .day], from: birthday)
-        var currentYear = calendar.component(.year, from: date)
-
-        // Try this year's birthday
-        birthdayComponents.year = currentYear
-        if let thisYearBirthday = calendar.date(from: birthdayComponents) {
-            if thisYearBirthday >= date {
-                return thisYearBirthday
-            }
-        } else {
-            // Schaltjahr-Fallback: 29.02. → 28.02. im Nicht-Schaltjahr
-            birthdayComponents.day = 28
-            if let fallback = calendar.date(from: birthdayComponents), fallback >= date {
-                return fallback
-            }
-        }
-
-        // If this year's birthday has passed, try next year
-        currentYear += 1
-        birthdayComponents.year = currentYear
-        // 29.02. im nächsten Jahr probieren
-        let originalDay = calendar.component(.day, from: birthday)
-        birthdayComponents.day = originalDay
-        if let nextYear = calendar.date(from: birthdayComponents) {
-            return nextYear
-        }
-        // Fallback: 28.02.
-        birthdayComponents.day = 28
-        return calendar.date(from: birthdayComponents)
+        BirthdayCalculator.nextBirthday(for: birthday, from: date)
     }
 
     /// Days until next birthday
     static func daysUntilBirthday(from birthday: Date, asOf date: Date = today) -> Int? {
-        guard let next = nextBirthday(from: birthday, after: date) else {
-            return nil
-        }
-        return calendar.dateComponents([.day], from: calendar.startOfDay(for: date), to: calendar.startOfDay(for: next)).day
+        BirthdayCalculator.daysUntilBirthday(for: birthday, from: date)
     }
 
     /// Check if birthday is today
     static func isBirthdayToday(from birthday: Date, asOf date: Date = today) -> Bool {
-        daysUntilBirthday(from: birthday, asOf: date) == 0
+        BirthdayCalculator.isBirthdayToday(for: birthday, from: date)
     }
 
     /// Check if birthday is tomorrow
     static func isBirthdayTomorrow(from birthday: Date, asOf date: Date = today) -> Bool {
-        daysUntilBirthday(from: birthday, asOf: date) == 1
+        BirthdayCalculator.daysUntilBirthday(for: birthday, from: date) == 1
     }
 
     /// Check if birthday is within the next N days
     static func isBirthdayWithinDays(_ days: Int, from birthday: Date, asOf date: Date = today) -> Bool {
-        guard let daysUntil = daysUntilBirthday(from: birthday, asOf: date) else {
-            return false
-        }
-        return daysUntil >= 0 && daysUntil <= days
+        BirthdayCalculator.isBirthdayWithinDays(for: birthday, days: days, from: date)
     }
 
     /// Get zodiac sign for a birthday

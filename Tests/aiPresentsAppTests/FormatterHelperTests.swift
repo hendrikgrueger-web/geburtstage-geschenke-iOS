@@ -330,11 +330,12 @@ final class FormatterHelperTests: XCTestCase {
     }
 
     func testTruncateShortMaxLength() {
+        // maxLength <= 3: no room for ellipsis, just truncate
         let text = "Hello"
         let truncated = FormatterHelper.truncate(text, maxLength: 2)
 
         XCTAssertEqual(truncated.count, 2, "Should truncate to max length even if very short")
-        XCTAssertTrue(truncated.hasSuffix("..."), "Should add ellipsis")
+        XCTAssertEqual(truncated, "He", "Should truncate without ellipsis when maxLength <= 3")
     }
 
     // MARK: - Helper Methods

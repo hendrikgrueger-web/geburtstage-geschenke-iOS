@@ -151,6 +151,9 @@ struct FormatterHelper {
         if text.count <= maxLength {
             return text
         }
+        if maxLength <= 3 {
+            return String(text.prefix(maxLength))
+        }
         let index = text.index(text.startIndex, offsetBy: maxLength - 3)
         return String(text[..<index]) + "..."
     }
