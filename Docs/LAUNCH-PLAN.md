@@ -29,13 +29,19 @@ ai Presents ist eine iOS-App für Geburtstags- und Geschenkeverwaltung mit KI-ge
 - [x] **#8:** `SettingsView.birthdayText` redundanter Branch entfernt
 - [x] **#5:** `TimelineView` @State-Variablen: **Kein Bug** — verschiedene UI-Einstiegspunkte (Context-Menu vs. Quick-Add)
 
-### Noch offen
+### Erledigt (2026-03-05, Batch 3)
+
+- [x] **#2:** `BirthdayDateHelper` → 5 Methoden an `BirthdayCalculator` delegiert (Cache + Thread-Safety)
+- [x] **#9:** Widget-Update bei PersonDetailView-Edits (WidgetCenter.reloadAllTimelines)
+- [x] **KI-Bug:** "5 weitere generieren"-Button funktioniert (isLoadingMore State)
+- [x] **Crash-Fix:** `FormatterHelper.truncate` bei maxLength ≤ 3 (String index out of bounds)
+- [x] **Tests:** 719 Tests grün, 0 Failures (SwiftData-Tests mit XCTSkip)
+
+### Noch offen (niedrige Priorität)
 
 | # | Priorität | Aufgabe | Skill |
 |---|-----------|---------|-------|
-| 2 | High | `BirthdayCalculator` und `BirthdayDateHelper` zu einer Klasse konsolidieren | — |
-| 4 | Medium | `PersonDetailView` aufteilen (1041 Zeilen → Extracted Sub-Views) | `/ui-review` |
-| 9 | Low | Widget-Update bei PersonDetailView-Edits triggern | — |
+| 4 | Low | `PersonDetailView` aufteilen (1041 Zeilen → Extracted Sub-Views) | `/ui-review` |
 
 ---
 
