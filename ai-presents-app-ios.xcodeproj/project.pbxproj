@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -168,7 +168,7 @@
 		106D1BEF8550146110F92A6C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		1189BC8C6BCB6FA40B03A301 /* AIConsentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIConsentSheet.swift; sourceTree = "<group>"; };
 		12050DD29ABF53F754FB7448 /* SmartInputFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartInputFieldTests.swift; sourceTree = "<group>"; };
-		12D1D096860C12DFAB2C4D16 /* aiPresentsApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = aiPresentsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12D1D096860C12DFAB2C4D16 /* aiPresentsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = aiPresentsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1352AE658416E5B2DEEB06D7 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
 		194FEF6D34BD0E36B4E9FA00 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		1BAAE077D709F609179254B0 /* AppLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoggerTests.swift; sourceTree = "<group>"; };
@@ -642,7 +642,6 @@
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					D13703CE0BA0DA2FBA541264 = {
-						DevelopmentTeam = 7ZR37VL5PV;
 						ProvisioningStyle = Automatic;
 					};
 					E3D3E47E2E69129859C61EBB = {
@@ -662,7 +661,6 @@
 			);
 			mainGroup = 2A1D3049F984BF6826B8DBAF;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

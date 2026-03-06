@@ -1,7 +1,11 @@
 {
   "sourceLanguage" : "de",
   "strings" : {
+    "+%@ weitere" : {
+
+    },
     "+%lld weitere" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -85,7 +89,11 @@
         }
       }
     },
+    "wird %@" : {
+
+    },
     "wird %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

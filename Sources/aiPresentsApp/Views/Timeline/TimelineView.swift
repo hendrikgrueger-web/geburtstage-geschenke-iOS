@@ -307,17 +307,10 @@ struct TimelineView: View {
             showingAIChat = true
             HapticFeedback.medium()
         } label: {
-            Image(systemName: "sparkles.bubble.fill")
-                .font(.system(size: 22, weight: .semibold))
-                .foregroundColor(.white)
+            Image("AIFABIcon")
+                .resizable()
+                .scaledToFit()
                 .frame(width: 56, height: 56)
-                .background(
-                    LinearGradient(
-                        colors: [.purple, .purple.opacity(0.8)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
                 .clipShape(Circle())
                 .shadow(color: .purple.opacity(0.3), radius: 8, x: 0, y: 4)
         }
