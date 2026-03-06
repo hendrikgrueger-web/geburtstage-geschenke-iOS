@@ -15,7 +15,7 @@ struct SettingsView: View {
     @State private var showingAbout = false
     @State private var showingRevokeConsentConfirmation = false
     @EnvironmentObject private var reminderManager: ReminderManager
-    @StateObject private var consentManager = AIConsentManager.shared
+    @ObservedObject private var consentManager = AIConsentManager.shared
 
     @Query private var reminderRule: [ReminderRule]
     @Query private var people: [PersonRef]
@@ -121,12 +121,7 @@ struct SettingsView: View {
                     NavigationLink {
                         DevSettingsView()
                     } label: {
-                        HStack {
-                            Text("Dev Settings")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.secondary)
-                        }
+                        Text("Dev Settings")
                     }
                     #endif
                 }
@@ -143,12 +138,7 @@ struct SettingsView: View {
                     NavigationLink {
                         ReminderSettingsView(rule: reminderRule.first)
                     } label: {
-                        HStack {
-                            Text("Erinnerungseinstellungen")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.secondary)
-                        }
+                        Text("Erinnerungseinstellungen")
                     }
 
                     if hasNotificationPermission {
@@ -256,23 +246,13 @@ struct SettingsView: View {
                     NavigationLink {
                         PrivacyView()
                     } label: {
-                        HStack {
-                            Text("Datenschutz")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.secondary)
-                        }
+                        Text("Datenschutz")
                     }
 
                     NavigationLink {
                         LegalView()
                     } label: {
-                        HStack {
-                            Text("Impressum")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.secondary)
-                        }
+                        Text("Impressum")
                     }
                 }
             }

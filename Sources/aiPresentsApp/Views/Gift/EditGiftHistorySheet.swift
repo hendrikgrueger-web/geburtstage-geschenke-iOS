@@ -117,7 +117,9 @@ struct EditGiftHistorySheet: View {
                 } header: {
                     Text("Jahr des Geschenks")
                 } footer: {
-                    Text("Wähle das Jahr, in dem das Geschenk verschenkt wurde")
+                    Text(history.giftDirection == .given
+                        ? String(localized: "Wähle das Jahr, in dem das Geschenk verschenkt wurde")
+                        : String(localized: "Wähle das Jahr, in dem das Geschenk erhalten wurde"))
                 }
 
                 Section("Details") {
