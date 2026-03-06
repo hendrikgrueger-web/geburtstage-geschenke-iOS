@@ -11,6 +11,13 @@ struct PersonDetailView: View {
     @Query private var giftIdeas: [GiftIdea]
     @Query private var giftHistory: [GiftHistory]
 
+    init(person: PersonRef) {
+        self.person = person
+        let personId = person.id
+        _giftIdeas = Query(filter: #Predicate<GiftIdea> { $0.personId == personId })
+        _giftHistory = Query(filter: #Predicate<GiftHistory> { $0.personId == personId })
+    }
+
     @State private var showingAddGiftIdea = false
     @State private var showingEditGiftIdea: GiftIdea?
     @State private var showingAddGiftHistory = false
@@ -777,7 +784,7 @@ struct PersonDetailView: View {
     private var filteredGiftIdeas: [GiftIdea] {
         let statusOrder: [GiftStatus] = [.idea, .planned, .purchased, .given]
 
-        var ideas = giftIdeas.filter { $0.personId == person.id }
+        var ideas = giftIdeas
 
         // Apply status filter
         switch giftStatusFilter {
@@ -815,14 +822,14 @@ struct PersonDetailView: View {
     /// Geschenke, die wir dieser Person gegeben haben — absteigend nach Jahr sortiert.
     private var givenGiftHistory: [GiftHistory] {
         giftHistory
-            .filter { $0.personId == person.id && $0.giftDirection == .given }
+            .filter { $0.giftDirection == .given }
             .sorted { $0.year > $1.year }
     }
 
     /// Geschenke, die wir von dieser Person erhalten haben — absteigend nach Jahr sortiert.
     private var receivedGiftHistory: [GiftHistory] {
         giftHistory
-            .filter { $0.personId == person.id && $0.giftDirection == .received }
+            .filter { $0.giftDirection == .received }
             .sorted { $0.year > $1.year }
     }
 
@@ -831,10 +838,7 @@ struct PersonDetailView: View {
     }
 
     private var birthdayString: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.locale = .current
-        return formatter.string(from: person.birthday)
+        FormatterHelper.displayDateFormatter.string(from: person.birthday)
     }
 
     private var daysUntilBirthday: Int {
@@ -908,9 +912,7 @@ struct PersonDetailView: View {
     }
 
     private func advanceStatus(for idea: GiftIdea) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yy"
-        let dateString = formatter.string(from: Date())
+        let dateString = FormatterHelper.shortLogDateFormatter.string(from: Date())
         let oldStatus = idea.status
 
         switch idea.status {
@@ -932,9 +934,7 @@ struct PersonDetailView: View {
     }
 
     private func markAllAsGiven() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yy"
-        let dateString = formatter.string(from: Date())
+        let dateString = FormatterHelper.shortLogDateFormatter.string(from: Date())
 
         let purchasedGifts = filteredGiftIdeas.filter { $0.status == .purchased }
         for gift in purchasedGifts {
@@ -947,7 +947,6 @@ struct PersonDetailView: View {
     private func duplicateGiftIdea(_ idea: GiftIdea) {
         // Check if duplicate already exists
         let existingTitles = giftIdeas
-            .filter { $0.personId == person.id }
             .map { $0.title.lowercased().trimmingCharacters(in: .whitespaces) }
 
         let titleWithoutCopy = idea.title
