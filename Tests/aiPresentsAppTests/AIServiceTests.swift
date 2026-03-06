@@ -125,9 +125,35 @@ final class AIServiceTests: XCTestCase {
 
     // MARK: - Verfügbarkeit
 
-    func testIsAPIKeyConfiguredReturnsBool() {
-        // Im Test-Environment ist normalerweise kein API-Key vorhanden
-        let result = AIService.isAPIKeyConfigured
-        XCTAssertTrue(result == true || result == false, "Should return a valid Bool")
+    func testIsAPIKeyConfigured_falseInTestEnvironment() {
+        // In der Test-Umgebung ist kein Proxy-Secret in Info.plist eingetragen,
+        // daher muss isAPIKeyConfigured false liefern.
+        XCTAssertFalse(AIService.isAPIKeyConfigured, "API key should not be configured in test environment")
+    }
+
+    // MARK: - extractJSON
+
+    func testExtractJSON_plainJSON_passthrough() {
+        let input = "{\"message\":\"test\"}"
+        XCTAssertEqual(AIService.extractJSON(from: input), input,
+                       "Plain JSON should be returned unchanged")
+    }
+
+    func testExtractJSON_markdownCodeBlock_stripsWrapper() {
+        let input = "```json\n{\"message\":\"test\"}\n```"
+        XCTAssertEqual(AIService.extractJSON(from: input), "{\"message\":\"test\"}",
+                       "JSON wrapped in ```json ... ``` should be unwrapped")
+    }
+
+    func testExtractJSON_withoutLanguageLabel() {
+        let input = "```\n{\"key\":\"val\"}\n```"
+        XCTAssertEqual(AIService.extractJSON(from: input), "{\"key\":\"val\"}",
+                       "JSON wrapped in bare ``` ... ``` should be unwrapped")
+    }
+
+    func testExtractJSON_whitespace_trimmed() {
+        let input = "  {\"a\":1}  "
+        XCTAssertEqual(AIService.extractJSON(from: input), "{\"a\":1}",
+                       "Leading and trailing whitespace should be trimmed")
     }
 }

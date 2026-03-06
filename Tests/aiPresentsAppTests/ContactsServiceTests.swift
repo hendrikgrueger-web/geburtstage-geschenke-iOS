@@ -25,15 +25,25 @@ final class ContactsServiceTests: XCTestCase {
 
     // MARK: - Permission Tests
 
-    func testRequestPermissionNotAuthorized() async throws {
-        // In a test/simulator environment, Contacts permission is typically denied
+    func testRequestPermission_returnsBoolOrThrowsContactsError() async throws {
+        // In der Test-Umgebung (Simulator ohne Benutzerinteraktion) ist der
+        // Kontaktzugriff nicht gewährt. requestPermission() muss entweder einen
+        // Bool zurückgeben (falls bereits entschieden) oder einen ContactsError werfen.
         do {
             let permissionGranted = try await sut.requestPermission()
-            XCTAssertTrue(permissionGranted == true || permissionGranted == false,
-                          "Request permission should return a boolean result")
+            // Wenn die Methode zurückkommt, muss es ein valides Bool sein
+            XCTAssertFalse(permissionGranted,
+                           "Permission should not be granted in automated test environment")
+        } catch let error as ContactsService.ContactsError {
+            // ContactsError.notAuthorized ist das erwartete Ergebnis ohne Benutzerinteraktion
+            if case .notAuthorized = error {
+                // Korrekt: Zugriff verweigert
+            } else {
+                XCTFail("Expected notAuthorized error in test environment, got: \(error)")
+            }
         } catch {
-            // CNError.accessDenied is expected in test environment
-            XCTAssertTrue(true, "Permission denied is expected in test environment")
+            // Andere Fehler (z.B. CNError) sind ebenfalls akzeptabel
+            XCTAssertNotNil(error, "Any thrown error is acceptable when permission is denied")
         }
     }
 
