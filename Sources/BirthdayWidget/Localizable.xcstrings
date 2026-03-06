@@ -1,8 +1,15 @@
 {
   "sourceLanguage" : "de",
   "strings" : {
-    "+%@ weitere" : {
-
+    "+%lld weitere" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld more"
+          }
+        }
+      }
     },
     "1 Idee" : {
       "extractionState" : "stale",
@@ -78,8 +85,15 @@
         }
       }
     },
-    "wird %@" : {
-
+    "wird %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "turns %lld"
+          }
+        }
+      }
     },
     "Zeigt die nächsten Geburtstage mit Geschenk-Status." : {
       "extractionState" : "stale",
