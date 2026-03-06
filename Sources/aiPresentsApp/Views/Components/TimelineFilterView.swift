@@ -20,6 +20,15 @@ struct TimelineFilterView: View {
             }
         }
 
+        var localizedName: String {
+            switch self {
+            case .all: return String(localized: "Alle")
+            case .today: return String(localized: "Heute")
+            case .upcoming7: return String(localized: "7 Tage")
+            case .upcoming30: return String(localized: "30 Tage")
+            }
+        }
+
         var accessibilityHint: String {
             switch self {
             case .all: return String(localized: "Zeigt alle Geburtstage")
@@ -50,7 +59,7 @@ struct TimelineFilterView: View {
         var parts: [String] = []
 
         if selectedPeriod != .all {
-            parts.append(selectedPeriod.rawValue)
+            parts.append(selectedPeriod.localizedName)
         }
 
         if !searchText.isEmpty {
@@ -110,7 +119,7 @@ struct TimelineFilterView: View {
                             Image(systemName: period.icon)
                                 .font(.caption)
 
-                            Text(period.rawValue)
+                            Text(period.localizedName)
                                 .font(.subheadline)
                                 .fontWeight(selectedPeriod == period ? .semibold : .regular)
                         }
@@ -146,7 +155,7 @@ struct TimelineFilterView: View {
                         )
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .accessibilityLabel(period.rawValue)
+                    .accessibilityLabel(period.localizedName)
                     .accessibilityHint(period.accessibilityHint)
                     .accessibilityAddTraits(selectedPeriod == period ? [.isSelected] : [])
                 }
