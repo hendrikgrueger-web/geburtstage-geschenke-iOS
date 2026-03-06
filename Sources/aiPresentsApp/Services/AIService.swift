@@ -350,7 +350,9 @@ struct AIService {
         let secret = AIService.proxySecret
         guard !secret.isEmpty else { throw AIError.noAPIKey }
 
-        let url = URL(string: AppConfig.AI.openRouterBaseURL)!
+        guard let url = URL(string: AppConfig.AI.openRouterBaseURL) else {
+            throw AIError.notConfigured
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(secret, forHTTPHeaderField: "X-App-Secret")
@@ -403,14 +405,16 @@ struct AIService {
         let secret = AIService.proxySecret
         guard !secret.isEmpty else { throw AIError.noAPIKey }
 
-        let url = URL(string: AppConfig.AI.openRouterBaseURL)!
+        guard let url = URL(string: AppConfig.AI.openRouterBaseURL) else {
+            throw AIError.notConfigured
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(secret, forHTTPHeaderField: "X-App-Secret")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let body: [String: Any] = [
-            "model": "google/gemini-3.1-flash-lite-preview",
+            "model": AppConfig.AI.model,
             "messages": [
                 ["role": "system", "content": system],
                 ["role": "user", "content": user]

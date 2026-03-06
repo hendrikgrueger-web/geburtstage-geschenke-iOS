@@ -16,8 +16,9 @@ struct GiftIdeaRow: View {
 
                 Spacer()
 
-                if linkValidation.isValid && !linkValidation.sanitized.isEmpty {
-                    Link(destination: URL(string: linkValidation.sanitized)!) {
+                if linkValidation.isValid && !linkValidation.sanitized.isEmpty,
+                   let url = URL(string: linkValidation.sanitized) {
+                    Link(destination: url) {
                         Image(systemName: "link.circle.fill")
                             .font(.caption)
                             .foregroundColor(AppColor.primary)
