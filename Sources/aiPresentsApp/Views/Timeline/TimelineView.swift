@@ -223,13 +223,19 @@ struct TimelineView: View {
         Array(Set(people.map { $0.relation })).sorted()
     }
 
+    // MARK: - Gift Ideas Lookup (O(1) pro Person via Dictionary-Grouping)
+
+    private var ideasByPerson: [UUID: [GiftIdea]] {
+        Dictionary(grouping: giftIdeas, by: \.personId)
+    }
+
     // MARK: - Birthday Row
 
     private func birthdayRow(for person: PersonRef) -> some View {
         Button {
             selectedPerson = person
         } label: {
-            BirthdayRow(person: person, giftIdeas: giftIdeasForPerson(person), onTap: {
+            BirthdayRow(person: person, giftIdeas: ideasByPerson[person.id] ?? [], onTap: {
                 selectedPerson = person
             }, onQuickAdd: {
                 quickAddPerson = person
@@ -268,10 +274,6 @@ struct TimelineView: View {
         }
     }
 
-    private func giftIdeasForPerson(_ person: PersonRef) -> [GiftIdea] {
-        giftIdeas.filter { $0.personId == person.id }
-    }
-
     // MARK: - Actions
 
     private func toggleSkipGift(for person: PersonRef) {
@@ -292,9 +294,7 @@ struct TimelineView: View {
     }
 
     private func markAsPlanned(_ idea: GiftIdea) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yy"
-        let dateString = formatter.string(from: Date())
+        let dateString = FormatterHelper.shortLogDateFormatter.string(from: Date())
         idea.statusLog.append("\(dateString) - \(String(localized: "Idee")) \u{2192} \(String(localized: "Geplant"))")
         idea.status = .planned
         HapticFeedback.success()

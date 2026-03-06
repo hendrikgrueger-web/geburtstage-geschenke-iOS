@@ -28,6 +28,9 @@ final class AIChatViewModel {
     private var personIdMap: [String: UUID] = [:]
     private var giftIdeaIdMap: [String: UUID] = [:]
 
+    /// Gecachter System-Prompt — wird einmalig in configure() gebaut, nicht bei jeder Nachricht neu.
+    private var cachedSystemPrompt: String = ""
+
     // MARK: - Setup
 
     func configure(people: [PersonRef], giftIdeas: [GiftIdea], giftHistory: [GiftHistory], modelContext: ModelContext) {
@@ -35,6 +38,7 @@ final class AIChatViewModel {
         self.giftIdeas = giftIdeas
         self.giftHistory = giftHistory
         self.modelContext = modelContext
+        cachedSystemPrompt = buildSystemPrompt()
     }
 
     // MARK: - Senden
@@ -74,7 +78,7 @@ final class AIChatViewModel {
 
     private func buildAPIMessages() -> [[String: String]] {
         var apiMessages: [[String: String]] = [
-            ["role": "system", "content": buildSystemPrompt()]
+            ["role": "system", "content": cachedSystemPrompt]
         ]
 
         for msg in messages {
@@ -257,9 +261,7 @@ final class AIChatViewModel {
                   let newStatusStr = data.newStatus,
                   let newStatus = GiftStatus(rawValue: newStatusStr) else { return }
 
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd.MM.yy"
-            let dateString = formatter.string(from: Date())
+            let dateString = FormatterHelper.shortLogDateFormatter.string(from: Date())
             let oldStatus = idea.status
             idea.statusLog.append("\(dateString) - \(oldStatus.rawValue) \u{2192} \(newStatus.rawValue)")
             idea.status = newStatus
