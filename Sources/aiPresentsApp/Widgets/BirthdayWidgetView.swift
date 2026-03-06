@@ -85,11 +85,11 @@ struct UpcomingBirthdayHero: View {
         let daysUntil = daysUntilBirthday(for: person)
 
         if daysUntil == 0 {
-            return "Heute wird \(age)!"
+            return String(localized: "Heute wird \(age)!")
         } else if daysUntil == 1 {
-            return "Morgen wird \(age)"
+            return String(localized: "Morgen wird \(age)")
         } else {
-            return "In \(daysUntil) Tagen wird \(age)"
+            return String(localized: "In \(daysUntil) Tagen wird \(age)")
         }
     }
 

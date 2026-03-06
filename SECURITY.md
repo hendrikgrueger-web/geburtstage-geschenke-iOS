@@ -17,71 +17,31 @@ The following must NEVER be committed to the repository:
 
 ## Environment Configuration
 
-### OpenRouter API Key
-The AI service uses OpenRouter API for gift suggestions. The API key is configured in:
+### Cloudflare Worker Proxy
 
-**File:** `Sources/aiPresentsApp/Services/AIService.swift`
-```swift
-private let apiKey = "" // OpenRouter API Key - needs to be configured
+The AI service uses a Cloudflare Worker (`Proxy/`) as a proxy to OpenRouter.
+The **real OpenRouter API key** is stored as a Cloudflare Worker Secret — never in the app.
+
+The app authenticates with the proxy using an **App Secret** via `X-App-Secret` header.
+
+```
+App → POST /chat (X-App-Secret) → Cloudflare Worker → OpenRouter API (Bearer API-Key)
 ```
 
 ### Local Development Setup
 
-#### Option 1: Direct Configuration (Development Only)
-For local development, you can temporarily add the API key directly to the source:
+1. Copy `App/Secrets.xcconfig.example` → `App/Secrets.xcconfig`
+2. Set `AI_PROXY_SECRET` to the App-Secret matching the Worker's `APP_SECRET`
+3. `Secrets.xcconfig` is in `.gitignore` and must never be committed
 
-```swift
-private let apiKey = "your-api-key-here" // REMOVE BEFORE COMMIT
+### Worker Secrets (via wrangler CLI)
+
+```bash
+cd Proxy
+wrangler secret put OPENROUTER_API_KEY   # real OpenRouter key
+wrangler secret put APP_SECRET           # app authentication secret
+wrangler deploy
 ```
-
-⚠️ **WARNING**: Never commit this! Always remove before committing.
-
-#### Option 2: Environment Variables (Recommended)
-Use environment variables in Xcode scheme:
-
-1. Edit Scheme → Run → Arguments → Environment Variables
-2. Add: `OPENROUTER_API_KEY` = `your-key-here`
-
-Then modify AIService.swift:
-```swift
-private let apiKey: String = {
-    ProcessInfo.processInfo.environment["OPENROUTER_API_KEY"] ?? ""
-}()
-```
-
-#### Option 3: xcconfig File (Team Development)
-Create a `secrets.xcconfig` file (add to .gitignore):
-
-```
-OPENROUTER_API_KEY = your-api-key-here
-```
-
-Then create `secrets.example.xcconfig` (commit this):
-
-```
-OPENROUTER_API_KEY = your-openrouter-api-key-here
-```
-
-Add to Xcode scheme:
-1. Project Settings → Configurations
-2. Duplicate Debug → Debug-Secrets
-3. Set "Based on" to Debug
-4. Edit Debug-Secrets → Build Settings → User-Defined
-5. Add: `OPENROUTER_API_KEY` = `$(OPENROUTER_API_KEY)`
-
-## Production Deployment
-
-### For App Store Distribution
-For production builds, the API key must be:
-1. Stored in encrypted format in the build server
-2. Injected at build time
-3. NEVER embedded in the compiled binary
-
-### Using Remote Config
-For better security, consider using:
-- Firebase Remote Config
-- Custom backend service
-- Environment-specific configuration files
 
 ## iCloud/CloudKit
 

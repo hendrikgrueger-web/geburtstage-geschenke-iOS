@@ -1,0 +1,5534 @@
+{
+  "sourceLanguage" : "de",
+  "strings" : {
+    "- Titel darf nicht leer sein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Title must not be empty"
+          }
+        }
+      }
+    },
+    "- Ungültige URL" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Invalid URL"
+          }
+        }
+      }
+    },
+    "- Ungültiges Budget" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Invalid budget"
+          }
+        }
+      }
+    },
+    "#%@" : {
+
+    },
+    "%@" : {
+
+    },
+    "%@ (%@)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "%@ (Build %@)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ (Build %2$@)"
+          }
+        }
+      }
+    },
+    "%@ €" : {
+
+    },
+    "%@ Geschenk%@ werden als verschenkt markiert." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ Geschenk%2$@ werden als verschenkt markiert."
+          }
+        }
+      }
+    },
+    "%@ wird nur aus dieser App entfernt. Dein iOS-Kontakt bleibt unverändert." : {
+
+    },
+    "%@ Zeichen" : {
+
+    },
+    "%@/30 Vorschläge generiert" : {
+
+    },
+    "%@€" : {
+
+    },
+    "• %@€" : {
+
+    },
+    "⚠️ Beginn und Ende können nicht identisch sein." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚠️ Start and end cannot be identical."
+          }
+        }
+      }
+    },
+    "⚠️ Keine Vorwarnungen ausgewählt. Du wirst nicht erinnert." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚠️ No advance warnings selected. You will not be reminded."
+          }
+        }
+      }
+    },
+    "🎉" : {
+
+    },
+    "🎉 Heute!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🎉 Today!"
+          }
+        }
+      }
+    },
+    "💡 Die Nachricht wurde basierend auf Alter, Meilenstein und Sternzeichen personalisiert." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "💡 The message was personalized based on age, milestone, and zodiac sign."
+          }
+        }
+      }
+    },
+    "💡 Tipp: Du kannst die Nachricht nach dem Generieren anpassen oder kopieren." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "💡 Tip: You can customize or copy the message after generating it."
+          }
+        }
+      }
+    },
+    "2 Tage vorher (kurzfristig)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 days before (short notice)"
+          }
+        }
+      }
+    },
+    "5 personalisierte Vorschläge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 personalized suggestions"
+          }
+        }
+      }
+    },
+    "5 weitere generieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate 5 more"
+          }
+        }
+      }
+    },
+    "7 Tage vorher (1 Woche)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7 days before (1 week)"
+          }
+        }
+      }
+    },
+    "14 Tage vorher (2 Wochen)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "14 days before (2 weeks)"
+          }
+        }
+      }
+    },
+    "30 Tage vorher (frühzeitig)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 days before (early)"
+          }
+        }
+      }
+    },
+    "Ab" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From"
+          }
+        }
+      }
+    },
+    "Abbrechen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "Abgelehnt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denied"
+          }
+        }
+      }
+    },
+    "Ablehnen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decline"
+          }
+        }
+      }
+    },
+    "Abo" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscription"
+          }
+        }
+      }
+    },
+    "Abo verwalten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage Subscription"
+          }
+        }
+      }
+    },
+    "AI Präsente" : {
+
+    },
+    "AI Presents Premium" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Presents Premium"
+          }
+        }
+      }
+    },
+    "Aktiv" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active"
+          }
+        }
+      }
+    },
+    "Aktivieren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable"
+          }
+        }
+      }
+    },
+    "Aktiviert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enabled"
+          }
+        }
+      }
+    },
+    "Aktiviert ✓" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enabled ✓"
+          }
+        }
+      }
+    },
+    "Akzeptabel" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acceptable"
+          }
+        }
+      }
+    },
+    "Akzeptanz" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acceptance"
+          }
+        }
+      }
+    },
+    "Alle" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        }
+      }
+    },
+    "Alle als verschenkt markieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark all as gifted"
+          }
+        }
+      }
+    },
+    "Alle als verschenkt markieren?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark all as gifted?"
+          }
+        }
+      }
+    },
+    "Alle anzeigen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show all"
+          }
+        }
+      }
+    },
+    "Alle Daten gelöscht!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All data deleted!"
+          }
+        }
+      }
+    },
+    "Alle Daten löschen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete All Data"
+          }
+        }
+      }
+    },
+    "Alle Daten löschen?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete All Data?"
+          }
+        }
+      }
+    },
+    "Alle Filter zurücksetzen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset all filters"
+          }
+        }
+      }
+    },
+    "Alle Kontakte und Geschenkideen wurden entfernt." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All contacts and gift ideas have been removed."
+          }
+        }
+      }
+    },
+    "Alle markiert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All marked"
+          }
+        }
+      }
+    },
+    "Alle Vorschläge existieren bereits als Geschenkideen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All suggestions already exist as gift ideas."
+          }
+        }
+      }
+    },
+    "Allgemein" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        }
+      }
+    },
+    "Als CSV exportieren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export as CSV"
+          }
+        }
+      }
+    },
+    "Als Idee" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As Idea"
+          }
+        }
+      }
+    },
+    "Alter (berechnet aus Geburtsdatum, nicht das Datum selbst)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Age (calculated from birthday, not the date itself)"
+          }
+        }
+      }
+    },
+    "Anbieter" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Provider"
+          }
+        }
+      }
+    },
+    "Ändert den Status der Geschenkidee zum nächsten Schritt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advances the gift idea to the next status"
+          }
+        }
+      }
+    },
+    "API-Key nicht konfiguriert (Demo-Modus)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "API key not configured (demo mode)"
+          }
+        }
+      }
+    },
+    "App-Informationen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Information"
+          }
+        }
+      }
+    },
+    "Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Art. 6(1)(a) GDPR (Consent)"
+          }
+        }
+      }
+    },
+    "Auf einen Blick" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At a Glance"
+          }
+        }
+      }
+    },
+    "Aus Adressbuch importieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import from Address Book"
+          }
+        }
+      }
+    },
+    "Aus App entfernen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from App"
+          }
+        }
+      }
+    },
+    "Aus App entfernen?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from App?"
+          }
+        }
+      }
+    },
+    "Ausgezeichnet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excellent"
+          }
+        }
+      }
+    },
+    "Bald ist es soweit! Letzter Anstoß." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Almost there! Last nudge."
+          }
+        }
+      }
+    },
+    "Bearbeiten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
+    },
+    "Beginn Ruhestunden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiet hours start"
+          }
+        }
+      }
+    },
+    "Behalte alle Geburtstage im Blick und plane Geschenke stressfrei." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep track of all birthdays and plan gifts stress-free."
+          }
+        }
+      }
+    },
+    "Bei Fragen zum Datenschutz:\n\nHendrik Grüger\nharryhirsch1878@gmail.com" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For privacy questions:\n\nHendrik Grüger\nharryhirsch1878@gmail.com"
+          }
+        }
+      }
+    },
+    "Benachrichtigungen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        }
+      }
+    },
+    "Benachrichtigungen aktiv" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications active"
+          }
+        }
+      }
+    },
+    "Benachrichtigungen in den Einstellungen aktivieren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable notifications in settings"
+          }
+        }
+      }
+    },
+    "Berechtigung verweigert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permission Denied"
+          }
+        }
+      }
+    },
+    "Bessere Geschenke. Weniger Stress." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Better gifts. Less stress."
+          }
+        }
+      }
+    },
+    "Beziehung" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relationship"
+          }
+        }
+      }
+    },
+    "Beziehung bearbeiten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Relationship"
+          }
+        }
+      }
+    },
+    "Beziehung eingeben" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter relationship"
+          }
+        }
+      }
+    },
+    "Beziehungstyp (z.B. \"Freund\", \"Mutter\")" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relationship type (e.g. \"Friend\", \"Mother\")"
+          }
+        }
+      }
+    },
+    "Birthday Widget" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday Widget"
+          }
+        }
+      }
+    },
+    "bis" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "to"
+          }
+        }
+      }
+    },
+    "Bis" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To"
+          }
+        }
+      }
+    },
+    "Bitte erlaube Benachrichtigungen in den Systemeinstellungen." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please allow notifications in system settings."
+          }
+        }
+      }
+    },
+    "Bitte gib eine gültige E-Mail-Adresse ein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a valid email address"
+          }
+        }
+      }
+    },
+    "Bitte gib eine gültige URL ein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a valid URL"
+          }
+        }
+      }
+    },
+    "Bitte gib eine gültige URL ein (z.B. https://example.com)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a valid URL (e.g. https://example.com)"
+          }
+        }
+      }
+    },
+    "Bitte gib eine gültige Zahl ein" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a valid number"
+          }
+        }
+      }
+    },
+    "Bitte korrigiere die Fehler im Formular" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please correct the errors in the form"
+          }
+        }
+      }
+    },
+    "Bruder" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brother"
+          }
+        }
+      }
+    },
+    "Budget" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget"
+          }
+        }
+      }
+    },
+    "Budget darf nicht negativ sein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget must not be negative"
+          }
+        }
+      }
+    },
+    "Budget-Bereich" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget Range"
+          }
+        }
+      }
+    },
+    "Budget-Bereich wählen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select budget range"
+          }
+        }
+      }
+    },
+    "Budget-Rahmen (Min/Max, für passende Vorschläge)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget range (min/max, for matching suggestions)"
+          }
+        }
+      }
+    },
+    "Cloud-KI via OpenRouter · Daten werden verschlüsselt übertragen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cloud AI via OpenRouter · Data is transmitted encrypted."
+          }
+        }
+      }
+    },
+    "CSV exportieren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export CSV"
+          }
+        }
+      }
+    },
+    "CSV-Datei wurde erstellt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CSV file was created"
+          }
+        }
+      }
+    },
+    "Da alle Daten lokal gespeichert werden, hast du jederzeit volle Kontrolle. Du kannst alle Daten über Einstellungen → Alle Daten löschen entfernen." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Since all data is stored locally, you have full control at all times. You can delete all data via Settings → Delete All Data."
+          }
+        }
+      }
+    },
+    "Da kein API-Key konfiguriert ist, wird eine Demo-Nachricht angezeigt." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Since no API key is configured, a demo message is shown."
+          }
+        }
+      }
+    },
+    "Das Abo verlängert sich automatisch. Du kannst jederzeit in den iOS-Einstellungen kündigen." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The subscription renews automatically. You can cancel at any time in iOS Settings."
+          }
+        }
+      }
+    },
+    "Das löscht alle Kontakte und Geschenkideen. Diese Aktion kann nicht rückgängig gemacht werden." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This deletes all contacts and gift ideas. This action cannot be undone."
+          }
+        }
+      }
+    },
+    "Das Mindestbudget darf nicht höher als das Maximalbudget sein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimum budget must not exceed maximum budget"
+          }
+        }
+      }
+    },
+    "Datei konnte nicht gespeichert werden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File could not be saved"
+          }
+        }
+      }
+    },
+    "Daten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        }
+      }
+    },
+    "Daten gelöscht" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data Deleted"
+          }
+        }
+      }
+    },
+    "Daten werden automatisch über deine Apple-Geräte synchronisiert." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data is automatically synced across your Apple devices."
+          }
+        }
+      }
+    },
+    "Daten werden nur lokal auf diesem Gerät gespeichert." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data is only stored locally on this device."
+          }
+        }
+      }
+    },
+    "Daten-Statistik" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data Statistics"
+          }
+        }
+      }
+    },
+    "Datenschutz" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy"
+          }
+        }
+      }
+    },
+    "Datenschutz-Einwilligung" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Consent"
+          }
+        }
+      }
+    },
+    "Datenübertragung in die USA. Rechtsgrundlage: Standardvertragsklauseln gemäß Art. 46 DSGVO. Server-Standort: USA." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data transfer to the USA. Legal basis: Standard contractual clauses per Art. 46 GDPR. Server location: USA."
+          }
+        }
+      }
+    },
+    "Datenverarbeitung durch Dritte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Third-Party Data Processing"
+          }
+        }
+      }
+    },
+    "Datum" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        }
+      }
+    },
+    "Debounced: %@" : {
+
+    },
+    "Debouncer Demo" : {
+
+    },
+    "Dein Feedback hilft, die KI-Vorschläge zu verbessern." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your feedback helps improve the AI suggestions."
+          }
+        }
+      }
+    },
+    "Dein Geschenk-Verlauf erscheint hier" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your gift history will appear here"
+          }
+        }
+      }
+    },
+    "Dein Name" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Name"
+          }
+        }
+      }
+    },
+    "Deine Einwilligung ist freiwillig. Die App funktioniert auch ohne KI-Features (Demo-Modus)." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your consent is voluntary. The app works without AI features (demo mode)."
+          }
+        }
+      }
+    },
+    "Deine Einwilligung ist freiwillig. Die App funktioniert auch ohne KI-Features." : {
+
+    },
+    "Deine Rechte" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Rights"
+          }
+        }
+      }
+    },
+    "Demo-Daten erstellen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Demo Data"
+          }
+        }
+      }
+    },
+    "Demo-Daten erstellt!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demo data created!"
+          }
+        }
+      }
+    },
+    "Demo-Daten für Tests und Screenshots" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demo data for tests and screenshots"
+          }
+        }
+      }
+    },
+    "Demo-Daten laden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Load Demo Data"
+          }
+        }
+      }
+    },
+    "Demo-Mode" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demo Mode"
+          }
+        }
+      }
+    },
+    "Demo-Modus — kein API-Key konfiguriert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demo mode — no API key configured"
+          }
+        }
+      }
+    },
+    "Demo-Modus — kein API-Key konfiguriert oder KI nicht aktiviert." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demo mode — no API key configured or AI not enabled."
+          }
+        }
+      }
+    },
+    "Der App-Code und das Design sind urheberrechtlich geschützt. SF Symbols werden gemäß Apple-Lizenz verwendet." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The app code and design are protected by copyright. SF Symbols are used according to Apple's license."
+          }
+        }
+      }
+    },
+    "Der Kontakt wird nur aus dieser App entfernt. Dein iOS-Kontakt bleibt unverändert." : {
+
+    },
+    "Dev Settings" : {
+
+    },
+    "Die Änderung wird beim nächsten App-Start wirksam." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The change will take effect on next app launch."
+          }
+        }
+      }
+    },
+    "Die App speichert lokal auf deinem Gerät: Namen und Geburtstage deiner Kontakte, Geschenkideen mit Budget und Tags, Erinnerungseinstellungen. Diese Daten verlassen niemals dein Gerät — es sei denn, du aktivierst iCloud Sync oder KI-Vorschläge." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The app stores locally on your device: Names and birthdays of your contacts, gift ideas with budget and tags, reminder settings. This data never leaves your device — unless you enable iCloud Sync or AI suggestions."
+          }
+        }
+      }
+    },
+    "Die App wird ohne Gewährleistung bereitgestellt. Für die Richtigkeit der KI-generierten Vorschläge wird keine Haftung übernommen." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The app is provided without warranty. No liability is assumed for the accuracy of AI-generated suggestions."
+          }
+        }
+      }
+    },
+    "Die App-Datenbank konnte nicht geladen werden. Bitte starte die App neu oder lösche sie und installiere sie erneut." : {
+
+    },
+    "Die KI erstellt eine herzliche Nachricht basierend auf Alter, Meilenstein und Sternzeichen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The AI creates a heartfelt message based on age, milestone, and zodiac sign."
+          }
+        }
+      }
+    },
+    "Die KI-Funktionen nutzen OpenRouter → Google Gemini (USA). Es werden Vorname, Alter, Beziehungstyp und Sternzeichen übertragen. Widerruf jederzeit möglich." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI features use OpenRouter → Google Gemini (USA). First name, age, relationship type, and zodiac sign are transmitted. Revocation possible at any time."
+          }
+        }
+      }
+    },
+    "Die KI-Funktionen werden deaktiviert. Du kannst die Einwilligung jederzeit erneut erteilen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI features will be disabled. You can grant consent again at any time."
+          }
+        }
+      }
+    },
+    "Diese Ansicht ist nur im Debug-Modus verfügbar." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This view is only available in debug mode."
+          }
+        }
+      }
+    },
+    "Diese App sammelt keine Daten über dich und sendet nichts an uns. Alle deine Geburtstage und Geschenkideen bleiben auf deinem Gerät (oder optional in deiner iCloud)." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This app does not collect any data about you and sends nothing to us. All your birthdays and gift ideas stay on your device (or optionally in your iCloud)."
+          }
+        }
+      }
+    },
+    "Diese Woche" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Week"
+          }
+        }
+      }
+    },
+    "Doppeltippen für weitere Optionen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double tap for more options"
+          }
+        }
+      }
+    },
+    "Doppeltippen um alle anzuzeigen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double tap to show all"
+          }
+        }
+      }
+    },
+    "Doppeltippen um nur Favoriten anzuzeigen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double tap to show favorites only"
+          }
+        }
+      }
+    },
+    "Du erhältst Benachrichtigungen für Geburtstage." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You will receive notifications for birthdays."
+          }
+        }
+      }
+    },
+    "Du erhältst keine Benachrichtigungen mehr." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You will no longer receive notifications."
+          }
+        }
+      }
+    },
+    "Du kannst das jederzeit in den Einstellungen ändern." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can change this at any time in Settings."
+          }
+        }
+      }
+    },
+    "Du wirst %@-mal erinnert: %@ vor dem Geburtstag." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Du wirst %1$@-mal erinnert: %2$@ vor dem Geburtstag."
+          }
+        }
+      }
+    },
+    "Duplizieren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicate"
+          }
+        }
+      }
+    },
+    "Ein Fehler ist aufgetreten. Bitte versuche es erneut." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred. Please try again."
+          }
+        }
+      }
+    },
+    "Eine private iOS App zum Verwalten von Geburtstagen und Geschenkideen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A private iOS app for managing birthdays and gift ideas."
+          }
+        }
+      }
+    },
+    "Einen Moment bitte..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One moment please..."
+          }
+        }
+      }
+    },
+    "Eingabe prüfen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check Input"
+          }
+        }
+      }
+    },
+    "Einstellungen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "Einstellungen öffnen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
+          }
+        }
+      }
+    },
+    "Einstellungen öffnen?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings?"
+          }
+        }
+      }
+    },
+    "Einwilligung erforderlich · Tippe für Details" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consent required · Tap for details"
+          }
+        }
+      }
+    },
+    "Einwilligung erteilt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consent Given"
+          }
+        }
+      }
+    },
+    "Einwilligung erteilt · Cloud-Verarbeitung via OpenRouter" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consent given · Cloud processing via OpenRouter"
+          }
+        }
+      }
+    },
+    "Einwilligung widerrufen?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revoke Consent?"
+          }
+        }
+      }
+    },
+    "Ende Ruhestunden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiet hours end"
+          }
+        }
+      }
+    },
+    "Entfernen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove"
+          }
+        }
+      }
+    },
+    "Ephemeral" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ephemeral"
+          }
+        }
+      }
+    },
+    "Erhalte Benachrichtigungen für Geburtstage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receive notifications for birthdays"
+          }
+        }
+      }
+    },
+    "Erhalte Erinnerungen für anstehende Geburtstage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receive reminders for upcoming birthdays"
+          }
+        }
+      }
+    },
+    "Erhalten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Received"
+          }
+        }
+      }
+    },
+    "Erhaltenes Geschenk" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Received Gift"
+          }
+        }
+      }
+    },
+    "Erhaltenes Geschenk bearbeiten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Received Gift"
+          }
+        }
+      }
+    },
+    "Erinnerungen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders"
+          }
+        }
+      }
+    },
+    "Erinnerungen aktivieren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable Reminders"
+          }
+        }
+      }
+    },
+    "Erinnerungen aktiviert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders Enabled"
+          }
+        }
+      }
+    },
+    "Erinnerungen aktualisiert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders Updated"
+          }
+        }
+      }
+    },
+    "Erinnerungen deaktiviert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders Disabled"
+          }
+        }
+      }
+    },
+    "Erinnerungen neu laden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reload Reminders"
+          }
+        }
+      }
+    },
+    "Erinnerungen werden automatisch mit iOS-Benachrichtigungen erstellt." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders are automatically created with iOS notifications."
+          }
+        }
+      }
+    },
+    "Erinnerungseinstellungen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder Settings"
+          }
+        }
+      }
+    },
+    "Erneut versuchen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Again"
+          }
+        }
+      }
+    },
+    "Erste Idee planen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plan First Idea"
+          }
+        }
+      }
+    },
+    "Erstellt eine personalisierte Geburtstagsnachricht mit KI-Assistent" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creates a personalized birthday message with AI assistant"
+          }
+        }
+      }
+    },
+    "Euro" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "euros"
+          }
+        }
+      }
+    },
+    "Export erfolgreich" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export successful"
+          }
+        }
+      }
+    },
+    "Export fehlgeschlagen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export failed"
+          }
+        }
+      }
+    },
+    "Exportiert Geschenkideen als CSV-Datei" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exports gift ideas as a CSV file"
+          }
+        }
+      }
+    },
+    "Favoriten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites"
+          }
+        }
+      }
+    },
+    "Features" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Features"
+          }
+        }
+      }
+    },
+    "Feedback gespeichert" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback saved"
+          }
+        }
+      }
+    },
+    "Feedback senden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send Feedback"
+          }
+        }
+      }
+    },
+    "Fehler" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
+    },
+    "Fehler beim Löschen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Error"
+          }
+        }
+      }
+    },
+    "Fehler: Ungültiges Budget" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error: Invalid budget"
+          }
+        }
+      }
+    },
+    "Fertig" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "Filter" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter"
+          }
+        }
+      }
+    },
+    "Fische" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pisces"
+          }
+        }
+      }
+    },
+    "Free" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Free"
+          }
+        }
+      }
+    },
+    "Freund/in" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Friend"
+          }
+        }
+      }
+    },
+    "Füge deine erste Geschenkidee hinzu" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add your first gift idea"
+          }
+        }
+      }
+    },
+    "Fügt eine neue Geschenkidee hinzu" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adds a new gift idea"
+          }
+        }
+      }
+    },
+    "Geburtsdatum" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date of birth"
+          }
+        }
+      }
+    },
+    "Geburtstag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday"
+          }
+        }
+      }
+    },
+    "Geburtstag heute" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday today"
+          }
+        }
+      }
+    },
+    "Geburtstag heute!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday today!"
+          }
+        }
+      }
+    },
+    "Geburtstag morgen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday tomorrow"
+          }
+        }
+      }
+    },
+    "Geburtstag steht bevor!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday is coming up!"
+          }
+        }
+      }
+    },
+    "Geburtstage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthdays"
+          }
+        }
+      }
+    },
+    "Geburtstage & Geschenkideen" : {
+
+    },
+    "Geburtstage auf dem Homescreen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthdays on the home screen"
+          }
+        }
+      }
+    },
+    "Geburtstags-Übersicht mit Countdowns" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday overview with countdowns"
+          }
+        }
+      }
+    },
+    "Geburtstagsnachricht" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday Message"
+          }
+        }
+      }
+    },
+    "Geburtstagsnachricht erstellen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create Birthday Message"
+          }
+        }
+      }
+    },
+    "Gekauft" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchased"
+          }
+        }
+      }
+    },
+    "Generiert 5 personalisierte Geschenkideen mit KI-Assistent" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generates 5 personalized gift ideas with AI assistant"
+          }
+        }
+      }
+    },
+    "Generiert eine alternative Geburtstagsnachricht" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generates an alternative birthday message"
+          }
+        }
+      }
+    },
+    "Geplant" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planned"
+          }
+        }
+      }
+    },
+    "gerade eben" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "just now"
+          }
+        }
+      }
+    },
+    "Geschenk" : {
+
+    },
+    "Geschenk bearbeiten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Gift"
+          }
+        }
+      }
+    },
+    "Geschenk nötig" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gift needed"
+          }
+        }
+      }
+    },
+    "Geschenk vermerken" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record Gift"
+          }
+        }
+      }
+    },
+    "Geschenk-Idee" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gift Idea"
+          }
+        }
+      }
+    },
+    "Geschenk-Status" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gift Status"
+          }
+        }
+      }
+    },
+    "Geschenk-Status Übersicht" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gift Status Overview"
+          }
+        }
+      }
+    },
+    "Geschenk-Verlauf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gift History"
+          }
+        }
+      }
+    },
+    "Geschenkidee" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gift Idea"
+          }
+        }
+      }
+    },
+    "Geschenkidee duplizieren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicate gift idea"
+          }
+        }
+      }
+    },
+    "Geschenkidee löschen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete gift idea"
+          }
+        }
+      }
+    },
+    "Geschenkidee teilen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share gift idea"
+          }
+        }
+      }
+    },
+    "Geschenkideen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "gift ideas"
+          }
+        }
+      }
+    },
+    "Geschenkideen mit Budget und Tags" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gift ideas with budget and tags"
+          }
+        }
+      }
+    },
+    "Geschenkideen sammeln" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collect Gift Ideas"
+          }
+        }
+      }
+    },
+    "Geschenkideen teilen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Gift Ideas"
+          }
+        }
+      }
+    },
+    "Geschenkideen vorschlagen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggest Gift Ideas"
+          }
+        }
+      }
+    },
+    "Geschenkstatus" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gift Status"
+          }
+        }
+      }
+    },
+    "Gestern" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yesterday"
+          }
+        }
+      }
+    },
+    "Getrennt durch Kommas" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Separated by commas"
+          }
+        }
+      }
+    },
+    "Gib bis zu 10 Tags getrennt durch Kommas ein, max 30 Zeichen pro Tag" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter up to 10 tags separated by commas, max 30 characters per tag"
+          }
+        }
+      }
+    },
+    "Gib das Budget in Euro ein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the budget in euros"
+          }
+        }
+      }
+    },
+    "Gib das Maximalbudget in Euro ein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the maximum budget in euros"
+          }
+        }
+      }
+    },
+    "Gib das Mindestbudget in Euro ein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the minimum budget in euros"
+          }
+        }
+      }
+    },
+    "GitHub" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub"
+          }
+        }
+      }
+    },
+    "given" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Given"
+          }
+        }
+      }
+    },
+    "Google Vertex AI / Google AI Studio (USA)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google Vertex AI / Google AI Studio (USA)"
+          }
+        }
+      }
+    },
+    "Groß (75-150€)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Large (€75-150)"
+          }
+        }
+      }
+    },
+    "Gut" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good"
+          }
+        }
+      }
+    },
+    "Haftungsausschluss" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disclaimer"
+          }
+        }
+      }
+    },
+    "Hallo!" : {
+
+    },
+    "Hendrik Grüger\nharryhirsch1878@gmail.com\n\nDiese App ist ein privates Projekt und kein kommerzielles Angebot." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hendrik Grüger\nharryhirsch1878@gmail.com\n\nThis app is a private project and not a commercial offering."
+          }
+        }
+      }
+    },
+    "Herzliche Texte per Knopfdruck" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heartfelt texts at the push of a button"
+          }
+        }
+      }
+    },
+    "Herzlicher Text zum Geburtstag" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A heartfelt birthday text"
+          }
+        }
+      }
+    },
+    "Heute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        }
+      }
+    },
+    "Heute 🎉" : {
+
+    },
+    "Heute!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today!"
+          }
+        }
+      }
+    },
+    "Hobbies & Interessen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hobbies & Interests"
+          }
+        }
+      }
+    },
+    "Hobby hinzufügen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add hobby"
+          }
+        }
+      }
+    },
+    "Ich helfe dir bei Geschenkideen und Geburtstagen." : {
+
+    },
+    "iCloud Sync" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud Sync"
+          }
+        }
+      }
+    },
+    "iCloud Sync (optional)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud Sync (optional)"
+          }
+        }
+      }
+    },
+    "iCloud Sync aktivieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable iCloud Sync"
+          }
+        }
+      }
+    },
+    "Idee" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idea"
+          }
+        }
+      }
+    },
+    "Idee bearbeiten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Idea"
+          }
+        }
+      }
+    },
+    "Idee hinzufügen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Idea"
+          }
+        }
+      }
+    },
+    "Ideen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ideas"
+          }
+        }
+      }
+    },
+    "Importiere Kontakte mit Geburtstagen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import contacts with birthdays"
+          }
+        }
+      }
+    },
+    "Importiere Kontakte über das + oben rechts" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import contacts via the + button in the top right"
+          }
+        }
+      }
+    },
+    "Importiere Kontakte um Geburtstage anzuzeigen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import contacts to show birthdays"
+          }
+        }
+      }
+    },
+    "Impressum" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legal Notice"
+          }
+        }
+      }
+    },
+    "In" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In"
+          }
+        }
+      }
+    },
+    "in %@ T." : {
+
+    },
+    "In %@ T." : {
+
+    },
+    "In 30 Tagen ist es soweit! Zeit für Geschenkideen." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It's 30 days away! Time for gift ideas."
+          }
+        }
+      }
+    },
+    "In den nächsten %@ Tagen hat niemand Geburtstag." : {
+
+    },
+    "In Einstellungen öffnen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open in Settings"
+          }
+        }
+      }
+    },
+    "In früheren Jahren verschenkt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gifted in previous years"
+          }
+        }
+      }
+    },
+    "In Zwischenablage kopieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to Clipboard"
+          }
+        }
+      }
+    },
+    "Info" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
+          }
+        }
+      }
+    },
+    "Informationen zum Datenschutz findest du unter dem Menüpunkt Datenschutz." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy information can be found under the Privacy menu item."
+          }
+        }
+      }
+    },
+    "Interessen/Tags (sofern vorhanden)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interests/Tags (if available)"
+          }
+        }
+      }
+    },
+    "Jahr" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Year"
+          }
+        }
+      }
+    },
+    "Jahr des Geschenks" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Year of the gift"
+          }
+        }
+      }
+    },
+    "Jahr:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Year:"
+          }
+        }
+      }
+    },
+    "Jahre alt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "years old"
+          }
+        }
+      }
+    },
+    "Jährlich" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yearly"
+          }
+        }
+      }
+    },
+    "Jetzt abonnieren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscribe Now"
+          }
+        }
+      }
+    },
+    "Jungfrau" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virgo"
+          }
+        }
+      }
+    },
+    "Kategorie" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category"
+          }
+        }
+      }
+    },
+    "Kategorie darf maximal 50 Zeichen haben" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category may not exceed 50 characters"
+          }
+        }
+      }
+    },
+    "Kategorie darf nicht leer sein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category must not be empty"
+          }
+        }
+      }
+    },
+    "Kategorie:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category:"
+          }
+        }
+      }
+    },
+    "Kauf ausstehend" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase pending"
+          }
+        }
+      }
+    },
+    "Kauf fehlgeschlagen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase failed"
+          }
+        }
+      }
+    },
+    "Käufe wiederherstellen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchases"
+          }
+        }
+      }
+    },
+    "Kein Geschenk" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Gift"
+          }
+        }
+      }
+    },
+    "Kein Geschenk nötig" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No gift needed"
+          }
+        }
+      }
+    },
+    "Kein Geschenk nötig. " : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No gift needed. "
+          }
+        }
+      }
+    },
+    "Kein Verlauf" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No History"
+          }
+        }
+      }
+    },
+    "Keine" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        }
+      }
+    },
+    "Keine Benachrichtigungen zwischen %@ und %@." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Keine Benachrichtigungen zwischen %1$@ und %2$@."
+          }
+        }
+      }
+    },
+    "Keine Daten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Data"
+          }
+        }
+      }
+    },
+    "Keine Einwilligung erteilt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Consent Given"
+          }
+        }
+      }
+    },
+    "Keine Ergebnisse" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Results"
+          }
+        }
+      }
+    },
+    "Keine Geburtstage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Birthdays"
+          }
+        }
+      }
+    },
+    "Keine Geschenkideen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Gift Ideas"
+          }
+        }
+      }
+    },
+    "Keine Geschenkideen vorhanden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No gift ideas available"
+          }
+        }
+      }
+    },
+    "Keine Geschenkideen zum Exportieren vorhanden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No gift ideas to export"
+          }
+        }
+      }
+    },
+    "Keine Kontakte" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Contacts"
+          }
+        }
+      }
+    },
+    "Keine Kontakte mit Geburtstagen gefunden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No contacts with birthdays found"
+          }
+        }
+      }
+    },
+    "Keine neuen Vorschläge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No New Suggestions"
+          }
+        }
+      }
+    },
+    "Keine Treffer" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Matches"
+          }
+        }
+      }
+    },
+    "KI deaktiviert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Disabled"
+          }
+        }
+      }
+    },
+    "KI deaktiviert · Einstellungen → KI-Assistent" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI disabled · Settings → AI Assistant"
+          }
+        }
+      }
+    },
+    "KI denkt nach…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI is thinking…"
+          }
+        }
+      }
+    },
+    "KI schreibt..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI is writing..."
+          }
+        }
+      }
+    },
+    "KI-Assistent" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Assistant"
+          }
+        }
+      }
+    },
+    "KI-Assistent ist in den Einstellungen deaktiviert." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI assistant is disabled in settings."
+          }
+        }
+      }
+    },
+    "KI-Geburtstagsnachrichten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Birthday Messages"
+          }
+        }
+      }
+    },
+    "KI-Geschenk-Ideen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Gift Ideas"
+          }
+        }
+      }
+    },
+    "KI-Geschenkvorschläge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Gift Suggestions"
+          }
+        }
+      }
+    },
+    "KI-Qualität" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Quality"
+          }
+        }
+      }
+    },
+    "KI-Vorschläge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Suggestions"
+          }
+        }
+      }
+    },
+    "KI-Vorschläge (OpenRouter)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Suggestions (OpenRouter)"
+          }
+        }
+      }
+    },
+    "KI-Vorschläge (optional, mit Einwilligung)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Suggestions (optional, with consent)"
+          }
+        }
+      }
+    },
+    "KI-Vorschläge aktiviert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Suggestions Enabled"
+          }
+        }
+      }
+    },
+    "KI-Vorschläge generieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate AI Suggestions"
+          }
+        }
+      }
+    },
+    "Kind" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Child"
+          }
+        }
+      }
+    },
+    "Klein (bis 25€)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Small (up to €25)"
+          }
+        }
+      }
+    },
+    "Kollege/in" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Colleague"
+          }
+        }
+      }
+    },
+    "Kontakt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact"
+          }
+        }
+      }
+    },
+    "Kontakt bearbeiten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Contact"
+          }
+        }
+      }
+    },
+    "Kontaktdaten / Telefonnummer" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact details / phone number"
+          }
+        }
+      }
+    },
+    "Kontakte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacts"
+          }
+        }
+      }
+    },
+    "Kontakte importieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import Contacts"
+          }
+        }
+      }
+    },
+    "Kontakte-Import (optional)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacts Import (optional)"
+          }
+        }
+      }
+    },
+    "Kopiert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copied"
+          }
+        }
+      }
+    },
+    "Kopiert die gesamte Nachricht in die Zwischenablage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copies the entire message to the clipboard"
+          }
+        }
+      }
+    },
+    "Kostenlos testen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Free Trial"
+          }
+        }
+      }
+    },
+    "Krebs" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancer"
+          }
+        }
+      }
+    },
+    "Kritisch" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Critical"
+          }
+        }
+      }
+    },
+    "Lade Preise…" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading prices…"
+          }
+        }
+      }
+    },
+    "Laden..." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading..."
+          }
+        }
+      }
+    },
+    "Lass dir kreative Geschenkideen basierend auf Interessen generieren." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get creative gift ideas generated based on interests."
+          }
+        }
+      }
+    },
+    "Leitet Anfragen weiter an" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forwards requests to"
+          }
+        }
+      }
+    },
+    "Link öffnen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Link"
+          }
+        }
+      }
+    },
+    "Link:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link:"
+          }
+        }
+      }
+    },
+    "Links" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Links"
+          }
+        }
+      }
+    },
+    "Löschen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
+    },
+    "Löwe" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leo"
+          }
+        }
+      }
+    },
+    "Mail-App geöffnet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail App Opened"
+          }
+        }
+      }
+    },
+    "Mail-App konnte nicht geöffnet werden." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail app could not be opened."
+          }
+        }
+      }
+    },
+    "Markieren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark"
+          }
+        }
+      }
+    },
+    "Max" : {
+
+    },
+    "Max Budget" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Max Budget"
+          }
+        }
+      }
+    },
+    "Max darf nicht kleiner als Min sein" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Max must not be less than min"
+          }
+        }
+      }
+    },
+    "Maximal 10 Tags erlaubt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum 10 tags allowed"
+          }
+        }
+      }
+    },
+    "Maximalbetrag muss größer als Minimalbetrag sein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum amount must be greater than minimum amount"
+          }
+        }
+      }
+    },
+    "Maximalbudget" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum Budget"
+          }
+        }
+      }
+    },
+    "Maximalbudget-Slider" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum budget slider"
+          }
+        }
+      }
+    },
+    "Maximum erreicht (10 Hobbies)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum reached (10 hobbies)"
+          }
+        }
+      }
+    },
+    "Min" : {
+
+    },
+    "Min Budget" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Min Budget"
+          }
+        }
+      }
+    },
+    "Mindestbudget" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimum Budget"
+          }
+        }
+      }
+    },
+    "Mindestbudget-Slider" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimum budget slider"
+          }
+        }
+      }
+    },
+    "Mindestens eine Vorwarnung muss ausgewählt sein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At least one advance warning must be selected"
+          }
+        }
+      }
+    },
+    "Minute" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "minute"
+          }
+        }
+      }
+    },
+    "Minuten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "minutes"
+          }
+        }
+      }
+    },
+    "Mit welchem Namen möchtest du die Nachricht unterschreiben? Dieser Name wird nur lokal auf deinem Gerät gespeichert." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What name would you like to sign the message with? This name is only stored locally on your device."
+          }
+        }
+      }
+    },
+    "Mittel (25-75€)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium (€25-75)"
+          }
+        }
+      }
+    },
+    "Möchtest du die Systemeinstellungen für Benachrichtigungen öffnen?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Would you like to open system settings for notifications?"
+          }
+        }
+      }
+    },
+    "Monat" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Month"
+          }
+        }
+      }
+    },
+    "Monatlich" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monthly"
+          }
+        }
+      }
+    },
+    "Morgen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tomorrow"
+          }
+        }
+      }
+    },
+    "Mutter" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mother"
+          }
+        }
+      }
+    },
+    "Nachricht" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message"
+          }
+        }
+      }
+    },
+    "Nachricht generieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate Message"
+          }
+        }
+      }
+    },
+    "Nachricht in Zwischenablage kopiert" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message copied to clipboard"
+          }
+        }
+      }
+    },
+    "Nächster Geburtstag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next Birthday"
+          }
+        }
+      }
+    },
+    "Nächstes Jahr" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next year"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
+    "Name des Geschenks" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gift name"
+          }
+        }
+      }
+    },
+    "Name: AI Präsente\nPlattform: iOS 26+\nSprache: Swift 6, SwiftUI" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name: AI Presents\nPlatform: iOS 26+\nLanguage: Swift 6, SwiftUI"
+          }
+        }
+      }
+    },
+    "Negativ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negative"
+          }
+        }
+      }
+    },
+    "Netzwerkfehler:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network error:"
+          }
+        }
+      }
+    },
+    "Neue Idee" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Idea"
+          }
+        }
+      }
+    },
+    "Neue Nachricht generieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate New Message"
+          }
+        }
+      }
+    },
+    "Neustart erforderlich" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restart Required"
+          }
+        }
+      }
+    },
+    "Nicht angefragt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not requested"
+          }
+        }
+      }
+    },
+    "Nie wieder einen Geburtstag vergessen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Never forget a birthday again"
+          }
+        }
+      }
+    },
+    "Nie wieder vergessen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Never Forget Again"
+          }
+        }
+      }
+    },
+    "Noch keine erhaltenen Geschenke" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No received gifts yet"
+          }
+        }
+      }
+    },
+    "Noch keine Ideen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No ideas yet"
+          }
+        }
+      }
+    },
+    "Noch ohne Geschenk" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Still without a gift"
+          }
+        }
+      }
+    },
+    "Notiz:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Note:"
+          }
+        }
+      }
+    },
+    "Notizen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes"
+          }
+        }
+      }
+    },
+    "Nur Favoriten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites only"
+          }
+        }
+      }
+    },
+    "Nur lokal" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local only"
+          }
+        }
+      }
+    },
+    "Nur lokal speichern" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Store locally only"
+          }
+        }
+      }
+    },
+    "Nur Namen & Geburtstage · Lokal gespeichert" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only names & birthdays · Stored locally"
+          }
+        }
+      }
+    },
+    "Nur noch 2 Wochen! Hast du etwas gefunden?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only 2 weeks left! Have you found something?"
+          }
+        }
+      }
+    },
+    "Nur noch eine Woche! Zeit zu handeln." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only one week left! Time to act."
+          }
+        }
+      }
+    },
+    "Nutzungsbedingungen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Use"
+          }
+        }
+      }
+    },
+    "Öffnen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        }
+      }
+    },
+    "Öffnet das Formular zum Bearbeiten von Name, Geburtstag und Beziehung" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the form to edit name, birthday, and relationship"
+          }
+        }
+      }
+    },
+    "Öffnet den Link im Browser" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the link in the browser"
+          }
+        }
+      }
+    },
+    "Ohne Name fortfahren" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue without name"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "OpenRouter Inc. (USA)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OpenRouter Inc. (USA)"
+          }
+        }
+      }
+    },
+    "Optionale Notizen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional notes"
+          }
+        }
+      }
+    },
+    "Optionen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Options"
+          }
+        }
+      }
+    },
+    "Partner/in" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partner"
+          }
+        }
+      }
+    },
+    "Personalisiert via Cloud-KI" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalized via cloud AI"
+          }
+        }
+      }
+    },
+    "Persönliche Geburtstagsnachricht" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal Birthday Message"
+          }
+        }
+      }
+    },
+    "Positiv" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positive"
+          }
+        }
+      }
+    },
+    "Premium" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium"
+          }
+        }
+      }
+    },
+    "Premium (150€+)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium (€150+)"
+          }
+        }
+      }
+    },
+    "Premium freischalten" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock Premium"
+          }
+        }
+      }
+    },
+    "pro Jahr" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "per year"
+          }
+        }
+      }
+    },
+    "pro Monat" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "per month"
+          }
+        }
+      }
+    },
+    "Produkt nicht gefunden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Product not found"
+          }
+        }
+      }
+    },
+    "Provisorisch" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Provisional"
+          }
+        }
+      }
+    },
+    "Qualitätsmetrik" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quality Metrics"
+          }
+        }
+      }
+    },
+    "received" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Received"
+          }
+        }
+      }
+    },
+    "Rechtsgrundlage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legal Basis"
+          }
+        }
+      }
+    },
+    "Results: %@" : {
+
+    },
+    "Ruhestunden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiet Hours"
+          }
+        }
+      }
+    },
+    "Ruhestunden-Ende muss zwischen 0 und 23 liegen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiet hours end must be between 0 and 23"
+          }
+        }
+      }
+    },
+    "Ruhestunden-Start muss zwischen 0 und 23 liegen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiet hours start must be between 0 and 23"
+          }
+        }
+      }
+    },
+    "Schließen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        }
+      }
+    },
+    "Schließt das Formular ohne zu speichern" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closes the form without saving"
+          }
+        }
+      }
+    },
+    "Schütze" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sagittarius"
+          }
+        }
+      }
+    },
+    "Schwester" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sister"
+          }
+        }
+      }
+    },
+    "Search Input: %@" : {
+
+    },
+    "Sekunde" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "second"
+          }
+        }
+      }
+    },
+    "Sekunden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "seconds"
+          }
+        }
+      }
+    },
+    "Skorpion" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scorpio"
+          }
+        }
+      }
+    },
+    "Slider verwenden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Slider"
+          }
+        }
+      }
+    },
+    "Smarte Erinnerungen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smart Reminders"
+          }
+        }
+      }
+    },
+    "Sollen deine Geburtstage und Geschenkideen automatisch auf all deinen Apple-Geräten verfügbar sein?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Should your birthdays and gift ideas be automatically available on all your Apple devices?"
+          }
+        }
+      }
+    },
+    "Sonstiges" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
+          }
+        }
+      }
+    },
+    "Sortierung" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorting"
+          }
+        }
+      }
+    },
+    "SPAR-TIPP" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BEST VALUE"
+          }
+        }
+      }
+    },
+    "Speichere Ideen und setze Budgets für jeden Kontakt." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save ideas and set budgets for each contact."
+          }
+        }
+      }
+    },
+    "Speichern" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
+    },
+    "Speichert das Geschenk" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saves the gift"
+          }
+        }
+      }
+    },
+    "Speichert die Änderungen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saves the changes"
+          }
+        }
+      }
+    },
+    "Speichert die Geschenkidee" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saves the gift idea"
+          }
+        }
+      }
+    },
+    "Stand: März 2026" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As of: March 2026"
+          }
+        }
+      }
+    },
+    "Status" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status"
+          }
+        }
+      }
+    },
+    "Status ändern" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change Status"
+          }
+        }
+      }
+    },
+    "Status prüfen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check Status"
+          }
+        }
+      }
+    },
+    "Status unbekannt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status unknown"
+          }
+        }
+      }
+    },
+    "Status vorwärts" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advance Status"
+          }
+        }
+      }
+    },
+    "Steinbock" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capricorn"
+          }
+        }
+      }
+    },
+    "Sternzeichen (berechnet, keine Personaldaten)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zodiac sign (calculated, no personal data)"
+          }
+        }
+      }
+    },
+    "Stier" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taurus"
+          }
+        }
+      }
+    },
+    "Stunde" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hour"
+          }
+        }
+      }
+    },
+    "Stunden" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hours"
+          }
+        }
+      }
+    },
+    "Suche..." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search..."
+          }
+        }
+      }
+    },
+    "Suchen..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search..."
+          }
+        }
+      }
+    },
+    "Tag" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day"
+          }
+        }
+      }
+    },
+    "Tage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Days"
+          }
+        }
+      }
+    },
+    "Tagen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "days"
+          }
+        }
+      }
+    },
+    "Tags" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags"
+          }
+        }
+      }
+    },
+    "Tags:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags:"
+          }
+        }
+      }
+    },
+    "Tap für Details und Geschenkideen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap for details and gift ideas"
+          }
+        }
+      }
+    },
+    "Teilen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        }
+      }
+    },
+    "Teilen-Dialog geöffnet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share dialog opened"
+          }
+        }
+      }
+    },
+    "Teilt alle Geschenkideen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shares all gift ideas"
+          }
+        }
+      }
+    },
+    "Teilt die Nachricht über das Share Sheet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shares the message via the share sheet"
+          }
+        }
+      }
+    },
+    "Test-Daten" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test Data"
+          }
+        }
+      }
+    },
+    "Tippe auf einen Vorschlag, um ihn als Geschenkidee zu speichern." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap a suggestion to save it as a gift idea."
+          }
+        }
+      }
+    },
+    "Titel" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title"
+          }
+        }
+      }
+    },
+    "Titel muss ausgefüllt sein" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title is required"
+          }
+        }
+      }
+    },
+    "Titel vergangener Geschenke (keine Notizen)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titles of past gifts (no notes)"
+          }
+        }
+      }
+    },
+    "Über ai-presents-app" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About ai-presents-app"
+          }
+        }
+      }
+    },
+    "Über die App" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About the App"
+          }
+        }
+      }
+    },
+    "Übersicht" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overview"
+          }
+        }
+      }
+    },
+    "Überspringen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        }
+      }
+    },
+    "Unbegrenzte Erinnerungen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlimited Reminders"
+          }
+        }
+      }
+    },
+    "Unbegrenzte Kontakte" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlimited Contacts"
+          }
+        }
+      }
+    },
+    "Unbegrenzte Kontakte, KI-Vorschläge & mehr" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlimited contacts, AI suggestions & more"
+          }
+        }
+      }
+    },
+    "Unbekannt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown"
+          }
+        }
+      }
+    },
+    "Unbekannter Kaufstatus" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown purchase status"
+          }
+        }
+      }
+    },
+    "Urheberrecht" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright"
+          }
+        }
+      }
+    },
+    "Vater" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Father"
+          }
+        }
+      }
+    },
+    "Verarbeitet die KI-Anfragen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Processes the AI requests"
+          }
+        }
+      }
+    },
+    "Verbesserungswürdig" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Needs Improvement"
+          }
+        }
+      }
+    },
+    "Verschenkt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Given"
+          }
+        }
+      }
+    },
+    "Version" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        }
+      }
+    },
+    "Versuche andere Suchbegriffe" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try different search terms"
+          }
+        }
+      }
+    },
+    "Vielen Dank für dein Feedback!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thank you for your feedback!"
+          }
+        }
+      }
+    },
+    "Von %@ erhalten" : {
+
+    },
+    "vor" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ago"
+          }
+        }
+      }
+    },
+    "Vor" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prev"
+          }
+        }
+      }
+    },
+    "Vorname (aus Kontaktdaten)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First name (from contacts)"
+          }
+        }
+      }
+    },
+    "Vorname Nachname" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First Last Name"
+          }
+        }
+      }
+    },
+    "Vorschläge (%@)" : {
+
+    },
+    "Vorwarnungen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advance Warnings"
+          }
+        }
+      }
+    },
+    "Waage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Libra"
+          }
+        }
+      }
+    },
+    "Wähle das Jahr, in dem das Geschenk verschenkt wurde" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select the year the gift was given"
+          }
+        }
+      }
+    },
+    "Wähle das Jahr, in dem du das Geschenk erhalten hast" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select the year you received the gift"
+          }
+        }
+      }
+    },
+    "Wähle das Maximalbudget" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select the maximum budget"
+          }
+        }
+      }
+    },
+    "Wähle das Mindestbudget" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select the minimum budget"
+          }
+        }
+      }
+    },
+    "Wähle den Status der Geschenkidee aus" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select the status of the gift idea"
+          }
+        }
+      }
+    },
+    "War das hilfreich?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Was this helpful?"
+          }
+        }
+      }
+    },
+    "Was funktioniert gut?\n\nWas könnte besser sein?\n\n" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What works well?\n\nWhat could be better?\n\n"
+          }
+        }
+      }
+    },
+    "Was hast du erhalten?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What did you receive?"
+          }
+        }
+      }
+    },
+    "Was wird NICHT übertragen?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is NOT transmitted?"
+          }
+        }
+      }
+    },
+    "Was wurde verschenkt?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What was gifted?"
+          }
+        }
+      }
+    },
+    "Wassermann" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquarius"
+          }
+        }
+      }
+    },
+    "Weiter" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "Welche Daten werden gespeichert?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What data is stored?"
+          }
+        }
+      }
+    },
+    "Welche Daten werden übertragen?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What data is transmitted?"
+          }
+        }
+      }
+    },
+    "Wenn deaktiviert, erhältst du keine Benachrichtigungen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When disabled, you will not receive notifications."
+          }
+        }
+      }
+    },
+    "Wenn du die KI-Funktion aktivierst, werden minimale Daten (Vorname, Alter, Beziehungstyp, Sternzeichen) an OpenRouter/Google übertragen. Details findest du in der Einwilligungserklärung." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you enable the AI function, minimal data (first name, age, relationship type, zodiac sign) is transmitted to OpenRouter/Google. Details can be found in the consent form."
+          }
+        }
+      }
+    },
+    "Wenn du iCloud Sync aktivierst, werden deine Daten über Apples iCloud synchronisiert. Apple verschlüsselt diese Daten. Wir haben keinen Zugriff auf deine iCloud-Daten." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you enable iCloud Sync, your data is synced via Apple's iCloud. Apple encrypts this data. We have no access to your iCloud data."
+          }
+        }
+      }
+    },
+    "Wenn du Kontakte aus deinem Adressbuch importierst, werden nur Name und Geburtstag gelesen. Die Daten werden lokal gespeichert und nicht weitergegeben." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When you import contacts from your address book, only name and birthday are read. The data is stored locally and not shared."
+          }
+        }
+      }
+    },
+    "Wer verarbeitet die Daten?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Who processes the data?"
+          }
+        }
+      }
+    },
+    "Werde rechtzeitig erinnert, damit du perfekt vorbereitet bist." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get reminded in time so you're perfectly prepared."
+          }
+        }
+      }
+    },
+    "Wert:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Value:"
+          }
+        }
+      }
+    },
+    "Widder" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aries"
+          }
+        }
+      }
+    },
+    "Widerruf jederzeit möglich: Einstellungen → KI-Assistent → \"Widerrufen\"" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revocation possible at any time: Settings → AI Assistant → \"Revoke\""
+          }
+        }
+      }
+    },
+    "Widerrufen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revoke"
+          }
+        }
+      }
+    },
+    "Wird für bessere KI-Vorschläge genutzt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Used for better AI suggestions"
+          }
+        }
+      }
+    },
+    "Woche" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "week"
+          }
+        }
+      }
+    },
+    "Wochen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "weeks"
+          }
+        }
+      }
+    },
+    "z.B. Oma, Onkel, Nachbar" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "e.g. Grandma, Uncle, Neighbor"
+          }
+        }
+      }
+    },
+    "z.B. Papa, Mama, Oma..." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "e.g. Dad, Mom, Grandma..."
+          }
+        }
+      }
+    },
+    "z.B. Schmuck, Buch, Erlebnis, Geld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "e.g. Jewelry, Book, Experience, Money"
+          }
+        }
+      }
+    },
+    "Zeigt alle Geburtstage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows all birthdays"
+          }
+        }
+      }
+    },
+    "Zeigt Geburtstage der nächsten 7 Tage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows birthdays in the next 7 days"
+          }
+        }
+      }
+    },
+    "Zeigt Geburtstage der nächsten 30 Tage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows birthdays in the next 30 days"
+          }
+        }
+      }
+    },
+    "Zeigt nur heutige Geburtstage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows today's birthdays only"
+          }
+        }
+      }
+    },
+    "Zeitraum ohne Benachrichtigungen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Period without notifications"
+          }
+        }
+      }
+    },
+    "Zugriff auf Kontakte nicht erlaubt" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact access not allowed"
+          }
+        }
+      }
+    },
+    "Zugriff verweigert – bitte in den Systemeinstellungen erlauben." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access denied – please allow in system settings."
+          }
+        }
+      }
+    },
+    "Zustimmen und KI aktivieren" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agree and Enable AI"
+          }
+        }
+      }
+    },
+    "Zwillinge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gemini"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

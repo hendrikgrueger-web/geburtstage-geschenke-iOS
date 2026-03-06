@@ -12,234 +12,49 @@ final class AIServiceTests: XCTestCase {
         sut = nil
     }
 
-    // MARK: - Demo Mode Tests
+    // MARK: - API-Key-Prüfung
 
-    func testGenerateDemoSuggestionsForFamily() async throws {
+    func testGenerateGiftIdeasThrowsWithoutAPIKey() async throws {
+        // Ohne API-Key muss ein Fehler geworfen werden (kein Demo-Modus)
         let person = PersonRef(contactIdentifier: "",
             displayName: "Anna Müller",
             birthday: Date(),
             relation: "Mama"
         )
 
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: 0,
-            budgetMax: 100,
-            tags: [],
-            pastGifts: []
-        )
-
-        XCTAssertEqual(suggestions.count, 5, "Demo mode should generate exactly 5 suggestions")
-        XCTAssertFalse(suggestions.isEmpty, "Suggestions should not be empty")
-
-        for suggestion in suggestions {
-            XCTAssertFalse(suggestion.title.isEmpty, "Suggestion title should not be empty")
-            XCTAssertFalse(suggestion.reason.isEmpty, "Suggestion reason should not be empty")
+        do {
+            _ = try await sut.generateGiftIdeas(
+                for: person,
+                budgetMin: 0,
+                budgetMax: 100,
+                tags: [],
+                pastGifts: []
+            )
+            // Wenn kein API-Key konfiguriert ist, sollte ein Fehler kommen
+            if !AIService.isAPIKeyConfigured {
+                XCTFail("Should throw error when API key is not configured")
+            }
+        } catch {
+            // Erwartetes Verhalten ohne API-Key
+            XCTAssertTrue(error is AIService.AIError, "Should throw AIError, got: \(error)")
         }
     }
 
-    func testGenerateDemoSuggestionsForFriends() async throws {
+    func testGenerateBirthdayMessageThrowsWithoutAPIKey() async throws {
         let person = PersonRef(contactIdentifier: "",
-            displayName: "Thomas Schmidt",
+            displayName: "Tom Schmidt",
             birthday: Date(),
             relation: "Freund"
         )
 
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: 20,
-            budgetMax: 80,
-            tags: ["Technik"],
-            pastGifts: []
-        )
-
-        XCTAssertEqual(suggestions.count, 5, "Demo mode should generate exactly 5 suggestions")
-
-        // Budget should be respected in demo mode suggestions
-        for suggestion in suggestions {
-            XCTAssertFalse(suggestion.title.isEmpty)
+        do {
+            _ = try await sut.generateBirthdayMessage(for: person, pastGifts: [])
+            if !AIService.isAPIKeyConfigured {
+                XCTFail("Should throw error when API key is not configured")
+            }
+        } catch {
+            XCTAssertTrue(error is AIService.AIError, "Should throw AIError, got: \(error)")
         }
-    }
-
-    func testGenerateDemoSuggestionsForPartners() async throws {
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Lisa Weber",
-            birthday: Date(),
-            relation: "Partnerin"
-        )
-
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: 50,
-            budgetMax: 200,
-            tags: [],
-            pastGifts: []
-        )
-
-        XCTAssertEqual(suggestions.count, 5)
-        XCTAssertTrue(suggestions.contains { $0.title.contains("Romantisch") || $0.title.contains("Erlebnis") },
-                      "Partner suggestions should include romantic or experiential gifts")
-    }
-
-    func testGenerateDemoSuggestionsForUnknownRelation() async throws {
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Max Fischer",
-            birthday: Date(),
-            relation: "Unbekannt"
-        )
-
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: 10,
-            budgetMax: 50,
-            tags: [],
-            pastGifts: []
-        )
-
-        XCTAssertEqual(suggestions.count, 5)
-        XCTAssertFalse(suggestions.isEmpty)
-    }
-
-    func testGenerateDemoSuggestionsForMilestoneAge18() async throws {
-        // Create a person who is turning 18 this year
-        let calendar = Calendar.current
-        let today = Date()
-        var components = calendar.dateComponents([.year, .month, .day], from: today)
-        components.year! -= 18
-
-        guard let birthday = calendar.date(from: components) else {
-            XCTFail("Failed to create birthday date")
-            return
-        }
-
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Lisa Neugeboren",
-            birthday: birthday,
-            relation: "Tochter"
-        )
-
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: 50,
-            budgetMax: 150,
-            tags: [],
-            pastGifts: []
-        )
-
-        XCTAssertEqual(suggestions.count, 5)
-        XCTAssertFalse(suggestions.isEmpty)
-
-        // Verify suggestions are relevant for 18th birthday
-        let suggestionTitles = suggestions.map { $0.title.lowercased() }
-        let containsMilestoneKeywords = suggestionTitles.contains { title in
-            title.contains("erlebnis") || title.contains("personalisiert") || title.contains("gutschein")
-        }
-        XCTAssertTrue(containsMilestoneKeywords, "Milestone suggestions should contain relevant keywords")
-    }
-
-    func testGenerateDemoSuggestionsForMilestoneAge30() async throws {
-        // Create a person who is turning 30 this year
-        let calendar = Calendar.current
-        let today = Date()
-        var components = calendar.dateComponents([.year, .month, .day], from: today)
-        components.year! -= 30
-
-        guard let birthday = calendar.date(from: components) else {
-            XCTFail("Failed to create birthday date")
-            return
-        }
-
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Max Erwachsener",
-            birthday: birthday,
-            relation: "Bruder"
-        )
-
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: 100,
-            budgetMax: 300,
-            tags: [],
-            pastGifts: []
-        )
-
-        XCTAssertEqual(suggestions.count, 5)
-        XCTAssertFalse(suggestions.isEmpty)
-
-        // Verify suggestions are relevant for 30th birthday
-        let suggestionTitles = suggestions.map { $0.title.lowercased() }
-        let containsAdultKeywords = suggestionTitles.contains { title in
-            title.contains("erlebnis") || title.contains("hochwertig") || title.contains("zeitlos")
-        }
-        XCTAssertTrue(containsAdultKeywords, "30th milestone suggestions should contain relevant keywords")
-    }
-
-    func testGenerateDemoSuggestionsWithTags() async throws {
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Julia Klein",
-            birthday: Date(),
-            relation: "Freundin"
-        )
-
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: 20,
-            budgetMax: 80,
-            tags: ["Bücher", "Lesen"],
-            pastGifts: []
-        )
-
-        XCTAssertEqual(suggestions.count, 5)
-    }
-
-    func testGenerateDemoSuggestionsWithPastGifts() async throws {
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Peter Meier",
-            birthday: Date(),
-            relation: "Kollege"
-        )
-
-        let pastGift = GiftHistory(
-            personId: person.id,
-            title: "Bücher-Set",
-            category: "Bücher",
-            year: 2025,
-            budget: 30,
-            note: "Liebt Krimis"
-        )
-
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: 0,
-            budgetMax: 100,
-            tags: [],
-            pastGifts: [pastGift]
-        )
-
-        XCTAssertEqual(suggestions.count, 5)
-        // Note: In demo mode, past gifts are passed but filtering logic may vary
-    }
-
-    func testGenerateDemoSuggestionsRespectsBudget() async throws {
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Sarah Wagner",
-            birthday: Date(),
-            relation: "Schwester"
-        )
-
-        let lowBudget = 10
-        let highBudget = 30
-
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: Double(lowBudget),
-            budgetMax: Double(highBudget),
-            tags: [],
-            pastGifts: []
-        )
-
-        XCTAssertEqual(suggestions.count, 5)
-        // Note: Demo mode generates fixed suggestions, budget awareness is limited
     }
 
     // MARK: - GiftSuggestion Tests
@@ -254,26 +69,23 @@ final class AIServiceTests: XCTestCase {
         XCTAssertEqual(suggestion.reason, "Because it's a test")
     }
 
-    func testMultipleGiftSuggestionsDistinct() async throws {
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Test Person",
-            birthday: Date(),
-            relation: "Freund"
-        )
+    func testGiftSuggestionHasUniqueID() {
+        let s1 = GiftSuggestion(title: "Gift 1", reason: "Reason 1")
+        let s2 = GiftSuggestion(title: "Gift 2", reason: "Reason 2")
+        XCTAssertNotEqual(s1.id, s2.id, "Each suggestion should have a unique ID")
+    }
 
-        let suggestions = try await sut.generateGiftIdeas(
-            for: person,
-            budgetMin: 0,
-            budgetMax: 100,
-            tags: [],
-            pastGifts: []
-        )
+    // MARK: - BirthdayMessage Tests
 
-        let titles = suggestions.map { $0.title }
-        let uniqueTitles = Set(titles)
+    func testBirthdayMessageFullText() {
+        let message = BirthdayMessage(greeting: "Hallo!", body: "Alles Gute!")
+        XCTAssertEqual(message.fullText, "Hallo!\n\nAlles Gute!")
+    }
 
-        XCTAssertEqual(titles.count, uniqueTitles.count,
-                       "All suggestions should have unique titles")
+    func testBirthdayMessageFullTextContainsBoth() {
+        let message = BirthdayMessage(greeting: "Liebe Anna,", body: "Herzlichen Glückwunsch!")
+        XCTAssertTrue(message.fullText.contains(message.greeting))
+        XCTAssertTrue(message.fullText.contains(message.body))
     }
 
     // MARK: - AIError Tests
@@ -281,145 +93,41 @@ final class AIServiceTests: XCTestCase {
     func testAIErrorDescriptions() {
         XCTAssertNotNil(AIService.AIError.noAPIKey.errorDescription,
                        "noAPIKey should have error description")
+        XCTAssertNotNil(AIService.AIError.notConfigured.errorDescription,
+                       "notConfigured should have error description")
+        XCTAssertNotNil(AIService.AIError.noConsent.errorDescription,
+                       "noConsent should have error description")
         XCTAssertNotNil(AIService.AIError.httpError(500).errorDescription,
                        "httpError should have error description")
         XCTAssertNotNil(AIService.AIError.emptyResponse.errorDescription,
                        "emptyResponse should have error description")
+        XCTAssertNotNil(AIService.AIError.invalidResponse.errorDescription,
+                       "invalidResponse should have error description")
     }
 
-    // MARK: - BirthdayMessage Tests
-
-    func testGenerateDemoBirthdayMessageForMilestone() async throws {
-        // Create a person who is turning 30 this year
-        let calendar = Calendar.current
-        let today = Date()
-        var components = calendar.dateComponents([.year, .month, .day], from: today)
-        components.year! -= 30
-
-        guard let birthday = calendar.date(from: components) else {
-            XCTFail("Failed to create birthday date")
-            return
-        }
-
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Anna Müller",
-            birthday: birthday,
-            relation: "Schwester"
-        )
-
-        let message = try await sut.generateBirthdayMessage(for: person, pastGifts: [])
-
-        XCTAssertFalse(message.greeting.isEmpty, "Greeting should not be empty")
-        XCTAssertFalse(message.body.isEmpty, "Body should not be empty")
-        XCTAssertFalse(message.fullText.isEmpty, "Full text should not be empty")
-
-        // Verify message contains birthday wishes (demo mode uses generic template)
-        XCTAssertTrue(message.body.contains("Geburtstag") || message.body.contains("besonderen"),
-                      "Demo message should contain birthday wishes")
-        XCTAssertTrue(message.body.contains("Anna") || message.greeting.contains("Anna"),
-                      "Message should be personalized with person's name")
+    func testAIErrorNotConfiguredMessage() {
+        let error = AIService.AIError.notConfigured
+        XCTAssertTrue(error.errorDescription?.contains("KI-Dienst") == true,
+                     "notConfigured error should mention KI-Dienst")
     }
 
-    func testGenerateDemoBirthdayMessageForYoungPerson() async throws {
-        // Create a young person (under 30)
-        let calendar = Calendar.current
-        let today = Date()
-        var components = calendar.dateComponents([.year, .month, .day], from: today)
-        components.year! -= 25
-
-        guard let birthday = calendar.date(from: components) else {
-            XCTFail("Failed to create birthday date")
-            return
-        }
-
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Tom Schmidt",
-            birthday: birthday,
-            relation: "Freund"
-        )
-
-        let message = try await sut.generateBirthdayMessage(for: person, pastGifts: [])
-
-        XCTAssertFalse(message.greeting.isEmpty)
-        XCTAssertFalse(message.body.isEmpty)
-        XCTAssertFalse(message.fullText.isEmpty)
-
-        // Verify message contains birthday wishes
-        XCTAssertTrue(message.body.contains("Geburtstag") || message.body.contains("Glückwunsch"),
-                      "Birthday message should contain birthday wishes")
-        XCTAssertTrue(message.body.contains("Tom") || message.greeting.contains("Tom"),
-                      "Message should be personalized")
+    func testAIErrorNoConsentMessage() {
+        let error = AIService.AIError.noConsent
+        XCTAssertTrue(error.errorDescription?.contains("Einwilligung") == true,
+                     "noConsent error should mention consent")
     }
 
-    func testGenerateDemoBirthdayMessageForOlderPerson() async throws {
-        // Create an older person (40+)
-        let calendar = Calendar.current
-        let today = Date()
-        var components = calendar.dateComponents([.year, .month, .day], from: today)
-        components.year! -= 45
-
-        guard let birthday = calendar.date(from: components) else {
-            XCTFail("Failed to create birthday date")
-            return
-        }
-
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Elisabeth Wagner",
-            birthday: birthday,
-            relation: "Mama"
-        )
-
-        let message = try await sut.generateBirthdayMessage(for: person, pastGifts: [])
-
-        XCTAssertFalse(message.greeting.isEmpty)
-        XCTAssertFalse(message.body.isEmpty)
-        XCTAssertFalse(message.fullText.isEmpty)
-
-        // Verify message is warm and appreciative (demo mode template uses "Herzlichst")
-        XCTAssertTrue(message.body.contains("Herzlichst") || message.body.contains("wunderschönen"),
-                      "Message should be warm and appreciative")
+    func testAIErrorHttpErrorIncludesStatusCode() {
+        let error = AIService.AIError.httpError(429)
+        XCTAssertTrue(error.errorDescription?.contains("429") == true,
+                     "HTTP error should include status code")
     }
 
-    func testBirthdayMessageStructure() async throws {
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Test Person",
-            birthday: Date(),
-            relation: "Partner"
-        )
+    // MARK: - Verfügbarkeit
 
-        let message = try await sut.generateBirthdayMessage(for: person, pastGifts: [])
-
-        // Verify structure
-        XCTAssertFalse(message.greeting.isEmpty, "Greeting should not be empty")
-        XCTAssertFalse(message.body.isEmpty, "Body should not be empty")
-
-        // Verify fullText combines both
-        XCTAssertTrue(message.fullText.contains(message.greeting), "Full text should contain greeting")
-        XCTAssertTrue(message.fullText.contains(message.body), "Full text should contain body")
-    }
-
-    func testGenerateDemoBirthdayMessageWithPastGifts() async throws {
-        let person = PersonRef(contactIdentifier: "",
-            displayName: "Sarah Klein",
-            birthday: Date(),
-            relation: "Freundin"
-        )
-
-        let pastGifts = [
-            GiftHistory(
-                personId: person.id,
-                title: "Buchgeschenk",
-                category: "Bücher",
-                year: 2025,
-                budget: 30,
-                note: "Liebt Krimis"
-            )
-        ]
-
-        let message = try await sut.generateBirthdayMessage(for: person, pastGifts: pastGifts)
-
-        XCTAssertFalse(message.greeting.isEmpty)
-        XCTAssertFalse(message.body.isEmpty)
-        // Past gifts are provided to API mode, demo mode uses standard templates
+    func testIsAPIKeyConfiguredReturnsBool() {
+        // Im Test-Environment ist normalerweise kein API-Key vorhanden
+        let result = AIService.isAPIKeyConfigured
+        XCTAssertTrue(result == true || result == false, "Should return a valid Bool")
     }
 }

@@ -90,8 +90,8 @@ struct GiftHistoryRow: View {
         }
         .padding(.vertical, 2)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(history.giftDirection == .given ? "Verschenkt" : "Erhalten"): \(history.title), \(history.category), \(history.year)")
-        .accessibilityHint("Geschenk vermerkt im Jahr \(history.year)")
+        .accessibilityLabel(String(localized: "\(history.giftDirection == .given ? String(localized: "Verschenkt") : String(localized: "Erhalten")): \(history.title), \(history.category), \(history.year)"))
+        .accessibilityHint(String(localized: "Geschenk vermerkt im Jahr \(history.year)"))
     }
 
     private var yearBadgeColor: Color {

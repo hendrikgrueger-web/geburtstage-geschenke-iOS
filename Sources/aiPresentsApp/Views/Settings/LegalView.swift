@@ -49,8 +49,8 @@ struct LegalView: View {
 // MARK: - Section Component
 
 private struct LegalSection: View {
-    let title: String
-    let content: String
+    let title: LocalizedStringKey
+    let content: LocalizedStringKey
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {

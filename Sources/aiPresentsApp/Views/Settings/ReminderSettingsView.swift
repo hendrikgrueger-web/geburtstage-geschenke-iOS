@@ -165,11 +165,11 @@ struct ReminderSettingsView: View {
 
     private func dayText(for day: Int) -> String {
         switch day {
-        case 30: return "30 Tage vorher (frühzeitig)"
-        case 14: return "14 Tage vorher (2 Wochen)"
-        case 7: return "7 Tage vorher (1 Woche)"
-        case 2: return "2 Tage vorher (kurzfristig)"
-        default: return "\(day) Tage vorher"
+        case 30: return String(localized: "30 Tage vorher (frühzeitig)")
+        case 14: return String(localized: "14 Tage vorher (2 Wochen)")
+        case 7: return String(localized: "7 Tage vorher (1 Woche)")
+        case 2: return String(localized: "2 Tage vorher (kurzfristig)")
+        default: return String(localized: "\(day) Tage vorher")
         }
     }
 

@@ -93,9 +93,9 @@ class ContactsService: ObservableObject {
         var errorDescription: String? {
             switch self {
             case .notAuthorized:
-                return "Zugriff auf Kontakte nicht erlaubt"
+                return String(localized: "Zugriff auf Kontakte nicht erlaubt")
             case .noBirthdaysFound:
-                return "Keine Kontakte mit Geburtstagen gefunden"
+                return String(localized: "Keine Kontakte mit Geburtstagen gefunden")
             }
         }
     }

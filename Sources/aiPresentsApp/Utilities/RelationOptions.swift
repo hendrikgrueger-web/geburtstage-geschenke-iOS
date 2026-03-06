@@ -23,4 +23,21 @@ enum RelationOptions {
     static func isPredefined(_ value: String) -> Bool {
         predefined.contains(value)
     }
+
+    /// Maps German canonical DB values to localized display strings.
+    /// Custom (non-predefined) values are returned as-is.
+    static func localizedDisplayName(for relation: String) -> String {
+        switch relation {
+        case "Partner/in": return String(localized: "Partner/in")
+        case "Mutter": return String(localized: "Mutter")
+        case "Vater": return String(localized: "Vater")
+        case "Schwester": return String(localized: "Schwester")
+        case "Bruder": return String(localized: "Bruder")
+        case "Freund/in": return String(localized: "Freund/in")
+        case "Kollege/in": return String(localized: "Kollege/in")
+        case "Kind": return String(localized: "Kind")
+        case "Sonstige": return String(localized: "Sonstige")
+        default: return relation
+        }
+    }
 }

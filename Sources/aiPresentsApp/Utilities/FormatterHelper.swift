@@ -7,7 +7,7 @@ struct FormatterHelper {
     static let displayDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = .current
         return formatter
     }()
 
@@ -15,7 +15,7 @@ struct FormatterHelper {
     static let shortDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = .current
         return formatter
     }()
 
@@ -25,7 +25,7 @@ struct FormatterHelper {
         formatter.numberStyle = .currency
         formatter.currencyCode = "EUR"
         formatter.currencySymbol = "€"
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = .current
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 0
         return formatter
@@ -71,15 +71,16 @@ struct FormatterHelper {
         guard let days = components.day else { return formatDate(date) }
 
         if days == 0 {
-            return "Heute"
+            return String(localized: "Heute")
         } else if days == 1 {
-            return "Morgen"
+            return String(localized: "Morgen")
         } else if days == -1 {
-            return "Gestern"
+            return String(localized: "Gestern")
         } else if days > 0 && days < 7 {
-            return "In \(days) Tagen"
+            return String(localized: "In \(days) Tagen")
         } else if days < 0 && days > -7 {
-            return "Vor \(-days) Tagen"
+            let absDays = -days
+            return String(localized: "Vor \(absDays) Tagen")
         } else {
             return formatDate(date)
         }
@@ -88,7 +89,7 @@ struct FormatterHelper {
     /// Formats a month and year
     static func formatMonthYear(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = .current
         formatter.dateFormat = "MMMM yyyy"
         return formatter.string(from: date)
     }
@@ -96,7 +97,7 @@ struct FormatterHelper {
     /// Formats a weekday
     static func formatWeekday(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = .current
         formatter.dateFormat = "EEEE"
         return formatter.string(from: date)
     }
@@ -113,7 +114,8 @@ struct FormatterHelper {
         if min == max {
             return formatCurrency(min)
         } else if min == 0 {
-            return "bis \(formatCurrency(max))"
+            let maxFormatted = formatCurrency(max)
+            return String(localized: "bis \(maxFormatted)")
         } else {
             return "\(formatCurrency(min)) - \(formatCurrency(max))"
         }
@@ -131,18 +133,19 @@ struct FormatterHelper {
 
     // MARK: - Text Formatting
 
-    /// Formats a list of items with commas and "und"
+    /// Formats a list of items with commas and localized conjunction
     static func formatList(_ items: [String]) -> String {
+        let conjunction = String(localized: "und")
         switch items.count {
         case 0:
             return ""
         case 1:
             return items[0]
         case 2:
-            return "\(items[0]) und \(items[1])"
+            return "\(items[0]) \(conjunction) \(items[1])"
         default:
             let allButLast = items.dropLast().joined(separator: ", ")
-            return "\(allButLast) und \(items.last!)"
+            return "\(allButLast) \(conjunction) \(items.last!)"
         }
     }
 
@@ -166,24 +169,24 @@ struct FormatterHelper {
 
     // MARK: - Age Formatting
 
-    /// Formats age with proper German grammar
+    /// Formats age with proper grammar
     static func formatAge(_ age: Int) -> String {
-        return "\(age) Jahre alt"
+        return String(localized: "\(age) Jahre alt")
     }
 
     /// Formats turning age for upcoming birthdays
     static func formatTurningAge(_ age: Int) -> String {
-        return "wird \(age)"
+        return String(localized: "wird \(age)")
     }
 
     // MARK: - Duration Formatting
 
-    /// Formats duration in days with proper German grammar
+    /// Formats duration in days with proper grammar
     static func formatDuration(_ days: Int) -> String {
         if days == 1 {
-            return "1 Tag"
+            return String(localized: "1 Tag")
         } else {
-            return "\(days) Tage"
+            return String(localized: "\(days) Tage")
         }
     }
 
@@ -194,19 +197,25 @@ struct FormatterHelper {
         let components = calendar.dateComponents([.minute, .hour, .day, .weekOfMonth, .month, .year], from: date, to: now)
 
         if let years = components.year, years > 0 {
-            return "vor \(years) Jahr\(years == 1 ? "" : "en")"
+            let unit = years == 1 ? String(localized: "Jahr") : String(localized: "Jahren")
+            return String(localized: "vor") + " \(years) \(unit)"
         } else if let months = components.month, months > 0 {
-            return "vor \(months) Monat\(months == 1 ? "" : "en")"
+            let unit = months == 1 ? String(localized: "Monat") : String(localized: "Monaten")
+            return String(localized: "vor") + " \(months) \(unit)"
         } else if let weeks = components.weekOfMonth, weeks > 0 {
-            return "vor \(weeks) Woche\(weeks == 1 ? "" : "n")"
+            let unit = weeks == 1 ? String(localized: "Woche") : String(localized: "Wochen")
+            return String(localized: "vor") + " \(weeks) \(unit)"
         } else if let days = components.day, days > 0 {
-            return "vor \(days) Tag\(days == 1 ? "" : "en")"
+            let unit = days == 1 ? String(localized: "Tag") : String(localized: "Tagen")
+            return String(localized: "vor") + " \(days) \(unit)"
         } else if let hours = components.hour, hours > 0 {
-            return "vor \(hours) Stunde\(hours == 1 ? "" : "n")"
+            let unit = hours == 1 ? String(localized: "Stunde") : String(localized: "Stunden")
+            return String(localized: "vor") + " \(hours) \(unit)"
         } else if let minutes = components.minute, minutes > 0 {
-            return "vor \(minutes) Minute\(minutes == 1 ? "" : "n")"
+            let unit = minutes == 1 ? String(localized: "Minute") : String(localized: "Minuten")
+            return String(localized: "vor") + " \(minutes) \(unit)"
         } else {
-            return "gerade eben"
+            return String(localized: "gerade eben")
         }
     }
 }

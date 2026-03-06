@@ -33,12 +33,16 @@
 	<true/>
 	<key>NSContactsUsageDescription</key>
 	<string>Diese App benötigt Zugriff auf deine Kontakte, um Geburtstage von Freunden und Familie zu importieren.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Der KI-Assistent nutzt das Mikrofon für die Spracheingabe, damit du Geschenkideen und Fragen per Stimme eingeben kannst.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Die Spracherkennung wird für die Spracheingabe im KI-Assistenten verwendet. Die Erkennung erfolgt bevorzugt auf dem Gerät.</string>
 	<key>NSUbiquitousContainersUsageDescription</key>
 	<string>Diese App nutzt iCloud, um deine Daten zwischen deinen Apple-Geräten zu synchronisieren.</string>
 	<key>NSUserNotificationsUsageDescription</key>
 	<string>Diese App möchte dich an Geburtstage erinnern, damit du pünktlich Geschenke vorbereiten kannst.</string>
-	<key>OpenRouterAPIKey</key>
-	<string>$(OPENROUTER_API_KEY)</string>
+	<key>AIProxySecret</key>
+	<string>$(AI_PROXY_SECRET)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

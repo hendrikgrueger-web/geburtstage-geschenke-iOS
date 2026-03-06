@@ -8,7 +8,7 @@ struct BudgetRangeView: View {
         VStack(alignment: .leading, spacing: 8) {
             // Range Title
             HStack {
-                Text(budgetRange.rawValue)
+                Text(budgetRange.localizedName)
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .foregroundColor(AppColor.textPrimary)
@@ -100,7 +100,7 @@ struct BudgetRangeCompactView: View {
                 .frame(width: 8, height: 8)
 
             // Range text
-            Text(budgetRange.rawValue)
+            Text(budgetRange.localizedName)
                 .font(.subheadline)
                 .foregroundColor(isSelected ? AppColor.primary : AppColor.textPrimary)
 

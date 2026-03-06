@@ -200,9 +200,9 @@ enum FormError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .validationFailed:
-            return "Bitte korrigiere die Fehler im Formular"
+            return String(localized: "Bitte korrigiere die Fehler im Formular")
         case .networkError(let error):
-            return "Netzwerkfehler: \(error.localizedDescription)"
+            return String(localized: "Netzwerkfehler:") + " \(error.localizedDescription)"
         case .submissionFailed(let message):
             return message
         case .custom(let message):

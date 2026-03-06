@@ -14,6 +14,13 @@ enum GiftDirection: String, Codable, CaseIterable, Sendable {
         case .received: "Erhalten"
         }
     }
+
+    var localizedName: String {
+        switch self {
+        case .given: return String(localized: "Verschenkt")
+        case .received: return String(localized: "Erhalten")
+        }
+    }
 }
 
 @Model

@@ -50,7 +50,7 @@ struct BirthdayRow: View {
         .listRowBackground(daysUntilBirthday <= 7 ? urgentBackgroundColor : AppColor.cardBackground)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
-        .accessibilityHint("Tap für Details und Geschenkideen")
+        .accessibilityHint(String(localized: "Tap für Details und Geschenkideen"))
         .contentShape(Rectangle())
         .onTapGesture {
             HapticFeedback.light()
@@ -72,9 +72,9 @@ struct BirthdayRow: View {
         } else if hasGiftWithStatus(.purchased) || hasGiftWithStatus(.given) {
             statusPill(icon: "checkmark", color: AppColor.success)
         } else if hasGiftWithStatus(.planned) {
-            statusPill(text: "Geplant", color: .blue)
+            statusPill(text: String(localized: "Geplant"), color: .blue)
         } else if ideaCount > 0 {
-            statusPill(text: "\(ideaCount) Ideen", color: AppColor.accent)
+            statusPill(text: String(localized: "\(ideaCount) Ideen"), color: AppColor.accent)
         }
     }
 
@@ -156,18 +156,18 @@ struct BirthdayRow: View {
         }
 
         var label = "\(person.displayName), "
-        label += "\(age) Jahre alt. "
+        label += String(localized: "\(age) Jahre alt. ")
 
         if person.skipGift {
-            label += "Kein Geschenk nötig. "
+            label += String(localized: "Kein Geschenk nötig. ")
         } else if !giftIdeas.isEmpty {
-            label += "\(giftIdeas.count) Geschenkidee\(giftIdeas.count == 1 ? "" : "n"). "
+            label += String(localized: "\(giftIdeas.count) Geschenkidee\(giftIdeas.count == 1 ? "" : "n"). ")
         }
 
         if daysUntil == 0 {
-            label += "Geburtstag heute!"
+            label += String(localized: "Geburtstag heute!")
         } else {
-            label += "Geburtstag in \(daysUntil) Tagen."
+            label += String(localized: "Geburtstag in \(daysUntil) Tagen.")
         }
 
         return label
@@ -181,17 +181,17 @@ struct BirthdayRow: View {
         }
 
         if daysUntil == 0 {
-            return "🎉 Heute wird \(age)!"
+            return "🎉 " + String(localized: "Heute wird \(age)!")
         } else if daysUntil == 1 {
-            return "Morgen wird \(age)"
+            return String(localized: "Morgen wird \(age)")
         } else if daysUntil == 365 {
-            return "Nächstes Jahr wird \(age + 1)"
+            return String(localized: "Nächstes Jahr wird \(age + 1)")
         } else if daysUntil < 7 {
-            return "In \(daysUntil) Tagen wird \(age)"
+            return String(localized: "In \(daysUntil) Tagen wird \(age)")
         } else if daysUntil < 30 {
-            return "\(daysUntil) Tage bis zum \(age). Geburtstag"
+            return String(localized: "\(daysUntil) Tage bis zum \(age). Geburtstag")
         } else {
-            return "Wird \(age) (\(daysUntil) Tage)"
+            return String(localized: "Wird \(age) (\(daysUntil) Tage)")
         }
     }
 

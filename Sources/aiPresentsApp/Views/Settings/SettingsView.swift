@@ -4,7 +4,6 @@ import UserNotifications
 
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject private var subscriptionManager: SubscriptionManager
     @State private var showingResetConfirmation = false
     @State private var hasNotificationPermission = false
     @State private var showingReminderSettings = false
@@ -15,8 +14,6 @@ struct SettingsView: View {
     @State private var showingICloudRestartNotice = false
     @State private var showingAbout = false
     @State private var showingRevokeConsentConfirmation = false
-    @State private var showingPaywall = false
-
     @EnvironmentObject private var reminderManager: ReminderManager
     @StateObject private var consentManager = AIConsentManager.shared
 
@@ -54,11 +51,11 @@ struct SettingsView: View {
 
     private func birthdayText(for days: Int) -> String {
         if days == 0 {
-            return "Heute!"
+            return String(localized: "Heute!")
         } else if days == 1 {
-            return "Morgen"
+            return String(localized: "Morgen")
         } else {
-            return "In \(days) Tagen"
+            return String(localized: "In \(days) Tagen")
         }
     }
 
@@ -91,66 +88,6 @@ struct SettingsView: View {
                         .padding(.vertical, 4)
                     } header: {
                         Text("Übersicht")
-                    }
-                }
-
-                // MARK: - Abo-Verwaltung
-                Section {
-                    if subscriptionManager.isPremium {
-                        HStack {
-                            PremiumBadge(style: .prominent)
-                            Spacer()
-                            if let product = subscriptionManager.activeProduct {
-                                Text(product.displayPrice + "/\(product.id.contains("yearly") ? "Jahr" : "Monat")")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-
-                        Button {
-                            if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
-                                UIApplication.shared.open(url)
-                            }
-                        } label: {
-                            HStack {
-                                Text("Abo verwalten")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                    } else {
-                        Button {
-                            showingPaywall = true
-                            HapticFeedback.medium()
-                        } label: {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("Premium freischalten")
-                                        .font(.headline)
-                                    Text("Unbegrenzte Kontakte, KI-Vorschläge & mehr")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                                Spacer()
-                                Image(systemName: "crown.fill")
-                                    .foregroundStyle(.orange)
-                            }
-                        }
-
-                        Button("Käufe wiederherstellen") {
-                            Task {
-                                await subscriptionManager.restorePurchases()
-                            }
-                        }
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                    }
-                } header: {
-                    Text("Abo")
-                } footer: {
-                    if !subscriptionManager.isPremium {
-                        Text("Free: \(SubscriptionManager.freePersonLimit) Kontakte · Demo-KI · 1 Erinnerung")
                     }
                 }
 
@@ -201,7 +138,7 @@ struct SettingsView: View {
                                 await handlePermissionChange(newValue)
                             }
                         }
-                        .accessibilityLabel("Erinnerungen aktivieren")
+                        .accessibilityLabel(String(localized: "Erinnerungen aktivieren"))
 
                     NavigationLink {
                         ReminderSettingsView(rule: reminderRule.first)
@@ -235,7 +172,7 @@ struct SettingsView: View {
                             }
                         }
                         .disabled(isRefreshingReminders)
-                        .accessibilityLabel("Erinnerungen neu laden")
+                        .accessibilityLabel(String(localized: "Erinnerungen neu laden"))
                     }
                 }
 
@@ -243,7 +180,7 @@ struct SettingsView: View {
                     Toggle(isOn: $iCloudSyncEnabled) {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("iCloud Sync")
-                            Text(iCloudSyncEnabled ? "Aktiv" : "Nur lokal")
+                            Text(iCloudSyncEnabled ? String(localized: "Aktiv") : String(localized: "Nur lokal"))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -255,8 +192,8 @@ struct SettingsView: View {
                     Text("iCloud Sync")
                 } footer: {
                     Text(iCloudSyncEnabled
-                         ? "Daten werden automatisch über deine Apple-Geräte synchronisiert."
-                         : "Daten werden nur lokal auf diesem Gerät gespeichert.")
+                         ? String(localized: "Daten werden automatisch über deine Apple-Geräte synchronisiert.")
+                         : String(localized: "Daten werden nur lokal auf diesem Gerät gespeichert."))
                 }
                 .alert("Neustart erforderlich", isPresented: $showingICloudRestartNotice) {
                     Button("OK") { }
@@ -285,7 +222,7 @@ struct SettingsView: View {
                     }
 
                     if !AIService.isAPIKeyConfigured {
-                        Label("API-Key nicht konfiguriert (Demo-Modus)", systemImage: "key.slash")
+                        Label("API-Key nicht konfiguriert", systemImage: "key.slash")
                             .font(.caption)
                             .foregroundColor(.orange)
                     }
@@ -373,7 +310,6 @@ struct SettingsView: View {
         .sheet(isPresented: $showingAbout) {
             aboutSheet
         }
-        .paywallSheet(isPresented: $showingPaywall)
     }
 
     private var aboutSheet: some View {
@@ -450,13 +386,13 @@ struct SettingsView: View {
 
             if granted {
                 await reminderManager.scheduleAllReminders()
-                toast = ToastItem.success("Erinnerungen aktiviert", message: "Du erhältst Benachrichtigungen für Geburtstage.")
+                toast = ToastItem.success(String(localized: "Erinnerungen aktiviert"), message: String(localized: "Du erhältst Benachrichtigungen für Geburtstage."))
             } else {
-                toast = ToastItem.warning("Berechtigung verweigert", message: "Bitte erlaube Benachrichtigungen in den Systemeinstellungen.")
+                toast = ToastItem.warning(String(localized: "Berechtigung verweigert"), message: String(localized: "Bitte erlaube Benachrichtigungen in den Systemeinstellungen."))
             }
         } else {
             await reminderManager.cancelAllReminders()
-            toast = ToastItem.info("Erinnerungen deaktiviert", message: "Du erhältst keine Benachrichtigungen mehr.")
+            toast = ToastItem.info(String(localized: "Erinnerungen deaktiviert"), message: String(localized: "Du erhältst keine Benachrichtigungen mehr."))
         }
     }
 
@@ -475,7 +411,7 @@ struct SettingsView: View {
         let pendingRequests = await center.pendingNotificationRequests()
 
         let count = pendingRequests.count
-        toast = ToastItem.success("Erinnerungen aktualisiert", message: "\(count) Erinnerung\(count == 1 ? "" : "en") neu geplant.")
+        toast = ToastItem.success(String(localized: "Erinnerungen aktualisiert"), message: String(localized: "\(count) Erinnerung\(count == 1 ? "" : "en") neu geplant."))
     }
 
     private func resetAllData() {
@@ -486,25 +422,25 @@ struct SettingsView: View {
             try modelContext.delete(model: PersonRef.self)
             try modelContext.delete(model: SuggestionFeedback.self)
             AppLogger.data.info("All data reset successfully")
-            toast = ToastItem.success("Daten gelöscht", message: "Alle Kontakte und Geschenkideen wurden entfernt.")
+            toast = ToastItem.success(String(localized: "Daten gelöscht"), message: String(localized: "Alle Kontakte und Geschenkideen wurden entfernt."))
         } catch {
             AppLogger.data.error("Failed to reset data", error: error)
-            toast = ToastItem.error("Fehler beim Löschen", message: "Ein Fehler ist aufgetreten. Bitte versuche es erneut.")
+            toast = ToastItem.error(String(localized: "Fehler beim Löschen"), message: String(localized: "Ein Fehler ist aufgetreten. Bitte versuche es erneut."))
         }
     }
 
     private func openFeedback() {
         let feedbackEmail = "harryhirsch1878@gmail.com"
         let subject = "ai-presents-app Feedback v\(appVersion)"
-        let body = "Was funktioniert gut?\n\nWas könnte besser sein?\n\n"
+        let body = String(localized: "Was funktioniert gut?\n\nWas könnte besser sein?\n\n")
 
         if let url = URL(string: "mailto:\(feedbackEmail)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") {
             UIApplication.shared.open(url) { success in
                 if success {
-                    toast = ToastItem.info("Mail-App geöffnet", message: "Vielen Dank für dein Feedback!")
+                    toast = ToastItem.info(String(localized: "Mail-App geöffnet"), message: String(localized: "Vielen Dank für dein Feedback!"))
                 } else {
                     AppLogger.ui.warning("Failed to open mail feedback link")
-                    toast = ToastItem.warning("Fehler", message: "Mail-App konnte nicht geöffnet werden.")
+                    toast = ToastItem.warning(String(localized: "Fehler"), message: String(localized: "Mail-App konnte nicht geöffnet werden."))
                 }
             }
         }

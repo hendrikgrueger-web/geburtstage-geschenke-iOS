@@ -106,16 +106,16 @@ struct GiftSummaryView: View {
             .background(status.color.opacity(0.15))
             .cornerRadius(6)
             .accessibilityElement(children: .combine)
-            .accessibilityLabel("\(statusText(for: status)): \(count)")
+            .accessibilityLabel(String(localized: "\(statusText(for: status)): \(count)"))
         }
     }
 
     private func statusText(for status: GiftStatus) -> String {
         switch status {
-        case .idea: return "Ideen"
-        case .planned: return "Geplant"
-        case .purchased: return "Gekauft"
-        case .given: return "Verschenkt"
+        case .idea: return String(localized: "Ideen")
+        case .planned: return String(localized: "Geplant")
+        case .purchased: return String(localized: "Gekauft")
+        case .given: return String(localized: "Verschenkt")
         }
     }
 

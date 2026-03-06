@@ -5,6 +5,11 @@ options:
   deploymentTarget:
     iOS: "26.0"
   xcodeVersion: "26.0"
+  developmentLanguage: de
+  knownRegions:
+    - de
+    - en
+    - Base
 
 targets:
   aiPresentsApp:
@@ -13,13 +18,15 @@ targets:
     deploymentTarget: "26.0"
     sources:
       - path: Sources/aiPresentsApp
+    resources:
+      - path: App/InfoPlist.xcstrings
     info:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: "AI Präsente"
         CFBundleShortVersionString: "0.8.1"
         CFBundleVersion: "13"
-        OpenRouterAPIKey: "$(OPENROUTER_API_KEY)"
+        AIProxySecret: "$(AI_PROXY_SECRET)"
         LSRequiresIPhoneOS: true
         UILaunchScreen: {}
         UIRequiredDeviceCapabilities:
@@ -34,6 +41,8 @@ targets:
         NSContactsUsageDescription: "Diese App benötigt Zugriff auf deine Kontakte, um Geburtstage von Freunden und Familie zu importieren."
         NSUserNotificationsUsageDescription: "Diese App möchte dich an Geburtstage erinnern, damit du pünktlich Geschenke vorbereiten kannst."
         NSUbiquitousContainersUsageDescription: "Diese App nutzt iCloud, um deine Daten zwischen deinen Apple-Geräten zu synchronisieren."
+        NSMicrophoneUsageDescription: "Der KI-Assistent nutzt das Mikrofon für die Spracheingabe, damit du Geschenkideen und Fragen per Stimme eingeben kannst."
+        NSSpeechRecognitionUsageDescription: "Die Spracherkennung wird für die Spracheingabe im KI-Assistenten verwendet. Die Erkennung erfolgt bevorzugt auf dem Gerät."
         CFBundleURLTypes:
           - CFBundleURLSchemes:
               - aipresents
@@ -49,7 +58,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.harryhirsch1878.ai-presents-app
         SWIFT_VERSION: "6.0"
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: "7ZR37VL5PV"
         CODE_SIGN_STYLE: Automatic
         CODE_SIGNING_REQUIRED: "YES"
         CODE_SIGNING_ALLOWED: "YES"
@@ -77,7 +86,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.harryhirsch1878.ai-presents-app.widget
         SWIFT_VERSION: "6.0"
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: "7ZR37VL5PV"
         CODE_SIGN_STYLE: Automatic
         CODE_SIGNING_REQUIRED: "YES"
         CODE_SIGNING_ALLOWED: "YES"

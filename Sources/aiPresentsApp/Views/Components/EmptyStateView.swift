@@ -19,31 +19,31 @@ enum EmptyStateType {
 
     var title: String {
         switch self {
-        case .noBirthdays: return "Keine Geburtstage"
-        case .noGiftIdeas: return "Keine Geschenkideen"
-        case .noHistory: return "Kein Verlauf"
-        case .noSearchResults: return "Keine Ergebnisse"
-        case .noContacts: return "Keine Kontakte"
+        case .noBirthdays: return String(localized: "Keine Geburtstage")
+        case .noGiftIdeas: return String(localized: "Keine Geschenkideen")
+        case .noHistory: return String(localized: "Kein Verlauf")
+        case .noSearchResults: return String(localized: "Keine Ergebnisse")
+        case .noContacts: return String(localized: "Keine Kontakte")
         }
     }
 
     var message: String {
         switch self {
-        case .noBirthdays: return "Importiere Kontakte um Geburtstage anzuzeigen"
-        case .noGiftIdeas: return "Füge deine erste Geschenkidee hinzu"
-        case .noHistory: return "Dein Geschenk-Verlauf erscheint hier"
-        case .noSearchResults: return "Versuche andere Suchbegriffe"
-        case .noContacts: return "Importiere Kontakte mit Geburtstagen"
+        case .noBirthdays: return String(localized: "Importiere Kontakte um Geburtstage anzuzeigen")
+        case .noGiftIdeas: return String(localized: "Füge deine erste Geschenkidee hinzu")
+        case .noHistory: return String(localized: "Dein Geschenk-Verlauf erscheint hier")
+        case .noSearchResults: return String(localized: "Versuche andere Suchbegriffe")
+        case .noContacts: return String(localized: "Importiere Kontakte mit Geburtstagen")
         }
     }
 
     var actionTitle: String? {
         switch self {
-        case .noBirthdays: return "Kontakte importieren"
-        case .noGiftIdeas: return "Idee hinzufügen"
+        case .noBirthdays: return String(localized: "Kontakte importieren")
+        case .noGiftIdeas: return String(localized: "Idee hinzufügen")
         case .noHistory: return nil
         case .noSearchResults: return nil
-        case .noContacts: return "Kontakte importieren"
+        case .noContacts: return String(localized: "Kontakte importieren")
         }
     }
 

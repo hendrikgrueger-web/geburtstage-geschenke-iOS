@@ -6,7 +6,6 @@ import WidgetKit
 struct aiPresentsApp: App {
     let modelContainer: ModelContainer
     @StateObject private var reminderManager: ReminderManager
-    @StateObject private var subscriptionManager = SubscriptionManager()
     @Environment(\.scenePhase) private var scenePhase
     @State private var deepLinkPersonID: UUID?
     /// True wenn weder persistenter noch lokaler Container erstellt werden konnte.
@@ -97,7 +96,6 @@ struct aiPresentsApp: App {
                     OnboardingView()
                 }
             }
-            .environmentObject(subscriptionManager)
             .environmentObject(reminderManager)
             .onOpenURL { url in
                 handleDeepLink(url)

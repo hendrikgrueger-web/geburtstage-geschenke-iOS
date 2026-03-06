@@ -5,6 +5,7 @@ struct TimelineView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var people: [PersonRef]
     @Query private var giftIdeas: [GiftIdea]
+    @Binding var deepLinkPersonID: UUID?
 
     @State private var showingSettings = false
     @State private var searchText = ""
@@ -16,6 +17,7 @@ struct TimelineView: View {
     @State private var isRefreshing = false
     @State private var debouncedSearchText = ""
     @State private var searchDebouncer = Debouncer(delay: 0.3)
+    @State private var showingAIChat = false
 
     var body: some View {
         List {
@@ -41,7 +43,7 @@ struct TimelineView: View {
                                     toggleSkipGift(for: person)
                                 } label: {
                                     Label(
-                                        person.skipGift ? "Geschenk nötig" : "Kein Geschenk",
+                                        person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk"),
                                         systemImage: person.skipGift ? "gift.fill" : "minus.circle"
                                     )
                                 }
@@ -71,7 +73,7 @@ struct TimelineView: View {
                 } label: {
                     Image(systemName: "gearshape")
                 }
-                .accessibilityLabel("Einstellungen")
+                .accessibilityLabel(String(localized: "Einstellungen"))
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -103,13 +105,13 @@ struct TimelineView: View {
                             Image(systemName: "line.3.horizontal.decrease.circle")
                                 .symbolVariant(filterRelation != nil ? .fill : .none)
                         }
-                        .accessibilityLabel("Filter")
+                        .accessibilityLabel(String(localized: "Filter"))
                     }
 
                     NavigationLink(destination: ContactsImportView()) {
                         Image(systemName: "person.badge.plus")
                     }
-                    .accessibilityLabel("Kontakte importieren")
+                    .accessibilityLabel(String(localized: "Kontakte importieren"))
                 }
             }
         }
@@ -127,17 +129,30 @@ struct TimelineView: View {
                 SettingsView()
             }
         }
+        .sheet(isPresented: $showingAIChat) {
+            AIChatView()
+        }
+        .overlay(alignment: .bottomTrailing) {
+            aiFABButton
+        }
+        .onChange(of: deepLinkPersonID) { _, newID in
+            guard let id = newID else { return }
+            if let person = people.first(where: { $0.id == id }) {
+                selectedPerson = person
+            }
+            deepLinkPersonID = nil
+        }
     }
 
     // MARK: - Stats Row
 
     private var statsRow: some View {
         HStack(spacing: 0) {
-            statItem(value: "\(people.count)", label: "Kontakte", icon: "person.2.fill")
+            statItem(value: "\(people.count)", label: String(localized: "Kontakte"), icon: "person.2.fill")
             Divider().frame(height: 32)
-            statItem(value: "\(birthdaysThisWeek)", label: "Diese Woche", icon: "calendar")
+            statItem(value: "\(birthdaysThisWeek)", label: String(localized: "Diese Woche"), icon: "calendar")
             Divider().frame(height: 32)
-            statItem(value: "\(giftIdeas.count)", label: "Ideen", icon: "lightbulb.fill")
+            statItem(value: "\(giftIdeas.count)", label: String(localized: "Ideen"), icon: "lightbulb.fill")
         }
         .padding(.vertical, 10)
         .background(AppColor.cardBackground)
@@ -238,7 +253,7 @@ struct TimelineView: View {
                 toggleSkipGift(for: person)
             } label: {
                 Label(
-                    person.skipGift ? "Geschenk nötig" : "Kein Geschenk nötig",
+                    person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk nötig"),
                     systemImage: person.skipGift ? "gift.fill" : "minus.circle"
                 )
             }
@@ -271,6 +286,7 @@ struct TimelineView: View {
         HapticFeedback.light()
         BirthdayCalculator.clearCache()
         try? await Task.sleep(nanoseconds: 500_000_000)
+        WidgetDataService.shared.updateWidgetData(from: modelContext)
         HapticFeedback.success()
         isRefreshing = false
     }
@@ -279,9 +295,35 @@ struct TimelineView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yy"
         let dateString = formatter.string(from: Date())
-        idea.statusLog.append("\(dateString) - Idee \u{2192} Geplant")
+        idea.statusLog.append("\(dateString) - \(String(localized: "Idee")) \u{2192} \(String(localized: "Geplant"))")
         idea.status = .planned
         HapticFeedback.success()
+    }
+
+    // MARK: - AI FAB Button
+
+    private var aiFABButton: some View {
+        Button {
+            showingAIChat = true
+            HapticFeedback.medium()
+        } label: {
+            Image(systemName: "sparkles.bubble.fill")
+                .font(.system(size: 22, weight: .semibold))
+                .foregroundColor(.white)
+                .frame(width: 56, height: 56)
+                .background(
+                    LinearGradient(
+                        colors: [.purple, .purple.opacity(0.8)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .clipShape(Circle())
+                .shadow(color: .purple.opacity(0.3), radius: 8, x: 0, y: 4)
+        }
+        .padding(.trailing, 20)
+        .padding(.bottom, 20)
+        .accessibilityLabel(String(localized: "KI-Assistent öffnen"))
     }
 
     // MARK: - Empty State
@@ -309,19 +351,19 @@ struct TimelineView: View {
 
     private var emptyStateTitle: String {
         if !debouncedSearchText.isEmpty {
-            return "Keine Treffer"
+            return String(localized: "Keine Treffer")
         } else if filterRelation != nil {
-            return "Keine Ergebnisse"
+            return String(localized: "Keine Ergebnisse")
         }
-        return "Keine Kontakte"
+        return String(localized: "Keine Kontakte")
     }
 
     private var emptyStateMessage: String {
         if !debouncedSearchText.isEmpty {
-            return "Keine Kontakte für \"\(debouncedSearchText)\""
+            return String(localized: "Keine Kontakte für \"\(debouncedSearchText)\"")
         } else if let relation = filterRelation {
-            return "Keine Kontakte für \"\(relation)\""
+            return String(localized: "Keine Kontakte für \"\(relation)\"")
         }
-        return "Importiere Kontakte über das + oben rechts"
+        return String(localized: "Importiere Kontakte über das + oben rechts")
     }
 }

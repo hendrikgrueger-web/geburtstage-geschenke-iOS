@@ -4,12 +4,9 @@ import SwiftData
 struct ContactsImportView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var subscriptionManager: SubscriptionManager
-
     @Query private var existingPeople: [PersonRef]
     @State private var isImporting = false
     @State private var importError: String?
-    @State private var showingPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -104,7 +101,6 @@ struct ContactsImportView: View {
                     Button("Abbrechen") { dismiss() }
                 }
             }
-            .paywallSheet(isPresented: $showingPaywall)
         }
     }
 
@@ -118,29 +114,42 @@ struct ContactsImportView: View {
                 guard granted else {
                     await MainActor.run {
                         isImporting = false
-                        importError = "Zugriff verweigert – bitte in den Systemeinstellungen erlauben."
+                        importError = String(localized: "Zugriff verweigert – bitte in den Systemeinstellungen erlauben.")
                     }
                     return
                 }
 
-                var people = try await ContactsService.shared.importBirthdays()
-
-                // Free-Tier: Maximal freePersonLimit Personen insgesamt
-                if !subscriptionManager.isPremium {
-                    let remaining = max(0, SubscriptionManager.freePersonLimit - existingPeople.count)
-                    if people.count > remaining {
-                        people = Array(people.prefix(remaining))
-                    }
-                }
+                let people = try await ContactsService.shared.importBirthdays()
 
                 await MainActor.run {
-                    for person in people { modelContext.insert(person) }
-                    isImporting = false
+                    // Bestehende Kontakte per contactIdentifier nachschlagen
+                    let existingByID = Dictionary(
+                        existingPeople.map { ($0.contactIdentifier, $0) },
+                        uniquingKeysWith: { first, _ in first }
+                    )
 
-                    // Hinweis wenn Limit erreicht
-                    if !subscriptionManager.isPremium && existingPeople.count + people.count >= SubscriptionManager.freePersonLimit {
-                        importError = "Free-Limit erreicht (\(SubscriptionManager.freePersonLimit) Kontakte). Upgrade für unbegrenzte Kontakte."
+                    var newPeople: [PersonRef] = []
+                    var updatedCount = 0
+
+                    for person in people {
+                        if let existing = existingByID[person.contactIdentifier] {
+                            // Update: Geburtstag, Name und birthYearKnown synchronisieren
+                            if existing.birthday != person.birthday || existing.birthYearKnown != person.birthYearKnown {
+                                existing.birthday = person.birthday
+                                existing.birthYearKnown = person.birthYearKnown
+                                updatedCount += 1
+                            }
+                            if existing.displayName != person.displayName {
+                                existing.displayName = person.displayName
+                                updatedCount += 1
+                            }
+                        } else {
+                            newPeople.append(person)
+                        }
                     }
+
+                    for person in newPeople { modelContext.insert(person) }
+                    isImporting = false
                 }
                 try? await Task.sleep(nanoseconds: 600_000_000)
                 await MainActor.run { dismiss() }

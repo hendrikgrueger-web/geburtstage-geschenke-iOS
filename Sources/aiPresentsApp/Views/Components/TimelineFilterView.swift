@@ -22,10 +22,10 @@ struct TimelineFilterView: View {
 
         var accessibilityHint: String {
             switch self {
-            case .all: return "Zeigt alle Geburtstage"
-            case .today: return "Zeigt nur heutige Geburtstage"
-            case .upcoming7: return "Zeigt Geburtstage der nächsten 7 Tage"
-            case .upcoming30: return "Zeigt Geburtstage der nächsten 30 Tage"
+            case .all: return String(localized: "Zeigt alle Geburtstage")
+            case .today: return String(localized: "Zeigt nur heutige Geburtstage")
+            case .upcoming7: return String(localized: "Zeigt Geburtstage der nächsten 7 Tage")
+            case .upcoming30: return String(localized: "Zeigt Geburtstage der nächsten 30 Tage")
             }
         }
     }

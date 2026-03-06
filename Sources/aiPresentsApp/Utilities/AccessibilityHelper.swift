@@ -6,56 +6,58 @@ struct AccessibilityHelper {
     static func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = .current
         return formatter.string(from: date)
     }
 
     /// Formats a date difference for accessibility
     static func formatDaysUntil(_ days: Int) -> String {
         if days == 0 {
-            return "Heute"
+            return String(localized: "Heute")
         } else if days == 1 {
-            return "Morgen"
+            return String(localized: "Morgen")
         } else if days < 7 {
-            return "In \(days) Tagen"
+            return String(localized: "In \(days) Tagen")
         } else if days < 30 {
-            return "In \(days) Tagen"
+            return String(localized: "In \(days) Tagen")
         } else {
-            return "\(days) Tage ab heute"
+            return String(localized: "\(days) Tage ab heute")
         }
     }
 
     /// Formats budget for accessibility
     static func formatBudget(_ min: Double, _ max: Double) -> String {
+        let minStr = "\(Int(min))"
+        let maxStr = "\(Int(max))"
         if min == max {
-            return String(format: "%.0f Euro", min)
+            return minStr + " " + String(localized: "Euro")
         } else if min == 0 {
-            return String(format: "bis %.0f Euro", max)
+            return String(localized: "bis") + " " + maxStr + " " + String(localized: "Euro")
         } else {
-            return String(format: "%.0f bis %.0f Euro", min, max)
+            return minStr + " " + String(localized: "bis") + " " + maxStr + " " + String(localized: "Euro")
         }
     }
 
     /// Formats tags for accessibility
     static func formatTags(_ tags: [String]) -> String {
         if tags.isEmpty {
-            return "Keine Tags"
+            return String(localized: "Keine Tags")
         }
         let formatted = tags.map { "#\($0)" }.joined(separator: ", ")
-        return "Tags: \(formatted)"
+        return String(localized: "Tags: \(formatted)")
     }
 
     /// Formats gift status for accessibility
     static func formatGiftStatus(_ status: GiftStatus) -> String {
         switch status {
         case .idea:
-            return "Geschenkidee"
+            return String(localized: "Geschenkidee")
         case .planned:
-            return "Geplant"
+            return String(localized: "Geplant")
         case .purchased:
-            return "Gekauft"
+            return String(localized: "Gekauft")
         case .given:
-            return "Verschenkt"
+            return String(localized: "Verschenkt")
         }
     }
 
@@ -64,11 +66,13 @@ struct AccessibilityHelper {
         var label = idea.title
 
         if includeStatus {
-            label += ", Status: \(formatGiftStatus(idea.status))"
+            let status = formatGiftStatus(idea.status)
+            label += ", " + String(localized: "Status: \(status)")
         }
 
         if idea.budgetMax > 0 {
-            label += ", Budget: \(formatBudget(idea.budgetMin, idea.budgetMax))"
+            let budget = formatBudget(idea.budgetMin, idea.budgetMax)
+            label += ", " + String(localized: "Budget: \(budget)")
         }
 
         if !idea.tags.isEmpty {
@@ -76,7 +80,7 @@ struct AccessibilityHelper {
         }
 
         if !idea.note.isEmpty {
-            label += ", Notiz: \(idea.note)"
+            label += ", " + String(localized: "Notiz: \(idea.note)")
         }
 
         return label
@@ -85,14 +89,18 @@ struct AccessibilityHelper {
     /// Creates a complete accessibility label for a person
     static func personLabel(_ person: PersonRef, daysUntil: Int?) -> String {
         var label = person.displayName
-        label += ", Beziehung: \(person.relation)"
+        label += ", " + String(localized: "Beziehung: \(person.relation)")
 
         if let days = daysUntil {
-            label += ", Nächster Geburtstag: \(formatDaysUntil(days))"
+            let daysFormatted = formatDaysUntil(days)
+            label += ", " + String(localized: "Nächster Geburtstag: \(daysFormatted)")
         }
 
         if let giftCount = person.giftIdeas?.count, giftCount > 0 {
-            label += ", \(giftCount) Geschenkidee\(giftCount == 1 ? "" : "n")"
+            let suffix = giftCount == 1
+                ? String(localized: "Geschenkidee")
+                : String(localized: "Geschenkideen")
+            label += ", \(giftCount) \(suffix)"
         }
 
         return label
@@ -100,15 +108,16 @@ struct AccessibilityHelper {
 
     /// Creates a complete accessibility label for gift history
     static func giftHistoryLabel(_ history: GiftHistory) -> String {
-        var label = "\(history.title), Jahr: \(history.year)"
-        label += ", Kategorie: \(history.category)"
+        var label = "\(history.title), " + String(localized: "Jahr:") + " \(history.year)"
+        label += ", " + String(localized: "Kategorie:") + " \(history.category)"
 
         if history.budget > 0 {
-            label += ", Budget: \(formatBudget(history.budget, history.budget))"
+            let budget = formatBudget(history.budget, history.budget)
+            label += ", " + String(localized: "Budget: \(budget)")
         }
 
         if !history.note.isEmpty {
-            label += ", Notiz: \(history.note)"
+            label += ", " + String(localized: "Notiz: \(history.note)")
         }
 
         return label
@@ -126,7 +135,7 @@ extension View {
     func accessibleButton(label: String, hint: String? = nil) -> some View {
         self
             .accessibilityLabel(label)
-            .accessibilityHint(hint ?? "Doppeltippen zum Auswählen")
+            .accessibilityHint(hint ?? String(localized: "Doppeltippen zum Auswählen"))
             .accessibilityAddTraits(.isButton)
     }
 

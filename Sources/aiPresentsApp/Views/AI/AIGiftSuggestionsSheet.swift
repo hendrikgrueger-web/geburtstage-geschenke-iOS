@@ -2,10 +2,19 @@ import SwiftUI
 import SwiftData
 
 enum BudgetRange: String, CaseIterable {
-    case low = "Klein (bis 25€)"
-    case medium = "Mittel (25-75€)"
-    case high = "Groß (75-150€)"
-    case premium = "Premium (150€+)"
+    case low = "low"
+    case medium = "medium"
+    case high = "high"
+    case premium = "premium"
+
+    var localizedName: String {
+        switch self {
+        case .low: return String(localized: "Klein (bis 25€)")
+        case .medium: return String(localized: "Mittel (25-75€)")
+        case .high: return String(localized: "Groß (75-150€)")
+        case .premium: return String(localized: "Premium (150€+)")
+        }
+    }
 
     var min: Double {
         switch self {
@@ -44,8 +53,6 @@ struct AIGiftSuggestionsSheet: View {
 
     // Track which suggestions have received feedback
     @State private var feedbackGivenForSuggestions = Set<String>()
-
-    private var isUsingCloudAI: Bool { AIService.isAvailable }
 
     var body: some View {
         NavigationStack {
@@ -108,7 +115,9 @@ struct AIGiftSuggestionsSheet: View {
                     .foregroundColor(AppColor.textSecondary)
 
                 if !filteredGiftHistory.isEmpty {
-                    Text("\(filteredGiftHistory.count) vergangene Geschenk\(filteredGiftHistory.count == 1 ? "" : "e")")
+                    Text(filteredGiftHistory.count == 1
+                         ? String(localized: "\(filteredGiftHistory.count) vergangenes Geschenk")
+                         : String(localized: "\(filteredGiftHistory.count) vergangene Geschenke"))
                         .font(.caption)
                         .foregroundColor(AppColor.textTertiary)
                 }
@@ -137,7 +146,7 @@ struct AIGiftSuggestionsSheet: View {
 
                     Spacer()
 
-                    Text("\(personMetrics.totalFeedback)× Feedback")
+                    Text(String(localized: "\(personMetrics.totalFeedback)× Feedback"))
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
@@ -316,7 +325,10 @@ struct AIGiftSuggestionsSheet: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Tippe auf einen Vorschlag, um ihn als Geschenkidee zu speichern.")
                 if suggestions.count != filteredSuggestions.count {
-                    Text("\(suggestions.count - filteredSuggestions.count) Vorschlag\(suggestions.count - filteredSuggestions.count == 1 ? "" : "e") bereits vorhanden.")
+                    let diff = suggestions.count - filteredSuggestions.count
+                    Text(diff == 1
+                         ? String(localized: "\(diff) Vorschlag bereits vorhanden.")
+                         : String(localized: "\(diff) Vorschläge bereits vorhanden."))
                 }
                 Text("\(suggestions.count)/30 Vorschläge generiert")
             }
@@ -357,16 +369,16 @@ struct AIGiftSuggestionsSheet: View {
         } footer: {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 4) {
-                    Image(systemName: isUsingCloudAI ? "cloud.fill" : "sparkles")
-                        .foregroundColor(isUsingCloudAI ? .blue : .orange)
-                    Text(isUsingCloudAI
-                         ? "Cloud-KI via OpenRouter · Daten werden verschlüsselt übertragen."
-                         : "Demo-Modus — kein API-Key konfiguriert oder KI nicht aktiviert.")
-                        .foregroundColor(isUsingCloudAI ? .blue : .orange)
+                    Image(systemName: "cloud.fill")
+                        .foregroundColor(.blue)
+                    Text("Cloud-KI via OpenRouter · Daten werden verschlüsselt übertragen.")
+                        .foregroundColor(.blue)
                 }
 
                 if !filteredGiftHistory.isEmpty {
-                    Text("📋 Basiert auf \(filteredGiftHistory.count) vergangenen Geschenk\(filteredGiftHistory.count == 1 ? "" : "en").")
+                    Text(filteredGiftHistory.count == 1
+                         ? String(localized: "📋 Basiert auf \(filteredGiftHistory.count) vergangenen Geschenk.")
+                         : String(localized: "📋 Basiert auf \(filteredGiftHistory.count) vergangenen Geschenken."))
                         .foregroundColor(AppColor.accent)
                 }
             }

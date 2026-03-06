@@ -22,7 +22,6 @@ struct PersonDetailView: View {
     @State private var pendingAIAction: AIAction? = nil
     @State private var giftSortOption: GiftSortOption = .status
 
-    @EnvironmentObject private var subscriptionManager: SubscriptionManager
     enum AIAction { case suggestions, birthdayMessage }
     @State private var giftStatusFilter: GiftStatusFilter = .all
     @State private var showingShareSheet = false
@@ -33,7 +32,6 @@ struct PersonDetailView: View {
     @State private var toast: ToastItem?
     @State private var showingAddReceivedGift = false
     @State private var showingEditPerson = false
-    @State private var showingPaywall = false
     @State private var editedName: String = ""
     @State private var editedBirthday: Date = Date()
     @State private var editedPersonRelation: String = ""
@@ -41,18 +39,30 @@ struct PersonDetailView: View {
     @State private var customEditPersonRelationText: String = ""
 
     enum GiftSortOption: String, CaseIterable {
-        case status = "Status"
-        case budget = "Budget"
-        case title = "Titel"
-        case date = "Datum"
+        case status, budget, title, date
+
+        var displayName: String {
+            switch self {
+            case .status: return String(localized: "Status")
+            case .budget: return String(localized: "Budget")
+            case .title: return String(localized: "Titel")
+            case .date: return String(localized: "Datum")
+            }
+        }
     }
 
     enum GiftStatusFilter: String, CaseIterable {
-        case all = "Alle"
-        case idea = "Ideen"
-        case planned = "Geplant"
-        case purchased = "Gekauft"
-        case given = "Verschenkt"
+        case all, idea, planned, purchased, given
+
+        var displayName: String {
+            switch self {
+            case .all: return String(localized: "Alle")
+            case .idea: return String(localized: "Ideen")
+            case .planned: return String(localized: "Geplant")
+            case .purchased: return String(localized: "Gekauft")
+            case .given: return String(localized: "Verschenkt")
+            }
+        }
     }
 
     var body: some View {
@@ -168,8 +178,8 @@ struct PersonDetailView: View {
                                 Label("Vor", systemImage: "arrow.right.circle.fill")
                             }
                             .tint(AppColor.primary)
-                            .accessibilityLabel("Status ändern")
-                            .accessibilityHint("Ändert den Status der Geschenkidee zum nächsten Schritt")
+                            .accessibilityLabel(String(localized: "Status ändern"))
+                            .accessibilityHint(String(localized: "Ändert den Status der Geschenkidee zum nächsten Schritt"))
                         }
                         .contextMenu {
                             Button {
@@ -179,21 +189,21 @@ struct PersonDetailView: View {
                             } label: {
                                 Label("Teilen", systemImage: "square.and.arrow.up")
                             }
-                            .accessibilityLabel("Geschenkidee teilen")
+                            .accessibilityLabel(String(localized: "Geschenkidee teilen"))
 
                             Button {
                                 duplicateGiftIdea(idea)
                             } label: {
                                 Label("Duplizieren", systemImage: "doc.on.doc")
                             }
-                            .accessibilityLabel("Geschenkidee duplizieren")
+                            .accessibilityLabel(String(localized: "Geschenkidee duplizieren"))
 
                             Button {
                                 advanceStatus(for: idea)
                             } label: {
                                 Label("Status vorwärts", systemImage: "arrow.right.circle.fill")
                             }
-                            .accessibilityLabel("Status ändern")
+                            .accessibilityLabel(String(localized: "Status ändern"))
 
                             Button(role: .destructive) {
                                 if let index = filteredGiftIdeas.firstIndex(where: { $0.id == idea.id }) {
@@ -202,7 +212,7 @@ struct PersonDetailView: View {
                             } label: {
                                 Label("Löschen", systemImage: "trash")
                             }
-                            .accessibilityLabel("Geschenkidee löschen")
+                            .accessibilityLabel(String(localized: "Geschenkidee löschen"))
                         }
                     }
                     .onDelete(perform: deleteGiftIdeas)
@@ -221,16 +231,16 @@ struct PersonDetailView: View {
                                 HapticFeedback.selectionChanged()
                             } label: {
                                 if giftStatusFilter == filter {
-                                    Label(filter.rawValue, systemImage: "checkmark")
+                                    Label(filter.displayName, systemImage: "checkmark")
                                 } else {
-                                    Text(filter.rawValue)
+                                    Text(filter.displayName)
                                 }
                             }
                         }
                     } label: {
                         controlPill(
                             icon: "line.3.horizontal.decrease",
-                            label: giftStatusFilter == .all ? "Filter" : giftStatusFilter.rawValue,
+                            label: giftStatusFilter == .all ? String(localized: "Filter") : giftStatusFilter.displayName,
                             isActive: giftStatusFilter != .all
                         )
                     }
@@ -243,16 +253,16 @@ struct PersonDetailView: View {
                                 HapticFeedback.selectionChanged()
                             } label: {
                                 if giftSortOption == option {
-                                    Label(option.rawValue, systemImage: "checkmark")
+                                    Label(option.displayName, systemImage: "checkmark")
                                 } else {
-                                    Text(option.rawValue)
+                                    Text(option.displayName)
                                 }
                             }
                         }
                     } label: {
                         controlPill(
                             icon: "arrow.up.arrow.down",
-                            label: giftSortOption == .status ? "Sortierung" : giftSortOption.rawValue,
+                            label: giftSortOption == .status ? String(localized: "Sortierung") : giftSortOption.displayName,
                             isActive: giftSortOption != .status
                         )
                     }
@@ -384,7 +394,7 @@ struct PersonDetailView: View {
                         Image(systemName: "trash")
                     }
                 }
-                .accessibleButton(label: "Aus App entfernen", hint: "Entfernt \(person.displayName) aus der App. Der iOS-Kontakt bleibt unverändert.")
+                .accessibleButton(label: String(localized: "Aus App entfernen"), hint: String(localized: "Entfernt \(person.displayName) aus der App. Der iOS-Kontakt bleibt unverändert."))
             }
         }
         .sheet(isPresented: $showingAddGiftIdea) {
@@ -436,8 +446,8 @@ struct PersonDetailView: View {
                     showingEditPerson = true
                     HapticFeedback.light()
                 }
-                .accessibilityLabel("Bearbeiten")
-                .accessibilityHint("Öffnet das Formular zum Bearbeiten von Name, Geburtstag und Beziehung")
+                .accessibilityLabel(String(localized: "Bearbeiten"))
+                .accessibilityHint(String(localized: "Öffnet das Formular zum Bearbeiten von Name, Geburtstag und Beziehung"))
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -449,14 +459,14 @@ struct PersonDetailView: View {
                     } label: {
                         Label("Teilen", systemImage: "square.and.arrow.up")
                     }
-                    .accessibleButton(label: "Teilen", hint: "Teilt alle Geschenkideen")
+                    .accessibleButton(label: String(localized: "Teilen"), hint: String(localized: "Teilt alle Geschenkideen"))
 
                     Button {
                         exportAsCSV()
                     } label: {
                         Label("Als CSV exportieren", systemImage: "doc.text")
                     }
-                    .accessibleButton(label: "CSV exportieren", hint: "Exportiert Geschenkideen als CSV-Datei")
+                    .accessibleButton(label: String(localized: "CSV exportieren"), hint: String(localized: "Exportiert Geschenkideen als CSV-Datei"))
 
                     Divider()
 
@@ -465,12 +475,12 @@ struct PersonDetailView: View {
                     } label: {
                         Label("Neue Idee", systemImage: "plus")
                     }
-                    .accessibleButton(label: "Neue Idee", hint: "Fügt eine neue Geschenkidee hinzu")
+                    .accessibleButton(label: String(localized: "Neue Idee"), hint: String(localized: "Fügt eine neue Geschenkidee hinzu"))
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
-                .accessibilityLabel("Optionen")
-                .accessibilityHint("Doppeltippen für weitere Optionen")
+                .accessibilityLabel(String(localized: "Optionen"))
+                .accessibilityHint(String(localized: "Doppeltippen für weitere Optionen"))
             }
         }
         .sheet(isPresented: $showingShareSheet) {
@@ -551,7 +561,7 @@ struct PersonDetailView: View {
                             displayedComponents: .date
                         )
                         .datePickerStyle(.compact)
-                        .environment(\.locale, Locale(identifier: "de_DE"))
+                        .environment(\.locale, .current)
                     }
 
                     Section("Beziehung") {
@@ -589,6 +599,7 @@ struct PersonDetailView: View {
                                 person.displayName = trimmedName
                             }
                             person.birthday = editedBirthday
+                            person.birthYearKnown = true  // Manuell eingegebenes Datum hat immer ein Jahr
                             if editedPersonRelation == "Sonstige" {
                                 let trimmed = customEditPersonRelationText.trimmingCharacters(in: .whitespaces)
                                 person.relation = trimmed.isEmpty ? "Sonstige" : trimmed
@@ -627,7 +638,6 @@ struct PersonDetailView: View {
             }
         }
         .toast(item: $toast)
-        .paywallSheet(isPresented: $showingPaywall)
     }
 
     private var aiAssistantSection: some View {
@@ -638,13 +648,13 @@ struct PersonDetailView: View {
                 aiActionRow(
                     icon: "sparkles",
                     color: .orange,
-                    title: "Geschenkideen vorschlagen",
-                    subtitle: "5 personalisierte Vorschläge"
+                    title: String(localized: "Geschenkideen vorschlagen"),
+                    subtitle: String(localized: "5 personalisierte Vorschläge")
                 )
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Geschenkideen vorschlagen")
-            .accessibilityHint("Generiert 5 personalisierte Geschenkideen mit KI-Assistent")
+            .accessibilityLabel(String(localized: "Geschenkideen vorschlagen"))
+            .accessibilityHint(String(localized: "Generiert 5 personalisierte Geschenkideen mit KI-Assistent"))
 
             Button(action: {
                 handleAIButtonTap(.birthdayMessage)
@@ -652,13 +662,13 @@ struct PersonDetailView: View {
                 aiActionRow(
                     icon: "text.quote",
                     color: .blue,
-                    title: "Geburtstagsnachricht erstellen",
-                    subtitle: "Herzlicher Text zum Geburtstag"
+                    title: String(localized: "Geburtstagsnachricht erstellen"),
+                    subtitle: String(localized: "Herzlicher Text zum Geburtstag")
                 )
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Geburtstagsnachricht erstellen")
-            .accessibilityHint("Erstellt eine personalisierte Geburtstagsnachricht mit KI-Assistent")
+            .accessibilityLabel(String(localized: "Geburtstagsnachricht erstellen"))
+            .accessibilityHint(String(localized: "Erstellt eine personalisierte Geburtstagsnachricht mit KI-Assistent"))
         } header: {
             HStack(spacing: 6) {
                 Image(systemName: "sparkles")
@@ -680,24 +690,18 @@ struct PersonDetailView: View {
 
     private var aiFooterText: String {
         if !AIService.isAPIKeyConfigured {
-            return "Demo-Modus — kein API-Key konfiguriert"
+            return String(localized: "API-Key nicht konfiguriert")
         } else if AIConsentManager.shared.consentGiven && AIConsentManager.shared.aiEnabled {
-            return "Einwilligung erteilt · Cloud-Verarbeitung via OpenRouter"
+            return String(localized: "Einwilligung erteilt · Cloud-Verarbeitung via OpenRouter")
         } else if AIConsentManager.shared.consentGiven && !AIConsentManager.shared.aiEnabled {
-            return "KI deaktiviert · Einstellungen → KI-Assistent"
+            return String(localized: "KI deaktiviert · Einstellungen → KI-Assistent")
         } else {
-            return "Einwilligung erforderlich · Tippe für Details"
+            return String(localized: "Einwilligung erforderlich · Tippe für Details")
         }
     }
 
     private func handleAIButtonTap(_ action: AIAction) {
         HapticFeedback.medium()
-
-        // Premium-Check: KI-Features nur für Premium-User
-        guard subscriptionManager.isPremium else {
-            showingPaywall = true
-            return
-        }
 
         if AIConsentManager.shared.consentGiven {
             if AIConsentManager.shared.aiEnabled {
@@ -708,7 +712,7 @@ struct PersonDetailView: View {
                     showingBirthdayMessage = true
                 }
             } else {
-                toast = ToastItem.warning("KI deaktiviert", message: "KI-Assistent ist in den Einstellungen deaktiviert.")
+                toast = ToastItem.warning(String(localized: "KI deaktiviert"), message: String(localized: "KI-Assistent ist in den Einstellungen deaktiviert."))
             }
         } else {
             pendingAIAction = action
@@ -829,7 +833,7 @@ struct PersonDetailView: View {
     private var birthdayString: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = .current
         return formatter.string(from: person.birthday)
     }
 
@@ -840,15 +844,15 @@ struct PersonDetailView: View {
 
     private var nextBirthdayInfo: String {
         if daysUntilBirthday == 0 {
-            return "🎉 Heute!"
+            return "🎉 " + String(localized: "Heute!")
         } else if daysUntilBirthday == 1 {
-            return "Morgen"
+            return String(localized: "Morgen")
         } else if daysUntilBirthday == 365 {
-            return "Nächstes Jahr"
+            return String(localized: "Nächstes Jahr")
         } else if daysUntilBirthday < 7 {
-            return "In \(daysUntilBirthday) Tagen"
+            return String(localized: "In \(daysUntilBirthday) Tagen")
         } else {
-            return "\(daysUntilBirthday) Tage"
+            return String(localized: "\(daysUntilBirthday) Tage")
         }
     }
 
@@ -883,7 +887,7 @@ struct PersonDetailView: View {
         let newIdea = GiftIdea(
             personId: person.id,
             title: history.title,
-            note: history.note.isEmpty ? "Kopiert aus Geschenk-Verlauf (\(history.year))" : history.note,
+            note: history.note.isEmpty ? String(localized: "Kopiert aus Geschenk-Verlauf (\(history.year))") : history.note,
             budgetMin: history.budget * 0.8,
             budgetMax: history.budget * 1.2,
             link: history.link,
@@ -935,7 +939,7 @@ struct PersonDetailView: View {
         let purchasedGifts = filteredGiftIdeas.filter { $0.status == .purchased }
         for gift in purchasedGifts {
             gift.status = .given
-            gift.statusLog.append("\(dateString) - Gekauft \u{2192} Verschenkt (Alle markiert)")
+            gift.statusLog.append("\(dateString) - \(String(localized: "Gekauft")) \u{2192} \(String(localized: "Verschenkt")) (\(String(localized: "Alle markiert")))")
         }
         HapticFeedback.success()
     }
@@ -975,10 +979,10 @@ struct PersonDetailView: View {
 
     private func statusDisplayName(_ status: GiftStatus) -> String {
         switch status {
-        case .idea: return "Idee"
-        case .planned: return "Geplant"
-        case .purchased: return "Gekauft"
-        case .given: return "Verschenkt"
+        case .idea: return String(localized: "Idee")
+        case .planned: return String(localized: "Geplant")
+        case .purchased: return String(localized: "Gekauft")
+        case .given: return String(localized: "Verschenkt")
         }
     }
 
@@ -1000,7 +1004,7 @@ struct PersonDetailView: View {
 
         shareText = text
         showingShareSheet = true
-        toast = ToastItem.info("Teilen", message: "Teilen-Dialog geöffnet")
+        toast = ToastItem.info(String(localized: "Teilen"), message: String(localized: "Teilen-Dialog geöffnet"))
     }
 
     private func exportAsCSV() {
@@ -1010,13 +1014,13 @@ struct PersonDetailView: View {
             let fileName = "geschenkideen-\(person.displayName.replacingOccurrences(of: " ", with: "_")).csv"
             if let url = saveCSVToDocuments(content: csvContent, fileName: fileName) {
                 shareCSV(url: url)
-                toast = ToastItem.success("Export erfolgreich", message: "CSV-Datei wurde erstellt")
+                toast = ToastItem.success(String(localized: "Export erfolgreich"), message: String(localized: "CSV-Datei wurde erstellt"))
             } else {
-                toast = ToastItem.error("Export fehlgeschlagen", message: "Datei konnte nicht gespeichert werden")
+                toast = ToastItem.error(String(localized: "Export fehlgeschlagen"), message: String(localized: "Datei konnte nicht gespeichert werden"))
                 HapticFeedback.error()
             }
         } else {
-            toast = ToastItem.warning("Keine Daten", message: "Keine Geschenkideen zum Exportieren vorhanden")
+            toast = ToastItem.warning(String(localized: "Keine Daten"), message: String(localized: "Keine Geschenkideen zum Exportieren vorhanden"))
             HapticFeedback.error()
         }
     }

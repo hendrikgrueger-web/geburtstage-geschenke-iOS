@@ -25,18 +25,18 @@ xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp -destina
 ```
 Sources/aiPresentsApp/
 ├── Models/          # SwiftData Models: PersonRef, GiftIdea, GiftHistory, ReminderRule, SuggestionFeedback
-├── Services/        # ContactsService, ReminderManager, AIService, AIConsentManager, SampleDataService, WidgetDataService, SubscriptionManager
+├── Services/        # ContactsService, ReminderManager, AIService, AIConsentManager, SpeechRecognitionService, SampleDataService, WidgetDataService
 ├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator, RelationOptions, GiftDirection
 ├── Views/
 │   ├── Timeline/    # TimelineView (eine chronologische Liste), BirthdayRow (mit Status-Badge), BirthdayCountdownBadge
 │   ├── Person/      # PersonDetailView (mit skipGift-Toggle, Hobbies, Received-Gifts), PersonAvatar, AllContactsView, ContactsImportView
 │   ├── Gift/        # GiftIdeaRow, GiftHistoryRow, GiftSummaryView, Add/Edit Sheets
-│   ├── AI/          # AIGiftSuggestionsSheet (bis 30 Vorschläge sammelbar), AIBirthdayMessageSheet, AIConsentSheet
+│   ├── AI/          # AIChatView (KI-Chat Sheet), ChatBubbleView, ChatInputBar, AIGiftSuggestionsSheet, AIBirthdayMessageSheet, AIConsentSheet
 │   ├── Settings/    # SettingsView (als Sheet via Gear-Icon), ReminderSettingsView, PrivacyView, LegalView, DevSettingsView
 │   ├── Onboarding/  # OnboardingView
 │   ├── Components/  # Wiederverwendbare UI-Komponenten: HobbiesChipView, RelationPickerView, FlowLayout, etc.
 │   └── (Root)       # ContentView (kein TabView), ShareSheetView, LaunchScreen
-├── ViewModels/      # AppViewModel, SuggestionQualityViewModel
+├── ViewModels/      # AppViewModel, AIChatViewModel, SuggestionQualityViewModel
 ├── Resources/       # AppColor
 ├── Widgets/         # BirthdayWidgetView (In-App Hero View)
 └── aiPresentsApp.swift  # App Entry Point
@@ -48,21 +48,43 @@ Sources/BirthdayWidget/  # WidgetKit Extension (separates Target)
 └── WidgetSharedTypes.swift        # WidgetBirthdayEntry + WidgetDataReader
 ```
 
+## KI-Chat ("Geschenke-Assistent")
+
+**Einstieg:** Floating Action Button (lila, `sparkles.bubble.fill`) unten rechts auf der TimelineView.
+
+**Architektur:** `AIChatView` (Sheet) → `AIChatViewModel` (@Observable) → `AIService.callOpenRouterChat()` (Multi-Turn)
+
+**Features:**
+- Natürlichsprachlicher Chat mit Kontextdaten aller Kontakte
+- 7 Intent-Typen: `create_gift_idea`, `query`, `update_gift_status`, `open_suggestions`, `clarify_person`, `off_topic`, `none`
+- Structured Output: KI antwortet mit JSON `{ message, action: { type, data } }`
+- Spracheingabe via SFSpeechRecognizer (on-device bevorzugt)
+- Welcome-State mit dynamischen Beispiel-Chips
+- Action-Buttons unter Assistant-Bubbles (z.B. "Als Geschenkidee speichern")
+
+**DSGVO:**
+- Consent v2 erforderlich (erweiterte Daten: Geburtstag Monat/Tag, Geschenk-Status, IDs)
+- v1-Bestandsnutzer müssen bei Chat-Nutzung erneut zustimmen
+- `AIConsentManager.canUseChat` prüft v2-Consent
+
+**Chat ist flüchtig:** Kein persistierter Verlauf, startet jedes Mal frisch.
+
 ## KI-Architektur (AIService + AIConsentManager)
 
-**Cloud-basiert via OpenRouter** — erfordert explizite DSGVO-Einwilligung.
+**Cloud-basiert via Cloudflare Worker Proxy → OpenRouter** — erfordert explizite DSGVO-Einwilligung.
 
 | Pfad | Voraussetzung | Daten |
 |---|---|---|
-| OpenRouter → Google Gemini | API-Key + Einwilligung | Vorname, Alter, Relation, Sternzeichen, Tags, Budget-Rahmen, Geschenktitel |
-| Demo-Modus | immer (Fallback) | Vollständig offline, keine KI |
+| App → CF Worker → OpenRouter → Google Gemini | Proxy-Secret + Einwilligung | Vorname, Alter, Relation, Sternzeichen, Tags, Budget-Rahmen, Geschenktitel |
+
+Kein Demo-Modus — ohne Proxy-Secret oder Einwilligung werden Fehler angezeigt.
 
 ### AIService
 
 ```swift
 // Verfügbarkeit
-AIService.isAPIKeyConfigured  // true wenn API-Key in Info.plist vorhanden (nonisolated)
-await AIService.isAvailable   // true wenn Key + Einwilligung (@MainActor)
+AIService.isAPIKeyConfigured  // true wenn Proxy-Secret in Info.plist vorhanden (nonisolated)
+await AIService.isAvailable   // true wenn Secret + Einwilligung (@MainActor)
 
 // Aufrufe
 let suggestions = try await AIService.shared.generateGiftIdeas(for: person, ...)
@@ -83,10 +105,10 @@ AIConsentManager.shared.revokeConsent()
 ### AppConfig.AI
 
 ```swift
-AppConfig.AI.openRouterAPIKey     // String aus Info.plist
-AppConfig.AI.isAPIKeyConfigured   // Bool
+AppConfig.AI.proxySecret          // String aus Info.plist (AIProxySecret)
+AppConfig.AI.isAPIKeyConfigured   // Bool (prüft ob Proxy-Secret gesetzt)
 AppConfig.AI.model                // "google/gemini-3.1-flash-lite-preview"
-AppConfig.AI.openRouterBaseURL    // "https://openrouter.ai/api/v1/chat/completions"
+AppConfig.AI.openRouterBaseURL    // Cloudflare Worker URL
 ```
 
 ## DSGVO — KI-Features
@@ -98,16 +120,34 @@ AppConfig.AI.openRouterBaseURL    // "https://openrouter.ai/api/v1/chat/completi
 **Drittlandübermittlung:** Standardvertragsklauseln Art. 46 DSGVO
 **Vollständige Doku:** `Docs/DSGVO-AI.md`
 
-## Secrets / API-Key
+## Cloudflare Worker Proxy
+
+Der OpenRouter API-Key liegt **nicht** in der App, sondern im Cloudflare Worker (`Proxy/`).
+Die App authentifiziert sich mit einem einfachen App-Secret via `X-App-Secret` Header.
+
+```
+App → POST /chat (X-App-Secret) → Cloudflare Worker → OpenRouter API (Bearer API-Key)
+```
+
+### Secrets
 
 ```bash
 # App/Secrets.xcconfig (in .gitignore, NICHT committen)
-OPENROUTER_API_KEY = sk-or-v1-...
+AI_PROXY_SECRET = <dein-app-secret>
 
 # Template: App/Secrets.xcconfig.example
 ```
 
-Der Key wird via `project.yml` → `OpenRouterAPIKey` in Info.plist geschrieben und per `Bundle.main.infoDictionary` ausgelesen.
+Das Secret wird via `project.yml` → `AIProxySecret` in Info.plist geschrieben und per `Bundle.main.infoDictionary` ausgelesen.
+
+### Worker Deploy
+
+```bash
+cd Proxy && npm install
+wrangler secret put OPENROUTER_API_KEY   # echten OpenRouter-Key eingeben
+wrangler secret put APP_SECRET           # dasselbe Secret wie in Secrets.xcconfig
+wrangler deploy
+```
 
 ## Wichtige Patterns & Konventionen
 
@@ -195,90 +235,76 @@ try context.delete(model: PersonRef.self)
 
 Wir orientieren uns immer an Apple HIG (Human Interface Guidelines) — natives Design, Standard-Patterns, SF Symbols, System-Farben.
 
-## Subscription-System (StoreKit 2)
-
-**Architektur:** `SubscriptionManager` (@MainActor, ObservableObject) als zentraler Service.
-
-### Product-IDs (App Store Connect)
-```
-Subscription Group: "AI Presents Premium"
-├── com.harryhirsch1878.aipresents.premium.monthly  (4,99 EUR)
-└── com.harryhirsch1878.aipresents.premium.yearly   (29,99 EUR, 14-Tage Free Trial)
-```
-
-### SubscriptionManager
-
-```swift
-// Verfügbarkeit prüfen
-subscriptionManager.isPremium                    // Bool — aktives Abo?
-subscriptionManager.canAddPerson(currentCount:)  // Bool — Personen-Limit prüfen
-subscriptionManager.activeProduct                // Product? — aktives Abo-Produkt
-
-// Kauf
-await subscriptionManager.purchase(product)      // Bool — Kauf erfolgreich?
-await subscriptionManager.restorePurchases()     // Käufe wiederherstellen
-await subscriptionManager.loadProducts()         // Produkte neu laden
-
-// Konstanten
-SubscriptionManager.freePersonLimit              // 5 Personen im Free-Tier
-SubscriptionProduct.allIDs                       // Set<String> aller Product-IDs
-SubscriptionProduct.groupID                      // "premium"
-```
-
-### Integration via EnvironmentObject
-```swift
-// App-Root: aiPresentsApp.swift
-@StateObject private var subscriptionManager = SubscriptionManager()
-// .environmentObject(subscriptionManager)
-
-// In Views:
-@EnvironmentObject private var subscriptionManager: SubscriptionManager
-```
-
-### Premium-Gating
-
-| Feature | Free | Premium |
-|---------|------|---------|
-| Personen | 5 max | Unbegrenzt |
-| KI-Geschenkvorschläge | Demo | Unbegrenzt |
-| KI-Geburtstagsnachricht | - | Ja |
-| Widget | - | Ja |
-| Custom Reminders | 1 | Unbegrenzt |
-| Cloud Sync (iCloud) | Ja | Ja |
-
-### Views
-
-| View | Datei | Zweck |
-|------|-------|-------|
-| `PaywallView` | `Views/Subscription/PaywallView.swift` | Paywall mit Features, Preisvergleich, Kauf |
-| `PremiumBadge` | `Views/Subscription/PremiumBadge.swift` | Kompaktes Premium/Free-Badge |
-| `.paywallSheet(isPresented:)` | Extension auf `View` | Convenience-Modifier für Paywall |
-| `.premiumRequired(action:)` | Extension auf `View` | Lock-Icon + Paywall-Trigger |
-
-### Gating-Punkte
-
-- **ContactsImportView:** Import begrenzt auf `freePersonLimit` Personen
-- **PersonDetailView:** `handleAIButtonTap()` prüft `isPremium` vor KI-Features
-- **SettingsView:** Abo-Section mit Status, Upgrade-Button, Restore
-
-### StoreKit Testing (Xcode)
-
-1. StoreKit Configuration File `App/Products.storekit` in Xcode erstellen
-2. Produkte anlegen (Monthly + Yearly, gleiche Subscription Group)
-3. Scheme → StoreKit Configuration → `Products.storekit` auswählen
-4. Im Simulator: Käufe testen, Renewals simulieren
-
 ## App-Start Fehlerbehandlung
 
 - **CloudKit-Fehler:** Automatischer Fallback auf lokalen Store (ohne iCloud Sync)
 - **Lokaler Store-Fehler:** In-Memory-Fallback + `ContentUnavailableView` (kein Crash, aber Daten gehen verloren)
 - Alle Container-Fehler werden via `AppLogger.data.error()` geloggt
 
+## Lokalisierung (i18n)
+
+**Sprachen:** Deutsch (Development Language) + Englisch
+**Technik:** Swift String Catalogs (.xcstrings) — automatische Extraktion durch Xcode
+
+### Pflicht-Regeln für alle neuen Strings
+
+1. **Alle neuen Strings MÜSSEN zweisprachig sein** (DE + EN)
+2. **Niemals `Locale(identifier: "de_DE")` hardcoden** → immer `Locale.current`
+3. SwiftUI `Text("...")` mit String-Literal → automatisch `LocalizedStringKey`, kein Wrapping nötig
+4. Programmatische Strings → `String(localized: "Deutscher Text")`
+5. KI-Prompts → `String(localized: "...", table: "AIContent")`
+6. Enum Display-Werte: `localizedName` computed property nutzen, NICHT `rawValue`
+
+### String Catalog Dateien
+
+| Datei | Zweck | Target |
+|-------|-------|--------|
+| `Sources/aiPresentsApp/Localizable.xcstrings` | UI-Strings der Haupt-App | aiPresentsApp |
+| `Sources/aiPresentsApp/AIContent.xcstrings` | KI-Prompts | aiPresentsApp |
+| `App/InfoPlist.xcstrings` | Usage Descriptions + Display Name | aiPresentsApp |
+| `Sources/BirthdayWidget/Localizable.xcstrings` | Widget UI-Strings | BirthdayWidgetExtension |
+| `Sources/BirthdayWidget/InfoPlist.xcstrings` | Widget Display Name | BirthdayWidgetExtension |
+
+### Beispiele
+
+```swift
+// SwiftUI Text — automatisch lokalisiert:
+Text("Keine Geburtstage")           // ✅ LocalizedStringKey
+Section("Beziehung") { ... }        // ✅ LocalizedStringKey
+Button("Speichern") { ... }         // ✅ LocalizedStringKey
+.navigationTitle("Einstellungen")   // ✅ LocalizedStringKey
+
+// Programmatische Strings — String(localized:) nötig:
+let msg = String(localized: "\(name) hat in \(days) Tagen Geburtstag")
+return String(localized: "Keine Ergebnisse")
+
+// KI-Inhalte:
+let prompt = String(localized: "Generiere 5 Geschenkideen", table: "AIContent")
+
+// Enum Pattern:
+enum GiftDirection {
+    case given, received
+    var localizedName: String {
+        switch self {
+        case .given: String(localized: "Verschenkt")
+        case .received: String(localized: "Erhalten")
+        }
+    }
+}
+```
+
+### Bekannte Einschränkungen (i18n)
+
+- **RelationOptions in SwiftData:** Deutsche Werte sind in der DB gespeichert. Display-Layer lokalisiert, DB-Werte bleiben deutsch. Spätere Migration kann englische Keys einführen.
+- **SampleDataService:** Demo-Personen haben deutsche Namen — niedrige Prio, nur Debug.
+
 ## Bekannte Einschränkungen
 
-- OpenRouter API-Key muss manuell in `App/Secrets.xcconfig` eingetragen werden
-- Ohne Key: Demo-Modus (vollständig offline)
+- Proxy-Secret muss in `App/Secrets.xcconfig` eingetragen werden (`AI_PROXY_SECRET`)
+- Cloudflare Worker muss deployed sein mit `OPENROUTER_API_KEY` + `APP_SECRET` Secrets
+- Ohne Proxy-Secret: KI-Features nicht nutzbar (Fehlermeldung statt Fallback)
 - App wurde initial von KI generiert — Code-Qualität variiert
+- Alle Features (KI, Kontakte, Widget) sind für alle User freigeschaltet (kein Premium-Gating)
 
 ## Launch-Plan
 

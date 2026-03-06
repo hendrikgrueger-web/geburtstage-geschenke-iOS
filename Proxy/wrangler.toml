@@ -1,0 +1,7 @@
+name = "ai-presents-proxy"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+# APP_SECRET wird als wrangler secret gesetzt (nicht hier)
+# OPENROUTER_API_KEY wird als wrangler secret gesetzt (nicht hier)

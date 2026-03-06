@@ -6,10 +6,12 @@ struct AIBirthdayMessageSheet: View {
 
     let person: PersonRef
 
+    @AppStorage("senderName") private var senderName: String = ""
+    @State private var showingSenderNamePrompt = false
+    @State private var senderNameInput: String = ""
     @State private var isLoading = false
     @State private var birthdayMessage: BirthdayMessage?
     @State private var errorMessage: String?
-    @State private var showDemoModeNotice = false
     @State private var showingShareSheet = false
     @State private var shareText: String = ""
     @State private var toast: ToastItem?
@@ -46,12 +48,17 @@ struct AIBirthdayMessageSheet: View {
                     ShareSheetView(items: [shareText])
                 }
             }
-            .alert("Demo-Mode", isPresented: $showDemoModeNotice) {
-                Button("OK") {
+            .alert("Dein Name", isPresented: $showingSenderNamePrompt) {
+                TextField("z.B. Papa, Mama, Oma...", text: $senderNameInput)
+                Button("Speichern") {
+                    senderName = senderNameInput.trimmingCharacters(in: .whitespacesAndNewlines)
+                    generateMessage()
+                }
+                Button("Ohne Name fortfahren", role: .cancel) {
                     generateMessage()
                 }
             } message: {
-                Text("Da kein API-Key konfiguriert ist, wird eine Demo-Nachricht angezeigt.")
+                Text("Mit welchem Namen möchtest du die Nachricht unterschreiben? Dieser Name wird nur lokal auf deinem Gerät gespeichert.")
             }
         }
         .toast(item: $toast)
@@ -96,15 +103,15 @@ struct AIBirthdayMessageSheet: View {
         let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) ?? 0
 
         if daysUntil == 0 {
-            return "🎉 Heute!"
+            return String(localized: "🎉 Heute!")
         } else if daysUntil == 1 {
-            return "Morgen"
+            return String(localized: "Morgen")
         } else if daysUntil < 7 {
-            return "In \(daysUntil) Tagen"
+            return String(localized: "In \(daysUntil) Tagen")
         } else {
             let formatter = DateFormatter()
             formatter.dateStyle = .medium
-            formatter.locale = Locale(identifier: "de_DE")
+            formatter.locale = .current
             return formatter.string(from: person.birthday)
         }
     }
@@ -278,7 +285,7 @@ struct AIBirthdayMessageSheet: View {
                 }
 
                 Button(action: {
-                    generateMessage()
+                    requestGenerateMessage()
                 }) {
                     HStack {
                         Image(systemName: "sparkles")
@@ -297,6 +304,16 @@ struct AIBirthdayMessageSheet: View {
         }
     }
 
+    private func requestGenerateMessage() {
+        // Beim ersten Mal nach Absender-Name fragen
+        if senderName.isEmpty && !showingSenderNamePrompt {
+            senderNameInput = ""
+            showingSenderNamePrompt = true
+            return
+        }
+        generateMessage()
+    }
+
     private func generateMessage() {
         isLoading = true
         errorMessage = nil
@@ -304,9 +321,10 @@ struct AIBirthdayMessageSheet: View {
         HapticFeedback.light()
 
         let p = person
+        let name = senderName.isEmpty ? nil : senderName
         Task { @MainActor in
             do {
-                let message = try await AIService.shared.generateBirthdayMessage(for: p)
+                let message = try await AIService.shared.generateBirthdayMessage(for: p, senderName: name)
                 isLoading = false
                 birthdayMessage = message
                 HapticFeedback.success()
@@ -321,7 +339,7 @@ struct AIBirthdayMessageSheet: View {
     private func copyMessage(_ message: BirthdayMessage) {
         let fullMessage = message.fullText
         UIPasteboard.general.string = fullMessage
-        toast = ToastItem.success("Kopiert", message: "Nachricht in Zwischenablage kopiert")
+        toast = ToastItem.success(String(localized: "Kopiert"), message: String(localized: "Nachricht in Zwischenablage kopiert"))
         HapticFeedback.success()
     }
 

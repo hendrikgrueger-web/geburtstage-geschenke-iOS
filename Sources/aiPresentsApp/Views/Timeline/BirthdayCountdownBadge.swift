@@ -22,7 +22,7 @@ struct BirthdayCountdownBadge: View {
             }
 
             if daysUntil > 0 {
-                Text(daysUntil == 1 ? "Tag" : "Tage")
+                Text(daysUntil == 1 ? String(localized: "Tag") : String(localized: "Tage"))
                     .font(.caption2)
                     .foregroundColor(.white.opacity(0.9))
             } else {
@@ -52,11 +52,11 @@ struct BirthdayCountdownBadge: View {
 
     private var accessibilityLabel: String {
         if daysUntil == 0 {
-            return "Geburtstag heute"
+            return String(localized: "Geburtstag heute")
         } else if daysUntil == 1 {
-            return "Geburtstag morgen"
+            return String(localized: "Geburtstag morgen")
         } else {
-            return "Geburtstag in \(daysUntil) Tagen"
+            return String(localized: "Geburtstag in \(daysUntil) Tagen")
         }
     }
 

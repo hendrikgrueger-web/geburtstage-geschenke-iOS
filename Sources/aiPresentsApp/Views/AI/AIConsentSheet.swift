@@ -47,6 +47,8 @@ struct AIConsentSheet: View {
                             ConsentDataRow(icon: "tag.fill", text: "Interessen/Tags (sofern vorhanden)")
                             ConsentDataRow(icon: "eurosign.circle", text: "Budget-Rahmen (Min/Max, für passende Vorschläge)")
                             ConsentDataRow(icon: "gift.fill", text: "Titel vergangener Geschenke (keine Notizen)")
+                            ConsentDataRow(icon: "calendar", text: "Geburtstag (nur Monat und Tag, kein Jahr)")
+                            ConsentDataRow(icon: "checkmark.circle", text: "Status von Geschenkideen (z.B. \"geplant\", \"gekauft\")")
                         }
                     }
 
@@ -110,7 +112,7 @@ struct AIConsentSheet: View {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)")
                                 .font(.subheadline.bold())
-                            Text("Deine Einwilligung ist freiwillig. Die App funktioniert auch ohne KI-Features (Demo-Modus).")
+                            Text("Deine Einwilligung ist freiwillig. Die App funktioniert auch ohne KI-Features.")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             Text("Widerruf jederzeit möglich: Einstellungen → KI-Assistent → \"Widerrufen\"")
@@ -164,7 +166,7 @@ struct AIConsentSheet: View {
 private struct ConsentSection<Content: View>: View {
     let icon: String
     let iconColor: Color
-    let title: String
+    let title: LocalizedStringKey
     @ViewBuilder let content: Content
 
     var body: some View {
@@ -188,7 +190,7 @@ private struct ConsentSection<Content: View>: View {
 
 private struct ConsentDataRow: View {
     let icon: String
-    let text: String
+    let text: LocalizedStringKey
 
     var body: some View {
         HStack(alignment: .top, spacing: 10) {

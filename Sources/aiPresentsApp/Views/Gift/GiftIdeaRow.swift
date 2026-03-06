@@ -55,7 +55,7 @@ struct GiftIdeaRow: View {
         .padding(.vertical, 2)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
-        .accessibilityHint("Status: \(statusText). Tap zum Bearbeiten")
+        .accessibilityHint(String(localized: "Status: \(statusText). Tap zum Bearbeiten"))
     }
 
     private var accessibilityLabel: String {
@@ -64,12 +64,12 @@ struct GiftIdeaRow: View {
             label += ". " + idea.note
         }
         if idea.budgetMax > 0 {
-            label += ". Budget: \(budgetString)"
+            label += String(localized: ". Budget: \(budgetString)")
         }
         if !idea.tags.isEmpty {
-            label += ". Tags: \(idea.tags.joined(separator: ", "))"
+            label += String(localized: ". Tags: \(idea.tags.joined(separator: ", "))")
         }
-        label += ". Status: \(statusText)"
+        label += String(localized: ". Status: \(statusText)")
         return label
     }
 
@@ -89,10 +89,10 @@ struct GiftIdeaRow: View {
 
     private var statusText: String {
         switch idea.status {
-        case .idea: return "Idee"
-        case .planned: return "Geplant"
-        case .purchased: return "Gekauft"
-        case .given: return "Verschenkt"
+        case .idea: return String(localized: "Idee")
+        case .planned: return String(localized: "Geplant")
+        case .purchased: return String(localized: "Gekauft")
+        case .given: return String(localized: "Verschenkt")
         }
     }
 
@@ -107,11 +107,11 @@ struct GiftIdeaRow: View {
 
     private var budgetString: String {
         if idea.budgetMin == idea.budgetMax {
-            return String(format: "%.0f €", idea.budgetMin)
+            return String(localized: "\(Int(idea.budgetMin)) €")
         } else if idea.budgetMin == 0 {
-            return String(format: "bis %.0f €", idea.budgetMax)
+            return String(localized: "bis \(Int(idea.budgetMax)) €")
         } else {
-            return String(format: "%.0f - %.0f €", idea.budgetMin, idea.budgetMax)
+            return String(localized: "\(Int(idea.budgetMin)) - \(Int(idea.budgetMax)) €")
         }
     }
 

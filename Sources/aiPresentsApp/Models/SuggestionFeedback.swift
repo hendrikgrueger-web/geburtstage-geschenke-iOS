@@ -41,17 +41,17 @@ struct SuggestionQualityMetrics {
     var ratingText: String {
         switch positivityRate {
         case 0.8...1.0:
-            return "⭐⭐⭐⭐⭐ Ausgezeichnet"
+            return "⭐⭐⭐⭐⭐ " + String(localized: "Ausgezeichnet")
         case 0.6..<0.8:
-            return "⭐⭐⭐⭐ Gut"
+            return "⭐⭐⭐⭐ " + String(localized: "Gut")
         case 0.4..<0.6:
-            return "⭐⭐⭐ Akzeptabel"
+            return "⭐⭐⭐ " + String(localized: "Akzeptabel")
         case 0.2..<0.4:
-            return "⭐⭐ Verbesserungswürdig"
+            return "⭐⭐ " + String(localized: "Verbesserungswürdig")
         case 0.0..<0.2:
-            return "⭐ Kritisch"
+            return "⭐ " + String(localized: "Kritisch")
         default:
-            return "Keine Daten"
+            return String(localized: "Keine Daten")
         }
     }
 

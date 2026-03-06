@@ -1,0 +1,97 @@
+{
+  "sourceLanguage" : "de",
+  "strings" : {
+    "+%@ weitere" : {
+
+    },
+    "1 Idee" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Idea"
+          }
+        }
+      }
+    },
+    "Geburtstage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthdays"
+          }
+        }
+      }
+    },
+    "Gekauft" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchased"
+          }
+        }
+      }
+    },
+    "Geplant" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planned"
+          }
+        }
+      }
+    },
+    "Heute" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        }
+      }
+    },
+    "Keine Geburtstage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Birthdays"
+          }
+        }
+      }
+    },
+    "Nächste Geburtstage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upcoming Birthdays"
+          }
+        }
+      }
+    },
+    "wird %@" : {
+
+    },
+    "Zeigt die nächsten Geburtstage mit Geschenk-Status." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows the upcoming birthdays with gift status."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

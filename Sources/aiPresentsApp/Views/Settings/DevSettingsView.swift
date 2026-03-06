@@ -107,7 +107,7 @@ struct DevSettingsView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             isCreatingSampleData = false
             sampleDataCreated = true
-            alertMessage = "Demo-Daten erstellt!"
+            alertMessage = String(localized: "Demo-Daten erstellt!")
             showingAlert = true
         }
     }
@@ -124,12 +124,12 @@ struct DevSettingsView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 isClearingData = false
                 dataCleared = true
-                alertMessage = "Alle Daten gelöscht!"
+                alertMessage = String(localized: "Alle Daten gelöscht!")
                 showingAlert = true
             }
         } catch {
             isClearingData = false
-            alertMessage = "Fehler beim Löschen: \(error.localizedDescription)"
+            alertMessage = String(localized: "Fehler beim Löschen: \(error.localizedDescription)")
             showingAlert = true
         }
     }

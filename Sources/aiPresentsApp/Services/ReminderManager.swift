@@ -120,7 +120,7 @@ class ReminderManager: ObservableObject {
         }
 
         let content = UNMutableNotificationContent()
-        content.title = "\(person.displayName)'s Geburtstag"
+        content.title = String(localized: "\(person.displayName)'s Geburtstag")
         content.body = notificationBody(for: leadDay)
         content.sound = .default; content.badge = 1
         content.userInfo = ["personId": person.id.uuidString, "leadDay": leadDay]
@@ -140,11 +140,11 @@ class ReminderManager: ObservableObject {
 
     private func notificationBody(for leadDay: Int) -> String {
         switch leadDay {
-        case 30: return "In 30 Tagen ist es soweit! Zeit für Geschenkideen."
-        case 14: return "Nur noch 2 Wochen! Hast du etwas gefunden?"
-        case 7: return "Nur noch eine Woche! Zeit zu handeln."
-        case 2: return "Bald ist es soweit! Letzter Anstoß."
-        default: return "Geburtstag steht bevor!"
+        case 30: return String(localized: "In 30 Tagen ist es soweit! Zeit für Geschenkideen.")
+        case 14: return String(localized: "Nur noch 2 Wochen! Hast du etwas gefunden?")
+        case 7: return String(localized: "Nur noch eine Woche! Zeit zu handeln.")
+        case 2: return String(localized: "Bald ist es soweit! Letzter Anstoß.")
+        default: return String(localized: "Geburtstag steht bevor!")
         }
     }
 

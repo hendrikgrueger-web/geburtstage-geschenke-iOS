@@ -6,23 +6,23 @@ struct OnboardingView: View {
     private let pages: [OnboardingPage] = [
         OnboardingPage(
             icon: "gift.fill",
-            title: "Nie wieder vergessen",
-            description: "Behalte alle Geburtstage im Blick und plane Geschenke stressfrei."
+            title: String(localized: "Nie wieder vergessen"),
+            description: String(localized: "Behalte alle Geburtstage im Blick und plane Geschenke stressfrei.")
         ),
         OnboardingPage(
             icon: "lightbulb.fill",
-            title: "Geschenkideen sammeln",
-            description: "Speichere Ideen und setze Budgets für jeden Kontakt."
+            title: String(localized: "Geschenkideen sammeln"),
+            description: String(localized: "Speichere Ideen und setze Budgets für jeden Kontakt.")
         ),
         OnboardingPage(
             icon: "bell.fill",
-            title: "Smarte Erinnerungen",
-            description: "Werde rechtzeitig erinnert, damit du perfekt vorbereitet bist."
+            title: String(localized: "Smarte Erinnerungen"),
+            description: String(localized: "Werde rechtzeitig erinnert, damit du perfekt vorbereitet bist.")
         ),
         OnboardingPage(
             icon: "sparkles",
-            title: "KI-Vorschläge",
-            description: "Lass dir kreative Geschenkideen basierend auf Interessen generieren."
+            title: String(localized: "KI-Vorschläge"),
+            description: String(localized: "Lass dir kreative Geschenkideen basierend auf Interessen generieren.")
         )
     ]
 
@@ -54,7 +54,7 @@ struct OnboardingView: View {
                         }
                         HapticFeedback.selectionChanged()
                     } label: {
-                        Text(isLastContentPage ? "Weiter" : "Überspringen")
+                        Text(isLastContentPage ? String(localized: "Weiter") : String(localized: "Überspringen"))
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)

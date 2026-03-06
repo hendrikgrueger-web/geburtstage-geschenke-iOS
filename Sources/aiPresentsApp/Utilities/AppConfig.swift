@@ -18,17 +18,20 @@ struct AppConfig {
         "\(appVersion) (\(buildNumber))"
     }
 
-    // MARK: - OpenRouter
+    // MARK: - AI Proxy
     struct AI {
-        static var openRouterAPIKey: String {
-            Bundle.main.infoDictionary?["OpenRouterAPIKey"] as? String ?? ""
+        /// App-Secret für Cloudflare Worker Proxy-Authentifizierung.
+        static var proxySecret: String {
+            Bundle.main.infoDictionary?["AIProxySecret"] as? String ?? ""
         }
+        /// True wenn ein gültiges Proxy-Secret konfiguriert ist.
         static var isAPIKeyConfigured: Bool {
-            let key = openRouterAPIKey
-            return !key.isEmpty && !key.hasPrefix("sk-or-v1-YOUR") && key.count > 20
+            let secret = proxySecret
+            return !secret.isEmpty && secret != "your-app-secret-here" && secret.count > 8
         }
         static let model = "google/gemini-3.1-flash-lite-preview"
-        static let openRouterBaseURL = "https://openrouter.ai/api/v1/chat/completions"
+        /// URL des Cloudflare Worker Proxy (POST /chat → OpenRouter).
+        static let openRouterBaseURL = "https://ai-presents-proxy.hendrik-grueger.workers.dev/chat"
     }
 
     // MARK: - UI Constants

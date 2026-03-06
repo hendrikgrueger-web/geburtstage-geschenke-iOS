@@ -45,19 +45,19 @@ struct UpcomingBirthdaysView: View {
                 }
             }
         }
-        .navigationTitle("Diese Woche (\(upcoming.count))")
+        .navigationTitle(String(localized: "Diese Woche (\(upcoming.count))"))
         .navigationBarTitleDisplayMode(.inline)
     }
 
     private func birthdayString(for person: PersonRef) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd. MMMM"
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = .current
         let today = Calendar.current.startOfDay(for: Date())
         guard let next = BirthdayCalculator.nextBirthday(for: person.birthday, from: today),
               let age = BirthdayCalculator.age(for: person.birthday, on: today) else {
             return formatter.string(from: person.birthday)
         }
-        return "\(formatter.string(from: next)) · wird \(age + 1)"
+        return "\(formatter.string(from: next)) · " + String(localized: "wird \(age + 1)")
     }
 }

@@ -94,17 +94,19 @@ enum AccessibilityConfiguration {
 
         switch days {
         case 0:
-            return "Heute"
+            return String(localized: "Heute")
         case 1:
-            return "Morgen"
+            return String(localized: "Morgen")
         case -1:
-            return "Gestern"
+            return String(localized: "Gestern")
         case 2...6:
-            return "In \(days) Tagen"
+            let d = days
+            return String(localized: "In") + " \(d) " + String(localized: "Tagen")
         case let x where x < 0:
-            return "vor \(abs(x)) Tagen"
+            return String(localized: "vor") + " \(abs(x)) " + String(localized: "Tagen")
         default:
-            return "In \(days) Tagen"
+            let d = days
+            return String(localized: "In") + " \(d) " + String(localized: "Tagen")
         }
     }
 }

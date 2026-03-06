@@ -48,10 +48,10 @@ extension GiftIdea {
 
     private var statusText: String {
         switch status {
-        case .idea: return "Idee"
-        case .planned: return "Geplant"
-        case .purchased: return "Gekauft"
-        case .given: return "Verschenkt"
+        case .idea: return String(localized: "Idee")
+        case .planned: return String(localized: "Geplant")
+        case .purchased: return String(localized: "Gekauft")
+        case .given: return String(localized: "Verschenkt")
         }
     }
 }
@@ -95,7 +95,7 @@ extension PersonRef {
     private var birthdayString: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = .current
         return formatter.string(from: birthday)
     }
 }

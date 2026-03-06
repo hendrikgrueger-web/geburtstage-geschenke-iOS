@@ -107,17 +107,17 @@ final class NotificationPermissionHelper: ObservableObject {
     var statusDescription: String {
         switch authorizationStatus {
         case .notDetermined:
-            return "Nicht angefragt"
+            return String(localized: "Nicht angefragt")
         case .denied:
-            return "Abgelehnt"
+            return String(localized: "Abgelehnt")
         case .authorized:
-            return "Aktiviert"
+            return String(localized: "Aktiviert")
         case .provisional:
-            return "Provisorisch"
+            return String(localized: "Provisorisch")
         case .ephemeral:
-            return "Ephemeral"
+            return String(localized: "Ephemeral")
         @unknown default:
-            return "Unbekannt"
+            return String(localized: "Unbekannt")
         }
     }
 
@@ -125,13 +125,13 @@ final class NotificationPermissionHelper: ObservableObject {
     var actionMessage: String {
         switch authorizationStatus {
         case .notDetermined:
-            return "Erhalte Benachrichtigungen für Geburtstage"
+            return String(localized: "Erhalte Benachrichtigungen für Geburtstage")
         case .denied:
-            return "Benachrichtigungen in den Einstellungen aktivieren"
+            return String(localized: "Benachrichtigungen in den Einstellungen aktivieren")
         case .authorized:
-            return "Benachrichtigungen aktiv"
+            return String(localized: "Benachrichtigungen aktiv")
         default:
-            return "Status unbekannt"
+            return String(localized: "Status unbekannt")
         }
     }
 
@@ -276,18 +276,18 @@ struct NotificationPermissionView: View {
 
     private var actionButtonTitle: String {
         if helper.isLoading {
-            return "Laden..."
+            return String(localized: "Laden...")
         }
 
         switch helper.authorizationStatus {
         case .notDetermined:
-            return "Aktivieren"
+            return String(localized: "Aktivieren")
         case .denied:
-            return "Einstellungen öffnen"
+            return String(localized: "Einstellungen öffnen")
         case .authorized:
-            return "Aktiviert ✓"
+            return String(localized: "Aktiviert ✓")
         default:
-            return "Status prüfen"
+            return String(localized: "Status prüfen")
         }
     }
 

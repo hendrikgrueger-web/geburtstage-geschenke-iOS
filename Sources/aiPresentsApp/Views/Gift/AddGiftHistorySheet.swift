@@ -67,10 +67,10 @@ struct AddGiftHistorySheet: View {
 
     private var validationMessages: String {
         var messages: [String] = []
-        if !isTitleValid { messages.append("- Titel darf nicht leer sein") }
-        if !isBudgetValid && !budget.isEmpty { messages.append("- Ungültiges Budget") }
+        if !isTitleValid { messages.append(String(localized: "- Titel darf nicht leer sein")) }
+        if !isBudgetValid && !budget.isEmpty { messages.append(String(localized: "- Ungültiges Budget")) }
         if let error = categoryValidation { messages.append("- \(error.errorDescription ?? "")") }
-        if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty { messages.append("- Ungültige URL") }
+        if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty { messages.append(String(localized: "- Ungültige URL")) }
         return messages.joined(separator: "\n")
     }
 
@@ -83,17 +83,17 @@ struct AddGiftHistorySheet: View {
                         text: $title,
                         minLength: 2,
                         maxLength: 100,
-                        placeholder: direction == .given ? "Was wurde verschenkt?" : "Was hast du erhalten?"
+                        placeholder: direction == .given ? String(localized: "Was wurde verschenkt?") : String(localized: "Was hast du erhalten?")
                     )
 
                     // SmartInputField for category
                     SmartInputField(
-                        title: "Kategorie",
+                        title: String(localized: "Kategorie"),
                         text: $category,
-                        placeholder: "z.B. Schmuck, Buch, Erlebnis, Geld",
+                        placeholder: String(localized: "z.B. Schmuck, Buch, Erlebnis, Geld"),
                         validator: { value in
                             if !value.isEmpty {
-                                return ValidationHelper.validateMaxLength(value, maxLength: 50, fieldName: "Kategorie")
+                                return ValidationHelper.validateMaxLength(value, maxLength: 50, fieldName: String(localized: "Kategorie"))
                             }
                             return .valid
                         }
@@ -126,7 +126,7 @@ struct AddGiftHistorySheet: View {
                     SmartInputField.noteField(
                         text: $note,
                         maxLength: 500,
-                        placeholder: "Optionale Notizen"
+                        placeholder: String(localized: "Optionale Notizen")
                     )
 
                     // SmartInputField for URL with auto-https
@@ -165,10 +165,14 @@ struct AddGiftHistorySheet: View {
                 } header: {
                     Text("Jahr des Geschenks")
                 } footer: {
-                    Text(direction == .given ? "Wähle das Jahr, in dem das Geschenk verschenkt wurde" : "Wähle das Jahr, in dem du das Geschenk erhalten hast")
+                    if direction == .given {
+                        Text("Wähle das Jahr, in dem das Geschenk verschenkt wurde")
+                    } else {
+                        Text("Wähle das Jahr, in dem du das Geschenk erhalten hast")
+                    }
                 }
             }
-            .navigationTitle(direction == .given ? "Geschenk vermerken" : "Erhaltenes Geschenk")
+            .navigationTitle(direction == .given ? String(localized: "Geschenk vermerken") : String(localized: "Erhaltenes Geschenk"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -191,7 +195,7 @@ struct AddGiftHistorySheet: View {
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
                     .accessibilityLabel("Speichern")
-                    .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? "Titel muss ausgefüllt sein" : "Speichert das Geschenk")
+                    .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? String(localized: "Titel muss ausgefüllt sein") : String(localized: "Speichert das Geschenk"))
                 }
             }
         }
@@ -207,7 +211,7 @@ struct AddGiftHistorySheet: View {
         let history = GiftHistory(
             personId: person.id,
             title: title.trimmingCharacters(in: .whitespaces),
-            category: category.isEmpty ? "Sonstiges" : category.trimmingCharacters(in: .whitespaces),
+            category: category.isEmpty ? String(localized: "Sonstiges") : category.trimmingCharacters(in: .whitespaces),
             year: year,
             budget: Double(budget) ?? 0,
             note: note,

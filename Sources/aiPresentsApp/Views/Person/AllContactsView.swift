@@ -40,9 +40,15 @@ struct AllContactsView: View {
                                     from: Calendar.current.startOfDay(for: Date())
                                 )
                                 if let d = days {
-                                    Text(d == 0 ? "Heute 🎉" : "in \(d) T.")
-                                        .font(.caption)
-                                        .foregroundColor(d <= 7 ? .orange : .secondary)
+                                    if d == 0 {
+                                        Text("Heute 🎉")
+                                            .font(.caption)
+                                            .foregroundColor(.orange)
+                                    } else {
+                                        Text("in \(d) T.")
+                                            .font(.caption)
+                                            .foregroundColor(d <= 7 ? .orange : .secondary)
+                                    }
                                 }
                             }
                             .padding(.vertical, 2)

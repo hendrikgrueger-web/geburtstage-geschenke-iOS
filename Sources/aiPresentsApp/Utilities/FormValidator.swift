@@ -12,17 +12,17 @@ enum ValidationError: LocalizedError, Equatable {
     var errorDescription: String? {
         switch self {
         case .emptyField(let field):
-            return "\(field) darf nicht leer sein"
+            return String(localized: "\(field) darf nicht leer sein")
         case .invalidBudget:
-            return "Bitte gib eine gültige Zahl ein"
+            return String(localized: "Bitte gib eine gültige Zahl ein")
         case .budgetMinMaxMismatch:
-            return "Maximalbetrag muss größer als Minimalbetrag sein"
+            return String(localized: "Maximalbetrag muss größer als Minimalbetrag sein")
         case .invalidURL:
-            return "Bitte gib eine gültige URL ein"
+            return String(localized: "Bitte gib eine gültige URL ein")
         case .tooShort(let length):
-            return "Mindestens \(length) Zeichen erforderlich"
+            return String(localized: "Mindestens \(length) Zeichen erforderlich")
         case .tooLong(let length):
-            return "Maximal \(length) Zeichen erlaubt"
+            return String(localized: "Maximal \(length) Zeichen erlaubt")
         }
     }
 }
@@ -65,7 +65,7 @@ struct FormValidator {
     static func validateTitle(_ text: String) -> ValidationError? {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.isEmpty {
-            return .emptyField("Titel")
+            return .emptyField(String(localized: "Titel"))
         }
         if trimmed.count > AppConfig.Limits.maxTitleLength {
             return .tooLong(maxLength: AppConfig.Limits.maxTitleLength)
@@ -119,7 +119,7 @@ struct FormValidator {
     static func validateCategory(_ category: String) -> ValidationError? {
         let trimmed = category.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.isEmpty {
-            return .emptyField("Kategorie")
+            return .emptyField(String(localized: "Kategorie"))
         }
         if trimmed.count > AppConfig.Limits.maxCategoryLength {
             return .tooLong(maxLength: AppConfig.Limits.maxCategoryLength)

@@ -70,7 +70,7 @@ struct BirthdayDateHelper {
         BirthdayCalculator.isBirthdayWithinDays(for: birthday, days: days, from: date)
     }
 
-    /// Get zodiac sign for a birthday
+    /// Get zodiac sign for a birthday (German, for API/data compatibility)
     static func zodiacSign(from birthday: Date) -> String {
         let calendar = Calendar.current
         let day = calendar.component(.day, from: birthday)
@@ -93,6 +93,29 @@ struct BirthdayDateHelper {
         }
     }
 
+    /// Get localized zodiac sign for a birthday (for UI display)
+    static func localizedZodiacSign(from birthday: Date) -> String {
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: birthday)
+        let month = calendar.component(.month, from: birthday)
+
+        switch (month, day) {
+        case (3, 21...31), (4, 1...19): return String(localized: "♈ Widder")
+        case (4, 20...30), (5, 1...20): return String(localized: "♉ Stier")
+        case (5, 21...31), (6, 1...20): return String(localized: "♊ Zwilling")
+        case (6, 21...30), (7, 1...22): return String(localized: "♋ Krebs")
+        case (7, 23...31), (8, 1...22): return String(localized: "♌ Löwe")
+        case (8, 23...31), (9, 1...22): return String(localized: "♍ Jungfrau")
+        case (9, 23...30), (10, 1...22): return String(localized: "♎ Waage")
+        case (10, 23...31), (11, 1...21): return String(localized: "♏ Skorpion")
+        case (11, 22...30), (12, 1...21): return String(localized: "♐ Schütze")
+        case (12, 22...31), (1, 1...19): return String(localized: "♑ Steinbock")
+        case (1, 20...31), (2, 1...18): return String(localized: "♒ Wassermann")
+        case (2, 19...29), (3, 1...20): return String(localized: "♓ Fische")
+        default: return ""
+        }
+    }
+
     // MARK: - Birthday Milestones
 
     /// Check if age is a milestone (18, 21, 30, 40, 50, 60, 70, 80, 90, 100)
@@ -103,16 +126,16 @@ struct BirthdayDateHelper {
     /// Get milestone name for age
     static func milestoneName(for age: Int) -> String? {
         switch age {
-        case 18: return "🎉 Volljährigkeit"
-        case 21: return "🎉 Große Mehrheit"
-        case 30: return "🎉 30. Geburtstag"
-        case 40: return "🎉 40. Geburtstag"
-        case 50: return "🎉 50. Geburtstag"
-        case 60: return "🎉 60. Geburtstag"
-        case 70: return "🎉 70. Geburtstag"
-        case 80: return "🎉 80. Geburtstag"
-        case 90: return "🎉 90. Geburtstag"
-        case 100: return "🎉 100. Geburtstag"
+        case 18: return "🎉 " + String(localized: "Volljährigkeit")
+        case 21: return "🎉 " + String(localized: "Große Mehrheit")
+        case 30: return "🎉 " + String(localized: "30. Geburtstag")
+        case 40: return "🎉 " + String(localized: "40. Geburtstag")
+        case 50: return "🎉 " + String(localized: "50. Geburtstag")
+        case 60: return "🎉 " + String(localized: "60. Geburtstag")
+        case 70: return "🎉 " + String(localized: "70. Geburtstag")
+        case 80: return "🎉 " + String(localized: "80. Geburtstag")
+        case 90: return "🎉 " + String(localized: "90. Geburtstag")
+        case 100: return "🎉 " + String(localized: "100. Geburtstag")
         default: return nil
         }
     }
@@ -120,7 +143,7 @@ struct BirthdayDateHelper {
     // MARK: - Formatting
 
     /// Format birthday for display (day and month only)
-    static func formatBirthdayShort(_ birthday: Date, locale: Locale = Locale(identifier: "de_DE")) -> String {
+    static func formatBirthdayShort(_ birthday: Date, locale: Locale = .current) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .none
         formatter.setLocalizedDateFormatFromTemplate("dd.MMM")
@@ -129,7 +152,7 @@ struct BirthdayDateHelper {
     }
 
     /// Format full birthday (with year)
-    static func formatBirthdayFull(_ birthday: Date, locale: Locale = Locale(identifier: "de_DE")) -> String {
+    static func formatBirthdayFull(_ birthday: Date, locale: Locale = .current) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.locale = locale
@@ -139,26 +162,27 @@ struct BirthdayDateHelper {
     /// Format relative date description
     static func relativeDateDescription(from birthday: Date, asOf date: Date = today) -> String {
         guard let daysUntil = daysUntilBirthday(from: birthday, asOf: date) else {
-            return "Unbekannt"
+            return String(localized: "Unbekannt")
         }
 
+        let months = daysUntil / 30
         switch daysUntil {
         case 0:
-            return "🎉 Heute!"
+            return "🎉 " + String(localized: "Heute!")
         case 1:
-            return "📅 Morgen"
+            return "📅 " + String(localized: "Morgen")
         case 2...7:
-            return "📅 In \(daysUntil) Tagen"
+            return "📅 " + String(localized: "In \(daysUntil) Tagen")
         case 8...30:
-            return "📅 \(daysUntil) Tage"
+            return "📅 " + String(localized: "\(daysUntil) Tage")
         case 31...60:
-            return "📅 In \(daysUntil / 30) Monaten"
+            return "📅 " + String(localized: "In \(months) Monaten")
         case 61...365:
-            return "📅 In \(daysUntil / 30) Monaten"
+            return "📅 " + String(localized: "In \(months) Monaten")
         case 366...:
-            return "📅 Nächstes Jahr"
+            return "📅 " + String(localized: "Nächstes Jahr")
         default:
-            return "Unbekannt"
+            return String(localized: "Unbekannt")
         }
     }
 
@@ -170,7 +194,7 @@ struct BirthdayDateHelper {
             return "\(currentAge) \(milestone)"
         }
 
-        return "\(currentAge) Jahre"
+        return String(localized: "\(currentAge) Jahre")
     }
 
     // MARK: - Grouping
@@ -182,6 +206,16 @@ struct BirthdayDateHelper {
         case thisWeek = "Diese Woche"
         case thisMonth = "Diesen Monat"
         case later = "Später"
+
+        var localizedName: String {
+            switch self {
+            case .today: return String(localized: "Heute")
+            case .tomorrow: return String(localized: "Morgen")
+            case .thisWeek: return String(localized: "Diese Woche")
+            case .thisMonth: return String(localized: "Diesen Monat")
+            case .later: return String(localized: "Später")
+            }
+        }
     }
 
     /// Get the period for a birthday
@@ -213,7 +247,7 @@ struct BirthdayDateHelper {
 
     private static var calendar: Calendar {
         var cal = Calendar(identifier: .gregorian)
-        cal.locale = Locale(identifier: "de_DE")
+        cal.locale = .current
         return cal
     }
 

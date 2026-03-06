@@ -113,7 +113,7 @@ private struct ChipView: View {
 
 /// Custom Layout, das Subviews horizontal anordnet und bei Platzmangel automatisch umbricht.
 /// Wird für die Chip-Darstellung verwendet, damit Hobbies mehrzeilig fließen.
-private struct FlowLayout: Layout {
+struct FlowLayout: Layout {
     var spacing: CGFloat = 8
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {

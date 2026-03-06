@@ -4,12 +4,13 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var people: [PersonRef]
+    @Binding var deepLinkPersonID: UUID?
 
     @State private var showingContactsImport = false
 
     var body: some View {
         NavigationStack {
-            TimelineView()
+            TimelineView(deepLinkPersonID: $deepLinkPersonID)
         }
         .sheet(isPresented: $showingContactsImport) {
             ContactsImportView()

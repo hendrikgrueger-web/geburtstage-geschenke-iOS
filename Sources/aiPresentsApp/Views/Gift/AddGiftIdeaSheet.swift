@@ -65,10 +65,10 @@ struct AddGiftIdeaSheet: View {
 
     private var validationMessages: String {
         var messages: [String] = []
-        if title.trimmingCharacters(in: .whitespaces).isEmpty { messages.append("- Titel darf nicht leer sein") }
-        if isBudgetInvalid { messages.append("- Ungültiges Budget") }
+        if title.trimmingCharacters(in: .whitespaces).isEmpty { messages.append(String(localized: "- Titel darf nicht leer sein")) }
+        if isBudgetInvalid { messages.append(String(localized: "- Ungültiges Budget")) }
         if let error = tagsValidation { messages.append("- \(error.errorDescription ?? "")") }
-        if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty { messages.append("- Ungültige URL") }
+        if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty { messages.append(String(localized: "- Ungültige URL")) }
         return messages.joined(separator: "\n")
     }
 
@@ -81,14 +81,14 @@ struct AddGiftIdeaSheet: View {
                         text: $title,
                         minLength: 2,
                         maxLength: 100,
-                        placeholder: "Name des Geschenks"
+                        placeholder: String(localized: "Name des Geschenks")
                     )
 
                     // SmartInputField for notes with character limit
                     SmartInputField.noteField(
                         text: $note,
                         maxLength: 500,
-                        placeholder: "Optionale Notizen"
+                        placeholder: String(localized: "Optionale Notizen")
                     )
 
                     // SmartInputField for URL with auto-https normalization
@@ -242,7 +242,7 @@ struct AddGiftIdeaSheet: View {
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
                     .accessibilityLabel("Speichern")
-                    .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? "Titel muss ausgefüllt sein" : "Speichert die Geschenkidee")
+                    .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? String(localized: "Titel muss ausgefüllt sein") : String(localized: "Speichert die Geschenkidee"))
                 }
             }
         }
@@ -280,10 +280,10 @@ struct AddGiftIdeaSheet: View {
 
     private func statusText(for status: GiftStatus) -> String {
         switch status {
-        case .idea: return "Idee"
-        case .planned: return "Geplant"
-        case .purchased: return "Gekauft"
-        case .given: return "Verschenkt"
+        case .idea: return String(localized: "Idee")
+        case .planned: return String(localized: "Geplant")
+        case .purchased: return String(localized: "Gekauft")
+        case .given: return String(localized: "Verschenkt")
         }
     }
 }

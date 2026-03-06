@@ -21,11 +21,11 @@ struct BirthdayWidgetData {
         /// Widget display text
         var displayText: String {
             if isToday {
-                return "Heute!"
+                return String(localized: "Heute!")
             } else if daysUntil == 1 {
-                return "Morgen"
+                return String(localized: "Morgen")
             } else {
-                return "in \(daysUntil) Tagen"
+                return String(localized: "in") + " \(daysUntil) " + String(localized: "Tagen")
             }
         }
 

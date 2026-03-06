@@ -25,7 +25,7 @@ struct ValidationHelper {
         if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "\(fieldName) darf nicht leer sein",
+                errorMessage: String(localized: "\(fieldName) darf nicht leer sein"),
                 errorKey: "empty"
             )
         }
@@ -37,7 +37,7 @@ struct ValidationHelper {
         if value.count < minLength {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "\(fieldName) muss mindestens \(minLength) Zeichen haben",
+                errorMessage: String(localized: "\(fieldName) muss mindestens \(minLength) Zeichen haben"),
                 errorKey: "minLength"
             )
         }
@@ -49,7 +49,7 @@ struct ValidationHelper {
         if value.count > maxLength {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "\(fieldName) darf maximal \(maxLength) Zeichen haben",
+                errorMessage: String(localized: "\(fieldName) darf maximal \(maxLength) Zeichen haben"),
                 errorKey: "maxLength"
             )
         }
@@ -83,7 +83,7 @@ struct ValidationHelper {
 
         return ValidationResult(
             isValid: false,
-            errorMessage: "Bitte gib eine gültige URL ein (z.B. https://example.com)",
+            errorMessage: String(localized: "Bitte gib eine gültige URL ein (z.B. https://example.com)"),
             errorKey: "invalidURL"
         )
     }
@@ -120,7 +120,7 @@ struct ValidationHelper {
         if !predicate.evaluate(with: trimmed) {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Bitte gib eine gültige E-Mail-Adresse ein",
+                errorMessage: String(localized: "Bitte gib eine gültige E-Mail-Adresse ein"),
                 errorKey: "invalidEmail"
             )
         }
@@ -135,7 +135,7 @@ struct ValidationHelper {
         if trimmed.isEmpty {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Kategorie darf nicht leer sein",
+                errorMessage: String(localized: "Kategorie darf nicht leer sein"),
                 errorKey: "empty"
             )
         }
@@ -143,7 +143,7 @@ struct ValidationHelper {
         if trimmed.count > 50 {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Kategorie darf maximal 50 Zeichen haben",
+                errorMessage: String(localized: "Kategorie darf maximal 50 Zeichen haben"),
                 errorKey: "maxLength"
             )
         }
@@ -158,7 +158,7 @@ struct ValidationHelper {
         if value < minValue {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "\(fieldName) muss mindestens \(minValue) sein",
+                errorMessage: String(localized: "\(fieldName) muss mindestens \(minValue) sein"),
                 errorKey: "minValue"
             )
         }
@@ -170,7 +170,7 @@ struct ValidationHelper {
         if value > maxValue {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "\(fieldName) darf maximal \(maxValue) sein",
+                errorMessage: String(localized: "\(fieldName) darf maximal \(maxValue) sein"),
                 errorKey: "maxValue"
             )
         }
@@ -182,7 +182,7 @@ struct ValidationHelper {
         if min > max {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Das Mindestbudget darf nicht höher als das Maximalbudget sein",
+                errorMessage: String(localized: "Das Mindestbudget darf nicht höher als das Maximalbudget sein"),
                 errorKey: "budgetRange"
             )
         }
@@ -196,7 +196,7 @@ struct ValidationHelper {
         if array.count > maxLength {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Maximal \(maxLength) \(fieldName) erlaubt",
+                errorMessage: String(localized: "Maximal \(maxLength) \(fieldName) erlaubt"),
                 errorKey: "maxArrayLength"
             )
         }
@@ -212,7 +212,7 @@ struct ValidationHelper {
         if nonEmptyTags.count > 10 {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Maximal 10 Tags erlaubt",
+                errorMessage: String(localized: "Maximal 10 Tags erlaubt"),
                 errorKey: "maxTags"
             )
         }
@@ -223,7 +223,7 @@ struct ValidationHelper {
             if trimmedTag.count > 30 {
                 return ValidationResult(
                     isValid: false,
-                    errorMessage: "Tag \(index + 1) darf maximal 30 Zeichen haben",
+                    errorMessage: String(localized: "Tag \(index + 1) darf maximal 30 Zeichen haben"),
                     errorKey: "tagTooLong"
                 )
             }
@@ -246,7 +246,7 @@ struct ValidationHelper {
         if date < Date() {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "\(fieldName) darf nicht in der Vergangenheit liegen",
+                errorMessage: String(localized: "\(fieldName) darf nicht in der Vergangenheit liegen"),
                 errorKey: "dateInPast"
             )
         }
@@ -260,7 +260,7 @@ struct ValidationHelper {
         if date > maxDate {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "\(fieldName) darf nicht mehr als \(years) Jahre in der Zukunft liegen",
+                errorMessage: String(localized: "\(fieldName) darf nicht mehr als \(years) Jahre in der Zukunft liegen"),
                 errorKey: "dateTooFar"
             )
         }
@@ -278,16 +278,17 @@ struct ValidationHelper {
         tags: [String]
     ) -> ValidationResult {
         // Validate title
-        if let error = validateNotEmpty(title, fieldName: "Titel").errorMessage {
+        let titleFieldName = String(localized: "Titel")
+        if let error = validateNotEmpty(title, fieldName: titleFieldName).errorMessage {
             return ValidationResult(isValid: false, errorMessage: error, errorKey: "title")
         }
-        if let error = validateMaxLength(title, maxLength: 100, fieldName: "Titel").errorMessage {
+        if let error = validateMaxLength(title, maxLength: 100, fieldName: titleFieldName).errorMessage {
             return ValidationResult(isValid: false, errorMessage: error, errorKey: "title")
         }
 
         // Validate budget
         if budgetMin < 0 || budgetMax < 0 {
-            return ValidationResult(isValid: false, errorMessage: "Budget darf nicht negativ sein", errorKey: "budget")
+            return ValidationResult(isValid: false, errorMessage: String(localized: "Budget darf nicht negativ sein"), errorKey: "budget")
         }
         if let error = validateBudgetRange(min: budgetMin, max: budgetMax).errorMessage {
             return ValidationResult(isValid: false, errorMessage: error, errorKey: "budget")
@@ -315,10 +316,11 @@ struct ValidationHelper {
         link: String
     ) -> ValidationResult {
         // Validate title
-        if let error = validateNotEmpty(title, fieldName: "Titel").errorMessage {
+        let titleFieldName = String(localized: "Titel")
+        if let error = validateNotEmpty(title, fieldName: titleFieldName).errorMessage {
             return ValidationResult(isValid: false, errorMessage: error, errorKey: "title")
         }
-        if let error = validateMaxLength(title, maxLength: 100, fieldName: "Titel").errorMessage {
+        if let error = validateMaxLength(title, maxLength: 100, fieldName: titleFieldName).errorMessage {
             return ValidationResult(isValid: false, errorMessage: error, errorKey: "title")
         }
 
@@ -332,14 +334,14 @@ struct ValidationHelper {
         if year < 1900 || year > currentYear {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Jahr muss zwischen 1900 und \(currentYear) liegen",
+                errorMessage: String(localized: "Jahr muss zwischen 1900 und \(currentYear) liegen"),
                 errorKey: "year"
             )
         }
 
         // Validate budget
         if budget < 0 {
-            return ValidationResult(isValid: false, errorMessage: "Budget darf nicht negativ sein", errorKey: "budget")
+            return ValidationResult(isValid: false, errorMessage: String(localized: "Budget darf nicht negativ sein"), errorKey: "budget")
         }
 
         // Validate link
@@ -360,7 +362,7 @@ struct ValidationHelper {
         if leadDays.isEmpty {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Mindestens eine Vorwarnung muss ausgewählt sein",
+                errorMessage: String(localized: "Mindestens eine Vorwarnung muss ausgewählt sein"),
                 errorKey: "noLeadDays"
             )
         }
@@ -369,7 +371,7 @@ struct ValidationHelper {
         if quietHoursStart < 0 || quietHoursStart > 23 {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Ruhestunden-Start muss zwischen 0 und 23 liegen",
+                errorMessage: String(localized: "Ruhestunden-Start muss zwischen 0 und 23 liegen"),
                 errorKey: "quietHoursStart"
             )
         }
@@ -377,7 +379,7 @@ struct ValidationHelper {
         if quietHoursEnd < 0 || quietHoursEnd > 23 {
             return ValidationResult(
                 isValid: false,
-                errorMessage: "Ruhestunden-Ende muss zwischen 0 und 23 liegen",
+                errorMessage: String(localized: "Ruhestunden-Ende muss zwischen 0 und 23 liegen"),
                 errorKey: "quietHoursEnd"
             )
         }
