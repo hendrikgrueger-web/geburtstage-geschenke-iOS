@@ -31,7 +31,7 @@ struct AppConfig {
         }
         static let model = "google/gemini-3.1-flash-lite-preview"
         /// URL des Cloudflare Worker Proxy (POST /chat → OpenRouter).
-        static let openRouterBaseURL = "https://ai-presents-proxy.hendrik-grueger.workers.dev/chat"
+        static let openRouterBaseURL = "https://ai-presents-proxy.hendrikgrueger.workers.dev/chat"
     }
 
     // MARK: - UI Constants

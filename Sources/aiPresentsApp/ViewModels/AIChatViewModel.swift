@@ -19,6 +19,9 @@ final class AIChatViewModel {
     /// Wird gesetzt wenn ein Status-Update durchgeführt wurde.
     var lastStatusUpdateMessage: String?
 
+    /// Matching Personen bei clarify_person — wird als tippbare Buttons angezeigt.
+    var clarifyOptions: [PersonRef] = []
+
     private var people: [PersonRef] = []
     private var giftIdeas: [GiftIdea] = []
     private var giftHistory: [GiftHistory] = []
@@ -108,19 +111,55 @@ final class AIChatViewModel {
         var prompt: String
         if isGerman {
             prompt = """
-            KI-Assistent der App "AI Präsente" (Geburtstags-/Geschenkeverwaltung).
-            Antworte auf Deutsch, herzlich, kurz (1-3 Sätze). Nur Geburtstage/Geschenke — Off-Topic freundlich ablehnen.
-            Bei mehrdeutigem Namen: nachfragen. Nutze Short-IDs (p1, g1 etc.) aus der Kontaktliste.
-            Antworte NUR mit JSON: {"message":"...","action":{"type":"none"}}
-            Aktionen: create_gift_idea(person_id,person_name,gift_title,gift_note) | query | update_gift_status(gift_idea_id,new_status:planned|purchased|given) | open_suggestions(person_id,person_name) | clarify_person | off_topic | none
+            Du bist der freundliche Geschenke-Assistent der App "AI Präsente".
+
+            REGELN:
+            - Antworte auf Deutsch, herzlich und natürlich wie ein guter Freund der bei Geschenken hilft.
+            - Themen: Geburtstage, Geschenkideen, Geschenkplanung. Off-Topic freundlich ablehnen.
+            - Bei mehrdeutigem Namen: nachfragen wer gemeint ist.
+            - WICHTIG: Short-IDs (p1, g1 etc.) sind NUR für die action-Felder. Schreibe NIEMALS Short-IDs in die message — verwende dort immer den echten Namen.
+            - WICHTIG: Wenn ein Vorname zu MEHREREN Kontakten passt, IMMER clarify_person verwenden und ALLE passenden Kontakte mit vollem Namen auflisten. NIEMALS einfach einen davon auswählen.
+            - Berechne das Alter korrekt: Wenn jemand z.B. 42 Jahre alt ist und in 30 Tagen Geburtstag hat, wird die Person 43.
+            - Formuliere vollständige, natürliche Sätze. Nenne konkrete Daten (z.B. "am 15. April") statt nur Tage.
+            - Bei Geschenkfragen: Berücksichtige Hobbies, Alter, Beziehung und bisherige Geschenke.
+
+            FORMAT: Antworte NUR mit JSON:
+            {"message":"Deine natürliche Antwort hier","action":{"type":"none"}}
+
+            Aktionen (in action.type):
+            - create_gift_idea: data={person_id,person_name,gift_title,gift_note}
+            - query: Reine Informationsabfrage
+            - update_gift_status: data={gift_idea_id,new_status:planned|purchased|given}
+            - open_suggestions: data={person_id,person_name} — KI-Vorschläge-Sheet öffnen
+            - clarify_person: Nachfrage bei mehrdeutigem Namen
+            - off_topic: Thema außerhalb des App-Bereichs
+            - none: Keine Aktion nötig
             """
         } else {
             prompt = """
-            AI assistant for "AI Präsente" (birthday/gift management app).
-            Respond warmly, concisely (1-3 sentences). Only birthdays/gifts — politely decline off-topic.
-            Ambiguous name: ask to clarify. Use short IDs (p1, g1 etc.) from the contact list.
-            Respond ONLY with JSON: {"message":"...","action":{"type":"none"}}
-            Actions: create_gift_idea(person_id,person_name,gift_title,gift_note) | query | update_gift_status(gift_idea_id,new_status:planned|purchased|given) | open_suggestions(person_id,person_name) | clarify_person | off_topic | none
+            You are the friendly gift assistant of the app "AI Präsente".
+
+            RULES:
+            - Respond warmly and naturally, like a helpful friend who's great at gift-giving.
+            - Topics: Birthdays, gift ideas, gift planning. Politely decline off-topic requests.
+            - Ambiguous name: ask to clarify.
+            - IMPORTANT: Short IDs (p1, g1 etc.) are ONLY for action fields. NEVER include short IDs in the message — always use the person's real name.
+            - IMPORTANT: If a first name matches MULTIPLE contacts, ALWAYS use clarify_person and list ALL matching contacts by full name. NEVER just pick one.
+            - Calculate age correctly: If someone is 42 and their birthday is in 30 days, they're turning 43.
+            - Use complete, natural sentences. Mention specific dates (e.g. "on April 15th") instead of just days.
+            - For gift questions: Consider hobbies, age, relationship, and past gifts.
+
+            FORMAT: Respond ONLY with JSON:
+            {"message":"Your natural response here","action":{"type":"none"}}
+
+            Actions (in action.type):
+            - create_gift_idea: data={person_id,person_name,gift_title,gift_note}
+            - query: Pure information query
+            - update_gift_status: data={gift_idea_id,new_status:planned|purchased|given}
+            - open_suggestions: data={person_id,person_name} — Open AI suggestions sheet
+            - clarify_person: Clarification needed for ambiguous name
+            - off_topic: Topic outside app scope
+            - none: No action needed
             """
         }
 
@@ -267,7 +306,16 @@ final class AIChatViewModel {
             idea.status = newStatus
             HapticFeedback.success()
 
-        case .query, .clarifyPerson, .offTopic, .none:
+        case .clarifyPerson:
+            // Finde alle Personen deren Name im letzten User-Message erwähnt wurde
+            if let lastUserMessage = messages.last(where: { $0.role == .user })?.content.lowercased() {
+                clarifyOptions = people.filter { person in
+                    let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? person.displayName
+                    return lastUserMessage.contains(firstName.lowercased())
+                }
+            }
+
+        case .query, .offTopic, .none:
             break
         }
     }

@@ -25,7 +25,7 @@ xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp -destina
 ```
 Sources/aiPresentsApp/
 ├── Models/          # SwiftData Models: PersonRef, GiftIdea, GiftHistory, ReminderRule, SuggestionFeedback
-├── Services/        # ContactsService, ReminderManager, AIService, AIConsentManager, SpeechRecognitionService, SampleDataService, WidgetDataService
+├── Services/        # ContactsService, ContactPhotoService, ReminderManager, AIService, AIConsentManager, SpeechRecognitionService, SampleDataService, WidgetDataService
 ├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator, RelationOptions, GiftDirection
 ├── Views/
 │   ├── Timeline/    # TimelineView (eine chronologische Liste), BirthdayRow (mit Status-Badge), BirthdayCountdownBadge
@@ -52,7 +52,7 @@ Sources/BirthdayWidget/  # WidgetKit Extension (separates Target)
 
 **Einstieg:** Floating Action Button (lila, `sparkles.bubble.fill`) unten rechts auf der TimelineView.
 
-**Architektur:** `AIChatView` (Sheet) → `AIChatViewModel` (@Observable) → `AIService.callOpenRouterChat()` (Multi-Turn)
+**Architektur:** `AIChatView` (Sheet) → `AIChatViewModel` (@Observable, mit gecachtem System-Prompt) → `AIService.callOpenRouterChat()` (Multi-Turn)
 
 **Features:**
 - Natürlichsprachlicher Chat mit Kontextdaten aller Kontakte
@@ -61,6 +61,7 @@ Sources/BirthdayWidget/  # WidgetKit Extension (separates Target)
 - Spracheingabe via SFSpeechRecognizer (on-device bevorzugt)
 - Welcome-State mit dynamischen Beispiel-Chips
 - Action-Buttons unter Assistant-Bubbles (z.B. "Als Geschenkidee speichern")
+- System-Prompt: Natürliche Sprache ("wie ein guter Freund"), Short-IDs nur in action-Feldern, konkrete Daten (nächstes Alter, Hobbies, Geschenk-Historie)
 
 **DSGVO:**
 - Consent v2 erforderlich (erweiterte Daten: Geburtstag Monat/Tag, Geschenk-Status, IDs)
@@ -108,7 +109,7 @@ AIConsentManager.shared.revokeConsent()
 AppConfig.AI.proxySecret          // String aus Info.plist (AIProxySecret)
 AppConfig.AI.isAPIKeyConfigured   // Bool (prüft ob Proxy-Secret gesetzt)
 AppConfig.AI.model                // "google/gemini-3.1-flash-lite-preview"
-AppConfig.AI.openRouterBaseURL    // Cloudflare Worker URL
+AppConfig.AI.openRouterBaseURL    // https://ai-presents-proxy.hendrikgrueger.workers.dev
 ```
 
 ## DSGVO — KI-Features
@@ -128,6 +129,12 @@ Die App authentifiziert sich mit einem einfachen App-Secret via `X-App-Secret` H
 ```
 App → POST /chat (X-App-Secret) → Cloudflare Worker → OpenRouter API (Bearer API-Key)
 ```
+
+### Worker Status
+
+**Live:** `ai-presents-proxy.hendrikgrueger.workers.dev`
+- OPENROUTER_API_KEY: Konfiguriert
+- APP_SECRET: Konfiguriert (muss mit `AI_PROXY_SECRET` in `App/Secrets.xcconfig` übereinstimmen)
 
 ### Secrets
 
@@ -210,6 +217,13 @@ try context.delete(model: PersonRef.self)
 - **RelationPickerView:** Standard Picker (Menu oder Wheel) mit 8 Optionen + "Sonstige"-Freitext. Bestehende Werte außerhalb der Liste → unter "Sonstige" angezeigt.
 - **FlowLayout:** Custom Layout für Chip-Anordnung (wrapping, centered, spacing). Wird für Hobbies, Tags und GiftIdea-Chips verwendet.
 - **GiftHistoryDirectionSegmented:** Segmented Control ("Verschenkt" / "Erhalten") — bestimmt `GiftHistory.direction`.
+- **ContactPhotoService:** On-Demand Laden von Kontaktfotos per `contactIdentifier`. Memory-Caching. Fallback auf Initialen-Circle wenn keine Foto vorhanden. `PersonAvatar` + `CompactPersonAvatar` zeigen echte Kontaktfotos.
+
+### XcodeGen configFiles Pattern
+- `configFiles` **MUSS auf Target-Ebene stehen** (Geschwister von `settings:`, nicht Kind)
+- Falsch: `settings: { configFiles: { ... } }`
+- Richtig: Target-Definition mit `settings: { ... }` UND `configFiles: { ... }` nebeneinander
+- Sonst wird `Secrets.xcconfig` nicht ins Xcode-Projekt eingebunden und Secrets (wie `AI_PROXY_SECRET`) sind leer
 
 ## UI-Architektur
 

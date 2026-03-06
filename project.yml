@@ -51,10 +51,10 @@ targets:
           UISceneConfigurations:
             UIWindowSceneSessionRoleApplication:
               - UISceneConfigurationName: "Default Configuration"
+    configFiles:
+      Debug: App/Secrets.xcconfig
+      Release: App/Secrets.xcconfig
     settings:
-      configFiles:
-        Debug: App/Secrets.xcconfig
-        Release: App/Secrets.xcconfig
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.harryhirsch1878.ai-presents-app
         SWIFT_VERSION: "6.0"

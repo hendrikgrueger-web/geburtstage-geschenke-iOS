@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,7 @@
 		288B939B5B82311CC9271EB9 /* ReminderSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3DCE06A0DFE3AB2C55B83F /* ReminderSettingsView.swift */; };
 		293D6EBEDA0427F92D55F28D /* BirthdayCalculatorThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC3124099F551F5EA373EA7 /* BirthdayCalculatorThreadSafetyTests.swift */; };
 		2ABBEB5E8A432317ADCE5B70 /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D56F13FD4A2AE4764D571A0 /* AnimationHelper.swift */; };
+		302089CCD50FCAE95999D515 /* AIConsentManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBEC37B287A1D9FCC89A3 /* AIConsentManagerTests.swift */; };
 		35BC16F120ECF2AEA82B7EED /* WidgetDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8AD13515C4A79913E22B /* WidgetDataService.swift */; };
 		394B25271A05013E17B413FF /* NochOhneGeschenkSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F96D1561167E4419327758 /* NochOhneGeschenkSection.swift */; };
 		3B35DB430F791BD5DEF5018A /* BirthdayCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF382AF887CC2A4530148FD7 /* BirthdayCalculatorTests.swift */; };
@@ -125,6 +126,7 @@
 		E7086712F1C4D11F26E86747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFD26EDCE7DBFA7399211E8 /* AppColor.swift */; };
 		EBD3EF59DCEFDCB8BB9E4182 /* AIBirthdayMessageSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445EDABC3BF7FB4E9809AD8 /* AIBirthdayMessageSheet.swift */; };
 		F1632B641E2ADD434097F145 /* AppColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BE28E623996C74E0FB24BE /* AppColorTests.swift */; };
+		F4B20996565BE1D5738F725E /* ContactPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C388F5B7A645CA233541D7 /* ContactPhotoService.swift */; };
 		F775D86C4C0D3228D7B84D79 /* UpcomingBirthdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F0D5F9397A43CD6A7AA0B /* UpcomingBirthdaysView.swift */; };
 		FBB7A3F4309F98B05DC46435 /* AIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67C423C60F6B50FA69691AD /* AIServiceTests.swift */; };
 /* End PBXBuildFile section */
@@ -168,7 +170,7 @@
 		106D1BEF8550146110F92A6C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		1189BC8C6BCB6FA40B03A301 /* AIConsentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIConsentSheet.swift; sourceTree = "<group>"; };
 		12050DD29ABF53F754FB7448 /* SmartInputFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartInputFieldTests.swift; sourceTree = "<group>"; };
-		12D1D096860C12DFAB2C4D16 /* aiPresentsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = aiPresentsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12D1D096860C12DFAB2C4D16 /* aiPresentsApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = aiPresentsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1352AE658416E5B2DEEB06D7 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
 		194FEF6D34BD0E36B4E9FA00 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		1BAAE077D709F609179254B0 /* AppLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoggerTests.swift; sourceTree = "<group>"; };
@@ -189,8 +191,10 @@
 		402FEFE3F505A5104FC535A3 /* GiftHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftHistory.swift; sourceTree = "<group>"; };
 		40B6E83D614EF822E16CE41C /* AppAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnimation.swift; sourceTree = "<group>"; };
 		40C06DC4DA1AD65D461067D1 /* BirthdayWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = BirthdayWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		43C388F5B7A645CA233541D7 /* ContactPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPhotoService.swift; sourceTree = "<group>"; };
 		44614D5AC68097C1AE93D4BC /* BirthdayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayWidget.swift; sourceTree = "<group>"; };
 		44DDD4E6A61E3B0E0D97E57E /* ChatInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputBar.swift; sourceTree = "<group>"; };
+		463BBEC37B287A1D9FCC89A3 /* AIConsentManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIConsentManagerTests.swift; sourceTree = "<group>"; };
 		48BF0D37EF4691DE87BFEAD0 /* QuickStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickStatsView.swift; sourceTree = "<group>"; };
 		49F19315FD9DFE8E8059A7D2 /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
 		4B3DCE06A0DFE3AB2C55B83F /* ReminderSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSettingsView.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 		F83B4AFF1A07CE2D4289D65A /* PersonRefExportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRefExportTests.swift; sourceTree = "<group>"; };
 		FA0B69485B276F2BE4B9D91A /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		FA76DEA3D7FF98FFEF1BCB48 /* AIContent.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AIContent.xcstrings; sourceTree = "<group>"; };
+		FAB8334445FE6CE62B8FD37D /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		FBB76E3E6785A675037F3D79 /* AllContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllContactsView.swift; sourceTree = "<group>"; };
 		FC7EC86AFD43E7619FFD809C /* GiftTransitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftTransitionService.swift; sourceTree = "<group>"; };
 		FD9995C6AE43B45FD1F56F19 /* AIChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatView.swift; sourceTree = "<group>"; };
@@ -330,6 +335,7 @@
 			children = (
 				4FCCEBBD776A26A884ADB277 /* aiPresentsApp */,
 				8D140A209E9842888CA1A887 /* aiPresentsAppTests */,
+				68E0351A5146923DD092F6B8 /* App */,
 				7117134C2BAD60580B161855 /* BirthdayWidget */,
 				1A6DD27508B184EC5FCC70F4 /* Products */,
 			);
@@ -437,6 +443,14 @@
 			path = UtilityTests;
 			sourceTree = "<group>";
 		};
+		68E0351A5146923DD092F6B8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FAB8334445FE6CE62B8FD37D /* Secrets.xcconfig */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		7117134C2BAD60580B161855 /* BirthdayWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +495,7 @@
 				A546E33A3E3C5AFDBF258820 /* AccessibilityConfigurationTests.swift */,
 				A92D5A39066D3EB9FAD43895 /* AccessibilityHelperTests.swift */,
 				AA443DCF283A93273952F5B3 /* AIBirthdayMessageSheetTests.swift */,
+				463BBEC37B287A1D9FCC89A3 /* AIConsentManagerTests.swift */,
 				B67C423C60F6B50FA69691AD /* AIServiceTests.swift */,
 				2D5814499A1D7F07472C1E3A /* AnimationHelperTests.swift */,
 				F4BE28E623996C74E0FB24BE /* AppColorTests.swift */,
@@ -550,6 +565,7 @@
 			children = (
 				B1E90FAE8B819BCA02CD3D47 /* AIConsentManager.swift */,
 				49F19315FD9DFE8E8059A7D2 /* AIService.swift */,
+				43C388F5B7A645CA233541D7 /* ContactPhotoService.swift */,
 				A29444B6BDF0731546595DE2 /* ContactsService.swift */,
 				FC7EC86AFD43E7619FFD809C /* GiftTransitionService.swift */,
 				AF5D518273E7BB19D619E0DF /* ReminderManager.swift */,
@@ -642,6 +658,7 @@
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					D13703CE0BA0DA2FBA541264 = {
+						DevelopmentTeam = 7ZR37VL5PV;
 						ProvisioningStyle = Automatic;
 					};
 					E3D3E47E2E69129859C61EBB = {
@@ -661,6 +678,7 @@
 			);
 			mainGroup = 2A1D3049F984BF6826B8DBAF;
 			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -710,6 +728,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9427DC3A62E7EFC8747F871D /* AIBirthdayMessageSheetTests.swift in Sources */,
+				302089CCD50FCAE95999D515 /* AIConsentManagerTests.swift in Sources */,
 				FBB7A3F4309F98B05DC46435 /* AIServiceTests.swift in Sources */,
 				1FD4F88401FFE069FBFD3B3E /* AccessibilityConfigurationTests.swift in Sources */,
 				9C3438E34DD32FF19D18E93D /* AccessibilityHelperTests.swift in Sources */,
@@ -776,6 +795,7 @@
 				A3EB1C597C140A4C1561CA0A /* ChatBubbleView.swift in Sources */,
 				8501B070F5EFF7678DC7071C /* ChatInputBar.swift in Sources */,
 				6A843E076521CAF9B67CEFBD /* ChatMessage.swift in Sources */,
+				F4B20996565BE1D5738F725E /* ContactPhotoService.swift in Sources */,
 				C6DC1001E06284F372E00529 /* ContactsImportView.swift in Sources */,
 				7957F19643497DB441123934 /* ContactsService.swift in Sources */,
 				0D6E38A50ABD9ACEF04B8E23 /* ContentView.swift in Sources */,
@@ -903,6 +923,7 @@
 		};
 		37F79148F46A936C3BDF3B58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FAB8334445FE6CE62B8FD37D /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_ALLOWED = YES;
@@ -1055,6 +1076,7 @@
 		};
 		BBA74B65F9DEB007B0DA216F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FAB8334445FE6CE62B8FD37D /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_ALLOWED = YES;

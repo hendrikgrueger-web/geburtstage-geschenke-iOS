@@ -48,7 +48,7 @@ struct AIGiftSuggestionsSheet: View {
     @State private var suggestions: [GiftSuggestion] = []
     @State private var errorMessage: String?
     @State private var selectedSuggestion: GiftSuggestion?
-    @State private var selectedBudget: BudgetRange = .medium
+    @State private var budgetValue: Double = 50
     @State private var qualityViewModel: SuggestionQualityViewModel?
 
     // Track which suggestions have received feedback
@@ -86,7 +86,7 @@ struct AIGiftSuggestionsSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Abbrechen") {
+                    Button("Schließen") {
                         dismiss()
                     }
                 }
@@ -361,8 +361,23 @@ struct AIGiftSuggestionsSheet: View {
 
     private var budgetSection: some View {
         Section {
-            budgetPicker
-            budgetDetailCard
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Text("Budget")
+                    Spacer()
+                    Text(budgetLabel)
+                        .foregroundStyle(.secondary)
+                }
+
+                Slider(
+                    value: $budgetValue,
+                    in: 0...500,
+                    step: 5
+                )
+                .accessibilityLabel("Budget")
+                .accessibilityValue(budgetLabel)
+            }
+
             generateButton
         } header: {
             Text("KI-Assistent")
@@ -377,8 +392,8 @@ struct AIGiftSuggestionsSheet: View {
 
                 if !filteredGiftHistory.isEmpty {
                     Text(filteredGiftHistory.count == 1
-                         ? String(localized: "📋 Basiert auf \(filteredGiftHistory.count) vergangenen Geschenk.")
-                         : String(localized: "📋 Basiert auf \(filteredGiftHistory.count) vergangenen Geschenken."))
+                         ? String(localized: "Basiert auf \(filteredGiftHistory.count) vergangenen Geschenk.")
+                         : String(localized: "Basiert auf \(filteredGiftHistory.count) vergangenen Geschenken."))
                         .foregroundColor(AppColor.accent)
                 }
             }
@@ -387,20 +402,11 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 
-    private var budgetPicker: some View {
-        Picker("Budget-Bereich", selection: $selectedBudget) {
-            ForEach(BudgetRange.allCases, id: \.self) { budget in
-                BudgetRangeCompactView(budgetRange: budget, isSelected: selectedBudget == budget)
-                    .tag(budget)
-            }
+    private var budgetLabel: String {
+        if budgetValue == 0 {
+            return String(localized: "Egal")
         }
-        .pickerStyle(.automatic)
-        .accessibilityLabel("Budget-Bereich wählen")
-    }
-
-    private var budgetDetailCard: some View {
-        BudgetRangeView(budgetRange: selectedBudget)
-            .padding(.vertical, 4)
+        return String(localized: "bis \(Int(budgetValue)) €")
     }
 
     private var generateButton: some View {
@@ -447,7 +453,7 @@ struct AIGiftSuggestionsSheet: View {
     }
 
     private func fetchSuggestions() {
-        let budget = selectedBudget
+        let maxBudget = budgetValue
         let history = filteredGiftHistory
         let existingTitles = suggestions.map { $0.title }
         let p = person
@@ -455,8 +461,8 @@ struct AIGiftSuggestionsSheet: View {
             do {
                 let newSuggestions = try await AIService.shared.generateGiftIdeas(
                     for: p,
-                    budgetMin: budget.min,
-                    budgetMax: budget.max,
+                    budgetMin: 0,
+                    budgetMax: maxBudget == 0 ? 500 : maxBudget,
                     tags: [],
                     pastGifts: history,
                     excludeTitles: existingTitles

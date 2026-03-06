@@ -84,9 +84,16 @@ struct AIChatView: View {
                     }
 
                     ForEach(viewModel.messages) { message in
-                        ChatBubbleView(message: message) { action in
-                            handleActionTap(action)
-                        }
+                        ChatBubbleView(
+                            message: message,
+                            clarifyOptions: message.action?.type == .clarifyPerson ? viewModel.clarifyOptions : [],
+                            onActionTap: { action in
+                                handleActionTap(action)
+                            },
+                            onClarifyTap: { person in
+                                handleClarifySelection(person)
+                            }
+                        )
                         .id(message.id)
                     }
 
@@ -188,6 +195,12 @@ struct AIChatView: View {
         Task {
             await viewModel.processAction(action)
         }
+    }
+
+    private func handleClarifySelection(_ person: PersonRef) {
+        viewModel.clarifyOptions = []
+        inputText = person.displayName
+        sendMessage()
     }
 
     private func toggleRecording() {
