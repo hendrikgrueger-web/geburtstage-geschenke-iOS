@@ -178,7 +178,6 @@ struct AIBirthdayMessageSheet: View {
                     generateMessage()
                 }
                 .buttonStyle(.borderedProminent)
-                .buttonStyle(.pressable)
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .padding()
@@ -294,7 +293,6 @@ struct AIBirthdayMessageSheet: View {
                     .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .buttonStyle(.pressable)
             }
             .padding(.vertical, 4)
         } footer: {

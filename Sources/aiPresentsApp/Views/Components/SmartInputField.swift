@@ -16,9 +16,7 @@ struct SmartInputField: View {
     @State private var debouncedText: String = ""
     @FocusState private var fieldFocus: Bool
 
-    private var debouncer: Debouncer {
-        Debouncer(delay: 0.3)
-    }
+    @StateObject private var debouncer = Debouncer(delay: 0.3)
 
     // MARK: - Computed Properties
     private var borderColor: Color {
