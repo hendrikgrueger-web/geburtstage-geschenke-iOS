@@ -19,6 +19,13 @@ struct FormatterHelper {
         return formatter
     }()
 
+    /// Kurzes Log-Datum (dd.MM.yy) für Status-Logs.
+    static let shortLogDateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "dd.MM.yy"
+        return f
+    }()
+
     /// Number formatter for currency (Euro)
     static let currencyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
