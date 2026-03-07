@@ -34,7 +34,7 @@ struct BirthdayWidgetMediumView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 5) {
             // Header
             HStack {
                 Image(systemName: "birthday.cake.fill")
@@ -105,7 +105,7 @@ struct BirthdayWidgetLargeView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 5) {
             // Header
             HStack {
                 Image(systemName: "birthday.cake.fill")
@@ -187,7 +187,7 @@ struct BirthdayWidgetRow: View {
                     .font(.system(size: 13, weight: .bold, design: .rounded))
                     .foregroundStyle(countdownColor)
             }
-            .frame(width: 36, height: 36)
+            .frame(width: 32, height: 32)
             .accessibilityHidden(true)
 
             // Name + Alter — prominentere Schrift für klare Lesbarkeit
