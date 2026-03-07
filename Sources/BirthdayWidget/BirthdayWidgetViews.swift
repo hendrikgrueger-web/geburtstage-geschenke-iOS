@@ -29,14 +29,15 @@ private enum WidgetColors {
 struct BirthdayWidgetMediumView: View {
     let entry: BirthdayTimelineEntry
 
+    /// Medium-Format zeigt 2 Einträge für optimalen Luft- und Leseraum.
     private var displayEntries: [WidgetBirthdayEntry] {
-        Array(entry.birthdays.prefix(3))  // Max. 3 Einträge im Medium-Format
+        Array(entry.birthdays.prefix(2))
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 0) {
             // Header
-            HStack {
+            HStack(spacing: 6) {
                 Image(systemName: "birthday.cake.fill")
                     .foregroundStyle(Color.accentColor)
                 Text("Nächste Geburtstage")
@@ -44,6 +45,11 @@ struct BirthdayWidgetMediumView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
                 Spacer()
+                if entry.birthdays.count > 2 {
+                    Text("+\(entry.birthdays.count - 2)")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                }
             }
 
             if displayEntries.isEmpty {
@@ -62,24 +68,19 @@ struct BirthdayWidgetMediumView: View {
                 }
                 Spacer()
             } else {
-                ForEach(displayEntries, id: \.id) { birthday in
+                Spacer(minLength: 8)
+                ForEach(Array(displayEntries.enumerated()), id: \.element.id) { index, birthday in
                     Link(destination: URL(string: "aipresents://person/\(birthday.id)")!) {
                         BirthdayWidgetRow(entry: birthday)
                     }
                     .accessibilityLabel(birthday.daysUntil == 0
                         ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
                         : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
-                }
-
-                if entry.birthdays.count > 3 {
-                    Spacer(minLength: 0)
-                    HStack {
-                        Spacer()
-                        Text("+\(entry.birthdays.count - 3) weitere")
-                            .font(.caption2)
-                            .foregroundStyle(.tertiary)
+                    if index < displayEntries.count - 1 {
+                        Spacer(minLength: 10)
                     }
                 }
+                Spacer(minLength: 0)
             }
         }
         .containerBackground(.fill.tertiary, for: .widget)
@@ -100,14 +101,15 @@ struct BirthdayWidgetMediumView: View {
 struct BirthdayWidgetLargeView: View {
     let entry: BirthdayTimelineEntry
 
+    /// Large-Format zeigt 5 Einträge — genug für Übersicht, ohne Gedränge.
     private var displayEntries: [WidgetBirthdayEntry] {
-        Array(entry.birthdays.prefix(7))  // Max. 7 Einträge im Large-Format
+        Array(entry.birthdays.prefix(5))
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 0) {
             // Header
-            HStack {
+            HStack(spacing: 6) {
                 Image(systemName: "birthday.cake.fill")
                     .foregroundStyle(Color.accentColor)
                 Text("Nächste Geburtstage")
@@ -115,6 +117,11 @@ struct BirthdayWidgetLargeView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
                 Spacer()
+                if entry.birthdays.count > 5 {
+                    Text("+\(entry.birthdays.count - 5)")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                }
             }
 
             if displayEntries.isEmpty {
@@ -133,30 +140,23 @@ struct BirthdayWidgetLargeView: View {
                 }
                 Spacer()
             } else {
-                ForEach(displayEntries, id: \.id) { birthday in
+                Spacer(minLength: 10)
+                ForEach(Array(displayEntries.enumerated()), id: \.element.id) { index, birthday in
                     Link(destination: URL(string: "aipresents://person/\(birthday.id)")!) {
                         BirthdayWidgetRow(entry: birthday)
                     }
                     .accessibilityLabel(birthday.daysUntil == 0
                         ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
                         : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
-                    if birthday.id != displayEntries.last?.id {
+                    if index < displayEntries.count - 1 {
+                        Spacer(minLength: 0)
                         Divider()
+                            .padding(.leading, 44)
+                        Spacer(minLength: 0)
                     }
                 }
-
-                if entry.birthdays.count > 7 {
-                    Spacer(minLength: 0)
-                    HStack {
-                        Spacer()
-                        Text("+\(entry.birthdays.count - 7) weitere")
-                            .font(.caption2)
-                            .foregroundStyle(.tertiary)
-                    }
-                }
+                Spacer(minLength: 0)
             }
-
-            Spacer(minLength: 0)
         }
         .containerBackground(.fill.tertiary, for: .widget)
         .widgetURL(URL(string: "aipresents://")!)
