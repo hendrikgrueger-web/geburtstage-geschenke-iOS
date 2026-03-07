@@ -342,16 +342,21 @@ struct PersonDetailView: View {
                             }
                         }
                     }
+
+                    Button {
+                        showingAddGiftHistory = true
+                        HapticFeedback.medium()
+                    } label: {
+                        Label("Eintrag hinzufügen", systemImage: "plus.circle.fill")
+                            .foregroundStyle(AppColor.primary)
+                            .fontWeight(.medium)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .accessibilityLabel(String(localized: "Verschenktes Geschenk hinzufügen"))
+                    .accessibilityHint(String(localized: "Fügt ein verschenktes Geschenk hinzu"))
                 }
             } header: {
-                HStack {
-                    Text("Verschenkt")
-                    Spacer()
-                    Button(action: { showingAddGiftHistory = true }) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title3)
-                    }
-                }
+                Text("Verschenkt")
             } footer: {
                 Text("In früheren Jahren verschenkt")
             }
@@ -384,15 +389,20 @@ struct PersonDetailView: View {
                         }
                     }
                 }
-            } header: {
-                HStack {
-                    Text("Von \(person.displayName) erhalten")
-                    Spacer()
-                    Button { showingAddReceivedGift = true } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title3)
-                    }
+
+                Button {
+                    showingAddReceivedGift = true
+                    HapticFeedback.medium()
+                } label: {
+                    Label("Eintrag hinzufügen", systemImage: "plus.circle.fill")
+                        .foregroundStyle(AppColor.primary)
+                        .fontWeight(.medium)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                .accessibilityLabel(String(localized: "Erhaltenes Geschenk hinzufügen"))
+                .accessibilityHint(String(localized: "Fügt ein erhaltenes Geschenk hinzu"))
+            } header: {
+                Text("Von \(person.displayName) erhalten")
             }
 
             // Danger Zone

@@ -324,6 +324,10 @@ enum GiftDirection {
 
 Vollständiger Launch-Plan mit 8 Phasen, Skills-Referenz und Revenue-Prognose: **`Docs/LAUNCH-PLAN.md`**
 
+## Backlog
+
+- **"Alle Daten löschen" Klartext**: Im Lösch-Dialog explizit darauf hinweisen, dass nur App-Daten dieser App gelöscht werden (nicht Kontakte, Kalender o.Ä.). Formulierung z.B.: "Alle gespeicherten Daten der App werden unwiderruflich gelöscht. Deine Kontakte und Kalendereinträge bleiben unberührt."
+
 ## GitHub
 
 - Repo: `harryhirsch1878/ai-presents-app-ios`

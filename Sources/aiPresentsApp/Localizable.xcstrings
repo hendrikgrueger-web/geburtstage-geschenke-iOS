@@ -117,6 +117,7 @@
       }
     },
     "💡 Die Nachricht wurde basierend auf Alter, Meilenstein und Sternzeichen personalisiert." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -127,6 +128,7 @@
       }
     },
     "💡 Tipp: Du kannst die Nachricht nach dem Generieren anpassen oder kopieren." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
