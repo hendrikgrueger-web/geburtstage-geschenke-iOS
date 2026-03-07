@@ -54,7 +54,7 @@ struct OnboardingView: View {
                         }
                         HapticFeedback.selectionChanged()
                     } label: {
-                        Text(isLastContentPage ? String(localized: "Weiter") : String(localized: "Überspringen"))
+                        Text(String(localized: "Weiter"))
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)

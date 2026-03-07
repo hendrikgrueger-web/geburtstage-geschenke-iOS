@@ -21,8 +21,8 @@ struct GiftHistoryRow: View {
                 .fontWeight(.bold)
                 .frame(width: 50, height: 50)
                 .background(yearBadgeColor.opacity(0.2))
-                .foregroundColor(yearBadgeColor)
-                .cornerRadius(12)
+                .foregroundStyle(yearBadgeColor)
+                .clipShape(.rect(cornerRadius: 12))
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 4) {
@@ -39,19 +39,19 @@ struct GiftHistoryRow: View {
                 HStack(spacing: 8) {
                     Text(history.category)
                         .font(.caption)
-                        .foregroundColor(AppColor.textSecondary)
+                        .foregroundStyle(AppColor.textSecondary)
 
                     if history.budget > 0 {
-                        Text("• \(Int(history.budget))€")
+                        Text("• \(CurrencyManager.shared.formatAmount(history.budget))")
                             .font(.caption)
-                            .foregroundColor(AppColor.textSecondary)
+                            .foregroundStyle(AppColor.textSecondary)
                     }
                 }
 
                 if !history.note.isEmpty {
                     Text(history.note)
                         .font(.caption2)
-                        .foregroundColor(AppColor.textTertiary)
+                        .foregroundStyle(AppColor.textTertiary)
                         .lineLimit(1)
                 }
             }
@@ -65,7 +65,7 @@ struct GiftHistoryRow: View {
                         HapticFeedback.light()
                     } label: {
                         Image(systemName: "lightbulb")
-                            .foregroundColor(AppColor.primary.opacity(0.6))
+                            .foregroundStyle(AppColor.primary.opacity(0.6))
                             .font(.caption)
                             .frame(width: 32, height: 32)
                     }
@@ -79,7 +79,7 @@ struct GiftHistoryRow: View {
                         HapticFeedback.light()
                     } label: {
                         Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(AppColor.textSecondary.opacity(0.6))
+                            .foregroundStyle(AppColor.textSecondary.opacity(0.6))
                             .font(.caption)
                             .frame(width: 32, height: 32)
                     }

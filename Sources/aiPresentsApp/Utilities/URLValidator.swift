@@ -1,10 +1,11 @@
 import Foundation
 import UIKit
 
+@MainActor
 enum URLValidator {
     /// Validates and sanitizes a URL string
     /// - Returns: A tuple containing the sanitized URL string and whether it's valid
-    static func validate(_ urlString: String) -> (sanitized: String, isValid: Bool) {
+    nonisolated static func validate(_ urlString: String) -> (sanitized: String, isValid: Bool) {
         let trimmed = urlString.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard !trimmed.isEmpty else {

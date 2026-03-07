@@ -22,7 +22,7 @@ struct ChatInputBar: View {
             } label: {
                 Image(systemName: isRecording ? "mic.fill" : "mic")
                     .font(.system(size: 20))
-                    .foregroundColor(isRecording ? .red : .secondary)
+                    .foregroundStyle(isRecording ? Color.red : Color.secondary)
                     .frame(width: 36, height: 36)
                     .background(isRecording ? Color.red.opacity(0.12) : Color.clear)
                     .clipShape(Circle())
@@ -36,7 +36,7 @@ struct ChatInputBar: View {
                 .textFieldStyle(.plain)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
-                .background(Color(.tertiarySystemGroupedBackground))
+                .background(.regularMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .focused($isFocused)
                 .submitLabel(.send)
@@ -51,7 +51,7 @@ struct ChatInputBar: View {
             } label: {
                 Image(systemName: "arrow.up.circle.fill")
                     .font(.system(size: 32))
-                    .foregroundColor(canSend ? AppColor.primary : Color(.tertiaryLabel))
+                    .foregroundStyle(canSend ? AppColor.primary : Color(.tertiaryLabel))
             }
             .disabled(!canSend)
             .accessibilityLabel(String(localized: "Senden"))

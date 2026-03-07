@@ -1,6 +1,5 @@
 import SwiftUI
 import SwiftData
-import WidgetKit
 
 struct PersonDetailView: View {
     @Environment(\.modelContext) private var modelContext
@@ -80,7 +79,7 @@ struct PersonDetailView: View {
 
                 HStack {
                     Text("Name")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                     Spacer()
                     Text(person.displayName)
                         .fontWeight(.medium)
@@ -88,7 +87,7 @@ struct PersonDetailView: View {
 
                 HStack {
                     Text("Geburtstag")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                     Spacer()
                     Text(birthdayString)
                         .fontWeight(.medium)
@@ -96,16 +95,16 @@ struct PersonDetailView: View {
 
                 HStack {
                     Text("Nächster Geburtstag")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                     Spacer()
                     Text(nextBirthdayInfo)
                         .fontWeight(.medium)
-                        .foregroundColor(daysUntilBirthday <= 7 ? .orange : .primary)
+                        .foregroundStyle(daysUntilBirthday <= 7 ? AppColor.accent : Color.primary)
                 }
 
                 HStack {
                     Text("Beziehung")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                     Spacer()
                     Button {
                         editedRelation = person.relation
@@ -117,7 +116,7 @@ struct PersonDetailView: View {
                                 .fontWeight(.medium)
                             Image(systemName: "chevron.right")
                                 .font(.caption)
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(.secondary)
                         }
                     }
                     .buttonStyle(.plain)
@@ -223,6 +222,19 @@ struct PersonDetailView: View {
                         }
                     }
                     .onDelete(perform: deleteGiftIdeas)
+
+                    // Apple Reminders–Style: volle Breite, klarer Aufruf zum Hinzufügen
+                    Button {
+                        showingAddGiftIdea = true
+                        HapticFeedback.medium()
+                    } label: {
+                        Label("Idee hinzufügen", systemImage: "plus.circle.fill")
+                            .foregroundStyle(AppColor.primary)
+                            .fontWeight(.medium)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .accessibilityLabel(String(localized: "Idee hinzufügen"))
+                    .accessibilityHint(String(localized: "Fügt eine neue Geschenkidee hinzu"))
                 }
             } header: {
                 HStack(spacing: 6) {
@@ -274,20 +286,13 @@ struct PersonDetailView: View {
                         )
                     }
 
-                    Button(action: {
-                        showingAddGiftIdea = true
-                        HapticFeedback.medium()
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundStyle(AppColor.primary)
-                    }
                 }
             } footer: {
                 if !filteredGiftIdeas.isEmpty && hasPurchasedGifts {
                     Button(action: { showingMarkAllAsGivenConfirmation = true }) {
                         HStack {
                             Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(AppColor.success)
+                                .foregroundStyle(AppColor.success)
                             Text("Alle als verschenkt markieren")
                                 .font(.subheadline)
                         }
@@ -445,7 +450,7 @@ struct PersonDetailView: View {
         .navigationTitle(person.displayName)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 Button("Bearbeiten") {
                     editedName = person.displayName
                     editedBirthday = person.birthday
@@ -457,7 +462,7 @@ struct PersonDetailView: View {
                 .accessibilityHint(String(localized: "Öffnet das Formular zum Bearbeiten von Name, Geburtstag und Beziehung"))
             }
 
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Menu {
                     Button {
                         shareText = person.exportAllGiftIdeasAsText()
@@ -521,13 +526,13 @@ struct PersonDetailView: View {
                 .navigationTitle("Beziehung bearbeiten")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                    ToolbarItem(placement: .topBarLeading) {
                         Button("Abbrechen") {
                             showingEditRelation = false
                         }
                     }
 
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                    ToolbarItem(placement: .topBarTrailing) {
                         Button("Speichern") {
                             if editedRelation == "Sonstige" {
                                 let trimmed = customRelationText.trimmingCharacters(in: .whitespaces)
@@ -551,6 +556,7 @@ struct PersonDetailView: View {
                     }
                 }
             }
+            .presentationDragIndicator(.visible)
         }
         // Kontakt-Bearbeitung Sheet — Name, Geburtstag und Beziehung editieren
         .sheet(isPresented: $showingEditPerson) {
@@ -593,13 +599,13 @@ struct PersonDetailView: View {
                 .navigationTitle("Kontakt bearbeiten")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                    ToolbarItem(placement: .topBarLeading) {
                         Button("Abbrechen") {
                             showingEditPerson = false
                         }
                     }
 
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                    ToolbarItem(placement: .topBarTrailing) {
                         Button("Speichern") {
                             let trimmedName = editedName.trimmingCharacters(in: .whitespaces)
                             if !trimmedName.isEmpty {
@@ -630,6 +636,7 @@ struct PersonDetailView: View {
                     }
                 }
             }
+            .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $showingAIConsent) {
             AIConsentSheet(isPresented: $showingAIConsent) {
@@ -654,7 +661,7 @@ struct PersonDetailView: View {
             }) {
                 aiActionRow(
                     icon: "sparkles",
-                    color: .orange,
+                    color: AppColor.accent,
                     title: String(localized: "Geschenkideen vorschlagen"),
                     subtitle: String(localized: "5 personalisierte Vorschläge")
                 )
@@ -668,7 +675,7 @@ struct PersonDetailView: View {
             }) {
                 aiActionRow(
                     icon: "text.quote",
-                    color: .blue,
+                    color: AppColor.primary,
                     title: String(localized: "Geburtstagsnachricht erstellen"),
                     subtitle: String(localized: "Herzlicher Text zum Geburtstag")
                 )
@@ -679,18 +686,18 @@ struct PersonDetailView: View {
         } header: {
             HStack(spacing: 6) {
                 Image(systemName: "sparkles")
-                    .foregroundColor(.purple)
+                    .foregroundStyle(AppColor.secondary)
                 Text("KI-Assistent")
             }
         } footer: {
             HStack(alignment: .top, spacing: 4) {
                 Image(systemName: "lock.shield.fill")
                     .font(.caption2)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .padding(.top, 1)
                 Text(aiFooterText)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
         }
     }
@@ -1044,7 +1051,6 @@ struct PersonDetailView: View {
 
     private func triggerWidgetUpdate() {
         WidgetDataService.shared.updateWidgetData(from: modelContext)
-        WidgetCenter.shared.reloadAllTimelines()
     }
 
     private func shareCSV(url: URL) {

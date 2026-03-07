@@ -150,16 +150,12 @@ class ReminderManager: ObservableObject {
 
     /// Fixed: Uses async/await pattern to avoid race conditions
     func cancelReminders(for person: PersonRef) async {
-        do {
-            let requests = try await center.pendingNotificationRequests()
-            let idsToRemove = requests
-                .filter { $0.identifier.contains("birthday_\(person.id.uuidString)") }
-                .map { $0.identifier }
-            center.removePendingNotificationRequests(withIdentifiers: idsToRemove)
-            AppLogger.reminder.debug("Cancelled reminders for \(person.displayName)")
-        } catch {
-            AppLogger.reminder.error("Failed to cancel reminders for \(person.displayName)", error: error)
-        }
+        let requests = await center.pendingNotificationRequests()
+        let idsToRemove = requests
+            .filter { $0.identifier.contains("birthday_\(person.id.uuidString)") }
+            .map { $0.identifier }
+        center.removePendingNotificationRequests(withIdentifiers: idsToRemove)
+        AppLogger.reminder.debug("Cancelled reminders for \(person.displayName)")
     }
 
     func cancelAllReminders() async {

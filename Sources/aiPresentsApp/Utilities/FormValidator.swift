@@ -88,7 +88,7 @@ struct FormValidator {
             return nil // Empty is valid
         }
 
-        let (sanitized, isValid) = URLValidator.validate(trimmed)
+        let (_, isValid) = URLValidator.validate(trimmed)
         if !isValid {
             return .invalidURL
         }

@@ -31,12 +31,14 @@ struct BirthdayTimelineProvider: TimelineProvider {
                 continue
             }
 
-            // Passe daysUntil für zukünftige Tage an
-            let adjustedBirthdays = entries.map { birthday in
-                WidgetBirthdayEntry(
+            // Passe daysUntil für zukünftige Tage an und filtere vergangene Geburtstage
+            let adjustedBirthdays = entries.compactMap { birthday -> WidgetBirthdayEntry? in
+                let adjusted = birthday.daysUntil - dayOffset
+                guard adjusted >= 0 else { return nil }
+                return WidgetBirthdayEntry(
                     id: birthday.id,
                     displayName: birthday.displayName,
-                    daysUntil: max(0, birthday.daysUntil - dayOffset),
+                    daysUntil: adjusted,
                     nextAge: birthday.nextAge,
                     relation: birthday.relation,
                     giftStatus: birthday.giftStatus,

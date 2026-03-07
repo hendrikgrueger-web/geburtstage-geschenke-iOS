@@ -47,16 +47,6 @@ enum EmptyStateType {
         }
     }
 
-    var color: Color {
-        switch self {
-        case .noBirthdays: return AppColor.primary
-        case .noGiftIdeas: return .orange
-        case .noHistory: return .blue
-        case .noSearchResults: return .gray
-        case .noContacts: return AppColor.primary
-        }
-    }
-
     var actionIcon: String {
         switch self {
         case .noBirthdays: return "person.badge.plus"
@@ -78,62 +68,20 @@ struct EmptyStateView: View {
     }
 
     var body: some View {
-        VStack(spacing: 24) {
-            // Icon with animation
-            iconView
-
-            // Title and message
-            VStack(spacing: 8) {
-                Text(type.title)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(AppColor.textPrimary)
-
-                Text(type.message)
-                    .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 32)
-            }
-
-            // Action using QuickActionCard for better visual hierarchy
+        ContentUnavailableView {
+            Label(type.title, systemImage: type.iconName)
+        } description: {
+            Text(type.message)
+        } actions: {
             if let actionTitle = type.actionTitle, let action = action {
-                QuickActionCard(
-                    style: .primary,
-                    icon: type.actionIcon,
-                    title: actionTitle,
-                    action: action
-                )
-                .padding(.horizontal, 32)
+                Button(action: action) {
+                    Label(actionTitle, systemImage: type.actionIcon)
+                }
+                .buttonStyle(.borderedProminent)
             }
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(AppColor.background)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(type.title). \(type.message)")
-    }
-
-    private var iconView: some View {
-        ZStack {
-            Circle()
-                .fill(type.color.opacity(0.15))
-                .frame(width: 120, height: 120)
-
-            Image(systemName: type.iconName)
-                .font(.system(size: 50))
-                .foregroundColor(type.color)
-        }
-    }
-
-    private var color: Color {
-        switch type {
-        case .noBirthdays: return AppColor.secondary
-        case .noGiftIdeas: return AppColor.primary
-        case .noHistory: return .gray
-        case .noSearchResults: return .orange
-        case .noContacts: return .red
-        }
     }
 }
 

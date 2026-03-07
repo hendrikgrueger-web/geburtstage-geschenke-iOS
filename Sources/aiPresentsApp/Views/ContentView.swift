@@ -17,10 +17,11 @@ struct ContentView: View {
         }
         .onAppear {
             if people.isEmpty && !UserDefaults.standard.bool(forKey: "hasShownContactsImport") {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                UserDefaults.standard.set(true, forKey: "hasShownContactsImport")
+                Task { @MainActor in
+                    try? await Task.sleep(for: .seconds(0.5))
                     showingContactsImport = true
                 }
-                UserDefaults.standard.set(true, forKey: "hasShownContactsImport")
             }
         }
     }

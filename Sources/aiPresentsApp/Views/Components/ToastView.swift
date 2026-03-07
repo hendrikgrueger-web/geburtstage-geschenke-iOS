@@ -71,7 +71,7 @@ struct ToastView: View {
             HStack(spacing: 12) {
                 Image(systemName: item.type.icon)
                     .font(.title2)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                     .frame(width: 28, height: 28)
                     .background(item.type.color)
                     .clipShape(Circle())
@@ -79,24 +79,24 @@ struct ToastView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(item.title)
                         .font(.headline)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
                     if let message = item.message {
                         Text(message)
                             .font(.subheadline)
-                            .foregroundColor(AppColor.textSecondary)
+                            .foregroundStyle(AppColor.textSecondary)
                     }
                 }
                 Spacer()
                 Button { dismiss() } label: {
                     Image(systemName: "xmark")
                         .font(.caption)
-                        .foregroundColor(AppColor.textSecondary)
+                        .foregroundStyle(AppColor.textSecondary)
                 }
             }
             .padding(16)
-            .background(AppColor.cardBackground)
-            .cornerRadius(12)
-            .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 4)
+            .background(.regularMaterial)
+            .clipShape(.rect(cornerRadius: 12))
+            .shadow(color: Color.black.opacity(0.12), radius: 12, x: 0, y: 4)
             .padding(.horizontal, 16)
             .padding(.bottom, isPresented ? 16 : -100)
             .offset(x: offset)

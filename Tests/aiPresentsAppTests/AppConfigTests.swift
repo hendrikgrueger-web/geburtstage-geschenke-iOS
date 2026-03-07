@@ -1,6 +1,7 @@
 import XCTest
 @testable import aiPresentsApp
 
+@MainActor
 final class AppConfigTests: XCTestCase {
 
     // MARK: - Build Tests

@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// Utility for consistent accessibility configuration across the app
+@MainActor
 enum AccessibilityConfiguration {
 
     /// Checks if reduced motion is enabled
@@ -63,7 +64,7 @@ enum AccessibilityConfiguration {
     static func buttonTraits(isEnabled: Bool = true) -> AccessibilityTraits {
         var traits: AccessibilityTraits = [.isButton]
         if !isEnabled {
-            traits.insert(.isStaticText)
+            _ = traits.insert(.isStaticText)
         }
         return traits
     }
@@ -72,7 +73,7 @@ enum AccessibilityConfiguration {
     static func selectableTraits(isSelected: Bool) -> AccessibilityTraits {
         var traits: AccessibilityTraits = [.isButton]
         if isSelected {
-            traits.insert(.isSelected)
+            _ = traits.insert(.isSelected)
         }
         return traits
     }

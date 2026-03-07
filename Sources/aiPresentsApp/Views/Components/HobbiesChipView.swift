@@ -26,43 +26,43 @@ struct HobbiesChipView: View {
                 }
             }
 
-            if isEditable && hobbies.count < 10 {
-                // Textfeld zum Hinzufuegen
-                HStack {
-                    TextField("Hobby hinzufügen", text: $newHobby)
-                        .textInputAutocapitalization(.words)
-                        .onSubmit { addHobby() }
+            if isEditable {
+                if hobbies.count < 10 {
+                    // Textfeld zum Hinzufuegen
+                    HStack {
+                        TextField("Hobby hinzufügen", text: $newHobby)
+                            .textInputAutocapitalization(.words)
+                            .onSubmit { addHobby() }
 
-                    if !newHobby.isEmpty {
-                        Button { addHobby() } label: {
-                            Image(systemName: "plus.circle.fill")
-                        }
-                    }
-                }
-
-                // Vorschlaege (nur noch nicht gewaehlte anzeigen)
-                let available = suggestions.filter { !hobbies.contains($0) }
-                if !available.isEmpty {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 6) {
-                            ForEach(available.prefix(5), id: \.self) { suggestion in
-                                Button {
-                                    withAnimation { hobbies.append(suggestion) }
-                                } label: {
-                                    Text(suggestion)
-                                        .font(.caption)
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 4)
-                                        .background(.fill.tertiary)
-                                        .clipShape(Capsule())
-                                }
-                                .buttonStyle(.plain)
+                        if !newHobby.isEmpty {
+                            Button { addHobby() } label: {
+                                Image(systemName: "plus.circle.fill")
                             }
                         }
                     }
-                }
 
-                if hobbies.count >= 10 {
+                    // Vorschlaege (nur noch nicht gewaehlte anzeigen)
+                    let available = suggestions.filter { !hobbies.contains($0) }
+                    if !available.isEmpty {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 6) {
+                                ForEach(available.prefix(5), id: \.self) { suggestion in
+                                    Button {
+                                        withAnimation { hobbies.append(suggestion) }
+                                    } label: {
+                                        Text(suggestion)
+                                            .font(.caption)
+                                            .padding(.horizontal, 10)
+                                            .padding(.vertical, 4)
+                                            .background(.fill.tertiary)
+                                            .clipShape(Capsule())
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                        }
+                    }
+                } else {
                     Text("Maximum erreicht (10 Hobbies)")
                         .font(.caption2)
                         .foregroundStyle(.secondary)

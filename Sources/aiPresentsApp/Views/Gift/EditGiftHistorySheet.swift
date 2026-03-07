@@ -126,15 +126,15 @@ struct EditGiftHistorySheet: View {
                     // SmartInputField for budget with number validation
                     HStack {
                         Text("Budget")
-                        TextField("€", text: $budget)
+                        TextField(CurrencyManager.shared.currencySymbol, text: $budget)
                             .keyboardType(.decimalPad)
-                            .foregroundColor(isBudgetValid ? .primary : .red)
+                            .foregroundStyle(isBudgetValid ? Color.primary : Color.red)
                     }
 
                     if !isBudgetValid && !budget.isEmpty {
                         Text("Bitte gib eine gültige Zahl ein")
                             .font(.caption)
-                            .foregroundColor(.red)
+                            .foregroundStyle(.red)
                     }
 
                     // SmartInputField for notes
@@ -162,7 +162,7 @@ struct EditGiftHistorySheet: View {
                                 }
                             } label: {
                                 Image(systemName: "arrow.up.right.square")
-                                    .foregroundColor(.blue)
+                                    .foregroundStyle(AppColor.primary)
                             }
                             .accessibilityLabel("Link öffnen")
                         }
@@ -192,6 +192,7 @@ struct EditGiftHistorySheet: View {
                 }
             }
         }
+        .presentationDragIndicator(.visible)
         .alert("Eingabe prüfen", isPresented: $showingValidationError) {
             Button("OK", role: .cancel) { }
         } message: {

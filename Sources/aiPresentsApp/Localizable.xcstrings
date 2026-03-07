@@ -60,9 +60,6 @@
         }
       }
     },
-    "%@ €" : {
-
-    },
     "%@ Geschenk%@ werden als verschenkt markiert." : {
       "localizations" : {
         "de" : {
@@ -82,10 +79,7 @@
     "%@/30 Vorschläge generiert" : {
 
     },
-    "%@€" : {
-
-    },
-    "• %@€" : {
+    "• %@" : {
 
     },
     "⚠️ Beginn und Ende können nicht identisch sein." : {
@@ -347,6 +341,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enabled ✓"
+          }
+        }
+      }
+    },
+    "Aktuelle Währung: %@ (%@)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Aktuelle Währung: %1$@ (%2$@)"
           }
         }
       }
@@ -1008,6 +1012,9 @@
           }
         }
       }
+    },
+    "Darstellung" : {
+
     },
     "Das Abo verlängert sich automatisch. Du kannst jederzeit in den iOS-Einstellungen kündigen." : {
       "extractionState" : "stale",
@@ -2194,6 +2201,9 @@
         }
       }
     },
+    "Geschätzter Preis" : {
+
+    },
     "Geschenk" : {
 
     },
@@ -2740,9 +2750,6 @@
           }
         }
       }
-    },
-    "In den nächsten %@ Tagen hat niemand Geburtstag." : {
-
     },
     "In Einstellungen öffnen" : {
       "localizations" : {
@@ -3575,6 +3582,9 @@
         }
       }
     },
+    "Manuell auf %@ eingestellt." : {
+
+    },
     "Markieren" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3586,10 +3596,8 @@
         }
       }
     },
-    "Max" : {
-
-    },
     "Max Budget" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3600,6 +3608,7 @@
       }
     },
     "Max darf nicht kleiner als Min sein" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3663,10 +3672,8 @@
         }
       }
     },
-    "Min" : {
-
-    },
     "Min Budget" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5185,6 +5192,9 @@
         }
       }
     },
+    "Währung" : {
+
+    },
     "War das hilfreich?" : {
       "localizations" : {
         "en" : {
@@ -5390,6 +5400,9 @@
           }
         }
       }
+    },
+    "Wird automatisch aus deiner Geräteregion ermittelt." : {
+
     },
     "Wird für bessere KI-Vorschläge genutzt" : {
       "localizations" : {

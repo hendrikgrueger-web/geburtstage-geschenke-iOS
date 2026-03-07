@@ -31,17 +31,14 @@ struct AIChatView: View {
             .navigationTitle("KI-Assistent")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Fertig") {
                         dismiss()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.secondary)
                     }
-                    .accessibilityLabel(String(localized: "Schließen"))
                 }
             }
         }
+        .presentationDragIndicator(.visible)
         .onAppear {
             viewModel.configure(
                 people: people,
@@ -52,6 +49,12 @@ struct AIChatView: View {
         }
         .onChange(of: people) { _, newVal in
             viewModel.configure(people: newVal, giftIdeas: giftIdeas, giftHistory: giftHistory, modelContext: modelContext)
+        }
+        .onChange(of: giftIdeas) { _, newVal in
+            viewModel.configure(people: people, giftIdeas: newVal, giftHistory: giftHistory, modelContext: modelContext)
+        }
+        .onChange(of: giftHistory) { _, newVal in
+            viewModel.configure(people: people, giftIdeas: giftIdeas, giftHistory: newVal, modelContext: modelContext)
         }
         .sheet(item: $viewModel.pendingGiftIdeaPerson) { person in
             AddGiftIdeaSheet(
@@ -124,11 +127,11 @@ struct AIChatView: View {
 
             ZStack {
                 Circle()
-                    .fill(Color.purple.opacity(0.1))
+                    .fill(AppColor.secondary.opacity(0.1))
                     .frame(width: 80, height: 80)
                 Image(systemName: "sparkles")
                     .font(.system(size: 36, weight: .semibold))
-                    .foregroundColor(.purple)
+                    .foregroundStyle(AppColor.secondary)
             }
 
             VStack(spacing: 8) {
@@ -136,7 +139,7 @@ struct AIChatView: View {
                     .font(.title2.bold())
                 Text("Ich helfe dir bei Geschenkideen und Geburtstagen.")
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             }
 
@@ -151,8 +154,8 @@ struct AIChatView: View {
                             .font(.subheadline)
                             .padding(.horizontal, 14)
                             .padding(.vertical, 8)
-                            .background(Color.purple.opacity(0.1))
-                            .foregroundColor(.purple)
+                            .background(AppColor.secondary.opacity(0.1))
+                            .foregroundStyle(AppColor.secondary)
                             .clipShape(Capsule())
                     }
                     .buttonStyle(.plain)
@@ -168,6 +171,12 @@ struct AIChatView: View {
     // MARK: - Actions
 
     private func sendMessage() {
+        // Spracheingabe stoppen falls aktiv
+        if isRecording {
+            speechService.stopTranscribing()
+            isRecording = false
+        }
+
         let text = inputText
         inputText = ""
 

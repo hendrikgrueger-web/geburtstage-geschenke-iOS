@@ -43,7 +43,7 @@ struct TimelineView: View {
                                     toggleSkipGift(for: person)
                                 } label: {
                                     Label(
-                                        person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk"),
+                                        person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk nötig"),
                                         systemImage: person.skipGift ? "gift.fill" : "minus.circle"
                                     )
                                 }
@@ -67,7 +67,7 @@ struct TimelineView: View {
             PersonDetailView(person: person)
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 Button {
                     showingSettings = true
                 } label: {
@@ -76,7 +76,7 @@ struct TimelineView: View {
                 .accessibilityLabel(String(localized: "Einstellungen"))
             }
 
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 12) {
                     if !availableRelations.isEmpty {
                         Menu {
@@ -165,15 +165,15 @@ struct TimelineView: View {
         HStack(spacing: 6) {
             Image(systemName: icon)
                 .font(.caption)
-                .foregroundColor(AppColor.primary)
+                .foregroundStyle(AppColor.primary)
             VStack(alignment: .leading, spacing: 1) {
                 Text(value)
                     .font(.subheadline)
                     .fontWeight(.bold)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
                 Text(label)
                     .font(.caption2)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
             }
         }
         .frame(maxWidth: .infinity)
@@ -235,9 +235,7 @@ struct TimelineView: View {
         Button {
             selectedPerson = person
         } label: {
-            BirthdayRow(person: person, giftIdeas: ideasByPerson[person.id] ?? [], onTap: {
-                selectedPerson = person
-            }, onQuickAdd: {
+            BirthdayRow(person: person, giftIdeas: ideasByPerson[person.id] ?? [], onQuickAdd: {
                 quickAddPerson = person
             })
         }
@@ -281,6 +279,7 @@ struct TimelineView: View {
             person.skipGift.toggle()
             HapticFeedback.medium()
         }
+        WidgetDataService.shared.updateWidgetData(from: modelContext)
     }
 
     private func refreshTimeline() async {
@@ -307,13 +306,12 @@ struct TimelineView: View {
             showingAIChat = true
             HapticFeedback.medium()
         } label: {
-            Image("AIFABIcon")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 56, height: 56)
-                .clipShape(Circle())
-                .shadow(color: .purple.opacity(0.3), radius: 8, x: 0, y: 4)
+            Image(systemName: "sparkles.bubble.fill")
+                .font(.title2)
+                .padding(16)
         }
+        .buttonStyle(.glass)
+        .tint(AppColor.primary)
         .padding(.trailing, 20)
         .padding(.bottom, 20)
         .accessibilityLabel(String(localized: "KI-Assistent öffnen"))
@@ -325,16 +323,16 @@ struct TimelineView: View {
         VStack(spacing: 16) {
             Image(systemName: "person.2.slash")
                 .font(.system(size: 48))
-                .foregroundColor(AppColor.textSecondary.opacity(0.6))
+                .foregroundStyle(AppColor.textSecondary.opacity(0.6))
 
             VStack(spacing: 4) {
                 Text(emptyStateTitle)
                     .font(.headline)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(emptyStateMessage)
                     .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
                     .multilineTextAlignment(.center)
             }
         }

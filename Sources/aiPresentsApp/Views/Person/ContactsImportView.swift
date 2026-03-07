@@ -17,7 +17,7 @@ struct ContactsImportView: View {
                 VStack(spacing: 16) {
                     Image(systemName: "person.badge.plus")
                         .font(.system(size: 64))
-                        .foregroundColor(.blue)
+                        .foregroundStyle(AppColor.primary)
 
                     Text("Kontakte importieren")
                         .font(.title2)
@@ -45,9 +45,9 @@ struct ContactsImportView: View {
                             }
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(14)
+                            .background(AppColor.primary)
+                            .foregroundStyle(.white)
+                            .clipShape(.rect(cornerRadius: 14))
                         }
 
                         // Sekundär: Demo
@@ -62,15 +62,15 @@ struct ContactsImportView: View {
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color(.systemGray5))
-                            .foregroundColor(.primary)
-                            .cornerRadius(14)
+                            .foregroundStyle(.primary)
+                            .clipShape(.rect(cornerRadius: 14))
                         }
                     }
 
                     if let error = importError {
                         HStack(spacing: 8) {
                             Image(systemName: "exclamationmark.triangle.fill")
-                                .foregroundColor(.orange)
+                                .foregroundStyle(AppColor.accent)
                             Text(error)
                                 .font(.caption)
                         }
@@ -89,7 +89,7 @@ struct ContactsImportView: View {
                         Text("Nur Namen & Geburtstage · Lokal gespeichert")
                             .font(.caption)
                     }
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                 }
 
                 Spacer()
@@ -97,11 +97,12 @@ struct ContactsImportView: View {
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button("Abbrechen") { dismiss() }
                 }
             }
         }
+        .presentationDragIndicator(.visible)
     }
 
     private func importFromContacts() {

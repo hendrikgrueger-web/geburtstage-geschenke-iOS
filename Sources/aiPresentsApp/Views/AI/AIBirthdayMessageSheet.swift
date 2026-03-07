@@ -37,8 +37,8 @@ struct AIBirthdayMessageSheet: View {
             .navigationTitle("Geburtstagsnachricht")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Abbrechen") {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Fertig") {
                         dismiss()
                     }
                 }
@@ -61,6 +61,7 @@ struct AIBirthdayMessageSheet: View {
                 Text("Mit welchem Namen möchtest du die Nachricht unterschreiben? Dieser Name wird nur lokal auf deinem Gerät gespeichert.")
             }
         }
+        .presentationDragIndicator(.visible)
         .toast(item: $toast)
     }
 
@@ -71,15 +72,15 @@ struct AIBirthdayMessageSheet: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(person.displayName)
                     .font(.headline)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(person.relation)
                     .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
 
                 Text(birthdayInfo)
                     .font(.caption)
-                    .foregroundColor(AppColor.textTertiary)
+                    .foregroundStyle(AppColor.textTertiary)
             }
 
             Spacer()
@@ -87,12 +88,12 @@ struct AIBirthdayMessageSheet: View {
             VStack(alignment: .trailing, spacing: 4) {
                 Image(systemName: "cake.fill")
                     .font(.title3)
-                    .foregroundColor(.orange)
+                    .foregroundStyle(.orange)
 
                 Text(ageString)
                     .font(.caption)
                     .fontWeight(.medium)
-                    .foregroundColor(AppColor.textTertiary)
+                    .foregroundStyle(AppColor.textTertiary)
             }
         }
         .padding(.vertical, 4)
@@ -146,11 +147,11 @@ struct AIBirthdayMessageSheet: View {
                 VStack(spacing: 4) {
                     Text("KI schreibt...")
                         .font(.headline)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
 
                     Text("Einen Moment bitte...")
                         .font(.caption)
-                        .foregroundColor(AppColor.textSecondary)
+                        .foregroundStyle(AppColor.textSecondary)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .center)
@@ -163,15 +164,15 @@ struct AIBirthdayMessageSheet: View {
             VStack(spacing: 16) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: 50))
-                    .foregroundColor(.orange)
+                    .foregroundStyle(.orange)
 
                 Text("Fehler")
                     .font(.headline)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(error)
                     .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
                     .multilineTextAlignment(.center)
 
                 Button("Erneut versuchen") {
@@ -190,12 +191,12 @@ struct AIBirthdayMessageSheet: View {
                 // Greeting
                 Text(message.greeting)
                     .font(.headline)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 // Body
                 Text(message.body)
                     .font(.body)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
                     .lineSpacing(4)
 
                 Divider()
@@ -208,7 +209,7 @@ struct AIBirthdayMessageSheet: View {
                     }) {
                         HStack {
                             Image(systemName: "doc.on.doc")
-                                .foregroundColor(AppColor.primary)
+                                .foregroundStyle(AppColor.primary)
                             Text("In Zwischenablage kopieren")
                                 .font(.subheadline)
                             Spacer()
@@ -224,7 +225,7 @@ struct AIBirthdayMessageSheet: View {
                     }) {
                         HStack {
                             Image(systemName: "square.and.arrow.up")
-                                .foregroundColor(AppColor.primary)
+                                .foregroundStyle(AppColor.primary)
                             Text("Teilen")
                                 .font(.subheadline)
                             Spacer()
@@ -241,7 +242,7 @@ struct AIBirthdayMessageSheet: View {
                     }) {
                         HStack {
                             Image(systemName: "arrow.clockwise")
-                                .foregroundColor(.orange)
+                                .foregroundStyle(.orange)
                             Text("Neue Nachricht generieren")
                                 .font(.subheadline)
                             Spacer()
@@ -256,9 +257,9 @@ struct AIBirthdayMessageSheet: View {
         } header: {
             Text("Nachricht")
         } footer: {
-            Text("💡 Die Nachricht wurde basierend auf Alter, Meilenstein und Sternzeichen personalisiert.")
+            Label("Die Nachricht wurde basierend auf Alter, Meilenstein und Sternzeichen personalisiert.", systemImage: "lightbulb.fill")
                 .font(.caption)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
         }
     }
 
@@ -268,16 +269,16 @@ struct AIBirthdayMessageSheet: View {
                 HStack(spacing: 12) {
                     Image(systemName: "sparkles.text.viewfinder")
                         .font(.title3)
-                        .foregroundColor(.orange)
+                        .foregroundStyle(.orange)
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Persönliche Geburtstagsnachricht")
                             .font(.headline)
-                            .foregroundColor(AppColor.textPrimary)
+                            .foregroundStyle(AppColor.textPrimary)
 
                         Text("Die KI erstellt eine herzliche Nachricht basierend auf Alter, Meilenstein und Sternzeichen.")
                             .font(.subheadline)
-                            .foregroundColor(AppColor.textSecondary)
+                            .foregroundStyle(AppColor.textSecondary)
                     }
 
                     Spacer()
@@ -296,9 +297,9 @@ struct AIBirthdayMessageSheet: View {
             }
             .padding(.vertical, 4)
         } footer: {
-            Text("💡 Tipp: Du kannst die Nachricht nach dem Generieren anpassen oder kopieren.")
+            Label("Tipp: Du kannst die Nachricht nach dem Generieren anpassen oder kopieren.", systemImage: "lightbulb.fill")
                 .font(.caption)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
         }
     }
 

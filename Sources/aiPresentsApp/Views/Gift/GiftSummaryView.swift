@@ -29,10 +29,10 @@ struct GiftSummaryView: View {
     private var emptyState: some View {
         HStack {
             Image(systemName: "lightbulb")
-                .foregroundColor(AppColor.textSecondary.opacity(0.5))
+                .foregroundStyle(AppColor.textSecondary.opacity(0.5))
             Text("Noch keine Ideen")
                 .font(.caption)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
             Spacer()
         }
         .padding(.vertical, 8)
@@ -58,7 +58,7 @@ struct GiftSummaryView: View {
             Text("Geschenk-Status")
                 .font(.caption)
                 .fontWeight(.semibold)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
 
             GeometryReader { geometry in
                 HStack(spacing: 2) {
@@ -70,7 +70,7 @@ struct GiftSummaryView: View {
                             .animation(.spring(response: 0.6, dampingFraction: 0.7), value: animatingBar)
                     }
                 }
-                .cornerRadius(3)
+                .clipShape(.rect(cornerRadius: 3))
             }
             .frame(height: 6)
         }
@@ -100,11 +100,11 @@ struct GiftSummaryView: View {
                     .font(.caption2)
                     .fontWeight(.semibold)
             }
-            .foregroundColor(status.color)
+            .foregroundStyle(status.color)
             .padding(.horizontal, 6)
             .padding(.vertical, 3)
             .background(status.color.opacity(0.15))
-            .cornerRadius(6)
+            .clipShape(.rect(cornerRadius: 6))
             .accessibilityElement(children: .combine)
             .accessibilityLabel(String(localized: "\(statusText(for: status)): \(count)"))
         }

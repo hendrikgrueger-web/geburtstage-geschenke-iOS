@@ -104,7 +104,8 @@ struct AIService {
             throw AIError.noConsent
         }
 
-        return try await generateGiftIdeasWithOpenRouter(context: context, budget: budgetRange, excludeTitles: excludeTitles)
+        let budgetString = CurrencyManager.shared.formatBudgetRange(min: budgetMin, max: budgetMax)
+        return try await generateGiftIdeasWithOpenRouter(context: context, budget: budgetRange, budgetString: budgetString, excludeTitles: excludeTitles)
     }
 
     @MainActor
@@ -136,6 +137,7 @@ struct AIService {
     private func generateGiftIdeasWithOpenRouter(
         context: GiftContext,
         budget: (min: Double, max: Double),
+        budgetString: String,
         excludeTitles: [String] = []
     ) async throws -> [GiftSuggestion] {
 
@@ -169,7 +171,7 @@ struct AIService {
             }
 
             userPrompt += "\nSternzeichen: \(context.zodiac)."
-            userPrompt += "\nBudget: \(Int(budget.min))–\(Int(budget.max)) Euro (strikt einhalten)."
+            userPrompt += "\nBudget: \(budgetString) (strikt einhalten)."
 
             let allExcluded = context.pastGiftTitles + excludeTitles
             if !allExcluded.isEmpty {
@@ -209,7 +211,7 @@ struct AIService {
             }
 
             userPrompt += "\nZodiac sign: \(context.zodiac)."
-            userPrompt += "\nBudget: \(Int(budget.min))–\(Int(budget.max)) Euro (strictly adhere)."
+            userPrompt += "\nBudget: \(budgetString) (strictly adhere)."
 
             let allExcluded = context.pastGiftTitles + excludeTitles
             if !allExcluded.isEmpty {

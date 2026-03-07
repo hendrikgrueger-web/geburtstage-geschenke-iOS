@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 enum AppAnimation {
     // Standard transitions
     static var fadeIn: Animation {

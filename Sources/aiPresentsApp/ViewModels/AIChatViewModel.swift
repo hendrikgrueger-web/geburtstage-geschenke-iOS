@@ -8,16 +8,12 @@ import SwiftUI
 final class AIChatViewModel {
     var messages: [ChatMessage] = []
     var isLoading = false
-    var errorMessage: String?
 
     /// Wird gesetzt wenn eine Aktion ein Sheet öffnen soll.
     var pendingGiftIdeaPerson: PersonRef?
     var pendingGiftIdeaTitle: String = ""
     var pendingGiftIdeaNote: String = ""
     var pendingSuggestionsPerson: PersonRef?
-
-    /// Wird gesetzt wenn ein Status-Update durchgeführt wurde.
-    var lastStatusUpdateMessage: String?
 
     /// Matching Personen bei clarify_person — wird als tippbare Buttons angezeigt.
     var clarifyOptions: [PersonRef] = []
@@ -44,6 +40,11 @@ final class AIChatViewModel {
         cachedSystemPrompt = buildSystemPrompt()
     }
 
+    /// Invalidiert den gecachten System-Prompt, z.B. nach Änderungen an giftIdeas/giftHistory.
+    func invalidatePromptCache() {
+        cachedSystemPrompt = buildSystemPrompt()
+    }
+
     // MARK: - Senden
 
     func sendMessage(_ text: String) async {
@@ -53,7 +54,6 @@ final class AIChatViewModel {
         let userMessage = ChatMessage(role: .user, content: trimmed)
         messages.append(userMessage)
         isLoading = true
-        errorMessage = nil
 
         do {
             let apiMessages = buildAPIMessages()
@@ -67,8 +67,6 @@ final class AIChatViewModel {
                 await processAction(action)
             }
         } catch {
-            let errorMsg = error.localizedDescription
-            errorMessage = errorMsg
             let errorChat = ChatMessage(role: .assistant, content: String(localized: "Entschuldigung, es gab einen Fehler. Bitte versuche es erneut."))
             messages.append(errorChat)
             AppLogger.data.error("Chat-Fehler", error: error)
@@ -100,7 +98,7 @@ final class AIChatViewModel {
 
     // MARK: - System Prompt
 
-    func buildSystemPrompt() -> String {
+    private func buildSystemPrompt() -> String {
         // ID-Maps bei jedem Prompt-Bau neu aufbauen
         personIdMap.removeAll()
         giftIdeaIdMap.removeAll()
@@ -126,14 +124,16 @@ final class AIChatViewModel {
             FORMAT: Antworte NUR mit JSON:
             {"message":"Deine natürliche Antwort hier","action":{"type":"none"}}
 
-            Aktionen (in action.type):
-            - create_gift_idea: data={person_id,person_name,gift_title,gift_note}
-            - query: Reine Informationsabfrage
-            - update_gift_status: data={gift_idea_id,new_status:planned|purchased|given}
-            - open_suggestions: data={person_id,person_name} — KI-Vorschläge-Sheet öffnen
-            - clarify_person: Nachfrage bei mehrdeutigem Namen
-            - off_topic: Thema außerhalb des App-Bereichs
-            - none: Keine Aktion nötig
+            Aktionstypen (in action.type):
+            - create_gift_idea: person_id, person_name, gift_title, gift_note
+            - query: (keine zusätzlichen Felder)
+            - update_gift_status: gift_idea_id, new_status (planned|purchased|given)
+            - open_suggestions: person_id, person_name — KI-Vorschläge-Sheet öffnen
+            - clarify_person: (keine zusätzlichen Felder)
+            - off_topic: (keine zusätzlichen Felder)
+            - none: (keine zusätzlichen Felder)
+
+            Beispiel: {"message":"Wie wäre es mit einem Buch?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Anna","gift_title":"Buch","gift_note":""}}
             """
         } else {
             prompt = """
@@ -152,19 +152,21 @@ final class AIChatViewModel {
             FORMAT: Respond ONLY with JSON:
             {"message":"Your natural response here","action":{"type":"none"}}
 
-            Actions (in action.type):
-            - create_gift_idea: data={person_id,person_name,gift_title,gift_note}
-            - query: Pure information query
-            - update_gift_status: data={gift_idea_id,new_status:planned|purchased|given}
-            - open_suggestions: data={person_id,person_name} — Open AI suggestions sheet
-            - clarify_person: Clarification needed for ambiguous name
-            - off_topic: Topic outside app scope
-            - none: No action needed
+            Action types (in action.type):
+            - create_gift_idea: person_id, person_name, gift_title, gift_note
+            - query: (no additional fields)
+            - update_gift_status: gift_idea_id, new_status (planned|purchased|given)
+            - open_suggestions: person_id, person_name — Open AI suggestions sheet
+            - clarify_person: (no additional fields)
+            - off_topic: (no additional fields)
+            - none: (no additional fields)
+
+            Example: {"message":"How about a book?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Anna","gift_title":"Book","gift_note":""}}
             """
         }
 
         // Kompakte Kontaktliste
-        prompt += "\n\nKontakte:\n"
+        prompt += isGerman ? "\n\nKontakte:\n" : "\n\nContacts:\n"
 
         if people.isEmpty {
             prompt += "(keine)\n"
@@ -205,7 +207,7 @@ final class AIChatViewModel {
         }
 
         if person.skipGift {
-            parts.append(isGerman ? "skip" : "skip")
+            parts.append("skip")
         }
 
         var entry = parts.joined(separator: "|")
@@ -257,16 +259,21 @@ final class AIChatViewModel {
     /// Löst eine Short-ID (z.B. "p1") oder volle UUID zu einer PersonRef auf.
     private func resolvePerson(from idString: String?) -> PersonRef? {
         guard let idString else { return nil }
+        let lower = idString.lowercased()
         // Short-ID Lookup
-        if let uuid = personIdMap[idString] {
+        if let uuid = personIdMap[lower] ?? personIdMap[idString] {
             return people.first { $0.id == uuid }
         }
         // Fallback: volle UUID
         if let uuid = UUID(uuidString: idString) {
             return people.first { $0.id == uuid }
         }
-        // Fallback: Name-Match
-        return people.first { $0.displayName.lowercased() == idString.lowercased() }
+        // Exakter Name-Match
+        if let exact = people.first(where: { $0.displayName.lowercased() == lower }) {
+            return exact
+        }
+        // Teilname-Match (Vorname oder Nachname)
+        return people.first { $0.displayName.lowercased().contains(lower) }
     }
 
     /// Löst eine Short-ID (z.B. "g1") oder volle UUID zu einer GiftIdea auf.
@@ -292,7 +299,10 @@ final class AIChatViewModel {
             pendingGiftIdeaPerson = person
 
         case .openSuggestions:
-            guard let person = resolvePerson(from: data.personId) ?? resolvePerson(from: data.personName) else { return }
+            guard let person = resolvePerson(from: data.personId) ?? resolvePerson(from: data.personName) else {
+                AppLogger.data.error("openSuggestions: Person nicht gefunden — personId=\(data.personId ?? "nil"), personName=\(data.personName ?? "nil")")
+                return
+            }
             pendingSuggestionsPerson = person
 
         case .updateGiftStatus:

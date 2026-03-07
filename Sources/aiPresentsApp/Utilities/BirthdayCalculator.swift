@@ -18,6 +18,16 @@ struct BirthdayCalculator {
         var isValid: Bool {
             Date().timeIntervalSince(timestamp) < 5.0
         }
+
+        /// Merge new values into this entry, preserving existing non-nil fields
+        func merging(nextBirthday: Date?? = nil, daysUntil: Int?? = nil, age: Int?? = nil) -> BirthdayCacheEntry {
+            BirthdayCacheEntry(
+                nextBirthday: nextBirthday ?? self.nextBirthday,
+                daysUntil: daysUntil ?? self.daysUntil,
+                age: age ?? self.age,
+                timestamp: Date()
+            )
+        }
     }
 
     /// Clear the birthday calculation cache
@@ -48,14 +58,15 @@ struct BirthdayCalculator {
         // Calculate new value (outside lock)
         let nextBirthday = calculateNextBirthday(for: birthday, from: referenceDate)
 
-        // Update cache (thread-safe)
+        // Update cache (thread-safe, merge with existing entry)
         cacheLock.lock()
-        cache[cacheKey] = BirthdayCacheEntry(
-            nextBirthday: nextBirthday,
-            daysUntil: nil,
-            age: nil,
-            timestamp: Date()
-        )
+        if let existing = cache[cacheKey], existing.isValid {
+            cache[cacheKey] = existing.merging(nextBirthday: .some(nextBirthday))
+        } else {
+            cache[cacheKey] = BirthdayCacheEntry(
+                nextBirthday: nextBirthday, daysUntil: nil, age: nil, timestamp: Date()
+            )
+        }
         cacheLock.unlock()
 
         return nextBirthday
@@ -115,14 +126,15 @@ struct BirthdayCalculator {
         // Calculate new value (outside lock)
         let daysUntil = calculateDaysUntilBirthday(for: birthday, from: referenceDate)
 
-        // Update cache (thread-safe)
+        // Update cache (thread-safe, merge with existing entry)
         cacheLock.lock()
-        cache[cacheKey] = BirthdayCacheEntry(
-            nextBirthday: nil,
-            daysUntil: daysUntil,
-            age: nil,
-            timestamp: Date()
-        )
+        if let existing = cache[cacheKey], existing.isValid {
+            cache[cacheKey] = existing.merging(daysUntil: .some(daysUntil))
+        } else {
+            cache[cacheKey] = BirthdayCacheEntry(
+                nextBirthday: nil, daysUntil: daysUntil, age: nil, timestamp: Date()
+            )
+        }
         cacheLock.unlock()
 
         return daysUntil
@@ -191,14 +203,15 @@ struct BirthdayCalculator {
         // Calculate new value (outside lock)
         let calculatedAge = calculateAge(for: birthday, on: date)
 
-        // Update cache (thread-safe)
+        // Update cache (thread-safe, merge with existing entry)
         cacheLock.lock()
-        cache[cacheKey] = BirthdayCacheEntry(
-            nextBirthday: nil,
-            daysUntil: nil,
-            age: calculatedAge,
-            timestamp: Date()
-        )
+        if let existing = cache[cacheKey], existing.isValid {
+            cache[cacheKey] = existing.merging(age: .some(calculatedAge))
+        } else {
+            cache[cacheKey] = BirthdayCacheEntry(
+                nextBirthday: nil, daysUntil: nil, age: calculatedAge, timestamp: Date()
+            )
+        }
         cacheLock.unlock()
 
         return calculatedAge
@@ -208,7 +221,7 @@ struct BirthdayCalculator {
     private static func calculateAge(for birthday: Date, on date: Date) -> Int? {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: date)
-        var components = calendar.dateComponents([.year, .month, .day], from: birthday)
+        let components = calendar.dateComponents([.year, .month, .day], from: birthday)
         let currentComponents = calendar.dateComponents([.year, .month, .day], from: today)
 
         guard let birthYear = components.year,

@@ -4,7 +4,7 @@ struct PersonAvatar: View {
     let person: PersonRef
     var size: CGFloat = 60
 
-    static func initials(from name: String) -> String {
+    nonisolated static func initials(from name: String) -> String {
         let components = name.split(separator: " ")
         if components.count >= 2 {
             return String(components[0].prefix(1)) + String(components[1].prefix(1))
@@ -29,14 +29,14 @@ struct PersonAvatar: View {
                     .fill(AppColor.gradientForRelation(person.relation))
                     .frame(width: size, height: size)
                     .overlay {
-                        Text(String(person.displayName.prefix(1)))
+                        Text(PersonAvatar.initials(from: person.displayName))
                             .font(.system(size: size * 0.4))
                             .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .foregroundStyle(.white)
                     }
             }
         }
-        .shadow(color: AppColor.primary.opacity(0.3), radius: 8, x: 0, y: 4)
+        .shadow(color: .black.opacity(0.1), radius: 3, x: 0, y: 1)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Avatar für \(person.displayName)")
         .accessibilityHint("\(person.relation)")
@@ -64,10 +64,10 @@ struct CompactPersonAvatar: View {
                     .fill(AppColor.gradientForRelation(person.relation))
                     .frame(width: size, height: size)
                     .overlay {
-                        Text(String(person.displayName.prefix(1)))
+                        Text(PersonAvatar.initials(from: person.displayName))
                             .font(.system(size: size * 0.35))
                             .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .foregroundStyle(.white)
                     }
             }
         }

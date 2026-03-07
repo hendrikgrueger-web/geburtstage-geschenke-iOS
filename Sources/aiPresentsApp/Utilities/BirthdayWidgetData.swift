@@ -86,20 +86,20 @@ struct BirthdayWidgetData {
             )
         }
         .sorted { $0.daysUntil < $1.daysUntil }
-        .prefix(limit)
-        .map { $0 }
+
+        let limitedEntries = Array(upcomingEntries.prefix(limit))
 
         // Calculate summary statistics
-        let todayCount = upcomingEntries.filter { $0.isToday }.count
-        let weekCount = upcomingEntries.filter { $0.daysUntil <= 7 }.count
-        let monthCount = upcomingEntries.count
+        let todayCount = limitedEntries.filter { $0.isToday }.count
+        let weekCount = limitedEntries.filter { $0.daysUntil <= 7 }.count
+        let monthCount = limitedEntries.count
 
         return WidgetSummary(
             todayCount: todayCount,
             weekCount: weekCount,
             monthCount: monthCount,
-            nextBirthday: upcomingEntries.first,
-            upcomingBirthdays: Array(upcomingEntries)
+            nextBirthday: limitedEntries.first,
+            upcomingBirthdays: limitedEntries
         )
     }
 

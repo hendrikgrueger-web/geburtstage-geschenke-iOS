@@ -14,7 +14,7 @@ struct ShareSheetView: UIViewControllerRepresentable {
 
 // MARK: - Gift Idea Export Extension
 extension GiftIdea {
-    func exportAsText() -> String {
+    @MainActor func exportAsText() -> String {
         var text = "🎁 \(title)\n"
 
         if !note.isEmpty {
@@ -23,13 +23,7 @@ extension GiftIdea {
 
         if budgetMax > 0 {
             text += "💰 "
-            if budgetMin == budgetMax {
-                text += String(format: "%.0f €", budgetMin)
-            } else if budgetMin == 0 {
-                text += String(format: "bis %.0f €", budgetMax)
-            } else {
-                text += String(format: "%.0f - %.0f €", budgetMin, budgetMax)
-            }
+            text += CurrencyManager.shared.formatBudgetRange(min: budgetMin, max: budgetMax)
             text += "\n"
         }
 
@@ -58,7 +52,7 @@ extension GiftIdea {
 
 // MARK: - Person Export Extension
 extension PersonRef {
-    func exportAllGiftIdeasAsText() -> String {
+    @MainActor func exportAllGiftIdeasAsText() -> String {
         let ideas = giftIdeas?.sorted { $0.createdAt > $1.createdAt } ?? []
 
         if ideas.isEmpty {
@@ -76,7 +70,7 @@ extension PersonRef {
         return text
     }
 
-    func exportSummaryAsText() -> String {
+    @MainActor func exportSummaryAsText() -> String {
         let ideaCount = giftIdeas?.count ?? 0
         let purchasedCount = giftIdeas?.filter { $0.status == .purchased }.count ?? 0
         let givenCount = giftIdeas?.filter { $0.status == .given }.count ?? 0

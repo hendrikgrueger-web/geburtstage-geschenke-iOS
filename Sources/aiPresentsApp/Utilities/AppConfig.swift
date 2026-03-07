@@ -36,9 +36,9 @@ struct AppConfig {
 
     // MARK: - UI Constants
     struct Budget {
-        static let sliderMinimum: Double = 0
-        static let sliderMaximum: Double = 500
-        static let sliderStep: Double = 5
+        @MainActor static var sliderMinimum: Double { CurrencyManager.shared.sliderMinimum }
+        @MainActor static var sliderMaximum: Double { CurrencyManager.shared.sliderMaximum }
+        @MainActor static var sliderStep: Double { CurrencyManager.shared.sliderStep }
     }
 
     struct Timeline {

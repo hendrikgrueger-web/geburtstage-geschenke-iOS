@@ -9,23 +9,18 @@ struct AddGiftIdeaSheet: View {
 
     @State private var title: String
     @State private var note: String
-    @State private var budgetMin: String
-    @State private var budgetMax: String
+    @State private var estimatedPrice: Double
     @State private var link: String
     @State private var tagsInput: String
     @State private var status: GiftStatus
     @State private var formState = AppFormState()
     @State private var showingValidationError = false
-    @State private var budgetMinSlider: Double = 0
-    @State private var budgetMaxSlider: Double = 0
-    @State private var useSlider = false
 
     init(person: PersonRef) {
         self.person = person
         self._title = State(initialValue: "")
         self._note = State(initialValue: "")
-        self._budgetMin = State(initialValue: "")
-        self._budgetMax = State(initialValue: "")
+        self._estimatedPrice = State(initialValue: 0)
         self._link = State(initialValue: "")
         self._tagsInput = State(initialValue: "")
         self._status = State(initialValue: .idea)
@@ -36,16 +31,11 @@ struct AddGiftIdeaSheet: View {
         self.person = person
         self._title = State(initialValue: prefillTitle)
         self._note = State(initialValue: prefillNote)
-        self._budgetMin = State(initialValue: "")
-        self._budgetMax = State(initialValue: "")
+        self._estimatedPrice = State(initialValue: 0)
         self._link = State(initialValue: "")
         self._tagsInput = State(initialValue: "")
         self._status = State(initialValue: .idea)
         self._formState = State(initialValue: AppFormState())
-    }
-
-    private var isBudgetInvalid: Bool {
-        FormValidator.validateBudget(minString: budgetMin, maxString: budgetMax) != nil
     }
 
     private var linkValidation: (sanitized: String, isValid: Bool) {
@@ -58,7 +48,6 @@ struct AddGiftIdeaSheet: View {
 
     private var canSave: Bool {
         !title.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !isBudgetInvalid &&
         tagsValidation == nil &&
         linkValidation.isValid
     }
@@ -66,7 +55,6 @@ struct AddGiftIdeaSheet: View {
     private var validationMessages: String {
         var messages: [String] = []
         if title.trimmingCharacters(in: .whitespaces).isEmpty { messages.append(String(localized: "- Titel darf nicht leer sein")) }
-        if isBudgetInvalid { messages.append(String(localized: "- Ungültiges Budget")) }
         if let error = tagsValidation { messages.append("- \(error.errorDescription ?? "")") }
         if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty { messages.append(String(localized: "- Ungültige URL")) }
         return messages.joined(separator: "\n")
@@ -109,7 +97,7 @@ struct AddGiftIdeaSheet: View {
                                 }
                             } label: {
                                 Image(systemName: "arrow.up.right.square")
-                                    .foregroundColor(.blue)
+                                    .foregroundStyle(AppColor.primary)
                             }
                             .accessibilityLabel("Link öffnen")
                             .accessibilityHint("Öffnet den Link im Browser")
@@ -117,80 +105,30 @@ struct AddGiftIdeaSheet: View {
                     }
                 }
 
-                Section("Budget") {
-                    Toggle("Slider verwenden", isOn: $useSlider.animation())
-                        .accessibleToggle(label: "Budget-Slider verwenden", isOn: useSlider)
-
-                    if useSlider {
-                        VStack(spacing: 16) {
-                            HStack {
-                                Text("Min")
-                                Text("\(Int(budgetMinSlider)) €")
-                                    .foregroundColor(AppColor.primary)
-                                    .fontWeight(.semibold)
-                                Spacer()
-                            }
-
-                            Slider(value: $budgetMinSlider,
-                                   in: AppConfig.Budget.sliderMinimum...AppConfig.Budget.sliderMaximum,
-                                   step: AppConfig.Budget.sliderStep) {
-                                Text("Min Budget")
-                            } minimumValueLabel: {
-                                Text("\(Int(AppConfig.Budget.sliderMinimum))€").font(.caption2).foregroundColor(.secondary)
-                            } maximumValueLabel: {
-                                Text("\(Int(AppConfig.Budget.sliderMaximum))€").font(.caption2).foregroundColor(.secondary)
-                            }
-                            .tint(AppColor.primary)
-                            .accessibilityLabel("Mindestbudget-Slider")
-                            .accessibilityHint("Wähle das Mindestbudget")
-
-                            HStack {
-                                Text("Max")
-                                Text("\(Int(budgetMaxSlider)) €")
-                                    .foregroundColor(AppColor.accent)
-                                    .fontWeight(.semibold)
-                                Spacer()
-                            }
-
-                            Slider(value: $budgetMaxSlider,
-                                   in: AppConfig.Budget.sliderMinimum...AppConfig.Budget.sliderMaximum,
-                                   step: AppConfig.Budget.sliderStep) {
-                                Text("Max Budget")
-                            } minimumValueLabel: {
-                                Text("\(Int(AppConfig.Budget.sliderMinimum))€").font(.caption2).foregroundColor(.secondary)
-                            } maximumValueLabel: {
-                                Text("\(Int(AppConfig.Budget.sliderMaximum))€").font(.caption2).foregroundColor(.secondary)
-                            }
-                            .tint(AppColor.accent)
-                            .accessibilityLabel("Maximalbudget-Slider")
-                            .accessibilityHint("Wähle das Maximalbudget")
-                        }
-                        .padding(.vertical, 8)
-                    } else {
+                Section {
+                    VStack(spacing: 8) {
                         HStack {
-                            Text("Min")
-                            TextField("€", text: $budgetMin)
-                                .keyboardType(.decimalPad)
-                                .accessibilityLabel("Mindestbudget")
-                                .accessibilityHint("Gib das Mindestbudget in Euro ein")
+                            Text("Geschätzter Preis")
+                            Spacer()
+                            Text(CurrencyManager.shared.formatAmountOrEmpty(estimatedPrice))
+                                .foregroundStyle(estimatedPrice > 0 ? AppColor.primary : .secondary)
+                                .fontWeight(.semibold)
                         }
 
-                        HStack {
-                            Text("Max")
-                            TextField("€", text: $budgetMax)
-                                .keyboardType(.decimalPad)
-                                .foregroundColor(isBudgetInvalid ? .red : .primary)
-                                .accessibilityLabel("Maximalbudget")
-                                .accessibilityHint("Gib das Maximalbudget in Euro ein")
+                        Slider(value: $estimatedPrice,
+                               in: AppConfig.Budget.sliderMinimum...AppConfig.Budget.sliderMaximum,
+                               step: AppConfig.Budget.sliderStep) {
+                            Text("Geschätzter Preis")
+                        } minimumValueLabel: {
+                            Text(CurrencyManager.shared.formatAmount(AppConfig.Budget.sliderMinimum)).font(.caption2).foregroundStyle(.secondary)
+                        } maximumValueLabel: {
+                            Text(CurrencyManager.shared.formatAmount(AppConfig.Budget.sliderMaximum)).font(.caption2).foregroundStyle(.secondary)
                         }
+                        .tint(AppColor.primary)
+                        .accessibilityLabel(String(localized: "Geschätzter Preis"))
+                        .accessibilityValue(CurrencyManager.shared.formatAmount(estimatedPrice))
                     }
-
-                    if isBudgetInvalid {
-                        Text("Max darf nicht kleiner als Min sein")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                            .accessibilityLabel("Fehler: Ungültiges Budget")
-                    }
+                    .padding(.vertical, 4)
                 }
 
                 Section("Tags") {
@@ -202,7 +140,7 @@ struct AddGiftIdeaSheet: View {
                     if let error = tagsValidation {
                         Text(error.errorDescription ?? "")
                             .font(.caption)
-                            .foregroundColor(.red)
+                            .foregroundStyle(.red)
                             .accessibilityLabel("Fehler: \(error.errorDescription ?? "")")
                     }
                 }
@@ -246,6 +184,7 @@ struct AddGiftIdeaSheet: View {
                 }
             }
         }
+        .presentationDragIndicator(.visible)
         .alert("Eingabe prüfen", isPresented: $showingValidationError) {
             Button("OK", role: .cancel) { }
         } message: {
@@ -261,15 +200,12 @@ struct AddGiftIdeaSheet: View {
 
         let linkValue = linkValidation.isValid ? linkValidation.sanitized : link.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        let minBudget = useSlider ? budgetMinSlider : (Double(budgetMin) ?? 0)
-        let maxBudget = useSlider ? budgetMaxSlider : (Double(budgetMax) ?? 0)
-
         let idea = GiftIdea(
             personId: person.id,
             title: title,
             note: note,
-            budgetMin: minBudget,
-            budgetMax: maxBudget,
+            budgetMin: estimatedPrice,
+            budgetMax: estimatedPrice,
             link: linkValue,
             status: status,
             tags: tags

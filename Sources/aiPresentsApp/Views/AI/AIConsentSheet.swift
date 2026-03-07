@@ -15,11 +15,11 @@ struct AIConsentSheet: View {
                     VStack(spacing: 12) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 16)
-                                .fill(Color.purple.opacity(0.15))
+                                .fill(AppColor.secondary.opacity(0.15))
                                 .frame(width: 64, height: 64)
                             Image(systemName: "sparkles")
                                 .font(.system(size: 28, weight: .semibold))
-                                .foregroundColor(.purple)
+                                .foregroundStyle(AppColor.secondary)
                         }
 
                         VStack(spacing: 4) {
@@ -27,7 +27,7 @@ struct AIConsentSheet: View {
                                 .font(.title2.bold())
                             Text("Datenverarbeitung durch Dritte")
                                 .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(.secondary)
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -78,7 +78,7 @@ struct AIConsentSheet: View {
                                     .font(.subheadline.bold())
                                 Text("Leitet Anfragen weiter an")
                                     .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .foregroundStyle(.secondary)
                             }
 
                             VStack(alignment: .leading, spacing: 4) {
@@ -86,19 +86,19 @@ struct AIConsentSheet: View {
                                     .font(.subheadline.bold())
                                 Text("Verarbeitet die KI-Anfragen")
                                     .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .foregroundStyle(.secondary)
                             }
 
                             Divider()
 
                             HStack(alignment: .top, spacing: 8) {
                                 Image(systemName: "globe")
-                                    .foregroundColor(.secondary)
+                                    .foregroundStyle(.secondary)
                                     .font(.caption)
                                     .padding(.top, 2)
                                 Text("Datenübertragung in die USA. Rechtsgrundlage: Standardvertragsklauseln gemäß Art. 46 DSGVO. Server-Standort: USA.")
                                     .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .foregroundStyle(.secondary)
                             }
                         }
                     }
@@ -106,7 +106,7 @@ struct AIConsentSheet: View {
                     // Rechtsgrundlage
                     ConsentSection(
                         icon: "doc.text.fill",
-                        iconColor: .purple,
+                        iconColor: AppColor.secondary,
                         title: "Rechtsgrundlage"
                     ) {
                         VStack(alignment: .leading, spacing: 8) {
@@ -114,10 +114,10 @@ struct AIConsentSheet: View {
                                 .font(.subheadline.bold())
                             Text("Deine Einwilligung ist freiwillig. Die App funktioniert auch ohne KI-Features.")
                                 .font(.caption)
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(.secondary)
                             Text("Widerruf jederzeit möglich: Einstellungen → KI-Assistent → \"Widerrufen\"")
                                 .font(.caption)
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(.secondary)
                         }
                     }
 
@@ -132,7 +132,7 @@ struct AIConsentSheet: View {
                                 .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
-                        .tint(.purple)
+                        .tint(AppColor.secondary)
                         .controlSize(.large)
 
                         Button {
@@ -140,7 +140,7 @@ struct AIConsentSheet: View {
                         } label: {
                             Text("Ablehnen")
                                 .frame(maxWidth: .infinity)
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(.secondary)
                         }
                         .buttonStyle(.plain)
                     }
@@ -158,6 +158,7 @@ struct AIConsentSheet: View {
                 }
             }
         }
+        .presentationDragIndicator(.visible)
     }
 }
 
@@ -173,7 +174,7 @@ private struct ConsentSection<Content: View>: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 10) {
                 Image(systemName: icon)
-                    .foregroundColor(iconColor)
+                    .foregroundStyle(iconColor)
                     .font(.system(size: 16, weight: .semibold))
                     .frame(width: 24)
                 Text(title)
@@ -195,13 +196,13 @@ private struct ConsentDataRow: View {
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
             Image(systemName: icon)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .font(.caption)
                 .frame(width: 16)
                 .padding(.top, 2)
             Text(text)
                 .font(.subheadline)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
         }
     }
 }

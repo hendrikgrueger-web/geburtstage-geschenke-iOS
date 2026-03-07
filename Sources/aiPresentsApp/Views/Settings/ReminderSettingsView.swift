@@ -37,7 +37,7 @@ struct ReminderSettingsView: View {
                 ForEach([30, 14, 7, 2], id: \.self) { day in
                     HStack {
                         Text(dayText(for: day))
-                            .foregroundColor(AppColor.textPrimary)
+                            .foregroundStyle(AppColor.textPrimary)
 
                         Spacer()
 
@@ -64,7 +64,7 @@ struct ReminderSettingsView: View {
             } footer: {
                 if leadDays.isEmpty {
                     Text("⚠️ Keine Vorwarnungen ausgewählt. Du wirst nicht erinnert.")
-                        .foregroundColor(.orange)
+                        .foregroundStyle(AppColor.accent)
                 } else {
                     Text("Du wirst \(leadDays.count)-mal erinnert: \(sortedLeadDays.map { "\($0)T" }.joined(separator: ", ")) vor dem Geburtstag.")
                 }
@@ -74,11 +74,11 @@ struct ReminderSettingsView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Zeitraum ohne Benachrichtigungen")
                         .font(.caption)
-                        .foregroundColor(AppColor.textSecondary)
+                        .foregroundStyle(AppColor.textSecondary)
 
                     HStack {
                         Text("Ab")
-                            .foregroundColor(AppColor.textSecondary)
+                            .foregroundStyle(AppColor.textSecondary)
 
                         Picker("", selection: $quietHoursStart) {
                             ForEach(0..<24) { hour in
@@ -91,7 +91,7 @@ struct ReminderSettingsView: View {
                         Spacer()
 
                         Text("Bis")
-                            .foregroundColor(AppColor.textSecondary)
+                            .foregroundStyle(AppColor.textSecondary)
 
                         Picker("", selection: $quietHoursEnd) {
                             ForEach(0..<24) { hour in
@@ -107,7 +107,7 @@ struct ReminderSettingsView: View {
             } footer: {
                 if quietHoursStart == quietHoursEnd {
                     Text("⚠️ Beginn und Ende können nicht identisch sein.")
-                        .foregroundColor(.red)
+                        .foregroundStyle(AppColor.danger)
                 } else {
                     let quietRange = quietHoursRange
                     Text("Keine Benachrichtigungen zwischen \(quietRange.start) und \(quietRange.end).")
@@ -121,14 +121,14 @@ struct ReminderSettingsView: View {
                             .font(.headline)
                         Text("Erinnerungen werden automatisch mit iOS-Benachrichtigungen erstellt.")
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
 
                     Spacer()
 
                     Image(systemName: "bell.badge")
                         .font(.title2)
-                        .foregroundColor(AppColor.primary)
+                        .foregroundStyle(AppColor.primary)
                 }
             }
         }
@@ -145,7 +145,7 @@ struct ReminderSettingsView: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button("Speichern") {
                     if quietHoursStart != quietHoursEnd {
                         saveSettings()

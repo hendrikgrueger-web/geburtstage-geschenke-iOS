@@ -71,14 +71,14 @@ struct SettingsView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Nächster Geburtstag")
                                     .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .foregroundStyle(.secondary)
 
                                 Text(next.person.displayName)
                                     .font(.headline)
 
                                 Text(birthdayText(for: daysUntil(from: next.date)))
                                     .font(.subheadline)
-                                    .foregroundColor(daysUntil(from: next.date) <= 7 ? .orange : .secondary)
+                                    .foregroundStyle(daysUntil(from: next.date) <= 7 ? AppColor.accent : Color.secondary)
                             }
 
                             Spacer()
@@ -96,25 +96,15 @@ struct SettingsView: View {
                         Text("Version")
                         Spacer()
                         Text("\(appVersion) (\(buildNumber))")
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
 
                     Button(action: openAbout) {
-                        HStack {
-                            Text("Über die App")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.secondary)
-                        }
+                        Text("Über die App")
                     }
 
                     Button(action: openFeedback) {
-                        HStack {
-                            Text("Feedback senden")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.secondary)
-                        }
+                        Text("Feedback senden")
                     }
 
                     #if DEBUG
@@ -156,7 +146,7 @@ struct SettingsView: View {
                                 }
 
                                 Text("Erinnerungen neu laden")
-                                    .foregroundColor(.primary)
+                                    .foregroundStyle(.primary)
 
                                 Spacer()
                             }
@@ -172,7 +162,7 @@ struct SettingsView: View {
                             Text("iCloud Sync")
                             Text(iCloudSyncEnabled ? String(localized: "Aktiv") : String(localized: "Nur lokal"))
                                 .font(.caption)
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(.secondary)
                         }
                     }
                     .onChange(of: iCloudSyncEnabled) { _, _ in
@@ -192,29 +182,50 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    NavigationLink {
+                        CurrencyPickerView()
+                    } label: {
+                        HStack {
+                            Text("Währung")
+                            Spacer()
+                            Text(CurrencyManager.shared.effectiveCurrencyCode)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                } header: {
+                    Text("Darstellung")
+                } footer: {
+                    if CurrencyManager.shared.isAutomatic {
+                        Text("Wird automatisch aus deiner Geräteregion ermittelt.")
+                    } else {
+                        Text("Manuell auf \(CurrencyManager.shared.currencyName) eingestellt.")
+                    }
+                }
+
+                Section {
                     Toggle("KI-Vorschläge aktiviert", isOn: $consentManager.aiEnabled)
                         .disabled(!consentManager.consentGiven)
 
                     if consentManager.consentGiven {
                         HStack {
                             Label("Einwilligung erteilt", systemImage: "checkmark.shield.fill")
-                                .foregroundColor(.green)
+                                .foregroundStyle(AppColor.success)
                             Spacer()
                             Button("Widerrufen") {
                                 showingRevokeConsentConfirmation = true
                             }
-                            .foregroundColor(.red)
+                            .foregroundStyle(AppColor.danger)
                             .font(.subheadline)
                         }
                     } else {
                         Label("Keine Einwilligung erteilt", systemImage: "shield.slash")
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
 
                     if !AIService.isAPIKeyConfigured {
                         Label("API-Key nicht konfiguriert", systemImage: "key.slash")
                             .font(.caption)
-                            .foregroundColor(.orange)
+                            .foregroundStyle(AppColor.accent)
                     }
                 } header: {
                     Text("KI-Assistent")
@@ -289,6 +300,7 @@ struct SettingsView: View {
         .toast(item: $toast)
         .sheet(isPresented: $showingAbout) {
             aboutSheet
+                .presentationDragIndicator(.visible)
         }
     }
 
@@ -300,7 +312,7 @@ struct SettingsView: View {
                         Text("Version")
                         Spacer()
                         Text("\(appVersion) (Build \(buildNumber))")
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
 
@@ -309,7 +321,7 @@ struct SettingsView: View {
                     Eine private iOS App zum Verwalten von Geburtstagen und Geschenkideen.
                     """)
                     .font(.body)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                 } header: {
                     Text("Über die App")
                 }
@@ -336,7 +348,7 @@ struct SettingsView: View {
                             Text("GitHub")
                             Spacer()
                             Image(systemName: "arrow.up.right")
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }
@@ -344,7 +356,7 @@ struct SettingsView: View {
             .navigationTitle("Über ai-presents-app")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("Fertig") {
                         showingAbout = false
                     }

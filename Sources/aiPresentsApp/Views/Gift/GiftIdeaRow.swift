@@ -21,7 +21,7 @@ struct GiftIdeaRow: View {
                     Link(destination: url) {
                         Image(systemName: "link.circle.fill")
                             .font(.caption)
-                            .foregroundColor(AppColor.primary)
+                            .foregroundStyle(AppColor.primary)
                     }
                 }
 
@@ -31,7 +31,7 @@ struct GiftIdeaRow: View {
             if !idea.note.isEmpty {
                 Text(idea.note)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .lineLimit(2)
             }
 
@@ -39,7 +39,7 @@ struct GiftIdeaRow: View {
                 HStack {
                     Text(budgetString)
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
 
                     Spacer()
 
@@ -84,8 +84,8 @@ struct GiftIdeaRow: View {
         .padding(.horizontal, 6)
         .padding(.vertical, 2)
         .background(idea.status.color.opacity(0.2))
-        .foregroundColor(idea.status.color)
-        .cornerRadius(4)
+        .foregroundStyle(idea.status.color)
+        .clipShape(.rect(cornerRadius: 4))
     }
 
     private var statusText: String {
@@ -97,23 +97,8 @@ struct GiftIdeaRow: View {
         }
     }
 
-    private var statusColor: Color {
-        switch idea.status {
-        case .idea: return .blue
-        case .planned: return .orange
-        case .purchased: return .green
-        case .given: return .gray
-        }
-    }
-
     private var budgetString: String {
-        if idea.budgetMin == idea.budgetMax {
-            return String(localized: "\(Int(idea.budgetMin)) €")
-        } else if idea.budgetMin == 0 {
-            return String(localized: "bis \(Int(idea.budgetMax)) €")
-        } else {
-            return String(localized: "\(Int(idea.budgetMin)) - \(Int(idea.budgetMax)) €")
-        }
+        return CurrencyManager.shared.formatBudgetRange(min: idea.budgetMin, max: idea.budgetMax)
     }
 
     private var budgetBar: some View {
@@ -130,7 +115,7 @@ struct GiftIdeaRow: View {
                     .fill(budgetGradient)
                     .frame(width: geometry.size.width - 4)
                     .frame(height: 6)
-                    .cornerRadius(2)
+                    .clipShape(.rect(cornerRadius: 2))
 
                 // Max marker
                 Rectangle()
@@ -162,8 +147,8 @@ struct GiftIdeaRow: View {
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
                         .background(tagColor(for: index))
-                        .foregroundColor(tagTextColor(for: index))
-                        .cornerRadius(4)
+                        .foregroundStyle(tagTextColor(for: index))
+                        .clipShape(.rect(cornerRadius: 4))
                 }
             }
         }

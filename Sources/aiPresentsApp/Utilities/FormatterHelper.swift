@@ -26,18 +26,6 @@ struct FormatterHelper {
         return f
     }()
 
-    /// Number formatter for currency (Euro)
-    static let currencyFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencyCode = "EUR"
-        formatter.currencySymbol = "€"
-        formatter.locale = .current
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 0
-        return formatter
-    }()
-
     /// Number formatter for budget ranges
     static let budgetFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -111,21 +99,16 @@ struct FormatterHelper {
 
     // MARK: - Number/Currency Formatting
 
-    /// Formats a number as currency (Euro)
+    /// Formats a number as currency using the active currency from CurrencyManager
+    @MainActor
     static func formatCurrency(_ amount: Double) -> String {
-        return currencyFormatter.string(from: NSNumber(value: amount)) ?? "0€"
+        CurrencyManager.shared.formatAmount(amount)
     }
 
-    /// Formats a budget range
+    /// Formats a budget range using the active currency from CurrencyManager
+    @MainActor
     static func formatBudget(min: Double, max: Double) -> String {
-        if min == max {
-            return formatCurrency(min)
-        } else if min == 0 {
-            let maxFormatted = formatCurrency(max)
-            return String(localized: "bis \(maxFormatted)")
-        } else {
-            return "\(formatCurrency(min)) - \(formatCurrency(max))"
-        }
+        CurrencyManager.shared.formatBudgetRange(min: min, max: max)
     }
 
     /// Formats a number for display

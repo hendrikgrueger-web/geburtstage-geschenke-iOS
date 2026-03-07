@@ -85,8 +85,8 @@ struct AIGiftSuggestionsSheet: View {
             .navigationTitle("KI-Geschenk-Ideen")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Schließen") {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Fertig") {
                         dismiss()
                     }
                 }
@@ -98,7 +98,8 @@ struct AIGiftSuggestionsSheet: View {
                     prefillNote: suggestion.reason
                 )
             }
-            }
+        }
+        .presentationDragIndicator(.visible)
     }
 
     private var personDetailsCard: some View {
@@ -108,18 +109,18 @@ struct AIGiftSuggestionsSheet: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(person.displayName)
                     .font(.headline)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(person.relation)
                     .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
 
                 if !filteredGiftHistory.isEmpty {
                     Text(filteredGiftHistory.count == 1
                          ? String(localized: "\(filteredGiftHistory.count) vergangenes Geschenk")
                          : String(localized: "\(filteredGiftHistory.count) vergangene Geschenke"))
                         .font(.caption)
-                        .foregroundColor(AppColor.textTertiary)
+                        .foregroundStyle(AppColor.textTertiary)
                 }
             }
 
@@ -137,11 +138,11 @@ struct AIGiftSuggestionsSheet: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("KI-Qualität")
                             .font(.headline)
-                            .foregroundColor(AppColor.textPrimary)
+                            .foregroundStyle(AppColor.textPrimary)
 
                         Text(personMetrics.ratingText)
                             .font(.subheadline)
-                            .foregroundColor(AppColor.accent)
+                            .foregroundStyle(AppColor.accent)
                     }
 
                     Spacer()
@@ -151,7 +152,7 @@ struct AIGiftSuggestionsSheet: View {
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(AppColor.primary.opacity(0.1))
-                        .foregroundColor(AppColor.primary)
+                        .foregroundStyle(AppColor.primary)
                         .clipShape(.rect(cornerRadius: 8))
                 }
 
@@ -161,20 +162,20 @@ struct AIGiftSuggestionsSheet: View {
                             Text("\(personMetrics.positiveFeedback)")
                                 .font(.title3)
                                 .fontWeight(.bold)
-                                .foregroundColor(.green)
+                                .foregroundStyle(.green)
                             Text("Positiv")
                                 .font(.caption)
-                                .foregroundColor(AppColor.textSecondary)
+                                .foregroundStyle(AppColor.textSecondary)
                         }
 
                         VStack(alignment: .leading) {
                             Text("\(personMetrics.negativeFeedback)")
                                 .font(.title3)
                                 .fontWeight(.bold)
-                                .foregroundColor(.red)
+                                .foregroundStyle(.red)
                             Text("Negativ")
                                 .font(.caption)
-                                .foregroundColor(AppColor.textSecondary)
+                                .foregroundStyle(AppColor.textSecondary)
                         }
 
                         Spacer()
@@ -183,10 +184,10 @@ struct AIGiftSuggestionsSheet: View {
                             Text(String(format: "%.0f%%", personMetrics.positivityRate * 100))
                                 .font(.title3)
                                 .fontWeight(.bold)
-                                .foregroundColor(AppColor.primary)
+                                .foregroundStyle(AppColor.primary)
                             Text("Akzeptanz")
                                 .font(.caption)
-                                .foregroundColor(AppColor.textSecondary)
+                                .foregroundStyle(AppColor.textSecondary)
                         }
                     }
                     .padding(.vertical, 8)
@@ -198,7 +199,7 @@ struct AIGiftSuggestionsSheet: View {
         } footer: {
             Text("Dein Feedback hilft, die KI-Vorschläge zu verbessern.")
                 .font(.caption)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
         }
     }
 
@@ -210,7 +211,7 @@ struct AIGiftSuggestionsSheet: View {
 
                 Text("KI denkt nach…")
                     .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.vertical, 24)
@@ -222,15 +223,15 @@ struct AIGiftSuggestionsSheet: View {
             VStack(spacing: 16) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: 50))
-                    .foregroundColor(.orange)
+                    .foregroundStyle(.orange)
 
                 Text("Fehler")
                     .font(.headline)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(error)
                     .font(.subheadline)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
                     .multilineTextAlignment(.center)
 
                 Button("Erneut versuchen") {
@@ -253,15 +254,15 @@ struct AIGiftSuggestionsSheet: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Image(systemName: "lightbulb.fill")
                         .font(.system(size: 40))
-                        .foregroundColor(AppColor.textSecondary.opacity(0.4))
+                        .foregroundStyle(AppColor.textSecondary.opacity(0.4))
 
                     Text("Keine neuen Vorschläge")
                         .font(.headline)
-                        .foregroundColor(AppColor.textPrimary)
+                        .foregroundStyle(AppColor.textPrimary)
 
                     Text("Alle Vorschläge existieren bereits als Geschenkideen.")
                         .font(.subheadline)
-                        .foregroundColor(AppColor.textSecondary)
+                        .foregroundStyle(AppColor.textSecondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()
@@ -282,10 +283,10 @@ struct AIGiftSuggestionsSheet: View {
                         } else {
                             HStack {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
+                                    .foregroundStyle(.green)
                                 Text("Feedback gespeichert")
                                     .font(.caption)
-                                    .foregroundColor(AppColor.textSecondary)
+                                    .foregroundStyle(AppColor.textSecondary)
                                 Spacer()
                             }
                             .padding(.top, 8)
@@ -333,7 +334,7 @@ struct AIGiftSuggestionsSheet: View {
                 Text("\(suggestions.count)/30 Vorschläge generiert")
             }
             .font(.caption)
-            .foregroundColor(AppColor.textSecondary)
+            .foregroundStyle(AppColor.textSecondary)
         }
     }
 
@@ -342,18 +343,18 @@ struct AIGiftSuggestionsSheet: View {
             HStack {
                 Text(suggestion.title)
                     .font(.headline)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Spacer()
 
                 Image(systemName: "arrow.right.circle.fill")
                     .font(.title3)
-                    .foregroundColor(AppColor.primary)
+                    .foregroundStyle(AppColor.primary)
             }
 
             Text(suggestion.reason)
                 .font(.subheadline)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
                 .lineLimit(3)
         }
         .padding(.vertical, 4)
@@ -385,20 +386,20 @@ struct AIGiftSuggestionsSheet: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 4) {
                     Image(systemName: "cloud.fill")
-                        .foregroundColor(.blue)
+                        .foregroundStyle(AppColor.primary)
                     Text("Cloud-KI via OpenRouter · Daten werden verschlüsselt übertragen.")
-                        .foregroundColor(.blue)
+                        .foregroundStyle(AppColor.primary)
                 }
 
                 if !filteredGiftHistory.isEmpty {
                     Text(filteredGiftHistory.count == 1
                          ? String(localized: "Basiert auf \(filteredGiftHistory.count) vergangenen Geschenk.")
                          : String(localized: "Basiert auf \(filteredGiftHistory.count) vergangenen Geschenken."))
-                        .foregroundColor(AppColor.accent)
+                        .foregroundStyle(AppColor.accent)
                 }
             }
             .font(.caption)
-            .foregroundColor(AppColor.textSecondary)
+            .foregroundStyle(AppColor.textSecondary)
         }
     }
 
@@ -406,7 +407,7 @@ struct AIGiftSuggestionsSheet: View {
         if budgetValue == 0 {
             return String(localized: "Egal")
         }
-        return String(localized: "bis \(Int(budgetValue)) €")
+        return String(localized: "bis") + " " + CurrencyManager.shared.formatAmount(budgetValue)
     }
 
     private var generateButton: some View {

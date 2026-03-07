@@ -16,13 +16,7 @@ struct ChatBubbleView: View {
             }
 
             VStack(alignment: message.role == .user ? .trailing : .leading, spacing: 6) {
-                Text(message.content)
-                    .font(.body)
-                    .foregroundColor(message.role == .user ? .white : AppColor.textPrimary)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
-                    .background(bubbleBackground)
-                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                messageBubble
 
                 // Action-Button unter Assistant-Bubble
                 if let action = message.action, action.type == .createGiftIdea {
@@ -49,7 +43,7 @@ struct ChatBubbleView: View {
                                 }
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 8)
-                                .background(Color.purple.opacity(0.08))
+                                .background(AppColor.secondary.opacity(0.08))
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
                             .buttonStyle(.plain)
@@ -71,19 +65,36 @@ struct ChatBubbleView: View {
 
     // MARK: - Subviews
 
-    private var assistantAvatar: some View {
-        ZStack {
-            Circle()
-                .fill(Color.purple.opacity(0.15))
-                .frame(width: 32, height: 32)
-            Image(systemName: "sparkles")
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(.purple)
+    /// Nachrichten-Bubble: User = Liquid Glass (iOS 26), Assistant = System-Hintergrund
+    @ViewBuilder
+    private var messageBubble: some View {
+        if message.role == .user {
+            Text(message.content)
+                .font(.body)
+                .foregroundStyle(AppColor.primary)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 18))
+        } else {
+            Text(message.content)
+                .font(.body)
+                .foregroundStyle(AppColor.textPrimary)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .background(Color(.secondarySystemGroupedBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 18))
         }
     }
 
-    private var bubbleBackground: Color {
-        message.role == .user ? AppColor.primary : Color(.secondarySystemGroupedBackground)
+    private var assistantAvatar: some View {
+        ZStack {
+            Circle()
+                .fill(AppColor.secondary.opacity(0.15))
+                .frame(width: 32, height: 32)
+            Image(systemName: "sparkles")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(AppColor.secondary)
+        }
     }
 
     private func actionButton(action: ChatAction) -> some View {
@@ -98,8 +109,8 @@ struct ChatBubbleView: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .background(Color.purple.opacity(0.12))
-            .foregroundColor(.purple)
+            .background(AppColor.secondary.opacity(0.12))
+            .foregroundStyle(AppColor.secondary)
             .clipShape(Capsule())
         }
         .buttonStyle(.plain)
@@ -137,11 +148,11 @@ struct TypingIndicatorView: View {
         HStack(alignment: .top, spacing: 8) {
             ZStack {
                 Circle()
-                    .fill(Color.purple.opacity(0.15))
+                    .fill(AppColor.secondary.opacity(0.15))
                     .frame(width: 32, height: 32)
                 Image(systemName: "sparkles")
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.purple)
+                    .foregroundStyle(AppColor.secondary)
             }
 
             HStack(spacing: 4) {

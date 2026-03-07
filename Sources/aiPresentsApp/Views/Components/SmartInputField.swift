@@ -44,7 +44,7 @@ struct SmartInputField: View {
     }
 
     private var iconColor: Color? {
-        guard let icon = icon else { return nil }
+        guard icon != nil else { return nil }
 
         if validationResult.isValid {
             return .green
@@ -159,7 +159,7 @@ struct SmartInputField: View {
             }
 
             // Character count for text fields
-            if keyboardType == .default && !isSecure, let validator = validator {
+            if keyboardType == .default && !isSecure, validator != nil {
                 characterCountView
             }
         }
@@ -189,7 +189,7 @@ struct SmartInputField: View {
     private func handleTextChange(_ newValue: String) {
         // Debounced validation
         debouncer.debounce {
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 debouncedText = newValue
                 validateImmediate()
             }
@@ -242,7 +242,7 @@ extension SmartInputField {
             validator: { value in
                 // Auto-normalize URL on focus loss
                 if let url = URL(string: value), url.scheme == nil, !value.isEmpty {
-                    DispatchQueue.main.async {
+                    Task { @MainActor in
                         text.wrappedValue = "https://" + value
                     }
                 }

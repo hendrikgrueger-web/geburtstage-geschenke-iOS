@@ -24,11 +24,11 @@ struct BirthdayRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(person.displayName)
                     .font(.headline)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(birthdayInfo)
                     .font(.subheadline)
-                    .foregroundColor(birthdayTextColor)
+                    .foregroundStyle(birthdayTextColor)
 
                 // Progress bar for birthdays < 30 days away
                 if daysUntilBirthday <= 30 && daysUntilBirthday >= 0 {
@@ -52,10 +52,6 @@ struct BirthdayRow: View {
         .accessibilityLabel(accessibilityLabel)
         .accessibilityHint(String(localized: "Tap für Details und Geschenkideen"))
         .contentShape(Rectangle())
-        .onTapGesture {
-            HapticFeedback.light()
-            onTap?()
-        }
         .onAppear {
             if daysUntilBirthday <= 7 {
                 isAnimating = true
@@ -72,9 +68,9 @@ struct BirthdayRow: View {
         } else if hasGiftWithStatus(.purchased) || hasGiftWithStatus(.given) {
             statusPill(icon: "checkmark", color: AppColor.success)
         } else if hasGiftWithStatus(.planned) {
-            statusPill(text: String(localized: "Geplant"), color: .blue)
+            statusPill(text: String(localized: "Geplant"), color: AppColor.primary)
         } else if ideaCount > 0 {
-            statusPill(text: String(localized: "\(ideaCount) Ideen"), color: AppColor.accent)
+            statusPill(text: ideaCount == 1 ? String(localized: "1 Idee") : String(localized: "\(ideaCount) Ideen"), color: AppColor.accent)
         }
     }
 
@@ -84,13 +80,13 @@ struct BirthdayRow: View {
                 Image(systemName: icon)
                     .font(.caption2)
                     .fontWeight(.bold)
-                    .foregroundColor(color)
+                    .foregroundStyle(color)
             }
             if let text = text {
                 Text(text)
                     .font(.caption)
                     .fontWeight(.semibold)
-                    .foregroundColor(color)
+                    .foregroundStyle(color)
             }
         }
         .padding(.horizontal, 8)
@@ -137,9 +133,7 @@ struct BirthdayRow: View {
     }
 
     private var progressColor: Color {
-        if daysUntilBirthday <= 2 {
-            return AppColor.birthdaySoon
-        } else if daysUntilBirthday <= 7 {
+        if daysUntilBirthday <= 7 {
             return AppColor.birthdaySoon
         } else if daysUntilBirthday <= 14 {
             return AppColor.secondary
@@ -150,13 +144,14 @@ struct BirthdayRow: View {
 
     private var accessibilityLabel: String {
         let today = Calendar.current.startOfDay(for: Date())
-        guard let age = BirthdayCalculator.age(for: person.birthday, on: today),
-              let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
+        guard let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
             return person.displayName
         }
 
         var label = "\(person.displayName), "
-        label += String(localized: "\(age) Jahre alt. ")
+        if person.birthYearKnown, let age = BirthdayCalculator.age(for: person.birthday, on: today) {
+            label += String(localized: "\(age) Jahre alt. ")
+        }
 
         if person.skipGift {
             label += String(localized: "Kein Geschenk nötig. ")
@@ -175,23 +170,42 @@ struct BirthdayRow: View {
 
     private var birthdayInfo: String {
         let today = Calendar.current.startOfDay(for: Date())
-        guard let age = BirthdayCalculator.age(for: person.birthday, on: today),
-              let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
+        guard let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
             return ""
         }
 
-        if daysUntil == 0 {
-            return "🎉 " + String(localized: "Heute wird \(age)!")
-        } else if daysUntil == 1 {
-            return String(localized: "Morgen wird \(age)")
-        } else if daysUntil == 365 {
-            return String(localized: "Nächstes Jahr wird \(age + 1)")
-        } else if daysUntil < 7 {
-            return String(localized: "In \(daysUntil) Tagen wird \(age)")
-        } else if daysUntil < 30 {
-            return String(localized: "\(daysUntil) Tage bis zum \(age). Geburtstag")
+        // age ist das aktuelle Alter VOR dem nächsten Geburtstag → +1 für das kommende Alter
+        let nextAge: Int? = if let age = person.birthYearKnown ? BirthdayCalculator.age(for: person.birthday, on: today) : nil {
+            age + 1
         } else {
-            return String(localized: "Wird \(age) (\(daysUntil) Tage)")
+            nil
+        }
+
+        if daysUntil == 0 {
+            if let nextAge {
+                return "🎉 " + String(localized: "Heute wird \(nextAge)!")
+            }
+            return "🎉 " + String(localized: "Heute Geburtstag!")
+        } else if daysUntil == 1 {
+            if let nextAge {
+                return String(localized: "Morgen wird \(nextAge)")
+            }
+            return String(localized: "Morgen Geburtstag")
+        } else if daysUntil < 7 {
+            if let nextAge {
+                return String(localized: "In \(daysUntil) Tagen wird \(nextAge)")
+            }
+            return String(localized: "In \(daysUntil) Tagen")
+        } else if daysUntil < 30 {
+            if let nextAge {
+                return String(localized: "\(daysUntil) Tage bis zum \(nextAge). Geburtstag")
+            }
+            return String(localized: "In \(daysUntil) Tagen")
+        } else {
+            if let nextAge {
+                return String(localized: "Wird \(nextAge) (\(daysUntil) Tage)")
+            }
+            return String(localized: "In \(daysUntil) Tagen")
         }
     }
 

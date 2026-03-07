@@ -10,8 +10,7 @@ struct EditGiftIdeaSheet: View {
 
     @State private var title: String
     @State private var note: String
-    @State private var budgetMin: String
-    @State private var budgetMax: String
+    @State private var estimatedPrice: Double
     @State private var link: String
     @State private var tagsInput: String
     @State private var status: GiftStatus
@@ -23,16 +22,11 @@ struct EditGiftIdeaSheet: View {
         self._idea = Bindable(idea)
         self._title = State(initialValue: idea.title)
         self._note = State(initialValue: idea.note)
-        self._budgetMin = State(initialValue: idea.budgetMin == 0 ? "" : "\(idea.budgetMin)")
-        self._budgetMax = State(initialValue: idea.budgetMax == 0 ? "" : "\(idea.budgetMax)")
+        self._estimatedPrice = State(initialValue: idea.budgetMax > 0 ? idea.budgetMax : idea.budgetMin)
         self._link = State(initialValue: idea.link)
         self._tagsInput = State(initialValue: idea.tags.joined(separator: ", "))
         self._status = State(initialValue: idea.status)
         self._formState = State(initialValue: AppFormState())
-    }
-
-    private var isBudgetInvalid: Bool {
-        FormValidator.validateBudget(minString: budgetMin, maxString: budgetMax) != nil
     }
 
     private var linkValidation: (sanitized: String, isValid: Bool) {
@@ -45,7 +39,6 @@ struct EditGiftIdeaSheet: View {
 
     private var canSave: Bool {
         !title.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !isBudgetInvalid &&
         tagsValidation == nil &&
         linkValidation.isValid
     }
@@ -53,7 +46,6 @@ struct EditGiftIdeaSheet: View {
     private var validationMessages: String {
         var messages: [String] = []
         if title.trimmingCharacters(in: .whitespaces).isEmpty { messages.append(String(localized: "- Titel darf nicht leer sein")) }
-        if isBudgetInvalid { messages.append(String(localized: "- Ungültiges Budget")) }
         if let error = tagsValidation { messages.append("- \(error.errorDescription ?? "")") }
         if !linkValidation.isValid && !link.trimmingCharacters(in: .whitespaces).isEmpty { messages.append(String(localized: "- Ungültige URL")) }
         return messages.joined(separator: "\n")
@@ -73,7 +65,7 @@ struct EditGiftIdeaSheet: View {
                             }
                         }
                     } label: {
-                        Image(systemName: "arrow.up.right.square").foregroundColor(.blue)
+                        Image(systemName: "arrow.up.right.square").foregroundStyle(AppColor.primary)
                     }
                     .accessibilityLabel("Link öffnen")
                 }
@@ -82,18 +74,30 @@ struct EditGiftIdeaSheet: View {
     }
 
     private var budgetSection: some View {
-        Section("Budget") {
-            HStack {
-                Text("Min")
-                TextField("€", text: $budgetMin).keyboardType(.decimalPad)
+        Section {
+            VStack(spacing: 8) {
+                HStack {
+                    Text("Geschätzter Preis")
+                    Spacer()
+                    Text(CurrencyManager.shared.formatAmountOrEmpty(estimatedPrice))
+                        .foregroundStyle(estimatedPrice > 0 ? AppColor.primary : .secondary)
+                        .fontWeight(.semibold)
+                }
+
+                Slider(value: $estimatedPrice,
+                       in: AppConfig.Budget.sliderMinimum...AppConfig.Budget.sliderMaximum,
+                       step: AppConfig.Budget.sliderStep) {
+                    Text("Geschätzter Preis")
+                } minimumValueLabel: {
+                    Text(CurrencyManager.shared.formatAmount(AppConfig.Budget.sliderMinimum)).font(.caption2).foregroundStyle(.secondary)
+                } maximumValueLabel: {
+                    Text(CurrencyManager.shared.formatAmount(AppConfig.Budget.sliderMaximum)).font(.caption2).foregroundStyle(.secondary)
+                }
+                .tint(AppColor.primary)
+                .accessibilityLabel(String(localized: "Geschätzter Preis"))
+                .accessibilityValue(CurrencyManager.shared.formatAmount(estimatedPrice))
             }
-            HStack {
-                Text("Max")
-                TextField("€", text: $budgetMax).keyboardType(.decimalPad).foregroundColor(isBudgetInvalid ? .red : .primary)
-            }
-            if isBudgetInvalid {
-                Text("Max darf nicht kleiner als Min sein").font(.caption).foregroundColor(.red)
-            }
+            .padding(.vertical, 4)
         }
     }
 
@@ -101,7 +105,7 @@ struct EditGiftIdeaSheet: View {
         Section("Tags") {
             TextField("Getrennt durch Kommas", text: $tagsInput).textInputAutocapitalization(.never)
             if let error = tagsValidation {
-                Text(error.errorDescription ?? "").font(.caption).foregroundColor(.red)
+                Text(error.errorDescription ?? "").font(.caption).foregroundStyle(.red)
             }
         }
     }
@@ -153,6 +157,7 @@ struct EditGiftIdeaSheet: View {
                 }
             }
         }
+        .presentationDragIndicator(.visible)
         .alert("Eingabe prüfen", isPresented: $showingValidationError) {
             Button("OK", role: .cancel) { }
         } message: {
@@ -163,8 +168,8 @@ struct EditGiftIdeaSheet: View {
     private func saveGiftIdea() {
         idea.title = title
         idea.note = note
-        idea.budgetMin = Double(budgetMin) ?? 0
-        idea.budgetMax = Double(budgetMax) ?? 0
+        idea.budgetMin = estimatedPrice
+        idea.budgetMax = estimatedPrice
         idea.link = linkValidation.isValid ? linkValidation.sanitized : link.trimmingCharacters(in: .whitespacesAndNewlines)
         idea.status = status
 

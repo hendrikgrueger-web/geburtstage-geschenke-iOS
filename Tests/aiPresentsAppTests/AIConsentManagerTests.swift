@@ -17,16 +17,16 @@ final class AIConsentManagerTests: XCTestCase {
 
     // MARK: - Setup / Teardown
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         resetDefaults()
         // Singleton-State synchronisieren
         AIConsentManager.shared.revokeConsent()
     }
 
-    override func tearDown() {
+    override func tearDown() async throws {
         resetDefaults()
-        super.tearDown()
+        try await super.tearDown()
     }
 
     private func resetDefaults() {

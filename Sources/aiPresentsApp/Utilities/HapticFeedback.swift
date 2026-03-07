@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 enum HapticFeedback {
     static func light() {
         let generator = UIImpactFeedbackGenerator(style: .light)

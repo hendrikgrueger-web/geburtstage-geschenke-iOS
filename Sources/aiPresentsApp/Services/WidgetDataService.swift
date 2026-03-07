@@ -40,7 +40,9 @@ final class WidgetDataService {
 
             let nextBirthday = BirthdayCalculator.nextBirthday(for: person.birthday, from: today)
             let nextAge: Int
-            if let nb = nextBirthday {
+            if !person.birthYearKnown {
+                nextAge = 0
+            } else if let nb = nextBirthday {
                 nextAge = BirthdayCalculator.age(for: person.birthday, on: nb) ?? 0
             } else {
                 nextAge = (BirthdayCalculator.age(for: person.birthday, on: today) ?? 0) + 1
@@ -59,8 +61,8 @@ final class WidgetDataService {
             )
         }
         .sorted { $0.daysUntil < $1.daysUntil }
-        .prefix(10)
-        .map { $0 }
+
+        let topEntries = Array(entries.prefix(10))
 
         // In App Group UserDefaults schreiben
         guard let defaults = UserDefaults(suiteName: Self.appGroupID) else {
@@ -69,9 +71,9 @@ final class WidgetDataService {
         }
 
         do {
-            let data = try JSONEncoder().encode(entries)
+            let data = try JSONEncoder().encode(topEntries)
             defaults.set(data, forKey: Self.userDefaultsKey)
-            AppLogger.data.info("WidgetDataService: \(entries.count) Einträge geschrieben")
+            AppLogger.data.info("WidgetDataService: \(topEntries.count) Einträge geschrieben")
         } catch {
             AppLogger.data.error("WidgetDataService: JSON-Encoding fehlgeschlagen: \(error)")
         }
@@ -90,6 +92,7 @@ final class WidgetDataService {
         do {
             return try JSONDecoder().decode([WidgetBirthdayEntry].self, from: data)
         } catch {
+            AppLogger.data.error("Widget-Daten konnten nicht gelesen werden: \(error)")
             return []
         }
     }

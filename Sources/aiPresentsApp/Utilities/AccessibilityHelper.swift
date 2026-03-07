@@ -26,15 +26,14 @@ struct AccessibilityHelper {
     }
 
     /// Formats budget for accessibility
+    @MainActor
     static func formatBudget(_ min: Double, _ max: Double) -> String {
-        let minStr = "\(Int(min))"
-        let maxStr = "\(Int(max))"
         if min == max {
-            return minStr + " " + String(localized: "Euro")
+            return CurrencyManager.shared.formatAmount(min)
         } else if min == 0 {
-            return String(localized: "bis") + " " + maxStr + " " + String(localized: "Euro")
+            return String(localized: "bis") + " " + CurrencyManager.shared.formatAmount(max)
         } else {
-            return minStr + " " + String(localized: "bis") + " " + maxStr + " " + String(localized: "Euro")
+            return CurrencyManager.shared.formatAmount(min) + " " + String(localized: "bis") + " " + CurrencyManager.shared.formatAmount(max)
         }
     }
 
@@ -62,6 +61,7 @@ struct AccessibilityHelper {
     }
 
     /// Creates a complete accessibility label for a gift idea
+    @MainActor
     static func giftIdeaLabel(_ idea: GiftIdea, includeStatus: Bool = true) -> String {
         var label = idea.title
 
@@ -107,6 +107,7 @@ struct AccessibilityHelper {
     }
 
     /// Creates a complete accessibility label for gift history
+    @MainActor
     static func giftHistoryLabel(_ history: GiftHistory) -> String {
         var label = "\(history.title), " + String(localized: "Jahr:") + " \(history.year)"
         label += ", " + String(localized: "Kategorie:") + " \(history.category)"

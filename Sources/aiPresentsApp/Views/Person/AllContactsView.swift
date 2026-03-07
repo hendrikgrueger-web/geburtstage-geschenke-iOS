@@ -32,7 +32,7 @@ struct AllContactsView: View {
                                         .fontWeight(.medium)
                                     Text(person.relation)
                                         .font(.caption)
-                                        .foregroundColor(.secondary)
+                                        .foregroundStyle(.secondary)
                                 }
                                 Spacer()
                                 let days = BirthdayCalculator.daysUntilBirthday(
@@ -43,11 +43,11 @@ struct AllContactsView: View {
                                     if d == 0 {
                                         Text("Heute 🎉")
                                             .font(.caption)
-                                            .foregroundColor(.orange)
+                                            .foregroundStyle(AppColor.accent)
                                     } else {
                                         Text("in \(d) T.")
                                             .font(.caption)
-                                            .foregroundColor(d <= 7 ? .orange : .secondary)
+                                            .foregroundStyle(d <= 7 ? AppColor.accent : Color.secondary)
                                     }
                                 }
                             }

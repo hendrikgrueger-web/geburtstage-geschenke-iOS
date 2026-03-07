@@ -17,24 +17,24 @@ struct BirthdayCountdownBadge: View {
                     Text(countdownText)
                         .font(.caption)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                 }
             }
 
             if daysUntil > 0 {
                 Text(daysUntil == 1 ? String(localized: "Tag") : String(localized: "Tage"))
                     .font(.caption2)
-                    .foregroundColor(.white.opacity(0.9))
+                    .foregroundStyle(.white.opacity(0.9))
             } else {
                 Text("Heute")
                     .font(.caption2)
-                    .foregroundColor(.white.opacity(0.9))
+                    .foregroundStyle(.white.opacity(0.9))
             }
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .background(badgeGradient)
-        .cornerRadius(14)
+        .clipShape(.rect(cornerRadius: 14))
         .shadow(color: badgeColor.opacity(0.3), radius: 4, x: 0, y: 2)
         .scaleEffect(pulseScale)
         .accessibilityElement(children: .combine)
