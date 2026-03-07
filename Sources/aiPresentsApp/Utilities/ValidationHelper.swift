@@ -396,17 +396,17 @@ struct ValidationErrorView: View {
         if !result.isValid, let errorMessage = result.errorMessage {
             HStack(spacing: 8) {
                 Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundColor(.orange)
+                    .foregroundStyle(AppColor.accent)
                     .font(.caption)
 
                 Text(errorMessage)
                     .font(.caption)
-                    .foregroundColor(.orange)
+                    .foregroundStyle(AppColor.accent)
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
-            .background(Color.orange.opacity(0.1))
-            .cornerRadius(8)
+            .background(AppColor.accent.opacity(0.1))
+            .clipShape(.rect(cornerRadius: 8))
             .transition(.opacity)
         }
     }

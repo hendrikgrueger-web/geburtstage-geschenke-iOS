@@ -130,12 +130,12 @@ struct TimelineFilterView: View {
                                 ? AppColor.primary
                                 : Color(.systemBackground)
                         )
-                        .foregroundColor(
+                        .foregroundStyle(
                             selectedPeriod == period
-                                ? .white
-                                : .primary
+                                ? Color.white
+                                : Color.primary
                         )
-                        .cornerRadius(20)
+                        .clipShape(.rect(cornerRadius: 20))
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(
@@ -168,7 +168,7 @@ struct TimelineFilterView: View {
     private var searchBarView: some View {
         HStack(spacing: 10) {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .font(.body)
 
             if isEditingSearch || !searchText.isEmpty {
@@ -184,7 +184,7 @@ struct TimelineFilterView: View {
                     }
             } else {
                 Text("Suchen...")
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
 
             if !searchText.isEmpty {
@@ -195,14 +195,14 @@ struct TimelineFilterView: View {
                     HapticFeedback.light()
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
             }
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
         .background(Color(.systemBackground))
-        .cornerRadius(10)
+        .clipShape(.rect(cornerRadius: 10))
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray.opacity(0.3), lineWidth: 1)
@@ -222,10 +222,10 @@ struct TimelineFilterView: View {
         } label: {
             Image(systemName: showFavoritesOnly ? "star.fill" : "star")
                 .font(.title3)
-                .foregroundColor(showFavoritesOnly ? .yellow : .secondary)
+                .foregroundStyle(showFavoritesOnly ? Color.yellow : Color.secondary)
                 .frame(width: 44, height: 44)
                 .background(showFavoritesOnly ? Color.yellow.opacity(0.15) : Color(.systemBackground))
-                .cornerRadius(10)
+                .clipShape(.rect(cornerRadius: 10))
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(showFavoritesOnly ? .yellow : Color.gray.opacity(0.3), lineWidth: 1)
@@ -239,11 +239,11 @@ struct TimelineFilterView: View {
         HStack(spacing: 8) {
             Image(systemName: "line.3.horizontal.decrease.circle")
                 .font(.caption)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Text(filterSummary)
                 .font(.caption)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Spacer()
 
@@ -256,7 +256,7 @@ struct TimelineFilterView: View {
                 HapticFeedback.light()
             }
             .font(.caption)
-            .foregroundColor(AppColor.primary)
+            .foregroundStyle(AppColor.primary)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)

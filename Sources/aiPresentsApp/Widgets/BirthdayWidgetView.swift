@@ -39,11 +39,11 @@ struct UpcomingBirthdayHero: View {
                 Text(person.displayName)
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(birthdayInfo(for: person))
                     .font(.caption)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
             }
 
             Spacer()
@@ -57,7 +57,7 @@ struct UpcomingBirthdayHero: View {
                             .font(.caption2)
                             .fontWeight(.medium)
                     }
-                    .foregroundColor(AppColor.accent)
+                    .foregroundStyle(AppColor.accent)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 3)
                     .background(AppColor.accent.opacity(0.12), in: Capsule())
@@ -97,10 +97,10 @@ struct UpcomingBirthdayHero: View {
         VStack(spacing: 8) {
             Image(systemName: "gift")
                 .font(.system(size: 32))
-                .foregroundColor(AppColor.textSecondary.opacity(0.4))
+                .foregroundStyle(AppColor.textSecondary.opacity(0.4))
             Text("Keine Geburtstage")
                 .font(.subheadline)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
         }
         .frame(maxWidth: .infinity)
         .padding()

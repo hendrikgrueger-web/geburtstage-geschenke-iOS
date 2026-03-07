@@ -282,7 +282,7 @@ struct SettingsView: View {
                     resetAllData()
                 }
             } message: {
-                Text("Das löscht alle Kontakte und Geschenkideen. Diese Aktion kann nicht rückgängig gemacht werden.")
+                Text("Alle gespeicherten Daten dieser App werden unwiderruflich gelöscht. Deine Kontakte, Kalendereinträge und andere Apps bleiben vollständig unberührt.")
             }
             .alert("Erinnerungen", isPresented: Binding(
                 get: { refreshAlertMessage != nil },

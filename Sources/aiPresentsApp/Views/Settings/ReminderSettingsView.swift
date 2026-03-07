@@ -147,14 +147,14 @@ struct ReminderSettingsView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Speichern") {
-                    if quietHoursStart != quietHoursEnd {
+                    if quietHoursStart != quietHoursEnd && !leadDays.isEmpty {
                         saveSettings()
                         dismiss()
                     } else {
                         HapticFeedback.warning()
                     }
                 }
-                .disabled(quietHoursStart == quietHoursEnd)
+                .disabled(quietHoursStart == quietHoursEnd || leadDays.isEmpty)
             }
         }
     }

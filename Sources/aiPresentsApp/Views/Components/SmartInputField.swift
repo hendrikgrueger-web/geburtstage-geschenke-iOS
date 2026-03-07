@@ -84,14 +84,14 @@ struct SmartInputField: View {
             Text(title)
                 .font(.caption)
                 .fontWeight(.semibold)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
 
             // Text field with validation
             HStack(spacing: 12) {
                 ZStack(alignment: .leading) {
                     if isSecure || text.isEmpty {
                         Text(placeholder)
-                            .foregroundColor(.gray.opacity(0.5))
+                            .foregroundStyle(.placeholder)
                             .font(.body)
                     }
 
@@ -118,7 +118,7 @@ struct SmartInputField: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
                 .background(Color(.systemBackground))
-                .cornerRadius(10)
+                .clipShape(.rect(cornerRadius: 10))
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(borderColor, lineWidth: isFocused ? 2 : 1)
@@ -132,10 +132,10 @@ struct SmartInputField: View {
                 }
 
                 // Validation icon
-                if let icon = icon {
+                if let icon = icon, let iconColor = iconColor {
                     Image(systemName: icon)
                         .font(.body)
-                        .foregroundColor(iconColor)
+                        .foregroundStyle(iconColor)
                         .symbolEffect(.bounce, options: .repeating, isActive: !validationResult.isValid && isFocused)
                 }
             }
@@ -145,16 +145,16 @@ struct SmartInputField: View {
                 HStack(spacing: 6) {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .font(.caption2)
-                        .foregroundColor(.orange)
+                        .foregroundStyle(AppColor.accent)
 
                     Text(errorMessage)
                         .font(.caption2)
-                        .foregroundColor(.orange)
+                        .foregroundStyle(AppColor.accent)
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(Color.orange.opacity(0.1))
-                .cornerRadius(6)
+                .background(AppColor.accent.opacity(0.1))
+                .clipShape(.rect(cornerRadius: 6))
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
 
@@ -177,10 +177,10 @@ struct SmartInputField: View {
             Spacer()
             Text("\(text.count) Zeichen")
                 .font(.caption2)
-                .foregroundColor(
+                .foregroundStyle(
                     validationResult.errorKey == "maxLength"
-                        ? .orange
-                        : .gray.opacity(0.6)
+                        ? AppColor.accent
+                        : Color.secondary
                 )
         }
     }

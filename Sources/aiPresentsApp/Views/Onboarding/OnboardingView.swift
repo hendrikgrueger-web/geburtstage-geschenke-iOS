@@ -56,7 +56,7 @@ struct OnboardingView: View {
                     } label: {
                         Text(String(localized: "Weiter"))
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(AppColor.primary)
@@ -76,18 +76,18 @@ struct OnboardingView: View {
 
             Image(systemName: "icloud.fill")
                 .font(.system(size: 80))
-                .foregroundColor(.blue)
+                .foregroundStyle(.blue)
 
             VStack(spacing: 16) {
                 Text("iCloud Sync")
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text("Sollen deine Geburtstage und Geschenkideen automatisch auf all deinen Apple-Geräten verfügbar sein?")
                     .font(.body)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
                     .padding(.horizontal)
             }
 
@@ -104,7 +104,7 @@ struct OnboardingView: View {
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.blue)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                     .clipShape(.rect(cornerRadius: 12))
                 }
                 .buttonStyle(.pressable)
@@ -115,14 +115,14 @@ struct OnboardingView: View {
                 } label: {
                     Text("Nur lokal speichern")
                         .font(.subheadline)
-                        .foregroundColor(AppColor.textSecondary)
+                        .foregroundStyle(AppColor.textSecondary)
                 }
             }
             .padding(.horizontal)
 
             Text("Du kannst das jederzeit in den Einstellungen ändern.")
                 .font(.caption)
-                .foregroundColor(AppColor.textTertiary)
+                .foregroundStyle(AppColor.textTertiary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 
@@ -153,19 +153,19 @@ struct OnboardingPageView: View {
 
             Image(systemName: page.icon)
                 .font(.system(size: 80))
-                .foregroundColor(AppColor.primary)
+                .foregroundStyle(AppColor.primary)
 
             VStack(spacing: 16) {
                 Text(page.title)
                     .font(.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(AppColor.textPrimary)
+                    .foregroundStyle(AppColor.textPrimary)
 
                 Text(page.description)
                     .font(.body)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(AppColor.textSecondary)
+                    .foregroundStyle(AppColor.textSecondary)
                     .padding(.horizontal)
             }
 

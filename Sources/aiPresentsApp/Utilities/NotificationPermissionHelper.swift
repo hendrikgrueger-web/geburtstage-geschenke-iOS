@@ -205,7 +205,7 @@ struct NotificationPermissionView: View {
             // Icon
             Image(systemName: helper.statusIcon)
                 .font(.system(size: 60))
-                .foregroundColor(helper.statusColor)
+                .foregroundStyle(helper.statusColor)
 
             // Title and message
             VStack(spacing: 8) {
@@ -215,23 +215,23 @@ struct NotificationPermissionView: View {
 
                 Text(message)
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             }
 
             // Status indicator
             HStack(spacing: 8) {
                 Image(systemName: helper.statusIcon)
-                    .foregroundColor(helper.statusColor)
+                    .foregroundStyle(helper.statusColor)
 
                 Text(helper.statusDescription)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
             .background(Color(.systemGray6))
-            .cornerRadius(8)
+            .clipShape(.rect(cornerRadius: 8))
 
             // Action button
             Button(action: handleAction) {
@@ -247,8 +247,8 @@ struct NotificationPermissionView: View {
             .frame(maxWidth: .infinity)
             .padding()
             .background(AppColor.primary)
-            .foregroundColor(.white)
-            .cornerRadius(12)
+            .foregroundStyle(.white)
+            .clipShape(.rect(cornerRadius: 12))
             .disabled(helper.isLoading)
 
             // Settings link (if denied)
@@ -259,7 +259,7 @@ struct NotificationPermissionView: View {
                 }) {
                     Text("In Einstellungen öffnen")
                         .font(.caption)
-                        .foregroundColor(AppColor.primary)
+                        .foregroundStyle(AppColor.primary)
                 }
             }
         }

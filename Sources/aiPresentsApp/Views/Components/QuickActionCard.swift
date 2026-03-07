@@ -74,12 +74,12 @@ struct QuickActionCard: View {
                     Text(title)
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
 
                     if let subtitle = subtitle {
                         Text(subtitle)
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
 
@@ -89,13 +89,13 @@ struct QuickActionCard: View {
                 if showChevron && action != nil {
                     Image(systemName: "chevron.right")
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
             }
             .padding(16)
             .frame(maxWidth: .infinity)
             .background(style.backgroundColor)
-            .cornerRadius(12)
+            .clipShape(.rect(cornerRadius: 12))
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(style.iconColor.opacity(0.3), lineWidth: 1)
@@ -119,7 +119,7 @@ struct QuickActionCard: View {
 
             Image(systemName: icon)
                 .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(style.iconColor)
+                .foregroundStyle(style.iconColor)
         }
     }
 }
@@ -263,7 +263,7 @@ struct StatCard: View {
             HStack {
                 Image(systemName: icon)
                     .font(.title3)
-                    .foregroundColor(color)
+                    .foregroundStyle(color)
 
                 Spacer()
 
@@ -271,11 +271,11 @@ struct StatCard: View {
                     Text(trend)
                         .font(.caption)
                         .fontWeight(.semibold)
-                        .foregroundColor(.green)
+                        .foregroundStyle(AppColor.success)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(Color.green.opacity(0.15))
-                        .cornerRadius(8)
+                        .background(AppColor.success.opacity(0.15))
+                        .clipShape(.rect(cornerRadius: 8))
                 }
             }
 
@@ -286,19 +286,19 @@ struct StatCard: View {
 
                 Text(title)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
 
             if let subtitle = subtitle {
                 Text(subtitle)
                     .font(.caption2)
-                    .foregroundColor(.secondary.opacity(0.8))
+                    .foregroundStyle(.secondary.opacity(0.8))
             }
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.systemBackground))
-        .cornerRadius(16)
+        .clipShape(.rect(cornerRadius: 16))
         .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(title): \(value)")

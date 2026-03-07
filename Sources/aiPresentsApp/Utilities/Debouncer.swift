@@ -244,7 +244,7 @@ struct DebouncerPreview: View {
                     .font(.caption)
                 Text("Debounced: \(debouncedText)")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                 Text("Results: \(resultCount)")
                     .font(.caption)
             }

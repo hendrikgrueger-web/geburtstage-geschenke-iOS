@@ -464,6 +464,9 @@
         }
       }
     },
+    "Alle gespeicherten Daten dieser App werden unwiderruflich gelöscht. Deine Kontakte, Kalendereinträge und andere Apps bleiben vollständig unberührt." : {
+
+    },
     "Alle Kontakte und Geschenkideen wurden entfernt." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1030,6 +1033,7 @@
       }
     },
     "Das löscht alle Kontakte und Geschenkideen. Diese Aktion kann nicht rückgängig gemacht werden." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1501,6 +1505,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Duplicate"
+          }
+        }
+      }
+    },
+    "Eigene" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom"
+          }
+        }
+      }
+    },
+    "Eigenen Typ hinzufügen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add custom type"
+          }
+        }
+      }
+    },
+    "Eigener Beziehungstyp" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom relationship type"
           }
         }
       }
@@ -2459,6 +2496,17 @@
         }
       }
     },
+    "Gib einen eigenen Beziehungstyp ein, z. B. \"Oma\", \"Onkel\" oder \"Mentor\"." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a custom relationship type, e.g. \"Grandma\", \"Uncle\" or \"Mentor\"."
+          }
+        }
+      }
+    },
     "GitHub" : {
       "localizations" : {
         "en" : {
@@ -2579,6 +2627,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Today!"
+          }
+        }
+      }
+    },
+    "Hinzufügen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
           }
         }
       }
@@ -5095,6 +5154,17 @@
         }
       }
     },
+    "Vorgegeben" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Predefined"
+          }
+        }
+      }
+    },
     "Vorname (aus Kontaktdaten)" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -5438,7 +5508,19 @@
         }
       }
     },
+    "z. B. Oma, Onkel, Mentor" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "e.g. Grandma, Uncle, Mentor"
+          }
+        }
+      }
+    },
     "z.B. Oma, Onkel, Nachbar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

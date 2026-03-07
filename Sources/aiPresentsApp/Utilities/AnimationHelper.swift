@@ -175,7 +175,7 @@ extension View {
             .font(.headline)
             .padding()
             .background(AppColor.cardBackground)
-            .cornerRadius(12)
+            .clipShape(.rect(cornerRadius: 12))
             .shimmer()
     }
     .padding()

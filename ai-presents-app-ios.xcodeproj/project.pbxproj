@@ -107,6 +107,7 @@
 		C9FBE9E01E8E6889EF6DD8A3 /* AIChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596E3CA77753436EF1C30BDD /* AIChatViewModel.swift */; };
 		CB2AE0384DDBD88EB4223BEB /* BirthdayWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 40C06DC4DA1AD65D461067D1 /* BirthdayWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CCA5269B438A26095BB3EBB9 /* WidgetSharedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EA63976AEF36E896DC6F5B /* WidgetSharedTypes.swift */; };
+		CCE878A6908A834DF2CAEDDC /* RelationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADD72AECCB8BD0511F891D /* RelationPickerView.swift */; };
 		CDDEE1E236CA31840130E0F1 /* ModelValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51FAE4D15E483A6BD00D955 /* ModelValidationTests.swift */; };
 		D29BAACE8F45C70867A0BB03 /* RelationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B4A599402C7B306F56FE6 /* RelationOptions.swift */; };
 		D41082B2ED0E32EFDE1354A9 /* DebouncerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063CAB0C081F446D470C7433 /* DebouncerTests.swift */; };
@@ -201,6 +202,7 @@
 		507E0BBB507D60FBD3B50AC0 /* SampleDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataServiceTests.swift; sourceTree = "<group>"; };
 		508247F8818A2793DD521981 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		51B467A880F06011A6CE947A /* BirthdayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayWidget.entitlements; sourceTree = "<group>"; };
+		53ADD72AECCB8BD0511F891D /* RelationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationPickerView.swift; sourceTree = "<group>"; };
 		56B829D839F0FB868391D0FA /* SampleDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataService.swift; sourceTree = "<group>"; };
 		596E3CA77753436EF1C30BDD /* AIChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatViewModel.swift; sourceTree = "<group>"; };
 		5FB7DAD883234BC09E12C476 /* aiPresentsAppTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = aiPresentsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,6 +361,7 @@
 				84458F69E06194AA2FA07A2F /* EmptyStateView.swift */,
 				0F28E31AFE15E5C5BF328E7F /* HobbiesChipView.swift */,
 				D193311408BB3D5C00C5C7D6 /* QuickActionCard.swift */,
+				53ADD72AECCB8BD0511F891D /* RelationPickerView.swift */,
 				C7C1474BF62BF80C2734793F /* SmartInputField.swift */,
 				A3185DD71D459EE21A6A0461 /* SuggestionFeedbackView.swift */,
 				502554517C926AD4B7EF35EE /* TimelineFilterView.swift */,
@@ -816,6 +819,7 @@
 				C801A1B192B9D9FE1FEF75B4 /* PrivacyView.swift in Sources */,
 				BDF4D04C70CB9E87D9F20383 /* QuickActionCard.swift in Sources */,
 				D29BAACE8F45C70867A0BB03 /* RelationOptions.swift in Sources */,
+				CCE878A6908A834DF2CAEDDC /* RelationPickerView.swift in Sources */,
 				6448766B18F8AAA964555537 /* ReminderManager.swift in Sources */,
 				927932D1E34BB9B96838198B /* ReminderRule.swift in Sources */,
 				288B939B5B82311CC9271EB9 /* ReminderSettingsView.swift in Sources */,

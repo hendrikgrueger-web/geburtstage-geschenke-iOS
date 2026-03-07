@@ -91,13 +91,13 @@ struct AIGiftSuggestionsSheet: View {
                     }
                 }
             }
-            .sheet(item: $selectedSuggestion) { suggestion in
-                AddGiftIdeaSheet(
-                    person: person,
-                    prefillTitle: suggestion.title,
-                    prefillNote: suggestion.reason
-                )
-            }
+        }
+        .sheet(item: $selectedSuggestion) { suggestion in
+            AddGiftIdeaSheet(
+                person: person,
+                prefillTitle: suggestion.title,
+                prefillNote: suggestion.reason
+            )
         }
         .presentationDragIndicator(.visible)
     }
@@ -162,7 +162,7 @@ struct AIGiftSuggestionsSheet: View {
                             Text("\(personMetrics.positiveFeedback)")
                                 .font(.title3)
                                 .fontWeight(.bold)
-                                .foregroundStyle(.green)
+                                .foregroundStyle(AppColor.success)
                             Text("Positiv")
                                 .font(.caption)
                                 .foregroundStyle(AppColor.textSecondary)
@@ -172,7 +172,7 @@ struct AIGiftSuggestionsSheet: View {
                             Text("\(personMetrics.negativeFeedback)")
                                 .font(.title3)
                                 .fontWeight(.bold)
-                                .foregroundStyle(.red)
+                                .foregroundStyle(AppColor.danger)
                             Text("Negativ")
                                 .font(.caption)
                                 .foregroundStyle(AppColor.textSecondary)
@@ -223,7 +223,7 @@ struct AIGiftSuggestionsSheet: View {
             VStack(spacing: 16) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: 50))
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(AppColor.accent)
 
                 Text("Fehler")
                     .font(.headline)

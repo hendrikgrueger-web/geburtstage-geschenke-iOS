@@ -37,7 +37,7 @@ struct LaunchScreen: View {
 
                     Image(systemName: "gift.fill")
                         .font(.system(size: 60))
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .scaleEffect(isAnimating ? 1.0 : 0.5)
                         .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.3), value: isAnimating)
 
@@ -46,7 +46,7 @@ struct LaunchScreen: View {
                         ForEach(0..<5, id: \.self) { index in
                             Image(systemName: ["sparkle", "star.fill", "heart.fill"][index % 3])
                                 .font(.system(size: 12))
-                                .foregroundColor(.white.opacity(0.8))
+                                .foregroundStyle(.white.opacity(0.8))
                                 .offset(x: CGFloat.random(in: -50...50), y: CGFloat.random(in: -50...50))
                                 .rotationEffect(.degrees(Double.random(in: 0...360)))
                                 .scaleEffect(isAnimating ? 1.0 : 0)
@@ -63,14 +63,14 @@ struct LaunchScreen: View {
                 VStack(spacing: 8) {
                     Text("AI Präsente")
                         .font(.system(size: 32, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .scaleEffect(isAnimating ? 1.0 : 0.8)
                         .opacity(showText ? 1 : 0)
                         .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.5), value: showText)
 
                     Text("Geburtstage & Geschenkideen")
                         .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.white.opacity(0.8))
+                        .foregroundStyle(.white.opacity(0.8))
                         .scaleEffect(isAnimating ? 1.0 : 0.8)
                         .opacity(showText ? 1 : 0)
                         .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.7), value: showText)

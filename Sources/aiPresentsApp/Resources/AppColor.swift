@@ -1,5 +1,18 @@
 import SwiftUI
 
+/// Zentrale Farb-Token für die gesamte App — Dark-Mode-adaptiv via `UIColor`-Closures.
+///
+/// **Farbsystem:**
+/// - Primär: iOS Blue (light: #007AFF, dark: #0A84FF) — Buttons, Links, Primäre CTAs
+/// - Sekundär: Soft Purple (light: #9966E5, dark: #AF7AFF) — Akzent-Elemente, Secondary CTAs
+/// - Akzent: Warm Orange (light: #FF9400, dark: #FF9F0A) — Warnungen, Highlights
+/// - Status: grün (success), gelb (warning), rot (danger) — für Feedback
+///
+/// **Dark-Mode-Adaption:** Alle dynamischen Farben nutzen `UIColor { trait in ... }` Closures,
+/// die sich zur Laufzeit an das aktuelle Interface-Style anpassen. Verwende die Token-Namen
+/// statt Hex-Werte direkt im Code — so können Farben zentral aktualisiert werden.
+///
+/// **Verwendung:** `AppColor.primary`, `AppColor.gradientBlue.gradient` bei LinearGradient, etc.
 enum AppColor {
     // MARK: - Primary Colors — iOS Blue (dynamisch, Light/Dark Mode)
     static let primary = Color(UIColor { trait in
@@ -129,7 +142,7 @@ enum AppColor {
             return gradientBlue
         case "partner", "ehepartner":
             return LinearGradient(
-                gradient: Gradient(colors: [.pink, .red]),
+                gradient: Gradient(colors: [AppColor.birthdayToday, AppColor.danger]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )

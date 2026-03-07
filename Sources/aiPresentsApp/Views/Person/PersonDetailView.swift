@@ -33,7 +33,6 @@ struct PersonDetailView: View {
     @State private var showingShareSheet = false
     @State private var shareText: String = ""
     @State private var showingEditRelation = false
-    @State private var editedRelation: String = ""
     @State private var showingMarkAllAsGivenConfirmation = false
     @State private var toast: ToastItem?
     @State private var showingAddReceivedGift = false
@@ -41,8 +40,6 @@ struct PersonDetailView: View {
     @State private var editedName: String = ""
     @State private var editedBirthday: Date = Date()
     @State private var editedPersonRelation: String = ""
-    @State private var customRelationText: String = ""
-    @State private var customEditPersonRelationText: String = ""
 
     enum GiftSortOption: String, CaseIterable {
         case status, budget, title, date
@@ -107,7 +104,6 @@ struct PersonDetailView: View {
                         .foregroundStyle(.secondary)
                     Spacer()
                     Button {
-                        editedRelation = person.relation
                         showingEditRelation = true
                         HapticFeedback.light()
                     } label: {
@@ -510,59 +506,23 @@ struct PersonDetailView: View {
                 ShareSheetView(items: [shareText])
             }
         }
-        // Relation-Picker Sheet — Inline-Picker mit Freitext-Option bei "Sonstige"
+        // Relation-Picker Sheet — dedizierter Screen mit eigenen Typen + Swipe-to-Delete
         .sheet(isPresented: $showingEditRelation) {
             NavigationStack {
-                Form {
-                    Section {
-                        Picker("Beziehung", selection: $editedRelation) {
-                            ForEach(RelationOptions.predefined, id: \.self) { option in
-                                Text(option).tag(option)
-                            }
-                        }
-                        .pickerStyle(.inline)
-                        .labelsHidden()
+                RelationPickerView(selectedRelation: Binding(
+                    get: { person.relation },
+                    set: { newValue in
+                        person.relation = newValue
+                        HapticFeedback.success()
+                        triggerWidgetUpdate()
+                        showingEditRelation = false
                     }
-
-                    if editedRelation == "Sonstige" {
-                        Section {
-                            TextField("Beziehung eingeben", text: $customRelationText)
-                                .textInputAutocapitalization(.sentences)
-                        } footer: {
-                            Text("z.B. Oma, Onkel, Nachbar")
-                        }
-                    }
-                }
-                .navigationTitle("Beziehung bearbeiten")
-                .navigationBarTitleDisplayMode(.inline)
+                ))
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button("Abbrechen") {
                             showingEditRelation = false
                         }
-                    }
-
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("Speichern") {
-                            if editedRelation == "Sonstige" {
-                                let trimmed = customRelationText.trimmingCharacters(in: .whitespaces)
-                                person.relation = trimmed.isEmpty ? "Sonstige" : trimmed
-                            } else {
-                                person.relation = editedRelation
-                            }
-                            HapticFeedback.success()
-                            triggerWidgetUpdate()
-                            showingEditRelation = false
-                        }
-                    }
-                }
-                .onAppear {
-                    if RelationOptions.isPredefined(person.relation) {
-                        editedRelation = person.relation
-                        customRelationText = ""
-                    } else {
-                        editedRelation = "Sonstige"
-                        customRelationText = person.relation
                     }
                 }
             }
@@ -588,21 +548,16 @@ struct PersonDetailView: View {
                     }
 
                     Section("Beziehung") {
-                        Picker("Beziehung", selection: $editedPersonRelation) {
-                            ForEach(RelationOptions.predefined, id: \.self) { option in
-                                Text(option).tag(option)
+                        NavigationLink {
+                            RelationPickerView(selectedRelation: $editedPersonRelation)
+                        } label: {
+                            HStack {
+                                Text("Beziehung")
+                                    .foregroundStyle(.secondary)
+                                Spacer()
+                                Text(RelationOptions.localizedDisplayName(for: editedPersonRelation))
+                                    .foregroundStyle(.primary)
                             }
-                        }
-                        .pickerStyle(.inline)
-                        .labelsHidden()
-                    }
-
-                    if editedPersonRelation == "Sonstige" {
-                        Section {
-                            TextField("Beziehung eingeben", text: $customEditPersonRelationText)
-                                .textInputAutocapitalization(.sentences)
-                        } footer: {
-                            Text("z.B. Oma, Onkel, Nachbar")
                         }
                     }
                 }
@@ -623,26 +578,12 @@ struct PersonDetailView: View {
                             }
                             person.birthday = editedBirthday
                             person.birthYearKnown = true  // Manuell eingegebenes Datum hat immer ein Jahr
-                            if editedPersonRelation == "Sonstige" {
-                                let trimmed = customEditPersonRelationText.trimmingCharacters(in: .whitespaces)
-                                person.relation = trimmed.isEmpty ? "Sonstige" : trimmed
-                            } else {
-                                person.relation = editedPersonRelation
-                            }
+                            person.relation = editedPersonRelation
                             HapticFeedback.success()
                             triggerWidgetUpdate()
                             showingEditPerson = false
                         }
                         .disabled(editedName.trimmingCharacters(in: .whitespaces).isEmpty)
-                    }
-                }
-                .onAppear {
-                    if RelationOptions.isPredefined(person.relation) {
-                        editedPersonRelation = person.relation
-                        customEditPersonRelationText = ""
-                    } else {
-                        editedPersonRelation = "Sonstige"
-                        customEditPersonRelationText = person.relation
                     }
                 }
             }

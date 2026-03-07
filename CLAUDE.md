@@ -162,13 +162,19 @@ wrangler deploy
 - `PersonRef` erwartet `contactIdentifier:` als required Parameter
 - `PersonRef.skipGift: Bool = false` — "Kein Geschenk nötig" pro Person
 - `PersonRef.hobbies: [String] = []` — dauerhafte Interessen pro Person (max. 10, fließt in KI-Prompt ein)
-- `PersonRef.relation: String` — Beziehungstyp (wählbar aus 8 Optionen + Sonstige-Freitext)
+- `PersonRef.relation: String` — Beziehungstyp (wählbar aus 8 vordefinierte Optionen + benutzerdefinierte + "Sonstige"-Fallback)
 - `PersonRef.birthYearKnown: Bool = true` — false wenn Geburtsjahr bei Kontakt-Import unbekannt war; KI-Prompt lässt dann Alter weg
 - `GiftIdea` Init-Reihenfolge: `status` VOR `tags`
 - `GiftStatus` ist `CaseIterable` + `Codable`
 - `GiftHistory.direction: String = "given"` — Richtung: "given" (verschenkt) oder "received" (erhalten); SwiftData speichert als String für Migration
 - `GiftDirection` enum: `.given`/`.received`, ist `Sendable` + `Codable` + `CaseIterable` (Utilities, nicht Models)
-- `RelationOptions.predefined` — 8 vordefinierte Beziehungstypen + "Sonstige": Partner/in, Mutter, Vater, Schwester, Bruder, Freund/in, Kollege/in, Kind
+- **RelationOptions (enum):** Zentrale Verwaltung aller Beziehungstypen
+  - `RelationOptions.predefined` — 8 vordefinierte + "Sonstige": Partner/in, Mutter, Vater, Schwester, Bruder, Freund/in, Kollege/in, Kind
+  - `RelationOptions.custom` — benutzerdefinierte Typen (UserDefaults key: `"customRelationTypes"`)
+  - `RelationOptions.all` — kombinierte Liste: `predefined.filter { != "Sonstige" } + custom + ["Sonstige"]`
+  - `RelationOptions.addCustom(_:)` — dedupliziert, getrimmt, ignoriert Duplikate
+  - `RelationOptions.removeCustom(_:)` — entfernt aus UserDefaults; wenn aktuell selektiert → Fallback auf "Sonstige"
+  - `RelationOptions.localizedDisplayName(for:)` — lokalisiert vordefinierte, gibt custom-Typen unverändert zurück
 
 ### ModelConfiguration
 - Positional String statt `identifier:` Label: `ModelConfiguration("name", ...)`
@@ -182,6 +188,12 @@ wrangler deploy
 - `.symbolEffect`: Verschiedene Effect-Typen können nicht in Ternary gemischt werden → `.symbolEffect(.bounce, isActive: condition)`
 - Alert `message:` Closures müssen IMMER einen View liefern — Logic in computed property auslagern
 - `.sheet()` Modifier NICHT an Sub-Views in List/Section anhängen → SwiftUI dismisst sofort bei Re-Render. Immer auf Top-Level `body` hängen.
+
+### iOS 26 Design-Compliance (Pflicht)
+- `.foregroundStyle()` statt `.foregroundColor()` (deprecated seit iOS 17)
+- `.clipShape(.rect(cornerRadius:))` statt `.cornerRadius()` (deprecated seit iOS 17)
+- AppColor-Tokens statt hardcodierter Farben: `AppColor.accent` statt `.orange`, `AppColor.danger` statt `.red`, `AppColor.success` statt `.green`
+- Widget-Target: `UIColor.systemXxx` und `Color.accentColor` (kein AppColor-Zugriff im Widget-Target)
 
 ### Swift 6 Concurrency
 - Tasks, die SwiftData-Models senden: `let p = person` lokale Kopie vor Task, dann `Task { @MainActor in ... }`
@@ -214,7 +226,11 @@ try context.delete(model: PersonRef.self)
 
 ### UI-Komponenten & Patterns
 - **HobbiesChipView:** FlowLayout mit Chips (wie Erinnerungen-Tags). Return-Taste → neuer Chip, ✕-Tap → löschen. Max. 10.
-- **RelationPickerView:** Standard Picker (Menu oder Wheel) mit 8 Optionen + "Sonstige"-Freitext. Bestehende Werte außerhalb der Liste → unter "Sonstige" angezeigt.
+- **RelationPickerView:** Navigation-basierter Picker (List mit Sections) für Beziehungstypen.
+  - **Struktur:** Vordefinierte Typen (oben) | Eigene Typen (Mitte, Swipe-to-Delete) | "Sonstige" + Add-Button (unten)
+  - **Funktionen:** Auswahl via Tipp, sofortiges Dismiss; "Eigenen Typ hinzufügen" öffnet Alert mit TextField
+  - **Fallback:** Wenn selektierte Relation gelöscht wird → automatischer Fallback auf "Sonstige"
+  - **Persistierung:** Custom-Typen via `RelationOptions.addCustom()` / `removeCustom()` in UserDefaults
 - **FlowLayout:** Custom Layout für Chip-Anordnung (wrapping, centered, spacing). Wird für Hobbies, Tags und GiftIdea-Chips verwendet.
 - **GiftHistoryDirectionSegmented:** Segmented Control ("Verschenkt" / "Erhalten") — bestimmt `GiftHistory.direction`.
 - **ContactPhotoService:** On-Demand Laden von Kontaktfotos per `contactIdentifier`. Memory-Caching. Fallback auf Initialen-Circle wenn keine Foto vorhanden. `PersonAvatar` + `CompactPersonAvatar` zeigen echte Kontaktfotos.
@@ -247,7 +263,18 @@ try context.delete(model: PersonRef.self)
 
 ## Design-Prinzip
 
-Wir orientieren uns immer an Apple HIG (Human Interface Guidelines) — natives Design, Standard-Patterns, SF Symbols, System-Farben.
+Wir orientieren uns **immer** an Apple HIG (Human Interface Guidelines) — natives Design, Standard-Patterns, SF Symbols, System-Farben.
+
+**iOS 26 Design-Standards (zwingend):**
+- **System-Farben:** `UIColor.systemXxx` statt hardcodierter Farben — automatische Dark-Mode-Adaption
+- **AppColor-Tokens:** Stets `AppColor.accent`, `AppColor.danger`, `AppColor.success` etc. statt `.orange`, `.red`, `.green`
+- **Liquid Glass:** `GlassEffectContainer`, `.glassEffect()` Modifier für unterstützte UI-Elemente (iOS 26+)
+- **Deprecated APIs vermeiden:**
+  - `.foregroundColor()` → `.foregroundStyle()` (deprecated seit iOS 17)
+  - `.cornerRadius()` → `.clipShape(.rect(cornerRadius:))` (deprecated seit iOS 17)
+- **SF Symbols 7:** Immer neueste Symbol-Varianten verwenden
+- **Semantic Colors:** Kontext-bezogene Systemfarben wie `.primary`, `.secondary`, `.tertiary`, `.placeholder`
+- **Kein hardcodierter Code:** Farben, Abstände und Fonts aus System-Definitionen ableiten
 
 ## App-Start Fehlerbehandlung
 
@@ -309,7 +336,7 @@ enum GiftDirection {
 
 ### Bekannte Einschränkungen (i18n)
 
-- **RelationOptions in SwiftData:** Deutsche Werte sind in der DB gespeichert. Display-Layer lokalisiert, DB-Werte bleiben deutsch. Spätere Migration kann englische Keys einführen.
+- **RelationOptions in SwiftData:** Deutsche Werte (vordefinierte + custom) sind in der DB gespeichert. Display-Layer lokalisiert Vordefinierte via `RelationOptions.localizedDisplayName()`, custom-Typen werden as-is angezeigt (nicht lokalisierbar). Spätere Migration kann englische Keys für vordefinierte Typen einführen.
 - **SampleDataService:** Demo-Personen haben deutsche Namen — niedrige Prio, nur Debug.
 
 ## Bekannte Einschränkungen
@@ -319,6 +346,7 @@ enum GiftDirection {
 - Ohne Proxy-Secret: KI-Features nicht nutzbar (Fehlermeldung statt Fallback)
 - App wurde initial von KI generiert — Code-Qualität variiert
 - Alle Features (KI, Kontakte, Widget) sind für alle User freigeschaltet (kein Premium-Gating)
+- **RelationOptions:** Benutzerdefinierte Beziehungstypen sind in UserDefaults persistiert, nicht iCloud-synced; bei Geräte-Sync verlieren sich custom-Typen
 
 ## Launch-Plan
 
@@ -326,7 +354,16 @@ Vollständiger Launch-Plan mit 8 Phasen, Skills-Referenz und Revenue-Prognose: *
 
 ## Backlog
 
-- **"Alle Daten löschen" Klartext**: Im Lösch-Dialog explizit darauf hinweisen, dass nur App-Daten dieser App gelöscht werden (nicht Kontakte, Kalender o.Ä.). Formulierung z.B.: "Alle gespeicherten Daten der App werden unwiderruflich gelöscht. Deine Kontakte und Kalendereinträge bleiben unberührt."
+### Offen
+
+1. **PersonDetailView aufteilen** (niedrige Prio) — 1041 Zeilen, sollte in Sub-Views aufgeteilt werden
+2. **Custom RelationOptions iCloud-Sync** — UserDefaults sind nicht iCloud-synced; bei Geräte-Sync gehen custom-Typen verloren. Später: evtl. SwiftData-Model oder CloudKit für custom-Typen
+3. **Relation-DB-Migration** — Vordefinierte Typen sind deutsch in DB gespeichert; spätere Migration kann englische Keys einführen (aktuell: Display-Layer lokalisiert, DB-Werte deutsch)
+4. **Doppelter Loading/Error-State in AI-Sheets** (niedrige Prio) — Shared Components extrahieren
+5. **TypingIndicator Avatar** — copy-paste Implementierung; eigene View auslagern
+
+### Bekannte technische Schulden
+- `ReminderManager.swift:11` — `nonisolated(unsafe)` Warning auf NSLock (unvermeidbar für deinit-Zugriff)
 
 ## GitHub
 

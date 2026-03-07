@@ -11,7 +11,7 @@ struct SuggestionFeedbackView: View {
         HStack(spacing: 12) {
             Text("War das hilfreich?")
                 .font(.caption)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
 
             Spacer()
 
@@ -23,7 +23,7 @@ struct SuggestionFeedbackView: View {
                 }) {
                     Image(systemName: hasGivenFeedback ? "hand.thumbsup.fill" : "hand.thumbsup")
                         .font(.title3)
-                        .foregroundColor(hasGivenFeedback ? .green : AppColor.textSecondary)
+                        .foregroundStyle(hasGivenFeedback ? AppColor.success : AppColor.textSecondary)
                 }
                 .buttonStyle(.plain)
                 .disabled(hasGivenFeedback)
@@ -35,7 +35,7 @@ struct SuggestionFeedbackView: View {
                 }) {
                     Image(systemName: hasGivenFeedback ? "hand.thumbsdown.fill" : "hand.thumbsdown")
                         .font(.title3)
-                        .foregroundColor(hasGivenFeedback ? .red : AppColor.textSecondary)
+                        .foregroundStyle(hasGivenFeedback ? AppColor.danger : AppColor.textSecondary)
                 }
                 .buttonStyle(.plain)
                 .disabled(hasGivenFeedback)

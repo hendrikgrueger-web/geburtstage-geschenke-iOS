@@ -256,7 +256,7 @@ struct FormField<FieldContent: View>: View {
             Text(label)
                 .font(.caption)
                 .fontWeight(.semibold)
-                .foregroundColor(AppColor.textSecondary)
+                .foregroundStyle(AppColor.textSecondary)
 
             // Content
             content
@@ -266,16 +266,16 @@ struct FormField<FieldContent: View>: View {
                 HStack(spacing: 6) {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .font(.caption2)
-                        .foregroundColor(.orange)
+                        .foregroundStyle(AppColor.accent)
 
                     Text(errorMessage)
                         .font(.caption2)
-                        .foregroundColor(.orange)
+                        .foregroundStyle(AppColor.accent)
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(Color.orange.opacity(0.1))
-                .cornerRadius(6)
+                .background(AppColor.accent.opacity(0.1))
+                .clipShape(.rect(cornerRadius: 6))
                 .transition(.opacity)
             }
         }
@@ -320,11 +320,11 @@ struct FormSubmitButton: View {
             }
             .font(.subheadline)
             .fontWeight(.semibold)
-            .foregroundColor(.white)
+            .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
             .padding()
             .background(backgroundColor)
-            .cornerRadius(12)
+            .clipShape(.rect(cornerRadius: 12))
         }
         .disabled(formState.isSubmitting || !formState.isValid)
         .opacity(formState.isSubmitting || !formState.isValid ? 0.6 : 1.0)

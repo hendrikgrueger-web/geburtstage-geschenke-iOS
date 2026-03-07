@@ -19,7 +19,7 @@ struct FABButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(.white)
+            .foregroundStyle(.white)
             .padding()
             .background(color)
             .clipShape(Circle())
@@ -39,11 +39,11 @@ struct CardButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(isDestructive ? .red : AppColor.primary)
+            .foregroundStyle(isDestructive ? AppColor.danger : AppColor.primary)
             .padding()
             .frame(maxWidth: .infinity)
-            .background(isDestructive ? Color.red.opacity(0.1) : AppColor.primary.opacity(0.1))
-            .cornerRadius(12)
+            .background(isDestructive ? AppColor.danger.opacity(0.1) : AppColor.primary.opacity(0.1))
+            .clipShape(.rect(cornerRadius: 12))
             .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
             .animation(.spring(response: 0.3, dampingFraction: 0.7), value: configuration.isPressed)
     }
@@ -59,12 +59,12 @@ struct GradientButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(.white)
+            .foregroundStyle(.white)
             .fontWeight(.semibold)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
             .background(gradient)
-            .cornerRadius(12)
+            .clipShape(.rect(cornerRadius: 12))
             .shadow(color: AppColor.primary.opacity(0.3), radius: 8, x: 0, y: 4)
             .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
             .animation(.spring(response: 0.3, dampingFraction: 0.7), value: configuration.isPressed)

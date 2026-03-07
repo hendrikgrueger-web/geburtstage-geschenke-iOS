@@ -21,12 +21,12 @@ struct DevSettingsView: View {
                 } label: {
                     HStack {
                         Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.green)
+                            .foregroundStyle(.green)
                         Text("Demo-Daten erstellen")
                         Spacer()
                         if sampleDataCreated {
                             Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
+                                .foregroundStyle(.green)
                         }
                     }
                 }
@@ -37,12 +37,12 @@ struct DevSettingsView: View {
                 } label: {
                     HStack {
                         Image(systemName: "trash.fill")
-                            .foregroundColor(.red)
+                            .foregroundStyle(.red)
                         Text("Alle Daten löschen")
                         Spacer()
                         if dataCleared {
                             Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
+                                .foregroundStyle(.green)
                         }
                     }
                 }
@@ -58,28 +58,28 @@ struct DevSettingsView: View {
                     Text("Kontakte")
                     Spacer()
                     Text("\(people.count)")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
 
                 HStack {
                     Text("Geschenkideen")
                     Spacer()
                     Text("\(totalGiftIdeas)")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
 
                 HStack {
                     Text("Geschenk-Verlauf")
                     Spacer()
                     Text("\(totalGiftHistory)")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
             }
 
             Section("Info") {
                 Text("Diese Ansicht ist nur im Debug-Modus verfügbar.")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
         }
         .navigationTitle("Dev Settings")

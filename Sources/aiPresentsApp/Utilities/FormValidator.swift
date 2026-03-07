@@ -137,7 +137,7 @@ extension View {
             .overlay(alignment: .trailing) {
                 if !isValid {
                     Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundColor(.red)
+                        .foregroundStyle(AppColor.danger)
                         .padding(.trailing, 8)
                 }
             }
@@ -153,7 +153,7 @@ extension View {
                             .font(.caption)
                         Text(error.errorDescription ?? "")
                             .font(.caption)
-                            .foregroundColor(.red)
+                            .foregroundStyle(AppColor.danger)
                         Spacer()
                     }
                     .padding(.horizontal, 4)
