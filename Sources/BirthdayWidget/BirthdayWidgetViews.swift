@@ -4,11 +4,11 @@ import WidgetKit
 // MARK: - Farben (Hex-Werte aus AppColor, da AppColor im Widget nicht verfügbar)
 
 private enum WidgetColors {
-    static let birthdayToday = Color(red: 1.0, green: 0.4, blue: 0.7)
-    static let birthdaySoon = Color(red: 1.0, green: 0.6, blue: 0.2)
-    static let accent = Color(red: 1.0, green: 0.58, blue: 0.0)
-    static let birthdayUpcoming = Color(red: 0.3, green: 0.7, blue: 1.0)
-    static let success = Color(red: 0.2, green: 0.8, blue: 0.4)
+    static let birthdayToday = Color.pink
+    static let birthdaySoon = Color.orange
+    static let accent = Color.orange
+    static let birthdayUpcoming = Color.blue
+    static let success = Color.green
 }
 
 // MARK: - Medium Widget View
@@ -27,7 +27,7 @@ struct BirthdayWidgetMediumView: View {
                 Image(systemName: "birthday.cake.fill")
                     .foregroundStyle(WidgetColors.accent)
                 Text("Nächste Geburtstage")
-                    .font(.caption)
+                    .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
                 Spacer()
@@ -37,9 +37,14 @@ struct BirthdayWidgetMediumView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Text("Keine Geburtstage")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                    VStack(spacing: 8) {
+                        Image(systemName: "gift")
+                            .font(.title2)
+                            .foregroundStyle(.quaternary)
+                        Text("Keine Geburtstage")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
                     Spacer()
                 }
                 Spacer()
@@ -48,6 +53,9 @@ struct BirthdayWidgetMediumView: View {
                     Link(destination: URL(string: "aipresents://person/\(birthday.id)")!) {
                         BirthdayWidgetRow(entry: birthday)
                     }
+                    .accessibilityLabel(birthday.daysUntil == 0
+                        ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
+                        : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
                 }
 
                 if entry.birthdays.count > 3 {
@@ -62,6 +70,7 @@ struct BirthdayWidgetMediumView: View {
             }
         }
         .containerBackground(.fill.tertiary, for: .widget)
+        .widgetURL(URL(string: "aipresents://")!)
     }
 }
 
@@ -107,6 +116,9 @@ struct BirthdayWidgetLargeView: View {
                     Link(destination: URL(string: "aipresents://person/\(birthday.id)")!) {
                         BirthdayWidgetRow(entry: birthday)
                     }
+                    .accessibilityLabel(birthday.daysUntil == 0
+                        ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
+                        : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
                     if birthday.id != displayEntries.last?.id {
                         Divider()
                     }
@@ -126,6 +138,7 @@ struct BirthdayWidgetLargeView: View {
             Spacer(minLength: 0)
         }
         .containerBackground(.fill.tertiary, for: .widget)
+        .widgetURL(URL(string: "aipresents://")!)
     }
 }
 
@@ -136,7 +149,7 @@ struct BirthdayWidgetRow: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            // Avatar-Kreis mit Initiale
+            // Avatar-Kreis mit Initiale (dekorativ)
             ZStack {
                 Circle()
                     .fill(countdownColor.opacity(0.2))
@@ -146,6 +159,7 @@ struct BirthdayWidgetRow: View {
                     .foregroundStyle(countdownColor)
             }
             .frame(width: 28, height: 28)
+            .accessibilityHidden(true)
 
             // Name + Alter
             VStack(alignment: .leading, spacing: 1) {
@@ -154,10 +168,12 @@ struct BirthdayWidgetRow: View {
                     .fontWeight(.medium)
                     .foregroundStyle(.primary)
                     .lineLimit(1)
+                    .privacySensitive()
                 if entry.nextAge > 0 {
                     Text("wird \(entry.nextAge)")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
+                        .privacySensitive()
                 }
             }
 
@@ -182,7 +198,7 @@ struct BirthdayWidgetRow: View {
             case "purchased":
                 HStack(spacing: 2) {
                     Image(systemName: "checkmark")
-                        .font(.system(size: 8, weight: .bold))
+                        .font(.system(.caption2, design: .default, weight: .bold))
                     Text("Gekauft")
                         .font(.caption2)
                 }
@@ -215,6 +231,11 @@ struct BirthdayWidgetRow: View {
             .padding(.horizontal, 6)
             .padding(.vertical, 3)
             .background(countdownColor, in: .rect(cornerRadius: 6))
+            .accessibilityLabel(
+                entry.daysUntil == 0
+                    ? String(localized: "Heute")
+                    : String(localized: "In \(entry.daysUntil) Tagen")
+            )
     }
 
     private var countdownText: String {
