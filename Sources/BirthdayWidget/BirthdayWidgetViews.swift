@@ -34,7 +34,7 @@ struct BirthdayWidgetMediumView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             // Header
             HStack {
                 Image(systemName: "birthday.cake.fill")
@@ -105,7 +105,7 @@ struct BirthdayWidgetLargeView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             // Header
             HStack {
                 Image(systemName: "birthday.cake.fill")
@@ -178,29 +178,29 @@ struct BirthdayWidgetRow: View {
     let entry: WidgetBirthdayEntry
 
     var body: some View {
-        HStack(spacing: 10) {
-            // Avatar-Kreis mit 2-Buchstaben-Initialen (dekorativ)
+        HStack(spacing: 12) {
+            // Avatar-Kreis mit 2-Buchstaben-Initialen — größer für bessere Lesbarkeit
             ZStack {
                 Circle()
-                    .fill(countdownColor.opacity(0.2))
+                    .fill(countdownColor.opacity(0.15))
                 Text(twoLetterInitials(for: entry.displayName))
-                    .font(.system(size: 9, weight: .bold))
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
                     .foregroundStyle(countdownColor)
             }
-            .frame(width: 28, height: 28)
+            .frame(width: 36, height: 36)
             .accessibilityHidden(true)
 
-            // Name + Alter
-            VStack(alignment: .leading, spacing: 1) {
+            // Name + Alter — prominentere Schrift für klare Lesbarkeit
+            VStack(alignment: .leading, spacing: 2) {
                 Text(entry.displayName)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
+                    .font(.callout)
+                    .fontWeight(.semibold)
                     .foregroundStyle(.primary)
                     .lineLimit(1)
                     .privacySensitive()
                 if entry.nextAge > 0 {
                     Text("wird \(entry.nextAge)")
-                        .font(.caption2)
+                        .font(.caption)
                         .foregroundStyle(.secondary)
                         .privacySensitive()
                 }
@@ -211,7 +211,7 @@ struct BirthdayWidgetRow: View {
             // Gift-Status Badge
             giftStatusBadge
 
-            // Countdown
+            // Countdown — prominente Zahl mit kleiner Einheit
             countdownBadge
         }
     }
@@ -245,34 +245,45 @@ struct BirthdayWidgetRow: View {
 
     private func statusText(_ text: String, color: Color) -> some View {
         Text(text)
-            .font(.caption2)
+            .font(.caption)
             .fontWeight(.medium)
             .foregroundStyle(color)
     }
 
     // MARK: - Countdown Badge
 
+    /// Heute: gefülltes Pill mit "Heute"-Label.
+    /// Andere Tage: große Zahl in Akzentfarbe + kleine "T."-Einheit darunter.
     private var countdownBadge: some View {
-        Text(countdownText)
-            .font(.caption2)
-            .fontWeight(.bold)
-            .foregroundStyle(.white)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 3)
-            .background(countdownColor, in: .rect(cornerRadius: 6))
-            .accessibilityLabel(
-                entry.daysUntil == 0
-                    ? String(localized: "Heute")
-                    : String(localized: "In \(entry.daysUntil) Tagen")
-            )
-    }
-
-    private var countdownText: String {
-        if entry.daysUntil == 0 {
-            return String(localized: "Heute")
-        } else {
-            return String(localized: "\(entry.daysUntil) T.")
+        Group {
+            if entry.daysUntil == 0 {
+                // Heute: Pill-Badge
+                Text(String(localized: "Heute"))
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 5)
+                    .background(countdownColor, in: .capsule)
+            } else {
+                // Zukünftige Geburtstage: prominente Zahl + kleine Einheit
+                VStack(spacing: 0) {
+                    Text("\(entry.daysUntil)")
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .foregroundStyle(countdownColor)
+                        .lineLimit(1)
+                    Text(String(localized: "T."))
+                        .font(.system(size: 9, weight: .semibold))
+                        .foregroundStyle(countdownColor.opacity(0.6))
+                }
+                .frame(minWidth: 28)
+            }
         }
+        .accessibilityLabel(
+            entry.daysUntil == 0
+                ? String(localized: "Heute")
+                : String(localized: "In \(entry.daysUntil) Tagen")
+        )
     }
 
     /// Bestimmt die Countdown-Badge-Farbe basierend auf Tagen bis Geburtstag.
