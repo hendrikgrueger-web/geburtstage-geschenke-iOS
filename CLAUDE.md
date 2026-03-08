@@ -367,5 +367,5 @@ Vollständiger Launch-Plan mit 8 Phasen, Skills-Referenz und Revenue-Prognose: *
 
 ## GitHub
 
-- Repo: `harryhirsch1878/ai-presents-app-ios`
+- Repo: `hendrikgrueger-web/geburtstage-geschenke-iOS`
 - Branch: `main`
