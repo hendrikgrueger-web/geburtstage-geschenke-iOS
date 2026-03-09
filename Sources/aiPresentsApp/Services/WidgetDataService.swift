@@ -17,7 +17,7 @@ struct WidgetBirthdayEntry: Codable, Sendable {
 @MainActor
 final class WidgetDataService {
     static let shared = WidgetDataService()
-    static let appGroupID = "group.com.hendrikgrueger.ai-presents"
+    static let appGroupID = "group.com.hendrikgrueger.birthdays-presents-ai"
     private static let userDefaultsKey = "widgetBirthdayEntries"
 
     private init() {}

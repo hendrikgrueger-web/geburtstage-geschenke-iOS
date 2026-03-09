@@ -56,7 +56,7 @@ targets:
       Release: App/Secrets.xcconfig
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.hendrikgrueger.ai-presents
+        PRODUCT_BUNDLE_IDENTIFIER: com.hendrikgrueger.birthdays-presents-ai
         SWIFT_VERSION: "6.0"
         DEVELOPMENT_TEAM: "7ZR37VL5PV"
         CODE_SIGN_STYLE: Automatic
@@ -84,7 +84,7 @@ targets:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.hendrikgrueger.ai-presents.widget
+        PRODUCT_BUNDLE_IDENTIFIER: com.hendrikgrueger.birthdays-presents-ai.widget
         SWIFT_VERSION: "6.0"
         DEVELOPMENT_TEAM: "7ZR37VL5PV"
         CODE_SIGN_STYLE: Automatic

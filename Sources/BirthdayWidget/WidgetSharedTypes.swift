@@ -13,7 +13,7 @@ struct WidgetBirthdayEntry: Codable, Sendable {
 
 /// Liest Widget-Daten aus App Group UserDefaults
 enum WidgetDataReader {
-    static let appGroupID = "group.com.hendrikgrueger.ai-presents"
+    static let appGroupID = "group.com.hendrikgrueger.birthdays-presents-ai"
     private static let userDefaultsKey = "widgetBirthdayEntries"
 
     static func readEntries() -> [WidgetBirthdayEntry] {

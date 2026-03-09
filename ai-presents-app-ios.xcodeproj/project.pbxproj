@@ -930,7 +930,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hendrikgrueger.ai-presents";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hendrikgrueger.birthdays-presents-ai";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1015,7 +1015,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hendrikgrueger.ai-presents.widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hendrikgrueger.birthdays-presents-ai.widget";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 6.0;
@@ -1038,7 +1038,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hendrikgrueger.ai-presents.widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hendrikgrueger.birthdays-presents-ai.widget";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 6.0;
@@ -1083,7 +1083,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hendrikgrueger.ai-presents";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hendrikgrueger.birthdays-presents-ai";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

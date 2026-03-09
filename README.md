@@ -305,7 +305,7 @@ Der AI-Chat erkennt 7 Intents:
 
 **Daten-Sharing:** App-Group UserDefaults (JSON-Snapshot), kein SwiftData im Widget
 
-- **App Group:** `group.com.hendrikgrueger.ai-presents`
+- **App Group:** `group.com.hendrikgrueger.birthdays-presents-ai`
 - **Refresh:** Täglich 00:00 + on-demand via `WidgetCenter.shared.reloadAllTimelines()`
 - **Families:** `.systemMedium` (3 Einträge), `.systemLarge` (7 Einträge)
 - **Deep-Linking:** `aipresents://person/{UUID}` → PersonDetailView
