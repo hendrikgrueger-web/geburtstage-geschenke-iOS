@@ -348,6 +348,23 @@ enum GiftDirection {
 - Alle Features (KI, Kontakte, Widget) sind für alle User freigeschaltet (kein Premium-Gating)
 - **RelationOptions:** Benutzerdefinierte Beziehungstypen sind in UserDefaults persistiert, nicht iCloud-synced; bei Geräte-Sync verlieren sich custom-Typen
 
+## App Store Setup — Stand 2026-03-09
+
+### Registrierte Identifier (Apple Developer Portal ✅)
+| Was | Identifier |
+|-----|------------|
+| App Bundle ID | `com.hendrikgrueger.birthdays-presents-ai` |
+| Widget Bundle ID | `com.hendrikgrueger.birthdays-presents-ai.widget` |
+| App Group | `group.com.hendrikgrueger.birthdays-presents-ai` |
+| App Store Connect | App angelegt ✅ |
+
+### Nächste Schritte vor erstem TestFlight-Upload
+1. **Xcode öffnen** → beide Targets prüfen (Signing & Capabilities, kein rotes Ausrufezeichen)
+2. **iCloud Container** ggf. anlegen: `iCloud.com.hendrikgrueger.birthdays-presents-ai` (falls CloudKit genutzt)
+3. **Datenschutz-URL** in App Store Connect eintragen (Pflicht vor Review)
+4. **Product → Archive** → Xcode Organizer → Distribute App → App Store Connect
+5. **TestFlight** aktivieren + Tester einladen
+
 ## Launch-Plan
 
 Vollständiger Launch-Plan mit 8 Phasen, Skills-Referenz und Revenue-Prognose: **`Docs/LAUNCH-PLAN.md`**
