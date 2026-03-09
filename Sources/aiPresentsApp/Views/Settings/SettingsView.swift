@@ -336,7 +336,7 @@ struct SettingsView: View {
 
                 Section {
                     Button {
-                        if let url = URL(string: "https://github.com/harryhirsch1878/ai-presents-app-ios") {
+                        if let url = URL(string: "https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS") {
                             UIApplication.shared.open(url) { success in
                                 if !success {
                                     AppLogger.ui.warning("Failed to open GitHub URL")
@@ -422,7 +422,7 @@ struct SettingsView: View {
     }
 
     private func openFeedback() {
-        let feedbackEmail = "harryhirsch1878@gmail.com"
+        let feedbackEmail = "hendrik@gruepi.de"
         let subject = "ai-presents-app Feedback v\(appVersion)"
         let body = String(localized: "Was funktioniert gut?\n\nWas könnte besser sein?\n\n")
 

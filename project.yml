@@ -1,7 +1,7 @@
 name: ai-presents-app-ios
 
 options:
-  bundleIdPrefix: com.harryhirsch1878
+  bundleIdPrefix: com.hendrikgrueger
   deploymentTarget:
     iOS: "26.0"
   xcodeVersion: "26.0"
@@ -56,7 +56,7 @@ targets:
       Release: App/Secrets.xcconfig
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.harryhirsch1878.ai-presents-app
+        PRODUCT_BUNDLE_IDENTIFIER: com.hendrikgrueger.ai-presents
         SWIFT_VERSION: "6.0"
         DEVELOPMENT_TEAM: "7ZR37VL5PV"
         CODE_SIGN_STYLE: Automatic
@@ -84,7 +84,7 @@ targets:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.harryhirsch1878.ai-presents-app.widget
+        PRODUCT_BUNDLE_IDENTIFIER: com.hendrikgrueger.ai-presents.widget
         SWIFT_VERSION: "6.0"
         DEVELOPMENT_TEAM: "7ZR37VL5PV"
         CODE_SIGN_STYLE: Automatic

@@ -123,7 +123,7 @@ This version includes:
 
 ```bash
 # Repository klonen
-git clone https://github.com/harryhirsch1878/ai-presents-app-ios.git
+git clone https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS.git
 cd ai-presents-app-ios
 
 # Xcode Setup Script ausführen (öffnet Anleitung)
@@ -247,9 +247,9 @@ Keine kritischen Issues bekannt.
 
 ## Kontakt & Support
 
-- **GitHub**: https://github.com/harryhirsch1878/ai-presents-app-ios
-- **Issues**: https://github.com/harryhirsch1878/ai-presents-app-ios/issues
-- **Email**: harryhirsch1878@gmail.com
+- **GitHub**: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
+- **Issues**: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
+- **Email**: hendrik@gruepi.de
 
 ---
 

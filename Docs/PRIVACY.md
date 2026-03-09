@@ -24,10 +24,10 @@ AI Präsente respektiert Ihre Privatsphäre und schützt Ihre persönlichen Date
 
 **Entwickler:**
 - Name: Hendrik Grüger
-- E-Mail: harryhirsch1878@gmail.com
-- GitHub: https://github.com/harryhirsch1878/ai-presents-app-ios
+- E-Mail: hendrik@gruepi.de
+- GitHub: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 
-**Kontakt für Datenschutzfragen:** harryhirsch1878@gmail.com
+**Kontakt für Datenschutzfragen:** hendrik@gruepi.de
 
 ---
 
@@ -181,24 +181,24 @@ Nach der DSGVO (EU) und geltenden Datenschutzgesetzen haben Sie folgende Rechte:
 ### 9.1 Recht auf Auskunft
 Sie können eine Übersicht aller über Sie gespeicherten Daten anfordern.
 
-**Wie:** Senden Sie eine E-Mail an harryhirsch1878@gmail.com mit dem Betreff "Datenauskunft".
+**Wie:** Senden Sie eine E-Mail an hendrik@gruepi.de mit dem Betreff "Datenauskunft".
 
 ### 9.2 Recht auf Löschung
 Sie können verlangen, dass alle Ihre Daten gelöscht werden.
 
 **Wie:**
 - In der App: Alle Daten über "Einstellungen → Daten löschen" entfernen.
-- Per E-Mail: harryhirsch1878@gmail.com mit dem Betreff "Datenlöschung".
+- Per E-Mail: hendrik@gruepi.de mit dem Betreff "Datenlöschung".
 
 ### 9.3 Recht auf Berichtigung
 Sie können falsche Daten korrigieren lassen.
 
-**Wie:** In der App direkt ändern oder per E-Mail an harryhirsch1878@gmail.com.
+**Wie:** In der App direkt ändern oder per E-Mail an hendrik@gruepi.de.
 
 ### 9.4 Recht auf Datenübertragbarkeit
 Sie können alle Ihre Daten in einem maschinenlesbaren Format anfordern.
 
-**Wie:** Senden Sie eine E-Mail an harryhirsch1878@gmail.com mit dem Betreff "Datenexport".
+**Wie:** Senden Sie eine E-Mail an hendrik@gruepi.de mit dem Betreff "Datenexport".
 
 ### 9.5 Recht auf Widerruf der Einwilligung
 Sie können Ihre Einwilligung zur Datenverarbeitung jederzeit widerrufen.
@@ -241,8 +241,8 @@ Wir behalten uns vor, diese Datenschutzrichtlinie anzupassen:
 
 Bei Fragen zu dieser Datenschutzrichtlinie oder Ihren Datenrechten kontaktieren Sie uns:
 
-- **E-Mail:** harryhirsch1878@gmail.com
-- **GitHub Issues:** https://github.com/harryhirsch1878/ai-presents-app-ios/issues
+- **E-Mail:** hendrik@gruepi.de
+- **GitHub Issues:** https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
 - **Sprache:** Deutsch oder Englisch
 
 ---
@@ -272,6 +272,6 @@ In der App unter "Einstellungen" können Sie:
 
 **Vielen Dank für Ihr Vertrauen!**
 
-Wir entwickeln diese App als Open-Source-Projekt. Der vollständige Quellcode ist auf GitHub verfügbar: https://github.com/harryhirsch1878/ai-presents-app-ios
+Wir entwickeln diese App als Open-Source-Projekt. Der vollständige Quellcode ist auf GitHub verfügbar: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 
 Sie können jederzeit überprüfen, wie Ihre Daten verarbeitet werden, indem Sie den Code einsehen.

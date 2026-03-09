@@ -254,7 +254,7 @@ try context.delete(model: PersonRef.self)
 ## Widget-Architektur
 
 **Daten-Sharing:** JSON-Snapshot via App Group UserDefaults (kein SwiftData im Widget)
-- **App Group:** `group.com.harryhirsch1878.ai-presents-app`
+- **App Group:** `group.com.hendrikgrueger.ai-presents`
 - **URL-Scheme:** `aipresents://person/{UUID}` für Deep-Linking
 - **WidgetDataService** schreibt Snapshot bei: App-Start, Hintergrund-Wechsel, Pull-to-Refresh
 - **Timeline-Refresh:** Täglich um Mitternacht + App-getriggert via `WidgetCenter.shared.reloadAllTimelines()`

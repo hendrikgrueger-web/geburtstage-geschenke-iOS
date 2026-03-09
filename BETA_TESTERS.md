@@ -117,7 +117,7 @@ aiPresents ist eine iOS App, die dir hilft:
 3. Beschreibe dein Feedback im E-Mail-Text
 
 ### GitHub Issues
-Besuche https://github.com/harryhirsch1878/ai-presents-app-ios/issues und erstelle ein Issue:
+Besuche https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues und erstelle ein Issue:
 - **Titel**: Kurze, klare Beschreibung
 - **Kategorie**: Bug / Feature Request / UX-Feedback / Sonstiges
 - **Schritte zur Reproduktion** (bei Bugs): Was hast du getan?
@@ -126,7 +126,7 @@ Besuche https://github.com/harryhirsch1878/ai-presents-app-ios/issues und erstel
 - **Screenshots/Videos**: Falls hilfreich
 
 ### Email Feedback
-Schreibe an harryhirsch1878@gmail.com mit:
+Schreibe an hendrik@gruepi.de mit:
 - App Version (siehe Einstellungen)
 - iOS Version
 - iPhone Modell
@@ -174,8 +174,8 @@ Wenn die App abstürzt:
 Vielen Dank für deine Unterstützung beim Testen von aiPresents! Dein Feedback hilft uns, die App besser zu machen.
 
 **Kontakt:**
-- GitHub: https://github.com/harryhirsch1878/ai-presents-app-ios
-- Email: harryhirsch1878@gmail.com
+- GitHub: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
+- Email: hendrik@gruepi.de
 
 ---
 

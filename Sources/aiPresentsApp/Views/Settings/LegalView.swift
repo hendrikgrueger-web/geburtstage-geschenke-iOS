@@ -8,7 +8,7 @@ struct LegalView: View {
                     // Anbieter
                     LegalSection(
                         title: "Anbieter",
-                        content: "Hendrik Grüger\nharryhirsch1878@gmail.com\n\nDiese App ist ein privates, nicht-kommerzielles Projekt und wird kostenlos zur Verfügung gestellt."
+                        content: "Hendrik Grüger\nhendrik@gruepi.de\n\nDiese App ist ein privates, nicht-kommerzielles Projekt und wird kostenlos zur Verfügung gestellt."
                     )
 
                     // Haftungsausschluss

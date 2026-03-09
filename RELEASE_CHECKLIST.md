@@ -110,7 +110,7 @@
 - [ ] Description (English) written
 - [ ] Keywords selected (iOS App Store)
 - [ ] Promotional Text (max 170 characters)
-- [ ] Support URL: https://github.com/harryhirsch1878/ai-presents-app-ios
+- [ ] Support URL: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 - [ ] Marketing URL: (optional)
 - [ ] Privacy Policy URL: (to be created)
 
@@ -219,8 +219,8 @@ Product → Archive
 
 ## Contact & Support
 
-- **GitHub Issues**: https://github.com/harryhirsch1878/ai-presents-app-ios/issues
-- **Email**: harryhirsch1878@gmail.com
+- **GitHub Issues**: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
+- **Email**: hendrik@gruepi.de
 - **Documentation**: See `Docs/` folder
 
 ---

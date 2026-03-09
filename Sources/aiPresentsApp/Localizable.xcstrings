@@ -693,13 +693,13 @@
         }
       }
     },
-    "Bei Fragen zum Datenschutz:\n\nHendrik Grüger\nharryhirsch1878@gmail.com" : {
+    "Bei Fragen zum Datenschutz:\n\nHendrik Grüger\nhendrik@gruepi.de" : {
       "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "For privacy questions:\n\nHendrik Grüger\nharryhirsch1878@gmail.com"
+            "value" : "For privacy questions:\n\nHendrik Grüger\nhendrik@gruepi.de"
           }
         }
       }
@@ -2574,13 +2574,13 @@
     "Hallo!" : {
 
     },
-    "Hendrik Grüger\nharryhirsch1878@gmail.com\n\nDiese App ist ein privates Projekt und kein kommerzielles Angebot." : {
+    "Hendrik Grüger\nhendrik@gruepi.de\n\nDiese App ist ein privates Projekt und kein kommerzielles Angebot." : {
       "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hendrik Grüger\nharryhirsch1878@gmail.com\n\nThis app is a private project and not a commercial offering."
+            "value" : "Hendrik Grüger\nhendrik@gruepi.de\n\nThis app is a private project and not a commercial offering."
           }
         }
       }

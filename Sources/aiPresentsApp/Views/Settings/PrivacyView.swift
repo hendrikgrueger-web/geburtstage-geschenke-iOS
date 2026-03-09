@@ -58,7 +58,7 @@ struct PrivacyView: View {
                         icon: "envelope.fill",
                         iconColor: AppColor.primary,
                         title: "Kontakt",
-                        content: "Bei Fragen zum Datenschutz:\n\nHendrik Grüger\nharryhirsch1878@gmail.com"
+                        content: "Bei Fragen zum Datenschutz:\n\nHendrik Grüger\nhendrik@gruepi.de"
                     )
 
                     Text("Stand: März 2026")

@@ -153,4 +153,4 @@ Für Daten, die bereits an OpenRouter/Google übertragen wurden:
 ## 8. Kontakt Datenschutz
 
 Hendrik Grüger
-harryhirsch1878@gmail.com
+hendrik@gruepi.de

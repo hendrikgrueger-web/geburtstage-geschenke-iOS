@@ -192,7 +192,7 @@ Sources/BirthdayWidget/  # WidgetKit Extension (separates Target)
 
 ```bash
 # Repo klonen
-git clone https://github.com/harryhirsch1878/ai-presents-app-ios.git
+git clone https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS.git
 cd ai-presents-app-ios
 
 # Xcode öffnen
@@ -305,7 +305,7 @@ Der AI-Chat erkennt 7 Intents:
 
 **Daten-Sharing:** App-Group UserDefaults (JSON-Snapshot), kein SwiftData im Widget
 
-- **App Group:** `group.com.harryhirsch1878.ai-presents-app`
+- **App Group:** `group.com.hendrikgrueger.ai-presents`
 - **Refresh:** Täglich 00:00 + on-demand via `WidgetCenter.shared.reloadAllTimelines()`
 - **Families:** `.systemMedium` (3 Einträge), `.systemLarge` (7 Einträge)
 - **Deep-Linking:** `aipresents://person/{UUID}` → PersonDetailView
@@ -393,4 +393,4 @@ Für Fragen oder Verbesserungen: GitHub Issues oder Discussions.
 
 **Gebaut mit:** Swift 6, SwiftUI, SwiftData, OpenRouter, Cloudflare Workers
 
-**GitHub:** [`harryhirsch1878/ai-presents-app-ios`](https://github.com/harryhirsch1878/ai-presents-app-ios)
+**GitHub:** [`hendrikgrueger-web/geburtstage-geschenke-iOS`](https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS)

@@ -17,7 +17,7 @@ brew install xcodegen
 - iOS App-Target mit `Sources/aiPresentsApp/` als Source
 - Lokales Swift Package als Dependency
 - `App/Info.plist` referenziert
-- Bundle ID: `com.harryhirsch1878.ai-presents-app`, iOS 17
+- Bundle ID: `com.hendrikgrueger.ai-presents`, iOS 17
 
 ### 3. `Package.swift` — `@main` aus Library excluden
 ```swift
@@ -43,7 +43,7 @@ xcodebuild -project ai-presents-app-ios.xcodeproj \
   build
 
 xcrun simctl install 393E9E09-95BE-481C-9C15-567808F8AF26 <path-to>.app
-xcrun simctl launch 393E9E09-95BE-481C-9C15-567808F8AF26 com.harryhirsch1878.ai-presents-app
+xcrun simctl launch 393E9E09-95BE-481C-9C15-567808F8AF26 com.hendrikgrueger.ai-presents
 ```
 
 ### 8. Tests verifizieren

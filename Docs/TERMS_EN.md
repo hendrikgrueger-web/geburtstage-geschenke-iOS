@@ -147,8 +147,8 @@ We do not guarantee specific availability of the app or its features:
 
 ### 9.2 Support
 Support is offered through the following channels:
-- GitHub Issues: https://github.com/harryhirsch1878/ai-presents-app-ios/issues
-- Email: harryhirsch1878@gmail.com
+- GitHub Issues: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
+- Email: hendrik@gruepi.de
 
 We strive to respond to requests promptly but provide no response guarantees.
 
@@ -225,8 +225,8 @@ These Terms of Service constitute the entire agreement between you and the devel
 
 For questions about these Terms of Service, please contact us:
 
-- **Email:** harryhirsch1878@gmail.com
-- **GitHub Issues:** https://github.com/harryhirsch1878/ai-presents-app-ios/issues
+- **Email:** hendrik@gruepi.de
+- **GitHub Issues:** https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
 - **Language:** English or German
 
 ---

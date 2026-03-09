@@ -74,7 +74,7 @@ export default {
         headers: {
           "Authorization": `Bearer ${env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": "https://github.com/harryhirsch1878/ai-presents-app-ios",
+          "HTTP-Referer": "https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS",
           "X-Title": "AI Praesente",
         },
         body: JSON.stringify(sanitized),

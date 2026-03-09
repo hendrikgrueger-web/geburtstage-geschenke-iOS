@@ -12,7 +12,7 @@ Vielen Dank für dein Interesse an ai-presents-app-ios! Dieser Leitfaden hilft d
 
 ### Projekt klonen
 ```bash
-git clone https://github.com/harryhirsch1878/ai-presents-app-ios.git
+git clone https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS.git
 cd ai-presents-app-ios
 ```
 

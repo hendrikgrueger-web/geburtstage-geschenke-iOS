@@ -1,7 +1,10 @@
 {
   "sourceLanguage" : "de",
   "strings" : {
-    "+%@ weitere" : {
+    "%@" : {
+
+    },
+    "+%@" : {
 
     },
     "+%lld weitere" : {

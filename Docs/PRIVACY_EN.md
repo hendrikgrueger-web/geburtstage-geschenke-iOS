@@ -24,10 +24,10 @@ AI Präsente respects your privacy and protects your personal data. This app is 
 
 **Developer:**
 - Name: Hendrik Grüger
-- Email: harryhirsch1878@gmail.com
-- GitHub: https://github.com/harryhirsch1878/ai-presents-app-ios
+- Email: hendrik@gruepi.de
+- GitHub: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 
-**Contact for privacy questions:** harryhirsch1878@gmail.com
+**Contact for privacy questions:** hendrik@gruepi.de
 
 ---
 
@@ -181,24 +181,24 @@ Under the GDPR (EU) and applicable privacy laws, you have the following rights:
 ### 9.1 Right to Information
 You can request an overview of all data stored about you.
 
-**How:** Send an email to harryhirsch1878@gmail.com with the subject "Data Access Request".
+**How:** Send an email to hendrik@gruepi.de with the subject "Data Access Request".
 
 ### 9.2 Right to Deletion
 You can request that all your data be deleted.
 
 **How:**
 - In the app: Remove all data via "Settings → Delete Data".
-- By email: harryhirsch1878@gmail.com with the subject "Data Deletion Request".
+- By email: hendrik@gruepi.de with the subject "Data Deletion Request".
 
 ### 9.3 Right to Correction
 You can have incorrect data corrected.
 
-**How:** Edit directly in the app or email harryhirsch1878@gmail.com.
+**How:** Edit directly in the app or email hendrik@gruepi.de.
 
 ### 9.4 Right to Data Portability
 You can request all your data in a machine-readable format.
 
-**How:** Send an email to harryhirsch1878@gmail.com with the subject "Data Export Request".
+**How:** Send an email to hendrik@gruepi.de with the subject "Data Export Request".
 
 ### 9.5 Right to Withdraw Consent
 You can withdraw your consent to data processing at any time.
@@ -241,8 +241,8 @@ We reserve the right to adapt this privacy policy:
 
 For questions about this privacy policy or your data rights, contact us:
 
-- **Email:** harryhirsch1878@gmail.com
-- **GitHub Issues:** https://github.com/harryhirsch1878/ai-presents-app-ios/issues
+- **Email:** hendrik@gruepi.de
+- **GitHub Issues:** https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
 - **Language:** English or German
 
 ---
@@ -272,6 +272,6 @@ In the app under "Settings", you can:
 
 **Thank you for your trust!**
 
-We develop this app as an open-source project. The complete source code is available on GitHub: https://github.com/harryhirsch1878/ai-presents-app-ios
+We develop this app as an open-source project. The complete source code is available on GitHub: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 
 You can review at any time how your data is processed by inspecting the code.
