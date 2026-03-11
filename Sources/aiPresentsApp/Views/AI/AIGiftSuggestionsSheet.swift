@@ -50,6 +50,8 @@ struct AIGiftSuggestionsSheet: View {
     @State private var selectedSuggestion: GiftSuggestion?
     @State private var budgetValue: Double = 50
     @State private var qualityViewModel: SuggestionQualityViewModel?
+    @State private var showingConsentSheet = false
+    @ObservedObject private var consentManager = AIConsentManager.shared
 
     // Track which suggestions have received feedback
     @State private var feedbackGivenForSuggestions = Set<String>()
@@ -98,6 +100,13 @@ struct AIGiftSuggestionsSheet: View {
                 prefillTitle: suggestion.title,
                 prefillNote: suggestion.reason
             )
+        }
+        .sheet(isPresented: $showingConsentSheet) {
+            AIConsentSheet(isPresented: $showingConsentSheet) {
+                consentManager.aiEnabled = true
+                errorMessage = nil
+                loadSuggestions()
+            }
         }
         .presentationDragIndicator(.visible)
     }
@@ -218,26 +227,55 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 
+    private var needsConsent: Bool {
+        !consentManager.consentGiven || !consentManager.aiEnabled
+    }
+
     private func errorState(_ error: String) -> some View {
         Section {
             VStack(spacing: 16) {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.system(size: 50))
-                    .foregroundStyle(AppColor.accent)
+                if needsConsent {
+                    Image(systemName: "shield.lefthalf.filled")
+                        .font(.system(size: 50))
+                        .foregroundStyle(AppColor.primary)
 
-                Text("Fehler")
-                    .font(.headline)
-                    .foregroundStyle(AppColor.textPrimary)
+                    Text("Einwilligung erforderlich")
+                        .font(.headline)
+                        .foregroundStyle(AppColor.textPrimary)
 
-                Text(error)
-                    .font(.subheadline)
-                    .foregroundStyle(AppColor.textSecondary)
-                    .multilineTextAlignment(.center)
+                    Text("Für KI-Vorschläge wird eine Einwilligung zur anonymisierten Datenverarbeitung benötigt.")
+                        .font(.subheadline)
+                        .foregroundStyle(AppColor.textSecondary)
+                        .multilineTextAlignment(.center)
 
-                Button("Erneut versuchen") {
-                    loadSuggestions()
+                    Button {
+                        showingConsentSheet = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "checkmark.shield")
+                            Text("Einwilligung erteilen")
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                } else {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.system(size: 50))
+                        .foregroundStyle(AppColor.accent)
+
+                    Text("Fehler")
+                        .font(.headline)
+                        .foregroundStyle(AppColor.textPrimary)
+
+                    Text(error)
+                        .font(.subheadline)
+                        .foregroundStyle(AppColor.textSecondary)
+                        .multilineTextAlignment(.center)
+
+                    Button("Erneut versuchen") {
+                        loadSuggestions()
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .padding()
