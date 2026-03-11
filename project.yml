@@ -21,6 +21,7 @@ targets:
     resources:
       - path: App/InfoPlist.xcstrings
       - path: Sources/aiPresentsApp/Resources/PrivacyInfo.xcprivacy
+      - path: Sources/aiPresentsApp/Resources/DemoPhotos
     info:
       path: App/Info.plist
       properties:

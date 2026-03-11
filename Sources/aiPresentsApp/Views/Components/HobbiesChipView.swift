@@ -8,10 +8,15 @@ struct HobbiesChipView: View {
     let isEditable: Bool
     @State private var newHobby: String = ""
 
-    private let suggestions = [
-        "Sport", "Lesen", "Kochen", "Musik", "Reisen",
-        "Gaming", "Garten", "Technik", "Wellness", "Fotografie"
-    ]
+    private var suggestions: [String] {
+        if Locale.current.language.languageCode?.identifier == "de" {
+            return ["Sport", "Lesen", "Kochen", "Musik", "Reisen",
+                    "Gaming", "Garten", "Technik", "Wellness", "Fotografie"]
+        } else {
+            return ["Sports", "Reading", "Cooking", "Music", "Travel",
+                    "Gaming", "Gardening", "Tech", "Wellness", "Photography"]
+        }
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {

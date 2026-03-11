@@ -79,6 +79,31 @@
     "%@/30 Vorschläge generiert" : {
 
     },
+    "%@/500" : {
+
+    },
+    "%lld Ideen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Ideas"
+          }
+        }
+      }
+    },
+    "%lld Tage bis zum %lld. Geburtstag" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld days until %2$lld. birthday"
+          }
+        }
+      }
+    },
     "• %@" : {
 
     },
@@ -134,6 +159,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "💡 Tip: You can customize or copy the message after generating it."
+          }
+        }
+      }
+    },
+    "1 Idee" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Idea"
           }
         }
       }
@@ -564,6 +600,12 @@
         }
       }
     },
+    "Anonymisierte Datenverarbeitung" : {
+
+    },
+    "API-Gateway — leitet Anfragen an das Sprachmodell weiter" : {
+
+    },
     "API-Key nicht konfiguriert (Demo-Modus)" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -974,6 +1016,9 @@
         }
       }
     },
+    "Cloudflare Inc. (USA)" : {
+
+    },
     "CSV exportieren" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1152,6 +1197,7 @@
       }
     },
     "Datenverarbeitung durch Dritte" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1371,7 +1417,11 @@
         }
       }
     },
+    "Die KI-Funktionen nutzen anonymisierte Daten (Geschlecht, Altersgruppe, Beziehung). Keine Namen oder Geburtsdaten werden übertragen. Widerruf jederzeit möglich." : {
+
+    },
     "Die KI-Funktionen nutzen OpenRouter → Google Gemini (USA). Es werden Vorname, Alter, Beziehungstyp und Sternzeichen übertragen. Widerruf jederzeit möglich." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1617,6 +1667,9 @@
         }
       }
     },
+    "Einwilligung erforderlich" : {
+
+    },
     "Einwilligung erforderlich · Tippe für Details" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1627,6 +1680,9 @@
           }
         }
       }
+    },
+    "Einwilligung erteilen" : {
+
     },
     "Einwilligung erteilt" : {
       "extractionState" : "stale",
@@ -1867,6 +1923,9 @@
         }
       }
     },
+    "Es werden keine personenbezogenen Daten übertragen. Die KI erhält nur anonymisierte Informationen wie Altersgruppe und Geschlecht — keine Namen, keine Geburtsdaten." : {
+
+    },
     "Euro" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2061,6 +2120,12 @@
           }
         }
       }
+    },
+    "Für KI-Nachrichten wird eine Einwilligung zur anonymisierten Datenverarbeitung benötigt." : {
+
+    },
+    "Für KI-Vorschläge wird eine Einwilligung zur anonymisierten Datenverarbeitung benötigt." : {
+
     },
     "Geburtsdatum" : {
       "extractionState" : "stale",
@@ -2528,7 +2593,11 @@
         }
       }
     },
+    "Google LLC — Google Gemini (USA)" : {
+
+    },
     "Google Vertex AI / Google AI Studio (USA)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2619,6 +2688,28 @@
     },
     "Heute 🎉" : {
 
+    },
+    "Heute Geburtstag!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday today!"
+          }
+        }
+      }
+    },
+    "Heute wird %lld!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turns %lld today!"
+          }
+        }
+      }
     },
     "Heute!" : {
       "extractionState" : "stale",
@@ -2763,6 +2854,17 @@
         }
       }
     },
+    "Importiere Kontakte über den + Button oben rechts" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import contacts via the + button in the top right"
+          }
+        }
+      }
+    },
     "Importiere Kontakte um Geburtstage anzuzeigen" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2800,6 +2902,28 @@
     },
     "In %@ T." : {
 
+    },
+    "In %lld Tagen" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In %lld days"
+          }
+        }
+      }
+    },
+    "In %lld Tagen wird %lld" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turns %2$lld in %1$lld days"
+          }
+        }
+      }
     },
     "In 30 Tagen ist es soweit! Zeit für Geschenkideen." : {
       "extractionState" : "stale",
@@ -3557,6 +3681,7 @@
       }
     },
     "Leitet Anfragen weiter an" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3863,6 +3988,28 @@
         }
       }
     },
+    "Morgen Geburtstag" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday tomorrow"
+          }
+        }
+      }
+    },
+    "Morgen wird %lld" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turns %lld tomorrow"
+          }
+        }
+      }
+    },
     "Mutter" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -4040,6 +4187,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Never Forget Again"
+          }
+        }
+      }
+    },
+    "Noch %lld Tage" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld days left"
           }
         }
       }
@@ -4376,6 +4534,9 @@
           }
         }
       }
+    },
+    "Proxy — schützt den API-Key, leitet Anfragen weiter" : {
+
     },
     "Qualitätsmetrik" : {
       "localizations" : {
@@ -4760,6 +4921,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "hours"
+          }
+        }
+      }
+    },
+    "Suche oder frag die KI…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search or ask the AI…"
           }
         }
       }
@@ -5469,6 +5640,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Revoke"
+          }
+        }
+      }
+    },
+    "Wird %lld (%lld Tage)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turns %1$lld (%2$lld days)"
           }
         }
       }
