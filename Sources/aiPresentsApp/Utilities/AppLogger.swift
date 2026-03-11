@@ -197,7 +197,7 @@ struct AppLogger {
         }
 
         // Log to OSLog
-        logger.log(level: osLogType, "\(fullMessage, privacy: .public)")
+        logger.log(level: osLogType, "\(fullMessage, privacy: .private)")
 
         // Optionally log to file
         if enableFileLogging {

@@ -30,6 +30,7 @@
 		288B939B5B82311CC9271EB9 /* ReminderSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3DCE06A0DFE3AB2C55B83F /* ReminderSettingsView.swift */; };
 		293D6EBEDA0427F92D55F28D /* BirthdayCalculatorThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC3124099F551F5EA373EA7 /* BirthdayCalculatorThreadSafetyTests.swift */; };
 		2ABBEB5E8A432317ADCE5B70 /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D56F13FD4A2AE4764D571A0 /* AnimationHelper.swift */; };
+		2FA251DE8BF357AB13AB9B90 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E19AFC50D527EF534E758C21 /* PrivacyInfo.xcprivacy */; };
 		302089CCD50FCAE95999D515 /* AIConsentManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBEC37B287A1D9FCC89A3 /* AIConsentManagerTests.swift */; };
 		35BC16F120ECF2AEA82B7EED /* WidgetDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EB8AD13515C4A79913E22B /* WidgetDataService.swift */; };
 		394B25271A05013E17B413FF /* NochOhneGeschenkSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F96D1561167E4419327758 /* NochOhneGeschenkSection.swift */; };
@@ -123,10 +124,12 @@
 		E57D8B243D742300DB9D1E97 /* GiftSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EEFAA1711FF7D0E0B7F39E /* GiftSummaryView.swift */; };
 		E7086712F1C4D11F26E86747 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFD26EDCE7DBFA7399211E8 /* AppColor.swift */; };
 		EBD3EF59DCEFDCB8BB9E4182 /* AIBirthdayMessageSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445EDABC3BF7FB4E9809AD8 /* AIBirthdayMessageSheet.swift */; };
+		ED2AFFA508807D0E9E523670 /* AgeObfuscator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CCCFD839244D8E1C2ACB19 /* AgeObfuscator.swift */; };
 		F1632B641E2ADD434097F145 /* AppColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BE28E623996C74E0FB24BE /* AppColorTests.swift */; };
 		F4B20996565BE1D5738F725E /* ContactPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C388F5B7A645CA233541D7 /* ContactPhotoService.swift */; };
 		F526501B141DB1E68DCC119E /* CurrencyPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B7A7A1704B15FDFCB8467B /* CurrencyPickerView.swift */; };
 		FBB7A3F4309F98B05DC46435 /* AIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67C423C60F6B50FA69691AD /* AIServiceTests.swift */; };
+		FD4D2A2144E158D556ADED3B /* GenderInference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476075C5D2C6F503AB4A6F28 /* GenderInference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,10 +193,12 @@
 		402FEFE3F505A5104FC535A3 /* GiftHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftHistory.swift; sourceTree = "<group>"; };
 		40B6E83D614EF822E16CE41C /* AppAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnimation.swift; sourceTree = "<group>"; };
 		40C06DC4DA1AD65D461067D1 /* BirthdayWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = BirthdayWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		42CCCFD839244D8E1C2ACB19 /* AgeObfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeObfuscator.swift; sourceTree = "<group>"; };
 		43C388F5B7A645CA233541D7 /* ContactPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPhotoService.swift; sourceTree = "<group>"; };
 		44614D5AC68097C1AE93D4BC /* BirthdayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayWidget.swift; sourceTree = "<group>"; };
 		44DDD4E6A61E3B0E0D97E57E /* ChatInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputBar.swift; sourceTree = "<group>"; };
 		463BBEC37B287A1D9FCC89A3 /* AIConsentManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIConsentManagerTests.swift; sourceTree = "<group>"; };
+		476075C5D2C6F503AB4A6F28 /* GenderInference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderInference.swift; sourceTree = "<group>"; };
 		49F19315FD9DFE8E8059A7D2 /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
 		4B3DCE06A0DFE3AB2C55B83F /* ReminderSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSettingsView.swift; sourceTree = "<group>"; };
 		4CA036501E37863B03B99A76 /* DevSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevSettingsView.swift; sourceTree = "<group>"; };
@@ -266,6 +271,7 @@
 		D5F96D1561167E4419327758 /* NochOhneGeschenkSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NochOhneGeschenkSection.swift; sourceTree = "<group>"; };
 		D654609E73AC420D24EAFCA2 /* NotificationPermissionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionHelper.swift; sourceTree = "<group>"; };
 		DBC502D8F73D78DC65FF08F9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E19AFC50D527EF534E758C21 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		E1EA63976AEF36E896DC6F5B /* WidgetSharedTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSharedTypes.swift; sourceTree = "<group>"; };
 		E216F336B476E2A5E5DEF4BB /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E51FAE4D15E483A6BD00D955 /* ModelValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelValidationTests.swift; sourceTree = "<group>"; };
@@ -479,6 +485,7 @@
 			children = (
 				EEFD26EDCE7DBFA7399211E8 /* AppColor.swift */,
 				24C63E565A13C7B20220F982 /* Assets.xcassets */,
+				E19AFC50D527EF534E758C21 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -533,6 +540,7 @@
 			children = (
 				34597EBF8E869A576A033613 /* AccessibilityConfiguration.swift */,
 				1352AE658416E5B2DEEB06D7 /* AccessibilityHelper.swift */,
+				42CCCFD839244D8E1C2ACB19 /* AgeObfuscator.swift */,
 				1D56F13FD4A2AE4764D571A0 /* AnimationHelper.swift */,
 				40B6E83D614EF822E16CE41C /* AppAnimation.swift */,
 				E9625CCD9B5CF0D4CD77D3C0 /* AppConfig.swift */,
@@ -544,6 +552,7 @@
 				27B18845F0E7BC36A990BF92 /* FormatterHelper.swift */,
 				BB528C5CB9257C5B49C23519 /* FormState.swift */,
 				BB4A238B9D3BB1782F13C829 /* FormValidator.swift */,
+				476075C5D2C6F503AB4A6F28 /* GenderInference.swift */,
 				6A5FC754F1167DC0929B2495 /* HapticFeedback.swift */,
 				D654609E73AC420D24EAFCA2 /* NotificationPermissionHelper.swift */,
 				842B4A599402C7B306F56FE6 /* RelationOptions.swift */,
@@ -691,6 +700,7 @@
 				C087C138C4A30588B39AAE16 /* AIContent.xcstrings in Resources */,
 				E51E4AE8AE4FBEFD81C752C4 /* Assets.xcassets in Resources */,
 				C93370B887B83EF31F6583BB /* Localizable.xcstrings in Resources */,
+				2FA251DE8BF357AB13AB9B90 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,6 +780,7 @@
 				24B66A4E2179EF84ACF9109C /* AccessibilityHelper.swift in Sources */,
 				2740B387B0AFC11EE6549B7B /* AddGiftHistorySheet.swift in Sources */,
 				6686A8787F67137D4E2656A8 /* AddGiftIdeaSheet.swift in Sources */,
+				ED2AFFA508807D0E9E523670 /* AgeObfuscator.swift in Sources */,
 				3C76F2D83CA9E5A6F1A2FAA9 /* AllContactsView.swift in Sources */,
 				2ABBEB5E8A432317ADCE5B70 /* AnimationHelper.swift in Sources */,
 				19EAD57CD2629FC7D1C796E2 /* AppAnimation.swift in Sources */,
@@ -800,6 +811,7 @@
 				6A8681CDDAB93E30A369AD8D /* FormState.swift in Sources */,
 				3E572DCDDD3299E595D2F565 /* FormValidator.swift in Sources */,
 				A0DFB75E42ECB007BF029AE2 /* FormatterHelper.swift in Sources */,
+				FD4D2A2144E158D556ADED3B /* GenderInference.swift in Sources */,
 				A7C4BDBF71BC24782E5BCB1D /* GiftHistory.swift in Sources */,
 				76451A86ED7DAD408D957293 /* GiftHistoryRow.swift in Sources */,
 				1DFC8F260BC16B738734E9F6 /* GiftIdea.swift in Sources */,

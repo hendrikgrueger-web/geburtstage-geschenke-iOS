@@ -9,9 +9,9 @@ iOS-App für Geburtstags- und Geschenkeverwaltung. Generiert von Open Claw (n8n/
 - **Swift 6.0**, SwiftUI, SwiftData (iOS 26+)
 - **Architektur:** MVVM mit Services
 - **Daten:** SwiftData + iCloud Sync (CloudKit)
-- **KI:** OpenRouter API → Google Gemini 3.1 Flash Lite (Cloud, opt-in, DSGVO-konform)
+- **KI:** OpenRouter API → Google Gemini 3.1 Flash Lite (Cloud, opt-in, DSGVO-konform, vollständig anonymisiert)
 - **Widget:** WidgetKit Birthday Widget (Medium + Large) mit Deep-Linking
-- **Version:** 0.9.1 (Build 13)
+- **Version:** 1.0.0 (Build 14)
 - **Target:** iPhone 17 Pro Simulator / iOS 26+
 
 ## Build
@@ -26,7 +26,7 @@ xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp -destina
 Sources/aiPresentsApp/
 ├── Models/          # SwiftData Models: PersonRef, GiftIdea, GiftHistory, ReminderRule, SuggestionFeedback
 ├── Services/        # ContactsService, ContactPhotoService, ReminderManager, AIService, AIConsentManager, SpeechRecognitionService, SampleDataService, WidgetDataService
-├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator, RelationOptions, GiftDirection
+├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator, RelationOptions, GiftDirection, GenderInference, AgeObfuscator
 ├── Views/
 │   ├── Timeline/    # TimelineView (eine chronologische Liste), BirthdayRow (mit Status-Badge), BirthdayCountdownBadge
 │   ├── Person/      # PersonDetailView (mit skipGift-Toggle, Hobbies, Received-Gifts), PersonAvatar, AllContactsView, ContactsImportView
@@ -72,11 +72,16 @@ Sources/BirthdayWidget/  # WidgetKit Extension (separates Target)
 
 ## KI-Architektur (AIService + AIConsentManager)
 
-**Cloud-basiert via Cloudflare Worker Proxy → OpenRouter** — erfordert explizite DSGVO-Einwilligung.
+**Cloud-basiert via Cloudflare Worker Proxy → OpenRouter** — erfordert explizite DSGVO-Einwilligung. **Vollständig anonymisiert.**
 
-| Pfad | Voraussetzung | Daten |
+| Pfad | Voraussetzung | Daten (anonymisiert) |
 |---|---|---|
-| App → CF Worker → OpenRouter → Google Gemini | Proxy-Secret + Einwilligung | Vorname, Alter, Relation, Sternzeichen, Tags, Budget-Rahmen, Geschenktitel |
+| App → CF Worker → OpenRouter → Google Gemini | Proxy-Secret + Einwilligung | Geschlecht (lokal), Altersgruppe, Relation, Sternzeichen, Hobbies, Tags, Budget, Geschenktitel, Tage bis Geburtstag |
+
+**Anonymisierungs-Pipeline:**
+- `GenderInference.swift` — leitet Geschlecht aus Beziehungstyp + Vorname lokal ab (`.male`/`.female`/`.neutral`)
+- `AgeObfuscator.swift` — wandelt exaktes Alter in Altersgruppe ("Mitte 30", "Anfang 20" etc.)
+- Name + Geburtsdatum werden NIE an die API gesendet
 
 Kein Demo-Modus — ohne Proxy-Secret oder Einwilligung werden Fehler angezeigt.
 
@@ -112,12 +117,12 @@ AppConfig.AI.model                // "google/gemini-3.1-flash-lite-preview"
 AppConfig.AI.openRouterBaseURL    // https://ai-presents-proxy.hendrikgrueger.workers.dev
 ```
 
-## DSGVO — KI-Features
+## DSGVO — KI-Features (vollständig anonymisiert)
 
-**Übertragene Daten:** Vorname, Alter (berechnet), Beziehungstyp, Sternzeichen, Hobbies/Interessen, Tags, Budget-Rahmen (Min/Max), Geschenktitel
-**NICHT übertragen:** Geburtsdatum, Links, Notizen, Telefonnummer
+**Übertragene Daten (anonymisiert):** Geschlecht (lokal abgeleitet via `GenderInference`), Altersgruppe (z.B. "Mitte 30" via `AgeObfuscator`), Beziehungstyp, Sternzeichen, Hobbies/Interessen, Tags, Budget-Rahmen (Min/Max), Geschenktitel, Tage bis Geburtstag
+**NICHT übertragen:** Name (weder Vor- noch Nachname), Geburtsdatum, exaktes Alter, Links, Notizen, Telefonnummer
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)
-**Auftragsverarbeiter:** OpenRouter Inc. (USA) → Google LLC (USA)
+**Datenweg:** App → Cloudflare Workers (Proxy) → OpenRouter Inc. (USA) → Google Gemini (USA)
 **Drittlandübermittlung:** Standardvertragsklauseln Art. 46 DSGVO
 **Vollständige Doku:** `Docs/DSGVO-AI.md`
 

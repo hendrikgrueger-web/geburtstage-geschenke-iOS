@@ -25,7 +25,7 @@ struct AIConsentSheet: View {
                         VStack(spacing: 4) {
                             Text("KI-Assistent")
                                 .font(.title2.bold())
-                            Text("Datenverarbeitung durch Dritte")
+                            Text("Anonymisierte Datenverarbeitung")
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                         }
@@ -33,22 +33,20 @@ struct AIConsentSheet: View {
                     .frame(maxWidth: .infinity)
                     .padding(.top, 8)
 
-                    // Übertragene Daten
+                    // Übertragene Daten (anonymisiert)
                     ConsentSection(
                         icon: "arrow.up.circle.fill",
                         iconColor: .orange,
-                        title: "Welche Daten werden übertragen?"
+                        title: "Was wird übertragen? (anonymisiert)"
                     ) {
                         VStack(alignment: .leading, spacing: 8) {
-                            ConsentDataRow(icon: "person.fill", text: "Vorname (aus Kontaktdaten)")
-                            ConsentDataRow(icon: "number", text: "Alter (berechnet aus Geburtsdatum, nicht das Datum selbst)")
-                            ConsentDataRow(icon: "heart.fill", text: "Beziehungstyp (z.B. \"Freund\", \"Mutter\")")
-                            ConsentDataRow(icon: "star.fill", text: "Sternzeichen (berechnet, keine Personaldaten)")
-                            ConsentDataRow(icon: "tag.fill", text: "Interessen/Tags (sofern vorhanden)")
-                            ConsentDataRow(icon: "eurosign.circle", text: "Budget-Rahmen (Min/Max, für passende Vorschläge)")
-                            ConsentDataRow(icon: "gift.fill", text: "Titel vergangener Geschenke (keine Notizen)")
-                            ConsentDataRow(icon: "calendar", text: "Geburtstag (nur Monat und Tag, kein Jahr)")
-                            ConsentDataRow(icon: "checkmark.circle", text: "Status von Geschenkideen (z.B. \"geplant\", \"gekauft\")")
+                            ConsentDataRow(icon: "person.fill", text: "Geschlecht (lokal aus Name/Beziehung abgeleitet)")
+                            ConsentDataRow(icon: "number", text: "Altersgruppe (z.B. \u{201E}Mitte 30\u{201C}, nicht das exakte Alter)")
+                            ConsentDataRow(icon: "heart.fill", text: "Beziehungstyp (z.B. \u{201E}Freund/in\u{201C}, \u{201E}Mutter\u{201C})")
+                            ConsentDataRow(icon: "star.fill", text: "Sternzeichen")
+                            ConsentDataRow(icon: "tag.fill", text: "Interessen und Hobbies (sofern vorhanden)")
+                            ConsentDataRow(icon: "eurosign.circle", text: "Budget-Rahmen (für passende Vorschläge)")
+                            ConsentDataRow(icon: "gift.fill", text: "Titel früherer Geschenke")
                         }
                     }
 
@@ -59,11 +57,24 @@ struct AIConsentSheet: View {
                         title: "Was wird NICHT übertragen?"
                     ) {
                         VStack(alignment: .leading, spacing: 8) {
+                            ConsentDataRow(icon: "person.text.rectangle", text: "Name")
                             ConsentDataRow(icon: "calendar", text: "Geburtsdatum")
+                            ConsentDataRow(icon: "number.circle", text: "Exaktes Alter")
                             ConsentDataRow(icon: "link", text: "Links")
                             ConsentDataRow(icon: "note.text", text: "Notizen")
                             ConsentDataRow(icon: "phone.fill", text: "Kontaktdaten / Telefonnummer")
                         }
+                    }
+
+                    // Datenschutz-Prinzip
+                    ConsentSection(
+                        icon: "shield.checkmark.fill",
+                        iconColor: .green,
+                        title: "Datenschutz-Prinzip"
+                    ) {
+                        Text("Es werden keine personenbezogenen Daten übertragen. Die KI erhält nur anonymisierte Informationen wie Altersgruppe und Geschlecht — keine Namen, keine Geburtsdaten.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
                     }
 
                     // Verarbeiter
@@ -74,15 +85,23 @@ struct AIConsentSheet: View {
                     ) {
                         VStack(alignment: .leading, spacing: 12) {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("OpenRouter Inc. (USA)")
+                                Text("Cloudflare Inc. (USA)")
                                     .font(.subheadline.bold())
-                                Text("Leitet Anfragen weiter an")
+                                Text("Proxy — schützt den API-Key, leitet Anfragen weiter")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
 
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Google Vertex AI / Google AI Studio (USA)")
+                                Text("OpenRouter Inc. (USA)")
+                                    .font(.subheadline.bold())
+                                Text("API-Gateway — leitet Anfragen an das Sprachmodell weiter")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Google LLC — Google Gemini (USA)")
                                     .font(.subheadline.bold())
                                 Text("Verarbeitet die KI-Anfragen")
                                     .font(.caption)

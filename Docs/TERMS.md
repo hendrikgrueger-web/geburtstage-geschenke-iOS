@@ -1,8 +1,8 @@
 # Nutzungsbedingungen (Terms of Service)
 
 **App:** AI Präsente
-**Version:** 0.2.0 (Beta)
-**Stand:** 2. März 2026
+**Version:** 1.0.0
+**Stand:** März 2026
 **Sprache:** Deutsch
 
 ---
@@ -59,7 +59,7 @@ Als Nutzer der App verpflichten Sie sich zu:
 
 ## 5. Geistiges Eigentum
 
-### 5.1 Rechte des Entwicklers
+### 5.1 Rechte des Anbieters
 Alle Rechte an der App "AI Präsente" einschließlich:
 - Quellcode
 - Design
@@ -67,22 +67,17 @@ Alle Rechte an der App "AI Präsente" einschließlich:
 - Grafiken
 - Dokumentation
 
-gehören dem Entwickler Hendrik Grüger oder seinen Lizenzgebern.
+gehören der Gruepi GmbH oder ihren Lizenzgebern.
 
-### 5.2 Open-Source-Lizenz
-Diese App wird als Open-Source-Projekt entwickelt. Der Quellcode steht unter einer Open-Source-Lizenz (siehe LICENSE-Datei im Repository).
-
-### 5.3 Nutzerrechte
+### 5.2 Nutzerrechte
 Sie erhalten:
-- Eine persönliche, nicht-exklusive Lizenz zur Nutzung der App
-- Das Recht, den Quellcode einzusehen und zu prüfen
-- Das Recht, Beiträge im Rahmen der Open-Source-Gemeinschaft zu leisten
+- Eine persönliche, nicht-exklusive Lizenz zur Nutzung der App gemäß Apple App Store-Bedingungen
 
-### 5.4 Einschränkungen
+### 5.3 Einschränkungen
 Sie dürfen:
 - Die App nicht ohne Erlaubnis kommerziell verwerten
-- Den Quellcode nicht unter anderer Lizenz verbreiten
-- Keine abgeleiteten Werke erstellen, die gegen die Open-Source-Lizenz verstoßen
+- Den App-Inhalt nicht vervielfältigen, modifizieren oder weiterverbreiten
+- Keine abgeleiteten Werke ohne ausdrückliche Genehmigung erstellen
 
 ---
 
@@ -132,9 +127,6 @@ Der Entwickler ist nicht verantwortlich für:
 - Schäden aus Nutzung von KI-Empfehlungen
 - Fehlfunktionen externer KI-Dienste
 
-### 8.3 Demo-Modus
-Die App enthält einen Demo-Modus ohne API-Key. In diesem Modus werden Beispieldaten angezeigt, die keine echten KI-Empfehlungen sind.
-
 ---
 
 ## 9. Verfügbarkeit und Support
@@ -151,14 +143,6 @@ Support wird über folgende Kanäle angeboten:
 - E-Mail: hendrik@gruepi.de
 
 Wir bemühen uns, Anfragen zeitnah zu beantworten, geben aber keine Antwortgarantien.
-
-### 9.3 Beta-Phase
-Diese App befindet sich in der Beta-Phase (v0.2.0). Es kann zu:
-- Fehlern und Abstürzen kommen
-- Änderungen an Funktionen und UI ohne Vorankündigung erfolgen
-- Datenverlust durch Updates möglich sein
-
-**Empfehlung:** Regelmäßige Backups Ihrer Daten werden empfohlen.
 
 ---
 
@@ -225,14 +209,16 @@ Diese Nutzungsbedingungen stellen die vollständige Vereinbarung zwischen Ihnen 
 
 Bei Fragen zu diesen Nutzungsbedingungen kontaktieren Sie uns:
 
+**Gruepi GmbH**
+Goethestraße 3
+36304 Alsfeld
+
 - **E-Mail:** hendrik@gruepi.de
-- **GitHub Issues:** https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
+- **Geschäftsführer:** Hendrik Grüger
 - **Sprache:** Deutsch oder Englisch
 
 ---
 
 **Vielen Dank für das Vertrauen in AI Präsente!**
 
-Wir entwickeln diese App mit Sorgfalt und Engagement. Ihre Feedback und Beiträge sind willkommen, um die App gemeinsam zu verbessern.
-
-Letzte Aktualisierung: 2. März 2026
+Letzte Aktualisierung: März 2026

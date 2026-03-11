@@ -114,12 +114,12 @@ final class AIChatViewModel {
             REGELN:
             - Antworte auf Deutsch, herzlich und natürlich wie ein guter Freund der bei Geschenken hilft.
             - Themen: Geburtstage, Geschenkideen, Geschenkplanung. Off-Topic freundlich ablehnen.
-            - Bei mehrdeutigem Namen: nachfragen wer gemeint ist.
-            - WICHTIG: Short-IDs (p1, g1 etc.) sind NUR für die action-Felder. Schreibe NIEMALS Short-IDs in die message — verwende dort immer den echten Namen.
-            - WICHTIG: Wenn ein Vorname zu MEHREREN Kontakten passt, IMMER clarify_person verwenden und ALLE passenden Kontakte mit vollem Namen auflisten. NIEMALS einfach einen davon auswählen.
-            - Berechne das Alter korrekt: Wenn jemand z.B. 42 Jahre alt ist und in 30 Tagen Geburtstag hat, wird die Person 43.
+            - DATENSCHUTZ: Du erhältst KEINE echten Namen. Jede Person hat eine ID (z.B. p1) und eine Beziehung (z.B. "deine Schwester"). Verwende in deinen Antworten immer die Beziehung statt eines Namens.
+            - Bei mehrdeutiger Beziehung: nachfragen wer gemeint ist.
+            - WICHTIG: Short-IDs (p1, g1 etc.) sind NUR für die action-Felder. Schreibe NIEMALS Short-IDs in die message — verwende dort die Beziehung (z.B. "deine Mutter", "dein Freund").
+            - WICHTIG: Wenn eine Beschreibung zu MEHREREN Kontakten passt, IMMER clarify_person verwenden und ALLE passenden Kontakte mit ihrer Beziehung und Altersgruppe auflisten.
             - Formuliere vollständige, natürliche Sätze. Nenne konkrete Daten (z.B. "am 15. April") statt nur Tage.
-            - Bei Geschenkfragen: Berücksichtige Hobbies, Alter, Beziehung und bisherige Geschenke.
+            - Bei Geschenkfragen: Berücksichtige Hobbies, Altersgruppe, Geschlecht, Beziehung und bisherige Geschenke.
 
             FORMAT: Antworte NUR mit JSON:
             {"message":"Deine natürliche Antwort hier","action":{"type":"none"}}
@@ -133,7 +133,7 @@ final class AIChatViewModel {
             - off_topic: (keine zusätzlichen Felder)
             - none: (keine zusätzlichen Felder)
 
-            Beispiel: {"message":"Wie wäre es mit einem Buch?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Anna","gift_title":"Buch","gift_note":""}}
+            Beispiel: {"message":"Wie wäre es mit einem Buch für deine Schwester?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Schwester","gift_title":"Buch","gift_note":""}}
             """
         } else {
             prompt = """
@@ -142,12 +142,12 @@ final class AIChatViewModel {
             RULES:
             - Respond warmly and naturally, like a helpful friend who's great at gift-giving.
             - Topics: Birthdays, gift ideas, gift planning. Politely decline off-topic requests.
-            - Ambiguous name: ask to clarify.
-            - IMPORTANT: Short IDs (p1, g1 etc.) are ONLY for action fields. NEVER include short IDs in the message — always use the person's real name.
-            - IMPORTANT: If a first name matches MULTIPLE contacts, ALWAYS use clarify_person and list ALL matching contacts by full name. NEVER just pick one.
-            - Calculate age correctly: If someone is 42 and their birthday is in 30 days, they're turning 43.
+            - PRIVACY: You do NOT receive real names. Each person has an ID (e.g. p1) and a relationship (e.g. "your sister"). Always use the relationship in your responses instead of a name.
+            - Ambiguous relationship: ask to clarify.
+            - IMPORTANT: Short IDs (p1, g1 etc.) are ONLY for action fields. NEVER include short IDs in the message — always use the relationship (e.g. "your mother", "your friend").
+            - IMPORTANT: If a description matches MULTIPLE contacts, ALWAYS use clarify_person and list ALL matching contacts by relationship and age group.
             - Use complete, natural sentences. Mention specific dates (e.g. "on April 15th") instead of just days.
-            - For gift questions: Consider hobbies, age, relationship, and past gifts.
+            - For gift questions: Consider hobbies, age group, gender, relationship, and past gifts.
 
             FORMAT: Respond ONLY with JSON:
             {"message":"Your natural response here","action":{"type":"none"}}
@@ -161,7 +161,7 @@ final class AIChatViewModel {
             - off_topic: (no additional fields)
             - none: (no additional fields)
 
-            Example: {"message":"How about a book?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Anna","gift_title":"Book","gift_note":""}}
+            Example: {"message":"How about a book for your sister?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Sister","gift_title":"Book","gift_note":""}}
             """
         }
 
@@ -184,16 +184,16 @@ final class AIChatViewModel {
     }
 
     private func buildCompactPersonEntry(_ person: PersonRef, shortId: String, isGerman: Bool, giftCounter: inout Int) -> String {
-        // Format: p1:Name|15.3.|34|10d|Freund/in|Reiten,Kochen
-        let calendar = Calendar.current
-        let month = calendar.component(.month, from: person.birthday)
-        let day = calendar.component(.day, from: person.birthday)
+        // Format: p1:weiblich|Mitte 30|10d|Freund/in|Reiten,Kochen
+        // DATENSCHUTZ: Kein Name, kein Geburtstag (Tag/Monat), kein exaktes Alter
+        let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? person.displayName
+        let gender = GenderInference.infer(relation: person.relation, firstName: firstName)
 
-        var parts: [String] = ["\(shortId):\(person.displayName)"]
-        parts.append("\(day).\(month).")
+        var parts: [String] = ["\(shortId):\(isGerman ? gender.localizedLabel : gender.englishLabel)"]
 
         if person.birthYearKnown {
-            parts.append("\(BirthdayDateHelper.age(from: person.birthday))J")
+            let exactAge = BirthdayDateHelper.age(from: person.birthday)
+            parts.append(AgeObfuscator.approximateAge(exactAge))
         }
 
         if let days = BirthdayDateHelper.daysUntilBirthday(from: person.birthday) {
@@ -224,12 +224,12 @@ final class AIChatViewModel {
             entry += " >" + ideaParts.joined(separator: ",")
         }
 
-        // Geschenkhistorie kompakt (nur letzten 2 Jahre, max 3)
+        // Geschenkhistorie kompakt (nur Titel, keine Jahreszahlen — DATENSCHUTZ, max 3)
         let history = giftHistory.filter { $0.personId == person.id }
             .sorted { $0.year > $1.year }
             .prefix(3)
         if !history.isEmpty {
-            let histParts = history.map { "\($0.title)(\($0.year % 100))" }
+            let histParts = history.map { $0.title }
             entry += " h:" + histParts.joined(separator: ",")
         }
 

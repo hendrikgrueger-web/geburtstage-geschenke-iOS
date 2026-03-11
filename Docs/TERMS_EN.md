@@ -1,8 +1,8 @@
 # Terms of Service
 
 **App:** AI Präsente
-**Version:** 0.2.0 (Beta)
-**Date:** March 2, 2026
+**Version:** 1.0.0
+**Date:** March 2026
 **Language:** English
 
 ---
@@ -59,7 +59,7 @@ As a user of the app, you agree to:
 
 ## 5. Intellectual Property
 
-### 5.1 Developer Rights
+### 5.1 Provider Rights
 All rights to the "AI Präsente" app, including:
 - Source code
 - Design
@@ -67,22 +67,17 @@ All rights to the "AI Präsente" app, including:
 - Graphics
 - Documentation
 
-belong to developer Hendrik Grüger or his licensors.
+belong to Gruepi GmbH or its licensors.
 
-### 5.2 Open Source License
-This app is developed as an open-source project. The source code is available under an open-source license (see LICENSE file in the repository).
-
-### 5.3 User Rights
+### 5.2 User Rights
 You receive:
-- A personal, non-exclusive license to use the app
-- The right to review and inspect the source code
-- The right to contribute within the open-source community
+- A personal, non-exclusive license to use the app pursuant to Apple App Store terms
 
-### 5.4 Restrictions
+### 5.3 Restrictions
 You may not:
 - Commercially exploit the app without permission
-- Distribute the source code under a different license
-- Create derivative works that violate the open-source license
+- Reproduce, modify, or redistribute the app content
+- Create derivative works without express authorization
 
 ---
 
@@ -132,9 +127,6 @@ The developer is not responsible for:
 - Damages from using AI recommendations
 - Malfunctions of external AI services
 
-### 8.3 Demo Mode
-The app includes a demo mode without an API key. In this mode, sample data is displayed that are not actual AI recommendations.
-
 ---
 
 ## 9. Availability and Support
@@ -151,14 +143,6 @@ Support is offered through the following channels:
 - Email: hendrik@gruepi.de
 
 We strive to respond to requests promptly but provide no response guarantees.
-
-### 9.3 Beta Phase
-This app is in beta phase (v0.2.0). There may be:
-- Errors and crashes
-- Changes to features and UI without notice
-- Possible data loss from updates
-
-**Recommendation:** Regular backups of your data are recommended.
 
 ---
 
@@ -225,14 +209,16 @@ These Terms of Service constitute the entire agreement between you and the devel
 
 For questions about these Terms of Service, please contact us:
 
+**Gruepi GmbH**
+Goethestraße 3
+36304 Alsfeld
+
 - **Email:** hendrik@gruepi.de
-- **GitHub Issues:** https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
+- **Managing Director:** Hendrik Grüger
 - **Language:** English or German
 
 ---
 
 **Thank you for your trust in AI Präsente!**
 
-We develop this app with care and commitment. Your feedback and contributions are welcome to improve the app together.
-
-Last Updated: March 2, 2026
+Last Updated: March 2026

@@ -1,8 +1,8 @@
 # Privacy Policy
 
 **App:** AI Präsente
-**Version:** 0.2.0 (Beta)
-**Date:** March 2, 2026
+**Version:** 1.0.0
+**Date:** March 11, 2026
 **Language:** English
 
 ---
@@ -22,10 +22,10 @@ AI Präsente respects your privacy and protects your personal data. This app is 
 
 ## 2. Data Controller
 
-**Developer:**
-- Name: Hendrik Grüger
+**Provider:**
+- Gruepi GmbH, Goethestraße 3, 36304 Alsfeld
+- Managing Director: Hendrik Grüger
 - Email: hendrik@gruepi.de
-- GitHub: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 
 **Contact for privacy questions:** hendrik@gruepi.de
 
@@ -106,18 +106,16 @@ AI Präsente respects your privacy and protects your personal data. This app is 
 **Purpose:** Generation of personalized gift ideas and birthday messages.
 
 **Processing:**
-- AI requests contain only minimal context data (name, age, relationship).
-- Requests are sent to external AI services (OpenAI API or similar).
+- AI requests contain only anonymized data: gender (locally inferred), age group (e.g. 'mid 30s'), relationship type, zodiac sign, interests, budget range, gift titles. NO names, birth dates, or exact ages are transmitted.
+- Requests are routed through Cloudflare Workers to OpenRouter Inc. (USA) and then to Google Gemini (USA).
 - AI responses are stored only locally.
 
 **Privacy:**
-- No personal identifiers are sent to the AI service.
+- No personally identifiable information (name, birth date, age) is sent to the AI service. All data is anonymized.
 - AI services may store requests temporarily for analytical purposes.
-- We recommend using API keys that do not store personal data.
 
 **Your Control:**
 - AI features are optional and can be disabled in settings.
-- You must provide your own API key for AI features (demo mode available).
 
 ---
 
@@ -141,7 +139,7 @@ We do NOT collect any of the following data:
 We do NOT transmit your personal data to third parties, except:
 
 1. **iCloud (Apple):** For synchronization between your devices (CloudKit).
-2. **AI Services (Optional):** For generating gift ideas (minimal context only).
+2. **AI Services (Optional):** Cloudflare Workers (proxy), OpenRouter Inc. (USA), Google Gemini (USA) — for generating gift ideas (anonymized data only).
 
 Both transmissions occur only with your explicit consent and can be disabled at any time.
 
@@ -233,7 +231,7 @@ We reserve the right to adapt this privacy policy:
 - The updated version will be documented here.
 - You will be informed by email (if you have an account on App Store Connect).
 
-**Last Updated:** March 2, 2026
+**Last Updated:** March 11, 2026
 
 ---
 
@@ -265,13 +263,8 @@ To protect your privacy, check the following settings:
 In the app under "Settings", you can:
 
 - Enable/disable AI features
-- Enter or remove API key for AI services
 - Delete all local data
 
 ---
 
 **Thank you for your trust!**
-
-We develop this app as an open-source project. The complete source code is available on GitHub: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
-
-You can review at any time how your data is processed by inspecting the code.

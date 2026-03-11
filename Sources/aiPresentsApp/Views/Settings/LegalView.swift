@@ -8,7 +8,7 @@ struct LegalView: View {
                     // Anbieter
                     LegalSection(
                         title: "Anbieter",
-                        content: "Hendrik Grüger\nhendrik@gruepi.de\n\nDiese App ist ein privates, nicht-kommerzielles Projekt und wird kostenlos zur Verfügung gestellt."
+                        content: "Gruepi GmbH\nGoethestraße 3\n36304 Alsfeld\n\nhendrik@gruepi.de\nGeschäftsführer: Hendrik Grüger\n\nHandelsregister: Amtsgericht Gießen, HRB XXXXX"
                     )
 
                     // Haftungsausschluss

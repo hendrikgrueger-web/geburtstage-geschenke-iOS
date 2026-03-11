@@ -1,8 +1,8 @@
 # Datenschutzrichtlinie (Privacy Policy)
 
 **App:** AI Präsente
-**Version:** 0.2.0 (Beta)
-**Stand:** 2. März 2026
+**Version:** 1.0.0
+**Stand:** 11. März 2026
 **Sprache:** Deutsch
 
 ---
@@ -22,10 +22,10 @@ AI Präsente respektiert Ihre Privatsphäre und schützt Ihre persönlichen Date
 
 ## 2. Verantwortlicher
 
-**Entwickler:**
-- Name: Hendrik Grüger
+**Anbieter:**
+- Gruepi GmbH, Goethestraße 3, 36304 Alsfeld
+- Geschäftsführer: Hendrik Grüger
 - E-Mail: hendrik@gruepi.de
-- GitHub: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 
 **Kontakt für Datenschutzfragen:** hendrik@gruepi.de
 
@@ -106,18 +106,16 @@ AI Präsente respektiert Ihre Privatsphäre und schützt Ihre persönlichen Date
 **Zweck:** Generierung von personalisierten Geschenkideen und Geburtstagsnachrichten.
 
 **Verarbeitung:**
-- KI-Anfragen enthalten nur minimale Kontextdaten (Name, Alter, Beziehung).
-- Anfragen werden an externe KI-Dienste gesendet (OpenAI API oder ähnliche).
+- KI-Anfragen enthalten ausschließlich anonymisierte Daten: Geschlecht (lokal abgeleitet), Altersgruppe (z.B. „Mitte 30"), Beziehungstyp, Sternzeichen, Interessen, Budget-Rahmen, Geschenktitel. Es werden KEINE Namen, Geburtsdaten oder exakten Altersangaben übertragen.
+- Anfragen werden über Cloudflare Workers an OpenRouter Inc. (USA) und von dort an Google Gemini (USA) weitergeleitet.
 - KI-Antworten werden nur lokal gespeichert.
 
 **Datenschutz:**
-- Keine persönlichen Identifikationsmerkmale werden an den KI-Dienst gesendet.
+- Keine personenbezogenen Daten (Name, Geburtsdatum, Alter) werden an den KI-Dienst gesendet. Alle Daten sind anonymisiert.
 - KI-Dienste speichern Anfragen möglicherweise temporär zu Analysezwecken.
-- Wir empfehlen die Nutzung von API-Keys, die keine persönlichen Daten speichern.
 
 **Ihre Kontrolle:**
 - KI-Funktionen sind optional und können in den Einstellungen deaktiviert werden.
-- Sie müssen Ihren eigenen API-Key für KI-Funktionen bereitstellen (Demo-Modus verfügbar).
 
 ---
 
@@ -141,7 +139,7 @@ Wir sammeln **keine** der folgenden Daten:
 Wir übertragen Ihre persönlichen Daten **nicht** an Dritte, außer:
 
 1. **iCloud (Apple):** Zur Synchronisation zwischen Ihren Geräten (CloudKit).
-2. **KI-Dienste (Optional):** Zur Generierung von Geschenkideen (nur minimaler Kontext).
+2. **KI-Dienste (Optional):** Cloudflare Workers (Proxy), OpenRouter Inc. (USA), Google Gemini (USA) — zur Generierung von Geschenkideen (nur anonymisierte Daten).
 
 Beide Übertragungen erfolgen nur mit Ihrer ausdrücklichen Zustimmung und können jederzeit deaktiviert werden.
 
@@ -233,7 +231,7 @@ Wir behalten uns vor, diese Datenschutzrichtlinie anzupassen:
 - Die aktualisierte Version wird hier dokumentiert.
 - Sie werden per E-Mail informiert (falls Sie einen Account bei App Store Connect haben).
 
-**Letzte Aktualisierung:** 2. März 2026
+**Letzte Aktualisierung:** 11. März 2026
 
 ---
 
@@ -265,13 +263,8 @@ Um Ihre Privatsphäre zu schützen, überprüfen Sie folgende Einstellungen:
 In der App unter "Einstellungen" können Sie:
 
 - KI-Funktionen aktivieren/deaktivieren
-- API-Key für KI-Dienste eingeben oder entfernen
 - Alle lokalen Daten löschen
 
 ---
 
 **Vielen Dank für Ihr Vertrauen!**
-
-Wir entwickeln diese App als Open-Source-Projekt. Der vollständige Quellcode ist auf GitHub verfügbar: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
-
-Sie können jederzeit überprüfen, wie Ihre Daten verarbeitet werden, indem Sie den Code einsehen.

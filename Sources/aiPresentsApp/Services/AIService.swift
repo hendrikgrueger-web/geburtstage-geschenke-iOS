@@ -4,23 +4,24 @@ import Foundation
 // Werden genutzt, um SwiftData-Objekte (non-Sendable) sicher über Actor-Grenzen zu übergeben.
 
 private struct GiftContext: Sendable {
-    let name: String
-    /// Nil wenn das Geburtsjahr unbekannt ist (Kontakt-Import ohne Jahr).
-    let age: Int?
+    /// Geschlecht als Label (z.B. "weiblich", "männlich", "Person") — KEIN Name
+    let genderLabel: String
+    /// Ungefähre Altersgruppe (z.B. "Mitte 30") — KEIN exaktes Alter. Nil wenn unbekannt.
+    let ageGroup: String?
     let relation: String
     let zodiac: String
     let daysUntil: Int?
     /// Dauerhafte Hobbies/Interessen der Person (max. 10, aus PersonRef.hobbies).
-    /// Werden im Prompt separat von den einmaligen Tags übergeben.
     let hobbies: [String]
     let tags: [String]
     let pastGiftTitles: [String] // Nur Titel, kein ganzes GiftHistory-Objekt
 }
 
 private struct BirthdayContext: Sendable {
-    let name: String
-    /// Nil wenn das Geburtsjahr unbekannt ist (Kontakt-Import ohne Jahr).
-    let age: Int?
+    /// Geschlecht als Label — KEIN Name
+    let genderLabel: String
+    /// Ungefähre Altersgruppe — KEIN exaktes Alter. Nil wenn unbekannt.
+    let ageGroup: String?
     let relation: String
     let zodiac: String
     let lastGiftTitle: String?
@@ -33,11 +34,10 @@ private struct BirthdayContext: Sendable {
 
 /// KI-Service für Geschenkvorschläge und Geburtstagsgrüße via Cloudflare Worker Proxy → OpenRouter (Google Gemini).
 ///
-/// ## Datenschutz: Cloud-Verarbeitung
-/// Ausgewählte Daten werden via Proxy an OpenRouter → Google Gemini (USA) übertragen.
-/// Übertragen werden: Vorname, Alter, Beziehungstyp, Sternzeichen, Interessen/Tags,
-/// Budget-Rahmen (Min/Max), Titel vergangener Geschenke.
-/// NICHT übertragen: Geburtsdatum, Links, Notizen, Telefonnummer.
+/// ## Datenschutz: Cloud-Verarbeitung (DSGVO-konform anonymisiert)
+/// Übertragene Daten sind ANONYMISIERT: Geschlecht (lokal abgeleitet), Altersgruppe (z.B. "Mitte 30"),
+/// Beziehungstyp, Sternzeichen, Interessen/Tags, Budget-Rahmen, Geschenktitel (ohne Jahr).
+/// NICHT übertragen: Name, Geburtsdatum, exaktes Alter, Links, Notizen, Telefonnummer.
 ///
 /// ## Voraussetzungen
 /// - Proxy-Secret in Info.plist (AIProxySecret)
@@ -84,16 +84,20 @@ struct AIService {
         excludeTitles: [String] = []
     ) async throws -> [GiftSuggestion] {
 
-        // Daten auf @MainActor in Sendable-Struct extrahieren
+        // DATENSCHUTZ: Geschlecht lokal ableiten, Alter verrauschen, kein Name an API
+        let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? person.displayName
+        let gender = GenderInference.infer(relation: person.relation, firstName: firstName)
+        let isGerman = Locale.current.language.languageCode?.identifier == "de"
+
         let context = GiftContext(
-            name: person.displayName,
-            age: person.birthYearKnown ? BirthdayDateHelper.age(from: person.birthday) : nil,
+            genderLabel: isGerman ? gender.localizedLabel : gender.englishLabel,
+            ageGroup: person.birthYearKnown ? AgeObfuscator.approximateAge(BirthdayDateHelper.age(from: person.birthday)) : nil,
             relation: person.relation,
             zodiac: BirthdayDateHelper.zodiacSign(from: person.birthday),
             daysUntil: BirthdayDateHelper.daysUntilBirthday(from: person.birthday),
             hobbies: person.hobbies,
             tags: tags,
-            pastGiftTitles: pastGifts.map { "\($0.title) (\($0.year))" }
+            pastGiftTitles: pastGifts.map { $0.title }
         )
         let budgetRange = (min: budgetMin, max: budgetMax)
 
@@ -111,10 +115,15 @@ struct AIService {
     @MainActor
     func generateBirthdayMessage(for person: PersonRef, pastGifts: [GiftHistory] = [], senderName: String? = nil) async throws -> BirthdayMessage {
 
+        // DATENSCHUTZ: Geschlecht lokal ableiten, Alter verrauschen, kein Name an API
+        let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? person.displayName
+        let gender = GenderInference.infer(relation: person.relation, firstName: firstName)
+        let isGerman = Locale.current.language.languageCode?.identifier == "de"
+
         let lastGift = pastGifts.sorted(by: { $0.year > $1.year }).first
         let context = BirthdayContext(
-            name: person.displayName,
-            age: person.birthYearKnown ? BirthdayDateHelper.age(from: person.birthday) : nil,
+            genderLabel: isGerman ? gender.localizedLabel : gender.englishLabel,
+            ageGroup: person.birthYearKnown ? AgeObfuscator.approximateAge(BirthdayDateHelper.age(from: person.birthday)) : nil,
             relation: person.relation,
             zodiac: BirthdayDateHelper.zodiacSign(from: person.birthday),
             lastGiftTitle: lastGift?.title,
@@ -144,24 +153,13 @@ struct AIService {
         var userPrompt: String
 
         if promptLanguage == "de" {
-            // Basis: Name + Beziehung
-            userPrompt = "Erstelle 5 passende Geschenkideen für \(context.name), Beziehung: \(context.relation)."
+            // DATENSCHUTZ: Geschlecht + Beziehung statt Name, Altersgruppe statt exaktes Alter
+            userPrompt = "Erstelle 5 passende Geschenkideen für eine \(context.genderLabel)e Person, Beziehung: \(context.relation)."
 
-            // Alter prominent hervorheben (WICHTIG für altersgerechte Vorschläge)
-            if let age = context.age {
-                let ageGroup: String
-                switch age {
-                case 0...5:   ageGroup = "Kleinkind"
-                case 6...12:  ageGroup = "Grundschulkind"
-                case 13...17: ageGroup = "Teenager"
-                case 18...25: ageGroup = "junger Erwachsener"
-                case 26...59: ageGroup = "Erwachsener"
-                default:      ageGroup = "Senior"
-                }
-                userPrompt += "\n⚠️ ALTER: \(age) Jahre (\(ageGroup)) — Vorschläge MÜSSEN altersgerecht sein!"
+            if let ageGroup = context.ageGroup {
+                userPrompt += "\n⚠️ ALTERSGRUPPE: \(ageGroup) — Vorschläge MÜSSEN altersgerecht sein!"
             }
 
-            // Hobbies als HÖCHSTE Priorität
             if !context.hobbies.isEmpty {
                 userPrompt += "\n⭐ HOBBIES (höchste Priorität, mindestens 3 Vorschläge müssen darauf eingehen): \(context.hobbies.joined(separator: ", "))."
             }
@@ -187,19 +185,10 @@ struct AIService {
                 }
             }
         } else {
-            userPrompt = "Create 5 suitable gift ideas for \(context.name), relationship: \(context.relation)."
+            userPrompt = "Create 5 suitable gift ideas for a \(context.genderLabel) person, relationship: \(context.relation)."
 
-            if let age = context.age {
-                let ageGroup: String
-                switch age {
-                case 0...5:   ageGroup = "toddler"
-                case 6...12:  ageGroup = "elementary school child"
-                case 13...17: ageGroup = "teenager"
-                case 18...25: ageGroup = "young adult"
-                case 26...59: ageGroup = "adult"
-                default:      ageGroup = "senior"
-                }
-                userPrompt += "\n⚠️ AGE: \(age) years old (\(ageGroup)) — suggestions MUST be age-appropriate!"
+            if let ageGroup = context.ageGroup {
+                userPrompt += "\n⚠️ AGE GROUP: \(ageGroup) — suggestions MUST be age-appropriate!"
             }
 
             if !context.hobbies.isEmpty {
@@ -266,46 +255,29 @@ struct AIService {
         var userPrompt: String
 
         if promptLanguage == "de" {
-            userPrompt = "Schreibe eine herzliche Geburtstagsnachricht für \(context.name), Beziehung: \(context.relation)."
+            // DATENSCHUTZ: Geschlecht + Beziehung statt Name, Altersgruppe statt exaktes Alter
+            userPrompt = "Schreibe eine herzliche Geburtstagsnachricht für eine \(context.genderLabel)e Person, Beziehung: \(context.relation)."
 
-            if let age = context.age {
-                let ageGroup: String
-                switch age {
-                case 0...5:   ageGroup = "Kleinkind"
-                case 6...12:  ageGroup = "Grundschulkind"
-                case 13...17: ageGroup = "Teenager"
-                case 18...25: ageGroup = "junger Erwachsener"
-                case 26...59: ageGroup = "Erwachsener"
-                default:      ageGroup = "Senior"
-                }
-                userPrompt += "\n⚠️ ALTER: \(age) Jahre (\(ageGroup)) — Sprache und Ton MÜSSEN zum Alter passen!"
+            if let ageGroup = context.ageGroup {
+                userPrompt += "\n⚠️ ALTERSGRUPPE: \(ageGroup) — Sprache und Ton MÜSSEN zur Altersgruppe passen!"
             }
 
             userPrompt += "\nSternzeichen: \(context.zodiac)."
 
-            if let title = context.lastGiftTitle, let year = context.lastGiftYear {
-                userPrompt += "\nLetztes Geschenk: \(title) (\(year))."
+            if let title = context.lastGiftTitle {
+                userPrompt += "\nLetztes Geschenk: \(title)."
             }
         } else {
-            userPrompt = "Write a heartfelt birthday message for \(context.name), relationship: \(context.relation)."
+            userPrompt = "Write a heartfelt birthday message for a \(context.genderLabel) person, relationship: \(context.relation)."
 
-            if let age = context.age {
-                let ageGroup: String
-                switch age {
-                case 0...5:   ageGroup = "toddler"
-                case 6...12:  ageGroup = "elementary school child"
-                case 13...17: ageGroup = "teenager"
-                case 18...25: ageGroup = "young adult"
-                case 26...59: ageGroup = "adult"
-                default:      ageGroup = "senior"
-                }
-                userPrompt += "\n⚠️ AGE: \(age) years old (\(ageGroup)) — language and tone MUST match the age!"
+            if let ageGroup = context.ageGroup {
+                userPrompt += "\n⚠️ AGE GROUP: \(ageGroup) — language and tone MUST match the age group!"
             }
 
             userPrompt += "\nZodiac sign: \(context.zodiac)."
 
-            if let title = context.lastGiftTitle, let year = context.lastGiftYear {
-                userPrompt += "\nLast gift: \(title) (\(year))."
+            if let title = context.lastGiftTitle {
+                userPrompt += "\nLast gift: \(title)."
             }
         }
 

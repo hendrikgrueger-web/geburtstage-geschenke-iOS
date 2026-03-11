@@ -16,6 +16,22 @@ const MAX_PAYLOAD_BYTES = 50_000;
 const MAX_MESSAGES = 50;
 const MAX_CONTENT_LENGTH = 10_000;
 const VALID_ROLES = ["system", "user", "assistant"];
+const RATE_LIMIT_MAX = 60; // Requests pro Minute pro IP
+const RATE_LIMIT_WINDOW = 60_000; // 1 Minute in ms
+
+// Einfaches In-Memory Rate Limiting (wird bei Worker-Neustart zurückgesetzt)
+const rateLimitMap = new Map();
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now - entry.windowStart > RATE_LIMIT_WINDOW) {
+    rateLimitMap.set(ip, { windowStart: now, count: 1 });
+    return true;
+  }
+  entry.count++;
+  return entry.count <= RATE_LIMIT_MAX;
+}
 
 export default {
   async fetch(request, env) {
@@ -31,6 +47,12 @@ export default {
     // Nur POST erlaubt
     if (request.method !== "POST") {
       return jsonError("Method Not Allowed", 405);
+    }
+
+    // Rate Limiting
+    const clientIP = request.headers.get("CF-Connecting-IP") || "unknown";
+    if (!checkRateLimit(clientIP)) {
+      return jsonError("Too Many Requests", 429);
     }
 
     // App-Secret Authentifizierung
@@ -93,7 +115,7 @@ export default {
 
 function corsHeaders() {
   return {
-    "Access-Control-Allow-Origin": "null",
+    "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, X-App-Secret",
   };
