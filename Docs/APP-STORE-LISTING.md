@@ -10,41 +10,43 @@
 Geburtstage & Geschenke
 
 ### Untertitel (max. 30 Zeichen)
-KI-Geschenkideen & Countdowns
+Dein KI-Geschenkeberater
 
 ### Beschreibung
 
-Nie wieder einen Geburtstag vergessen — und immer die passende Geschenkidee parat haben.
+Der Geburtstag steht vor der Tür — und du hast keine Idee? Das war gestern.
 
-Geburtstage & Geschenke hilft dir, alle wichtigen Geburtstage im Blick zu behalten und mit KI-Unterstützung kreative Geschenkideen zu finden. Importiere deine Kontakte, sieh auf einen Blick wer als Nächstes Geburtstag hat und lass dir personalisierte Vorschläge machen.
+Geburtstage & Geschenke nimmt dir den Stress ab: Die App erinnert dich rechtzeitig an jeden Geburtstag und findet dank KI die passende Geschenkidee — abgestimmt auf Alter, Hobbies und Beziehung. Einfach Kontakte importieren, fertig.
 
-GEBURTSTAGE IM BLICK
-- Chronologische Timeline aller Geburtstage mit Countdown
-- Smarte Erinnerungen — du bestimmst wann und wie oft
-- Widget für den Homescreen zeigt die nächsten Geburtstage
+KEIN GEBURTSTAG MEHR VERGESSEN
+- Alle Geburtstage auf einen Blick — sortiert nach Countdown
+- Smarte Erinnerungen: Du bestimmst wann und wie oft
+- Homescreen-Widget zeigt, wer als Nächstes dran ist
 
-KI-GESCHENKASSISTENT
-- Frag die KI nach Geschenkideen — per Text oder Sprache
-- Vorschläge basieren auf Alter, Beziehung und Interessen
-- Trag Ideen direkt als Geschenkvorschlag ein
-- Lass dir persönliche Geburtstagsnachrichten schreiben
-- Datenschutzfreundlich: Keine Namen oder Geburtsdaten werden übertragen
+DEIN PERSÖNLICHER KI-GESCHENKASSISTENT
+- Frag per Text oder Sprache nach Geschenkideen
+- Personalisierte Vorschläge basierend auf Hobbies, Alter und Beziehung
+- Ideen direkt speichern und als geplant oder gekauft markieren
+- Persönliche Geburtstagsnachrichten auf Knopfdruck
+- Datenschutz: Keine Namen oder Geburtsdaten werden übertragen
 
-GESCHENKE ORGANISIEREN
-- Geschenkideen sammeln, planen und als gekauft markieren
-- Geschenkhistorie: Was wurde wann verschenkt oder erhalten?
-- Budget im Blick behalten
+GESCHENKE PERFEKT ORGANISIERT
+- Geschenkideen sammeln, planen und den Überblick behalten
+- Geschenkhistorie: Was hast du wem geschenkt — und was bekommen?
+- Budget pro Person im Blick
 
-DEINE DATEN GEHÖREN DIR
-- iCloud-Sync über alle Apple-Geräte
-- DSGVO-konform: KI-Features nur mit deiner Einwilligung
-- Anonymisierte Datenverarbeitung — keine personenbezogenen Daten an Dritte
+100% DEINE DATEN
+- iCloud-Sync auf all deinen Apple-Geräten
+- DSGVO-konform: KI nur mit deiner ausdrücklichen Einwilligung
+- Keine personenbezogenen Daten an Dritte — garantiert
+
+Schluss mit Last-Minute-Panik. Lade Geburtstage & Geschenke jetzt herunter und schenke smarter.
 
 ### Keywords (max. 100 Zeichen)
-Geburtstag,Geschenk,Ideen,KI,Erinnerung,Countdown,Planer,Geschenkidee,Birthday,Presents
+Geburtstag,Geschenk,KI,Ideen,Erinnerung,Planer,Countdown,Wunschliste,Kalender,Jahrestag,Schenken
 
 ### Promotional Text (max. 170 Zeichen)
-Geburtstage im Blick, Geschenkideen per KI — nie wieder ohne Idee dastehen. Jetzt mit Spracheingabe und smartem Assistenten!
+Nie wieder Last-Minute-Stress! Dein KI-Assistent findet das perfekte Geschenk — passend zu Hobbies, Alter und Beziehung. Per Text oder Sprache.
 
 ---
 
@@ -54,41 +56,43 @@ Geburtstage im Blick, Geschenkideen per KI — nie wieder ohne Idee dastehen. Je
 Birthdays & Gifts
 
 ### Subtitle (max. 30 characters)
-AI Gift Ideas & Countdowns
+Your AI Gift-Finding Assistant
 
 ### Description
 
-Never forget a birthday again — and always have the perfect gift idea ready.
+Birthday coming up and no idea what to get? We've got you.
 
-Birthdays & Gifts helps you keep track of all important birthdays and find creative gift ideas with AI assistance. Import your contacts, see at a glance who's celebrating next, and get personalized suggestions.
+Birthdays & Gifts takes the stress out of gift-giving. The app reminds you of every birthday and uses AI to suggest thoughtful, personalized gift ideas — based on hobbies, age, and your relationship. Just import your contacts and you're set.
 
-BIRTHDAYS AT A GLANCE
-- Chronological timeline with countdown to every birthday
-- Smart reminders — you decide when and how often
-- Home screen widget shows upcoming birthdays
+NEVER MISS A BIRTHDAY
+- Every birthday in one timeline, sorted by countdown
+- Smart reminders on your schedule — daily, weekly, or custom
+- Home screen widget shows who's celebrating next
 
-AI GIFT ASSISTANT
-- Ask the AI for gift ideas — by text or voice
-- Suggestions based on age, relationship, and interests
-- Save ideas directly as gift suggestions
-- Get personalized birthday messages written for you
-- Privacy-friendly: No names or birth dates are transmitted
+YOUR PERSONAL AI GIFT ADVISOR
+- Ask for gift ideas by text or voice — like chatting with a friend
+- Personalized suggestions based on hobbies, age, and relationship
+- Save ideas instantly and mark them as planned or purchased
+- Get heartfelt birthday messages written for you in seconds
+- Privacy first: No names or birth dates ever leave your device
 
-ORGANIZE YOUR GIFTS
-- Collect gift ideas, plan them, and mark as purchased
-- Gift history: Track what was given or received and when
-- Keep your budget in check
+GIFT PLANNING, SIMPLIFIED
+- Collect ideas, track your plans, and stay organized
+- Gift history: Remember what you gave — and what you received
+- Budget tracking per person so you never overspend
 
-YOUR DATA STAYS YOURS
+YOUR DATA, YOUR CONTROL
 - iCloud sync across all your Apple devices
-- GDPR compliant: AI features only with your consent
-- Anonymized data processing — no personal data shared with third parties
+- GDPR & privacy compliant: AI only with your explicit consent
+- Zero personal data shared with third parties — guaranteed
+
+Stop the last-minute panic. Download Birthdays & Gifts and give smarter gifts, every time.
 
 ### Keywords (max. 100 characters)
-Birthday,Gift,Ideas,AI,Reminder,Countdown,Planner,GiftIdea,Presents,Tracker
+birthday,gift,ideas,AI,reminder,planner,countdown,wishlist,present,tracker,anniversary,occasion,bday
 
 ### Promotional Text (max. 170 characters)
-Track birthdays, get AI-powered gift ideas — never be without inspiration. Now with voice input and a smart assistant!
+No more last-minute gift panic! Your AI assistant finds the perfect present — based on hobbies, age & relationship. Ask by text or voice.
 
 ---
 
