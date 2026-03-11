@@ -15,6 +15,12 @@
             "state": "translated",
             "value": "aventureux, optimiste"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aventurero, optimista"
+          }
         }
       }
     },
@@ -31,6 +37,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Joyeux anniversaire !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Feliz cumpleaños!"
           }
         }
       }
@@ -49,6 +61,12 @@
             "state": "translated",
             "value": "joyeux anniversaire ! Je te souhaite une magnifique journée où tu seras comblé(e) de toutes parts."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡feliz cumpleaños! Te deseo un día maravilloso en el que te mimen de todas las formas posibles."
+          }
         }
       }
     },
@@ -65,6 +83,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jeux adaptés à l'âge."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diversión de juego adecuada para la edad."
           }
         }
       }
@@ -83,6 +107,12 @@
             "state": "translated",
             "value": "Jouet adapté à l'âge pour l'anniversaire marquant."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juguete apropiado para el cumpleaños especial."
+          }
         }
       }
     },
@@ -99,6 +129,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Une attention qui dure."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un regalo especial que perdura."
           }
         }
       }
@@ -117,6 +153,12 @@
             "state": "translated",
             "value": "Bricoler, peindre et être créatif."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manualidades, pintura y creatividad."
+          }
         }
       }
     },
@@ -133,6 +175,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Reste aussi unique que tu es !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Sigue siendo tan único/a como eres!"
           }
         }
       }
@@ -151,6 +199,12 @@
             "state": "translated",
             "value": "Jeu de société ou puzzle"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juego de mesa o puzle"
+          }
         }
       }
     },
@@ -167,6 +221,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Continue d'apporter de l'harmonie au monde !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Sigue aportando armonía al mundo!"
           }
         }
       }
@@ -185,6 +245,12 @@
             "state": "translated",
             "value": "Livre ou bon pour liseuse"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libro o vale para e-reader"
+          }
         }
       }
     },
@@ -201,6 +267,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Livre sur le sujet préféré"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libro sobre su tema favorito"
           }
         }
       }
@@ -219,6 +291,12 @@
             "state": "translated",
             "value": "Des chaussures cool pour la prochaine performance."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapatillas geniales para la próxima actuación."
+          }
         }
       }
     },
@@ -235,6 +313,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "De la technologie cool pour le quotidien."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tecnología útil para el día a día."
           }
         }
       }
@@ -253,6 +337,12 @@
             "state": "translated",
             "value": "Du matériel cool pour le sport favori."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Equipamiento genial para su deporte favorito."
+          }
         }
       }
     },
@@ -269,6 +359,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ton ambition et ta discipline sont exemplaires !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Tu ambición y disciplina son ejemplares!"
           }
         }
       }
@@ -287,6 +383,12 @@
             "state": "translated",
             "value": "Ta rigueur est impressionnante — reste ainsi !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Tu atención al detalle es impresionante — sigue siendo así!"
+          }
         }
       }
     },
@@ -303,6 +405,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ton empathie et ta créativité sont un cadeau !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Tu empatía y creatividad son un regalo!"
           }
         }
       }
@@ -321,6 +429,12 @@
             "state": "translated",
             "value": "Ton bienveillance est inestimable — profite de cette journée !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Tu naturaleza cariñosa no tiene precio — disfruta este día!"
+          }
         }
       }
     },
@@ -337,6 +451,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ta créativité et ton indépendance sont une inspiration !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Tu creatividad e independencia son inspiradoras!"
           }
         }
       }
@@ -355,6 +475,12 @@
             "state": "translated",
             "value": "Ta passion et ta profondeur sont uniques !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Tu pasión y profundidad son verdaderamente únicas!"
+          }
         }
       }
     },
@@ -371,6 +497,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le dernier best-seller pour les amoureux des livres."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El último bestseller para amantes de los libros."
           }
         }
       }
@@ -389,6 +521,12 @@
             "state": "translated",
             "value": "Capturer les plus beaux moments."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Captura los momentos más hermosos."
+          }
         }
       }
     },
@@ -405,6 +543,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ambitieux, discipliné"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ambicioso, disciplinado"
           }
         }
       }
@@ -423,6 +567,12 @@
             "state": "translated",
             "value": "indépendant, innovant"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "independiente, innovador"
+          }
         }
       }
     },
@@ -439,6 +589,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Un souvenir durable."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un recuerdo duradero."
           }
         }
       }
@@ -457,6 +613,12 @@
             "state": "translated",
             "value": "Un cadeau classique et élégant."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un regalo clásico y elegante."
+          }
         }
       }
     },
@@ -473,6 +635,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "unique"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "único"
           }
         }
       }
@@ -491,6 +659,12 @@
             "state": "translated",
             "value": "Unique et avec une touche personnelle."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Único y con significado personal."
+          }
         }
       }
     },
@@ -507,6 +681,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "énergique, spontané"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "enérgico, espontáneo"
           }
         }
       }
@@ -525,6 +705,12 @@
             "state": "translated",
             "value": "Des souvenirs plutôt que des choses."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recuerdos en lugar de cosas."
+          }
         }
       }
     },
@@ -541,6 +727,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Expérience pour deux"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experiencia para dos"
           }
         }
       }
@@ -559,6 +751,12 @@
             "state": "translated",
             "value": "Bon d'expérience"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vale de experiencia"
+          }
         }
       }
     },
@@ -575,6 +773,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bon d'expérience pour du temps partagé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vale de experiencia para tiempo de calidad"
           }
         }
       }
@@ -593,6 +797,12 @@
             "state": "translated",
             "value": "Bon d'expérience pour enfants"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vale de experiencia para niños"
+          }
         }
       }
     },
@@ -609,6 +819,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escape room, laser tag ou parc d'escalade."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escape room, láser tag o rocódromo."
           }
         }
       }
@@ -627,6 +843,12 @@
             "state": "translated",
             "value": "Quelque chose de délicieux pour le quotidien."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algo mimoso para el día a día."
+          }
         }
       }
     },
@@ -643,6 +865,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Accessoires fitness"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesorios de fitness"
           }
         }
       }
@@ -661,6 +889,12 @@
             "state": "translated",
             "value": "Stimule l'imagination et la motricité fine."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fomenta la imaginación y la motricidad fina."
+          }
         }
       }
     },
@@ -677,6 +911,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Album photo avec des souvenirs communs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Álbum de fotos con recuerdos compartidos"
           }
         }
       }
@@ -695,6 +935,12 @@
             "state": "translated",
             "value": "Album photo ou album de souvenirs"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Álbum de fotos o libro de recuerdos"
+          }
         }
       }
     },
@@ -711,6 +957,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Choix libre pour le jeu favori."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libre elección para su juego favorito."
           }
         }
       }
@@ -729,6 +981,12 @@
             "state": "translated",
             "value": "Choix libre dans la boutique préférée."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libre elección en su tienda favorita."
+          }
         }
       }
     },
@@ -745,6 +1003,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Parc d'attractions, parc d'escalade ou piscine."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parque temático, rocódromo o piscina."
           }
         }
       }
@@ -763,6 +1027,12 @@
             "state": "translated",
             "value": "Pour bouger et s'amuser dehors."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para ejercicio y diversión al aire libre."
+          }
         }
       }
     },
@@ -779,6 +1049,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pour la prochaine session de lecture."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para la próxima sesión de lectura."
           }
         }
       }
@@ -797,6 +1073,12 @@
             "state": "translated",
             "value": "Pour les jeunes créatifs et explorateurs."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para jóvenes creativos y exploradores."
+          }
         }
       }
     },
@@ -813,6 +1095,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pour les explorateurs culinaires."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para exploradores culinarios."
           }
         }
       }
@@ -831,6 +1119,12 @@
             "state": "translated",
             "value": "Pour s'amuser en plein air."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para divertirse al aire libre."
+          }
         }
       }
     },
@@ -847,6 +1141,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "attentionné, émotionnel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cariñoso, emocional"
           }
         }
       }
@@ -865,6 +1165,12 @@
             "state": "translated",
             "value": "Bon de jeu"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vale de videojuegos"
+          }
         }
       }
     },
@@ -881,6 +1187,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Accessoires gaming"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesorios de gaming"
           }
         }
       }
@@ -899,6 +1211,12 @@
             "state": "translated",
             "value": "Profite de ta journée ! 🎂"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Disfruta tu día! 🎂"
+          }
         }
       }
     },
@@ -915,6 +1233,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Profite des beaux moments de la vie !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Disfruta los hermosos momentos de la vida!"
           }
         }
       }
@@ -933,6 +1257,12 @@
             "state": "translated",
             "value": "Profite de cette journée spéciale !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Disfruta este día especial!"
+          }
         }
       }
     },
@@ -949,6 +1279,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "épicurien, terre-à-terre"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "amante del placer, con los pies en la tierra"
           }
         }
       }
@@ -967,6 +1303,12 @@
             "state": "translated",
             "value": "Passe le meilleur anniversaire ! 🎂🎈"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Que tengas el mejor cumpleaños de tu vida! 🎂🎈"
+          }
         }
       }
     },
@@ -983,6 +1325,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "harmonieux, esthétique"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "armonioso, estético"
           }
         }
       }
@@ -1001,6 +1349,12 @@
             "state": "translated",
             "value": "Joyeux anniversaire !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Feliz cumpleaños!"
+          }
         }
       }
     },
@@ -1017,6 +1371,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "De haute qualité et motivant."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De alta calidad y motivador."
           }
         }
       }
@@ -1035,6 +1395,12 @@
             "state": "translated",
             "value": "Expérience gastronomique de qualité"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experiencia gastronómica premium"
+          }
         }
       }
     },
@@ -1051,6 +1417,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Parfum de luxe"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fragancia premium"
           }
         }
       }
@@ -1069,6 +1441,12 @@
             "state": "translated",
             "value": "Livre ou livre audio de qualité"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libro o audiolibro premium"
+          }
         }
       }
     },
@@ -1085,6 +1463,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Accessoire cuisine de qualité"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesorio de cocina premium"
           }
         }
       }
@@ -1103,6 +1487,12 @@
             "state": "translated",
             "value": "Matériel de qualité pour les esprits créatifs."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Materiales de alta calidad para mentes creativas."
+          }
         }
       }
     },
@@ -1119,6 +1509,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "J'espère que tu passes une super journée et que tu fêtes ça bien !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Espero que tengas un día genial y lo celebres a lo grande!"
           }
         }
       }
@@ -1137,6 +1533,12 @@
             "state": "translated",
             "value": "Je te souhaite une super journée avec plein de fun, de gâteau et plein de cadeaux !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Te deseo un día increíble lleno de diversión, pastel y muchos regalos!"
+          }
         }
       }
     },
@@ -1153,6 +1555,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "intense, passionné"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "intenso, apasionado"
           }
         }
       }
@@ -1171,6 +1579,12 @@
             "state": "translated",
             "value": "Best-seller jeunesse"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestseller juvenil"
+          }
         }
       }
     },
@@ -1187,6 +1601,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Café, thé ou chocolat de qualité premium."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Café, té o chocolate de calidad premium."
           }
         }
       }
@@ -1205,6 +1625,12 @@
             "state": "translated",
             "value": "Aucune clé API configurée. Veuillez saisir votre clé OpenRouter."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay clave API configurada. Por favor, introduce tu clave de OpenRouter."
+          }
         }
       }
     },
@@ -1221,6 +1647,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Livre de cuisine pour enfants ou kit pâtisserie"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libro de cocina infantil o kit de repostería"
           }
         }
       }
@@ -1239,6 +1671,12 @@
             "state": "translated",
             "value": "Livre pour enfants ou livre audio"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libro infantil o audiolibro"
+          }
         }
       }
     },
@@ -1255,6 +1693,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Collection de livres pour enfants"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colección de libros infantiles"
           }
         }
       }
@@ -1273,6 +1717,12 @@
             "state": "translated",
             "value": "Série de livres pour enfants"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serie de libros infantiles"
+          }
         }
       }
     },
@@ -1289,6 +1739,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jeu vidéo adapté à l'âge"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Videojuego apropiado para la edad"
           }
         }
       }
@@ -1307,6 +1763,12 @@
             "state": "translated",
             "value": "Expérience culinaire ou livre de cuisine"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experiencia culinaria o libro de cocina"
+          }
         }
       }
     },
@@ -1323,6 +1785,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cours de cuisine, dégustation de vin ou bien-être."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clase de cocina, cata de vinos o spa."
           }
         }
       }
@@ -1341,6 +1809,12 @@
             "state": "translated",
             "value": "Billets de concert"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entradas para concierto"
+          }
         }
       }
     },
@@ -1357,6 +1831,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Casque ou gadget tech"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auriculares o gadget tecnológico"
           }
         }
       }
@@ -1375,6 +1855,12 @@
             "state": "translated",
             "value": "Devenir créatif en cuisine."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sé creativo en la cocina."
+          }
         }
       }
     },
@@ -1391,6 +1877,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kit de bricolage créatif"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kit de manualidades"
           }
         }
       }
@@ -1409,6 +1901,12 @@
             "state": "translated",
             "value": "Kit créatif"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kit creativo"
+          }
         }
       }
     },
@@ -1425,6 +1923,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kit créatif pour bricoler"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set de manualidades"
           }
         }
       }
@@ -1443,6 +1947,12 @@
             "state": "translated",
             "value": "Atelier créatif"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taller creativo"
+          }
         }
       }
     },
@@ -1459,6 +1969,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "créatif, sûr de soi"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "creativo, seguro de sí mismo"
           }
         }
       }
@@ -1477,6 +1993,12 @@
             "state": "translated",
             "value": "Kit de loisir créatif"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set de afición creativa"
+          }
         }
       }
     },
@@ -1493,6 +2015,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fournitures artistiques"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Material de arte"
           }
         }
       }
@@ -1511,6 +2039,12 @@
             "state": "translated",
             "value": "artistique, empathique"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "artístico, empático"
+          }
         }
       }
     },
@@ -1527,6 +2061,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réponse vide reçue du service IA."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se recibió una respuesta vacía del servicio de IA."
           }
         }
       }
@@ -1545,6 +2085,12 @@
             "state": "translated",
             "value": "Lecture pour les petits aventuriers."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Material de lectura para pequeños aventureros."
+          }
         }
       }
     },
@@ -1561,6 +2107,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jouet préféré"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juguete favorito"
           }
         }
       }
@@ -1579,6 +2131,12 @@
             "state": "translated",
             "value": "Vivre la musique en direct."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vivir la música en directo."
+          }
         }
       }
     },
@@ -1595,6 +2153,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peindre, bricoler et être créatif."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintura, manualidades y creatividad."
           }
         }
       }
@@ -1613,6 +2177,12 @@
             "state": "translated",
             "value": "Bon de mode"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vale de moda"
+          }
         }
       }
     },
@@ -1629,6 +2199,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Que ton optimisme te porte vers de nouveaux sommets !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Que tu optimismo te lleve a nuevas alturas!"
           }
         }
       }
@@ -1647,6 +2223,12 @@
             "state": "translated",
             "value": "Que ton énergie et ta spontanéité te propulsent loin !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Que tu energía y espontaneidad te lleven lejos!"
+          }
         }
       }
     },
@@ -1663,6 +2245,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Que ta curiosité ouvre toujours de nouveaux chemins !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Que tu curiosidad siempre abra nuevos caminos!"
           }
         }
       }
@@ -1681,6 +2269,12 @@
             "state": "translated",
             "value": "Accessoires musicaux"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesorios de música"
+          }
         }
       }
     },
@@ -1697,6 +2291,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Durable et inspirant."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duradero e inspirador."
           }
         }
       }
@@ -1715,6 +2315,12 @@
             "state": "translated",
             "value": "De nouvelles aventures pour un nouveau chapitre de vie."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuevas aventuras para una nueva etapa en la vida."
+          }
         }
       }
     },
@@ -1731,6 +2337,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apprendre de nouvelles choses ou approfondir ses compétences."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aprende algo nuevo o profundiza tus habilidades."
           }
         }
       }
@@ -1749,6 +2361,12 @@
             "state": "translated",
             "value": "Apprendre et devenir créatif."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aprende algo nuevo y sé creativo."
+          }
         }
       }
     },
@@ -1765,6 +2383,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "curieux, communicatif"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "curioso, comunicativo"
           }
         }
       }
@@ -1783,6 +2407,12 @@
             "state": "translated",
             "value": "Utile au quotidien."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Útil en el día a día."
+          }
         }
       }
     },
@@ -1799,6 +2429,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jouet d'extérieur"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juguetes para exteriores"
           }
         }
       }
@@ -1817,6 +2453,12 @@
             "state": "translated",
             "value": "Parfaitement adapté au sport favori."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfecto para su deporte favorito."
+          }
         }
       }
     },
@@ -1833,6 +2475,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "En accord avec l'intérêt personnel."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acorde a su interés personal."
           }
         }
       }
@@ -1851,6 +2499,12 @@
             "state": "translated",
             "value": "Parfait pour la passion de la danse."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfecto para la pasión por el baile."
+          }
         }
       }
     },
@@ -1867,6 +2521,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Parfait pour les jeunes musiciens."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfecto para jóvenes músicos."
           }
         }
       }
@@ -1885,6 +2545,12 @@
             "state": "translated",
             "value": "perfectionniste, pratique"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "perfeccionista, práctico"
+          }
         }
       }
     },
@@ -1901,6 +2567,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Souvenir personnalisé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recuerdo personalizado"
           }
         }
       }
@@ -1919,6 +2591,12 @@
             "state": "translated",
             "value": "Cadeau personnalisé"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regalo personalizado"
+          }
         }
       }
     },
@@ -1935,6 +2613,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Personnel et sentimental."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personal y sentimental."
           }
         }
       }
@@ -1953,6 +2637,12 @@
             "state": "translated",
             "value": "Kit de soins ou bon spa"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set de cuidado o vale de spa"
+          }
         }
       }
     },
@@ -1969,6 +2659,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pratique pour la prochaine aventure."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Práctico para la próxima aventura."
           }
         }
       }
@@ -1987,6 +2683,12 @@
             "state": "translated",
             "value": "Pratique et motivant."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Práctico y motivador."
+          }
         }
       }
     },
@@ -2003,6 +2705,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pratique et durablement utile."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Práctico y duradero."
           }
         }
       }
@@ -2021,6 +2729,12 @@
             "state": "translated",
             "value": "Gadget pratique"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gadget práctico"
+          }
         }
       }
     },
@@ -2037,6 +2751,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Du temps de qualité à deux."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiempo de calidad para dos."
           }
         }
       }
@@ -2055,6 +2775,12 @@
             "state": "translated",
             "value": "Bon voyage ou week-end"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vale de viaje o fin de semana"
+          }
         }
       }
     },
@@ -2071,6 +2797,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Accessoires de voyage"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesorios de viaje"
           }
         }
       }
@@ -2089,6 +2821,12 @@
             "state": "translated",
             "value": "Expérience romantique de week-end"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experiencia de fin de semana romántico"
+          }
         }
       }
     },
@@ -2105,6 +2843,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bijou ou accessoire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joya o accesorio"
           }
         }
       }
@@ -2123,6 +2867,12 @@
             "state": "translated",
             "value": "Des histoires passionnantes pour les jeunes esprits."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historias emocionantes para mentes jóvenes."
+          }
         }
       }
     },
@@ -2139,6 +2889,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Des histoires passionnantes pour s'immerger."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historias emocionantes para sumergirse."
           }
         }
       }
@@ -2157,6 +2913,12 @@
             "state": "translated",
             "value": "Du plaisir de jeu pour toute la famille."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diversión para toda la familia."
+          }
         }
       }
     },
@@ -2173,6 +2935,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Équipement sportif"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Equipamiento deportivo"
           }
         }
       }
@@ -2191,6 +2959,12 @@
             "state": "translated",
             "value": "Équipement de sport"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artículos deportivos"
+          }
         }
       }
     },
@@ -2207,6 +2981,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spotify, Netflix ou App Store."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotify, Netflix o App Store."
           }
         }
       }
@@ -2225,6 +3005,12 @@
             "state": "translated",
             "value": "Continue à briller et à nous inspirer tous !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Sigue brillando e inspirándonos a todos!"
+          }
         }
       }
     },
@@ -2241,6 +3027,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bon streaming ou app"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vale de streaming o app"
           }
         }
       }
@@ -2259,6 +3051,12 @@
             "state": "translated",
             "value": "Vêtements ou chaussures de danse"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ropa o calzado de baile"
+          }
         }
       }
     },
@@ -2275,6 +3073,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bon cours de danse"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vale para clase de baile"
           }
         }
       }
@@ -2293,6 +3097,12 @@
             "state": "translated",
             "value": "Chaussures de danse"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapatos de baile"
+          }
         }
       }
     },
@@ -2309,6 +3119,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quelque chose d'inoubliable pour cet anniversaire marquant."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algo inolvidable para este cumpleaños especial."
           }
         }
       }
@@ -2327,6 +3143,12 @@
             "state": "translated",
             "value": "Une mise à niveau pour le hobby."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una mejora para la afición."
+          }
         }
       }
     },
@@ -2343,6 +3165,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exprimer sa gratitude avec un plaisir particulier."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra aprecio con algo especial."
           }
         }
       }
@@ -2361,6 +3189,12 @@
             "state": "translated",
             "value": "Montre un intérêt sincère."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra interés genuino."
+          }
         }
       }
     },
@@ -2378,6 +3212,12 @@
             "state": "translated",
             "value": "Intemporel et reconnaissant."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atemporal y apreciativo."
+          }
         }
       }
     },
@@ -2394,6 +3234,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zoo, cinéma ou piscine."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoo, cine o piscina."
           }
         }
       }

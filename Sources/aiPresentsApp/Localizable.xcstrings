@@ -15,6 +15,12 @@
             "state": "translated",
             "value": "- Le titre ne peut pas être vide"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "- El título no puede estar vacío"
+          }
         }
       }
     },
@@ -32,6 +38,12 @@
             "state": "translated",
             "value": "- URL invalide"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "- URL inválida"
+          }
         }
       }
     },
@@ -48,6 +60,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "- Budget invalide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "- Presupuesto inválido"
           }
         }
       }
@@ -114,6 +132,12 @@
             "state": "translated",
             "value": "%lld idées"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ideas"
+          }
         }
       }
     },
@@ -130,6 +154,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$lld jours jusqu'au %2$lld. anniversaire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld días hasta el %2$lld. cumpleaños"
           }
         }
       }
@@ -150,6 +180,12 @@
             "state": "translated",
             "value": "⚠️ Le début et la fin ne peuvent pas être identiques."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⚠️ El inicio y el fin no pueden ser iguales."
+          }
         }
       }
     },
@@ -165,6 +201,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "⚠️ Aucun avertissement préalable sélectionné. Vous ne serez pas rappelé."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⚠️ No se han seleccionado avisos previos. No recibirás recordatorios."
           }
         }
       }
@@ -186,6 +228,12 @@
             "state": "translated",
             "value": "🎉 Aujourd'hui !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🎉 ¡Hoy!"
+          }
         }
       }
     },
@@ -202,6 +250,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "💡 Le message a été personnalisé en fonction de l'âge, du jalon et du signe astrologique."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "💡 El mensaje fue personalizado en función de la edad, el hito y el signo zodiacal."
           }
         }
       }
@@ -220,6 +274,12 @@
             "state": "translated",
             "value": "💡 Conseil : Vous pouvez personnaliser ou copier le message après l'avoir généré."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "💡 Consejo: Puedes personalizar o copiar el mensaje después de generarlo."
+          }
         }
       }
     },
@@ -236,6 +296,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 idée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 idea"
           }
         }
       }
@@ -254,6 +320,12 @@
             "state": "translated",
             "value": "2 jours avant (court terme)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 días antes (aviso corto)"
+          }
         }
       }
     },
@@ -271,6 +343,12 @@
             "state": "translated",
             "value": "5 suggestions personnalisées"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 sugerencias personalizadas"
+          }
         }
       }
     },
@@ -286,6 +364,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Générer 5 de plus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generar 5 más"
           }
         }
       }
@@ -304,6 +388,12 @@
             "state": "translated",
             "value": "7 jours"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 días"
+          }
         }
       }
     },
@@ -320,6 +410,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "7 jours avant (1 semaine)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 días antes (1 semana)"
           }
         }
       }
@@ -338,6 +434,12 @@
             "state": "translated",
             "value": "14 jours avant (2 semaines)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "14 días antes (2 semanas)"
+          }
         }
       }
     },
@@ -354,6 +456,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "30 jours"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 días"
           }
         }
       }
@@ -372,6 +480,12 @@
             "state": "translated",
             "value": "30 jours avant (à l'avance)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 días antes (con antelación)"
+          }
         }
       }
     },
@@ -387,6 +501,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "De"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desde"
           }
         }
       }
@@ -405,6 +525,12 @@
             "state": "translated",
             "value": "Annuler"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
+          }
         }
       }
     },
@@ -422,6 +548,12 @@
             "state": "translated",
             "value": "Refusé"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denegado"
+          }
         }
       }
     },
@@ -437,6 +569,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Refuser"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechazar"
           }
         }
       }
@@ -455,6 +593,12 @@
             "state": "translated",
             "value": "Abonnement"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suscripción"
+          }
         }
       }
     },
@@ -471,6 +615,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gérer l'abonnement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestionar suscripción"
           }
         }
       }
@@ -492,6 +642,12 @@
             "state": "translated",
             "value": "AI Presents Premium"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Presents Premium"
+          }
         }
       }
     },
@@ -508,6 +664,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Actif"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activo"
           }
         }
       }
@@ -526,6 +688,12 @@
             "state": "translated",
             "value": "Activer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar"
+          }
         }
       }
     },
@@ -543,6 +711,12 @@
             "state": "translated",
             "value": "Activé"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activado"
+          }
         }
       }
     },
@@ -559,6 +733,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Activé ✓"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activado ✓"
           }
         }
       }
@@ -587,6 +767,12 @@
             "state": "translated",
             "value": "Acceptable"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceptable"
+          }
         }
       }
     },
@@ -602,6 +788,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acceptation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceptación"
           }
         }
       }
@@ -620,6 +812,12 @@
             "state": "translated",
             "value": "Tous"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos"
+          }
         }
       }
     },
@@ -635,6 +833,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tout marquer comme offert"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marcar todos como regalados"
           }
         }
       }
@@ -653,6 +857,12 @@
             "state": "translated",
             "value": "Tout marquer comme offert ?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Marcar todos como regalados?"
+          }
         }
       }
     },
@@ -669,6 +879,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tout afficher"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar todos"
           }
         }
       }
@@ -687,6 +903,12 @@
             "state": "translated",
             "value": "Toutes les données supprimées !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Todos los datos eliminados!"
+          }
         }
       }
     },
@@ -702,6 +924,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Supprimer toutes les données"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar todos los datos"
           }
         }
       }
@@ -720,6 +948,12 @@
             "state": "translated",
             "value": "Supprimer toutes les données ?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar todos los datos?"
+          }
         }
       }
     },
@@ -736,6 +970,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réinitialiser tous les filtres"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restablecer todos los filtros"
           }
         }
       }
@@ -757,6 +997,12 @@
             "state": "translated",
             "value": "Tous les contacts et idées cadeaux ont été supprimés."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los contactos e ideas de regalo han sido eliminados."
+          }
         }
       }
     },
@@ -774,6 +1020,12 @@
             "state": "translated",
             "value": "Tout marqué"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos marcados"
+          }
         }
       }
     },
@@ -790,6 +1042,12 @@
             "state": "translated",
             "value": "Toutes les suggestions existent déjà comme idées cadeaux."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas las sugerencias ya existen como ideas de regalo."
+          }
         }
       }
     },
@@ -805,6 +1063,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Général"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
           }
         }
       }
@@ -823,6 +1087,12 @@
             "state": "translated",
             "value": "Exporter en CSV"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar como CSV"
+          }
         }
       }
     },
@@ -839,6 +1109,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comme idée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Como idea"
           }
         }
       }
@@ -857,6 +1133,12 @@
             "state": "translated",
             "value": "Âge (calculé à partir de la date de naissance, pas la date elle-même)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edad (calculada desde el cumpleaños, no la fecha en sí)"
+          }
         }
       }
     },
@@ -874,6 +1156,12 @@
             "state": "translated",
             "value": "Fournisseur"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proveedor"
+          }
         }
       }
     },
@@ -890,6 +1178,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fait avancer le statut de l'idée cadeau à l'étape suivante"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avanza la idea de regalo al siguiente estado"
           }
         }
       }
@@ -914,6 +1208,12 @@
             "state": "translated",
             "value": "Clé API non configurée (mode démo)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clave API no configurada (modo demo)"
+          }
         }
       }
     },
@@ -931,6 +1231,12 @@
             "state": "translated",
             "value": "Informations sur l'app"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Información de la app"
+          }
         }
       }
     },
@@ -946,6 +1252,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Art. 6(1)(a) RGPD (Consentement)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Art. 6(1)(a) RGPD (Consentimiento)"
           }
         }
       }
@@ -964,6 +1276,12 @@
             "state": "translated",
             "value": "En un coup d'œil"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De un vistazo"
+          }
         }
       }
     },
@@ -980,6 +1298,12 @@
             "state": "translated",
             "value": "Importer depuis le carnet d'adresses"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar desde la libreta de direcciones"
+          }
         }
       }
     },
@@ -995,6 +1319,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Retirer de l'app"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar de la app"
           }
         }
       }
@@ -1013,6 +1343,12 @@
             "state": "translated",
             "value": "Retirer de l'app ?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar de la app?"
+          }
         }
       }
     },
@@ -1029,6 +1365,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Excellent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excelente"
           }
         }
       }
@@ -1047,6 +1389,12 @@
             "state": "translated",
             "value": "C'est bientôt ! Dernier rappel."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Casi! Último empujón."
+          }
         }
       }
     },
@@ -1063,6 +1411,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Modifier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar"
           }
         }
       }
@@ -1081,6 +1435,12 @@
             "state": "translated",
             "value": "Début des heures calmes"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inicio del horario silencioso"
+          }
         }
       }
     },
@@ -1097,6 +1457,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gardez une vue d'ensemble sur tous les anniversaires et planifiez les cadeaux sans stress."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lleva el control de todos los cumpleaños y planifica regalos sin estrés."
           }
         }
       }
@@ -1115,6 +1481,12 @@
             "state": "translated",
             "value": "Pour toute question sur la confidentialité :\n\nHendrik Grüger\nhendrik@gruepi.de"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para preguntas sobre privacidad:\n\nHendrik Grüger\nhendrik@gruepi.de"
+          }
         }
       }
     },
@@ -1131,6 +1503,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Notifications"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notificaciones"
           }
         }
       }
@@ -1149,6 +1527,12 @@
             "state": "translated",
             "value": "Notifications actives"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notificaciones activas"
+          }
         }
       }
     },
@@ -1165,6 +1549,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Activer les notifications dans les réglages"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar notificaciones en ajustes"
           }
         }
       }
@@ -1183,6 +1573,12 @@
             "state": "translated",
             "value": "Autorisation refusée"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permiso denegado"
+          }
         }
       }
     },
@@ -1200,6 +1596,12 @@
             "state": "translated",
             "value": "De meilleurs cadeaux. Moins de stress."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mejores regalos. Menos estrés."
+          }
         }
       }
     },
@@ -1215,6 +1617,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Relation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relación"
           }
         }
       }
@@ -1233,6 +1641,12 @@
             "state": "translated",
             "value": "Modifier la relation"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar relación"
+          }
         }
       }
     },
@@ -1249,6 +1663,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saisir la relation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduce la relación"
           }
         }
       }
@@ -1267,6 +1687,12 @@
             "state": "translated",
             "value": "Type de relation (ex. « Ami », « Mère »)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tipo de relación (p. ej. \"Amigo/a\", \"Madre\")"
+          }
         }
       }
     },
@@ -1283,6 +1709,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Widget Anniversaires"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget de cumpleaños"
           }
         }
       }
@@ -1301,6 +1733,12 @@
             "state": "translated",
             "value": "jusqu'à"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hasta"
+          }
         }
       }
     },
@@ -1316,6 +1754,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jusqu'à"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hasta"
           }
         }
       }
@@ -1334,6 +1778,12 @@
             "state": "translated",
             "value": "Veuillez autoriser les notifications dans les réglages système."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por favor, permite las notificaciones en los ajustes del sistema."
+          }
         }
       }
     },
@@ -1350,6 +1800,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Veuillez saisir une adresse e-mail valide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por favor, introduce una dirección de correo válida"
           }
         }
       }
@@ -1368,6 +1824,12 @@
             "state": "translated",
             "value": "Veuillez saisir une URL valide"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por favor, introduce una URL válida"
+          }
         }
       }
     },
@@ -1385,6 +1847,12 @@
             "state": "translated",
             "value": "Veuillez saisir une URL valide (ex. https://example.com)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por favor, introduce una URL válida (p. ej. https://ejemplo.com)"
+          }
         }
       }
     },
@@ -1400,6 +1868,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Veuillez saisir un nombre valide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por favor, introduce un número válido"
           }
         }
       }
@@ -1418,6 +1892,12 @@
             "state": "translated",
             "value": "Veuillez corriger les erreurs dans le formulaire"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por favor, corrige los errores en el formulario"
+          }
         }
       }
     },
@@ -1435,6 +1915,12 @@
             "state": "translated",
             "value": "Frère"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermano"
+          }
         }
       }
     },
@@ -1450,6 +1936,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Budget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto"
           }
         }
       }
@@ -1468,6 +1960,12 @@
             "state": "translated",
             "value": "Le budget ne peut pas être négatif"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El presupuesto no puede ser negativo"
+          }
         }
       }
     },
@@ -1484,6 +1982,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plage de budget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rango de presupuesto"
           }
         }
       }
@@ -1502,6 +2006,12 @@
             "state": "translated",
             "value": "Sélectionner une plage de budget"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seleccionar rango de presupuesto"
+          }
         }
       }
     },
@@ -1519,6 +2029,12 @@
             "state": "translated",
             "value": "Fourchette de budget (min/max, pour des suggestions adaptées)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rango de presupuesto (mín/máx, para sugerencias)"
+          }
         }
       }
     },
@@ -1534,6 +2050,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "IA cloud via OpenRouter · Les données sont transmises de manière chiffrée."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA en la nube vía OpenRouter · Los datos se transmiten cifrados."
           }
         }
       }
@@ -1555,6 +2077,12 @@
             "state": "translated",
             "value": "Exporter CSV"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar CSV"
+          }
         }
       }
     },
@@ -1571,6 +2099,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fichier CSV créé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El archivo CSV fue creado"
           }
         }
       }
@@ -1589,6 +2123,12 @@
             "state": "translated",
             "value": "Comme toutes les données sont stockées localement, vous avez un contrôle total à tout moment. Vous pouvez supprimer toutes les données via Réglages → Supprimer toutes les données."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Como todos los datos se almacenan localmente, tienes el control total en todo momento. Puedes eliminar todos los datos en Ajustes → Eliminar todos los datos."
+          }
         }
       }
     },
@@ -1605,6 +2145,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comme aucune clé API n'est configurée, un message de démonstration s'affiche."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Como no hay ninguna clave API configurada, se muestra un mensaje de demostración."
           }
         }
       }
@@ -1626,6 +2172,12 @@
             "state": "translated",
             "value": "L'abonnement se renouvelle automatiquement. Vous pouvez annuler à tout moment dans les réglages iOS."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La suscripción se renueva automáticamente. Puedes cancelarla en cualquier momento en Ajustes de iOS."
+          }
         }
       }
     },
@@ -1642,6 +2194,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cela supprime tous les contacts et idées cadeaux. Cette action est irréversible."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esto elimina todos los contactos e ideas de regalo. Esta acción no se puede deshacer."
           }
         }
       }
@@ -1660,6 +2218,12 @@
             "state": "translated",
             "value": "Le budget minimum ne peut pas dépasser le budget maximum"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El presupuesto mínimo no puede superar el máximo"
+          }
         }
       }
     },
@@ -1676,6 +2240,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible d'enregistrer le fichier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El archivo no pudo guardarse"
           }
         }
       }
@@ -1694,6 +2264,12 @@
             "state": "translated",
             "value": "Données"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datos"
+          }
         }
       }
     },
@@ -1710,6 +2286,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Données supprimées"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datos eliminados"
           }
         }
       }
@@ -1728,6 +2310,12 @@
             "state": "translated",
             "value": "Les données sont synchronisées automatiquement sur vos appareils Apple."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los datos se sincronizan automáticamente en todos tus dispositivos Apple."
+          }
         }
       }
     },
@@ -1744,6 +2332,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les données sont uniquement stockées localement sur cet appareil."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los datos solo se almacenan localmente en este dispositivo."
           }
         }
       }
@@ -1762,6 +2356,12 @@
             "state": "translated",
             "value": "Statistiques des données"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estadísticas de datos"
+          }
         }
       }
     },
@@ -1777,6 +2377,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Confidentialité"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacidad"
           }
         }
       }
@@ -1795,6 +2401,12 @@
             "state": "translated",
             "value": "Consentement à la confidentialité"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consentimiento de privacidad"
+          }
         }
       }
     },
@@ -1810,6 +2422,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transfert de données vers les États-Unis. Base juridique : clauses contractuelles types conformément à l'art. 46 RGPD. Localisation du serveur : États-Unis."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transferencia de datos a EE. UU. Base legal: Cláusulas contractuales estándar según el Art. 46 del RGPD. Ubicación del servidor: EE. UU."
           }
         }
       }
@@ -1828,6 +2446,12 @@
             "state": "translated",
             "value": "Traitement des données par des tiers"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesamiento de datos por terceros"
+          }
         }
       }
     },
@@ -1844,6 +2468,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Date"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha"
           }
         }
       }
@@ -1867,6 +2497,12 @@
             "state": "translated",
             "value": "Votre retour aide à améliorer les suggestions de l'IA."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu opinión ayuda a mejorar las sugerencias de IA."
+          }
         }
       }
     },
@@ -1883,6 +2519,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Votre historique de cadeaux apparaîtra ici"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu historial de regalos aparecerá aquí"
           }
         }
       }
@@ -1901,6 +2543,12 @@
             "state": "translated",
             "value": "Votre prénom"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu nombre"
+          }
         }
       }
     },
@@ -1917,6 +2565,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Votre consentement est volontaire. L'app fonctionne également sans les fonctionnalités IA (mode démo)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu consentimiento es voluntario. La app funciona sin funciones de IA (modo demo)."
           }
         }
       }
@@ -1938,6 +2592,12 @@
             "state": "translated",
             "value": "Vos droits"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus derechos"
+          }
         }
       }
     },
@@ -1953,6 +2613,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Créer des données de démonstration"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crear datos de demostración"
           }
         }
       }
@@ -1971,6 +2637,12 @@
             "state": "translated",
             "value": "Données de démonstration créées !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Datos de demostración creados!"
+          }
         }
       }
     },
@@ -1987,6 +2659,12 @@
             "state": "translated",
             "value": "Données de démo pour les tests et captures d'écran"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datos de demostración para pruebas y capturas"
+          }
         }
       }
     },
@@ -2002,6 +2680,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Charger des données de démo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargar datos de demostración"
           }
         }
       }
@@ -2020,6 +2704,12 @@
             "state": "translated",
             "value": "Mode démo"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo demo"
+          }
         }
       }
     },
@@ -2036,6 +2726,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mode démo — aucune clé API configurée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo demo — sin clave API configurada"
           }
         }
       }
@@ -2054,6 +2750,12 @@
             "state": "translated",
             "value": "Mode démo — aucune clé API configurée ou IA non activée."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo demo — sin clave API configurada o IA no activada."
+          }
         }
       }
     },
@@ -2070,6 +2772,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le code et le design de l'app sont protégés par le droit d'auteur. Les SF Symbols sont utilisés conformément à la licence Apple."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El código y el diseño de la app están protegidos por derechos de autor. Los SF Symbols se usan según la licencia de Apple."
           }
         }
       }
@@ -2093,6 +2801,12 @@
             "state": "translated",
             "value": "La modification prendra effet au prochain démarrage de l'app."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El cambio se aplicará en el próximo inicio de la app."
+          }
         }
       }
     },
@@ -2110,6 +2824,12 @@
             "state": "translated",
             "value": "L'app stocke localement sur votre appareil : noms et anniversaires de vos contacts, idées cadeaux avec budget et tags, paramètres de rappel. Ces données ne quittent jamais votre appareil — sauf si vous activez iCloud Sync ou les suggestions IA."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app almacena localmente en tu dispositivo: nombres y cumpleaños de tus contactos, ideas de regalo con presupuesto y etiquetas, ajustes de recordatorio. Estos datos nunca salen de tu dispositivo, a menos que actives la sincronización con iCloud o las sugerencias de IA."
+          }
         }
       }
     },
@@ -2126,6 +2846,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'app est fournie sans garantie. Aucune responsabilité n'est assumée pour l'exactitude des suggestions générées par l'IA."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app se proporciona sin garantía. No se asume ninguna responsabilidad por la precisión de las sugerencias generadas por IA."
           }
         }
       }
@@ -2145,6 +2871,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'IA crée un message chaleureux basé sur l'âge, le jalon et le signe astrologique."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La IA crea un mensaje emotivo basado en la edad, el hito y el signo zodiacal."
           }
         }
       }
@@ -2166,6 +2898,12 @@
             "state": "translated",
             "value": "Les fonctionnalités IA utilisent OpenRouter → Google Gemini (États-Unis). Le prénom, l'âge, le type de relation et le signe astrologique sont transmis. Révocation possible à tout moment."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las funciones de IA usan OpenRouter → Google Gemini (EE. UU.). Se transmiten el nombre, la edad, el tipo de relación y el signo zodiacal. Revocación posible en cualquier momento."
+          }
         }
       }
     },
@@ -2182,6 +2920,12 @@
             "state": "translated",
             "value": "Les fonctionnalités IA seront désactivées. Vous pouvez redonner votre consentement à tout moment."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las funciones de IA se desactivarán. Puedes otorgar el consentimiento de nuevo en cualquier momento."
+          }
         }
       }
     },
@@ -2197,6 +2941,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cette vue n'est disponible qu'en mode débogage."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta vista solo está disponible en modo de depuración."
           }
         }
       }
@@ -2215,6 +2965,12 @@
             "state": "translated",
             "value": "Cette app ne collecte aucune donnée vous concernant et ne nous envoie rien. Tous vos anniversaires et idées cadeaux restent sur votre appareil (ou optionnellement dans votre iCloud)."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta app no recopila ningún dato tuyo y no nos envía nada. Todos tus cumpleaños e ideas de regalo permanecen en tu dispositivo (u opcionalmente en tu iCloud)."
+          }
         }
       }
     },
@@ -2231,6 +2987,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cette semaine"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta semana"
           }
         }
       }
@@ -2249,6 +3011,12 @@
             "state": "translated",
             "value": "Double-taper pour plus d'options"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doble toque para más opciones"
+          }
         }
       }
     },
@@ -2265,6 +3033,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Double-taper pour tout afficher"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doble toque para mostrar todos"
           }
         }
       }
@@ -2283,6 +3057,12 @@
             "state": "translated",
             "value": "Double-taper pour afficher uniquement les favoris"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doble toque para mostrar solo favoritos"
+          }
         }
       }
     },
@@ -2299,6 +3079,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vous recevrez des notifications pour les anniversaires."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recibirás notificaciones para los cumpleaños."
           }
         }
       }
@@ -2317,6 +3103,12 @@
             "state": "translated",
             "value": "Vous ne recevrez plus de notifications."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya no recibirás notificaciones."
+          }
         }
       }
     },
@@ -2332,6 +3124,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vous pouvez modifier cela à tout moment dans les réglages."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes cambiarlo en cualquier momento en Ajustes."
           }
         }
       }
@@ -2360,6 +3158,12 @@
             "state": "translated",
             "value": "Dupliquer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duplicado"
+          }
         }
       }
     },
@@ -2376,6 +3180,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Personnalisés"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personalizado"
           }
         }
       }
@@ -2394,6 +3204,12 @@
             "state": "translated",
             "value": "Ajouter un type personnalisé"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir tipo personalizado"
+          }
         }
       }
     },
@@ -2410,6 +3226,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Type de relation personnalisé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tipo de relación personalizado"
           }
         }
       }
@@ -2428,6 +3250,12 @@
             "state": "translated",
             "value": "Une erreur s'est produite. Veuillez réessayer."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se produjo un error. Por favor, inténtalo de nuevo."
+          }
         }
       }
     },
@@ -2444,6 +3272,12 @@
             "state": "translated",
             "value": "Une app iOS privée pour gérer les anniversaires et les idées cadeaux."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una app privada de iOS para gestionar cumpleaños e ideas de regalo."
+          }
         }
       }
     },
@@ -2459,6 +3293,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Un instant..."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un momento, por favor..."
           }
         }
       }
@@ -2477,6 +3317,12 @@
             "state": "translated",
             "value": "Vérifier la saisie"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar entrada"
+          }
         }
       }
     },
@@ -2493,6 +3339,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réglages"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes"
           }
         }
       }
@@ -2511,6 +3363,12 @@
             "state": "translated",
             "value": "Ouvrir les réglages"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir ajustes"
+          }
         }
       }
     },
@@ -2527,6 +3385,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrir les réglages ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Abrir ajustes?"
           }
         }
       }
@@ -2548,6 +3412,12 @@
             "state": "translated",
             "value": "Consentement requis · Appuyer pour les détails"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se requiere consentimiento · Toca para más detalles"
+          }
         }
       }
     },
@@ -2568,6 +3438,12 @@
             "state": "translated",
             "value": "Consentement donné"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consentimiento otorgado"
+          }
         }
       }
     },
@@ -2584,6 +3460,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Consentement donné · Traitement cloud via OpenRouter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consentimiento otorgado · Procesamiento en la nube vía OpenRouter"
           }
         }
       }
@@ -2602,6 +3484,12 @@
             "state": "translated",
             "value": "Révoquer le consentement ?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Revocar consentimiento?"
+          }
         }
       }
     },
@@ -2618,6 +3506,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fin des heures calmes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fin del horario silencioso"
           }
         }
       }
@@ -2636,6 +3530,12 @@
             "state": "translated",
             "value": "Retirer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar"
+          }
         }
       }
     },
@@ -2652,6 +3552,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Éphémère"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Efímero"
           }
         }
       }
@@ -2670,6 +3576,12 @@
             "state": "translated",
             "value": "Recevoir des notifications pour les anniversaires"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recibir notificaciones de cumpleaños"
+          }
         }
       }
     },
@@ -2686,6 +3598,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recevoir des rappels pour les anniversaires à venir"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recibir recordatorios de próximos cumpleaños"
           }
         }
       }
@@ -2704,6 +3622,12 @@
             "state": "translated",
             "value": "Reçu"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recibido"
+          }
         }
       }
     },
@@ -2720,6 +3644,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cadeau reçu"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regalo recibido"
           }
         }
       }
@@ -2738,6 +3668,12 @@
             "state": "translated",
             "value": "Modifier le cadeau reçu"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar regalo recibido"
+          }
         }
       }
     },
@@ -2754,6 +3690,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rappels"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorios"
           }
         }
       }
@@ -2772,6 +3714,12 @@
             "state": "translated",
             "value": "Activer les rappels"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar recordatorios"
+          }
         }
       }
     },
@@ -2788,6 +3736,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rappels activés"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorios activados"
           }
         }
       }
@@ -2806,6 +3760,12 @@
             "state": "translated",
             "value": "Rappels mis à jour"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorios actualizados"
+          }
         }
       }
     },
@@ -2823,6 +3783,12 @@
             "state": "translated",
             "value": "Rappels désactivés"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorios desactivados"
+          }
         }
       }
     },
@@ -2838,6 +3804,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recharger les rappels"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recargar recordatorios"
           }
         }
       }
@@ -2855,6 +3827,12 @@
             "state": "translated",
             "value": "Les rappels sont créés automatiquement avec les notifications iOS."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los recordatorios se crean automáticamente con las notificaciones de iOS."
+          }
         }
       }
     },
@@ -2870,6 +3848,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réglages des rappels"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes de recordatorio"
           }
         }
       }
@@ -2888,6 +3872,12 @@
             "state": "translated",
             "value": "Réessayer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intentar de nuevo"
+          }
         }
       }
     },
@@ -2905,6 +3895,12 @@
             "state": "translated",
             "value": "Planifier la première idée"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planifica tu primera idea"
+          }
         }
       }
     },
@@ -2921,6 +3917,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Crée un message d'anniversaire personnalisé avec l'assistant IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea un mensaje de cumpleaños personalizado con el asistente de IA"
           }
         }
       }
@@ -2942,6 +3944,12 @@
             "state": "translated",
             "value": "Euro"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "euros"
+          }
         }
       }
     },
@@ -2958,6 +3966,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Export réussi"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportación exitosa"
           }
         }
       }
@@ -2976,6 +3990,12 @@
             "state": "translated",
             "value": "Échec de l'export"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportación fallida"
+          }
         }
       }
     },
@@ -2992,6 +4012,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exporte les idées cadeaux en fichier CSV"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exporta ideas de regalo como archivo CSV"
           }
         }
       }
@@ -3010,6 +4036,12 @@
             "state": "translated",
             "value": "Favoris"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favoritos"
+          }
         }
       }
     },
@@ -3027,6 +4059,12 @@
             "state": "translated",
             "value": "Fonctionnalités"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funciones"
+          }
         }
       }
     },
@@ -3042,6 +4080,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Retour enregistré"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comentarios guardados"
           }
         }
       }
@@ -3059,6 +4103,12 @@
             "state": "translated",
             "value": "Envoyer un retour"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar comentarios"
+          }
         }
       }
     },
@@ -3074,6 +4124,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Erreur"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error"
           }
         }
       }
@@ -3092,6 +4148,12 @@
             "state": "translated",
             "value": "Erreur lors de la suppression"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error al eliminar"
+          }
         }
       }
     },
@@ -3108,6 +4170,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Erreur : Budget invalide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error: Presupuesto inválido"
           }
         }
       }
@@ -3126,6 +4194,12 @@
             "state": "translated",
             "value": "Terminé"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hecho"
+          }
         }
       }
     },
@@ -3142,6 +4216,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Filtres"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtrar"
           }
         }
       }
@@ -3160,6 +4240,12 @@
             "state": "translated",
             "value": "Poissons"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piscis"
+          }
         }
       }
     },
@@ -3176,6 +4262,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gratuit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gratis"
           }
         }
       }
@@ -3194,6 +4286,12 @@
             "state": "translated",
             "value": "Ami(e)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amigo/a"
+          }
         }
       }
     },
@@ -3211,6 +4309,12 @@
             "state": "translated",
             "value": "Ajoutez votre première idée cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade tu primera idea de regalo"
+          }
         }
       }
     },
@@ -3227,6 +4331,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajoute une nouvelle idée cadeau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade una nueva idea de regalo"
           }
         }
       }
@@ -3251,6 +4361,12 @@
             "state": "translated",
             "value": "Date de naissance"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha de nacimiento"
+          }
         }
       }
     },
@@ -3266,6 +4382,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anniversaire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumpleaños"
           }
         }
       }
@@ -3284,6 +4406,12 @@
             "state": "translated",
             "value": "Anniversaire aujourd'hui"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumpleaños hoy"
+          }
         }
       }
     },
@@ -3300,6 +4428,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anniversaire aujourd'hui !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Cumpleaños hoy!"
           }
         }
       }
@@ -3318,6 +4452,12 @@
             "state": "translated",
             "value": "Anniversaire demain"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumpleaños mañana"
+          }
         }
       }
     },
@@ -3335,6 +4475,12 @@
             "state": "translated",
             "value": "L'anniversaire approche !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Se acerca el cumpleaños!"
+          }
         }
       }
     },
@@ -3351,6 +4497,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anniversaires"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumpleaños"
           }
         }
       }
@@ -3372,6 +4524,12 @@
             "state": "translated",
             "value": "Anniversaires sur l'écran d'accueil"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumpleaños en la pantalla de inicio"
+          }
         }
       }
     },
@@ -3388,6 +4546,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vue d'ensemble des anniversaires avec comptes à rebours"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumen de cumpleaños con cuenta regresiva"
           }
         }
       }
@@ -3406,6 +4570,12 @@
             "state": "translated",
             "value": "Message d'anniversaire"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mensaje de cumpleaños"
+          }
         }
       }
     },
@@ -3422,6 +4592,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Créer un message d'anniversaire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crear mensaje de cumpleaños"
           }
         }
       }
@@ -3440,6 +4616,12 @@
             "state": "translated",
             "value": "Acheté"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprado"
+          }
         }
       }
     },
@@ -3456,6 +4638,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Génère 5 idées cadeaux personnalisées avec l'assistant IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genera 5 ideas de regalo personalizadas con el asistente de IA"
           }
         }
       }
@@ -3474,6 +4662,12 @@
             "state": "translated",
             "value": "Génère un message d'anniversaire alternatif"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genera un mensaje de cumpleaños alternativo"
+          }
         }
       }
     },
@@ -3491,6 +4685,12 @@
             "state": "translated",
             "value": "Planifié"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planificado"
+          }
         }
       }
     },
@@ -3507,6 +4707,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "à l'instant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ahora mismo"
           }
         }
       }
@@ -3531,6 +4737,12 @@
             "state": "translated",
             "value": "Modifier le cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar regalo"
+          }
         }
       }
     },
@@ -3547,6 +4759,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cadeau nécessaire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se necesita regalo"
           }
         }
       }
@@ -3565,6 +4783,12 @@
             "state": "translated",
             "value": "Noter le cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registrar regalo"
+          }
         }
       }
     },
@@ -3582,6 +4806,12 @@
             "state": "translated",
             "value": "Idée cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idea de regalo"
+          }
         }
       }
     },
@@ -3597,6 +4827,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Statut du cadeau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado del regalo"
           }
         }
       }
@@ -3615,6 +4851,12 @@
             "state": "translated",
             "value": "Vue d'ensemble du statut des cadeaux"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumen del estado del regalo"
+          }
         }
       }
     },
@@ -3630,6 +4872,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historique des cadeaux"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historial de regalos"
           }
         }
       }
@@ -3648,6 +4896,12 @@
             "state": "translated",
             "value": "Idée cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idea de regalo"
+          }
         }
       }
     },
@@ -3664,6 +4918,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dupliquer l'idée cadeau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duplicar idea de regalo"
           }
         }
       }
@@ -3682,6 +4942,12 @@
             "state": "translated",
             "value": "Supprimer l'idée cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar idea de regalo"
+          }
         }
       }
     },
@@ -3699,6 +4965,12 @@
             "state": "translated",
             "value": "Partager l'idée cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir idea de regalo"
+          }
         }
       }
     },
@@ -3714,6 +4986,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Idées cadeaux"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ideas de regalo"
           }
         }
       }
@@ -3732,6 +5010,12 @@
             "state": "translated",
             "value": "Idées cadeaux avec budget et tags"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideas de regalo con presupuesto y etiquetas"
+          }
         }
       }
     },
@@ -3748,6 +5032,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Collecter des idées cadeaux"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recopilar ideas de regalo"
           }
         }
       }
@@ -3766,6 +5056,12 @@
             "state": "translated",
             "value": "Partager les idées cadeaux"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir ideas de regalo"
+          }
         }
       }
     },
@@ -3782,6 +5078,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suggérer des idées cadeaux"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerir ideas de regalo"
           }
         }
       }
@@ -3800,6 +5102,12 @@
             "state": "translated",
             "value": "Statut cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado del regalo"
+          }
         }
       }
     },
@@ -3816,6 +5124,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayer"
           }
         }
       }
@@ -3834,6 +5148,12 @@
             "state": "translated",
             "value": "Séparé par des virgules"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Separado por comas"
+          }
         }
       }
     },
@@ -3850,6 +5170,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saisissez jusqu'à 10 tags séparés par des virgules, max 30 caractères par tag"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduce hasta 10 etiquetas separadas por comas, máx. 30 caracteres por etiqueta"
           }
         }
       }
@@ -3868,6 +5194,12 @@
             "state": "translated",
             "value": "Saisissez le budget en euros"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduce el presupuesto en euros"
+          }
         }
       }
     },
@@ -3884,6 +5216,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saisissez le budget maximum en euros"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduce el presupuesto máximo en euros"
           }
         }
       }
@@ -3902,6 +5240,12 @@
             "state": "translated",
             "value": "Saisissez le budget minimum en euros"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduce el presupuesto mínimo en euros"
+          }
         }
       }
     },
@@ -3919,6 +5263,12 @@
             "state": "translated",
             "value": "Saisissez un type de relation personnalisé, p. ex. « Grand-mère », « Oncle » ou « Mentor »."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduce un tipo de relación personalizado, p. ej. \"Abuela\", \"Tío\" o \"Mentor\"."
+          }
         }
       }
     },
@@ -3931,6 +5281,12 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "GitHub"
@@ -3952,6 +5308,12 @@
             "state": "translated",
             "value": "offert"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regalado"
+          }
         }
       }
     },
@@ -3972,6 +5334,12 @@
             "state": "translated",
             "value": "Google Vertex AI / Google AI Studio (États-Unis)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Google Vertex AI / Google AI Studio (EE. UU.)"
+          }
         }
       }
     },
@@ -3988,6 +5356,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Grand (75-150 €)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grande (€75-150)"
           }
         }
       }
@@ -4006,6 +5380,12 @@
             "state": "translated",
             "value": "Bien"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bueno"
+          }
         }
       }
     },
@@ -4022,6 +5402,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clause de non-responsabilité"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aviso legal"
           }
         }
       }
@@ -4043,6 +5429,12 @@
             "state": "translated",
             "value": "Hendrik Grüger\nhendrik@gruepi.de\n\nCette app est un projet privé et non une offre commerciale."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hendrik Grüger\nhendrik@gruepi.de\n\nEsta app es un proyecto privado y no una oferta comercial."
+          }
         }
       }
     },
@@ -4059,6 +5451,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Messages chaleureux en un clic"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Textos emotivos con solo un toque"
           }
         }
       }
@@ -4077,6 +5475,12 @@
             "state": "translated",
             "value": "Message chaleureux pour l'anniversaire"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un texto de cumpleaños emotivo"
+          }
         }
       }
     },
@@ -4092,6 +5496,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aujourd'hui"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy"
           }
         }
       }
@@ -4113,6 +5523,12 @@
             "state": "translated",
             "value": "Anniversaire aujourd'hui !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Cumpleaños hoy!"
+          }
         }
       }
     },
@@ -4129,6 +5545,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fête ses %lld ans aujourd'hui !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Cumple %lld hoy!"
           }
         }
       }
@@ -4147,6 +5569,12 @@
             "state": "translated",
             "value": "Aujourd'hui !"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Hoy!"
+          }
         }
       }
     },
@@ -4164,6 +5592,12 @@
             "state": "translated",
             "value": "Ajouter"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir"
+          }
         }
       }
     },
@@ -4179,6 +5613,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Loisirs & centres d'intérêt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aficiones e intereses"
           }
         }
       }
@@ -4196,6 +5636,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajouter un loisir"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir afición"
           }
         }
       }
@@ -4216,6 +5662,12 @@
             "state": "translated",
             "value": "iCloud Sync"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sincronización con iCloud"
+          }
         }
       }
     },
@@ -4233,6 +5685,12 @@
             "state": "translated",
             "value": "iCloud Sync (optionnel)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sincronización con iCloud (opcional)"
+          }
         }
       }
     },
@@ -4248,6 +5706,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Activer iCloud Sync"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar sincronización con iCloud"
           }
         }
       }
@@ -4266,6 +5730,12 @@
             "state": "translated",
             "value": "Idée"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idea"
+          }
         }
       }
     },
@@ -4282,6 +5752,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Modifier l'idée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar idea"
           }
         }
       }
@@ -4300,6 +5776,12 @@
             "state": "translated",
             "value": "Ajouter une idée"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir idea"
+          }
         }
       }
     },
@@ -4316,6 +5798,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Idées"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideas"
           }
         }
       }
@@ -4334,6 +5822,12 @@
             "state": "translated",
             "value": "Importez des contacts avec des anniversaires"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar contactos con cumpleaños"
+          }
         }
       }
     },
@@ -4350,6 +5844,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importez des contacts via le + en haut à droite"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa contactos con el botón + en la parte superior derecha"
           }
         }
       }
@@ -4368,6 +5868,12 @@
             "state": "translated",
             "value": "Importez des contacts via le bouton + en haut à droite"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa contactos con el botón + en la parte superior derecha"
+          }
         }
       }
     },
@@ -4385,6 +5891,12 @@
             "state": "translated",
             "value": "Importez des contacts pour afficher les anniversaires"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa contactos para ver cumpleaños"
+          }
         }
       }
     },
@@ -4400,6 +5912,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mentions légales"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aviso legal"
           }
         }
       }
@@ -4417,6 +5935,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dans"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En"
           }
         }
       }
@@ -4441,6 +5965,12 @@
             "state": "translated",
             "value": "Dans %lld jours"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En %lld días"
+          }
         }
       }
     },
@@ -4457,6 +5987,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fête ses %2$lld ans dans %1$lld jours"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumple %2$lld en %1$lld días"
           }
         }
       }
@@ -4475,6 +6011,12 @@
             "state": "translated",
             "value": "Dans 30 jours, c'est le moment ! L'heure des idées cadeaux."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Faltan 30 días! Es hora de buscar ideas de regalo."
+          }
         }
       }
     },
@@ -4490,6 +6032,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrir dans les réglages"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir en ajustes"
           }
         }
       }
@@ -4507,6 +6055,12 @@
             "state": "translated",
             "value": "Offert les années précédentes"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regalado en años anteriores"
+          }
         }
       }
     },
@@ -4523,6 +6077,12 @@
             "state": "translated",
             "value": "Copier dans le presse-papiers"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar al portapapeles"
+          }
         }
       }
     },
@@ -4538,6 +6098,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Infos"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Info"
           }
         }
       }
@@ -4556,6 +6122,12 @@
             "state": "translated",
             "value": "Vous trouverez les informations sur la confidentialité dans le menu Confidentialité."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La información de privacidad se encuentra en el menú Privacidad."
+          }
         }
       }
     },
@@ -4572,6 +6144,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Intérêts/Tags (si disponibles)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intereses/Etiquetas (si están disponibles)"
           }
         }
       }
@@ -4590,6 +6168,12 @@
             "state": "translated",
             "value": "Année"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Año"
+          }
         }
       }
     },
@@ -4605,6 +6189,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Année du cadeau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Año del regalo"
           }
         }
       }
@@ -4623,6 +6213,12 @@
             "state": "translated",
             "value": "Année :"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Año:"
+          }
         }
       }
     },
@@ -4639,6 +6235,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ans"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "años"
           }
         }
       }
@@ -4657,6 +6259,12 @@
             "state": "translated",
             "value": "Annuellement"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anual"
+          }
         }
       }
     },
@@ -4673,6 +6281,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "S'abonner maintenant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suscribirse ahora"
           }
         }
       }
@@ -4691,6 +6305,12 @@
             "state": "translated",
             "value": "Vierge"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Virgo"
+          }
         }
       }
     },
@@ -4707,6 +6327,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catégorie"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categoría"
           }
         }
       }
@@ -4725,6 +6351,12 @@
             "state": "translated",
             "value": "La catégorie peut avoir maximum 50 caractères"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La categoría no puede superar los 50 caracteres"
+          }
         }
       }
     },
@@ -4741,6 +6373,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La catégorie ne peut pas être vide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La categoría no puede estar vacía"
           }
         }
       }
@@ -4759,6 +6397,12 @@
             "state": "translated",
             "value": "Catégorie :"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categoría:"
+          }
         }
       }
     },
@@ -4775,6 +6419,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Achat en attente"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compra pendiente"
           }
         }
       }
@@ -4793,6 +6443,12 @@
             "state": "translated",
             "value": "Échec de l'achat"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compra fallida"
+          }
         }
       }
     },
@@ -4809,6 +6465,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Restaurer les achats"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar compras"
           }
         }
       }
@@ -4827,6 +6489,12 @@
             "state": "translated",
             "value": "Pas de cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin regalo"
+          }
         }
       }
     },
@@ -4843,6 +6511,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pas de cadeau nécessaire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No necesita regalo"
           }
         }
       }
@@ -4861,6 +6535,12 @@
             "state": "translated",
             "value": "Pas de cadeau nécessaire. "
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No necesita regalo. "
+          }
         }
       }
     },
@@ -4878,6 +6558,12 @@
             "state": "translated",
             "value": "Pas d'historique"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin historial"
+          }
         }
       }
     },
@@ -4894,6 +6580,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucun"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ninguno"
           }
         }
       }
@@ -4922,6 +6614,12 @@
             "state": "translated",
             "value": "Pas de données"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin datos"
+          }
         }
       }
     },
@@ -4938,6 +6636,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucun consentement donné"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin consentimiento otorgado"
           }
         }
       }
@@ -4956,6 +6660,12 @@
             "state": "translated",
             "value": "Aucun résultat"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin resultados"
+          }
         }
       }
     },
@@ -4971,6 +6681,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pas d'anniversaires"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin cumpleaños"
           }
         }
       }
@@ -4989,6 +6705,12 @@
             "state": "translated",
             "value": "Pas d'idées cadeaux"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin ideas de regalo"
+          }
         }
       }
     },
@@ -5005,6 +6727,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucune idée cadeau disponible"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay ideas de regalo disponibles"
           }
         }
       }
@@ -5023,6 +6751,12 @@
             "state": "translated",
             "value": "Aucune idée cadeau à exporter"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay ideas de regalo para exportar"
+          }
         }
       }
     },
@@ -5039,6 +6773,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pas de contacts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin contactos"
           }
         }
       }
@@ -5057,6 +6797,12 @@
             "state": "translated",
             "value": "Aucun contact avec anniversaire trouvé"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontraron contactos con cumpleaños"
+          }
         }
       }
     },
@@ -5072,6 +6818,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pas de nouvelles suggestions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin nuevas sugerencias"
           }
         }
       }
@@ -5090,6 +6842,12 @@
             "state": "translated",
             "value": "Aucune correspondance"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin coincidencias"
+          }
         }
       }
     },
@@ -5106,6 +6864,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "IA désactivée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA desactivada"
           }
         }
       }
@@ -5124,6 +6888,12 @@
             "state": "translated",
             "value": "IA désactivée · Réglages → Assistant IA"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA desactivada · Ajustes → Asistente de IA"
+          }
         }
       }
     },
@@ -5139,6 +6909,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'IA réfléchit…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La IA está pensando…"
           }
         }
       }
@@ -5156,6 +6932,12 @@
             "state": "translated",
             "value": "L'IA écrit..."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La IA está escribiendo..."
+          }
         }
       }
     },
@@ -5171,6 +6953,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Assistant IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asistente de IA"
           }
         }
       }
@@ -5189,6 +6977,12 @@
             "state": "translated",
             "value": "L'assistant IA est désactivé dans les réglages."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El asistente de IA está desactivado en ajustes."
+          }
         }
       }
     },
@@ -5205,6 +6999,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Messages d'anniversaire IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mensajes de cumpleaños con IA"
           }
         }
       }
@@ -5223,6 +7023,12 @@
             "state": "translated",
             "value": "Idées cadeaux IA"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideas de regalo con IA"
+          }
         }
       }
     },
@@ -5240,6 +7046,12 @@
             "state": "translated",
             "value": "Suggestions cadeaux IA"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerencias de regalo con IA"
+          }
         }
       }
     },
@@ -5255,6 +7067,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Qualité IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calidad de IA"
           }
         }
       }
@@ -5273,6 +7091,12 @@
             "state": "translated",
             "value": "Suggestions IA"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerencias de IA"
+          }
         }
       }
     },
@@ -5289,6 +7113,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suggestions IA (OpenRouter)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerencias de IA (OpenRouter)"
           }
         }
       }
@@ -5307,6 +7137,12 @@
             "state": "translated",
             "value": "Suggestions IA (optionnel, avec consentement)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerencias de IA (opcional, con consentimiento)"
+          }
         }
       }
     },
@@ -5324,6 +7160,12 @@
             "state": "translated",
             "value": "Suggestions IA activées"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerencias de IA activadas"
+          }
         }
       }
     },
@@ -5339,6 +7181,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Générer des suggestions IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generar sugerencias de IA"
           }
         }
       }
@@ -5357,6 +7205,12 @@
             "state": "translated",
             "value": "Enfant"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hijo/a"
+          }
         }
       }
     },
@@ -5373,6 +7227,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Petit (jusqu'à 25 €)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pequeño (hasta €25)"
           }
         }
       }
@@ -5391,6 +7251,12 @@
             "state": "translated",
             "value": "Collègue"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colega"
+          }
         }
       }
     },
@@ -5407,6 +7273,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contact"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contacto"
           }
         }
       }
@@ -5425,6 +7297,12 @@
             "state": "translated",
             "value": "Modifier le contact"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar contacto"
+          }
         }
       }
     },
@@ -5442,6 +7320,12 @@
             "state": "translated",
             "value": "Coordonnées / Numéro de téléphone"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detalles del contacto / número de teléfono"
+          }
         }
       }
     },
@@ -5458,6 +7342,12 @@
             "state": "translated",
             "value": "Contacts"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contactos"
+          }
         }
       }
     },
@@ -5473,6 +7363,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importer des contacts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar contactos"
           }
         }
       }
@@ -5491,6 +7387,12 @@
             "state": "translated",
             "value": "Import de contacts (optionnel)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importación de contactos (opcional)"
+          }
         }
       }
     },
@@ -5507,6 +7409,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copié"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado"
           }
         }
       }
@@ -5525,6 +7433,12 @@
             "state": "translated",
             "value": "Copie l'intégralité du message dans le presse-papiers"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia el mensaje completo al portapapeles"
+          }
         }
       }
     },
@@ -5541,6 +7455,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tester gratuitement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comenzar prueba gratuita"
           }
         }
       }
@@ -5559,6 +7479,12 @@
             "state": "translated",
             "value": "Cancer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cáncer"
+          }
         }
       }
     },
@@ -5575,6 +7501,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Critique"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crítico"
           }
         }
       }
@@ -5593,6 +7525,12 @@
             "state": "translated",
             "value": "Chargement des prix…"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargando precios…"
+          }
         }
       }
     },
@@ -5609,6 +7547,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chargement..."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cargando..."
           }
         }
       }
@@ -5627,6 +7571,12 @@
             "state": "translated",
             "value": "Laissez générer des idées cadeaux créatives basées sur les intérêts."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obtén ideas de regalo creativas basadas en intereses."
+          }
         }
       }
     },
@@ -5643,6 +7593,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transmet les requêtes à"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reenvía solicitudes a"
           }
         }
       }
@@ -5661,6 +7617,12 @@
             "state": "translated",
             "value": "Ouvrir le lien"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir enlace"
+          }
         }
       }
     },
@@ -5677,6 +7639,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lien :"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enlace:"
           }
         }
       }
@@ -5695,6 +7663,12 @@
             "state": "translated",
             "value": "Liens"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enlaces"
+          }
         }
       }
     },
@@ -5711,6 +7685,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Supprimer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar"
           }
         }
       }
@@ -5729,6 +7709,12 @@
             "state": "translated",
             "value": "Lion"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leo"
+          }
         }
       }
     },
@@ -5746,6 +7732,12 @@
             "state": "translated",
             "value": "App Mail ouverte"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App de correo abierta"
+          }
         }
       }
     },
@@ -5762,6 +7754,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'app Mail n'a pas pu être ouverte."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo abrir la app de correo."
           }
         }
       }
@@ -5783,6 +7781,12 @@
             "state": "translated",
             "value": "Marquer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marcar"
+          }
         }
       }
     },
@@ -5799,6 +7803,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Budget max"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto máx."
           }
         }
       }
@@ -5817,6 +7827,12 @@
             "state": "translated",
             "value": "Le max ne peut pas être inférieur au min"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El máximo no puede ser menor que el mínimo"
+          }
         }
       }
     },
@@ -5833,6 +7849,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maximum 10 tags autorisés"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Máximo 10 etiquetas permitidas"
           }
         }
       }
@@ -5851,6 +7873,12 @@
             "state": "translated",
             "value": "Le montant maximum doit être supérieur au montant minimum"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El importe máximo debe ser mayor que el mínimo"
+          }
         }
       }
     },
@@ -5867,6 +7895,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Budget maximum"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto máximo"
           }
         }
       }
@@ -5885,6 +7919,12 @@
             "state": "translated",
             "value": "Curseur budget maximum"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Control deslizante de presupuesto máximo"
+          }
         }
       }
     },
@@ -5900,6 +7940,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maximum atteint (10 loisirs)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Máximo alcanzado (10 aficiones)"
           }
         }
       }
@@ -5918,6 +7964,12 @@
             "state": "translated",
             "value": "Budget min"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto mín."
+          }
         }
       }
     },
@@ -5934,6 +7986,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Budget minimum"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto mínimo"
           }
         }
       }
@@ -5952,6 +8010,12 @@
             "state": "translated",
             "value": "Curseur budget minimum"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Control deslizante de presupuesto mínimo"
+          }
         }
       }
     },
@@ -5968,6 +8032,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Au moins un avertissement préalable doit être sélectionné"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Debe seleccionarse al menos un aviso previo"
           }
         }
       }
@@ -5986,6 +8056,12 @@
             "state": "translated",
             "value": "Minute"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "minuto"
+          }
         }
       }
     },
@@ -6003,6 +8079,12 @@
             "state": "translated",
             "value": "Minutes"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "minutos"
+          }
         }
       }
     },
@@ -6018,6 +8100,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Avec quel prénom souhaitez-vous signer le message ? Ce prénom est uniquement stocké localement sur votre appareil."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Con qué nombre deseas firmar el mensaje? Este nombre solo se almacena localmente en tu dispositivo."
           }
         }
       }
@@ -6036,6 +8124,12 @@
             "state": "translated",
             "value": "Moyen (25-75 €)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mediano (€25-75)"
+          }
         }
       }
     },
@@ -6051,6 +8145,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Souhaitez-vous ouvrir les réglages système pour les notifications ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Deseas abrir los ajustes del sistema para las notificaciones?"
           }
         }
       }
@@ -6069,6 +8169,12 @@
             "state": "translated",
             "value": "Mois"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes"
+          }
         }
       }
     },
@@ -6085,6 +8191,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mensuel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mensual"
           }
         }
       }
@@ -6103,6 +8215,12 @@
             "state": "translated",
             "value": "Demain"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mañana"
+          }
         }
       }
     },
@@ -6119,6 +8237,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anniversaire demain"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumpleaños mañana"
           }
         }
       }
@@ -6137,6 +8261,12 @@
             "state": "translated",
             "value": "Fête ses %lld ans demain"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumple %lld mañana"
+          }
         }
       }
     },
@@ -6154,6 +8284,12 @@
             "state": "translated",
             "value": "Mère"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Madre"
+          }
         }
       }
     },
@@ -6170,6 +8306,12 @@
             "state": "translated",
             "value": "Message"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mensaje"
+          }
         }
       }
     },
@@ -6185,6 +8327,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Générer un message"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generar mensaje"
           }
         }
       }
@@ -6203,6 +8351,12 @@
             "state": "translated",
             "value": "Message copié dans le presse-papiers"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mensaje copiado al portapapeles"
+          }
         }
       }
     },
@@ -6218,6 +8372,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prochain anniversaire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo cumpleaños"
           }
         }
       }
@@ -6236,6 +8396,12 @@
             "state": "translated",
             "value": "L'année prochaine"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El año que viene"
+          }
         }
       }
     },
@@ -6251,6 +8417,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nom"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre"
           }
         }
       }
@@ -6269,6 +8441,12 @@
             "state": "translated",
             "value": "Nom du cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre del regalo"
+          }
         }
       }
     },
@@ -6286,6 +8464,12 @@
             "state": "translated",
             "value": "Nom : AI Présents\nPlateforme : iOS 26+\nLangage : Swift 6, SwiftUI"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre: AI Presents\nPlataforma: iOS 26+\nLenguaje: Swift 6, SwiftUI"
+          }
         }
       }
     },
@@ -6301,6 +8485,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Négatif"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Negativo"
           }
         }
       }
@@ -6319,6 +8509,12 @@
             "state": "translated",
             "value": "Erreur réseau :"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error de red:"
+          }
         }
       }
     },
@@ -6336,6 +8532,12 @@
             "state": "translated",
             "value": "Nouvelle idée"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nueva idea"
+          }
         }
       }
     },
@@ -6351,6 +8553,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Générer un nouveau message"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generar nuevo mensaje"
           }
         }
       }
@@ -6369,6 +8577,12 @@
             "state": "translated",
             "value": "Redémarrage requis"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se requiere reinicio"
+          }
         }
       }
     },
@@ -6385,6 +8599,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Non demandé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No solicitado"
           }
         }
       }
@@ -6403,6 +8623,12 @@
             "state": "translated",
             "value": "Ne plus jamais oublier un anniversaire"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nunca olvides un cumpleaños"
+          }
         }
       }
     },
@@ -6419,6 +8645,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plus jamais oublier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nunca más lo olvides"
           }
         }
       }
@@ -6437,6 +8669,12 @@
             "state": "translated",
             "value": "Encore %lld jours"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld días restantes"
+          }
         }
       }
     },
@@ -6452,6 +8690,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pas encore de cadeaux reçus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay regalos recibidos"
           }
         }
       }
@@ -6469,6 +8713,12 @@
             "state": "translated",
             "value": "Pas encore d'idées"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay ideas"
+          }
         }
       }
     },
@@ -6484,6 +8734,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sans cadeau pour l'instant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún sin regalo"
           }
         }
       }
@@ -6502,6 +8758,12 @@
             "state": "translated",
             "value": "Note :"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nota:"
+          }
         }
       }
     },
@@ -6518,6 +8780,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Notes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notas"
           }
         }
       }
@@ -6536,6 +8804,12 @@
             "state": "translated",
             "value": "Favoris uniquement"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo favoritos"
+          }
         }
       }
     },
@@ -6553,6 +8827,12 @@
             "state": "translated",
             "value": "Localement uniquement"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo local"
+          }
         }
       }
     },
@@ -6569,6 +8849,12 @@
             "state": "translated",
             "value": "Stocker uniquement en local"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardar solo localmente"
+          }
         }
       }
     },
@@ -6584,6 +8870,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Noms & anniversaires uniquement · Stocké localement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo nombres y cumpleaños · Guardados localmente"
           }
         }
       }
@@ -6602,6 +8894,12 @@
             "state": "translated",
             "value": "Plus que 2 semaines ! Avez-vous trouvé quelque chose ?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Solo quedan 2 semanas! ¿Has encontrado algo?"
+          }
         }
       }
     },
@@ -6618,6 +8916,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plus qu'une semaine ! Il est temps d'agir."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Solo queda una semana! Es hora de actuar."
           }
         }
       }
@@ -6636,6 +8940,12 @@
             "state": "translated",
             "value": "Conditions d'utilisation"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Términos de uso"
+          }
         }
       }
     },
@@ -6652,6 +8962,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrir"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir"
           }
         }
       }
@@ -6670,6 +8986,12 @@
             "state": "translated",
             "value": "Ouvre le formulaire pour modifier le nom, la date de naissance et la relation"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre el formulario para editar nombre, cumpleaños y relación"
+          }
         }
       }
     },
@@ -6686,6 +9008,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvre le lien dans le navigateur"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre el enlace en el navegador"
           }
         }
       }
@@ -6704,6 +9032,12 @@
             "state": "translated",
             "value": "Continuer sans nom"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuar sin nombre"
+          }
         }
       }
     },
@@ -6717,6 +9051,12 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "OK"
@@ -6737,6 +9077,12 @@
             "state": "translated",
             "value": "OpenRouter Inc. (États-Unis)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenRouter Inc. (EE. UU.)"
+          }
         }
       }
     },
@@ -6753,6 +9099,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Notes optionnelles"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notas opcionales"
           }
         }
       }
@@ -6771,6 +9123,12 @@
             "state": "translated",
             "value": "Options"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opciones"
+          }
         }
       }
     },
@@ -6787,6 +9145,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Partenaire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pareja"
           }
         }
       }
@@ -6805,6 +9169,12 @@
             "state": "translated",
             "value": "Personnalisé via IA cloud"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personalizado vía IA en la nube"
+          }
         }
       }
     },
@@ -6820,6 +9190,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Message d'anniversaire personnel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mensaje de cumpleaños personal"
           }
         }
       }
@@ -6837,6 +9213,12 @@
             "state": "translated",
             "value": "Positif"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Positivo"
+          }
         }
       }
     },
@@ -6850,6 +9232,12 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Premium"
@@ -6871,6 +9259,12 @@
             "state": "translated",
             "value": "Premium (150 €+)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium (€150+)"
+          }
         }
       }
     },
@@ -6887,6 +9281,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Débloquer Premium"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloquear Premium"
           }
         }
       }
@@ -6905,6 +9305,12 @@
             "state": "translated",
             "value": "par an"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "por año"
+          }
         }
       }
     },
@@ -6921,6 +9327,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "par mois"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "por mes"
           }
         }
       }
@@ -6939,6 +9351,12 @@
             "state": "translated",
             "value": "Produit introuvable"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Producto no encontrado"
+          }
         }
       }
     },
@@ -6955,6 +9373,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Provisoire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provisional"
           }
         }
       }
@@ -6975,6 +9399,12 @@
             "state": "translated",
             "value": "Métrique de qualité"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Métricas de calidad"
+          }
         }
       }
     },
@@ -6992,6 +9422,12 @@
             "state": "translated",
             "value": "reçu"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recibido"
+          }
         }
       }
     },
@@ -7008,6 +9444,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Base juridique"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Base legal"
           }
         }
       }
@@ -7028,6 +9470,12 @@
             "state": "translated",
             "value": "Heures calmes"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horario silencioso"
+          }
         }
       }
     },
@@ -7044,6 +9492,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La fin des heures calmes doit être entre 0 et 23"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El fin del horario silencioso debe estar entre 0 y 23"
           }
         }
       }
@@ -7062,6 +9516,12 @@
             "state": "translated",
             "value": "Le début des heures calmes doit être entre 0 et 23"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El inicio del horario silencioso debe estar entre 0 y 23"
+          }
         }
       }
     },
@@ -7078,6 +9538,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fermer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
           }
         }
       }
@@ -7096,6 +9562,12 @@
             "state": "translated",
             "value": "Ferme le formulaire sans enregistrer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cierra el formulario sin guardar"
+          }
         }
       }
     },
@@ -7113,6 +9585,12 @@
             "state": "translated",
             "value": "Sagittaire"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sagitario"
+          }
         }
       }
     },
@@ -7129,6 +9607,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sœur"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermana"
           }
         }
       }
@@ -7150,6 +9634,12 @@
             "state": "translated",
             "value": "Seconde"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "segundo"
+          }
         }
       }
     },
@@ -7166,6 +9656,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Secondes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "segundos"
           }
         }
       }
@@ -7184,6 +9680,12 @@
             "state": "translated",
             "value": "Scorpion"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escorpio"
+          }
         }
       }
     },
@@ -7200,6 +9702,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Utiliser le curseur"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar control deslizante"
           }
         }
       }
@@ -7218,6 +9726,12 @@
             "state": "translated",
             "value": "Rappels intelligents"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorios inteligentes"
+          }
         }
       }
     },
@@ -7233,6 +9747,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vos anniversaires et idées cadeaux doivent-ils être automatiquement disponibles sur tous vos appareils Apple ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Deseas que tus cumpleaños e ideas de regalo estén disponibles automáticamente en todos tus dispositivos Apple?"
           }
         }
       }
@@ -7251,6 +9771,12 @@
             "state": "translated",
             "value": "Autre"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otros"
+          }
         }
       }
     },
@@ -7267,6 +9793,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tri"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordenar"
           }
         }
       }
@@ -7285,6 +9817,12 @@
             "state": "translated",
             "value": "BON PLAN"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MEJOR VALOR"
+          }
         }
       }
     },
@@ -7301,6 +9839,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enregistrez des idées et définissez des budgets pour chaque contact."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guarda ideas y establece presupuestos para cada contacto."
           }
         }
       }
@@ -7319,6 +9863,12 @@
             "state": "translated",
             "value": "Enregistrer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardar"
+          }
         }
       }
     },
@@ -7335,6 +9885,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enregistre le cadeau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guarda el regalo"
           }
         }
       }
@@ -7353,6 +9909,12 @@
             "state": "translated",
             "value": "Enregistre les modifications"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guarda los cambios"
+          }
         }
       }
     },
@@ -7370,6 +9932,12 @@
             "state": "translated",
             "value": "Enregistre l'idée cadeau"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guarda la idea de regalo"
+          }
         }
       }
     },
@@ -7385,6 +9953,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Date : Mars 2026"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A partir de: marzo de 2026"
           }
         }
       }
@@ -7403,6 +9977,12 @@
             "state": "translated",
             "value": "Statut"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado"
+          }
         }
       }
     },
@@ -7419,6 +9999,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Modifier le statut"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambiar estado"
           }
         }
       }
@@ -7437,6 +10023,12 @@
             "state": "translated",
             "value": "Vérifier le statut"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar estado"
+          }
         }
       }
     },
@@ -7453,6 +10045,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Statut inconnu"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado desconocido"
           }
         }
       }
@@ -7471,6 +10069,12 @@
             "state": "translated",
             "value": "Statut suivant"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avanzar estado"
+          }
         }
       }
     },
@@ -7487,6 +10091,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Capricorne"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capricornio"
           }
         }
       }
@@ -7505,6 +10115,12 @@
             "state": "translated",
             "value": "Signe astrologique (calculé, pas de données personnelles)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signo zodiacal (calculado, sin datos personales)"
+          }
         }
       }
     },
@@ -7521,6 +10137,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Taureau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tauro"
           }
         }
       }
@@ -7539,6 +10161,12 @@
             "state": "translated",
             "value": "Heure"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hora"
+          }
         }
       }
     },
@@ -7556,6 +10184,12 @@
             "state": "translated",
             "value": "Heures"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "horas"
+          }
         }
       }
     },
@@ -7571,6 +10205,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rechercher ou demander à l'IA…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar o pregunta a la IA…"
           }
         }
       }
@@ -7589,6 +10229,12 @@
             "state": "translated",
             "value": "Rechercher..."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar..."
+          }
         }
       }
     },
@@ -7604,6 +10250,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rechercher..."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar..."
           }
         }
       }
@@ -7622,6 +10274,12 @@
             "state": "translated",
             "value": "Jour"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Día"
+          }
         }
       }
     },
@@ -7638,6 +10296,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jours"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Días"
           }
         }
       }
@@ -7656,6 +10320,12 @@
             "state": "translated",
             "value": "Jours"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "días"
+          }
         }
       }
     },
@@ -7672,6 +10342,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tags"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etiquetas"
           }
         }
       }
@@ -7690,6 +10366,12 @@
             "state": "translated",
             "value": "Tags :"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etiquetas:"
+          }
         }
       }
     },
@@ -7707,6 +10389,12 @@
             "state": "translated",
             "value": "Appuyer pour les détails et idées cadeaux"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca para detalles e ideas de regalo"
+          }
         }
       }
     },
@@ -7722,6 +10410,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Partager"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir"
           }
         }
       }
@@ -7740,6 +10434,12 @@
             "state": "translated",
             "value": "Dialogue de partage ouvert"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diálogo de compartir abierto"
+          }
         }
       }
     },
@@ -7756,6 +10456,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Partage toutes les idées cadeaux"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparte todas las ideas de regalo"
           }
         }
       }
@@ -7774,6 +10480,12 @@
             "state": "translated",
             "value": "Partage le message via la feuille de partage"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparte el mensaje mediante la hoja de compartir"
+          }
         }
       }
     },
@@ -7790,6 +10502,12 @@
             "state": "translated",
             "value": "Données de test"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datos de prueba"
+          }
         }
       }
     },
@@ -7805,6 +10523,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Appuyez sur une suggestion pour l'enregistrer comme idée cadeau."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca una sugerencia para guardarla como idea de regalo."
           }
         }
       }
@@ -7823,6 +10547,12 @@
             "state": "translated",
             "value": "Titre"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Título"
+          }
         }
       }
     },
@@ -7839,6 +10569,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le titre doit être rempli"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El título es obligatorio"
           }
         }
       }
@@ -7857,6 +10593,12 @@
             "state": "translated",
             "value": "Titre des cadeaux passés (sans notes)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Títulos de regalos pasados (sin notas)"
+          }
         }
       }
     },
@@ -7874,6 +10616,12 @@
             "state": "translated",
             "value": "À propos d'ai-presents-app"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acerca de ai-presents-app"
+          }
         }
       }
     },
@@ -7890,6 +10638,12 @@
             "state": "translated",
             "value": "À propos de l'app"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acerca de la app"
+          }
         }
       }
     },
@@ -7905,6 +10659,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vue d'ensemble"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumen"
           }
         }
       }
@@ -7923,6 +10683,12 @@
             "state": "translated",
             "value": "Ignorer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omitir"
+          }
         }
       }
     },
@@ -7939,6 +10705,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rappels illimités"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorios ilimitados"
           }
         }
       }
@@ -7957,6 +10729,12 @@
             "state": "translated",
             "value": "Contacts illimités"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contactos ilimitados"
+          }
         }
       }
     },
@@ -7973,6 +10751,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contacts illimités, suggestions IA & plus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contactos ilimitados, sugerencias de IA y más"
           }
         }
       }
@@ -7991,6 +10775,12 @@
             "state": "translated",
             "value": "Inconnu"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desconocido"
+          }
         }
       }
     },
@@ -8007,6 +10797,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Statut d'achat inconnu"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado de compra desconocido"
           }
         }
       }
@@ -8025,6 +10821,12 @@
             "state": "translated",
             "value": "Droit d'auteur"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derechos de autor"
+          }
         }
       }
     },
@@ -8042,6 +10844,12 @@
             "state": "translated",
             "value": "Père"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Padre"
+          }
         }
       }
     },
@@ -8057,6 +10865,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Traite les requêtes IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesa las solicitudes de IA"
           }
         }
       }
@@ -8075,6 +10889,12 @@
             "state": "translated",
             "value": "À améliorer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Necesita mejora"
+          }
         }
       }
     },
@@ -8091,6 +10911,12 @@
             "state": "translated",
             "value": "Offert"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regalado"
+          }
         }
       }
     },
@@ -8106,6 +10932,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Version"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versión"
           }
         }
       }
@@ -8124,6 +10956,12 @@
             "state": "translated",
             "value": "Essayez d'autres termes de recherche"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prueba con otros términos de búsqueda"
+          }
         }
       }
     },
@@ -8140,6 +10978,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Merci pour votre retour !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Gracias por tus comentarios!"
           }
         }
       }
@@ -8161,6 +11005,12 @@
             "state": "translated",
             "value": "il y a"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hace"
+          }
         }
       }
     },
@@ -8177,6 +11027,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Il y a"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anterior"
           }
         }
       }
@@ -8195,6 +11051,12 @@
             "state": "translated",
             "value": "Prédéfini"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Predefinido"
+          }
         }
       }
     },
@@ -8212,6 +11074,12 @@
             "state": "translated",
             "value": "Prénom (depuis les données de contact)"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre (de contactos)"
+          }
         }
       }
     },
@@ -8228,6 +11096,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prénom Nom"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre Apellido"
           }
         }
       }
@@ -8248,6 +11122,12 @@
             "state": "translated",
             "value": "Avertissements préalables"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avisos previos"
+          }
         }
       }
     },
@@ -8265,6 +11145,12 @@
             "state": "translated",
             "value": "Balance"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libra"
+          }
         }
       }
     },
@@ -8281,6 +11167,12 @@
             "state": "translated",
             "value": "Sélectionnez l'année à laquelle le cadeau a été offert"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selecciona el año en que se regaló"
+          }
         }
       }
     },
@@ -8296,6 +11188,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sélectionnez l'année à laquelle vous avez reçu le cadeau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selecciona el año en que recibiste el regalo"
           }
         }
       }
@@ -8314,6 +11212,12 @@
             "state": "translated",
             "value": "Sélectionnez le budget maximum"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selecciona el presupuesto máximo"
+          }
         }
       }
     },
@@ -8331,6 +11235,12 @@
             "state": "translated",
             "value": "Sélectionnez le budget minimum"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selecciona el presupuesto mínimo"
+          }
         }
       }
     },
@@ -8347,6 +11257,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sélectionnez le statut de l'idée cadeau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selecciona el estado de la idea de regalo"
           }
         }
       }
@@ -8367,6 +11283,12 @@
             "state": "translated",
             "value": "Était-ce utile ?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Fue útil?"
+          }
         }
       }
     },
@@ -8383,6 +11305,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Qu'est-ce qui fonctionne bien ?\n\nQu'est-ce qui pourrait être amélioré ?\n\n"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué funciona bien?\n\n¿Qué podría mejorar?\n\n"
           }
         }
       }
@@ -8401,6 +11329,12 @@
             "state": "translated",
             "value": "Qu'avez-vous reçu ?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué recibiste?"
+          }
         }
       }
     },
@@ -8417,6 +11351,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Qu'est-ce qui N'EST PAS transmis ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué NO se transmite?"
           }
         }
       }
@@ -8435,6 +11375,12 @@
             "state": "translated",
             "value": "Qu'a-t-on offert ?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué se regaló?"
+          }
         }
       }
     },
@@ -8451,6 +11397,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verseau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acuario"
           }
         }
       }
@@ -8469,6 +11421,12 @@
             "state": "translated",
             "value": "Continuer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuar"
+          }
         }
       }
     },
@@ -8485,6 +11443,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quelles données sont stockées ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué datos se almacenan?"
           }
         }
       }
@@ -8503,6 +11467,12 @@
             "state": "translated",
             "value": "Quelles données sont transmises ?"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué datos se transmiten?"
+          }
         }
       }
     },
@@ -8518,6 +11488,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Si désactivé, vous ne recevrez aucune notification."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando esté desactivado, no recibirás notificaciones."
           }
         }
       }
@@ -8536,6 +11512,12 @@
             "state": "translated",
             "value": "Lorsque vous activez la fonctionnalité IA, des données minimales (prénom, âge, type de relation, signe astrologique) sont transmises à OpenRouter/Google. Vous trouverez les détails dans la déclaration de consentement."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si activas la función de IA, se transmiten datos mínimos (nombre, edad, tipo de relación, signo zodiacal) a OpenRouter/Google. Los detalles se encuentran en el formulario de consentimiento."
+          }
         }
       }
     },
@@ -8552,6 +11534,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lorsque vous activez iCloud Sync, vos données sont synchronisées via iCloud d'Apple. Apple chiffre ces données. Nous n'avons pas accès à vos données iCloud."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si activas la sincronización con iCloud, tus datos se sincronizan a través del iCloud de Apple. Apple cifra estos datos. No tenemos acceso a tus datos de iCloud."
           }
         }
       }
@@ -8570,6 +11558,12 @@
             "state": "translated",
             "value": "Lorsque vous importez des contacts depuis votre carnet d'adresses, seuls le nom et la date de naissance sont lus. Les données sont stockées localement et ne sont pas transmises."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando importas contactos de tu libreta de direcciones, solo se leen el nombre y el cumpleaños. Los datos se almacenan localmente y no se comparten."
+          }
         }
       }
     },
@@ -8586,6 +11580,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Qui traite les données ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Quién procesa los datos?"
           }
         }
       }
@@ -8604,6 +11604,12 @@
             "state": "translated",
             "value": "Soyez rappelé à temps pour être parfaitement préparé."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recibe recordatorios a tiempo para estar perfectamente preparado."
+          }
         }
       }
     },
@@ -8620,6 +11626,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Valeur :"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valor:"
           }
         }
       }
@@ -8638,6 +11650,12 @@
             "state": "translated",
             "value": "Bélier"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aries"
+          }
         }
       }
     },
@@ -8653,6 +11671,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Révocation possible à tout moment : Réglages → Assistant IA → « Révoquer »"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revocación posible en cualquier momento: Ajustes → Asistente de IA → \"Revocar\""
           }
         }
       }
@@ -8671,6 +11695,12 @@
             "state": "translated",
             "value": "Révoquer"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revocar"
+          }
         }
       }
     },
@@ -8687,6 +11717,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fête ses %1$lld ans (%2$lld jours)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumple %1$lld (%2$lld días)"
           }
         }
       }
@@ -8707,6 +11743,12 @@
             "state": "translated",
             "value": "Utilisé pour de meilleures suggestions IA"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilizado para mejores sugerencias de IA"
+          }
         }
       }
     },
@@ -8723,6 +11765,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Semaine"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "semana"
           }
         }
       }
@@ -8741,6 +11789,12 @@
             "state": "translated",
             "value": "Semaines"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "semanas"
+          }
         }
       }
     },
@@ -8757,6 +11811,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "p. ex. Grand-mère, Oncle, Mentor"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. Abuela, Tío, Mentor"
           }
         }
       }
@@ -8775,6 +11835,12 @@
             "state": "translated",
             "value": "p. ex. Grand-mère, Oncle, Voisin"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. Abuela, Tío, Vecino"
+          }
         }
       }
     },
@@ -8792,6 +11858,12 @@
             "state": "translated",
             "value": "p. ex. Papa, Maman, Mamie..."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. Papá, Mamá, Abuela..."
+          }
         }
       }
     },
@@ -8807,6 +11879,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "p. ex. Bijou, Livre, Expérience, Argent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "p. ej. Joya, Libro, Experiencia, Dinero"
           }
         }
       }
@@ -8825,6 +11903,12 @@
             "state": "translated",
             "value": "Affiche tous les anniversaires"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra todos los cumpleaños"
+          }
         }
       }
     },
@@ -8841,6 +11925,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Affiche les anniversaires des 7 prochains jours"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra cumpleaños en los próximos 7 días"
           }
         }
       }
@@ -8859,6 +11949,12 @@
             "state": "translated",
             "value": "Affiche les anniversaires des 30 prochains jours"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra cumpleaños en los próximos 30 días"
+          }
         }
       }
     },
@@ -8876,6 +11972,12 @@
             "state": "translated",
             "value": "Affiche uniquement les anniversaires d'aujourd'hui"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra solo los cumpleaños de hoy"
+          }
         }
       }
     },
@@ -8891,6 +11993,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Période sans notifications"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Período sin notificaciones"
           }
         }
       }
@@ -8909,6 +12017,12 @@
             "state": "translated",
             "value": "Accès aux contacts non autorisé"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acceso a contactos no permitido"
+          }
         }
       }
     },
@@ -8926,6 +12040,12 @@
             "state": "translated",
             "value": "Accès refusé – veuillez l'autoriser dans les réglages système."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acceso denegado – por favor, permite el acceso en los ajustes del sistema."
+          }
         }
       }
     },
@@ -8941,6 +12061,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Accepter et activer l'IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceptar y activar IA"
           }
         }
       }
@@ -8958,6 +12084,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gémeaux"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gemini"
           }
         }
       }

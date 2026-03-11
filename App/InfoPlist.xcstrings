@@ -21,6 +21,12 @@
             "state": "translated",
             "value": "AI Présents"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Regalos"
+          }
         }
       }
     },
@@ -43,6 +49,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cette app a besoin d'accéder à vos contacts pour importer les anniversaires de vos amis et de votre famille."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta app necesita acceso a tus contactos para importar los cumpleaños de amigos y familiares."
           }
         }
       }
@@ -67,6 +79,12 @@
             "state": "translated",
             "value": "Cette app souhaite vous rappeler les anniversaires afin que vous puissiez préparer les cadeaux à temps."
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta app desea recordarte los cumpleaños para que puedas preparar regalos a tiempo."
+          }
         }
       }
     },
@@ -89,6 +107,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cette app utilise iCloud pour synchroniser vos données entre vos appareils Apple."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta app utiliza iCloud para sincronizar tus datos entre tus dispositivos Apple."
           }
         }
       }

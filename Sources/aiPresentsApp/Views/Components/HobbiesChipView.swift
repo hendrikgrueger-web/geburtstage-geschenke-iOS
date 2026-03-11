@@ -16,6 +16,9 @@ struct HobbiesChipView: View {
         } else if lang == "fr" {
             return ["Sport", "Lecture", "Cuisine", "Musique", "Voyages",
                     "Jeux vidéo", "Jardinage", "Technologie", "Bien-être", "Photographie"]
+        } else if lang == "es" {
+            return ["Deporte", "Lectura", "Cocina", "Música", "Viajes",
+                    "Videojuegos", "Jardinería", "Tecnología", "Bienestar", "Fotografía"]
         } else {
             return ["Sports", "Reading", "Cooking", "Music", "Travel",
                     "Gaming", "Gardening", "Tech", "Wellness", "Photography"]

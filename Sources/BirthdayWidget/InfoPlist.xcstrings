@@ -21,6 +21,12 @@
             "state": "translated",
             "value": "Anniversaires"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumpleaños"
+          }
         }
       }
     },

@@ -21,6 +21,12 @@
             "state": "translated",
             "value": "+%lld de plus"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld más"
+          }
         }
       }
     },
@@ -37,6 +43,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 idée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 idea"
           }
         }
       }
@@ -55,6 +67,12 @@
             "state": "translated",
             "value": "Anniversaires"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumpleaños"
+          }
         }
       }
     },
@@ -70,6 +88,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acheté"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprado"
           }
         }
       }
@@ -88,6 +112,12 @@
             "state": "translated",
             "value": "Planifié"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planificado"
+          }
         }
       }
     },
@@ -105,6 +135,12 @@
             "state": "translated",
             "value": "Aujourd'hui"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy"
+          }
         }
       }
     },
@@ -121,6 +157,12 @@
             "state": "translated",
             "value": "Pas d'anniversaires"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin cumpleaños"
+          }
         }
       }
     },
@@ -136,6 +178,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prochains anniversaires"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximos cumpleaños"
           }
         }
       }
@@ -157,6 +205,12 @@
             "state": "translated",
             "value": "fête ses %lld ans"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cumple %lld"
+          }
         }
       }
     },
@@ -173,6 +227,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Affiche les prochains anniversaires avec le statut du cadeau."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muestra los próximos cumpleaños con el estado del regalo."
           }
         }
       }

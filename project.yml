@@ -9,6 +9,7 @@ options:
   knownRegions:
     - de
     - en
+    - es
     - fr
     - Base
 
