@@ -36,10 +36,9 @@ function checkRateLimit(ip) {
 export default {
   async fetch(request, env) {
 
-    // CORS preflight
+    // CORS preflight (native iOS-App braucht keine CORS-Headers, aber ignorieren wir es nicht)
     if (request.method === "OPTIONS") {
       return new Response(null, {
-        headers: corsHeaders(),
         status: 204,
       });
     }
@@ -52,7 +51,10 @@ export default {
     // Rate Limiting
     const clientIP = request.headers.get("CF-Connecting-IP") || "unknown";
     if (!checkRateLimit(clientIP)) {
-      return jsonError("Too Many Requests", 429);
+      return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again later." }), {
+        status: 429,
+        headers: { "Content-Type": "application/json" }
+      });
     }
 
     // App-Secret Authentifizierung
@@ -112,14 +114,6 @@ export default {
     }
   },
 };
-
-function corsHeaders() {
-  return {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, X-App-Secret",
-  };
-}
 
 function jsonError(message, status) {
   return new Response(JSON.stringify({ error: message }), {

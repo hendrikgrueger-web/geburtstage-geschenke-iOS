@@ -30,20 +30,35 @@ struct ChatInputBar: View {
             }
             .accessibilityLabel(isRecording ? String(localized: "Aufnahme stoppen") : String(localized: "Spracheingabe"))
 
-            // Textfeld
-            TextField(String(localized: "Nachricht..."), text: $text, axis: .vertical)
-                .lineLimit(1...4)
-                .textFieldStyle(.plain)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(.regularMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .focused($isFocused)
-                .submitLabel(.send)
-                .onSubmit {
-                    if canSend { onSend() }
+            // Textfeld with character limit
+            VStack(alignment: .trailing, spacing: 4) {
+                TextField(String(localized: "Nachricht..."), text: $text, axis: .vertical)
+                    .lineLimit(1...4)
+                    .textFieldStyle(.plain)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(.regularMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .focused($isFocused)
+                    .submitLabel(.send)
+                    .onSubmit {
+                        if canSend { onSend() }
+                    }
+                    .onChange(of: text) { _, newValue in
+                        if newValue.count > 500 {
+                            text = String(newValue.prefix(500))
+                        }
+                    }
+                    .accessibilityLabel(String(localized: "Nachricht eingeben"))
+
+                // Character counter (only shown when > 400 chars)
+                if text.count > 400 {
+                    Text("\(text.count)/500")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 12)
                 }
-                .accessibilityLabel(String(localized: "Nachricht eingeben"))
+            }
 
             // Sende-Button
             Button {

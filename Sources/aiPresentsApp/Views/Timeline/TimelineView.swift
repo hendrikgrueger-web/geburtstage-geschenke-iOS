@@ -306,12 +306,17 @@ struct TimelineView: View {
             showingAIChat = true
             HapticFeedback.medium()
         } label: {
-            Image(systemName: "sparkles.bubble.fill")
-                .font(.title2)
-                .padding(16)
+            ZStack {
+                Circle()
+                    .fill(Color.purple.opacity(0.12))
+                    .frame(width: 56, height: 56)
+                Image(systemName: "sparkles")
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundStyle(.purple)
+            }
         }
-        .buttonStyle(.glass)
-        .tint(AppColor.primary)
+        .buttonStyle(.plain)
+        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
         .padding(.trailing, 20)
         .padding(.bottom, 20)
         .accessibilityLabel(String(localized: "KI-Assistent öffnen"))

@@ -22,9 +22,10 @@ final class URLValidatorTests: XCTestCase {
         XCTAssertEqual(result.sanitized, "https://example.com")
     }
 
-    func testValidHTTPURL() {
+    func testInvalidHTTPURL() {
+        // HTTP URLs are rejected; only HTTPS is allowed
         let result = URLValidator.validate("http://example.com")
-        XCTAssertTrue(result.isValid)
+        XCTAssertFalse(result.isValid)
         XCTAssertEqual(result.sanitized, "http://example.com")
     }
 

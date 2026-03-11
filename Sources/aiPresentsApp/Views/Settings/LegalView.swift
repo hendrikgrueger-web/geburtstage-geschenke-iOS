@@ -8,7 +8,7 @@ struct LegalView: View {
                     // Anbieter
                     LegalSection(
                         title: "Anbieter",
-                        content: "Gruepi GmbH\nGoethestraße 3\n36304 Alsfeld\n\nhendrik@gruepi.de\nGeschäftsführer: Hendrik Grüger\n\nHandelsregister: Amtsgericht Gießen, HRB XXXXX"
+                        content: "Gruepi GmbH\nGoethestraße 3\n36304 Alsfeld\n\nhendrik@gruepi.de\nGeschäftsführer: Hendrik Grüger\n\nHandelsregister: Amtsgericht Gießen, HRB 12564"
                     )
 
                     // Haftungsausschluss
