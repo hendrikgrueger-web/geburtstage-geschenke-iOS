@@ -8,15 +8,12 @@ struct TimelineView: View {
     @Binding var deepLinkPersonID: UUID?
 
     @State private var showingSettings = false
-    @State private var searchText = ""
     @State private var filterRelation: String? = nil
     @State private var showingAddGiftIdeaFor: PersonRef?
     @State private var quickAddPerson: PersonRef?
     @State private var showingAISuggestionsFor: PersonRef?
     @State private var selectedPerson: PersonRef?
     @State private var isRefreshing = false
-    @State private var debouncedSearchText = ""
-    @State private var searchDebouncer = Debouncer(delay: 0.3)
     @State private var showingAIChat = false
 
     var body: some View {
@@ -54,10 +51,6 @@ struct TimelineView: View {
             }
         }
         .listStyle(.plain)
-        .searchable(text: $searchText, prompt: "Suche...")
-        .onChange(of: searchText) { _, newValue in
-            searchDebouncer.debounce { debouncedSearchText = newValue }
-        }
         .refreshable {
             await refreshTimeline()
         }
@@ -130,10 +123,12 @@ struct TimelineView: View {
             }
         }
         .sheet(isPresented: $showingAIChat) {
-            AIChatView()
+            AIChatView(onPersonSelected: { person in
+                selectedPerson = person
+            })
         }
-        .overlay(alignment: .bottomTrailing) {
-            aiFABButton
+        .safeAreaInset(edge: .bottom) {
+            smartSearchBar
         }
         .onChange(of: deepLinkPersonID) { _, newID in
             guard let id = newID else { return }
@@ -193,15 +188,6 @@ struct TimelineView: View {
         let today = Calendar.current.startOfDay(for: Date())
 
         return people.compactMap { person -> (PersonRef, Date)? in
-            // Suchfilter
-            if !debouncedSearchText.isEmpty {
-                let searchLower = debouncedSearchText.lowercased()
-                if !person.displayName.lowercased().contains(searchLower) &&
-                   !person.relation.lowercased().contains(searchLower) {
-                    return nil
-                }
-            }
-
             // Beziehungsfilter
             if let relation = filterRelation, !relation.isEmpty {
                 if person.relation != relation {
@@ -299,27 +285,37 @@ struct TimelineView: View {
         HapticFeedback.success()
     }
 
-    // MARK: - AI FAB Button
+    // MARK: - Smart Search Bar
 
-    private var aiFABButton: some View {
+    private var smartSearchBar: some View {
         Button {
             showingAIChat = true
-            HapticFeedback.medium()
+            HapticFeedback.light()
         } label: {
-            ZStack {
-                Circle()
-                    .fill(Color.purple.opacity(0.12))
-                    .frame(width: 56, height: 56)
-                Image(systemName: "sparkles")
-                    .font(.system(size: 24, weight: .semibold))
-                    .foregroundStyle(.purple)
+            HStack(spacing: 10) {
+                Image(systemName: "sparkle.magnifyingglass")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(.secondary)
+
+                Text("Suche oder frag die KI…")
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+
+                Spacer()
+
+                Image(systemName: "mic")
+                    .font(.system(size: 16))
+                    .foregroundStyle(.secondary)
             }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(.regularMaterial)
+            .clipShape(Capsule())
         }
         .buttonStyle(.plain)
-        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
-        .padding(.trailing, 20)
-        .padding(.bottom, 20)
-        .accessibilityLabel(String(localized: "KI-Assistent öffnen"))
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .accessibilityLabel(String(localized: "Suche oder KI-Assistent öffnen"))
     }
 
     // MARK: - Empty State
@@ -346,18 +342,14 @@ struct TimelineView: View {
     }
 
     private var emptyStateTitle: String {
-        if !debouncedSearchText.isEmpty {
-            return String(localized: "Keine Treffer")
-        } else if filterRelation != nil {
+        if filterRelation != nil {
             return String(localized: "Keine Ergebnisse")
         }
         return String(localized: "Keine Kontakte")
     }
 
     private var emptyStateMessage: String {
-        if !debouncedSearchText.isEmpty {
-            return String(localized: "Keine Kontakte für \"\(debouncedSearchText)\"")
-        } else if let relation = filterRelation {
+        if let relation = filterRelation {
             return String(localized: "Keine Kontakte für \"\(relation)\"")
         }
         return String(localized: "Importiere Kontakte über das + oben rechts")

@@ -14,6 +14,10 @@ final class SpeechRecognitionService {
     private var audioEngine: AVAudioEngine?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var timeoutTask: Task<Void, Never>?
+
+    /// Maximale Aufnahmedauer in Sekunden.
+    static let maxDuration: TimeInterval = 30
 
     /// Fordert Berechtigungen an und startet die Live-Transkription.
     func startTranscribing(onTranscript: @escaping @Sendable (String) -> Void) async throws {
@@ -58,6 +62,13 @@ final class SpeechRecognitionService {
         self.recognitionRequest = request
         self.isTranscribing = true
 
+        // 30-Sekunden Auto-Stop
+        timeoutTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(SpeechRecognitionService.maxDuration))
+            guard !Task.isCancelled else { return }
+            self?.stopTranscribing()
+        }
+
         recognitionTask = recognizer.recognitionTask(with: request) { [weak self] result, error in
             if let result {
                 let text = result.bestTranscription.formattedString
@@ -76,6 +87,8 @@ final class SpeechRecognitionService {
     }
 
     func stopTranscribing() {
+        timeoutTask?.cancel()
+        timeoutTask = nil
         audioEngine?.stop()
         audioEngine?.inputNode.removeTap(onBus: 0)
         recognitionRequest?.endAudio()

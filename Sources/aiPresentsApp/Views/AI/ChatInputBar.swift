@@ -7,6 +7,7 @@ struct ChatInputBar: View {
     let onSend: () -> Void
     let onMicTap: () -> Void
     var isRecording: Bool = false
+    var autoFocus: Bool = false
 
     @FocusState private var isFocused: Bool
 
@@ -32,7 +33,7 @@ struct ChatInputBar: View {
 
             // Textfeld with character limit
             VStack(alignment: .trailing, spacing: 4) {
-                TextField(String(localized: "Nachricht..."), text: $text, axis: .vertical)
+                TextField(String(localized: "Suche oder frag die KI…"), text: $text, axis: .vertical)
                     .lineLimit(1...4)
                     .textFieldStyle(.plain)
                     .padding(.horizontal, 12)
@@ -43,6 +44,14 @@ struct ChatInputBar: View {
                     .submitLabel(.send)
                     .onSubmit {
                         if canSend { onSend() }
+                    }
+                    .onAppear {
+                        if autoFocus {
+                            Task {
+                                try? await Task.sleep(for: .milliseconds(300))
+                                isFocused = true
+                            }
+                        }
                     }
                     .onChange(of: text) { _, newValue in
                         if newValue.count > 500 {

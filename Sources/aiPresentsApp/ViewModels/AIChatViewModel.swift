@@ -366,6 +366,14 @@ final class AIChatViewModel {
             isGerman ? "Wer hat in den nächsten 7 Tagen Geburtstag?" : "Who has a birthday in the next 7 days?"
         ))
 
+        // Geschenkidee-Eintrag Beispiel
+        if let person = people.first {
+            chips.append((
+                isGerman ? "Kinogutschein für \(person.displayName) eintragen" : "Add cinema voucher for \(person.displayName)",
+                isGerman ? "Trag einen Kinogutschein als Geschenkidee für \(person.displayName) ein" : "Add a cinema voucher as a gift idea for \(person.displayName)"
+            ))
+        }
+
         return chips
     }
 }

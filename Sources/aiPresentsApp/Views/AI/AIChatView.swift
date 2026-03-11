@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 /// KI-Chat Sheet — konversationeller Einstiegspunkt für alle KI-Interaktionen.
+/// Kombiniert Personen-Suche und KI-Chat in einer Oberfläche.
 struct AIChatView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
@@ -9,11 +10,25 @@ struct AIChatView: View {
     @Query private var giftIdeas: [GiftIdea]
     @Query private var giftHistory: [GiftHistory]
 
+    /// Callback wenn ein Kontakt aus der Suche ausgewählt wird.
+    var onPersonSelected: ((PersonRef) -> Void)?
+
     @State private var viewModel = AIChatViewModel()
     @State private var inputText = ""
     @State private var showingConsentSheet = false
     @State private var isRecording = false
     @State private var speechService = SpeechRecognitionService()
+
+    /// Personen die zum aktuellen Suchtext passen.
+    private var searchResults: [PersonRef] {
+        let trimmed = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, viewModel.messages.isEmpty else { return [] }
+        let lower = trimmed.lowercased()
+        return people.filter {
+            $0.displayName.lowercased().contains(lower) ||
+            $0.relation.lowercased().contains(lower)
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -25,7 +40,8 @@ struct AIChatView: View {
                     isLoading: viewModel.isLoading,
                     onSend: sendMessage,
                     onMicTap: toggleRecording,
-                    isRecording: isRecording
+                    isRecording: isRecording,
+                    autoFocus: true
                 )
             }
             .navigationTitle("KI-Assistent")
@@ -82,8 +98,13 @@ struct AIChatView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 12) {
-                    if viewModel.messages.isEmpty {
+                    if viewModel.messages.isEmpty && searchResults.isEmpty {
                         welcomeView
+                    }
+
+                    // Suchergebnisse anzeigen
+                    if !searchResults.isEmpty {
+                        searchResultsView
                     }
 
                     ForEach(viewModel.messages) { message in
@@ -231,6 +252,50 @@ struct AIChatView: View {
                 }
             }
         }
+    }
+
+    // MARK: - Search Results
+
+    private var searchResultsView: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Kontakte")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 20)
+
+            ForEach(searchResults.prefix(5)) { person in
+                Button {
+                    dismiss()
+                    onPersonSelected?(person)
+                } label: {
+                    HStack(spacing: 12) {
+                        PersonAvatar(person: person, size: 36)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(person.displayName)
+                                .font(.body)
+                                .foregroundStyle(AppColor.textPrimary)
+                            Text(person.relation)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+
+                        Spacer()
+
+                        if let days = BirthdayCalculator.daysUntilBirthday(
+                            for: person.birthday,
+                            from: Calendar.current.startOfDay(for: Date())
+                        ) {
+                            BirthdayCountdownBadge(daysUntil: days)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.vertical, 8)
     }
 
     private func scrollToBottom(proxy: ScrollViewProxy) {
