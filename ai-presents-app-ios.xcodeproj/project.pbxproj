@@ -652,11 +652,11 @@
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					D13703CE0BA0DA2FBA541264 = {
-						DevelopmentTeam = 7ZR37VL5PV;
+						DevelopmentTeam = CU87QNNB3N;
 						ProvisioningStyle = Automatic;
 					};
 					E3D3E47E2E69129859C61EBB = {
-						DevelopmentTeam = 7ZR37VL5PV;
+						DevelopmentTeam = CU87QNNB3N;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -923,7 +923,7 @@
 				CODE_SIGN_ENTITLEMENTS = App/aiPresentsApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7ZR37VL5PV;
+				DEVELOPMENT_TEAM = CU87QNNB3N;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1007,7 +1007,7 @@
 				CODE_SIGNING_REQUIRED = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/BirthdayWidget/BirthdayWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7ZR37VL5PV;
+				DEVELOPMENT_TEAM = CU87QNNB3N;
 				INFOPLIST_FILE = Sources/BirthdayWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1030,7 +1030,7 @@
 				CODE_SIGNING_REQUIRED = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/BirthdayWidget/BirthdayWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7ZR37VL5PV;
+				DEVELOPMENT_TEAM = CU87QNNB3N;
 				INFOPLIST_FILE = Sources/BirthdayWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1076,7 +1076,7 @@
 				CODE_SIGN_ENTITLEMENTS = App/aiPresentsApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7ZR37VL5PV;
+				DEVELOPMENT_TEAM = CU87QNNB3N;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (

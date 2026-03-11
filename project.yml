@@ -58,7 +58,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.hendrikgrueger.birthdays-presents-ai
         SWIFT_VERSION: "6.0"
-        DEVELOPMENT_TEAM: "7ZR37VL5PV"
+        DEVELOPMENT_TEAM: "CU87QNNB3N"
         CODE_SIGN_STYLE: Automatic
         CODE_SIGNING_REQUIRED: "YES"
         CODE_SIGNING_ALLOWED: "YES"
@@ -86,7 +86,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.hendrikgrueger.birthdays-presents-ai.widget
         SWIFT_VERSION: "6.0"
-        DEVELOPMENT_TEAM: "7ZR37VL5PV"
+        DEVELOPMENT_TEAM: "CU87QNNB3N"
         CODE_SIGN_STYLE: Automatic
         CODE_SIGNING_REQUIRED: "YES"
         CODE_SIGNING_ALLOWED: "YES"

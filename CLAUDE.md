@@ -357,6 +357,8 @@ enum GiftDirection {
 | Widget Bundle ID | `com.hendrikgrueger.birthdays-presents-ai.widget` |
 | App Group | `group.com.hendrikgrueger.birthdays-presents-ai` |
 | App Store Connect App-ID | `6760319397` ✅ |
+| Team (Xcode + App Store) | Gruepi GmbH `CU87QNNB3N` |
+| Erster Build | 0.8.1 (13) — hochgeladen ✅ |
 
 ### Nächste Schritte vor erstem TestFlight-Upload
 1. **Xcode öffnen** → beide Targets prüfen (Signing & Capabilities, kein rotes Ausrufezeichen)
