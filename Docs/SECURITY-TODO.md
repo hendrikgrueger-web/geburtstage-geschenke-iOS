@@ -1,7 +1,7 @@
 # Security & Legal TODO — vor App Store Release
 
 > Erstellt: März 2026 | Geprüfte Version: 0.8.1 (Build 13)
-> Agenten: DSGVO-Check ✅ | Pentester ⏳ (Ergebnisse folgen)
+> Agenten: DSGVO-Check ✅ | Pentester ✅
 
 ---
 
@@ -34,12 +34,17 @@
   - `Docs/PRIVACY_EN.md` identisch
   - Auch: Beschwerderecht bei Aufsichtsbehörde (Art. 77 DSGVO) nennen
 
-- [ ] **K6 — PrivacyInfo.xcprivacy erstellen**
+- [ ] **K6 — PrivacyInfo.xcprivacy erstellen** *(auch von Pentester bestätigt)*
   - Datei: `Sources/aiPresentsApp/PrivacyInfo.xcprivacy`
   - Deklarieren: NSPrivacyAccessedAPICategoryUserDefaults (CA92.1)
   - Deklarieren: Kontaktdaten (NSPrivacyCollectedDataTypeContacts)
   - Deklarieren: Audiodaten (Mikrofon/Sprache)
   - Ohne diese Datei: Apple lehnt App seit Herbst 2024 ab
+
+- [ ] **K7 — OSLog gibt personenbezogene Daten als `.public` aus (DSGVO)**
+  - `Sources/aiPresentsApp/Utilities/AppLogger.swift` Zeile 200
+  - Personennamen, IDs in Fehlermeldungen → `privacy: .private` statt `.public`
+  - Betrifft z.B. `AIChatViewModel.swift:303`: `personName` als `.public` geloggt
 
 ---
 
@@ -70,6 +75,24 @@
   - Art. 8 DSGVO: unter 16 braucht elterliche Zustimmung
   - Mindestens Texthinweis: "Ich bestätige, dass ich 16 Jahre oder älter bin."
 
+- [ ] **S9 — Rate Limiting im Cloudflare Worker**
+  - `Proxy/src/index.js` — kein Rate Limiting vorhanden
+  - Wenn App-Secret kompromittiert: unbegrenzte Requests → OpenRouter-Guthaben leerräumbar
+  - Cloudflare Workers Rate Limiting API oder IP-basiertes KV-Counting
+
+- [ ] **S10 — CORS-Header `"null"` korrigieren**
+  - `Proxy/src/index.js:96`: `"Access-Control-Allow-Origin": "null"` ist falsch
+  - iOS-App braucht keinen CORS-Header → einfach weglassen
+
+- [ ] **S11 — HTTP-URLs in Geschenkideen blockieren**
+  - `Sources/aiPresentsApp/Utilities/URLValidator.swift`
+  - Nur `https://` erlauben, `http://` ablehnen
+
+- [ ] **S12 — Chat-Input-Limit setzen**
+  - `Sources/aiPresentsApp/Views/AI/ChatInputBar.swift`
+  - Kein Zeichenlimit → `.lineLimit()` ist nur optisch
+  - Empfehlung: max. 500 Zeichen
+
 ---
 
 ## 🔵 EMPFEHLUNG — Nice to Have
@@ -78,16 +101,27 @@
 - [ ] **E2 — Cloudflare Worker auf EU-Region beschränken** (wrangler.toml)
 - [ ] **E3 — Consent-Zeitstempel in AIConsentManager speichern**
 - [ ] **E4 — iCloud-Datenlöschung besser dokumentieren**
+- [ ] **E5 — URLSession Timeout setzen** (`AIService.swift`, empfohlen: 15s)
+- [ ] **E6 — `armv7` aus UIRequiredDeviceCapabilities entfernen** (`project.yml:33`, veraltet)
+- [ ] **E7 — Apple App Attest** für stärkere Gerät-Authentifizierung (statt App-Secret)
 
 ---
 
-## ⏳ Pentester-Ergebnisse
+## ✅ Positiv — gut gemacht
 
-Werden ergänzt sobald Security-Agent fertig ist.
+- `Secrets.xcconfig` nie in Git committed (git log bestätigt)
+- OpenRouter API-Key liegt nur im Cloudflare Worker, nie in der App
+- `DevSettingsView` vollständig in `#if DEBUG` eingekapselt
+- KI-Consent mit Versionierung (v1/v2) vor jedem API-Call
+- Cloudflare Worker: Model-Whitelist + Message-Count + Payload-Size Validierung
+- Kontakte: nur Name, Geburtstag, Identifier — keine Telefonnummern/Adressen
+- Deep-Link-Validierung: UUID strict geparst, kein Injection-Risiko
+- Dreifach-Fallback für ModelContainer (kein unkontrollierter Crash)
+- Alter statt Geburtsdatum in KI-Prompts
 
 ---
 
 ## Quellen
 
 - DSGVO-Agent (Claude Sonnet 4.6), März 2026
-- Pentester-Agent (Claude Sonnet 4.6), März 2026 — ausstehend
+- Pentester-Agent (Claude Sonnet 4.6), März 2026
