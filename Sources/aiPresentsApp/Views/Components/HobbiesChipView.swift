@@ -9,9 +9,13 @@ struct HobbiesChipView: View {
     @State private var newHobby: String = ""
 
     private var suggestions: [String] {
-        if Locale.current.language.languageCode?.identifier == "de" {
+        let lang = Locale.current.language.languageCode?.identifier
+        if lang == "de" {
             return ["Sport", "Lesen", "Kochen", "Musik", "Reisen",
                     "Gaming", "Garten", "Technik", "Wellness", "Fotografie"]
+        } else if lang == "fr" {
+            return ["Sport", "Lecture", "Cuisine", "Musique", "Voyages",
+                    "Jeux vidéo", "Jardinage", "Technologie", "Bien-être", "Photographie"]
         } else {
             return ["Sports", "Reading", "Cooking", "Music", "Travel",
                     "Gaming", "Gardening", "Tech", "Wellness", "Photography"]

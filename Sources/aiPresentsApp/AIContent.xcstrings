@@ -1,1557 +1,2403 @@
 {
-  "sourceLanguage" : "de",
-  "strings" : {
-    "abenteuerlustig, optimistisch" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "adventurous, optimistic"
+  "sourceLanguage": "de",
+  "strings": {
+    "abenteuerlustig, optimistisch": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "adventurous, optimistic"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aventureux, optimiste"
+          }
         }
       }
     },
-    "Alles Gute zum Geburtstag!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Happy birthday!"
+    "Alles Gute zum Geburtstag!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Happy birthday!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joyeux anniversaire !"
           }
         }
       }
     },
-    "alles Gute zum Geburtstag! Ich wünsche dir einen wunderschönen Tag, an dem du rundum verwöhnt wirst." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "happy birthday! I wish you a wonderful day where you are thoroughly pampered."
+    "alles Gute zum Geburtstag! Ich wünsche dir einen wunderschönen Tag, an dem du rundum verwöhnt wirst.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "happy birthday! I wish you a wonderful day where you are thoroughly pampered."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "joyeux anniversaire ! Je te souhaite une magnifique journée où tu seras comblé(e) de toutes parts."
+          }
         }
       }
     },
-    "Altersgerechter Spielspaß." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Age-appropriate gaming fun."
+    "Altersgerechter Spielspaß.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Age-appropriate gaming fun."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeux adaptés à l'âge."
           }
         }
       }
     },
-    "Altersgerechtes Spielzeug zum runden Geburtstag." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Age-appropriate toy for the milestone birthday."
+    "Altersgerechtes Spielzeug zum runden Geburtstag.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Age-appropriate toy for the milestone birthday."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouet adapté à l'âge pour l'anniversaire marquant."
+          }
         }
       }
     },
-    "Aufmerksamkeit, die bleibt." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A thoughtful gift that lasts."
+    "Aufmerksamkeit, die bleibt.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A thoughtful gift that lasts."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une attention qui dure."
           }
         }
       }
     },
-    "Basteln, malen und kreativ sein." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crafting, painting, and being creative."
+    "Basteln, malen und kreativ sein.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crafting, painting, and being creative."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bricoler, peindre et être créatif."
+          }
         }
       }
     },
-    "Bleib so einzigartig wie du bist!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stay as unique as you are!"
+    "Bleib so einzigartig wie du bist!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stay as unique as you are!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reste aussi unique que tu es !"
           }
         }
       }
     },
-    "Brettspiel oder Puzzle" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Board Game or Puzzle"
+    "Brettspiel oder Puzzle": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Board Game or Puzzle"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeu de société ou puzzle"
+          }
         }
       }
     },
-    "Bringe weiterhin Harmonie in die Welt!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keep bringing harmony to the world!"
+    "Bringe weiterhin Harmonie in die Welt!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep bringing harmony to the world!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue d'apporter de l'harmonie au monde !"
           }
         }
       }
     },
-    "Buch oder E-Reader-Gutschein" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Book or E-Reader Voucher"
+    "Buch oder E-Reader-Gutschein": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Book or E-Reader Voucher"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Livre ou bon pour liseuse"
+          }
         }
       }
     },
-    "Buch zum Lieblingsthema" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Book on Their Favorite Topic"
+    "Buch zum Lieblingsthema": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Book on Their Favorite Topic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Livre sur le sujet préféré"
           }
         }
       }
     },
-    "Coole Schuhe für den nächsten Auftritt." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cool shoes for the next performance."
+    "Coole Schuhe für den nächsten Auftritt.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cool shoes for the next performance."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des chaussures cool pour la prochaine performance."
+          }
         }
       }
     },
-    "Coole Technik für den Alltag." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cool tech for everyday life."
+    "Coole Technik für den Alltag.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cool tech for everyday life."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De la technologie cool pour le quotidien."
           }
         }
       }
     },
-    "Cooles Equipment für den Lieblingssport." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cool gear for their favorite sport."
+    "Cooles Equipment für den Lieblingssport.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cool gear for their favorite sport."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du matériel cool pour le sport favori."
+          }
         }
       }
     },
-    "Dein Ehrgeiz und Disziplin sind vorbildlich!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your ambition and discipline are exemplary!"
+    "Dein Ehrgeiz und Disziplin sind vorbildlich!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your ambition and discipline are exemplary!"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton ambition et ta discipline sont exemplaires !"
+          }
         }
       }
     },
-    "Deine Akribie ist beeindruckend — bleib so!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your attention to detail is impressive — stay just as you are!"
+    "Deine Akribie ist beeindruckend — bleib so!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your attention to detail is impressive — stay just as you are!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta rigueur est impressionnante — reste ainsi !"
           }
         }
       }
     },
-    "Deine Empathie und Kreativität sind ein Geschenk!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your empathy and creativity are a gift!"
+    "Deine Empathie und Kreativität sind ein Geschenk!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your empathy and creativity are a gift!"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton empathie et ta créativité sont un cadeau !"
+          }
         }
       }
     },
-    "Deine Fürsorge ist unbezahlbar — genieß diesen Tag!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your caring nature is priceless — enjoy this day!"
+    "Deine Fürsorge ist unbezahlbar — genieß diesen Tag!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your caring nature is priceless — enjoy this day!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton bienveillance est inestimable — profite de cette journée !"
           }
         }
       }
     },
-    "Deine Kreativität und Unabhängigkeit inspirieren!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your creativity and independence are inspiring!"
+    "Deine Kreativität und Unabhängigkeit inspirieren!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your creativity and independence are inspiring!"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta créativité et ton indépendance sont une inspiration !"
+          }
         }
       }
     },
-    "Deine Leidenschaft und Tiefe sind einzigartig!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your passion and depth are truly unique!"
+    "Deine Leidenschaft und Tiefe sind einzigartig!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your passion and depth are truly unique!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta passion et ta profondeur sont uniques !"
           }
         }
       }
     },
-    "Der neueste Bestseller für Bücherfans." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The latest bestseller for book lovers."
+    "Der neueste Bestseller für Bücherfans.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The latest bestseller for book lovers."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dernier best-seller pour les amoureux des livres."
+          }
         }
       }
     },
-    "Die schönsten Momente festhalten." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Capture the most beautiful moments."
+    "Die schönsten Momente festhalten.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capture the most beautiful moments."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capturer les plus beaux moments."
           }
         }
       }
     },
-    "ehrgeizig, diszipliniert" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ambitious, disciplined"
+    "ehrgeizig, diszipliniert": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ambitious, disciplined"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ambitieux, discipliné"
+          }
         }
       }
     },
-    "eigenständig, innovativ" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "independent, innovative"
+    "eigenständig, innovativ": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "independent, innovative"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "indépendant, innovant"
+          }
         }
       }
     },
-    "Ein bleibendes Erinnerungsstück." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A lasting memento."
+    "Ein bleibendes Erinnerungsstück.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lasting memento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un souvenir durable."
           }
         }
       }
     },
-    "Ein klassisches, elegantes Geschenk." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A classic, elegant gift."
+    "Ein klassisches, elegantes Geschenk.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A classic, elegant gift."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un cadeau classique et élégant."
+          }
         }
       }
     },
-    "einzigartig" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "unique"
+    "einzigartig": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "unique"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "unique"
           }
         }
       }
     },
-    "Einzigartig und mit persönlichem Bezug." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unique and personally meaningful."
+    "Einzigartig und mit persönlichem Bezug.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unique and personally meaningful."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unique et avec une touche personnelle."
+          }
         }
       }
     },
-    "energisch, spontan" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "energetic, spontaneous"
+    "energisch, spontan": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "energetic, spontaneous"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "énergique, spontané"
           }
         }
       }
     },
-    "Erinnerungen statt Dinge." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Memories instead of things."
+    "Erinnerungen statt Dinge.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memories instead of things."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des souvenirs plutôt que des choses."
+          }
         }
       }
     },
-    "Erlebnis für zwei" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Experience for Two"
+    "Erlebnis für zwei": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experience for Two"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expérience pour deux"
           }
         }
       }
     },
-    "Erlebnis-Gutschein" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Experience Voucher"
+    "Erlebnis-Gutschein": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experience Voucher"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bon d'expérience"
+          }
         }
       }
     },
-    "Erlebnis-Gutschein für gemeinsame Zeit" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Experience Voucher for Quality Time"
+    "Erlebnis-Gutschein für gemeinsame Zeit": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experience Voucher for Quality Time"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bon d'expérience pour du temps partagé"
+          }
         }
       }
     },
-    "Erlebnis-Gutschein für Kinder" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Experience Voucher for Kids"
+    "Erlebnis-Gutschein für Kinder": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experience Voucher for Kids"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bon d'expérience pour enfants"
           }
         }
       }
     },
-    "Escape Room, Laser Tag oder Kletterpark." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escape room, laser tag, or climbing park."
+    "Escape Room, Laser Tag oder Kletterpark.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escape room, laser tag, or climbing park."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escape room, laser tag ou parc d'escalade."
+          }
         }
       }
     },
-    "Etwas Verwöhnendes für den Alltag." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Something pampering for everyday life."
+    "Etwas Verwöhnendes für den Alltag.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something pampering for everyday life."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose de délicieux pour le quotidien."
           }
         }
       }
     },
-    "Fitness-Zubehör" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fitness Accessories"
+    "Fitness-Zubehör": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fitness Accessories"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessoires fitness"
+          }
         }
       }
     },
-    "Fördert Fantasie und Feinmotorik." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Encourages imagination and fine motor skills."
+    "Fördert Fantasie und Feinmotorik.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encourages imagination and fine motor skills."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stimule l'imagination et la motricité fine."
           }
         }
       }
     },
-    "Fotoalbum mit gemeinsamen Erinnerungen" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Photo Album with Shared Memories"
+    "Fotoalbum mit gemeinsamen Erinnerungen": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photo Album with Shared Memories"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Album photo avec des souvenirs communs"
+          }
         }
       }
     },
-    "Fotoalbum oder Erinnerungsalbum" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Photo Album or Memory Book"
+    "Fotoalbum oder Erinnerungsalbum": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photo Album or Memory Book"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Album photo ou album de souvenirs"
           }
         }
       }
     },
-    "Freie Auswahl beim Lieblings-Game." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Free choice for their favorite game."
+    "Freie Auswahl beim Lieblings-Game.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free choice for their favorite game."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choix libre pour le jeu favori."
+          }
         }
       }
     },
-    "Freie Auswahl beim Lieblings-Shop." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Free choice at the favorite shop."
+    "Freie Auswahl beim Lieblings-Shop.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free choice at the favorite shop."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choix libre dans la boutique préférée."
           }
         }
       }
     },
-    "Freizeitpark, Kletterpark oder Schwimmbad." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Theme park, climbing park, or swimming pool."
+    "Freizeitpark, Kletterpark oder Schwimmbad.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theme park, climbing park, or swimming pool."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parc d'attractions, parc d'escalade ou piscine."
+          }
         }
       }
     },
-    "Für Bewegung und Spaß draußen." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For exercise and outdoor fun."
+    "Für Bewegung und Spaß draußen.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For exercise and outdoor fun."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour bouger et s'amuser dehors."
           }
         }
       }
     },
-    "Für die nächste Lese-Session." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For the next reading session."
+    "Für die nächste Lese-Session.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For the next reading session."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour la prochaine session de lecture."
+          }
         }
       }
     },
-    "Für junge Kreative und Entdecker." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For young creatives and explorers."
+    "Für junge Kreative und Entdecker.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For young creatives and explorers."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour les jeunes créatifs et explorateurs."
           }
         }
       }
     },
-    "Für kulinarische Entdecker." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For culinary explorers."
+    "Für kulinarische Entdecker.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For culinary explorers."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour les explorateurs culinaires."
+          }
         }
       }
     },
-    "Für Spaß an der frischen Luft." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For fun in the fresh air."
+    "Für Spaß an der frischen Luft.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For fun in the fresh air."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour s'amuser en plein air."
           }
         }
       }
     },
-    "fürsorglich, emotional" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "caring, emotional"
+    "fürsorglich, emotional": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "caring, emotional"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "attentionné, émotionnel"
+          }
         }
       }
     },
-    "Gaming-Gutschein" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gaming Voucher"
+    "Gaming-Gutschein": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gaming Voucher"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bon de jeu"
+          }
         }
       }
     },
-    "Gaming-Zubehör" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gaming Accessories"
+    "Gaming-Zubehör": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gaming Accessories"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessoires gaming"
           }
         }
       }
     },
-    "Genieß deinen Tag! 🎂" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enjoy your day! 🎂"
+    "Genieß deinen Tag! 🎂": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enjoy your day! 🎂"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profite de ta journée ! 🎂"
+          }
         }
       }
     },
-    "Genieß die schönen Momente des Lebens!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enjoy the beautiful moments in life!"
+    "Genieß die schönen Momente des Lebens!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enjoy the beautiful moments in life!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profite des beaux moments de la vie !"
           }
         }
       }
     },
-    "Genieß diesen besonderen Tag!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enjoy this special day!"
+    "Genieß diesen besonderen Tag!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enjoy this special day!"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profite de cette journée spéciale !"
+          }
         }
       }
     },
-    "genussvoll, bodenständig" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "pleasure-loving, down-to-earth"
+    "genussvoll, bodenständig": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pleasure-loving, down-to-earth"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "épicurien, terre-à-terre"
           }
         }
       }
     },
-    "Hab den allerbesten Geburtstag! 🎂🎈" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Have the best birthday ever! 🎂🎈"
+    "Hab den allerbesten Geburtstag! 🎂🎈": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Have the best birthday ever! 🎂🎈"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passe le meilleur anniversaire ! 🎂🎈"
+          }
         }
       }
     },
-    "harmonisch, ästhetisch" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "harmonious, aesthetic"
+    "harmonisch, ästhetisch": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "harmonious, aesthetic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "harmonieux, esthétique"
           }
         }
       }
     },
-    "Herzlichen Glückwunsch zum Geburtstag!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Happy birthday!"
+    "Herzlichen Glückwunsch zum Geburtstag!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Happy birthday!"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joyeux anniversaire !"
+          }
         }
       }
     },
-    "Hochwertig und motivierend." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "High-quality and motivating."
+    "Hochwertig und motivierend.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "High-quality and motivating."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De haute qualité et motivant."
+          }
         }
       }
     },
-    "Hochwertige Genuss-Erfahrung" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premium Gourmet Experience"
+    "Hochwertige Genuss-Erfahrung": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium Gourmet Experience"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expérience gastronomique de qualité"
           }
         }
       }
     },
-    "Hochwertige Parfümerie" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premium Fragrance"
+    "Hochwertige Parfümerie": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium Fragrance"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parfum de luxe"
+          }
         }
       }
     },
-    "Hochwertiges Buch oder Hörbuch" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premium Book or Audiobook"
+    "Hochwertiges Buch oder Hörbuch": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium Book or Audiobook"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Livre ou livre audio de qualité"
           }
         }
       }
     },
-    "Hochwertiges Küchen-Accessoire" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premium Kitchen Accessory"
+    "Hochwertiges Küchen-Accessoire": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium Kitchen Accessory"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessoire cuisine de qualité"
+          }
         }
       }
     },
-    "Hochwertiges Material für kreative Köpfe." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "High-quality materials for creative minds."
+    "Hochwertiges Material für kreative Köpfe.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "High-quality materials for creative minds."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matériel de qualité pour les esprits créatifs."
           }
         }
       }
     },
-    "Ich hoffe, du hast einen richtig coolen Tag und feierst ordentlich!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I hope you have a really cool day and celebrate big!"
+    "Ich hoffe, du hast einen richtig coolen Tag und feierst ordentlich!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I hope you have a really cool day and celebrate big!"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "J'espère que tu passes une super journée et que tu fêtes ça bien !"
+          }
         }
       }
     },
-    "Ich wünsche dir einen richtig tollen Tag mit viel Spaß, Kuchen und ganz vielen Geschenken!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I wish you an amazing day full of fun, cake, and lots of presents!"
+    "Ich wünsche dir einen richtig tollen Tag mit viel Spaß, Kuchen und ganz vielen Geschenken!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I wish you an amazing day full of fun, cake, and lots of presents!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je te souhaite une super journée avec plein de fun, de gâteau et plein de cadeaux !"
           }
         }
       }
     },
-    "intensiv, leidenschaftlich" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "intense, passionate"
+    "intensiv, leidenschaftlich": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "intense, passionate"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "intense, passionné"
+          }
         }
       }
     },
-    "Jugendbuch-Bestseller" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Young Adult Bestseller"
+    "Jugendbuch-Bestseller": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Young Adult Bestseller"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Best-seller jeunesse"
+          }
         }
       }
     },
-    "Kaffee, Tee oder Schokolade in Premium-Qualität." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premium quality coffee, tea, or chocolate."
+    "Kaffee, Tee oder Schokolade in Premium-Qualität.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium quality coffee, tea, or chocolate."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Café, thé ou chocolat de qualité premium."
           }
         }
       }
     },
-    "Kein API-Key konfiguriert. Bitte trage deinen OpenRouter-Key ein." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No API key configured. Please enter your OpenRouter key."
+    "Kein API-Key konfiguriert. Bitte trage deinen OpenRouter-Key ein.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No API key configured. Please enter your OpenRouter key."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune clé API configurée. Veuillez saisir votre clé OpenRouter."
+          }
         }
       }
     },
-    "Kinder-Kochbuch oder Backset" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Children's Cookbook or Baking Set"
+    "Kinder-Kochbuch oder Backset": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Children's Cookbook or Baking Set"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Livre de cuisine pour enfants ou kit pâtisserie"
           }
         }
       }
     },
-    "Kinderbuch oder Hörspiel" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Children's Book or Audiobook"
+    "Kinderbuch oder Hörspiel": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Children's Book or Audiobook"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Livre pour enfants ou livre audio"
+          }
         }
       }
     },
-    "Kinderbuch-Sammlung" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Children's Book Collection"
+    "Kinderbuch-Sammlung": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Children's Book Collection"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collection de livres pour enfants"
           }
         }
       }
     },
-    "Kinderbuch-Serie" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Children's Book Series"
+    "Kinderbuch-Serie": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Children's Book Series"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Série de livres pour enfants"
+          }
         }
       }
     },
-    "Kindgerechtes Videospiel" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Age-Appropriate Video Game"
+    "Kindgerechtes Videospiel": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Age-Appropriate Video Game"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeu vidéo adapté à l'âge"
           }
         }
       }
     },
-    "Koch-Erlebnis oder Kochbuch" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cooking Experience or Cookbook"
+    "Koch-Erlebnis oder Kochbuch": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cooking Experience or Cookbook"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expérience culinaire ou livre de cuisine"
+          }
         }
       }
     },
-    "Kochkurs, Weinprobe oder Wellness." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cooking class, wine tasting, or spa."
+    "Kochkurs, Weinprobe oder Wellness.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cooking class, wine tasting, or spa."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cours de cuisine, dégustation de vin ou bien-être."
           }
         }
       }
     },
-    "Konzerttickets" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Concert Tickets"
+    "Konzerttickets": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Concert Tickets"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Billets de concert"
+          }
         }
       }
     },
-    "Kopfhörer oder Tech-Gadget" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Headphones or Tech Gadget"
+    "Kopfhörer oder Tech-Gadget": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Headphones or Tech Gadget"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casque ou gadget tech"
           }
         }
       }
     },
-    "Kreativ in der Küche werden." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get creative in the kitchen."
+    "Kreativ in der Küche werden.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get creative in the kitchen."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Devenir créatif en cuisine."
+          }
         }
       }
     },
-    "Kreativ-Bastelset" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Creative Craft Kit"
+    "Kreativ-Bastelset": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creative Craft Kit"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kit de bricolage créatif"
           }
         }
       }
     },
-    "Kreativ-Set" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Creative Kit"
+    "Kreativ-Set": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creative Kit"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kit créatif"
+          }
         }
       }
     },
-    "Kreativ-Set zum Basteln" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Creative Craft Set"
+    "Kreativ-Set zum Basteln": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creative Craft Set"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kit créatif pour bricoler"
           }
         }
       }
     },
-    "Kreativ-Workshop" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Creative Workshop"
+    "Kreativ-Workshop": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creative Workshop"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atelier créatif"
+          }
         }
       }
     },
-    "kreativ, selbstbewusst" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "creative, confident"
+    "kreativ, selbstbewusst": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "creative, confident"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "créatif, sûr de soi"
+          }
         }
       }
     },
-    "Kreatives Hobby-Set" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Creative Hobby Set"
+    "Kreatives Hobby-Set": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Creative Hobby Set"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kit de loisir créatif"
           }
         }
       }
     },
-    "Künstlerbedarf" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Art Supplies"
+    "Künstlerbedarf": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Art Supplies"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fournitures artistiques"
+          }
         }
       }
     },
-    "künstlerisch, einfühlsam" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "artistic, empathetic"
+    "künstlerisch, einfühlsam": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "artistic, empathetic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "artistique, empathique"
           }
         }
       }
     },
-    "Leere Antwort vom KI-Dienst erhalten." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Received an empty response from the AI service."
+    "Leere Antwort vom KI-Dienst erhalten.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Received an empty response from the AI service."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réponse vide reçue du service IA."
+          }
         }
       }
     },
-    "Lesestoff für kleine Abenteurer." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reading material for little adventurers."
+    "Lesestoff für kleine Abenteurer.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading material for little adventurers."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lecture pour les petits aventuriers."
           }
         }
       }
     },
-    "Lieblings-Spielzeug" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Favorite Toy"
+    "Lieblings-Spielzeug": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favorite Toy"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouet préféré"
+          }
         }
       }
     },
-    "Live-Musik erleben." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Experience live music."
+    "Live-Musik erleben.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experience live music."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vivre la musique en direct."
           }
         }
       }
     },
-    "Malen, basteln und kreativ sein." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Painting, crafting, and being creative."
+    "Malen, basteln und kreativ sein.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Painting, crafting, and being creative."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peindre, bricoler et être créatif."
+          }
         }
       }
     },
-    "Mode-Gutschein" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fashion Voucher"
+    "Mode-Gutschein": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fashion Voucher"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bon de mode"
+          }
         }
       }
     },
-    "Möge dein Optimismus dich zu neuen Höhen führen!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "May your optimism lead you to new heights!"
+    "Möge dein Optimismus dich zu neuen Höhen führen!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "May your optimism lead you to new heights!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que ton optimisme te porte vers de nouveaux sommets !"
           }
         }
       }
     },
-    "Möge deine Energie und Spontaneität dich weiterbringen!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "May your energy and spontaneity take you far!"
+    "Möge deine Energie und Spontaneität dich weiterbringen!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "May your energy and spontaneity take you far!"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que ton énergie et ta spontanéité te propulsent loin !"
+          }
         }
       }
     },
-    "Möge deine Neugier immer neue Wege öffnen!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "May your curiosity always open new paths!"
+    "Möge deine Neugier immer neue Wege öffnen!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "May your curiosity always open new paths!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que ta curiosité ouvre toujours de nouveaux chemins !"
           }
         }
       }
     },
-    "Musikzubehör" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Music Accessories"
+    "Musikzubehör": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Music Accessories"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessoires musicaux"
+          }
         }
       }
     },
-    "Nachhaltig und inspirierend." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lasting and inspiring."
+    "Nachhaltig und inspirierend.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lasting and inspiring."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durable et inspirant."
           }
         }
       }
     },
-    "Neue Abenteuer für einen neuen Lebensabschnitt." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New adventures for a new chapter in life."
+    "Neue Abenteuer für einen neuen Lebensabschnitt.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New adventures for a new chapter in life."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De nouvelles aventures pour un nouveau chapitre de vie."
+          }
         }
       }
     },
-    "Neues lernen oder Können vertiefen." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Learn something new or deepen your skills."
+    "Neues lernen oder Können vertiefen.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learn something new or deepen your skills."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apprendre de nouvelles choses ou approfondir ses compétences."
           }
         }
       }
     },
-    "Neues lernen und kreativ werden." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Learn something new and get creative."
+    "Neues lernen und kreativ werden.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learn something new and get creative."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apprendre et devenir créatif."
+          }
         }
       }
     },
-    "neugierig, kommunikativ" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "curious, communicative"
+    "neugierig, kommunikativ": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "curious, communicative"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "curieux, communicatif"
+          }
         }
       }
     },
-    "Nützlich im Alltag." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Useful in everyday life."
+    "Nützlich im Alltag.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Useful in everyday life."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utile au quotidien."
           }
         }
       }
     },
-    "Outdoor-Spielzeug" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Outdoor Toys"
+    "Outdoor-Spielzeug": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outdoor Toys"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouet d'extérieur"
+          }
         }
       }
     },
-    "Passend zum Lieblingssport." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A great match for their favorite sport."
+    "Passend zum Lieblingssport.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A great match for their favorite sport."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parfaitement adapté au sport favori."
           }
         }
       }
     },
-    "Passend zum persönlichen Interesse." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Matching their personal interest."
+    "Passend zum persönlichen Interesse.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matching their personal interest."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En accord avec l'intérêt personnel."
+          }
         }
       }
     },
-    "Perfekt für die Leidenschaft fürs Tanzen." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Perfect for a passion for dancing."
+    "Perfekt für die Leidenschaft fürs Tanzen.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfect for a passion for dancing."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parfait pour la passion de la danse."
           }
         }
       }
     },
-    "Perfekt für junge Musiker." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Perfect for young musicians."
+    "Perfekt für junge Musiker.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfect for young musicians."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parfait pour les jeunes musiciens."
+          }
         }
       }
     },
-    "perfektionistisch, praktisch" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "perfectionist, practical"
+    "perfektionistisch, praktisch": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "perfectionist, practical"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "perfectionniste, pratique"
           }
         }
       }
     },
-    "Personalisiertes Andenken" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personalized Keepsake"
+    "Personalisiertes Andenken": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personalized Keepsake"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Souvenir personnalisé"
+          }
         }
       }
     },
-    "Personalisiertes Geschenk" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personalized Gift"
+    "Personalisiertes Geschenk": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personalized Gift"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cadeau personnalisé"
+          }
         }
       }
     },
-    "Persönlich und sentimental." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personal and sentimental."
+    "Persönlich und sentimental.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personal and sentimental."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personnel et sentimental."
           }
         }
       }
     },
-    "Pflegeset oder Spa-Gutschein" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Care Set or Spa Voucher"
+    "Pflegeset oder Spa-Gutschein": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Care Set or Spa Voucher"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kit de soins ou bon spa"
+          }
         }
       }
     },
-    "Praktisch für das nächste Abenteuer." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Practical for the next adventure."
+    "Praktisch für das nächste Abenteuer.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Practical for the next adventure."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratique pour la prochaine aventure."
           }
         }
       }
     },
-    "Praktisch und motivierend." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Practical and motivating."
+    "Praktisch und motivierend.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Practical and motivating."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratique et motivant."
+          }
         }
       }
     },
-    "Praktisch und von dauerhaftem Nutzen." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Practical and long-lasting."
+    "Praktisch und von dauerhaftem Nutzen.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Practical and long-lasting."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratique et durablement utile."
           }
         }
       }
     },
-    "Praktisches Gadget" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Practical Gadget"
+    "Praktisches Gadget": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Practical Gadget"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gadget pratique"
+          }
         }
       }
     },
-    "Qualitätszeit zu zweit." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quality time for two."
+    "Qualitätszeit zu zweit.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quality time for two."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du temps de qualité à deux."
           }
         }
       }
     },
-    "Reise- oder Wochenend-Gutschein" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Travel or Weekend Voucher"
+    "Reise- oder Wochenend-Gutschein": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Travel or Weekend Voucher"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bon voyage ou week-end"
+          }
         }
       }
     },
-    "Reise-Zubehör" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Travel Accessories"
+    "Reise-Zubehör": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Travel Accessories"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessoires de voyage"
+          }
         }
       }
     },
-    "Romantisches Wochenend-Erlebnis" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Romantic Weekend Experience"
+    "Romantisches Wochenend-Erlebnis": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Romantic Weekend Experience"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expérience romantique de week-end"
           }
         }
       }
     },
-    "Schmuck oder Accessoire" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jewelry or Accessory"
+    "Schmuck oder Accessoire": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jewelry or Accessory"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bijou ou accessoire"
+          }
         }
       }
     },
-    "Spannende Geschichten für junge Köpfe." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exciting stories for young minds."
+    "Spannende Geschichten für junge Köpfe.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exciting stories for young minds."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des histoires passionnantes pour les jeunes esprits."
           }
         }
       }
     },
-    "Spannende Geschichten zum Abtauchen." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exciting stories to dive into."
+    "Spannende Geschichten zum Abtauchen.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exciting stories to dive into."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des histoires passionnantes pour s'immerger."
+          }
         }
       }
     },
-    "Spielspaß für die ganze Familie." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fun for the whole family."
+    "Spielspaß für die ganze Familie.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fun for the whole family."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du plaisir de jeu pour toute la famille."
           }
         }
       }
     },
-    "Sport-Equipment" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sports Equipment"
+    "Sport-Equipment": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sports Equipment"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Équipement sportif"
+          }
         }
       }
     },
-    "Sportausrüstung" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sports Gear"
+    "Sportausrüstung": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sports Gear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Équipement de sport"
           }
         }
       }
     },
-    "Spotify, Netflix oder App Store." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spotify, Netflix, or App Store."
+    "Spotify, Netflix oder App Store.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotify, Netflix, or App Store."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotify, Netflix ou App Store."
+          }
         }
       }
     },
-    "Strahle weiter hell und inspiriere uns alle!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keep shining bright and inspiring us all!"
+    "Strahle weiter hell und inspiriere uns alle!": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep shining bright and inspiring us all!"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue à briller et à nous inspirer tous !"
+          }
         }
       }
     },
-    "Streaming- oder App-Gutschein" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Streaming or App Voucher"
+    "Streaming- oder App-Gutschein": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Streaming or App Voucher"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bon streaming ou app"
           }
         }
       }
     },
-    "Tanzkleidung oder -schuhe" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dance Clothing or Shoes"
+    "Tanzkleidung oder -schuhe": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dance Clothing or Shoes"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vêtements ou chaussures de danse"
+          }
         }
       }
     },
-    "Tanzkurs-Gutschein" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dance Class Voucher"
+    "Tanzkurs-Gutschein": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dance Class Voucher"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bon cours de danse"
           }
         }
       }
     },
-    "Tanzschuhe" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dance Shoes"
+    "Tanzschuhe": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dance Shoes"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaussures de danse"
+          }
         }
       }
     },
-    "Unvergessliches für diesen runden Geburtstag." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Something unforgettable for this milestone birthday."
+    "Unvergessliches für diesen runden Geburtstag.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something unforgettable for this milestone birthday."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose d'inoubliable pour cet anniversaire marquant."
           }
         }
       }
     },
-    "Upgrade für das Hobby." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "An upgrade for the hobby."
+    "Upgrade für das Hobby.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An upgrade for the hobby."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une mise à niveau pour le hobby."
+          }
         }
       }
     },
-    "Wertschätzung zeigen mit einem besonderen Genuss." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show appreciation with a special treat."
+    "Wertschätzung zeigen mit einem besonderen Genuss.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show appreciation with a special treat."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exprimer sa gratitude avec un plaisir particulier."
           }
         }
       }
     },
-    "Zeigt echtes Interesse." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Shows genuine interest."
+    "Zeigt echtes Interesse.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shows genuine interest."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Montre un intérêt sincère."
+          }
         }
       }
     },
-    "Zeitlos und wertschätzend." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Timeless and appreciative."
+    "Zeitlos und wertschätzend.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timeless and appreciative."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intemporel et reconnaissant."
+          }
         }
       }
     },
-    "Zoo, Kino oder Schwimmbad." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zoo, cinema, or swimming pool."
+    "Zoo, Kino oder Schwimmbad.": {
+      "extractionState": "stale",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoo, cinema, or swimming pool."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoo, cinéma ou piscine."
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

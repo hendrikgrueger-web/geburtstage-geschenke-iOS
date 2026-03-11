@@ -96,6 +96,72 @@ No more last-minute gift panic! Your AI assistant finds the perfect present — 
 
 ---
 
+## Français — fr-FR
+
+### Nom
+Anniversaires & Cadeaux
+
+### Sous-titre (max. 30 caractères)
+Ton assistant IA cadeaux (25 chars)
+
+### Description
+
+L'anniversaire approche — et tu n'as aucune idée ? C'est fini, ça.
+
+Anniversaires & Cadeaux te libère du stress : l'app te rappelle chaque anniversaire au bon moment et déniche grâce à l'IA le cadeau parfait — adapté à l'âge, aux passions et à ta relation. Importe simplement tes contacts, et c'est parti.
+
+NE RATE PLUS AUCUN ANNIVERSAIRE
+- Tous les anniversaires en un coup d'œil — triés par compte à rebours
+- Rappels intelligents : tu choisis quand et à quelle fréquence
+- Le widget affiche sur ton écran d'accueil qui fête bientôt son anniversaire
+
+TON ASSISTANT CADEAUX PERSONNEL PROPULSÉ PAR L'IA
+- Demande des idées cadeaux par texte ou par voix — comme avec un ami
+- Suggestions personnalisées selon les hobbies, l'âge et ta relation
+- Enregistre les idées directement et marque-les comme planifiées ou achetées
+- Messages d'anniversaire touchants générés en quelques secondes
+- Vie privée protégée : aucun nom ni date de naissance n'est transmis
+
+CADEAUX PARFAITEMENT ORGANISÉS
+- Collecte des idées, planifie et garde le cap
+- Historique des cadeaux : ce que tu as offert — et ce que tu as reçu
+- Budget par personne pour ne jamais dépasser
+
+TES DONNÉES, TON CONTRÔLE
+- Synchronisation iCloud sur tous tes appareils Apple
+- Conforme RGPD : l'IA uniquement avec ton consentement explicite
+- Zéro donnée personnelle partagée avec des tiers — garanti
+
+Finis le stress de dernière minute. Télécharge Anniversaires & Cadeaux et offre des cadeaux qui font vraiment plaisir.
+
+### Mots-clés (max. 100 caractères)
+idée,rappel,planifier,liste,souhait,fête,famille,ami,surprise,original,personnalisé,widget,don
+
+### Texte promotionnel (max. 170 caractères)
+Finis le stress de dernière minute ! Ton assistant IA trouve le cadeau parfait — selon les hobbies, l'âge et ta relation. Par texte ou par voix.
+
+---
+
+## Français — fr-CA (Cross-Localization Canada)
+
+### Mots-clés (100 chars, English terms Canadians search)
+idea,reminder,planner,wishlist,gift,party,family,friend,surprise,personalized,widget,budget
+
+### Description / Promotional Text
+(identique à fr-FR)
+
+### Screenshot Captions (FR)
+
+| # | Légende | Vue |
+|---|---------|-----|
+| 1 | Tous les anniversaires en un coup d'œil | Timeline |
+| 2 | L'IA trouve le cadeau parfait | AI Chat |
+| 3 | Hobbies, âge et relation | PersonDetail |
+| 4 | Collecte et planifie tes idées cadeaux | Gift Ideas |
+| 5 | Widget pour ton écran d'accueil | Widget |
+
+---
+
 ## App Store Connect Einstellungen
 
 ### Kategorie

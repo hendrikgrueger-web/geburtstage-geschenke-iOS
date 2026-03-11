@@ -9,6 +9,7 @@ options:
   knownRegions:
     - de
     - en
+    - fr
     - Base
 
 targets:
