@@ -43,7 +43,7 @@ GESCHENKE PERFEKT ORGANISIERT
 Schluss mit Last-Minute-Panik. Lade Geburtstage & Geschenke jetzt herunter und schenke smarter.
 
 ### Keywords (max. 100 Zeichen)
-Geburtstag,Geschenk,KI,Ideen,Erinnerung,Planer,Countdown,Wunschliste,Kalender,Jahrestag,Schenken
+Ideen,Erinnerung,Planer,Countdown,Wunschliste,Kalender,Jahrestag,Schenken,Familie,Anlass,Wunsch,Fest
 
 ### Promotional Text (max. 170 Zeichen)
 Nie wieder Last-Minute-Stress! Dein KI-Assistent findet das perfekte Geschenk — passend zu Hobbies, Alter und Beziehung. Per Text oder Sprache.
@@ -89,7 +89,7 @@ YOUR DATA, YOUR CONTROL
 Stop the last-minute panic. Download Birthdays & Gifts and give smarter gifts, every time.
 
 ### Keywords (max. 100 characters)
-birthday,gift,ideas,AI,reminder,planner,countdown,wishlist,present,tracker,anniversary,occasion,bday
+ideas,reminder,planner,countdown,wishlist,present,tracker,anniversary,occasion,bday,celebrate,friend
 
 ### Promotional Text (max. 170 characters)
 No more last-minute gift panic! Your AI assistant finds the perfect present — based on hobbies, age & relationship. Ask by text or voice.
@@ -116,3 +116,52 @@ https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 
 ### Datenschutz-URL
 (muss noch gehostet werden — z.B. GitHub Pages)
+
+---
+
+## Cross-Localization (ASO-Taktik)
+
+Apple indexiert für den DE-Markt: Deutsch + English (UK).
+Apple indexiert für den US-Markt: English (US) + Spanish (Mexico).
+
+### Spanish (Mexico) — Extra Keywords für US-Markt
+
+Name: Birthdays & Gifts
+Subtitle: Your AI Gift-Finding Assistant
+Keywords (100 chars, English!):
+notify,schedule,surprise,party,event,celebrate,personal,smart,suggest,recommend,hobby,age,relation
+
+### English (UK) — Extra Keywords für UK/EU-Markt
+
+Name: Birthdays & Gifts
+Subtitle: Your AI Gift-Finding Assistant
+Keywords (100 chars):
+favour,organise,mum,dad,mate,thoughtful,meaningful,perfect,unique,special,surprise,personalise,plan
+
+---
+
+## Screenshot-Strategie (5-Screenshot Framework)
+
+### DE Captions (keyword-optimiert für Apple OCR)
+
+| # | Caption | View |
+|---|---------|------|
+| 1 | Alle Geburtstage im Blick | Timeline |
+| 2 | KI findet das perfekte Geschenk | AI Chat |
+| 3 | Hobbies, Alter & Beziehung | PersonDetail |
+| 4 | Geschenkideen sammeln & planen | Gift Ideas |
+| 5 | Widget für deinen Homescreen | Widget |
+
+### EN Captions (keyword-optimised for Apple OCR)
+
+| # | Caption | View |
+|---|---------|------|
+| 1 | Every Birthday at a Glance | Timeline |
+| 2 | AI Finds the Perfect Gift | AI Chat |
+| 3 | Hobbies, Age & Relationship | PersonDetail |
+| 4 | Collect & Plan Gift Ideas | Gift Ideas |
+| 5 | Widget for Your Home Screen | Widget |
+
+### Hinweis
+Apple OCR liest Text in Screenshots und indexiert ihn für die Suche (seit Juni 2025).
+Keywords in den ersten 2 Screenshots haben den höchsten Impact.

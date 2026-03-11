@@ -67,6 +67,14 @@ struct aiPresentsApp: App {
             SampleDataService.createSampleData(in: ctx)
             UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
         }
+
+        // Screenshot-Modus: Person-ID merken für onAppear
+        if let idx = CommandLine.arguments.firstIndex(of: "--show-person"),
+           idx + 1 < CommandLine.arguments.count {
+            UserDefaults.standard.set(CommandLine.arguments[idx + 1], forKey: "screenshotPersonID")
+        } else {
+            UserDefaults.standard.removeObject(forKey: "screenshotPersonID")
+        }
         #endif
     }
 
@@ -91,6 +99,17 @@ struct aiPresentsApp: App {
                             }
                             // Widget-Daten initial aktualisieren
                             WidgetDataService.shared.updateWidgetData(from: modelContainer.mainContext)
+
+                            #if DEBUG
+                            // Screenshot-Modus: Deep Link nach View-Aufbau setzen
+                            if let idString = UserDefaults.standard.string(forKey: "screenshotPersonID"),
+                               let id = UUID(uuidString: idString) {
+                                UserDefaults.standard.removeObject(forKey: "screenshotPersonID")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    deepLinkPersonID = id
+                                }
+                            }
+                            #endif
                         }
                 } else {
                     OnboardingView()
