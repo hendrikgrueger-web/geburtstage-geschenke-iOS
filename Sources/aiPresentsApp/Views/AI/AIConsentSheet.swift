@@ -43,10 +43,11 @@ struct AIConsentSheet: View {
                             ConsentDataRow(icon: "person.fill", text: "Geschlecht (lokal aus Name/Beziehung abgeleitet)")
                             ConsentDataRow(icon: "number", text: "Altersgruppe (z.B. \u{201E}Mitte 30\u{201C}, nicht das exakte Alter)")
                             ConsentDataRow(icon: "heart.fill", text: "Beziehungstyp (z.B. \u{201E}Freund/in\u{201C}, \u{201E}Mutter\u{201C})")
-                            ConsentDataRow(icon: "star.fill", text: "Sternzeichen")
-                            ConsentDataRow(icon: "tag.fill", text: "Interessen und Hobbies (sofern vorhanden)")
-                            ConsentDataRow(icon: "eurosign.circle", text: "Budget-Rahmen (für passende Vorschläge)")
-                            ConsentDataRow(icon: "gift.fill", text: "Titel früherer Geschenke")
+                            ConsentDataRow(icon: "star.fill", text: "Sternzeichen (aus Geburtsmonat und -tag)")
+                            ConsentDataRow(icon: "tag.fill", text: "Hobbies und Interessen (sofern vorhanden)")
+                            ConsentDataRow(icon: "eurosign.circle", text: "Budget-Rahmen (Min/Max für passende Vorschläge)")
+                            ConsentDataRow(icon: "gift.fill", text: "Geschenkideen: Titel und Status (geplant/gekauft)")
+                            ConsentDataRow(icon: "clock.arrow.circlepath", text: "Geschenkhistorie: Titel früher gemachter Geschenke")
                         }
                     }
 
@@ -57,8 +58,8 @@ struct AIConsentSheet: View {
                         title: "Was wird NICHT übertragen?"
                     ) {
                         VStack(alignment: .leading, spacing: 8) {
-                            ConsentDataRow(icon: "person.text.rectangle", text: "Name")
-                            ConsentDataRow(icon: "calendar", text: "Geburtsdatum")
+                            ConsentDataRow(icon: "person.text.rectangle", text: "Name (weder Vor- noch Nachname)")
+                            ConsentDataRow(icon: "calendar", text: "Geburtsdatum (kein Tag, Monat oder Jahr)")
                             ConsentDataRow(icon: "number.circle", text: "Exaktes Alter")
                             ConsentDataRow(icon: "link", text: "Links")
                             ConsentDataRow(icon: "note.text", text: "Notizen")
@@ -139,6 +140,18 @@ struct AIConsentSheet: View {
                                 .foregroundStyle(.secondary)
                         }
                     }
+
+                    // Altersbestätigung (DSGVO Art. 8)
+                    HStack(alignment: .top, spacing: 10) {
+                        Image(systemName: "person.badge.shield.checkmark.fill")
+                            .foregroundStyle(AppColor.secondary)
+                            .font(.caption)
+                            .padding(.top, 2)
+                        Text("Mit der Zustimmung bestätige ich, dass ich mindestens 16 Jahre alt bin. (DSGVO Art. 8)")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.horizontal, 4)
 
                     // Buttons
                     VStack(spacing: 12) {

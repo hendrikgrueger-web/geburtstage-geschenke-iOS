@@ -132,9 +132,9 @@ class ReminderManager: ObservableObject {
 
         do {
             try await center.add(request)
-            AppLogger.reminder.debug("Scheduled reminder for \(person.displayName): \(leadDay) days before")
+            AppLogger.reminder.debug("Scheduled reminder for \(person.displayName, privacy: .private): \(leadDay) days before")
         } catch {
-            AppLogger.reminder.error("Failed to schedule notification for \(person.displayName)", error: error)
+            AppLogger.reminder.error("Failed to schedule notification for \(person.displayName, privacy: .private)", error: error)
         }
     }
 
@@ -155,7 +155,7 @@ class ReminderManager: ObservableObject {
             .filter { $0.identifier.contains("birthday_\(person.id.uuidString)") }
             .map { $0.identifier }
         center.removePendingNotificationRequests(withIdentifiers: idsToRemove)
-        AppLogger.reminder.debug("Cancelled reminders for \(person.displayName)")
+        AppLogger.reminder.debug("Cancelled reminders for \(person.displayName, privacy: .private)")
     }
 
     func cancelAllReminders() async {

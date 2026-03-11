@@ -142,6 +142,62 @@ Finis le stress de dernière minute ! Ton assistant IA trouve le cadeau parfait 
 
 ---
 
+## Español — es-ES
+
+### Nombre
+Cumpleaños y Regalos
+
+### Subtítulo (máx. 30 caracteres)
+Tu asistente IA de regalos (27 chars)
+
+### Descripción
+
+¿El cumpleaños está a la vuelta de la esquina y no sabes qué regalar? Eso se acabó.
+
+Cumpleaños y Regalos te quita el estrés de encima: la app te recuerda cada cumpleaños a tiempo y, gracias a la IA, encuentra el regalo perfecto — adaptado a la edad, los hobbies y tu relación. Importa tus contactos y listo.
+
+NO TE OLVIDES DE NINGÚN CUMPLEAÑOS
+- Todos los cumpleaños de un vistazo — ordenados por cuenta atrás
+- Recordatorios inteligentes: tú decides cuándo y con qué frecuencia
+- El widget en tu pantalla de inicio te muestra quién cumple años antes
+
+TU ASISTENTE DE REGALOS CON IA
+- Pide ideas por texto o por voz — como hablar con un amigo
+- Sugerencias personalizadas según hobbies, edad y relación
+- Guarda ideas al instante y márcalas como planificadas o compradas
+- Mensajes de cumpleaños especiales generados en segundos
+- Privacidad garantizada: ningún nombre ni fecha de nacimiento sale de tu dispositivo
+
+REGALOS PERFECTAMENTE ORGANIZADOS
+- Colecciona ideas, planifica y mantén el control
+- Historial de regalos: recuerda qué regalaste — y qué recibiste
+- Presupuesto por persona para no pasarte nunca
+
+TUS DATOS, TU CONTROL
+- Sincronización con iCloud en todos tus dispositivos Apple
+- Conforme al RGPD: la IA solo se activa con tu consentimiento explícito
+- Cero datos personales compartidos con terceros — garantizado
+
+Adiós a los agobios de última hora. Descarga Cumpleaños y Regalos y regala de forma más inteligente.
+
+### Palabras clave (máx. 100 caracteres)
+idea,recordatorio,planificar,lista,deseo,fiesta,familia,amigo,sorpresa,original,personalizado,widget
+
+### Texto promocional (máx. 170 caracteres)
+¡Sin estrés de última hora! Tu asistente IA encuentra el regalo perfecto — según hobbies, edad y relación. Por texto o por voz.
+
+---
+
+## Español — es-MX (Cross-Localization México)
+
+### Palabras clave (100 chars, English terms for US-market cross-loc)
+notify,schedule,surprise,party,event,celebrate,personal,smart,suggest,recommend,hobby,age,relation
+
+### Descripción / Texto promocional
+(idéntico a es-ES)
+
+---
+
 ## Français — fr-CA (Cross-Localization Canada)
 
 ### Mots-clés (100 chars, English terms Canadians search)
@@ -162,6 +218,83 @@ idea,reminder,planner,wishlist,gift,party,family,friend,surprise,personalized,wi
 
 ---
 
+## What's New (v1.0.0)
+
+### DE — Deutsch
+```
+Willkommen bei Geburtstage & Geschenke! 🎁
+
+• Geburtstage aller Kontakte im Blick
+• KI-gestützte Geschenkvorschläge
+• Hobbies & Interessen pro Person
+• iCloud-Sync auf allen Geräten
+• Homescreen-Widget
+```
+
+### EN — English
+```
+Welcome to Birthdays & Gifts! 🎁
+
+• Every birthday from your contacts at a glance
+• AI-powered gift suggestions
+• Hobbies & interests per person
+• iCloud sync across all your devices
+• Home screen widget
+```
+
+### FR — Français
+```
+Bienvenue dans Anniversaires & Cadeaux ! 🎁
+
+• Tous les anniversaires de tes contacts en un coup d'œil
+• Suggestions de cadeaux propulsées par l'IA
+• Hobbies et intérêts par personne
+• Synchronisation iCloud sur tous tes appareils
+• Widget pour l'écran d'accueil
+```
+
+### ES — Español
+```
+¡Bienvenido a Cumpleaños y Regalos! 🎁
+
+• Todos los cumpleaños de tus contactos de un vistazo
+• Sugerencias de regalos con IA
+• Hobbies e intereses por persona
+• Sincronización iCloud en todos tus dispositivos
+• Widget para la pantalla de inicio
+```
+
+---
+
+## Review Notes für Apple (Hinweise für das Review-Team)
+
+```
+Hinweis für das Apple Review Team:
+
+Die App verwendet KI (Google Gemini über einen Cloudflare-Proxy und OpenRouter)
+für Geschenkvorschläge. Die KI-Funktion erfordert eine explizite DSGVO-Einwilligung
+durch den Nutzer.
+
+So testen Sie die KI-Funktionen:
+1. App öffnen (keine Registrierung erforderlich)
+2. Auf den lila Chat-Button (unten rechts, Sprechblasen-Symbol) tippen
+3. Den Datenschutz-Einwilligungsdialog lesen und "Zustimmen" antippen
+4. Im Chat nach Geschenkideen fragen, z. B. "Ideen für meine Mutter?"
+
+Wichtige Hinweise:
+- Kein Login erforderlich — alle Funktionen ohne Account nutzbar
+- Die App fragt beim ersten Start nach Kontakte-Zugriff (für Geburtstags-Import)
+- Die App fragt beim ersten Sprach-Input nach Mikrofon-Zugriff (optional)
+- Ohne KI-Einwilligung sind alle anderen Features (Geburtstage, Geschenkideen, Widget)
+  vollständig nutzbar
+- An die KI werden KEINE Namen oder Geburtsdaten übertragen (nur Altersgruppe,
+  Beziehungstyp, Hobbies, anonymisierte Geschenkdaten)
+- Der Cloudflare Worker Proxy ist live unter:
+  https://ai-presents-proxy.hendrikgrueger.workers.dev
+```
+
+---
+
 ## App Store Connect Einstellungen
 
 ### Kategorie
@@ -169,7 +302,7 @@ Primär: Lifestyle
 Sekundär: Productivity
 
 ### Altersfreigabe
-4+ (kein anstößiger Inhalt)
+12+ (KI-generierte Inhalte)
 
 ### Preis
 Kostenlos
