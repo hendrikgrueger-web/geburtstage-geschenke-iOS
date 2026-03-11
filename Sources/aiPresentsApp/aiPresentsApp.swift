@@ -8,6 +8,7 @@ struct aiPresentsApp: App {
     @StateObject private var reminderManager: ReminderManager
     @Environment(\.scenePhase) private var scenePhase
     @State private var deepLinkPersonID: UUID?
+    @State private var screenshotShowChat = false
     /// True wenn weder persistenter noch lokaler Container erstellt werden konnte.
     private let containerCreationFailed: Bool
 
@@ -75,6 +76,13 @@ struct aiPresentsApp: App {
         } else {
             UserDefaults.standard.removeObject(forKey: "screenshotPersonID")
         }
+
+        // Screenshot-Modus: AI-Chat öffnen
+        if CommandLine.arguments.contains("--show-chat") {
+            UserDefaults.standard.set(true, forKey: "screenshotShowChat")
+        } else {
+            UserDefaults.standard.removeObject(forKey: "screenshotShowChat")
+        }
         #endif
     }
 
@@ -91,7 +99,7 @@ struct aiPresentsApp: App {
                         description: Text("Die App-Datenbank konnte nicht geladen werden. Bitte starte die App neu oder lösche sie und installiere sie erneut.")
                     )
                 } else if hasCompletedOnboarding {
-                    ContentView(deepLinkPersonID: $deepLinkPersonID)
+                    ContentView(deepLinkPersonID: $deepLinkPersonID, screenshotShowChat: $screenshotShowChat)
                         .onAppear {
                             GiftTransitionService.autoTransitionPurchasedGifts(in: modelContainer.mainContext)
                             Task {
@@ -107,6 +115,13 @@ struct aiPresentsApp: App {
                                 UserDefaults.standard.removeObject(forKey: "screenshotPersonID")
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                     deepLinkPersonID = id
+                                }
+                            }
+                            // Screenshot-Modus: AI-Chat öffnen
+                            if UserDefaults.standard.bool(forKey: "screenshotShowChat") {
+                                UserDefaults.standard.removeObject(forKey: "screenshotShowChat")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    screenshotShowChat = true
                                 }
                             }
                             #endif

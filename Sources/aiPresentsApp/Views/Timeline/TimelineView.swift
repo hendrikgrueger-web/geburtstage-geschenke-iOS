@@ -6,6 +6,7 @@ struct TimelineView: View {
     @Query private var people: [PersonRef]
     @Query private var giftIdeas: [GiftIdea]
     @Binding var deepLinkPersonID: UUID?
+    @Binding var screenshotShowChat: Bool
 
     @State private var showingSettings = false
     @State private var filterRelation: String? = nil
@@ -126,6 +127,12 @@ struct TimelineView: View {
             AIChatView(onPersonSelected: { person in
                 selectedPerson = person
             })
+        }
+        .onChange(of: screenshotShowChat) { _, newValue in
+            if newValue {
+                showingAIChat = true
+                screenshotShowChat = false
+            }
         }
         .safeAreaInset(edge: .bottom) {
             smartSearchBar
