@@ -14,6 +14,7 @@ struct SettingsView: View {
     @State private var showingICloudRestartNotice = false
     @State private var showingAbout = false
     @State private var showingRevokeConsentConfirmation = false
+    @State private var showingAIConsentSheet = false
     @EnvironmentObject private var reminderManager: ReminderManager
     @ObservedObject private var consentManager = AIConsentManager.shared
 
@@ -203,8 +204,16 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    Toggle("KI-Vorschläge aktiviert", isOn: $consentManager.aiEnabled)
-                        .disabled(!consentManager.consentGiven)
+                    Toggle("KI-Vorschläge aktiviert", isOn: Binding(
+                        get: { consentManager.consentGiven && consentManager.aiEnabled },
+                        set: { newValue in
+                            if newValue && !consentManager.consentGiven {
+                                showingAIConsentSheet = true
+                            } else {
+                                consentManager.aiEnabled = newValue
+                            }
+                        }
+                    ))
 
                     if consentManager.consentGiven {
                         HStack {
@@ -218,8 +227,11 @@ struct SettingsView: View {
                             .font(.subheadline)
                         }
                     } else {
-                        Label("Keine Einwilligung erteilt", systemImage: "shield.slash")
-                            .foregroundStyle(.secondary)
+                        Button {
+                            showingAIConsentSheet = true
+                        } label: {
+                            Label("Einwilligung erteilen", systemImage: "shield.lefthalf.filled")
+                        }
                     }
 
                     if !AIService.isAPIKeyConfigured {
@@ -230,7 +242,7 @@ struct SettingsView: View {
                 } header: {
                     Text("KI-Assistent")
                 } footer: {
-                    Text("Die KI-Funktionen nutzen OpenRouter → Google Gemini (USA). Es werden Vorname, Alter, Beziehungstyp und Sternzeichen übertragen. Widerruf jederzeit möglich.")
+                    Text("Die KI-Funktionen nutzen anonymisierte Daten (Geschlecht, Altersgruppe, Beziehung). Keine Namen oder Geburtsdaten werden übertragen. Widerruf jederzeit möglich.")
                 }
                 .alert("Einwilligung widerrufen?", isPresented: $showingRevokeConsentConfirmation) {
                     Button("Abbrechen", role: .cancel) { }
@@ -239,6 +251,11 @@ struct SettingsView: View {
                     }
                 } message: {
                     Text("Die KI-Funktionen werden deaktiviert. Du kannst die Einwilligung jederzeit erneut erteilen.")
+                }
+                .sheet(isPresented: $showingAIConsentSheet) {
+                    AIConsentSheet(isPresented: $showingAIConsentSheet) {
+                        consentManager.aiEnabled = true
+                    }
                 }
 
                 Section("Daten") {
