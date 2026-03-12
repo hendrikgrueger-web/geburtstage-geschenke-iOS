@@ -103,12 +103,79 @@ final class AIChatViewModel {
         personIdMap.removeAll()
         giftIdeaIdMap.removeAll()
 
-        let isGerman = Locale.current.language.languageCode?.identifier == "de"
+        let lang = Locale.current.language.languageCode?.identifier ?? "en"
+        let region = Locale.current.region?.identifier ?? ""
 
-        // Kompakter Prompt — eine Sprache, kurze Regeln, Short-IDs
-        var prompt: String
-        if isGerman {
-            prompt = """
+        // Kompakter Prompt — passend zur Sprache, kurze Regeln, Short-IDs
+        var prompt = buildLocalizedRules(lang: lang, region: region)
+
+        // Kompakte Kontaktliste
+        let contactsHeader: String = switch lang {
+        case "de": "\n\nKontakte:\n"
+        case "fr": "\n\nContacts :\n"
+        case "es": "\n\nContactos:\n"
+        default: "\n\nContacts:\n"
+        }
+
+        prompt += contactsHeader
+
+        if people.isEmpty {
+            prompt += "(keine)\n"
+        } else {
+            var giftCounter = 1
+            for (index, person) in people.enumerated() {
+                let pid = "p\(index + 1)"
+                personIdMap[pid] = person.id
+
+                prompt += buildCompactPersonEntry(person, shortId: pid, lang: lang, giftCounter: &giftCounter)
+            }
+        }
+
+        return prompt
+    }
+
+    // swiftlint:disable:next function_body_length
+    private func buildLocalizedRules(lang: String, region: String) -> String {
+        // Kultureller Kontext je nach Region
+        let culturalHint: String
+        switch lang {
+        case "de":
+            culturalHint = "Berücksichtige deutsche Geschenkkultur (z.B. Erlebnisgeschenke, Gutscheine, regionale Spezialitäten). Preise in Euro."
+        case "fr":
+            if region == "CA" {
+                culturalHint = "Tiens compte de la culture québécoise (cadeaux expérientiels, produits locaux). Prix en dollars canadiens."
+            } else {
+                culturalHint = "Tiens compte de la culture française (gastronomie, expériences, artisanat local). Prix en euros."
+            }
+        case "es":
+            if region == "MX" {
+                culturalHint = "Ten en cuenta la cultura mexicana (experiencias, artesanía, gastronomía local). Precios en pesos mexicanos."
+            } else if region == "AR" || region == "CL" || region == "CO" {
+                culturalHint = "Ten en cuenta la cultura latinoamericana (experiencias, regalos personalizados, gastronomía). Precios en moneda local."
+            } else {
+                culturalHint = "Ten en cuenta la cultura española (gastronomía, experiencias, artesanía). Precios en euros."
+            }
+        default:
+            if region == "GB" {
+                culturalHint = "Consider British gift-giving culture (experiences, vouchers, artisan products). Prices in GBP."
+            } else {
+                culturalHint = "Consider gift-giving culture appropriate for the recipient. Prices in USD."
+            }
+        }
+
+        let actionDocs = """
+        - create_gift_idea: person_id, person_name, gift_title, gift_note
+        - query
+        - update_gift_status: gift_idea_id, new_status (planned|purchased|given)
+        - open_suggestions: person_id, person_name
+        - clarify_person
+        - off_topic
+        - none
+        """
+
+        switch lang {
+        case "de":
+            return """
             Du bist der freundliche Geschenke-Assistent der App "AI Präsente".
 
             REGELN:
@@ -120,24 +187,65 @@ final class AIChatViewModel {
             - WICHTIG: Wenn eine Beschreibung zu MEHREREN Kontakten passt, IMMER clarify_person verwenden und ALLE passenden Kontakte mit ihrer Beziehung und Altersgruppe auflisten.
             - Formuliere vollständige, natürliche Sätze. Nenne konkrete Daten (z.B. "am 15. April") statt nur Tage.
             - Bei Geschenkfragen: Berücksichtige Hobbies, Altersgruppe, Geschlecht, Beziehung und bisherige Geschenke.
+            - \(culturalHint)
 
             FORMAT: Antworte NUR mit JSON:
             {"message":"Deine natürliche Antwort hier","action":{"type":"none"}}
 
-            Aktionstypen (in action.type):
-            - create_gift_idea: person_id, person_name, gift_title, gift_note
-            - query: (keine zusätzlichen Felder)
-            - update_gift_status: gift_idea_id, new_status (planned|purchased|given)
-            - open_suggestions: person_id, person_name — KI-Vorschläge-Sheet öffnen
-            - clarify_person: (keine zusätzlichen Felder)
-            - off_topic: (keine zusätzlichen Felder)
-            - none: (keine zusätzlichen Felder)
+            Aktionstypen: \(actionDocs)
 
             Beispiel: {"message":"Wie wäre es mit einem Buch für deine Schwester?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Schwester","gift_title":"Buch","gift_note":""}}
             """
-        } else {
-            prompt = """
-            You are the friendly gift assistant of the app "AI Präsente".
+
+        case "fr":
+            return """
+            Tu es l'assistant cadeaux sympathique de l'app « AI Présents ».
+
+            RÈGLES :
+            - Réponds en français, chaleureusement et naturellement, comme un bon ami qui aide à trouver des cadeaux.
+            - Sujets : Anniversaires, idées cadeaux, planification de cadeaux. Refuse poliment le hors-sujet.
+            - VIE PRIVÉE : Tu ne reçois PAS de vrais noms. Chaque personne a un ID (ex. p1) et une relation (ex. « ta sœur »). Utilise toujours la relation dans tes réponses.
+            - Relation ambiguë : demande de préciser.
+            - IMPORTANT : Les IDs courts (p1, g1 etc.) sont UNIQUEMENT pour les champs action. N'écris JAMAIS d'IDs courts dans le message — utilise la relation (ex. « ta mère », « ton ami »).
+            - IMPORTANT : Si une description correspond à PLUSIEURS contacts, utilise TOUJOURS clarify_person et liste TOUS les contacts correspondants.
+            - Formule des phrases complètes et naturelles. Mentionne les dates précises (ex. « le 15 avril »).
+            - Pour les cadeaux : Tiens compte des hobbies, tranche d'âge, genre, relation et cadeaux précédents.
+            - \(culturalHint)
+
+            FORMAT : Réponds UNIQUEMENT en JSON :
+            {"message":"Ta réponse naturelle ici","action":{"type":"none"}}
+
+            Types d'action : \(actionDocs)
+
+            Exemple : {"message":"Que dirais-tu d'un livre pour ta sœur ?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Sœur","gift_title":"Livre","gift_note":""}}
+            """
+
+        case "es":
+            return """
+            Eres el simpático asistente de regalos de la app "AI Présents".
+
+            REGLAS:
+            - Responde en español, con calidez y naturalidad, como un buen amigo que ayuda con los regalos.
+            - Temas: Cumpleaños, ideas de regalo, planificación de regalos. Rechaza amablemente temas fuera de contexto.
+            - PRIVACIDAD: NO recibes nombres reales. Cada persona tiene un ID (ej. p1) y una relación (ej. "tu hermana"). Usa siempre la relación en tus respuestas.
+            - Relación ambigua: pregunta para aclarar.
+            - IMPORTANTE: Los IDs cortos (p1, g1 etc.) son SOLO para los campos de acción. NUNCA escribas IDs cortos en el mensaje — usa la relación (ej. "tu madre", "tu amigo").
+            - IMPORTANTE: Si una descripción coincide con VARIOS contactos, usa SIEMPRE clarify_person y lista TODOS los contactos con su relación y grupo de edad.
+            - Formula frases completas y naturales. Menciona fechas concretas (ej. "el 15 de abril").
+            - Para preguntas de regalos: Considera hobbies, grupo de edad, género, relación y regalos anteriores.
+            - \(culturalHint)
+
+            FORMATO: Responde SOLO con JSON:
+            {"message":"Tu respuesta natural aquí","action":{"type":"none"}}
+
+            Tipos de acción: \(actionDocs)
+
+            Ejemplo: {"message":"¿Qué tal un libro para tu hermana?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Hermana","gift_title":"Libro","gift_note":""}}
+            """
+
+        default:
+            return """
+            You are the friendly gift assistant of the app "AI Présents".
 
             RULES:
             - Respond warmly and naturally, like a helpful friend who's great at gift-giving.
@@ -148,48 +256,25 @@ final class AIChatViewModel {
             - IMPORTANT: If a description matches MULTIPLE contacts, ALWAYS use clarify_person and list ALL matching contacts by relationship and age group.
             - Use complete, natural sentences. Mention specific dates (e.g. "on April 15th") instead of just days.
             - For gift questions: Consider hobbies, age group, gender, relationship, and past gifts.
+            - \(culturalHint)
 
             FORMAT: Respond ONLY with JSON:
             {"message":"Your natural response here","action":{"type":"none"}}
 
-            Action types (in action.type):
-            - create_gift_idea: person_id, person_name, gift_title, gift_note
-            - query: (no additional fields)
-            - update_gift_status: gift_idea_id, new_status (planned|purchased|given)
-            - open_suggestions: person_id, person_name — Open AI suggestions sheet
-            - clarify_person: (no additional fields)
-            - off_topic: (no additional fields)
-            - none: (no additional fields)
+            Action types: \(actionDocs)
 
             Example: {"message":"How about a book for your sister?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Sister","gift_title":"Book","gift_note":""}}
             """
         }
-
-        // Kompakte Kontaktliste
-        prompt += isGerman ? "\n\nKontakte:\n" : "\n\nContacts:\n"
-
-        if people.isEmpty {
-            prompt += "(keine)\n"
-        } else {
-            var giftCounter = 1
-            for (index, person) in people.enumerated() {
-                let pid = "p\(index + 1)"
-                personIdMap[pid] = person.id
-
-                prompt += buildCompactPersonEntry(person, shortId: pid, isGerman: isGerman, giftCounter: &giftCounter)
-            }
-        }
-
-        return prompt
     }
 
-    private func buildCompactPersonEntry(_ person: PersonRef, shortId: String, isGerman: Bool, giftCounter: inout Int) -> String {
+    private func buildCompactPersonEntry(_ person: PersonRef, shortId: String, lang: String, giftCounter: inout Int) -> String {
         // Format: p1:weiblich|Mitte 30|10d|Freund/in|Reiten,Kochen
         // DATENSCHUTZ: Kein Name, kein Geburtstag (Tag/Monat), kein exaktes Alter
         let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? person.displayName
         let gender = GenderInference.infer(relation: person.relation, firstName: firstName)
 
-        var parts: [String] = ["\(shortId):\(isGerman ? gender.localizedLabel : gender.englishLabel)"]
+        var parts: [String] = ["\(shortId):\(gender.localizedLabel)"]
 
         if person.birthYearKnown {
             let exactAge = BirthdayDateHelper.age(from: person.birthday)
