@@ -124,7 +124,7 @@ AppConfig.AI.openRouterBaseURL    // https://ai-presents-proxy.hendrikgrueger.wo
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)
 **Datenweg:** App → Cloudflare Workers (Proxy) → OpenRouter Inc. (USA) → Google Gemini (USA)
 **Drittlandübermittlung:** Standardvertragsklauseln Art. 46 DSGVO
-**Vollständige Doku:** `Docs/DSGVO-AI.md`
+**Vollständige Doku:** `docs/DSGVO-AI.md`
 
 ## Cloudflare Worker Proxy
 
@@ -368,13 +368,13 @@ enum GiftDirection {
 ### Nächste Schritte vor erstem TestFlight-Upload
 1. **Xcode öffnen** → beide Targets prüfen (Signing & Capabilities, kein rotes Ausrufezeichen)
 2. **iCloud Container** ggf. anlegen: `iCloud.com.hendrikgrueger.birthdays-presents-ai` (falls CloudKit genutzt)
-3. **Datenschutz-URL** in App Store Connect eintragen (Pflicht vor Review)
+3. ~~**Datenschutz-URL** in App Store Connect eintragen~~ ✅ Gesetzt: `https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/`
 4. **Product → Archive** → Xcode Organizer → Distribute App → App Store Connect
 5. **TestFlight** aktivieren + Tester einladen
 
 ## Launch-Plan
 
-Vollständiger Launch-Plan mit 8 Phasen, Skills-Referenz und Revenue-Prognose: **`Docs/LAUNCH-PLAN.md`**
+Vollständiger Launch-Plan mit 8 Phasen, Skills-Referenz und Revenue-Prognose: **`docs/LAUNCH-PLAN.md`**
 
 ## Backlog
 

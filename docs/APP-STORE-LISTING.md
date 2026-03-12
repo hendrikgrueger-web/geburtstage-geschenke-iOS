@@ -314,7 +314,7 @@ Kostenlos
 https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 
 ### Datenschutz-URL
-(muss noch gehostet werden — z.B. GitHub Pages)
+https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/
 
 ---
 
