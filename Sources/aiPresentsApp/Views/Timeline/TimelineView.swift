@@ -138,6 +138,16 @@ struct TimelineView: View {
                 screenshotShowChat = false
             }
         }
+        #if DEBUG
+        .onAppear {
+            if UserDefaults.standard.bool(forKey: "screenshotShowSettings") {
+                UserDefaults.standard.removeObject(forKey: "screenshotShowSettings")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    showingSettings = true
+                }
+            }
+        }
+        #endif
         .safeAreaInset(edge: .bottom) {
             smartSearchBar
         }

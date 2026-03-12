@@ -83,6 +83,18 @@ struct aiPresentsApp: App {
         } else {
             UserDefaults.standard.removeObject(forKey: "screenshotShowChat")
         }
+
+        // Screenshot-Modus: Settings öffnen
+        if CommandLine.arguments.contains("--show-settings") {
+            UserDefaults.standard.set(true, forKey: "screenshotShowSettings")
+        } else {
+            UserDefaults.standard.removeObject(forKey: "screenshotShowSettings")
+        }
+
+        // Screenshot-Modus: Onboarding zeigen (hasCompletedOnboarding zurücksetzen)
+        if CommandLine.arguments.contains("--show-onboarding") {
+            UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
+        }
         #endif
     }
 
