@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy / Datenschutzrichtlinie for AI Pr&auml;sente - Birthday &amp; Gift Management App">
+    <meta name="author" content="Gruepi GmbH">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="AI Pr&auml;sente - Privacy Policy / Datenschutzrichtlinie">
+    <meta property="og:description" content="Privacy Policy for AI Pr&auml;sente - Birthday &amp; Gift Management App">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/">
+    <title>AI Pr&auml;sente &mdash; Privacy Policy / Datenschutzrichtlinie</title>
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-text: #1d1d1f;
+            --color-text-secondary: #6e6e73;
+            --color-border: #d2d2d7;
+            --color-accent: #0071e3;
+            --color-accent-hover: #0077ed;
+            --color-surface: #f5f5f7;
+            --color-card: #ffffff;
+            --max-width: 780px;
+            --font-stack: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #000000;
+                --color-text: #f5f5f7;
+                --color-text-secondary: #a1a1a6;
+                --color-border: #424245;
+                --color-accent: #2997ff;
+                --color-accent-hover: #2ea0ff;
+                --color-surface: #1c1c1e;
+                --color-card: #1c1c1e;
+            }
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .site-header {
+                background: rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-name {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            padding: 6px 16px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: var(--font-stack);
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--color-accent);
+            color: #ffffff;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: var(--color-surface);
+        }
+
+        /* Main Content */
+        .content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .page-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .page-meta {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            color: var(--color-text);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: var(--color-text);
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--color-text);
+        }
+
+        ul, ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--color-accent-hover);
+            text-decoration: underline;
+        }
+
+        /* Principles Card */
+        .principles {
+            background: var(--color-surface);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin: 24px 0;
+        }
+
+        .principles ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .principles li {
+            padding: 6px 0;
+        }
+
+        .principles li::before {
+            content: none;
+        }
+
+        /* Section divider */
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--color-border);
+            margin: 48px 0 0;
+        }
+
+        /* Not-collected list */
+        .not-collected-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .not-collected-list li {
+            padding: 4px 0;
+            color: var(--color-text-secondary);
+        }
+
+        .not-collected-list li::before {
+            content: "\2717\00a0\00a0";
+            color: var(--color-text-secondary);
+        }
+
+        /* Footer */
+        .site-footer {
+            border-top: 1px solid var(--color-border);
+            padding: 24px;
+            text-align: center;
+            font-size: 0.8125rem;
+            color: var(--color-text-secondary);
+        }
+
+        .site-footer a {
+            color: var(--color-text-secondary);
+        }
+
+        .site-footer a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Language sections */
+        .lang-section {
+            display: none;
+        }
+
+        .lang-section.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .content {
+                padding: 32px 20px 60px;
+            }
+
+            .principles {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <span class="app-name">AI Pr&auml;sente</span>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="switchLang('de')" id="btn-de">Deutsch</button>
+            <button class="lang-btn" onclick="switchLang('en')" id="btn-en">English</button>
+        </div>
+    </div>
+</header>
+
+<main class="content">
+
+    <!-- ==================== DEUTSCH ==================== -->
+    <div class="lang-section active" id="lang-de">
+
+        <h1 class="page-title">Datenschutzrichtlinie</h1>
+        <p class="page-subtitle">AI Pr&auml;sente &mdash; Geburtstage &amp; Geschenke</p>
+        <p class="page-meta">Version 1.0.0 &middot; Stand: 11. M&auml;rz 2026</p>
+
+        <!-- 1. Überblick -->
+        <h2>1. &Uuml;berblick</h2>
+        <p>AI Pr&auml;sente respektiert Ihre Privatsph&auml;re und sch&uuml;tzt Ihre pers&ouml;nlichen Daten. Diese App wurde entwickelt, um Geburtstage und Geschenkideen zu verwalten, ohne unn&ouml;tige Daten zu sammeln oder zu teilen.</p>
+
+        <div class="principles">
+            <ul>
+                <li><strong>Datensparsamkeit:</strong> Wir sammeln nur Daten, die f&uuml;r die App-Funktionalit&auml;t notwendig sind.</li>
+                <li><strong>Transparenz:</strong> Sie wissen jederzeit, welche Daten wir verwenden und wof&uuml;r.</li>
+                <li><strong>Kontrolle:</strong> Sie haben volle Kontrolle &uuml;ber Ihre Daten und k&ouml;nnen diese jederzeit l&ouml;schen.</li>
+                <li><strong>Sicherheit:</strong> Ihre Daten werden verschl&uuml;sselt und sicher gespeichert.</li>
+                <li><strong>Kein Tracking:</strong> Wir verwenden keine Tracking-Tools, Analytics oder Werbedienste.</li>
+            </ul>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 2. Verantwortlicher -->
+        <h2>2. Verantwortlicher</h2>
+        <p><strong>Anbieter:</strong><br>
+        Gruepi GmbH, Goethestra&szlig;e 3, 36304 Alsfeld<br>
+        Gesch&auml;ftsf&uuml;hrer: Hendrik Gr&uuml;ger<br>
+        E-Mail: <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a></p>
+        <p><strong>Kontakt f&uuml;r Datenschutzfragen:</strong> <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a></p>
+
+        <hr class="section-divider">
+
+        <!-- 3. Welche Daten wir verarbeiten -->
+        <h2>3. Welche Daten wir verarbeiten</h2>
+
+        <h3>3.1 Kontakte (iOS-Adressbuch)</h3>
+        <p><strong>Zweck:</strong> Import von Geburtstagsdaten aus Ihren Kontakten.</p>
+        <p><strong>Daten:</strong></p>
+        <ul>
+            <li>Name und Vorname</li>
+            <li>Geburtsdatum (falls vorhanden)</li>
+            <li>Profilbild (falls vorhanden)</li>
+        </ul>
+        <p><strong>Verarbeitung:</strong></p>
+        <ul>
+            <li>Daten werden nur lokal auf Ihrem Ger&auml;t und in Ihrem pers&ouml;nlichen iCloud-Konto gespeichert.</li>
+            <li>Keine &Uuml;bermittlung an Dritte oder Server des Entwicklers.</li>
+        </ul>
+        <p><strong>Ihre Kontrolle:</strong></p>
+        <ul>
+            <li>Sie k&ouml;nnen jederzeit in den iOS-Einstellungen den Zugriff auf Kontakte widerrufen.</li>
+            <li>Sie k&ouml;nnen einzelne Kontakte aus der App entfernen.</li>
+        </ul>
+
+        <h3>3.2 Benutzerdaten (SwiftData)</h3>
+        <p><strong>Zweck:</strong> Speicherung von Geschenkideen, Geschenkhistorie und Erinnerungen.</p>
+        <p><strong>Daten:</strong></p>
+        <ul>
+            <li>Geschenkideen (Titel, Beschreibung, Budget, Links)</li>
+            <li>Geschenkhistorie (was Sie wann wem geschenkt haben)</li>
+            <li>Erinnerungsregeln (wann Sie erinnert werden m&ouml;chten)</li>
+            <li>AI-Suggestion-Feedback (Ihre Bewertung von Geschenkvorschl&auml;gen)</li>
+        </ul>
+        <p><strong>Verarbeitung:</strong></p>
+        <ul>
+            <li>Alle Daten werden lokal auf Ihrem Ger&auml;t gespeichert.</li>
+            <li>Optionaler iCloud-Sync (CloudKit) zur Synchronisation zwischen Ihren Ger&auml;ten.</li>
+            <li>Keine &Uuml;bermittlung an Dritte oder Server des Entwicklers.</li>
+        </ul>
+        <p><strong>Ihre Kontrolle:</strong></p>
+        <ul>
+            <li>Sie k&ouml;nnen alle Daten direkt in der App l&ouml;schen.</li>
+            <li>Sie k&ouml;nnen den iCloud-Sync in den iOS-Einstellungen deaktivieren.</li>
+        </ul>
+
+        <h3>3.3 Benachrichtigungen (Push-Notifications)</h3>
+        <p><strong>Zweck:</strong> Erinnerungen an Geburtstage und Geschenkplanung.</p>
+        <p><strong>Daten:</strong></p>
+        <ul>
+            <li>Keine pers&ouml;nlichen Daten werden f&uuml;r Benachrichtigungen gesammelt.</li>
+            <li>Benachrichtigungen werden lokal auf Ihrem Ger&auml;t generiert.</li>
+        </ul>
+        <p><strong>Ihre Kontrolle:</strong></p>
+        <ul>
+            <li>Sie k&ouml;nnen jederzeit in den iOS-Einstellungen Benachrichtigungen deaktivieren.</li>
+            <li>Sie k&ouml;nnen Erinnerungsregeln in der App anpassen oder l&ouml;schen.</li>
+        </ul>
+
+        <h3>3.4 iCloud-Sync (CloudKit)</h3>
+        <p><strong>Zweck:</strong> Synchronisation Ihrer Daten zwischen mehreren iOS-Ger&auml;ten.</p>
+        <p><strong>Daten:</strong></p>
+        <ul>
+            <li>Alle oben genannten Benutzerdaten werden &uuml;bertragen.</li>
+            <li>Daten werden in Ihrem pers&ouml;nlichen iCloud-Konto verschl&uuml;sselt gespeichert.</li>
+        </ul>
+        <p><strong>Verarbeitung:</strong></p>
+        <ul>
+            <li>&Uuml;bertragung erfolgt direkt zwischen Ihren Ger&auml;ten und iCloud.</li>
+            <li>Der Entwickler hat keinen Zugriff auf Ihre iCloud-Daten.</li>
+        </ul>
+        <p><strong>Ihre Kontrolle:</strong></p>
+        <ul>
+            <li>Sie k&ouml;nnen den iCloud-Sync in den iOS-Einstellungen deaktivieren.</li>
+            <li>Sie k&ouml;nnen Daten jederzeit aus der App l&ouml;schen (dies l&ouml;scht sie auch aus iCloud).</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 4. KI-Funktionen -->
+        <h2>4. KI-Funktionen (Optional)</h2>
+
+        <h3>4.1 Geschenkideen und Geburtstagsnachrichten</h3>
+        <p><strong>Zweck:</strong> Generierung von personalisierten Geschenkideen und Geburtstagsnachrichten.</p>
+        <p><strong>Verarbeitung:</strong></p>
+        <ul>
+            <li>KI-Anfragen enthalten ausschlie&szlig;lich anonymisierte Daten: Geschlecht (lokal abgeleitet), Altersgruppe (z.B. &bdquo;Mitte 30&ldquo;), Beziehungstyp, Sternzeichen, Interessen, Budget-Rahmen, Geschenktitel. Es werden KEINE Namen, Geburtsdaten oder exakten Altersangaben &uuml;bertragen.</li>
+            <li>Anfragen werden &uuml;ber Cloudflare Workers an OpenRouter Inc. (USA) und von dort an Google Gemini (USA) weitergeleitet.</li>
+            <li>KI-Antworten werden nur lokal gespeichert.</li>
+        </ul>
+        <p><strong>Datenschutz:</strong></p>
+        <ul>
+            <li>Keine personenbezogenen Daten (Name, Geburtsdatum, Alter) werden an den KI-Dienst gesendet. Alle Daten sind anonymisiert.</li>
+            <li>KI-Dienste speichern Anfragen m&ouml;glicherweise tempor&auml;r zu Analysezwecken.</li>
+        </ul>
+        <p><strong>Ihre Kontrolle:</strong></p>
+        <ul>
+            <li>KI-Funktionen sind optional und k&ouml;nnen in den Einstellungen deaktiviert werden.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 5. Daten, die wir NICHT sammeln -->
+        <h2>5. Daten, die wir NICHT sammeln</h2>
+        <p>Wir sammeln <strong>keine</strong> der folgenden Daten:</p>
+        <ul class="not-collected-list">
+            <li>Standortdaten</li>
+            <li>Ger&auml;tekennungen (Device IDs, Advertising Identifiers)</li>
+            <li>Nutzungsstatistiken oder Analytics</li>
+            <li>Crash-Reports (werden an Apple &uuml;bermittelt, nicht an den Entwickler)</li>
+            <li>Daten f&uuml;r Werbezwecke</li>
+            <li>Drittanbieter-Cookies oder Tracking-Pixel</li>
+            <li>Gesundheitsdaten</li>
+            <li>Finanzdaten</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 6. Datenübermittlung an Dritte -->
+        <h2>6. Daten&uuml;bermittlung an Dritte</h2>
+        <p>Wir &uuml;bertragen Ihre pers&ouml;nlichen Daten <strong>nicht</strong> an Dritte, au&szlig;er:</p>
+        <ol>
+            <li><strong>iCloud (Apple):</strong> Zur Synchronisation zwischen Ihren Ger&auml;ten (CloudKit).</li>
+            <li><strong>KI-Dienste (Optional):</strong> Cloudflare Workers (Proxy), OpenRouter Inc. (USA), Google Gemini (USA) &mdash; zur Generierung von Geschenkideen (nur anonymisierte Daten).</li>
+        </ol>
+        <p>Beide &Uuml;bertragungen erfolgen nur mit Ihrer ausdr&uuml;cklichen Zustimmung und k&ouml;nnen jederzeit deaktiviert werden.</p>
+        <p><strong>Keine Daten&uuml;bermittlung an:</strong></p>
+        <ul class="not-collected-list">
+            <li>Werbepartner</li>
+            <li>Datenbroker</li>
+            <li>Social-Media-Plattformen</li>
+            <li>Regierungsbeh&ouml;rden (au&szlig;er gesetzlich vorgeschrieben)</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 7. Datensicherheit -->
+        <h2>7. Datensicherheit</h2>
+        <p>Wir treffen angemessene Ma&szlig;nahmen zum Schutz Ihrer Daten:</p>
+        <ul>
+            <li><strong>Lokale Speicherung:</strong> Alle Daten werden verschl&uuml;sselt auf Ihrem Ger&auml;t gespeichert (iOS Data Protection).</li>
+            <li><strong>iCloud-Verschl&uuml;sselung:</strong> iCloud-Daten werden Ende-zu-Ende verschl&uuml;sselt (falls aktiviert).</li>
+            <li><strong>Keine offenen Datenbanken:</strong> Alle Datenzugriffe erfolgen &uuml;ber kontrollierte APIs.</li>
+            <li><strong>Regelm&auml;&szlig;ige Updates:</strong> Wir ver&ouml;ffentlichen Sicherheitsupdates, um bekannte Schwachstellen zu beheben.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 8. Kinder und Jugendliche -->
+        <h2>8. Kinder und Jugendliche</h2>
+        <p>Diese App ist f&uuml;r Personen ab 16 Jahren geeignet. Wir sammeln bewusst keine Daten von Kindern unter 13 Jahren:</p>
+        <ul>
+            <li>Keine Altersverifikation erforderlich.</li>
+            <li>Keine besonderen Schutzmechanismen f&uuml;r Minderj&auml;hrige notwendig.</li>
+            <li>Eltern k&ouml;nnen die App unter Aufsicht nutzen.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 9. Ihre Rechte -->
+        <h2>9. Ihre Rechte</h2>
+        <p>Nach der DSGVO (EU) und geltenden Datenschutzgesetzen haben Sie folgende Rechte:</p>
+
+        <h3>9.1 Recht auf Auskunft</h3>
+        <p>Sie k&ouml;nnen eine &Uuml;bersicht aller &uuml;ber Sie gespeicherten Daten anfordern.</p>
+        <p><strong>Wie:</strong> Senden Sie eine E-Mail an <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a> mit dem Betreff &bdquo;Datenauskunft&ldquo;.</p>
+
+        <h3>9.2 Recht auf L&ouml;schung</h3>
+        <p>Sie k&ouml;nnen verlangen, dass alle Ihre Daten gel&ouml;scht werden.</p>
+        <p><strong>Wie:</strong></p>
+        <ul>
+            <li>In der App: Alle Daten &uuml;ber &bdquo;Einstellungen &rarr; Daten l&ouml;schen&ldquo; entfernen.</li>
+            <li>Per E-Mail: <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a> mit dem Betreff &bdquo;Datenl&ouml;schung&ldquo;.</li>
+        </ul>
+
+        <h3>9.3 Recht auf Berichtigung</h3>
+        <p>Sie k&ouml;nnen falsche Daten korrigieren lassen.</p>
+        <p><strong>Wie:</strong> In der App direkt &auml;ndern oder per E-Mail an <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a>.</p>
+
+        <h3>9.4 Recht auf Daten&uuml;bertragbarkeit</h3>
+        <p>Sie k&ouml;nnen alle Ihre Daten in einem maschinenlesbaren Format anfordern.</p>
+        <p><strong>Wie:</strong> Senden Sie eine E-Mail an <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a> mit dem Betreff &bdquo;Datenexport&ldquo;.</p>
+
+        <h3>9.5 Recht auf Widerruf der Einwilligung</h3>
+        <p>Sie k&ouml;nnen Ihre Einwilligung zur Datenverarbeitung jederzeit widerrufen.</p>
+        <p><strong>Wie:</strong></p>
+        <ul>
+            <li>In den iOS-Einstellungen: Kontakte, Benachrichtigungen, iCloud deaktivieren.</li>
+            <li>In der App: KI-Funktionen deaktivieren.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 10. Datenretention -->
+        <h2>10. Datenretention</h2>
+        <p><strong>Wie lange werden Ihre Daten gespeichert?</strong></p>
+        <ul>
+            <li><strong>Kontakte:</strong> Solange Sie die App nutzen oder Kontakte in der App speichern.</li>
+            <li><strong>Geschenkdaten:</strong> Solange Sie die App nutzen oder die Daten nicht manuell l&ouml;schen.</li>
+            <li><strong>Erinnerungen:</strong> Solange Sie die App nutzen oder die Regeln nicht l&ouml;schen.</li>
+            <li><strong>KI-Feedback:</strong> Solange Sie die App nutzen (f&uuml;r kontinuierliche Verbesserung der KI-Empfehlungen).</li>
+        </ul>
+        <p><strong>Automatische L&ouml;schung:</strong></p>
+        <ul>
+            <li>Es gibt keine automatische L&ouml;schung Ihrer Daten.</li>
+            <li>Bei Deinstallation der App bleiben Daten in iCloud erhalten (falls Sync aktiv).</li>
+            <li>Bei Deinstallation ohne iCloud-Sync werden alle lokalen Daten gel&ouml;scht.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 11. Änderungen -->
+        <h2>11. &Auml;nderungen an dieser Datenschutzrichtlinie</h2>
+        <p>Wir behalten uns vor, diese Datenschutzrichtlinie anzupassen:</p>
+        <ul>
+            <li>Wesentliche &Auml;nderungen werden in der App angezeigt.</li>
+            <li>Die aktualisierte Version wird hier dokumentiert.</li>
+            <li>Sie werden per E-Mail informiert (falls Sie einen Account bei App Store Connect haben).</li>
+        </ul>
+        <p><strong>Letzte Aktualisierung:</strong> 11. M&auml;rz 2026</p>
+
+        <hr class="section-divider">
+
+        <!-- 12. Kontakt -->
+        <h2>12. Kontakt</h2>
+        <p>Bei Fragen zu dieser Datenschutzrichtlinie oder Ihren Datenrechten kontaktieren Sie uns:</p>
+        <ul>
+            <li><strong>E-Mail:</strong> <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a></li>
+            <li><strong>GitHub Issues:</strong> <a href="https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues">github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues</a></li>
+            <li><strong>Sprache:</strong> Deutsch oder Englisch</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 13. Anhänge -->
+        <h2>13. Anh&auml;nge</h2>
+
+        <h3>13.1 iOS-Settings f&uuml;r Datenschutz</h3>
+        <p>Um Ihre Privatsph&auml;re zu sch&uuml;tzen, &uuml;berpr&uuml;fen Sie folgende Einstellungen:</p>
+        <h4>Einstellungen &rarr; Datenschutz &amp; Sicherheit:</h4>
+        <ul>
+            <li>Kontakte: Pr&uuml;fen, ob AI Pr&auml;sente Zugriff hat (einmalige Abfrage beim ersten Start).</li>
+            <li>Benachrichtigungen: AI Pr&auml;sente-Benachrichtigungen anpassen oder deaktivieren.</li>
+        </ul>
+        <h4>Einstellungen &rarr; [Ihr Name] &rarr; iCloud:</h4>
+        <ul>
+            <li>iCloud Drive: AI Pr&auml;sente-Daten k&ouml;nnen deaktiviert werden.</li>
+        </ul>
+
+        <h3>13.2 App-Settings f&uuml;r Datenschutz</h3>
+        <p>In der App unter &bdquo;Einstellungen&ldquo; k&ouml;nnen Sie:</p>
+        <ul>
+            <li>KI-Funktionen aktivieren/deaktivieren</li>
+            <li>Alle lokalen Daten l&ouml;schen</li>
+        </ul>
+
+        <p style="margin-top: 48px; text-align: center; color: var(--color-text-secondary);"><strong>Vielen Dank f&uuml;r Ihr Vertrauen!</strong></p>
+
+    </div>
+
+    <!-- ==================== ENGLISH ==================== -->
+    <div class="lang-section" id="lang-en">
+
+        <h1 class="page-title">Privacy Policy</h1>
+        <p class="page-subtitle">AI Pr&auml;sente &mdash; Birthdays &amp; Gifts</p>
+        <p class="page-meta">Version 1.0.0 &middot; Last updated: March 11, 2026</p>
+
+        <!-- 1. Overview -->
+        <h2>1. Overview</h2>
+        <p>AI Pr&auml;sente respects your privacy and protects your personal data. This app is designed to manage birthdays and gift ideas without collecting unnecessary data or sharing it with third parties.</p>
+
+        <div class="principles">
+            <ul>
+                <li><strong>Data Minimization:</strong> We only collect data that is necessary for the app's functionality.</li>
+                <li><strong>Transparency:</strong> You always know what data we use and for what purpose.</li>
+                <li><strong>Control:</strong> You have full control over your data and can delete it at any time.</li>
+                <li><strong>Security:</strong> Your data is encrypted and stored securely.</li>
+                <li><strong>No Tracking:</strong> We do not use tracking tools, analytics, or advertising services.</li>
+            </ul>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 2. Data Controller -->
+        <h2>2. Data Controller</h2>
+        <p><strong>Provider:</strong><br>
+        Gruepi GmbH, Goethestra&szlig;e 3, 36304 Alsfeld, Germany<br>
+        Managing Director: Hendrik Gr&uuml;ger<br>
+        Email: <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a></p>
+        <p><strong>Contact for privacy questions:</strong> <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a></p>
+
+        <hr class="section-divider">
+
+        <!-- 3. Data We Process -->
+        <h2>3. Data We Process</h2>
+
+        <h3>3.1 Contacts (iOS Address Book)</h3>
+        <p><strong>Purpose:</strong> Import birthday data from your contacts.</p>
+        <p><strong>Data:</strong></p>
+        <ul>
+            <li>First and last name</li>
+            <li>Date of birth (if available)</li>
+            <li>Profile picture (if available)</li>
+        </ul>
+        <p><strong>Processing:</strong></p>
+        <ul>
+            <li>Data is stored only locally on your device and in your personal iCloud account.</li>
+            <li>No transmission to third parties or developer servers.</li>
+        </ul>
+        <p><strong>Your Control:</strong></p>
+        <ul>
+            <li>You can revoke contact access at any time in iOS Settings.</li>
+            <li>You can remove individual contacts from the app.</li>
+        </ul>
+
+        <h3>3.2 User Data (SwiftData)</h3>
+        <p><strong>Purpose:</strong> Storing gift ideas, gift history, and reminders.</p>
+        <p><strong>Data:</strong></p>
+        <ul>
+            <li>Gift ideas (title, description, budget, links)</li>
+            <li>Gift history (what you gave to whom and when)</li>
+            <li>Reminder rules (when you want to be reminded)</li>
+            <li>AI suggestion feedback (your rating of gift suggestions)</li>
+        </ul>
+        <p><strong>Processing:</strong></p>
+        <ul>
+            <li>All data is stored locally on your device.</li>
+            <li>Optional iCloud sync (CloudKit) for syncing between your devices.</li>
+            <li>No transmission to third parties or developer servers.</li>
+        </ul>
+        <p><strong>Your Control:</strong></p>
+        <ul>
+            <li>You can delete all data directly in the app.</li>
+            <li>You can disable iCloud sync in iOS Settings.</li>
+        </ul>
+
+        <h3>3.3 Notifications (Push Notifications)</h3>
+        <p><strong>Purpose:</strong> Reminders for birthdays and gift planning.</p>
+        <p><strong>Data:</strong></p>
+        <ul>
+            <li>No personal data is collected for notifications.</li>
+            <li>Notifications are generated locally on your device.</li>
+        </ul>
+        <p><strong>Your Control:</strong></p>
+        <ul>
+            <li>You can disable notifications at any time in iOS Settings.</li>
+            <li>You can adjust or delete reminder rules in the app.</li>
+        </ul>
+
+        <h3>3.4 iCloud Sync (CloudKit)</h3>
+        <p><strong>Purpose:</strong> Synchronization of your data between multiple iOS devices.</p>
+        <p><strong>Data:</strong></p>
+        <ul>
+            <li>All user data mentioned above is transferred.</li>
+            <li>Data is stored encrypted in your personal iCloud account.</li>
+        </ul>
+        <p><strong>Processing:</strong></p>
+        <ul>
+            <li>Transmission occurs directly between your devices and iCloud.</li>
+            <li>The developer has no access to your iCloud data.</li>
+        </ul>
+        <p><strong>Your Control:</strong></p>
+        <ul>
+            <li>You can disable iCloud sync in iOS Settings.</li>
+            <li>You can delete data from the app at any time (this also deletes it from iCloud).</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 4. AI Features -->
+        <h2>4. AI Features (Optional)</h2>
+
+        <h3>4.1 Gift Ideas and Birthday Messages</h3>
+        <p><strong>Purpose:</strong> Generation of personalized gift ideas and birthday messages.</p>
+        <p><strong>Processing:</strong></p>
+        <ul>
+            <li>AI requests contain only anonymized data: gender (locally inferred), age group (e.g. "mid 30s"), relationship type, zodiac sign, interests, budget range, gift titles. NO names, birth dates, or exact ages are transmitted.</li>
+            <li>Requests are routed through Cloudflare Workers to OpenRouter Inc. (USA) and then to Google Gemini (USA).</li>
+            <li>AI responses are stored only locally.</li>
+        </ul>
+        <p><strong>Privacy:</strong></p>
+        <ul>
+            <li>No personally identifiable information (name, birth date, age) is sent to the AI service. All data is anonymized.</li>
+            <li>AI services may store requests temporarily for analytical purposes.</li>
+        </ul>
+        <p><strong>Your Control:</strong></p>
+        <ul>
+            <li>AI features are optional and can be disabled in settings.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 5. Data We Do NOT Collect -->
+        <h2>5. Data We Do NOT Collect</h2>
+        <p>We do <strong>NOT</strong> collect any of the following data:</p>
+        <ul class="not-collected-list">
+            <li>Location data</li>
+            <li>Device identifiers (Device IDs, Advertising Identifiers)</li>
+            <li>Usage statistics or analytics</li>
+            <li>Crash reports (sent to Apple, not to the developer)</li>
+            <li>Data for advertising purposes</li>
+            <li>Third-party cookies or tracking pixels</li>
+            <li>Health data</li>
+            <li>Financial data</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 6. Data Transmission to Third Parties -->
+        <h2>6. Data Transmission to Third Parties</h2>
+        <p>We do <strong>NOT</strong> transmit your personal data to third parties, except:</p>
+        <ol>
+            <li><strong>iCloud (Apple):</strong> For synchronization between your devices (CloudKit).</li>
+            <li><strong>AI Services (Optional):</strong> Cloudflare Workers (proxy), OpenRouter Inc. (USA), Google Gemini (USA) &mdash; for generating gift ideas (anonymized data only).</li>
+        </ol>
+        <p>Both transmissions occur only with your explicit consent and can be disabled at any time.</p>
+        <p><strong>No data transmission to:</strong></p>
+        <ul class="not-collected-list">
+            <li>Advertising partners</li>
+            <li>Data brokers</li>
+            <li>Social media platforms</li>
+            <li>Government agencies (except as required by law)</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 7. Data Security -->
+        <h2>7. Data Security</h2>
+        <p>We take appropriate measures to protect your data:</p>
+        <ul>
+            <li><strong>Local Storage:</strong> All data is encrypted on your device (iOS Data Protection).</li>
+            <li><strong>iCloud Encryption:</strong> iCloud data is end-to-end encrypted (if enabled).</li>
+            <li><strong>No Open Databases:</strong> All data access occurs through controlled APIs.</li>
+            <li><strong>Regular Updates:</strong> We publish security updates to fix known vulnerabilities.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 8. Children and Minors -->
+        <h2>8. Children and Minors</h2>
+        <p>This app is suitable for persons aged 16 and above. We intentionally do not collect data from children under 13:</p>
+        <ul>
+            <li>No age verification required.</li>
+            <li>No special protection mechanisms for minors necessary.</li>
+            <li>Parents can use the app under supervision.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 9. Your Rights -->
+        <h2>9. Your Rights</h2>
+        <p>Under the GDPR (EU) and applicable privacy laws, you have the following rights:</p>
+
+        <h3>9.1 Right to Information</h3>
+        <p>You can request an overview of all data stored about you.</p>
+        <p><strong>How:</strong> Send an email to <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a> with the subject "Data Access Request".</p>
+
+        <h3>9.2 Right to Deletion</h3>
+        <p>You can request that all your data be deleted.</p>
+        <p><strong>How:</strong></p>
+        <ul>
+            <li>In the app: Remove all data via "Settings &rarr; Delete Data".</li>
+            <li>By email: <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a> with the subject "Data Deletion Request".</li>
+        </ul>
+
+        <h3>9.3 Right to Correction</h3>
+        <p>You can have incorrect data corrected.</p>
+        <p><strong>How:</strong> Edit directly in the app or email <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a>.</p>
+
+        <h3>9.4 Right to Data Portability</h3>
+        <p>You can request all your data in a machine-readable format.</p>
+        <p><strong>How:</strong> Send an email to <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a> with the subject "Data Export Request".</p>
+
+        <h3>9.5 Right to Withdraw Consent</h3>
+        <p>You can withdraw your consent to data processing at any time.</p>
+        <p><strong>How:</strong></p>
+        <ul>
+            <li>In iOS Settings: Disable Contacts, Notifications, iCloud.</li>
+            <li>In the app: Disable AI features.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 10. Data Retention -->
+        <h2>10. Data Retention</h2>
+        <p><strong>How long is your data stored?</strong></p>
+        <ul>
+            <li><strong>Contacts:</strong> As long as you use the app or store contacts in the app.</li>
+            <li><strong>Gift Data:</strong> As long as you use the app or don't manually delete the data.</li>
+            <li><strong>Reminders:</strong> As long as you use the app or don't delete the rules.</li>
+            <li><strong>AI Feedback:</strong> As long as you use the app (for continuous improvement of AI recommendations).</li>
+        </ul>
+        <p><strong>Automatic Deletion:</strong></p>
+        <ul>
+            <li>There is no automatic deletion of your data.</li>
+            <li>When you uninstall the app, data remains in iCloud (if sync is enabled).</li>
+            <li>When you uninstall without iCloud sync, all local data is deleted.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 11. Changes -->
+        <h2>11. Changes to This Privacy Policy</h2>
+        <p>We reserve the right to adapt this privacy policy:</p>
+        <ul>
+            <li>Significant changes will be displayed in the app.</li>
+            <li>The updated version will be documented here.</li>
+            <li>You will be informed by email (if you have an account on App Store Connect).</li>
+        </ul>
+        <p><strong>Last Updated:</strong> March 11, 2026</p>
+
+        <hr class="section-divider">
+
+        <!-- 12. Contact -->
+        <h2>12. Contact</h2>
+        <p>For questions about this privacy policy or your data rights, contact us:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a></li>
+            <li><strong>GitHub Issues:</strong> <a href="https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues">github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues</a></li>
+            <li><strong>Language:</strong> English or German</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- 13. Appendices -->
+        <h2>13. Appendices</h2>
+
+        <h3>13.1 iOS Settings for Privacy</h3>
+        <p>To protect your privacy, check the following settings:</p>
+        <h4>Settings &rarr; Privacy &amp; Security:</h4>
+        <ul>
+            <li>Contacts: Check if AI Pr&auml;sente has access (one-time prompt on first launch).</li>
+            <li>Notifications: Adjust or disable AI Pr&auml;sente notifications.</li>
+        </ul>
+        <h4>Settings &rarr; [Your Name] &rarr; iCloud:</h4>
+        <ul>
+            <li>iCloud Drive: AI Pr&auml;sente data can be disabled here.</li>
+        </ul>
+
+        <h3>13.2 App Settings for Privacy</h3>
+        <p>In the app under "Settings", you can:</p>
+        <ul>
+            <li>Enable/disable AI features</li>
+            <li>Delete all local data</li>
+        </ul>
+
+        <p style="margin-top: 48px; text-align: center; color: var(--color-text-secondary);"><strong>Thank you for your trust!</strong></p>
+
+    </div>
+
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 Gruepi GmbH &middot; <a href="mailto:hendrik@gruepi.de">hendrik@gruepi.de</a></p>
+</footer>
+
+<script>
+    function switchLang(lang) {
+        document.querySelectorAll('.lang-section').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        document.querySelectorAll('.lang-btn').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        document.getElementById('lang-' + lang).classList.add('active');
+        document.getElementById('btn-' + lang).classList.add('active');
+        document.documentElement.lang = lang === 'de' ? 'de' : 'en';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Auto-detect language from browser
+    (function() {
+        var userLang = navigator.language || navigator.userLanguage;
+        if (userLang && !userLang.startsWith('de')) {
+            switchLang('en');
+        }
+    })();
+</script>
+
+</body>
+</html>
