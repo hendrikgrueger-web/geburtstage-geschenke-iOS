@@ -417,24 +417,31 @@ struct PersonDetailView: View {
         }
         .sheet(isPresented: $showingAddGiftIdea) {
             AddGiftIdeaSheet(person: person)
+                .presentationDetents([.medium, .large])
         }
         .sheet(item: $showingEditGiftIdea) { idea in
             EditGiftIdeaSheet(person: person, idea: idea)
+                .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $showingAddGiftHistory) {
             AddGiftHistorySheet(person: person)
+                .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $showingAddReceivedGift) {
             AddGiftHistorySheet(person: person, direction: .received)
+                .presentationDetents([.medium, .large])
         }
         .sheet(item: $showingEditGiftHistory) { history in
             EditGiftHistorySheet(person: person, history: history)
+                .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $showingAISuggestions) {
             AIGiftSuggestionsSheet(person: person)
+                .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $showingBirthdayMessage) {
             AIBirthdayMessageSheet(person: person)
+                .presentationDetents([.medium, .large])
         }
         .alert("Alle als verschenkt markieren?", isPresented: $showingMarkAllAsGivenConfirmation) {
             Button("Abbrechen", role: .cancel) { }
@@ -494,6 +501,7 @@ struct PersonDetailView: View {
                         Label("Neue Idee", systemImage: "plus")
                     }
                     .accessibleButton(label: String(localized: "Neue Idee"), hint: String(localized: "Fügt eine neue Geschenkidee hinzu"))
+                    .keyboardShortcut("i", modifiers: .command)
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
@@ -1012,6 +1020,12 @@ struct PersonDetailView: View {
 
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController {
+            // iPad erfordert sourceView/sourceRect für Popover — sonst Crash
+            if let popover = activityVC.popoverPresentationController {
+                popover.sourceView = rootViewController.view
+                popover.sourceRect = CGRect(x: rootViewController.view.bounds.midX, y: rootViewController.view.bounds.midY, width: 0, height: 0)
+                popover.permittedArrowDirections = []
+            }
             rootViewController.present(activityVC, animated: true)
         }
 

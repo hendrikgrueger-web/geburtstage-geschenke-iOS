@@ -8,7 +8,7 @@ struct LegalView: View {
                     // Anbieter
                     LegalSection(
                         title: "Anbieter",
-                        content: "Gruepi GmbH\nRennekamp 19\n59494 Soest\n\nVertreten durch: Hendrik Grüger, Sebastian Mause\nE-Mail: hendrik@gruepi.de\n\nRegistergericht: Amtsgericht Arnsberg\nRegisternummer: HRB 12564\nUSt-IdNr.: DE322907053"
+                        content: "Gruepi GmbH\nGoethestraße 3\n36304 Alsfeld\n\nVertreten durch: Hendrik Grüger, Sebastian Mause\nE-Mail: hendrik@gruepi.de\n\nRegistergericht: Amtsgericht Gießen\nRegisternummer: HRB 12564\nUSt-IdNr.: DE322907053"
                     )
 
                     // Haftungsausschluss

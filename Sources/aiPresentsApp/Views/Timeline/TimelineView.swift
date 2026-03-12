@@ -13,7 +13,7 @@ struct TimelineView: View {
     @State private var showingAddGiftIdeaFor: PersonRef?
     @State private var quickAddPerson: PersonRef?
     @State private var showingAISuggestionsFor: PersonRef?
-    @State private var selectedPerson: PersonRef?
+    @Binding var selectedPerson: PersonRef?
     @State private var isRefreshing = false
     @State private var showingAIChat = false
 
@@ -57,9 +57,6 @@ struct TimelineView: View {
         }
         .navigationTitle("Geburtstage")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(item: $selectedPerson) { person in
-            PersonDetailView(person: person)
-        }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
@@ -68,6 +65,7 @@ struct TimelineView: View {
                     Image(systemName: "gearshape")
                 }
                 .accessibilityLabel(String(localized: "Einstellungen"))
+                .keyboardShortcut(",", modifiers: .command)
             }
 
             ToolbarItem(placement: .topBarTrailing) {
@@ -106,27 +104,33 @@ struct TimelineView: View {
                         Image(systemName: "person.badge.plus")
                     }
                     .accessibilityLabel(String(localized: "Kontakte importieren"))
+                    .keyboardShortcut("n", modifiers: .command)
                 }
             }
         }
         .sheet(item: $quickAddPerson) { person in
             AddGiftIdeaSheet(person: person)
+                .presentationDetents([.medium, .large])
         }
         .sheet(item: $showingAddGiftIdeaFor) { person in
             AddGiftIdeaSheet(person: person)
+                .presentationDetents([.medium, .large])
         }
         .sheet(item: $showingAISuggestionsFor) { person in
             AIGiftSuggestionsSheet(person: person)
+                .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $showingSettings) {
             NavigationStack {
                 SettingsView()
             }
+            .presentationDetents([.large])
         }
         .sheet(isPresented: $showingAIChat) {
             AIChatView(onPersonSelected: { person in
                 selectedPerson = person
             })
+            .presentationDetents([.large])
         }
         .onChange(of: screenshotShowChat) { _, newValue in
             if newValue {
@@ -320,6 +324,7 @@ struct TimelineView: View {
             .clipShape(Capsule())
         }
         .buttonStyle(.plain)
+        .hoverEffect(.lift)
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
         .accessibilityLabel(String(localized: "Suche oder KI-Assistent öffnen"))

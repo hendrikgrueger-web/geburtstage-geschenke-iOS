@@ -6,6 +6,10 @@ struct ShareSheetView: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> UIActivityViewController {
         let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        // iPad erfordert popover-Konfiguration — sonst Crash
+        if let popover = controller.popoverPresentationController {
+            popover.permittedArrowDirections = .any
+        }
         return controller
     }
 

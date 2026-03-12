@@ -89,6 +89,7 @@ struct GiftHistoryRow: View {
             }
         }
         .padding(.vertical, 2)
+        .hoverEffect(.highlight)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(String(localized: "\(history.giftDirection == .given ? String(localized: "Verschenkt") : String(localized: "Erhalten")): \(history.title), \(history.category), \(history.year)"))
         .accessibilityHint(String(localized: "Geschenk vermerkt im Jahr \(history.year)"))

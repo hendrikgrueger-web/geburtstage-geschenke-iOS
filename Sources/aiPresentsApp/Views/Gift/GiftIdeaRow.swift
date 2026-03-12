@@ -54,6 +54,7 @@ struct GiftIdeaRow: View {
             }
         }
         .padding(.vertical, 2)
+        .hoverEffect(.highlight)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityHint(String(localized: "Status: \(statusText). Tap zum Bearbeiten"))

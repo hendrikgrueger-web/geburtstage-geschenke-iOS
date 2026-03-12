@@ -52,6 +52,7 @@ struct BirthdayRow: View {
         .accessibilityLabel(accessibilityLabel)
         .accessibilityHint(String(localized: "Tap für Details und Geschenkideen"))
         .contentShape(Rectangle())
+        .hoverEffect(.highlight)
         .onAppear {
             if daysUntilBirthday <= 7 {
                 isAnimating = true
