@@ -11,13 +11,17 @@ iOS-App für Geburtstags- und Geschenkeverwaltung. Generiert von Open Claw (n8n/
 - **Daten:** SwiftData + iCloud Sync (CloudKit)
 - **KI:** OpenRouter API → Google Gemini 3.1 Flash Lite (Cloud, opt-in, DSGVO-konform, vollständig anonymisiert)
 - **Widget:** WidgetKit Birthday Widget (Medium + Large) mit Deep-Linking
-- **Version:** 1.0.0 (Build 14)
-- **Target:** iPhone 17 Pro Simulator / iOS 26+
+- **Version:** 1.0.0 (Build 18)
+- **Target:** iPhone + iPad / iOS 26+
+- **iPad:** NavigationSplitView (zwei Spalten: Sidebar + Detail), alle 4 Orientierungen
 
 ## Build
 
 ```bash
+# iPhone
 xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
+# iPad
+xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp -destination 'platform=iOS Simulator,name=iPad Pro 13-inch (M5)' build
 ```
 
 ## Projektstruktur
@@ -194,6 +198,15 @@ wrangler deploy
 - Alert `message:` Closures müssen IMMER einen View liefern — Logic in computed property auslagern
 - `.sheet()` Modifier NICHT an Sub-Views in List/Section anhängen → SwiftUI dismisst sofort bei Re-Render. Immer auf Top-Level `body` hängen.
 
+### iPad-Patterns
+- **NavigationSplitView** in ContentView — `selectedPerson: PersonRef?` als `@State` in ContentView, `@Binding` in TimelineView
+- **Kein `.navigationDestination`** — Detail wird direkt in der detail-Spalte gezeigt
+- **UIActivityViewController iPad-Fix:** `popoverPresentationController.sourceView/sourceRect` MUSS gesetzt werden (sonst Crash)
+- **ShareSheetView:** `popoverPresentationController.permittedArrowDirections = .any` für iPad-Kompatibilität
+- **Sheet-Detents:** `.presentationDetents([.medium, .large])` auf allen Add/Edit-Sheets
+- **Hover-Effekte:** `.hoverEffect(.highlight)` auf BirthdayRow, GiftIdeaRow, GiftHistoryRow; `.hoverEffect(.lift)` auf SmartSearchBar
+- **Keyboard Shortcuts:** Cmd+, (Settings), Cmd+N (Kontakte), Cmd+I (Neue Idee), Cmd+F (AI-Chat)
+
 ### iOS 26 Design-Compliance (Pflicht)
 - `.foregroundStyle()` statt `.foregroundColor()` (deprecated seit iOS 17)
 - `.clipShape(.rect(cornerRadius:))` statt `.cornerRadius()` (deprecated seit iOS 17)
@@ -248,7 +261,10 @@ try context.delete(model: PersonRef.self)
 
 ## UI-Architektur
 
-- **Kein TabView** — nur ein Screen (TimelineView) mit Settings als Sheet (Gear-Icon links oben)
+- **Kein TabView** — NavigationSplitView (iPad: Sidebar + Detail, iPhone: kollabiert zu NavigationStack)
+- **ContentView:** `NavigationSplitView(columnVisibility: .doubleColumn)` mit `selectedPerson` als State. Sidebar-Spalte 320–440pt Breite. Empty Detail State mit Gift-Icon.
+- **iPad-spezifisch:** `.balanced` Style, alle 4 Orientierungen, `.hoverEffect(.highlight)` auf Rows, `.hoverEffect(.lift)` auf Search Bar, `.presentationDetents([.medium, .large])` auf Sheets, Keyboard Shortcuts (Cmd+, Cmd+N, Cmd+I, Cmd+F)
+- **UIRequiresFullScreen: false** — erlaubt Split View + Slide Over auf iPad
 - **TimelineView:** Stats-Leiste → Suchfeld → chronologische Liste ALLER Geburtstage
 - **BirthdayRow:** Avatar, Name, Countdown, Geschenk-Status-Badge (skipGift/gekauft/geplant/Ideen)
 - **Swipe-Actions:** Links-Swipe auf BirthdayRow → "Kein Geschenk" Toggle
