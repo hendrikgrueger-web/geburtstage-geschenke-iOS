@@ -39,6 +39,24 @@
             "state": "new",
             "value": "BirthdayWidgetExtension"
           }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BirthdayWidgetExtension"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BirthdayWidgetExtension"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BirthdayWidgetExtension"
+          }
         }
       }
     }
