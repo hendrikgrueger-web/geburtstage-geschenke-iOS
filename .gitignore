@@ -114,3 +114,4 @@ Proxy/.dev.vars
 # Secrets — niemals committen!
 Config/Secrets.xcconfig
 App/Secrets.xcconfig
+Screenshots/

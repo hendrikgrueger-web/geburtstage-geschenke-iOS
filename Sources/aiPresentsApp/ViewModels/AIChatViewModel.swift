@@ -418,7 +418,7 @@ final class AIChatViewModel {
     // MARK: - Welcome Chips
 
     var welcomeChips: [(label: String, message: String)] {
-        let isGerman = Locale.current.language.languageCode?.identifier == "de"
+        let lang = Locale.current.language.languageCode?.identifier ?? "en"
         var chips: [(String, String)] = []
 
         // Nächster Geburtstag
@@ -431,32 +431,62 @@ final class AIChatViewModel {
             .sorted(by: { $0.1 < $1.1 })
             .first {
             let name = nextPerson.0.displayName
-            chips.append((
-                isGerman ? "Wann hat \(name) Geburtstag?" : "When is \(name)'s birthday?",
-                isGerman ? "Wann hat \(name) Geburtstag?" : "When is \(name)'s birthday?"
-            ))
+            let label: String = switch lang {
+            case "de": "Wann hat \(name) Geburtstag?"
+            case "fr": "C'est quand l'anniversaire de \(name) ?"
+            case "es": "¿Cuándo cumple años \(name)?"
+            default: "When is \(name)'s birthday?"
+            }
+            chips.append((label, label))
         }
 
         // Geschenkidee vorschlagen
         if let person = people.first {
-            chips.append((
-                isGerman ? "Idee für \(person.displayName)" : "Idea for \(person.displayName)",
-                isGerman ? "Schlage Geschenke für \(person.displayName) vor" : "Suggest gifts for \(person.displayName)"
-            ))
+            let label: String = switch lang {
+            case "de": "Idee für \(person.displayName)"
+            case "fr": "Idée pour \(person.displayName)"
+            case "es": "Idea para \(person.displayName)"
+            default: "Idea for \(person.displayName)"
+            }
+            let message: String = switch lang {
+            case "de": "Schlage Geschenke für \(person.displayName) vor"
+            case "fr": "Suggère des cadeaux pour \(person.displayName)"
+            case "es": "Sugiere regalos para \(person.displayName)"
+            default: "Suggest gifts for \(person.displayName)"
+            }
+            chips.append((label, message))
         }
 
         // Allgemeine Chips
-        chips.append((
-            isGerman ? "Wer hat bald Geburtstag?" : "Who has a birthday soon?",
-            isGerman ? "Wer hat in den nächsten 7 Tagen Geburtstag?" : "Who has a birthday in the next 7 days?"
-        ))
+        let soonLabel: String = switch lang {
+        case "de": "Wer hat bald Geburtstag?"
+        case "fr": "Qui fête bientôt son anniversaire ?"
+        case "es": "¿Quién cumple años pronto?"
+        default: "Who has a birthday soon?"
+        }
+        let soonMessage: String = switch lang {
+        case "de": "Wer hat in den nächsten 7 Tagen Geburtstag?"
+        case "fr": "Qui a son anniversaire dans les 7 prochains jours ?"
+        case "es": "¿Quién cumple años en los próximos 7 días?"
+        default: "Who has a birthday in the next 7 days?"
+        }
+        chips.append((soonLabel, soonMessage))
 
         // Geschenkidee-Eintrag Beispiel
         if let person = people.first {
-            chips.append((
-                isGerman ? "Kinogutschein für \(person.displayName) eintragen" : "Add cinema voucher for \(person.displayName)",
-                isGerman ? "Trag einen Kinogutschein als Geschenkidee für \(person.displayName) ein" : "Add a cinema voucher as a gift idea for \(person.displayName)"
-            ))
+            let label: String = switch lang {
+            case "de": "Kinogutschein für \(person.displayName) eintragen"
+            case "fr": "Ajouter un bon cinéma pour \(person.displayName)"
+            case "es": "Añadir vale de cine para \(person.displayName)"
+            default: "Add cinema voucher for \(person.displayName)"
+            }
+            let message: String = switch lang {
+            case "de": "Trag einen Kinogutschein als Geschenkidee für \(person.displayName) ein"
+            case "fr": "Ajoute un bon cinéma comme idée cadeau pour \(person.displayName)"
+            case "es": "Añade un vale de cine como idea de regalo para \(person.displayName)"
+            default: "Add a cinema voucher as a gift idea for \(person.displayName)"
+            }
+            chips.append((label, message))
         }
 
         return chips

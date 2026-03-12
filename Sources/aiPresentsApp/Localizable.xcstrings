@@ -5413,7 +5413,26 @@
       }
     },
     "Hallo!": {
-      "localizations": {}
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hello!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonjour !"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Hola!"
+          }
+        }
+      }
     },
     "Hendrik Grüger\nhendrik@gruepi.de\n\nDiese App ist ein privates Projekt und kein kommerzielles Angebot.": {
       "extractionState": "stale",
@@ -5647,7 +5666,26 @@
       }
     },
     "Ich helfe dir bei Geschenkideen und Geburtstagen.": {
-      "localizations": {}
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I help you with gift ideas and birthdays."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je t'aide à trouver des idées cadeaux et à gérer les anniversaires."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te ayudo con ideas de regalo y cumpleaños."
+          }
+        }
+      }
     },
     "iCloud Sync": {
       "localizations": {

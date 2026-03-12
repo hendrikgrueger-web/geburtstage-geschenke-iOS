@@ -41,7 +41,7 @@ struct AIChatView: View {
                     onSend: sendMessage,
                     onMicTap: toggleRecording,
                     isRecording: isRecording,
-                    autoFocus: true
+                    autoFocus: !ProcessInfo.processInfo.arguments.contains("--show-chat")
                 )
             }
             .navigationTitle("KI-Assistent")
