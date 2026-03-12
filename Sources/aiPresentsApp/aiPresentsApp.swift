@@ -131,6 +131,11 @@ struct aiPresentsApp: App {
                 }
             }
             .environmentObject(reminderManager)
+            .overlay {
+                if AppLockManager.shared.isLocked {
+                    AppLockView()
+                }
+            }
             .onOpenURL { url in
                 handleDeepLink(url)
             }
@@ -139,6 +144,7 @@ struct aiPresentsApp: App {
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .background {
                 WidgetDataService.shared.updateWidgetData(from: modelContainer.mainContext)
+                AppLockManager.shared.lockIfEnabled()
             }
         }
     }

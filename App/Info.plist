@@ -30,13 +30,15 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>17</string>
+	<string>18</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSContactsUsageDescription</key>
 	<string>Diese App benötigt Zugriff auf deine Kontakte, um Geburtstage von Freunden und Familie zu importieren.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Face ID schützt deine Geschenkideen, damit niemand sie versehentlich sieht.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Der KI-Assistent nutzt das Mikrofon für die Spracheingabe, damit du Geschenkideen und Fragen per Stimme eingeben kannst.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>

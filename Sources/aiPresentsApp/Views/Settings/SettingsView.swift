@@ -182,6 +182,21 @@ struct SettingsView: View {
                     Text("Die Änderung wird beim nächsten App-Start wirksam.")
                 }
 
+                if AppLockManager.shared.isBiometricAvailable {
+                    Section {
+                        Toggle(isOn: Bindable(AppLockManager.shared).isEnabled) {
+                            Label(
+                                String(localized: "Mit \(AppLockManager.shared.biometricName) sperren"),
+                                systemImage: AppLockManager.shared.biometricIcon
+                            )
+                        }
+                    } header: {
+                        Text("Sicherheit")
+                    } footer: {
+                        Text("Schütze deine Geschenkideen — niemand kann sie sehen, ohne dein Gesicht oder deinen Fingerabdruck.")
+                    }
+                }
+
                 Section {
                     NavigationLink {
                         CurrencyPickerView()
