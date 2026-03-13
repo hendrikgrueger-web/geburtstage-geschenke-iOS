@@ -11,7 +11,6 @@ struct TimelineView: View {
     @State private var showingSettings = false
     @State private var filterRelation: String? = nil
     @State private var showingAddGiftIdeaFor: PersonRef?
-    @State private var quickAddPerson: PersonRef?
     @State private var showingAISuggestionsFor: PersonRef?
     @Binding var selectedPerson: PersonRef?
     @State private var isRefreshing = false
@@ -107,10 +106,6 @@ struct TimelineView: View {
                     .keyboardShortcut("n", modifiers: .command)
                 }
             }
-        }
-        .sheet(item: $quickAddPerson) { person in
-            AddGiftIdeaSheet(person: person)
-                .presentationDetents([.medium, .large])
         }
         .sheet(item: $showingAddGiftIdeaFor) { person in
             AddGiftIdeaSheet(person: person)
@@ -250,7 +245,7 @@ struct TimelineView: View {
             selectedPerson = person
         } label: {
             BirthdayRow(person: person, giftIdeas: ideasByPerson[person.id] ?? [], onQuickAdd: {
-                quickAddPerson = person
+                showingAddGiftIdeaFor = person
             })
         }
         .buttonStyle(.plain)
