@@ -94,6 +94,7 @@
 		A2116E5CE17F7C1FEFECDA97 /* demo-ingrid.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E47BEC5FEAD7E35C5D6570C5 /* demo-ingrid.jpg */; };
 		A3AB0F00E3C9BBAE31A8C8D0 /* demo-sophie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ACB6D6D4FCFBB46A3698F82F /* demo-sophie.jpg */; };
 		A3EB1C597C140A4C1561CA0A /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194FEF6D34BD0E36B4E9FA00 /* ChatBubbleView.swift */; };
+		A54009A95F62E43039B42E1A /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9980FD538EBE7937C51AFEE3 /* SubscriptionManager.swift */; };
 		A56DD62AEF51C01D7115FB65 /* DevSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA036501E37863B03B99A76 /* DevSettingsView.swift */; };
 		A665CB640EDDB4CD95671A07 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 81D810CCD472376033152FEE /* InfoPlist.xcstrings */; };
 		A698099C64A398F9C86E12D7 /* ValidationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8502AF01206747446F5E2EED /* ValidationHelper.swift */; };
@@ -258,6 +259,7 @@
 		95BB6E1690ACBC0C41AE04F7 /* ContactsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsServiceTests.swift; sourceTree = "<group>"; };
 		987579EBF3FB66AC923CA758 /* BirthdayTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayTimelineProvider.swift; sourceTree = "<group>"; };
 		98B65F655134CF6668D50BD9 /* PersonRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRef.swift; sourceTree = "<group>"; };
+		9980FD538EBE7937C51AFEE3 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		9AF1C70D1E7AA24CAA593363 /* BirthdayCalculatorEdgeCasesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCalculatorEdgeCasesTests.swift; sourceTree = "<group>"; };
 		9E705474AA673040B59B5EBA /* SuggestionQualityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionQualityViewModel.swift; sourceTree = "<group>"; };
 		9FC35DCCF49380674DAC125E /* BirthdayWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayWidgetView.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 				AF5D518273E7BB19D619E0DF /* ReminderManager.swift */,
 				56B829D839F0FB868391D0FA /* SampleDataService.swift */,
 				BA3BFC741FC7522FB943DEC6 /* SpeechRecognitionService.swift */,
+				9980FD538EBE7937C51AFEE3 /* SubscriptionManager.swift */,
 				A6EB8AD13515C4A79913E22B /* WidgetDataService.swift */,
 			);
 			path = Services;
@@ -906,6 +909,7 @@
 				DB037047927D8B4E3AD267B9 /* ShareSheetView.swift in Sources */,
 				831940E5795C3E5929750297 /* SmartInputField.swift in Sources */,
 				400365EF33DDCECA2B3AE6C6 /* SpeechRecognitionService.swift in Sources */,
+				A54009A95F62E43039B42E1A /* SubscriptionManager.swift in Sources */,
 				7646F3A08BCEF6CA391CDB98 /* SuggestionFeedback.swift in Sources */,
 				88ED29FC5BFFAE3D273DBF27 /* SuggestionFeedbackView.swift in Sources */,
 				02BD9144C92EBA217C096D14 /* SuggestionQualityViewModel.swift in Sources */,
