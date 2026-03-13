@@ -303,11 +303,8 @@ struct SettingsView: View {
                 } message: {
                     Text("Die KI-Funktionen werden deaktiviert. Du kannst die Einwilligung jederzeit erneut erteilen.")
                 }
-                .sheet(isPresented: $showingAIConsentSheet) {
-                    AIConsentSheet(isPresented: $showingAIConsentSheet) {
-                        consentManager.aiEnabled = true
-                    }
-                }
+
+
 
                 Section("Daten") {
                     Button(role: .destructive) {
@@ -369,6 +366,11 @@ struct SettingsView: View {
         .sheet(isPresented: $showingAbout) {
             aboutSheet
                 .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showingAIConsentSheet) {
+            AIConsentSheet(isPresented: $showingAIConsentSheet) {
+                consentManager.aiEnabled = true
+            }
         }
         .sheet(isPresented: $showingPaywall) {
             PaywallView()
