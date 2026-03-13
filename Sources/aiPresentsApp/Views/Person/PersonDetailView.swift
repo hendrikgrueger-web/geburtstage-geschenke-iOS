@@ -148,12 +148,25 @@ struct PersonDetailView: View {
                 GiftSummaryView(person: person)
 
                 if filteredGiftIdeas.isEmpty {
-                    EmptyStateView(type: .noGiftIdeas, action: {
+                    Button {
                         showingAddGiftIdea = true
                         HapticFeedback.light()
-                    })
+                    } label: {
+                        VStack(spacing: 12) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.system(size: 48))
+                                .foregroundStyle(AppColor.primary)
+                            Text("Geschenkidee hinzufügen")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 24)
+                    }
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
+                    .accessibilityLabel(String(localized: "Geschenkidee hinzufügen"))
+                    .accessibilityHint(String(localized: "Fügt eine neue Geschenkidee hinzu"))
                 } else {
                     ForEach(filteredGiftIdeas) { idea in
                         Button {
@@ -219,15 +232,20 @@ struct PersonDetailView: View {
                     }
                     .onDelete(perform: deleteGiftIdeas)
 
-                    // Apple Reminders–Style: volle Breite, klarer Aufruf zum Hinzufügen
                     Button {
                         showingAddGiftIdea = true
                         HapticFeedback.medium()
                     } label: {
-                        Label("Idee hinzufügen", systemImage: "plus.circle.fill")
-                            .foregroundStyle(AppColor.primary)
-                            .fontWeight(.medium)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        VStack(spacing: 8) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.system(size: 36))
+                                .foregroundStyle(AppColor.primary)
+                            Text("Idee hinzufügen")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
                     }
                     .accessibilityLabel(String(localized: "Idee hinzufügen"))
                     .accessibilityHint(String(localized: "Fügt eine neue Geschenkidee hinzu"))

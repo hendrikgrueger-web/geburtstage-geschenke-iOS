@@ -27,17 +27,7 @@ struct GiftSummaryView: View {
     }
 
     private var emptyState: some View {
-        HStack {
-            Image(systemName: "lightbulb")
-                .foregroundStyle(AppColor.textSecondary.opacity(0.5))
-            Text("Noch keine Ideen")
-                .font(.caption)
-                .foregroundStyle(AppColor.textSecondary)
-            Spacer()
-        }
-        .padding(.vertical, 8)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("Keine Geschenkideen vorhanden")
+        EmptyView()
     }
 
     private var summaryContent: some View {
