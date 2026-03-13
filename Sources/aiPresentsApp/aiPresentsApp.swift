@@ -6,6 +6,7 @@ import WidgetKit
 struct aiPresentsApp: App {
     let modelContainer: ModelContainer
     @StateObject private var reminderManager: ReminderManager
+    @StateObject private var subscriptionManager = SubscriptionManager()
     @Environment(\.scenePhase) private var scenePhase
     @State private var deepLinkPersonID: UUID?
     @State private var screenshotShowChat = false
@@ -159,6 +160,7 @@ struct aiPresentsApp: App {
                 }
             }
             .environmentObject(reminderManager)
+            .environmentObject(subscriptionManager)
             .overlay {
                 if AppLockManager.shared.isLocked {
                     AppLockView()
