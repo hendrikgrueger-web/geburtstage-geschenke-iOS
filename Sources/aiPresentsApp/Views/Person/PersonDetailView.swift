@@ -4,6 +4,7 @@ import SwiftData
 struct PersonDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
 
     let person: PersonRef
 
@@ -37,6 +38,7 @@ struct PersonDetailView: View {
     @State private var toast: ToastItem?
     @State private var showingAddReceivedGift = false
     @State private var showingEditPerson = false
+    @State private var showingPaywall = false
     @State private var editedName: String = ""
     @State private var editedBirthday: Date = Date()
     @State private var editedPersonRelation: String = ""
@@ -104,8 +106,12 @@ struct PersonDetailView: View {
                         .foregroundStyle(.secondary)
                     Spacer()
                     Button {
-                        showingEditRelation = true
-                        HapticFeedback.light()
+                        if subscriptionManager.hasFullAccess {
+                            showingEditRelation = true
+                            HapticFeedback.light()
+                        } else {
+                            showingPaywall = true
+                        }
                     } label: {
                         HStack {
                             Text(person.relation)
@@ -125,6 +131,7 @@ struct PersonDetailView: View {
                         HapticFeedback.selectionChanged()
                     }
                 ))
+                .disabled(!subscriptionManager.hasFullAccess)
             }
 
             // MARK: - Hobbies & Interessen (fließen in KI-Prompt ein)
@@ -149,15 +156,23 @@ struct PersonDetailView: View {
 
                 if filteredGiftIdeas.isEmpty {
                     EmptyStateView(type: .noGiftIdeas, action: {
-                        showingAddGiftIdea = true
-                        HapticFeedback.light()
+                        if subscriptionManager.hasFullAccess {
+                            showingAddGiftIdea = true
+                            HapticFeedback.light()
+                        } else {
+                            showingPaywall = true
+                        }
                     })
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
                 } else {
                     ForEach(filteredGiftIdeas) { idea in
                         Button {
-                            showingEditGiftIdea = idea
+                            if subscriptionManager.hasFullAccess {
+                                showingEditGiftIdea = idea
+                            } else {
+                                showingPaywall = true
+                            }
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 GiftIdeaRow(idea: idea)
@@ -175,7 +190,11 @@ struct PersonDetailView: View {
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                             Button {
-                                advanceStatus(for: idea)
+                                if subscriptionManager.hasFullAccess {
+                                    advanceStatus(for: idea)
+                                } else {
+                                    showingPaywall = true
+                                }
                             } label: {
                                 Label("Vor", systemImage: "arrow.right.circle.fill")
                             }
@@ -201,7 +220,11 @@ struct PersonDetailView: View {
                             .accessibilityLabel(String(localized: "Geschenkidee duplizieren"))
 
                             Button {
-                                advanceStatus(for: idea)
+                                if subscriptionManager.hasFullAccess {
+                                    advanceStatus(for: idea)
+                                } else {
+                                    showingPaywall = true
+                                }
                             } label: {
                                 Label("Status vorwärts", systemImage: "arrow.right.circle.fill")
                             }
@@ -221,8 +244,12 @@ struct PersonDetailView: View {
 
                     // Apple Reminders–Style: volle Breite, klarer Aufruf zum Hinzufügen
                     Button {
-                        showingAddGiftIdea = true
-                        HapticFeedback.medium()
+                        if subscriptionManager.hasFullAccess {
+                            showingAddGiftIdea = true
+                            HapticFeedback.medium()
+                        } else {
+                            showingPaywall = true
+                        }
                     } label: {
                         Label("Idee hinzufügen", systemImage: "plus.circle.fill")
                             .foregroundStyle(AppColor.primary)
@@ -304,15 +331,23 @@ struct PersonDetailView: View {
             Section {
                 if givenGiftHistory.isEmpty {
                     EmptyStateView(type: .noHistory, action: {
-                        showingAddGiftHistory = true
-                        HapticFeedback.light()
+                        if subscriptionManager.hasFullAccess {
+                            showingAddGiftHistory = true
+                            HapticFeedback.light()
+                        } else {
+                            showingPaywall = true
+                        }
                     })
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
                 } else {
                     ForEach(givenGiftHistory) { history in
                         Button {
-                            showingEditGiftHistory = history
+                            if subscriptionManager.hasFullAccess {
+                                showingEditGiftHistory = history
+                            } else {
+                                showingPaywall = true
+                            }
                         } label: {
                             GiftHistoryRow(
                                 history: history,
@@ -340,8 +375,12 @@ struct PersonDetailView: View {
                     }
 
                     Button {
-                        showingAddGiftHistory = true
-                        HapticFeedback.medium()
+                        if subscriptionManager.hasFullAccess {
+                            showingAddGiftHistory = true
+                            HapticFeedback.medium()
+                        } else {
+                            showingPaywall = true
+                        }
                     } label: {
                         Label("Eintrag hinzufügen", systemImage: "plus.circle.fill")
                             .foregroundStyle(AppColor.primary)
@@ -366,7 +405,11 @@ struct PersonDetailView: View {
                 } else {
                     ForEach(receivedGiftHistory) { history in
                         Button {
-                            showingEditGiftHistory = history
+                            if subscriptionManager.hasFullAccess {
+                                showingEditGiftHistory = history
+                            } else {
+                                showingPaywall = true
+                            }
                         } label: {
                             GiftHistoryRow(
                                 history: history,
@@ -387,8 +430,12 @@ struct PersonDetailView: View {
                 }
 
                 Button {
-                    showingAddReceivedGift = true
-                    HapticFeedback.medium()
+                    if subscriptionManager.hasFullAccess {
+                        showingAddReceivedGift = true
+                        HapticFeedback.medium()
+                    } else {
+                        showingPaywall = true
+                    }
                 } label: {
                     Label("Eintrag hinzufügen", systemImage: "plus.circle.fill")
                         .foregroundStyle(AppColor.primary)
@@ -465,11 +512,15 @@ struct PersonDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Bearbeiten") {
-                    editedName = person.displayName
-                    editedBirthday = person.birthday
-                    editedPersonRelation = person.relation
-                    showingEditPerson = true
-                    HapticFeedback.light()
+                    if subscriptionManager.hasFullAccess {
+                        editedName = person.displayName
+                        editedBirthday = person.birthday
+                        editedPersonRelation = person.relation
+                        showingEditPerson = true
+                        HapticFeedback.light()
+                    } else {
+                        showingPaywall = true
+                    }
                 }
                 .accessibilityLabel(String(localized: "Bearbeiten"))
                 .accessibilityHint(String(localized: "Öffnet das Formular zum Bearbeiten von Name, Geburtstag und Beziehung"))
@@ -496,7 +547,11 @@ struct PersonDetailView: View {
                     Divider()
 
                     Button {
-                        showingAddGiftIdea = true
+                        if subscriptionManager.hasFullAccess {
+                            showingAddGiftIdea = true
+                        } else {
+                            showingPaywall = true
+                        }
                     } label: {
                         Label("Neue Idee", systemImage: "plus")
                     }
@@ -610,6 +665,9 @@ struct PersonDetailView: View {
                 }
             }
         }
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView()
+        }
         .toast(item: $toast)
     }
 
@@ -675,6 +733,11 @@ struct PersonDetailView: View {
 
     private func handleAIButtonTap(_ action: AIAction) {
         HapticFeedback.medium()
+
+        guard subscriptionManager.hasFullAccess else {
+            showingPaywall = true
+            return
+        }
 
         if AIConsentManager.shared.consentGiven {
             if AIConsentManager.shared.aiEnabled {
