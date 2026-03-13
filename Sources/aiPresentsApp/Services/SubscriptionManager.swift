@@ -1,5 +1,6 @@
 import StoreKit
 import SwiftUI
+import os
 
 /// Verwaltet StoreKit 2 Käufe, Abonnements und den 3-Monats-Trial.
 @MainActor
@@ -138,6 +139,14 @@ final class SubscriptionManager: ObservableObject {
         purchasedProductIDs = purchased
     }
 
+    /// Ist `nonisolated` damit es aus Task.detached aufgerufen werden kann.
+    nonisolated private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+        switch result {
+        case .unverified: throw StoreError.failedVerification
+        case .verified(let safe): return safe
+        }
+    }
+
     /// Lauscht auf neue Transaktionen (z.B. nach Abo-Verlängerung im Hintergrund).
     private func listenForTransactions() -> Task<Void, Never> {
         Task.detached { [weak self] in
@@ -150,13 +159,6 @@ final class SubscriptionManager: ObservableObject {
         }
     }
 
-    /// Prüft die StoreKit-Verifikation und wirft bei Fehlschlag.
-    nonisolated private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
-        switch result {
-        case .unverified: throw StoreError.failedVerification
-        case .verified(let safe): return safe
-        }
-    }
 
     // MARK: - Errors
 
