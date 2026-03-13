@@ -7,6 +7,8 @@ struct ContactsImportView: View {
     @Query private var existingPeople: [PersonRef]
     @State private var isImporting = false
     @State private var importError: String?
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
+    @State private var showingPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -36,7 +38,11 @@ struct ContactsImportView: View {
                     } else {
                         // Primär: Adressbuch
                         Button {
-                            importFromContacts()
+                            if subscriptionManager.hasFullAccess {
+                                importFromContacts()
+                            } else {
+                                showingPaywall = true
+                            }
                         } label: {
                             HStack(spacing: 10) {
                                 Image(systemName: "person.2.fill")
@@ -52,7 +58,11 @@ struct ContactsImportView: View {
 
                         // Sekundär: Demo
                         Button {
-                            loadSampleData()
+                            if subscriptionManager.hasFullAccess {
+                                loadSampleData()
+                            } else {
+                                showingPaywall = true
+                            }
                         } label: {
                             HStack(spacing: 10) {
                                 Image(systemName: "wand.and.stars")
@@ -103,6 +113,9 @@ struct ContactsImportView: View {
             }
         }
         .presentationDragIndicator(.visible)
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView()
+        }
     }
 
     private func importFromContacts() {

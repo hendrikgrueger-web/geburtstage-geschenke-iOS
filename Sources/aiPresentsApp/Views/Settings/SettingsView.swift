@@ -15,7 +15,9 @@ struct SettingsView: View {
     @State private var showingAbout = false
     @State private var showingRevokeConsentConfirmation = false
     @State private var showingAIConsentSheet = false
+    @State private var showingPaywall = false
     @EnvironmentObject private var reminderManager: ReminderManager
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
     @ObservedObject private var consentManager = AIConsentManager.shared
 
     @Query private var reminderRule: [ReminderRule]
@@ -63,6 +65,38 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
+                // Abo-Section
+                Section {
+                    if subscriptionManager.isSubscribed {
+                        Label("Premium aktiv", systemImage: "crown.fill")
+                            .foregroundStyle(AppColor.accent)
+                    } else if subscriptionManager.isInTrial {
+                        Button {
+                            showingPaywall = true
+                        } label: {
+                            HStack {
+                                Label("Testphase", systemImage: "clock.fill")
+                                Spacer()
+                                Text("Noch \(subscriptionManager.trialDaysRemaining) Tage")
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    } else {
+                        Button {
+                            showingPaywall = true
+                        } label: {
+                            Label("Premium freischalten", systemImage: "crown")
+                                .foregroundStyle(AppColor.accent)
+                        }
+                    }
+
+                    Button("Käufe wiederherstellen") {
+                        Task { await subscriptionManager.restorePurchases() }
+                    }
+                } header: {
+                    Text("Abo")
+                }
+
                 // Next Birthday Card
                 if let next = nextBirthday {
                     Section {
@@ -335,6 +369,9 @@ struct SettingsView: View {
         .sheet(isPresented: $showingAbout) {
             aboutSheet
                 .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView()
         }
     }
 
