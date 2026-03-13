@@ -146,6 +146,13 @@ struct TimelineView: View {
                     showingSettings = true
                 }
             }
+            if let idString = UserDefaults.standard.string(forKey: "screenshotShowAddGift"),
+               let id = UUID(uuidString: idString) {
+                UserDefaults.standard.removeObject(forKey: "screenshotShowAddGift")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    showingAddGiftIdeaFor = people.first(where: { $0.id == id })
+                }
+            }
         }
         #endif
         .safeAreaInset(edge: .bottom) {

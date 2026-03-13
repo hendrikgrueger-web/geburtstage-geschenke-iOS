@@ -58,6 +58,14 @@ struct aiPresentsApp: App {
         }
 
         #if DEBUG
+        // Screenshot-Modus: globaler Flag (versteckt Dev-Only-UI in Screenshots)
+        let screenshotArgs = ["--reset-sample-data", "--show-person", "--show-chat", "--show-settings", "--show-add-gift", "--show-onboarding"]
+        if CommandLine.arguments.contains(where: { screenshotArgs.contains($0) }) {
+            UserDefaults.standard.set(true, forKey: "screenshotMode")
+        } else {
+            UserDefaults.standard.removeObject(forKey: "screenshotMode")
+        }
+
         if CommandLine.arguments.contains("--reset-sample-data") {
             let ctx = modelContainer.mainContext
             try? ctx.delete(model: SuggestionFeedback.self)
@@ -89,6 +97,14 @@ struct aiPresentsApp: App {
             UserDefaults.standard.set(true, forKey: "screenshotShowSettings")
         } else {
             UserDefaults.standard.removeObject(forKey: "screenshotShowSettings")
+        }
+
+        // Screenshot-Modus: Add Gift Idea Sheet öffnen
+        if let idx = CommandLine.arguments.firstIndex(of: "--show-add-gift"),
+           idx + 1 < CommandLine.arguments.count {
+            UserDefaults.standard.set(CommandLine.arguments[idx + 1], forKey: "screenshotShowAddGift")
+        } else {
+            UserDefaults.standard.removeObject(forKey: "screenshotShowAddGift")
         }
 
         // Screenshot-Modus: Onboarding zeigen (hasCompletedOnboarding zurücksetzen)

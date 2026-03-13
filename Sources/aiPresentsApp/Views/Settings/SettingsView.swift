@@ -109,10 +109,12 @@ struct SettingsView: View {
                     }
 
                     #if DEBUG
-                    NavigationLink {
-                        DevSettingsView()
-                    } label: {
-                        Text("Dev Settings")
+                    if !UserDefaults.standard.bool(forKey: "screenshotMode") {
+                        NavigationLink {
+                            DevSettingsView()
+                        } label: {
+                            Text("Dev Settings")
+                        }
                     }
                     #endif
                 }
