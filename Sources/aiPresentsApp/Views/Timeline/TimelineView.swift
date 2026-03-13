@@ -8,6 +8,10 @@ struct TimelineView: View {
     @Binding var deepLinkPersonID: UUID?
     @Binding var screenshotShowChat: Bool
 
+    @EnvironmentObject private var subscriptionManager: SubscriptionManager
+    @State private var showingPaywall = false
+    @State private var showingContactsImport = false
+
     @State private var showingSettings = false
     @State private var filterRelation: String? = nil
     @State private var showingAddGiftIdeaFor: PersonRef?
@@ -25,6 +29,13 @@ struct TimelineView: View {
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)
 
+            // ReadOnlyBanner vor den BirthdayRows
+            Section {
+                ReadOnlyBanner()
+            }
+            .listRowInsets(EdgeInsets())
+            .listRowBackground(Color.clear)
+
             // Chronologische Liste aller Geburtstage
             if filteredBirthdays.isEmpty {
                 Section {
@@ -37,7 +48,11 @@ struct TimelineView: View {
                         birthdayRow(for: person)
                             .swipeActions(edge: .trailing) {
                                 Button {
-                                    toggleSkipGift(for: person)
+                                    if subscriptionManager.hasFullAccess {
+                                        toggleSkipGift(for: person)
+                                    } else {
+                                        showingPaywall = true
+                                    }
                                 } label: {
                                     Label(
                                         person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk nötig"),
@@ -99,7 +114,13 @@ struct TimelineView: View {
                         .accessibilityLabel(String(localized: "Filter"))
                     }
 
-                    NavigationLink(destination: ContactsImportView()) {
+                    Button {
+                        if subscriptionManager.hasFullAccess {
+                            showingContactsImport = true
+                        } else {
+                            showingPaywall = true
+                        }
+                    } label: {
                         Image(systemName: "person.badge.plus")
                     }
                     .accessibilityLabel(String(localized: "Kontakte importieren"))
@@ -126,6 +147,12 @@ struct TimelineView: View {
                 selectedPerson = person
             })
             .presentationDetents([.large])
+        }
+        .sheet(isPresented: $showingContactsImport) {
+            ContactsImportView()
+        }
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView()
         }
         .onChange(of: screenshotShowChat) { _, newValue in
             if newValue {
@@ -245,7 +272,11 @@ struct TimelineView: View {
             selectedPerson = person
         } label: {
             BirthdayRow(person: person, giftIdeas: ideasByPerson[person.id] ?? [], onQuickAdd: {
-                showingAddGiftIdeaFor = person
+                if subscriptionManager.hasFullAccess {
+                    showingAddGiftIdeaFor = person
+                } else {
+                    showingPaywall = true
+                }
             })
         }
         .buttonStyle(.plain)
@@ -257,13 +288,21 @@ struct TimelineView: View {
             }
 
             Button {
-                showingAddGiftIdeaFor = person
+                if subscriptionManager.hasFullAccess {
+                    showingAddGiftIdeaFor = person
+                } else {
+                    showingPaywall = true
+                }
             } label: {
                 Label("Idee hinzufügen", systemImage: "plus.circle.fill")
             }
 
             Button {
-                toggleSkipGift(for: person)
+                if subscriptionManager.hasFullAccess {
+                    toggleSkipGift(for: person)
+                } else {
+                    showingPaywall = true
+                }
             } label: {
                 Label(
                     person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk nötig"),
@@ -273,7 +312,11 @@ struct TimelineView: View {
 
             if let firstIdea = person.giftIdeas?.first(where: { $0.status == .idea }) {
                 Button {
-                    markAsPlanned(firstIdea)
+                    if subscriptionManager.hasFullAccess {
+                        markAsPlanned(firstIdea)
+                    } else {
+                        showingPaywall = true
+                    }
                 } label: {
                     Label("Erste Idee planen", systemImage: "checkmark.circle")
                 }
@@ -312,7 +355,11 @@ struct TimelineView: View {
 
     private var smartSearchBar: some View {
         Button {
-            showingAIChat = true
+            if subscriptionManager.hasFullAccess {
+                showingAIChat = true
+            } else {
+                showingPaywall = true
+            }
             HapticFeedback.light()
         } label: {
             HStack(spacing: 10) {
