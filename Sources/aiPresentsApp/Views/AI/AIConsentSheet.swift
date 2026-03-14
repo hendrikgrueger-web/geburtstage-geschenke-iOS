@@ -33,14 +33,15 @@ struct AIConsentSheet: View {
                     .frame(maxWidth: .infinity)
                     .padding(.top, 8)
 
-                    // Übertragene Daten (anonymisiert)
+                    // Übertragene Daten
                     ConsentSection(
                         icon: "arrow.up.circle.fill",
                         iconColor: .orange,
-                        title: "Was wird übertragen? (anonymisiert)"
+                        title: "Was wird übertragen?"
                     ) {
                         VStack(alignment: .leading, spacing: 8) {
-                            ConsentDataRow(icon: "person.fill", text: "Geschlecht (lokal aus Name/Beziehung abgeleitet)")
+                            ConsentDataRow(icon: "person.fill", text: "Vorname (damit die KI deine Kontakte erkennt)")
+                            ConsentDataRow(icon: "person.2.fill", text: "Geschlecht (lokal aus Name/Beziehung abgeleitet)")
                             ConsentDataRow(icon: "number", text: "Altersgruppe (z.B. \u{201E}Mitte 30\u{201C}, nicht das exakte Alter)")
                             ConsentDataRow(icon: "heart.fill", text: "Beziehungstyp (z.B. \u{201E}Freund/in\u{201C}, \u{201E}Mutter\u{201C})")
                             ConsentDataRow(icon: "star.fill", text: "Sternzeichen (aus Geburtsmonat und -tag)")
@@ -58,7 +59,7 @@ struct AIConsentSheet: View {
                         title: "Was wird NICHT übertragen?"
                     ) {
                         VStack(alignment: .leading, spacing: 8) {
-                            ConsentDataRow(icon: "person.text.rectangle", text: "Name (weder Vor- noch Nachname)")
+                            ConsentDataRow(icon: "person.text.rectangle", text: "Nachname")
                             ConsentDataRow(icon: "calendar", text: "Geburtsdatum (kein Tag, Monat oder Jahr)")
                             ConsentDataRow(icon: "number.circle", text: "Exaktes Alter")
                             ConsentDataRow(icon: "link", text: "Links")
@@ -73,7 +74,7 @@ struct AIConsentSheet: View {
                         iconColor: .green,
                         title: "Datenschutz-Prinzip"
                     ) {
-                        Text("Es werden keine personenbezogenen Daten übertragen. Die KI erhält nur anonymisierte Informationen wie Altersgruppe und Geschlecht — keine Namen, keine Geburtsdaten.")
+                        Text("Die KI kennt nur Vornamen, Altersgruppe und Beziehung — keine Nachnamen, keine Geburtsdaten, keine Kontaktdaten. Ein Vorname allein ist nicht personenbezogen.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
