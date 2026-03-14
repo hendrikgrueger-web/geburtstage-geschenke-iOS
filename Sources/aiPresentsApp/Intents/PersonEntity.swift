@@ -37,7 +37,7 @@ extension PersonEntity {
 /// Creates a fresh ModelContainer for use inside AppIntent processes.
 /// Each call creates an independent container — intentional since intents run
 /// in a separate process without access to the main app's container.
-private func makeIntentsModelContainer() throws -> ModelContainer {
+func makeIntentsModelContainer() throws -> ModelContainer {
     let schema = Schema([
         PersonRef.self,
         GiftIdea.self,
