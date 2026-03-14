@@ -268,18 +268,17 @@ struct TimelineView: View {
     // MARK: - Birthday Row
 
     private func birthdayRow(for person: PersonRef) -> some View {
-        Button {
+        BirthdayRow(person: person, giftIdeas: ideasByPerson[person.id] ?? [], onQuickAdd: {
+            if subscriptionManager.hasFullAccess {
+                showingAddGiftIdeaFor = person
+            } else {
+                showingPaywall = true
+            }
+        })
+        .contentShape(Rectangle())
+        .onTapGesture {
             selectedPerson = person
-        } label: {
-            BirthdayRow(person: person, giftIdeas: ideasByPerson[person.id] ?? [], onQuickAdd: {
-                if subscriptionManager.hasFullAccess {
-                    showingAddGiftIdeaFor = person
-                } else {
-                    showingPaywall = true
-                }
-            })
         }
-        .buttonStyle(.plain)
         .contextMenu {
             Button {
                 showingAISuggestionsFor = person
