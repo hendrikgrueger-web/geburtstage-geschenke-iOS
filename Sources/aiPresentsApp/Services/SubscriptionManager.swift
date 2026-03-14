@@ -9,9 +9,9 @@ final class SubscriptionManager: ObservableObject {
     // MARK: - Product IDs
 
     enum ProductID: String, CaseIterable {
-        case monthly  = "com.hendrikgrueger.birthdays-presents-ai.monthly"
-        case yearly   = "com.hendrikgrueger.birthdays-presents-ai.yearly"
-        case lifetime = "com.hendrikgrueger.birthdays-presents-ai.lifetime"
+        case monthly  = "com.hendrikgrueger.birthdays.presents.ai.monthly"
+        case yearly   = "com.hendrikgrueger.birthdays.presents.ai.yearly"
+        case lifetime = "com.hendrikgrueger.birthdays.presents.ai.lifetime"
     }
 
     // MARK: - Published State
