@@ -94,7 +94,9 @@ final class AIChatViewModel {
         for msg in messages {
             switch msg.role {
             case .user:
-                apiMessages.append(["role": "user", "content": msg.content])
+                // Namen im User-Text lokal auflösen und als Hint anhängen
+                let enriched = enrichUserMessage(msg.content)
+                apiMessages.append(["role": "user", "content": enriched])
             case .assistant:
                 apiMessages.append(["role": "assistant", "content": msg.content])
             case .system:
@@ -380,6 +382,33 @@ final class AIChatViewModel {
             return giftIdeas.first { $0.id == uuid }
         }
         return nil
+    }
+
+    // MARK: - Namens-Auflösung (lokal, DSGVO-konform)
+
+    /// Scannt den User-Text nach echten Kontaktnamen und hängt einen unsichtbaren Hint
+    /// für die KI an, damit sie die Person per Short-ID zuordnen kann.
+    /// Beispiel: "Wann hat Lukas Brenner Geburtstag?" → "Wann hat Lukas Brenner Geburtstag?\n[context: user refers to p5]"
+    private func enrichUserMessage(_ text: String) -> String {
+        let lower = text.lowercased()
+        var matches: [(shortId: String, name: String)] = []
+
+        for (shortId, uuid) in personIdMap {
+            guard let person = people.first(where: { $0.id == uuid }) else { continue }
+            let displayName = person.displayName.lowercased()
+            let firstName = displayName.split(separator: " ").first.map(String.init) ?? displayName
+
+            // Voll-Name oder Vorname im Text?
+            if lower.contains(displayName) || (firstName.count >= 3 && lower.contains(firstName)) {
+                matches.append((shortId: shortId, name: person.displayName))
+            }
+        }
+
+        guard !matches.isEmpty else { return text }
+
+        // Hint anhängen (nur für die KI sichtbar, nicht dem User gezeigt)
+        let hints = matches.prefix(3).map { "\($0.shortId) = \($0.name)" }.joined(separator: ", ")
+        return text + "\n[context: user refers to \(hints)]"
     }
 
     // MARK: - Text-Bereinigung & Personen-Extraktion
