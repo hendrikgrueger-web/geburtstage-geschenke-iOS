@@ -94,12 +94,9 @@ final class AIChatViewModel {
         for msg in messages {
             switch msg.role {
             case .user:
-                // Namen lokal auflösen → System-Injection VOR der User-Nachricht
-                let resolved = resolveNamesInUserMessage(msg.content)
-                if let injection = resolved.systemInjection {
-                    apiMessages.append(["role": "system", "content": injection])
-                }
-                apiMessages.append(["role": "user", "content": msg.content])
+                // Namen durch Short-IDs ersetzen: "für Emre" → "für p5"
+                let apiContent = replaceNamesWithShortIds(msg.content)
+                apiMessages.append(["role": "user", "content": apiContent])
             case .assistant:
                 apiMessages.append(["role": "assistant", "content": msg.content])
             case .system:
@@ -393,43 +390,37 @@ final class AIChatViewModel {
 
     // MARK: - Namens-Auflösung (lokal, DSGVO-konform)
 
-    /// Löst Namen im User-Text lokal auf und erzeugt eine System-Injection.
-    /// Priorität: 1) Exakter Vollname, 2) Vorname (nur wenn eindeutig)
-    private func resolveNamesInUserMessage(_ text: String) -> (systemInjection: String?, matchedPersons: [PersonRef]) {
-        let lower = text.lowercased()
+    /// Ersetzt echte Namen im User-Text durch Short-IDs für die KI.
+    /// "Trag Buchgutschein für Emre ein" → "Trag Buchgutschein für p5 ein"
+    /// Die KI kennt Short-IDs perfekt — kein Hint oder Injection nötig.
+    private func replaceNamesWithShortIds(_ text: String) -> String {
+        var result = text
 
-        // Schritt 1: Exakte Vollname-Matches (höchste Priorität)
-        var exactMatches: [(shortId: String, person: PersonRef)] = []
-        var firstNameMatches: [(shortId: String, person: PersonRef)] = []
+        // Sortiert nach Namenslänge (längste zuerst), damit "Emre Kaya" vor "Emre" ersetzt wird
+        var nameMap: [(name: String, shortId: String)] = []
 
         for (shortId, uuid) in personIdMap {
             guard let person = people.first(where: { $0.id == uuid }) else { continue }
-            let displayName = person.displayName.lowercased()
-            let firstName = displayName.split(separator: " ").first.map(String.init) ?? displayName
-
-            if lower.contains(displayName) {
-                exactMatches.append((shortId: shortId, person: person))
-            } else if firstName.count >= 3 && lower.contains(firstName) {
-                firstNameMatches.append((shortId: shortId, person: person))
+            // Vollname
+            nameMap.append((name: person.displayName, shortId: shortId))
+            // Vorname (nur wenn >= 3 Zeichen, um Kurzformen wie "Li" zu vermeiden)
+            let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? ""
+            if firstName.count >= 3 && firstName != person.displayName {
+                nameMap.append((name: firstName, shortId: shortId))
             }
         }
 
-        // Exakte Matches haben Vorrang
-        let matches = exactMatches.isEmpty ? firstNameMatches : exactMatches
-        guard !matches.isEmpty else { return (nil, []) }
+        // Längste Namen zuerst ersetzen (verhindert Teil-Ersetzungen)
+        nameMap.sort { $0.name.count > $1.name.count }
 
-        let persons = Array(matches.prefix(3).map(\.person))
-
-        if matches.count == 1 {
-            let m = matches[0]
-            let firstName = m.person.displayName.split(separator: " ").first.map(String.init) ?? m.person.displayName
-            let injection = "WICHTIG: Der User meint \(m.shortId) (\(m.person.relation)). Verwende den Namen '\(firstName)' in deiner Antwort. Behandle die Anfrage so als hätte der User die ID \(m.shortId) genannt."
-            return (injection, persons)
-        } else {
-            let list = matches.prefix(3).map { "\($0.shortId) = \($0.person.displayName) (\($0.person.relation))" }.joined(separator: ", ")
-            let injection = "MEHRDEUTIG: Mehrere Kontakte passen: \(list). Frage den User welche Person gemeint ist. Verwende clarify_person."
-            return (injection, persons)
+        for entry in nameMap {
+            // Case-insensitive Ersetzung
+            if let range = result.range(of: entry.name, options: .caseInsensitive) {
+                result.replaceSubrange(range, with: entry.shortId)
+            }
         }
+
+        return result
     }
 
     // MARK: - Text-Bereinigung & Personen-Extraktion
