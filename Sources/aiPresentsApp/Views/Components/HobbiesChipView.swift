@@ -1,12 +1,13 @@
 import SwiftUI
 
 /// Chip-basierte Eingabe für Hobbies und Interessen einer Person.
-/// Zeigt vorhandene Hobbies als Chips, bietet Textfeld + Vorschläge zum Hinzufügen.
+/// Einheitliches Design: Chips oben, "Eintrag hinzufügen"-Leiste darunter.
 /// Maximum: 10 Hobbies pro Person. Wird in PersonDetailView verwendet.
 struct HobbiesChipView: View {
     @Binding var hobbies: [String]
     let isEditable: Bool
     @State private var newHobby: String = ""
+    @State private var showingInput = false
 
     private var suggestions: [String] {
         let lang = Locale.current.language.languageCode?.identifier
@@ -26,8 +27,8 @@ struct HobbiesChipView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            // Flow-Layout mit bestehenden Chips
+        VStack(alignment: .leading, spacing: 10) {
+            // Vorhandene Chips
             if !hobbies.isEmpty {
                 FlowLayout(spacing: 8) {
                     ForEach(hobbies, id: \.self) { hobby in
@@ -38,52 +39,75 @@ struct HobbiesChipView: View {
                 }
             }
 
-            if isEditable {
-                if hobbies.count < 10 {
-                    // Textfeld zum Hinzufuegen
-                    HStack {
-                        TextField("Hobby hinzufügen", text: $newHobby)
-                            .textInputAutocapitalization(.words)
-                            .onSubmit { addHobby() }
+            if isEditable && hobbies.count < 10 {
+                if showingInput {
+                    // Eingabefeld + Vorschläge
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            TextField("Hobby eingeben", text: $newHobby)
+                                .textInputAutocapitalization(.words)
+                                .onSubmit { addHobby() }
 
-                        if !newHobby.isEmpty {
-                            Button { addHobby() } label: {
-                                Image(systemName: "plus.circle.fill")
+                            if !newHobby.isEmpty {
+                                Button { addHobby() } label: {
+                                    Image(systemName: "plus.circle.fill")
+                                        .foregroundStyle(AppColor.accent)
+                                }
+                            }
+
+                            Button { showingInput = false } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundStyle(.secondary)
                             }
                         }
-                    }
 
-                    // Vorschlaege (nur noch nicht gewaehlte anzeigen)
-                    let available = suggestions.filter { !hobbies.contains($0) }
-                    if !available.isEmpty {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 6) {
-                                ForEach(available.prefix(5), id: \.self) { suggestion in
-                                    Button {
-                                        withAnimation { hobbies.append(suggestion) }
-                                    } label: {
-                                        Text(suggestion)
-                                            .font(.caption)
-                                            .padding(.horizontal, 10)
-                                            .padding(.vertical, 4)
-                                            .background(.fill.tertiary)
-                                            .clipShape(Capsule())
+                        // Vorschläge
+                        let available = suggestions.filter { !hobbies.contains($0) }
+                        if !available.isEmpty {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 6) {
+                                    ForEach(available.prefix(5), id: \.self) { suggestion in
+                                        Button {
+                                            withAnimation { hobbies.append(suggestion) }
+                                        } label: {
+                                            Text(suggestion)
+                                                .font(.caption)
+                                                .padding(.horizontal, 10)
+                                                .padding(.vertical, 4)
+                                                .background(.fill.tertiary)
+                                                .clipShape(Capsule())
+                                        }
+                                        .buttonStyle(.plain)
                                     }
-                                    .buttonStyle(.plain)
                                 }
                             }
                         }
                     }
                 } else {
-                    Text("Maximum erreicht (10 Hobbies)")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
+                    // "Eintrag hinzufügen"-Leiste
+                    Button {
+                        showingInput = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundStyle(AppColor.accent)
+                            Text("Hobby hinzufügen")
+                                .foregroundStyle(AppColor.accent)
+                            Spacer()
+                        }
+                        .font(.subheadline)
+                        .padding(.vertical, 4)
+                    }
+                    .buttonStyle(.plain)
                 }
+            } else if isEditable && hobbies.count >= 10 {
+                Text("Maximum erreicht (10)")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
             }
         }
     }
 
-    /// Fügt ein neues Hobby hinzu — nur wenn nicht leer, nicht doppelt und unter dem Limit von 10.
     private func addHobby() {
         let trimmed = newHobby.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty, !hobbies.contains(trimmed), hobbies.count < 10 else { return }
@@ -94,8 +118,6 @@ struct HobbiesChipView: View {
 
 // MARK: - ChipView
 
-/// Einzelner Chip mit Text und optionalem Entfernen-Button.
-/// Wird innerhalb von `HobbiesChipView` im FlowLayout dargestellt.
 private struct ChipView: View {
     let text: String
     let isEditable: Bool
@@ -123,8 +145,6 @@ private struct ChipView: View {
 
 // MARK: - FlowLayout
 
-/// Custom Layout, das Subviews horizontal anordnet und bei Platzmangel automatisch umbricht.
-/// Wird für die Chip-Darstellung verwendet, damit Hobbies mehrzeilig fließen.
 struct FlowLayout: Layout {
     var spacing: CGFloat = 8
 
