@@ -33,7 +33,8 @@ final class AIChatViewModel {
     // MARK: - Setup
 
     func configure(people: [PersonRef], giftIdeas: [GiftIdea], giftHistory: [GiftHistory], modelContext: ModelContext) {
-        self.people = people
+        // FIX: Stabile Sortierung — verhindert dass p1 auf verschiedene Personen zeigt
+        self.people = people.sorted { $0.displayName < $1.displayName }
         self.giftIdeas = giftIdeas
         self.giftHistory = giftHistory
         self.modelContext = modelContext
@@ -391,19 +392,18 @@ final class AIChatViewModel {
     // MARK: - Namens-Auflösung (lokal, DSGVO-konform)
 
     /// Ersetzt echte Namen im User-Text durch Short-IDs für die KI.
-    /// Baut die Name→ID Map direkt aus dem people-Array (gleiche Reihenfolge wie buildSystemPrompt).
+    /// Nutzt Regex mit Wortgrenzen (\b) und ersetzt ALLE Vorkommen.
     private func replaceNamesWithShortIds(_ text: String) -> String {
         guard !people.isEmpty else { return text }
 
-        // Name→ShortId Map direkt aus people bauen (identische Reihenfolge wie System-Prompt)
         var nameMap: [(name: String, shortId: String)] = []
         for (index, person) in people.enumerated() {
             let shortId = "p\(index + 1)"
-            // Vollname (z.B. "Emre Kaya")
             nameMap.append((name: person.displayName, shortId: shortId))
-            // Vorname (z.B. "Emre") — nur wenn >= 3 Zeichen
-            let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? ""
-            if firstName.count >= 3 && firstName != person.displayName {
+            let parts = person.displayName.split(separator: " ")
+            if let firstName = parts.first.map(String.init),
+               firstName.count >= 3,
+               parts.count > 1 {
                 nameMap.append((name: firstName, shortId: shortId))
             }
         }
@@ -413,8 +413,14 @@ final class AIChatViewModel {
 
         var result = text
         for entry in nameMap {
-            if let range = result.range(of: entry.name, options: .caseInsensitive) {
-                result.replaceSubrange(range, with: entry.shortId)
+            // Regex mit Wortgrenzen: verhindert "Will" in "Ich will essen"
+            // Ersetzt ALLE Vorkommen (nicht nur erstes)
+            let escaped = NSRegularExpression.escapedPattern(for: entry.name)
+            do {
+                let regex = try NSRegularExpression(pattern: "\\b\(escaped)\\b", options: .caseInsensitive)
+                result = regex.stringByReplacingMatches(in: result, range: NSRange(result.startIndex..., in: result), withTemplate: entry.shortId)
+            } catch {
+                AppLogger.data.error("Regex-Fehler für '\(entry.name)': \(error)")
             }
         }
         return result
