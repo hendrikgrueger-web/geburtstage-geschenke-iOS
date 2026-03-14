@@ -165,6 +165,19 @@ struct AIChatView: View {
                     .multilineTextAlignment(.center)
             }
 
+            // Privacy-Badge
+            HStack(spacing: 6) {
+                Image(systemName: "lock.shield.fill")
+                    .font(.caption2)
+                Text("Namen bleiben auf deinem Gerät — ich kenne nur eure Beziehung")
+                    .font(.caption2)
+            }
+            .foregroundStyle(.tertiary)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 6)
+            .background(.ultraThinMaterial)
+            .clipShape(Capsule())
+
             // Beispiel-Chips
             FlowLayout(spacing: 8) {
                 ForEach(viewModel.welcomeChips, id: \.message) { chip in
