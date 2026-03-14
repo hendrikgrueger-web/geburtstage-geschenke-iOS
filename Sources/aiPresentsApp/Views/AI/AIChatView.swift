@@ -243,7 +243,8 @@ struct AIChatView: View {
 
     private func handleClarifySelection(_ person: PersonRef) {
         viewModel.mentionedPersons = []
-        inputText = person.displayName
+        // Vollnamen + Beziehung senden → System-Injection findet exakten Match
+        inputText = "\(person.displayName) (\(person.relation))"
         sendMessage()
     }
 

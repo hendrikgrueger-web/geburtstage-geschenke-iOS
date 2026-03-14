@@ -394,35 +394,41 @@ final class AIChatViewModel {
     // MARK: - Namens-Auflösung (lokal, DSGVO-konform)
 
     /// Löst Namen im User-Text lokal auf und erzeugt eine System-Injection.
-    /// Statt eines subtilen Hints bekommt die KI eine klare System-Anweisung:
-    /// "Der User meint p5 (Emre Kaya, Bruder). Verwende den Namen 'Emre' in deiner Antwort."
+    /// Priorität: 1) Exakter Vollname, 2) Vorname (nur wenn eindeutig)
     private func resolveNamesInUserMessage(_ text: String) -> (systemInjection: String?, matchedPersons: [PersonRef]) {
         let lower = text.lowercased()
-        var matches: [(shortId: String, person: PersonRef)] = []
+
+        // Schritt 1: Exakte Vollname-Matches (höchste Priorität)
+        var exactMatches: [(shortId: String, person: PersonRef)] = []
+        var firstNameMatches: [(shortId: String, person: PersonRef)] = []
 
         for (shortId, uuid) in personIdMap {
             guard let person = people.first(where: { $0.id == uuid }) else { continue }
             let displayName = person.displayName.lowercased()
             let firstName = displayName.split(separator: " ").first.map(String.init) ?? displayName
 
-            if lower.contains(displayName) || (firstName.count >= 3 && lower.contains(firstName)) {
-                matches.append((shortId: shortId, person: person))
+            if lower.contains(displayName) {
+                exactMatches.append((shortId: shortId, person: person))
+            } else if firstName.count >= 3 && lower.contains(firstName) {
+                firstNameMatches.append((shortId: shortId, person: person))
             }
         }
 
+        // Exakte Matches haben Vorrang
+        let matches = exactMatches.isEmpty ? firstNameMatches : exactMatches
         guard !matches.isEmpty else { return (nil, []) }
 
-        let persons = matches.prefix(3).map(\.person)
+        let persons = Array(matches.prefix(3).map(\.person))
 
         if matches.count == 1 {
             let m = matches[0]
             let firstName = m.person.displayName.split(separator: " ").first.map(String.init) ?? m.person.displayName
             let injection = "WICHTIG: Der User meint \(m.shortId) (\(m.person.relation)). Verwende den Namen '\(firstName)' in deiner Antwort. Behandle die Anfrage so als hätte der User die ID \(m.shortId) genannt."
-            return (injection, Array(persons))
+            return (injection, persons)
         } else {
             let list = matches.prefix(3).map { "\($0.shortId) = \($0.person.displayName) (\($0.person.relation))" }.joined(separator: ", ")
-            let injection = "MEHRDEUTIG: Mehrere Kontakte passen zum Namen: \(list). Frage den User welche Person gemeint ist. Verwende clarify_person."
-            return (injection, Array(persons))
+            let injection = "MEHRDEUTIG: Mehrere Kontakte passen: \(list). Frage den User welche Person gemeint ist. Verwende clarify_person."
+            return (injection, persons)
         }
     }
 
