@@ -94,9 +94,12 @@ final class AIChatViewModel {
         for msg in messages {
             switch msg.role {
             case .user:
-                // Namen im User-Text lokal auflösen und als Hint anhängen
-                let enriched = enrichUserMessage(msg.content)
-                apiMessages.append(["role": "user", "content": enriched])
+                // Namen lokal auflösen → System-Injection VOR der User-Nachricht
+                let resolved = resolveNamesInUserMessage(msg.content)
+                if let injection = resolved.systemInjection {
+                    apiMessages.append(["role": "system", "content": injection])
+                }
+                apiMessages.append(["role": "user", "content": msg.content])
             case .assistant:
                 apiMessages.append(["role": "assistant", "content": msg.content])
             case .system:
@@ -390,29 +393,37 @@ final class AIChatViewModel {
 
     // MARK: - Namens-Auflösung (lokal, DSGVO-konform)
 
-    /// Scannt den User-Text nach echten Kontaktnamen und hängt einen unsichtbaren Hint
-    /// für die KI an, damit sie die Person per Short-ID zuordnen kann.
-    /// Beispiel: "Wann hat Lukas Brenner Geburtstag?" → "Wann hat Lukas Brenner Geburtstag?\n[context: user refers to p5]"
-    private func enrichUserMessage(_ text: String) -> String {
+    /// Löst Namen im User-Text lokal auf und erzeugt eine System-Injection.
+    /// Statt eines subtilen Hints bekommt die KI eine klare System-Anweisung:
+    /// "Der User meint p5 (Emre Kaya, Bruder). Verwende den Namen 'Emre' in deiner Antwort."
+    private func resolveNamesInUserMessage(_ text: String) -> (systemInjection: String?, matchedPersons: [PersonRef]) {
         let lower = text.lowercased()
-        var matches: [(shortId: String, name: String)] = []
+        var matches: [(shortId: String, person: PersonRef)] = []
 
         for (shortId, uuid) in personIdMap {
             guard let person = people.first(where: { $0.id == uuid }) else { continue }
             let displayName = person.displayName.lowercased()
             let firstName = displayName.split(separator: " ").first.map(String.init) ?? displayName
 
-            // Voll-Name oder Vorname im Text?
             if lower.contains(displayName) || (firstName.count >= 3 && lower.contains(firstName)) {
-                matches.append((shortId: shortId, name: person.displayName))
+                matches.append((shortId: shortId, person: person))
             }
         }
 
-        guard !matches.isEmpty else { return text }
+        guard !matches.isEmpty else { return (nil, []) }
 
-        // Hint anhängen (nur für die KI sichtbar, nicht dem User gezeigt)
-        let hints = matches.prefix(3).map { "\($0.shortId) = \($0.name)" }.joined(separator: ", ")
-        return text + "\n[context: user refers to \(hints)]"
+        let persons = matches.prefix(3).map(\.person)
+
+        if matches.count == 1 {
+            let m = matches[0]
+            let firstName = m.person.displayName.split(separator: " ").first.map(String.init) ?? m.person.displayName
+            let injection = "WICHTIG: Der User meint \(m.shortId) (\(m.person.relation)). Verwende den Namen '\(firstName)' in deiner Antwort. Behandle die Anfrage so als hätte der User die ID \(m.shortId) genannt."
+            return (injection, Array(persons))
+        } else {
+            let list = matches.prefix(3).map { "\($0.shortId) = \($0.person.displayName) (\($0.person.relation))" }.joined(separator: ", ")
+            let injection = "MEHRDEUTIG: Mehrere Kontakte passen zum Namen: \(list). Frage den User welche Person gemeint ist. Verwende clarify_person."
+            return (injection, Array(persons))
+        }
     }
 
     // MARK: - Text-Bereinigung & Personen-Extraktion
