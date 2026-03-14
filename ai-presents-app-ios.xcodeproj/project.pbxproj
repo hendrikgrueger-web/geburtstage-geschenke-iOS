@@ -52,6 +52,7 @@
 		44475B6B9052225B83F66E8D /* EditGiftHistorySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711769EFA88D8FC06C5A5572 /* EditGiftHistorySheet.swift */; };
 		452B098D43648CAD88063CA7 /* demo-peter.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0DF552A504FEB6F294F90285 /* demo-peter.jpg */; };
 		4688F631BAAFB6A1850550F0 /* BirthdayWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0FFC29100B5746FDA7B170 /* BirthdayWidgetData.swift */; };
+		4713FF664A80E5DAECB848AF /* UpcomingBirthdaysIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E907972344B19DBE2B836D /* UpcomingBirthdaysIntent.swift */; };
 		4BB8F952AE94C51E3B6E502B /* demo-max.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C140E38D86B8B10857861C83 /* demo-max.jpg */; };
 		4C1FF090C338E5735622B544 /* PremiumGateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB846A6AD80BD60EAE0C51 /* PremiumGateModifier.swift */; };
 		511BCECA0736D37EC1EA5746 /* AIChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9995C6AE43B45FD1F56F19 /* AIChatView.swift */; };
@@ -65,6 +66,7 @@
 		618B54FA2FCE6FEDA3840D24 /* URLValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5F559491D1986B505C9C84 /* URLValidator.swift */; };
 		6448766B18F8AAA964555537 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5D518273E7BB19D619E0DF /* ReminderManager.swift */; };
 		645974F1F40A1B360A8183CC /* GiftModelValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE2FA9D61AEDE351B3B7718 /* GiftModelValidationTests.swift */; };
+		6544FE2B7862486070FEF7D7 /* OpenPersonIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3CA444C5240950D56492D /* OpenPersonIntent.swift */; };
 		6686A8787F67137D4E2656A8 /* AddGiftIdeaSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD526AAD5CC9486A0290B2B8 /* AddGiftIdeaSheet.swift */; };
 		672DC7E93D3BE9EE48016044 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722036218687E49E95EF8A33 /* SettingsView.swift */; };
 		6A843E076521CAF9B67CEFBD /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B618522D35422F2E3961784 /* ChatMessage.swift */; };
@@ -106,6 +108,7 @@
 		AA835811E643849C8EEF8B2C /* GiftTransitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7EC86AFD43E7619FFD809C /* GiftTransitionService.swift */; };
 		AC138672CE067DF6B4308C1E /* BirthdayCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A02B6D7A77AAD75AE1990 /* BirthdayCalculator.swift */; };
 		ACF2CFCF45EB2312F56815E0 /* ValidationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC88C885EE88547724D7673C /* ValidationHelperTests.swift */; };
+		AD2BCBEE7B68245D70EF3519 /* AddGiftIdeaIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577176E5413D563A0D2954E0 /* AddGiftIdeaIntent.swift */; };
 		ADE1CC765E156F4853A4DDF8 /* BirthdayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF726314BEDDE5BB6C64E630 /* BirthdayRow.swift */; };
 		B20A8F0530F4C41B976873AF /* BirthdayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44614D5AC68097C1AE93D4BC /* BirthdayWidget.swift */; };
 		B6F30405FEBA5F73D16CEA09 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEA4ED4260D661E8A6F60F /* Debouncer.swift */; };
@@ -212,6 +215,7 @@
 		2B21B2CB3D74C9F83C2AE0FB /* BirthdayCalculationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCalculationTests.swift; sourceTree = "<group>"; };
 		2B618522D35422F2E3961784 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		2D5814499A1D7F07472C1E3A /* AnimationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelperTests.swift; sourceTree = "<group>"; };
+		32E907972344B19DBE2B836D /* UpcomingBirthdaysIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingBirthdaysIntent.swift; sourceTree = "<group>"; };
 		34597EBF8E869A576A033613 /* AccessibilityConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityConfiguration.swift; sourceTree = "<group>"; };
 		3BC3124099F551F5EA373EA7 /* BirthdayCalculatorThreadSafetyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCalculatorThreadSafetyTests.swift; sourceTree = "<group>"; };
 		402FEFE3F505A5104FC535A3 /* GiftHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftHistory.swift; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 		51B467A880F06011A6CE947A /* BirthdayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayWidget.entitlements; sourceTree = "<group>"; };
 		53ADD72AECCB8BD0511F891D /* RelationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationPickerView.swift; sourceTree = "<group>"; };
 		56B829D839F0FB868391D0FA /* SampleDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataService.swift; sourceTree = "<group>"; };
+		577176E5413D563A0D2954E0 /* AddGiftIdeaIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGiftIdeaIntent.swift; sourceTree = "<group>"; };
 		596E3CA77753436EF1C30BDD /* AIChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatViewModel.swift; sourceTree = "<group>"; };
 		5FB7DAD883234BC09E12C476 /* aiPresentsAppTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = aiPresentsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		624B827CFCB9D3C7D8C92841 /* AddGiftHistorySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGiftHistorySheet.swift; sourceTree = "<group>"; };
@@ -285,6 +290,7 @@
 		ACB6D6D4FCFBB46A3698F82F /* demo-sophie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "demo-sophie.jpg"; sourceTree = "<group>"; };
 		AF5D518273E7BB19D619E0DF /* ReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderManager.swift; sourceTree = "<group>"; };
 		B1E90FAE8B819BCA02CD3D47 /* AIConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIConsentManager.swift; sourceTree = "<group>"; };
+		B2C3CA444C5240950D56492D /* OpenPersonIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenPersonIntent.swift; sourceTree = "<group>"; };
 		B67C423C60F6B50FA69691AD /* AIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIServiceTests.swift; sourceTree = "<group>"; };
 		B6B3346F947F83DB766598DA /* AIGiftSuggestionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIGiftSuggestionsSheet.swift; sourceTree = "<group>"; };
 		BA3BFC741FC7522FB943DEC6 /* SpeechRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionService.swift; sourceTree = "<group>"; };
@@ -543,7 +549,10 @@
 		80BB6BA73F825C97BF2F7203 /* Intents */ = {
 			isa = PBXGroup;
 			children = (
+				577176E5413D563A0D2954E0 /* AddGiftIdeaIntent.swift */,
+				B2C3CA444C5240950D56492D /* OpenPersonIntent.swift */,
 				C82887340C489D12FFB0B697 /* PersonEntity.swift */,
+				32E907972344B19DBE2B836D /* UpcomingBirthdaysIntent.swift */,
 			);
 			path = Intents;
 			sourceTree = "<group>";
@@ -877,6 +886,7 @@
 				DE56A3B1C078CF765FF226DE /* AccessibilityConfiguration.swift in Sources */,
 				24B66A4E2179EF84ACF9109C /* AccessibilityHelper.swift in Sources */,
 				2740B387B0AFC11EE6549B7B /* AddGiftHistorySheet.swift in Sources */,
+				AD2BCBEE7B68245D70EF3519 /* AddGiftIdeaIntent.swift in Sources */,
 				6686A8787F67137D4E2656A8 /* AddGiftIdeaSheet.swift in Sources */,
 				ED2AFFA508807D0E9E523670 /* AgeObfuscator.swift in Sources */,
 				3C76F2D83CA9E5A6F1A2FAA9 /* AllContactsView.swift in Sources */,
@@ -926,6 +936,7 @@
 				75737163F48A72E2B0C14D9C /* NonLinearPriceSlider.swift in Sources */,
 				3DF3F3C26C22CB8F580F83C0 /* NotificationPermissionHelper.swift in Sources */,
 				B7E016C0B6BB420CF944444E /* OnboardingView.swift in Sources */,
+				6544FE2B7862486070FEF7D7 /* OpenPersonIntent.swift in Sources */,
 				C3D336CC9AE2AA5A77E32C36 /* PaywallView.swift in Sources */,
 				97CA71ECC58101BBEBA9A15F /* PersonAvatar.swift in Sources */,
 				5588AE9AB8463F7BF41CD246 /* PersonDetailView.swift in Sources */,
@@ -953,6 +964,7 @@
 				19E9A3274F1DEA8DBD575123 /* TimelineView.swift in Sources */,
 				536C68C701B7445374355897 /* ToastView.swift in Sources */,
 				618B54FA2FCE6FEDA3840D24 /* URLValidator.swift in Sources */,
+				4713FF664A80E5DAECB848AF /* UpcomingBirthdaysIntent.swift in Sources */,
 				A698099C64A398F9C86E12D7 /* ValidationHelper.swift in Sources */,
 				35BC16F120ECF2AEA82B7EED /* WidgetDataService.swift in Sources */,
 				6DED96A46E46750CA87BAE6E /* aiPresentsApp.swift in Sources */,
