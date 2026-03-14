@@ -95,9 +95,7 @@ final class AIChatViewModel {
         for msg in messages {
             switch msg.role {
             case .user:
-                // Namen durch Short-IDs ersetzen: "für Emre" → "für p5"
-                let apiContent = replaceNamesWithShortIds(msg.content)
-                apiMessages.append(["role": "user", "content": apiContent])
+                apiMessages.append(["role": "user", "content": msg.content])
             case .assistant:
                 apiMessages.append(["role": "assistant", "content": msg.content])
             case .system:
@@ -194,8 +192,9 @@ final class AIChatViewModel {
             - Antworte auf Deutsch, herzlich und natürlich wie ein guter Freund der bei Geschenken hilft.
             - Themen: Geburtstage, Geschenkideen, Geschenkplanung. Off-Topic freundlich ablehnen und IMMER einen konkreten Vorschlag machen, was du stattdessen fragen könntest (z.B. "Frag mich lieber: Wer hat bald Geburtstag?").
             - AKTION SOFORT AUSFÜHREN: Wenn der User dich bittet eine Geschenkidee einzutragen oder zu speichern, TU ES SOFORT mit create_gift_idea. Frage NICHT nach Details, Budget oder Varianten — trage genau das ein was der User sagt.
-            - DATENSCHUTZ: Du erhältst KEINE echten Namen im Kontaktverzeichnis. Jede Person hat eine ID (z.B. p1) und eine Beziehung. Verwende in deinen Antworten den Namen den der User benutzt, oder die Beziehung.
-            - Short-IDs (p1, g1 etc.) sind NUR für die action-Felder. Schreibe NIEMALS Short-IDs in die message — verwende dort die Beziehung oder den Namen.
+            - NAMEN: Du kennst die Vornamen aller Kontakte. Verwende sie natürlich. Bei eindeutigem Vornamen: sofort zuordnen.
+            - Bei MEHREREN Kontakten mit gleichem Vornamen: Frage welcher gemeint ist (mit Beziehung und Altersgruppe). Sage dabei: "Ich darf Nachnamen nämlich nicht online verarbeiten — Datenschutz! 🔒". Verwende clarify_person.
+            - Short-IDs (p1, g1 etc.) sind NUR für die action-Felder. NIEMALS in die message — verwende Vornamen oder Beziehung.
             - Formuliere kurze, natürliche Sätze. Nenne konkrete Daten (z.B. "am 15. April") statt nur Tage.
             - Bei Geschenkfragen: Berücksichtige Hobbies, Altersgruppe, Geschlecht, Beziehung und bisherige Geschenke.
             - \(culturalHint)
@@ -215,10 +214,10 @@ final class AIChatViewModel {
             RÈGLES :
             - Réponds en français, chaleureusement et naturellement, comme un bon ami qui aide à trouver des cadeaux.
             - Sujets : Anniversaires, idées cadeaux, planification de cadeaux. Refuse poliment le hors-sujet et suggère TOUJOURS une question pertinente (ex. « Demande-moi plutôt : Qui a bientôt son anniversaire ? »).
-            - VIE PRIVÉE : Tu ne reçois PAS de vrais noms dans la liste de contacts. Chaque personne a un ID (ex. p1) et une relation.
-            - INDICES CONTEXTUELS : Quand l'utilisateur mentionne un nom, l'app ajoute un indice comme [context: user refers to p5 = Lukas]. Utilise cette info et réponds naturellement avec le nom.
-            - Correspondance ambiguë : demande de préciser.
-            - IMPORTANT : Les IDs courts (p1, g1 etc.) sont UNIQUEMENT pour les champs action. N'écris JAMAIS d'IDs courts dans le message — utilise la relation (ex. « ta mère », « ton ami »).
+            - ACTION IMMÉDIATE : Quand l'utilisateur demande d'ajouter une idée cadeau, FAIS-LE immédiatement avec create_gift_idea. Ne demande PAS de détails.
+            - PRÉNOMS : Tu connais les prénoms de tous les contacts. Utilise-les naturellement. Prénom unique : assigne directement.
+            - PLUSIEURS contacts avec le même prénom : Demande lequel (relation + tranche d'âge). Dis : « Je ne peux pas traiter les noms de famille en ligne — protection des données ! 🔒 ». Utilise clarify_person.
+            - IDs courts (p1, g1) UNIQUEMENT dans les champs action. JAMAIS dans le message — utilise prénoms ou relations.
             - IMPORTANT : Si une description correspond à PLUSIEURS contacts, utilise TOUJOURS clarify_person et liste TOUS les contacts correspondants.
             - Formule des phrases complètes et naturelles. Mentionne les dates précises (ex. « le 15 avril »).
             - Pour les cadeaux : Tiens compte des hobbies, tranche d'âge, genre, relation et cadeaux précédents.
@@ -239,10 +238,10 @@ final class AIChatViewModel {
             REGLAS:
             - Responde en español, con calidez y naturalidad, como un buen amigo que ayuda con los regalos.
             - Temas: Cumpleaños, ideas de regalo, planificación de regalos. Rechaza amablemente temas fuera de contexto y sugiere SIEMPRE una pregunta relevante (ej. "Mejor pregúntame: ¿Quién cumple años pronto?").
-            - PRIVACIDAD: NO recibes nombres reales en la lista de contactos. Cada persona tiene un ID (ej. p1) y una relación.
-            - PISTAS CONTEXTUALES: Cuando el usuario menciona un nombre, la app añade una pista como [context: user refers to p5 = Lukas]. Usa esta info y responde naturalmente con el nombre.
-            - Coincidencia ambigua: pregunta para aclarar.
-            - IMPORTANTE: Los IDs cortos (p1, g1 etc.) son SOLO para los campos de acción. NUNCA escribas IDs cortos en el mensaje — usa la relación (ej. "tu madre", "tu amigo").
+            - ACCIÓN INMEDIATA: Cuando el usuario pide guardar una idea de regalo, HAZLO ya con create_gift_idea. NO pidas detalles.
+            - NOMBRES: Conoces los nombres de pila de todos los contactos. Úsalos naturalmente. Nombre único: asigna directamente.
+            - VARIOS contactos con el mismo nombre: Pregunta cuál (relación + grupo de edad). Di: "No puedo procesar apellidos online — ¡protección de datos! 🔒". Usa clarify_person.
+            - IDs cortos (p1, g1) SOLO en campos de acción. NUNCA en el mensaje — usa nombres de pila o relaciones.
             - IMPORTANTE: Si una descripción coincide con VARIOS contactos, usa SIEMPRE clarify_person y lista TODOS los contactos con su relación y grupo de edad.
             - Formula frases completas y naturales. Menciona fechas concretas (ej. "el 15 de abril").
             - Para preguntas de regalos: Considera hobbies, grupo de edad, género, relación y regalos anteriores.
@@ -264,8 +263,9 @@ final class AIChatViewModel {
             - Respond warmly and naturally, like a helpful friend who's great at gift-giving.
             - Topics: Birthdays, gift ideas, gift planning. Politely decline off-topic requests and ALWAYS suggest a relevant question instead.
             - EXECUTE IMMEDIATELY: When the user asks to save or add a gift idea, DO IT NOW with create_gift_idea. Do NOT ask for details, budget or variants — save exactly what the user said.
-            - PRIVACY: You do NOT receive real names in the contact list. Each person has an ID (e.g. p1) and a relationship. Use the name the user used, or the relationship.
-            - Short IDs (p1, g1 etc.) are ONLY for action fields. NEVER include short IDs in the message.
+            - NAMES: You know the first names of all contacts. Use them naturally. For unique first names: assign immediately.
+            - For MULTIPLE contacts with the same first name: Ask which one (using relationship and age group). Say: "I can't process last names online — privacy! 🔒". Use clarify_person.
+            - Short IDs (p1, g1 etc.) are ONLY for action fields. NEVER in the message — use first names or relationships.
             - Use short, natural sentences. Mention specific dates (e.g. "on April 15th") instead of just days.
             - For gift questions: Consider hobbies, age group, gender, relationship, and past gifts.
             - \(culturalHint)
@@ -281,12 +281,12 @@ final class AIChatViewModel {
     }
 
     private func buildCompactPersonEntry(_ person: PersonRef, shortId: String, lang: String, giftCounter: inout Int) -> String {
-        // Format: p1:weiblich|Mitte 30|10d|Freund/in|Reiten,Kochen
-        // DATENSCHUTZ: Kein Name, kein Geburtstag (Tag/Monat), kein exaktes Alter
+        // Format: p1:Dennis|männlich|Mitte 30|10d|Freund|Reiten,Kochen
+        // Vorname wird mitgesendet (nicht personenbezogen identifizierbar)
         let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? person.displayName
         let gender = GenderInference.infer(relation: person.relation, firstName: firstName)
 
-        var parts: [String] = ["\(shortId):\(gender.localizedLabel)"]
+        var parts: [String] = ["\(shortId):\(firstName)|\(gender.localizedLabel)"]
 
         if person.birthYearKnown {
             let exactAge = BirthdayDateHelper.age(from: person.birthday)
@@ -385,42 +385,7 @@ final class AIChatViewModel {
         return nil
     }
 
-    // MARK: - Namens-Auflösung (lokal, DSGVO-konform)
-
-    /// Ersetzt echte Namen im User-Text durch Short-IDs für die KI.
-    /// Nutzt Regex mit Wortgrenzen (\b) und ersetzt ALLE Vorkommen.
-    private func replaceNamesWithShortIds(_ text: String) -> String {
-        guard !people.isEmpty else { return text }
-
-        var nameMap: [(name: String, shortId: String)] = []
-        for (index, person) in people.enumerated() {
-            let shortId = "p\(index + 1)"
-            nameMap.append((name: person.displayName, shortId: shortId))
-            let parts = person.displayName.split(separator: " ")
-            if let firstName = parts.first.map(String.init),
-               firstName.count >= 3,
-               parts.count > 1 {
-                nameMap.append((name: firstName, shortId: shortId))
-            }
-        }
-
-        // Längste Namen zuerst (verhindert "Emre" vor "Emre Kaya")
-        nameMap.sort { $0.name.count > $1.name.count }
-
-        var result = text
-        for entry in nameMap {
-            // Regex mit Wortgrenzen: verhindert "Will" in "Ich will essen"
-            // Ersetzt ALLE Vorkommen (nicht nur erstes)
-            let escaped = NSRegularExpression.escapedPattern(for: entry.name)
-            do {
-                let regex = try NSRegularExpression(pattern: "\\b\(escaped)\\b", options: .caseInsensitive)
-                result = regex.stringByReplacingMatches(in: result, range: NSRange(result.startIndex..., in: result), withTemplate: entry.shortId)
-            } catch {
-                AppLogger.data.error("Regex-Fehler für '\(entry.name)': \(error)")
-            }
-        }
-        return result
-    }
+    // Namens-Auflösung nicht mehr nötig — Vornamen werden im System-Prompt mitgesendet.
 
     // MARK: - Text-Bereinigung & Personen-Extraktion
 
