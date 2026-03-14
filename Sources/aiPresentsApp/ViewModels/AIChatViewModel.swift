@@ -392,34 +392,35 @@ final class AIChatViewModel {
 
     /// Ersetzt echte Namen im User-Text durch Short-IDs für die KI.
     /// "Trag Buchgutschein für Emre ein" → "Trag Buchgutschein für p5 ein"
-    /// Die KI kennt Short-IDs perfekt — kein Hint oder Injection nötig.
     private func replaceNamesWithShortIds(_ text: String) -> String {
-        var result = text
+        AppLogger.data.info("replaceNames: input='\(text)', personIdMap.count=\(personIdMap.count), people.count=\(people.count)")
 
-        // Sortiert nach Namenslänge (längste zuerst), damit "Emre Kaya" vor "Emre" ersetzt wird
+        var result = text
         var nameMap: [(name: String, shortId: String)] = []
 
         for (shortId, uuid) in personIdMap {
-            guard let person = people.first(where: { $0.id == uuid }) else { continue }
-            // Vollname
+            guard let person = people.first(where: { $0.id == uuid }) else {
+                AppLogger.data.info("replaceNames: \(shortId) → UUID not found in people")
+                continue
+            }
             nameMap.append((name: person.displayName, shortId: shortId))
-            // Vorname (nur wenn >= 3 Zeichen, um Kurzformen wie "Li" zu vermeiden)
             let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? ""
             if firstName.count >= 3 && firstName != person.displayName {
                 nameMap.append((name: firstName, shortId: shortId))
             }
         }
 
-        // Längste Namen zuerst ersetzen (verhindert Teil-Ersetzungen)
         nameMap.sort { $0.name.count > $1.name.count }
+        AppLogger.data.info("replaceNames: nameMap has \(nameMap.count) entries, first 5: \(nameMap.prefix(5).map { "\($0.name)→\($0.shortId)" })")
 
         for entry in nameMap {
-            // Case-insensitive Ersetzung
             if let range = result.range(of: entry.name, options: .caseInsensitive) {
+                AppLogger.data.info("replaceNames: MATCH '\(entry.name)' → '\(entry.shortId)'")
                 result.replaceSubrange(range, with: entry.shortId)
             }
         }
 
+        AppLogger.data.info("replaceNames: output='\(result)'")
         return result
     }
 
