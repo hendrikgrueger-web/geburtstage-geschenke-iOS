@@ -1,14 +1,31 @@
 import StoreKit
+import SwiftData
 import SwiftUI
 
-/// Paywall-Sheet mit 3 Preisoptionen (Monatlich, Jährlich, Lifetime), Trial-Banner und Restore-Funktion.
+/// Paywall-Sheet mit 3 Preisoptionen (Jährlich, Monatlich, Lifetime), Trial-Banner und Restore-Funktion.
 struct PaywallView: View {
 
     @EnvironmentObject private var subscriptionManager: SubscriptionManager
     @Environment(\.dismiss) private var dismiss
 
+    @Query private var people: [PersonRef]
+
     @State private var isPurchasing = false
     @State private var errorMessage: String?
+
+    /// Produkte in Wunschreihenfolge: Yearly → Monthly → Lifetime
+    private var sortedProducts: [Product] {
+        let order: [String] = [
+            SubscriptionManager.ProductID.yearly.rawValue,
+            SubscriptionManager.ProductID.monthly.rawValue,
+            SubscriptionManager.ProductID.lifetime.rawValue,
+        ]
+        return subscriptionManager.products.sorted { a, b in
+            let ai = order.firstIndex(of: a.id) ?? Int.max
+            let bi = order.firstIndex(of: b.id) ?? Int.max
+            return ai < bi
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -59,16 +76,51 @@ struct PaywallView: View {
                     .font(.system(size: 36))
                     .foregroundStyle(AppColor.accent)
             }
-            Text("Alle Features freischalten")
-                .font(.title2.bold())
-                .foregroundStyle(.primary)
-                .multilineTextAlignment(.center)
-            Text("Erhalte unbegrenzten Zugriff auf KI-Geschenkvorschläge, Erinnerungen und alle Premium-Features.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
+
+            if people.count > 0 {
+                Text("Du hast \(people.count) Geburtstage gespeichert")
+                    .font(.title2.bold())
+                    .foregroundStyle(.primary)
+                    .multilineTextAlignment(.center)
+            } else {
+                Text("Alle Features freischalten")
+                    .font(.title2.bold())
+                    .foregroundStyle(.primary)
+                    .multilineTextAlignment(.center)
+            }
+
+            featureList
         }
         .padding(.top, 8)
+    }
+
+    private var featureList: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            featureRow(icon: "person.crop.circle.badge.plus", text: "Unbegrenzt Kontakte importieren")
+            featureRow(icon: "sparkles", text: "KI-Geschenkvorschläge")
+            featureRow(icon: "pencil", text: "Geschenkideen bearbeiten & verwalten")
+            featureRow(icon: "bell.badge", text: "Smarte Erinnerungen")
+            featureRow(icon: "rectangle.on.rectangle", text: "Homescreen Widget")
+            featureRow(icon: "message", text: "KI-Geburtstagsnachrichten")
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 8)
+        .padding(.top, 4)
+    }
+
+    private func featureRow(icon: String, text: String) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundStyle(AppColor.success)
+                .font(.system(size: 16))
+            Image(systemName: icon)
+                .foregroundStyle(.secondary)
+                .font(.system(size: 14))
+                .frame(width: 18)
+            Text(text)
+                .font(.subheadline)
+                .foregroundStyle(.primary)
+        }
     }
 
     // MARK: - Trial Banner
@@ -111,7 +163,7 @@ struct PaywallView: View {
                     .frame(maxWidth: .infinity, minHeight: 100)
                     .multilineTextAlignment(.center)
             } else {
-                ForEach(subscriptionManager.products, id: \.id) { product in
+                ForEach(sortedProducts, id: \.id) { product in
                     ProductCard(
                         product: product,
                         isPurchasing: isPurchasing,
@@ -191,7 +243,7 @@ private struct ProductCard: View {
     private var badge: String? {
         switch product.id {
         case SubscriptionManager.ProductID.yearly.rawValue:
-            return String(localized: "Bester Preis")
+            return String(localized: "Meistgewählt")
         case SubscriptionManager.ProductID.lifetime.rawValue:
             return String(localized: "Einmalig")
         default:
