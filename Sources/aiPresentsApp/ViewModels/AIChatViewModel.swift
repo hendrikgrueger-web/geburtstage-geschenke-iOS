@@ -384,18 +384,16 @@ final class AIChatViewModel {
 
     // MARK: - Text-Bereinigung & Personen-Extraktion
 
-    /// Ersetzt Short-IDs (p1, p2 …) im Nachrichtentext durch den Display-Namen der Person.
+    /// Entfernt Short-IDs aus dem Nachrichtentext.
+    /// Häufige KI-Muster: "Deine Tante (p33)" → "Deine Tante", "p33" → Personenname
     private func cleanMessageText(_ text: String) -> String {
-        let pattern = /\bp(\d+)\b/
         var cleaned = text
-        // Matches in umgekehrter Reihenfolge ersetzen, damit Indizes stabil bleiben
-        let matches = text.matches(of: pattern)
-        for match in matches.reversed() {
-            let shortId = "p\(match.1)"
-            if let uuid = personIdMap[shortId],
-               let person = people.first(where: { $0.id == uuid }) {
-                cleaned = cleaned.replacingOccurrences(of: String(match.0), with: person.displayName)
-            }
+        // 1. Klammer-IDs komplett entfernen: "(p33)" → "" (Beziehung steht schon im Text)
+        cleaned = cleaned.replacing(/\s*\(p\d+\)/, with: "")
+        // 2. Alleinstehende IDs durch Display-Namen ersetzen: "p33 hat..." → "Name hat..."
+        for (shortId, uuid) in personIdMap {
+            guard let person = people.first(where: { $0.id == uuid }) else { continue }
+            cleaned = cleaned.replacing(try! Regex("\\b\(shortId)\\b"), with: person.displayName)
         }
         return cleaned
     }
