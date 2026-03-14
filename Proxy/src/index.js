@@ -11,7 +11,7 @@
  *   wrangler deploy
  */
 
-const ALLOWED_MODELS = ["google/gemini-3.1-flash-lite-preview"];
+const ALLOWED_MODELS = ["openai/gpt-4.1-nano", "google/gemini-3.1-flash-lite-preview"];
 const MAX_PAYLOAD_BYTES = 50_000;
 const MAX_MESSAGES = 50;
 const MAX_CONTENT_LENGTH = 10_000;
