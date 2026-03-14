@@ -108,9 +108,10 @@ struct AIChatView: View {
                     }
 
                     ForEach(viewModel.messages) { message in
+                        let isLastAssistant = message.role == .assistant && message.id == viewModel.messages.last(where: { $0.role == .assistant })?.id
                         ChatBubbleView(
                             message: message,
-                            clarifyOptions: message.action?.type == .clarifyPerson ? viewModel.clarifyOptions : [],
+                            clarifyOptions: isLastAssistant ? viewModel.mentionedPersons : [],
                             onActionTap: { action in
                                 handleActionTap(action)
                             },
@@ -228,7 +229,7 @@ struct AIChatView: View {
     }
 
     private func handleClarifySelection(_ person: PersonRef) {
-        viewModel.clarifyOptions = []
+        viewModel.mentionedPersons = []
         inputText = person.displayName
         sendMessage()
     }

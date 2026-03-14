@@ -15,8 +15,8 @@ final class AIChatViewModel {
     var pendingGiftIdeaNote: String = ""
     var pendingSuggestionsPerson: PersonRef?
 
-    /// Matching Personen bei clarify_person — wird als tippbare Buttons angezeigt.
-    var clarifyOptions: [PersonRef] = []
+    /// Erwähnte Personen in der letzten AI-Antwort — wird als tippbare Karten angezeigt (max 3).
+    var mentionedPersons: [PersonRef] = []
 
     private var people: [PersonRef] = []
     private var giftIdeas: [GiftIdea] = []
@@ -60,8 +60,17 @@ final class AIChatViewModel {
             let response = try await AIService.shared.callOpenRouterChat(messages: apiMessages)
 
             let action = parseAction(from: response.action)
-            let assistantMessage = ChatMessage(role: .assistant, content: response.message, action: action)
+            // Short-IDs aus Nachrichtentext entfernen (p1 → Beziehungsname)
+            let cleanedMessage = cleanMessageText(response.message)
+            let assistantMessage = ChatMessage(role: .assistant, content: cleanedMessage, action: action)
             messages.append(assistantMessage)
+
+            // Erwähnte Personen aus Nachricht + Action-Daten extrahieren (max 3)
+            let actionJson = [response.action?.personId, response.action?.personName, response.action?.giftIdeaId]
+                .compactMap { $0 }
+                .joined(separator: " ")
+            let fullSearchText = cleanedMessage + " " + response.message + " " + actionJson
+            mentionedPersons = extractMentionedPersons(from: fullSearchText, limit: 3)
 
             if let action {
                 await processAction(action)
@@ -373,6 +382,43 @@ final class AIChatViewModel {
         return nil
     }
 
+    // MARK: - Text-Bereinigung & Personen-Extraktion
+
+    /// Ersetzt Short-IDs (p1, p2 …) im Nachrichtentext durch den Display-Namen der Person.
+    private func cleanMessageText(_ text: String) -> String {
+        let pattern = /\bp(\d+)\b/
+        var cleaned = text
+        // Matches in umgekehrter Reihenfolge ersetzen, damit Indizes stabil bleiben
+        let matches = text.matches(of: pattern)
+        for match in matches.reversed() {
+            let shortId = "p\(match.1)"
+            if let uuid = personIdMap[shortId],
+               let person = people.first(where: { $0.id == uuid }) {
+                cleaned = cleaned.replacingOccurrences(of: String(match.0), with: person.displayName)
+            }
+        }
+        return cleaned
+    }
+
+    /// Extrahiert erwähnte Personen aus einem Text anhand von Short-IDs (p\d+), max `limit` Einträge.
+    private func extractMentionedPersons(from text: String, limit: Int = 3) -> [PersonRef] {
+        let pattern = /\bp(\d+)\b/
+        var found: [PersonRef] = []
+        var seen: Set<UUID> = []
+
+        for match in text.matches(of: pattern) {
+            let shortId = "p\(match.1)"
+            if let uuid = personIdMap[shortId],
+               !seen.contains(uuid),
+               let person = people.first(where: { $0.id == uuid }) {
+                found.append(person)
+                seen.insert(uuid)
+                if found.count >= limit { break }
+            }
+        }
+        return found
+    }
+
     func processAction(_ action: ChatAction) async {
         guard let data = action.data else { return }
 
@@ -402,12 +448,18 @@ final class AIChatViewModel {
             HapticFeedback.success()
 
         case .clarifyPerson:
-            // Finde alle Personen deren Name im letzten User-Message erwähnt wurde
+            // Bei clarify_person: Personen aus User-Nachricht per Name matchen und zu mentionedPersons hinzufügen
             if let lastUserMessage = messages.last(where: { $0.role == .user })?.content.lowercased() {
-                clarifyOptions = people.filter { person in
+                let nameMatched = people.filter { person in
                     let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? person.displayName
                     return lastUserMessage.contains(firstName.lowercased())
                 }
+                // Name-Matches mit Short-ID-Matches zusammenführen (Duplikate entfernen)
+                var merged = mentionedPersons
+                for p in nameMatched where !merged.contains(where: { $0.id == p.id }) {
+                    merged.append(p)
+                }
+                mentionedPersons = Array(merged.prefix(3))
             }
 
         case .query, .offTopic, .none:

@@ -25,8 +25,8 @@ struct ChatBubbleView: View {
                 if let action = message.action, action.type == .openSuggestions {
                     actionButton(action: action)
                 }
-                // Clarify-Buttons: tippbare Personen-Auswahl
-                if message.action?.type == .clarifyPerson, !clarifyOptions.isEmpty {
+                // Personen-Karten: tippbare Karten für alle erwähnten Personen
+                if !clarifyOptions.isEmpty {
                     VStack(spacing: 6) {
                         ForEach(clarifyOptions, id: \.id) { person in
                             Button {
