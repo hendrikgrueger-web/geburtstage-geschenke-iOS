@@ -106,29 +106,7 @@ struct AddGiftIdeaSheet: View {
                 }
 
                 Section {
-                    VStack(spacing: 8) {
-                        HStack {
-                            Text("Geschätzter Preis")
-                            Spacer()
-                            Text(CurrencyManager.shared.formatAmountOrEmpty(estimatedPrice))
-                                .foregroundStyle(estimatedPrice > 0 ? AppColor.primary : .secondary)
-                                .fontWeight(.semibold)
-                        }
-
-                        Slider(value: $estimatedPrice,
-                               in: AppConfig.Budget.sliderMinimum...AppConfig.Budget.sliderMaximum,
-                               step: AppConfig.Budget.sliderStep) {
-                            Text("Geschätzter Preis")
-                        } minimumValueLabel: {
-                            Text(CurrencyManager.shared.formatAmount(AppConfig.Budget.sliderMinimum)).font(.caption2).foregroundStyle(.secondary)
-                        } maximumValueLabel: {
-                            Text(CurrencyManager.shared.formatAmount(AppConfig.Budget.sliderMaximum)).font(.caption2).foregroundStyle(.secondary)
-                        }
-                        .tint(AppColor.primary)
-                        .accessibilityLabel(String(localized: "Geschätzter Preis"))
-                        .accessibilityValue(CurrencyManager.shared.formatAmount(estimatedPrice))
-                    }
-                    .padding(.vertical, 4)
+                    NonLinearPriceSlider(price: $estimatedPrice)
                 }
 
                 Section("Tags") {
