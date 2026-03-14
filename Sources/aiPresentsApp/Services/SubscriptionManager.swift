@@ -1,5 +1,6 @@
 import StoreKit
 import SwiftUI
+import UserNotifications
 import os
 
 /// Verwaltet StoreKit 2 Käufe, Abonnements und den 3-Monats-Trial.
@@ -23,7 +24,7 @@ final class SubscriptionManager: ObservableObject {
     // MARK: - Trial Constants
 
     private static let trialStartKey = "subscriptionTrialStartDate"
-    private static let trialDurationMonths = 3
+    private static let trialDurationDays = 14
 
     // MARK: - Trial Properties
 
@@ -33,7 +34,7 @@ final class SubscriptionManager: ObservableObject {
 
     var trialEndDate: Date {
         guard let start = trialStartDate else { return .distantPast }
-        return Calendar.current.date(byAdding: .month, value: Self.trialDurationMonths, to: start) ?? .distantPast
+        return Calendar.current.date(byAdding: .day, value: Self.trialDurationDays, to: start) ?? .distantPast
     }
 
     var isInTrial: Bool {
@@ -63,6 +64,7 @@ final class SubscriptionManager: ObservableObject {
 
     init() {
         startTrialIfNeeded()
+        scheduleTrialReminders()
         transactionListener = listenForTransactions()
         Task { await updatePurchasedProducts() }
     }
@@ -76,6 +78,51 @@ final class SubscriptionManager: ObservableObject {
         if UserDefaults.standard.object(forKey: Self.trialStartKey) == nil {
             UserDefaults.standard.set(Date(), forKey: Self.trialStartKey)
             AppLogger.data.info("Trial gestartet")
+        }
+    }
+
+    // MARK: - Trial Notifications
+
+    /// Plant Push-Benachrichtigungen für 7 Tage und 1 Tag vor Trial-Ende.
+    func scheduleTrialReminders() {
+        guard isInTrial else { return }
+        let center = UNUserNotificationCenter.current()
+
+        // Bestehende Trial-Notifications entfernen
+        center.removePendingNotificationRequests(withIdentifiers: ["trial-7days", "trial-1day"])
+
+        let trialEnd = trialEndDate
+
+        // 7 Tage vorher
+        if let sevenDaysBefore = Calendar.current.date(byAdding: .day, value: -7, to: trialEnd),
+           sevenDaysBefore > Date() {
+            let content = UNMutableNotificationContent()
+            content.title = String(localized: "Testzeitraum endet bald")
+            content.body = String(localized: "Noch 7 Tage kostenlos. Sichere dir jetzt alle Features!")
+            content.sound = .default
+
+            let trigger = UNCalendarNotificationTrigger(
+                dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour], from: sevenDaysBefore),
+                repeats: false
+            )
+            center.add(UNNotificationRequest(identifier: "trial-7days", content: content, trigger: trigger))
+            AppLogger.notifications.info("Trial-Reminder (7 Tage) geplant: \(sevenDaysBefore)")
+        }
+
+        // 1 Tag vorher
+        if let oneDayBefore = Calendar.current.date(byAdding: .day, value: -1, to: trialEnd),
+           oneDayBefore > Date() {
+            let content = UNMutableNotificationContent()
+            content.title = String(localized: "Letzter Tag!")
+            content.body = String(localized: "Morgen endet dein Testzeitraum. Upgrade für vollen Zugriff!")
+            content.sound = .default
+
+            let trigger = UNCalendarNotificationTrigger(
+                dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour], from: oneDayBefore),
+                repeats: false
+            )
+            center.add(UNNotificationRequest(identifier: "trial-1day", content: content, trigger: trigger))
+            AppLogger.notifications.info("Trial-Reminder (1 Tag) geplant: \(oneDayBefore)")
         }
     }
 
