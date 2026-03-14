@@ -158,6 +158,11 @@ struct AddGiftIdeaSheet: View {
             }
             .navigationTitle("Geschenk-Idee")
             .navigationBarTitleDisplayMode(.inline)
+            .safeAreaInset(edge: .top) {
+                Text("für \(person.displayName)")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Abbrechen") {
