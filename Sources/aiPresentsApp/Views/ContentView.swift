@@ -23,6 +23,9 @@ struct ContentView: View {
                 selectedPerson: $selectedPerson
             )
             .navigationSplitViewColumnWidth(min: 320, ideal: 380, max: 440)
+            .navigationDestination(for: PersonRef.self) { person in
+                PersonDetailView(person: person)
+            }
         } detail: {
             if let person = selectedPerson {
                 PersonDetailView(person: person)
