@@ -9,6 +9,7 @@ struct ContactsImportView: View {
     @State private var importError: String?
     @EnvironmentObject private var subscriptionManager: SubscriptionManager
     @State private var showingPaywall = false
+    @State private var showingPaywallAfterImport = false
 
     var body: some View {
         NavigationStack {
@@ -116,6 +117,11 @@ struct ContactsImportView: View {
         .sheet(isPresented: $showingPaywall) {
             PaywallView()
         }
+        .sheet(isPresented: $showingPaywallAfterImport, onDismiss: {
+            dismiss()
+        }) {
+            PaywallView()
+        }
     }
 
     private func importFromContacts() {
@@ -166,7 +172,14 @@ struct ContactsImportView: View {
                     isImporting = false
                 }
                 try? await Task.sleep(nanoseconds: 600_000_000)
-                await MainActor.run { dismiss() }
+                await MainActor.run {
+                    if !UserDefaults.standard.bool(forKey: "hasSeenPostImportPaywall") {
+                        UserDefaults.standard.set(true, forKey: "hasSeenPostImportPaywall")
+                        showingPaywallAfterImport = true
+                    } else {
+                        dismiss()
+                    }
+                }
             } catch {
                 await MainActor.run {
                     isImporting = false
