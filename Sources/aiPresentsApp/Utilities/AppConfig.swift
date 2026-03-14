@@ -29,7 +29,7 @@ struct AppConfig {
             let secret = proxySecret
             return !secret.isEmpty && secret != "your-app-secret-here" && secret.count > 8
         }
-        static let model = "openai/gpt-4.1-nano"
+        static let model = "stepfun/step-3.5-flash:free"
         /// URL des Cloudflare Worker Proxy (POST /chat → OpenRouter).
         static let openRouterBaseURL = "https://ai-presents-proxy.hendrikgrueger.workers.dev/chat"
     }
