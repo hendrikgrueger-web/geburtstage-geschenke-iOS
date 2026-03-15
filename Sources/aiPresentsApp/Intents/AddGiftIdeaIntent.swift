@@ -1,4 +1,5 @@
 import AppIntents
+import StoreKit
 import SwiftData
 import Foundation
 
@@ -19,6 +20,10 @@ struct AddGiftIdeaIntent: AppIntent {
     var giftTitle: String
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
+        guard await hasFullAccess() else {
+            return .result(dialog: IntentDialog(stringLiteral: String(localized: "Upgrade für vollen Zugriff")))
+        }
+
         let container = try makeIntentsModelContainer()
         let context = ModelContext(container)
 
@@ -41,8 +46,32 @@ struct AddGiftIdeaIntent: AppIntent {
         )
         context.insert(newIdea)
         try context.save()
+        await WidgetDataService.shared.updateWidgetData(from: context)
 
         let dialogText = String(localized: "'\(giftTitle)' als Geschenkidee für \(person.displayName) eingetragen!")
         return .result(dialog: IntentDialog(stringLiteral: dialogText))
+    }
+
+    private nonisolated func hasFullAccess() async -> Bool {
+        if isTrialActive() {
+            return true
+        }
+
+        let productIDs = Set(SubscriptionManager.ProductID.allCases.map(\.rawValue))
+        for await result in StoreKit.Transaction.currentEntitlements {
+            guard case .verified(let transaction) = result else { continue }
+            if productIDs.contains(transaction.productID) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private nonisolated func isTrialActive(now: Date = Date()) -> Bool {
+        guard let trialStartDate = UserDefaults.standard.object(forKey: "subscriptionTrialStartDate") as? Date,
+              let trialEndDate = Calendar.current.date(byAdding: .day, value: 14, to: trialStartDate) else {
+            return false
+        }
+        return now < trialEndDate
     }
 }

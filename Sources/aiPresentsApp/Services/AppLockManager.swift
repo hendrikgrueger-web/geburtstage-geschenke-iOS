@@ -50,7 +50,7 @@ final class AppLockManager {
 
         do {
             let success = try await context.evaluatePolicy(
-                .deviceOwnerAuthenticationWithBiometrics,
+                .deviceOwnerAuthentication,
                 localizedReason: String(localized: "Entsperre die App, um deine Geschenkideen zu sehen")
             )
             if success {

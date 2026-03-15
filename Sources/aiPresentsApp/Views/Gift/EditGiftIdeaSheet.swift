@@ -179,6 +179,7 @@ struct EditGiftIdeaSheet: View {
             .filter { !$0.isEmpty }
 
         idea.tags = tags
+        WidgetDataService.shared.updateWidgetData(from: modelContext)
     }
 
     private func statusText(for status: GiftStatus) -> String {

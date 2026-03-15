@@ -62,6 +62,7 @@ struct GiftTransitionService {
 
         if transitionCount > 0 {
             AppLogger.data.info("GiftTransitionService: \(transitionCount) Geschenk(e) automatisch auf verschenkt gesetzt")
+            WidgetDataService.shared.updateWidgetData(from: context)
         }
     }
 }

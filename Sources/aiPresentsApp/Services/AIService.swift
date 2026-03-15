@@ -242,12 +242,11 @@ struct AIService {
 
         let responseData = try await callOpenRouter(system: systemPrompt, user: userPrompt)
 
-        guard let json = try? JSONDecoder().decode(GiftSuggestionsJSON.self, from: responseData) else {
+        guard let suggestions = AIService.decodeGiftSuggestions(from: responseData) else {
             AppLogger.data.error("JSON-Parse-Fehler bei Gift Ideas")
             throw AIError.invalidResponse
         }
-
-        return json.suggestions.map { GiftSuggestion(title: $0.title, reason: $0.reason) }
+        return suggestions
     }
 
     private func generateBirthdayMessageWithOpenRouter(context: BirthdayContext) async throws -> BirthdayMessage {
@@ -307,14 +306,11 @@ struct AIService {
 
         let responseData = try await callOpenRouter(system: systemPrompt, user: userPrompt)
 
-        guard let json = try? JSONDecoder().decode(BirthdayMessageJSON.self, from: responseData) else {
+        guard let message = AIService.decodeBirthdayMessage(from: responseData, senderName: context.senderName) else {
             AppLogger.data.error("JSON-Parse-Fehler bei Birthday Message")
             throw AIError.invalidResponse
         }
-
-        // Absender-Name lokal anhängen (wurde NICHT an API gesendet)
-        let signature = context.senderName.map { "\n\n\($0)" } ?? ""
-        return BirthdayMessage(greeting: json.greeting, body: json.body + signature)
+        return message
     }
 
     // MARK: - Chat API (Multi-Turn)
@@ -371,6 +367,32 @@ struct AIService {
             return filtered.joined(separator: "\n")
         }
         return trimmed
+    }
+
+    static func decodeGiftSuggestions(from responseData: Data) -> [GiftSuggestion]? {
+        guard let rawContent = String(data: responseData, encoding: .utf8) else {
+            return nil
+        }
+        let cleanedContent = extractJSON(from: rawContent)
+        guard let contentData = cleanedContent.data(using: .utf8),
+              let json = try? JSONDecoder().decode(GiftSuggestionsJSON.self, from: contentData) else {
+            return nil
+        }
+        return json.suggestions.map { GiftSuggestion(title: $0.title, reason: $0.reason) }
+    }
+
+    static func decodeBirthdayMessage(from responseData: Data, senderName: String? = nil) -> BirthdayMessage? {
+        guard let rawContent = String(data: responseData, encoding: .utf8) else {
+            return nil
+        }
+        let cleanedContent = extractJSON(from: rawContent)
+        guard let contentData = cleanedContent.data(using: .utf8),
+              let json = try? JSONDecoder().decode(BirthdayMessageJSON.self, from: contentData) else {
+            return nil
+        }
+
+        let signature = senderName.map { "\n\n\($0)" } ?? ""
+        return BirthdayMessage(greeting: json.greeting, body: json.body + signature)
     }
 
     // MARK: - Single-Turn API

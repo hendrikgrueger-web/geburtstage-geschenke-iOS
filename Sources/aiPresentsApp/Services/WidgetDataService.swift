@@ -22,6 +22,11 @@ final class WidgetDataService {
 
     private init() {}
 
+    static func refresh(using context: ModelContext?) {
+        guard let context else { return }
+        shared.updateWidgetData(from: context)
+    }
+
     /// Schreibt einen JSON-Snapshot der nächsten Geburtstage in die App Group UserDefaults
     func updateWidgetData(from context: ModelContext) {
         let descriptor = FetchDescriptor<PersonRef>()
@@ -29,6 +34,10 @@ final class WidgetDataService {
             AppLogger.data.error("WidgetDataService: Konnte Personen nicht laden")
             return
         }
+
+        let giftDescriptor = FetchDescriptor<GiftIdea>()
+        let allIdeas = (try? context.fetch(giftDescriptor)) ?? []
+        let ideasByPerson = Dictionary(grouping: allIdeas, by: \.personId)
 
         let today = Calendar.current.startOfDay(for: Date())
 
@@ -48,7 +57,7 @@ final class WidgetDataService {
                 nextAge = (BirthdayCalculator.age(for: person.birthday, on: today) ?? 0) + 1
             }
 
-            let giftStatus = computeGiftStatus(for: person)
+            let giftStatus = computeGiftStatus(skipGift: person.skipGift, ideas: ideasByPerson[person.id] ?? [])
 
             return WidgetBirthdayEntry(
                 id: person.id,
@@ -98,12 +107,12 @@ final class WidgetDataService {
     }
 
     /// Berechnet den Gift-Status-String für eine Person (konsistent mit BirthdayRow)
-    private func computeGiftStatus(for person: PersonRef) -> String {
-        if person.skipGift {
+    private func computeGiftStatus(skipGift: Bool, ideas: [GiftIdea]) -> String {
+        if skipGift {
             return "skip"
         }
 
-        guard let ideas = person.giftIdeas, !ideas.isEmpty else {
+        guard !ideas.isEmpty else {
             return "none"
         }
 

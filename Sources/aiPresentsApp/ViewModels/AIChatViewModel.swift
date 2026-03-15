@@ -448,6 +448,7 @@ final class AIChatViewModel {
             let oldStatus = idea.status
             idea.statusLog.append("\(dateString) - \(oldStatus.rawValue) \u{2192} \(newStatus.rawValue)")
             idea.status = newStatus
+            WidgetDataService.refresh(using: modelContext)
             HapticFeedback.success()
 
         case .clarifyPerson:

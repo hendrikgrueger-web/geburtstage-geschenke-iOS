@@ -456,7 +456,7 @@ struct SettingsView: View {
                 toast = ToastItem.warning(String(localized: "Berechtigung verweigert"), message: String(localized: "Bitte erlaube Benachrichtigungen in den Systemeinstellungen."))
             }
         } else {
-            await reminderManager.cancelAllReminders()
+            await reminderManager.cancelBirthdayReminders()
             toast = ToastItem.info(String(localized: "Erinnerungen deaktiviert"), message: String(localized: "Du erhältst keine Benachrichtigungen mehr."))
         }
     }
@@ -465,7 +465,7 @@ struct SettingsView: View {
         isRefreshingReminders = true
         HapticFeedback.light()
 
-        await reminderManager.cancelAllReminders()
+        await reminderManager.cancelBirthdayReminders()
         await reminderManager.scheduleAllReminders()
 
         isRefreshingReminders = false
@@ -486,6 +486,7 @@ struct SettingsView: View {
             try modelContext.delete(model: GiftIdea.self)
             try modelContext.delete(model: PersonRef.self)
             try modelContext.delete(model: SuggestionFeedback.self)
+            WidgetDataService.shared.updateWidgetData(from: modelContext)
             AppLogger.data.info("All data reset successfully")
             toast = ToastItem.success(String(localized: "Daten gelöscht"), message: String(localized: "Alle Kontakte und Geschenkideen wurden entfernt."))
         } catch {

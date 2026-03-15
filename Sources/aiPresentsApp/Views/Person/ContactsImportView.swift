@@ -169,6 +169,7 @@ struct ContactsImportView: View {
                     }
 
                     for person in newPeople { modelContext.insert(person) }
+                    WidgetDataService.shared.updateWidgetData(from: modelContext)
                     isImporting = false
                 }
                 try? await Task.sleep(nanoseconds: 600_000_000)
@@ -193,6 +194,7 @@ struct ContactsImportView: View {
         isImporting = true
         importError = nil
         SampleDataService.createSampleData(in: modelContext)
+        WidgetDataService.shared.updateWidgetData(from: modelContext)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             isImporting = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {

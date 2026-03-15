@@ -3,6 +3,11 @@ import SwiftData
 
 struct UpcomingBirthdayHero: View {
     @Query private var allPeople: [PersonRef]
+    @Query private var giftIdeas: [GiftIdea]
+
+    private var giftIdeasByPerson: [UUID: [GiftIdea]] {
+        Dictionary(grouping: giftIdeas, by: \.personId)
+    }
 
     private var upcomingBirthdays: [PersonRef] {
         let today = Calendar.current.startOfDay(for: Date())
@@ -49,7 +54,7 @@ struct UpcomingBirthdayHero: View {
             Spacer()
 
             HStack(spacing: 8) {
-                if let giftCount = person.giftIdeas?.count, giftCount > 0 {
+                if let giftCount = giftIdeasByPerson[person.id]?.count, giftCount > 0 {
                     HStack(spacing: 3) {
                         Image(systemName: "lightbulb.fill")
                             .font(.caption2)
@@ -79,10 +84,18 @@ struct UpcomingBirthdayHero: View {
 
     private func birthdayInfo(for person: PersonRef) -> String {
         let today = Calendar.current.startOfDay(for: Date())
-        guard let age = BirthdayCalculator.age(for: person.birthday, on: today) else {
-            return ""
-        }
         let daysUntil = daysUntilBirthday(for: person)
+
+        guard person.birthYearKnown,
+              let age = BirthdayCalculator.age(for: person.birthday, on: today) else {
+            if daysUntil == 0 {
+                return String(localized: "Heute Geburtstag!")
+            } else if daysUntil == 1 {
+                return String(localized: "Morgen Geburtstag")
+            } else {
+                return String(localized: "In \(daysUntil) Tagen")
+            }
+        }
 
         if daysUntil == 0 {
             return String(localized: "Heute wird \(age)!")

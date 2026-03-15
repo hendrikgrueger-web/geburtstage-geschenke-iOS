@@ -87,7 +87,7 @@ struct AccessibilityHelper {
     }
 
     /// Creates a complete accessibility label for a person
-    static func personLabel(_ person: PersonRef, daysUntil: Int?) -> String {
+    static func personLabel(_ person: PersonRef, daysUntil: Int?, giftCount: Int? = nil) -> String {
         var label = person.displayName
         label += ", " + String(localized: "Beziehung: \(person.relation)")
 
@@ -96,7 +96,7 @@ struct AccessibilityHelper {
             label += ", " + String(localized: "Nächster Geburtstag: \(daysFormatted)")
         }
 
-        if let giftCount = person.giftIdeas?.count, giftCount > 0 {
+        if let giftCount, giftCount > 0 {
             let suffix = giftCount == 1
                 ? String(localized: "Geschenkidee")
                 : String(localized: "Geschenkideen")

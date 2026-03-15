@@ -195,6 +195,7 @@ struct AddGiftIdeaSheet: View {
         )
 
         modelContext.insert(idea)
+        WidgetDataService.shared.updateWidgetData(from: modelContext)
     }
 
     private func statusText(for status: GiftStatus) -> String {

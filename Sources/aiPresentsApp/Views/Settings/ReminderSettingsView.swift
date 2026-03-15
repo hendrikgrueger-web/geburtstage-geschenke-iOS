@@ -197,7 +197,7 @@ struct ReminderSettingsView: View {
 
         // Reschedule reminders with new settings
         Task {
-            await reminderManager.cancelAllReminders()
+            await reminderManager.cancelBirthdayReminders()
             if enabled {
                 await reminderManager.scheduleAllReminders()
             }

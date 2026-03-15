@@ -19,6 +19,14 @@ struct FormatterHelper {
         return formatter
     }()
 
+    /// Shared birthday formatter without year for contacts where the birth year is unknown.
+    static let birthdayMonthDayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.setLocalizedDateFormatFromTemplate("MMMMd")
+        return formatter
+    }()
+
     /// Kurzes Log-Datum (dd.MM.yy) für Status-Logs.
     static let shortLogDateFormatter: DateFormatter = {
         let f = DateFormatter()
@@ -49,6 +57,13 @@ struct FormatterHelper {
     /// Formats a date for display (medium style)
     static func formatDate(_ date: Date) -> String {
         return displayDateFormatter.string(from: date)
+    }
+
+    /// Formats birthdays while respecting contacts without a known birth year.
+    static func formatBirthday(_ date: Date, birthYearKnown: Bool) -> String {
+        birthYearKnown
+            ? displayDateFormatter.string(from: date)
+            : birthdayMonthDayFormatter.string(from: date)
     }
 
     /// Formats a date in short format

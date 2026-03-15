@@ -4,6 +4,7 @@ import UserNotifications
 
 @MainActor
 class ReminderManager: ObservableObject {
+    private static let birthdayNotificationPrefix = "birthday_"
     private let modelContext: ModelContext
     private let center = UNUserNotificationCenter.current()
 
@@ -52,7 +53,7 @@ class ReminderManager: ObservableObject {
             AppLogger.reminder.debug("Reminder rule disabled or not found")
             return
         }
-        await cancelAllReminders()
+        await cancelBirthdayReminders()
         let descriptor = FetchDescriptor<PersonRef>()
         guard let people = try? modelContext.fetch(descriptor) else { return }
         for person in people { await scheduleReminders(for: person, rule: rule) }
@@ -127,7 +128,7 @@ class ReminderManager: ObservableObject {
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         let request = UNNotificationRequest(
-            identifier: "birthday_\(person.id.uuidString)_\(leadDay)_\(nextBirthday.timeIntervalSince1970)",
+            identifier: "\(Self.birthdayNotificationPrefix)\(person.id.uuidString)_\(leadDay)_\(nextBirthday.timeIntervalSince1970)",
             content: content, trigger: trigger)
 
         do {
@@ -152,10 +153,19 @@ class ReminderManager: ObservableObject {
     func cancelReminders(for person: PersonRef) async {
         let requests = await center.pendingNotificationRequests()
         let idsToRemove = requests
-            .filter { $0.identifier.contains("birthday_\(person.id.uuidString)") }
+            .filter { $0.identifier.contains("\(Self.birthdayNotificationPrefix)\(person.id.uuidString)") }
             .map { $0.identifier }
         center.removePendingNotificationRequests(withIdentifiers: idsToRemove)
         AppLogger.reminder.debug("Cancelled reminders for \(person.displayName)")
+    }
+
+    func cancelBirthdayReminders() async {
+        let requests = await center.pendingNotificationRequests()
+        let idsToRemove = requests
+            .map(\.identifier)
+            .filter { $0.hasPrefix(Self.birthdayNotificationPrefix) }
+        center.removePendingNotificationRequests(withIdentifiers: idsToRemove)
+        AppLogger.reminder.debug("All birthday reminders cancelled")
     }
 
     func cancelAllReminders() async {

@@ -169,7 +169,7 @@ struct AIChatView: View {
             HStack(spacing: 6) {
                 Image(systemName: "lock.shield.fill")
                     .font(.caption2)
-                Text("Namen bleiben auf deinem Gerät — ich kenne nur eure Beziehung")
+                Text("Die KI erhält deinen Vornamen und anonymisierte Daten wie Altersgruppe und Geschlecht. Dein Nachname und Geburtsdatum bleiben auf dem Gerät.")
                     .font(.caption2)
             }
             .foregroundStyle(.tertiary)

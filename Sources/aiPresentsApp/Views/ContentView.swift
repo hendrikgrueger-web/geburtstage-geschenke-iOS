@@ -2,7 +2,6 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Query private var people: [PersonRef]
     @Binding var deepLinkPersonID: UUID?
@@ -11,14 +10,11 @@ struct ContentView: View {
     @State private var showingContactsImport = false
     @State private var selectedPerson: PersonRef?
     @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
-    #if DEBUG
-    @State private var screenshotPerson: PersonRef?
-    #endif
+    @State private var compactPresentedPerson: PersonRef?
 
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             TimelineView(
-                deepLinkPersonID: $deepLinkPersonID,
                 screenshotShowChat: $screenshotShowChat,
                 selectedPerson: $selectedPerson
             )
@@ -37,20 +33,30 @@ struct ContentView: View {
         .sheet(isPresented: $showingContactsImport) {
             ContactsImportView()
         }
-        #if DEBUG
-        .fullScreenCover(item: $screenshotPerson) { person in
+        .fullScreenCover(item: $compactPresentedPerson, onDismiss: {
+            guard horizontalSizeClass == .compact else { return }
+            selectedPerson = nil
+        }) { person in
             NavigationStack {
                 PersonDetailView(person: person)
             }
         }
         .onChange(of: deepLinkPersonID) { _, newID in
-            guard let id = newID, horizontalSizeClass == .compact else { return }
-            if let person = people.first(where: { $0.id == id }) {
-                screenshotPerson = person
-                deepLinkPersonID = nil
+            guard let id = newID,
+                  let person = people.first(where: { $0.id == id }) else { return }
+
+            if horizontalSizeClass == .compact {
+                compactPresentedPerson = person
+            } else {
+                selectedPerson = person
             }
+            deepLinkPersonID = nil
         }
-        #endif
+        .onChange(of: selectedPerson?.id) { _, _ in
+            guard horizontalSizeClass == .compact,
+                  let person = selectedPerson else { return }
+            compactPresentedPerson = person
+        }
         .onAppear {
             if people.isEmpty && !UserDefaults.standard.bool(forKey: "hasShownContactsImport") {
                 UserDefaults.standard.set(true, forKey: "hasShownContactsImport")

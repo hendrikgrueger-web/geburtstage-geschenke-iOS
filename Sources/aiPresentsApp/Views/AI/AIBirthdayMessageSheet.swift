@@ -99,10 +99,12 @@ struct AIBirthdayMessageSheet: View {
                     .font(.title3)
                     .foregroundStyle(.orange)
 
-                Text(ageString)
-                    .font(.caption)
-                    .fontWeight(.medium)
-                    .foregroundStyle(AppColor.textTertiary)
+                if let ageString {
+                    Text(ageString)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundStyle(AppColor.textTertiary)
+                }
             }
         }
         .padding(.vertical, 4)
@@ -119,14 +121,12 @@ struct AIBirthdayMessageSheet: View {
         } else if daysUntil < 7 {
             return String(localized: "In \(daysUntil) Tagen")
         } else {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            formatter.locale = .current
-            return formatter.string(from: person.birthday)
+            return FormatterHelper.formatBirthday(person.birthday, birthYearKnown: person.birthYearKnown)
         }
     }
 
-    private var ageString: String {
+    private var ageString: String? {
+        guard person.birthYearKnown else { return nil }
         let age = BirthdayDateHelper.age(from: person.birthday, asOf: Date())
         if BirthdayDateHelper.isMilestoneAge(age: age) {
             return "\(age). 🎯"

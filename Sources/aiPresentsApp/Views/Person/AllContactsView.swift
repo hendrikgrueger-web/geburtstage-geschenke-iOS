@@ -78,6 +78,7 @@ struct AllContactsView: View {
             Button("Entfernen", role: .destructive) {
                 if let person = personToDelete {
                     modelContext.delete(person)
+                    WidgetDataService.shared.updateWidgetData(from: modelContext)
                     personToDelete = nil
                 }
             }

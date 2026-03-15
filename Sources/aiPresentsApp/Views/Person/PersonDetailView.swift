@@ -885,7 +885,7 @@ struct PersonDetailView: View {
     }
 
     private var birthdayString: String {
-        FormatterHelper.displayDateFormatter.string(from: person.birthday)
+        FormatterHelper.formatBirthday(person.birthday, birthYearKnown: person.birthYearKnown)
     }
 
     private var daysUntilBirthday: Int {
@@ -914,6 +914,7 @@ struct PersonDetailView: View {
             }
             HapticFeedback.warning()
         }
+        triggerWidgetUpdate()
     }
 
     private func deleteGiftHistory(at offsets: IndexSet) {
@@ -946,6 +947,7 @@ struct PersonDetailView: View {
             tags: [history.category]
         )
         modelContext.insert(newIdea)
+        triggerWidgetUpdate()
         HapticFeedback.success()
     }
 
@@ -988,6 +990,7 @@ struct PersonDetailView: View {
             gift.status = .given
             gift.statusLog.append("\(dateString) - \(String(localized: "Gekauft")) \u{2192} \(String(localized: "Verschenkt")) (\(String(localized: "Alle markiert")))")
         }
+        triggerWidgetUpdate()
         HapticFeedback.success()
     }
 
@@ -1020,6 +1023,7 @@ struct PersonDetailView: View {
             tags: idea.tags
         )
         modelContext.insert(newIdea)
+        triggerWidgetUpdate()
         HapticFeedback.success()
     }
 

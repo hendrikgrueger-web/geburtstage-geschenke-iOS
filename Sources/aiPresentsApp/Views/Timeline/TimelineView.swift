@@ -5,7 +5,6 @@ struct TimelineView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var people: [PersonRef]
     @Query private var giftIdeas: [GiftIdea]
-    @Binding var deepLinkPersonID: UUID?
     @Binding var screenshotShowChat: Bool
 
     @EnvironmentObject private var subscriptionManager: SubscriptionManager
@@ -180,13 +179,6 @@ struct TimelineView: View {
         .safeAreaInset(edge: .bottom) {
             smartSearchBar
         }
-        .onChange(of: deepLinkPersonID) { _, newID in
-            guard let id = newID else { return }
-            if let person = people.first(where: { $0.id == id }) {
-                selectedPerson = person
-            }
-            deepLinkPersonID = nil
-        }
     }
 
     // MARK: - Stats Row
@@ -307,7 +299,7 @@ struct TimelineView: View {
                 )
             }
 
-            if let firstIdea = person.giftIdeas?.first(where: { $0.status == .idea }) {
+            if let firstIdea = ideasByPerson[person.id]?.first(where: { $0.status == .idea }) {
                 Button {
                     if subscriptionManager.hasFullAccess {
                         markAsPlanned(firstIdea)
@@ -345,6 +337,7 @@ struct TimelineView: View {
         let dateString = FormatterHelper.shortLogDateFormatter.string(from: Date())
         idea.statusLog.append("\(dateString) - \(String(localized: "Idee")) \u{2192} \(String(localized: "Geplant"))")
         idea.status = .planned
+        WidgetDataService.shared.updateWidgetData(from: modelContext)
         HapticFeedback.success()
     }
 
