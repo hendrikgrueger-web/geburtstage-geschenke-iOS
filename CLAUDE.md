@@ -395,26 +395,33 @@ enum GiftDirection {
 | Erster Build | 0.8.1 (13) — hochgeladen ✅ |
 
 ### TestFlight Status (2026-03-15)
-- Builds hochgeladen: v13–v19
-- **Build v19:** BETA_APPROVED — externen Gruppen zugewiesen, Einladungen verschickt
-- Interne Gruppe: `Testgrupp Geschenke-App Hendrik` (gruepigmbh@gmail.com)
-- Externe Gruppe `Familie-extern`: hendrik187@gmail.com, maik.vonangern@bv.aok.de (INVITED)
+- Builds hochgeladen: v13–v19 (alt), v27 (aktuell, mit ZDR + DSGVO-Fix)
+- **Builds 20-26 fehlten in TestFlight** — Ursache: `buildDistributionAudience` war `null`, jetzt auf `INTERNAL_ONLY` gefixt
+- Interne Gruppe: `Testgrupp Geschenke-App Hendrik` (gruepigmbh@gmail.com — INSTALLED)
+- Externe Gruppe `Familie-extern`: hendrik187@gmail.com (INSTALLED), maik.vonangern@bv.aok.de (INSTALLED)
 - Externe Gruppe `Externe-Tester`: bergen.inga@gmail.com (INVITED)
 
 ## Xcode Cloud (CI/CD)
 
-**Status:** Aktiv — Workflow "Deploy to TestFlight" konfiguriert.
+**Status:** Aktiv — Workflow "Deploy to TestFlight" mit automatischer Distribution.
 
 | Komponente | Wert |
 |------------|------|
 | CI Product ID | `9FAFC09A-4B7E-4FD0-ACD1-2DB6847BEFC8` |
-| Workflow | "Deploy to TestFlight" — Push auf `main` → Archive iOS |
+| Workflow | "Deploy to TestFlight" — Push auf `main` → Archive iOS → TestFlight (intern + extern) |
 | Scheme | `aiPresentsApp` |
+| Distribution | `INTERNAL_ONLY` + Nachaktion: externe Gruppen (Familie-extern, Externe-Tester) |
 | ci_scripts | `ci_post_clone.sh` — generiert `Secrets.xcconfig` aus `$AI_PROXY_SECRET` |
 | GitHub Repo | `hendrikgrueger-web/geburtstage-geschenke-iOS` (verbunden) |
+| GitHub Actions | `.github/workflows/test.yml` — Build + SwiftLint bei Push/PR (Dummy Secrets.xcconfig) |
 
 ### Environment Variable (in Xcode Cloud Settings)
-- `AI_PROXY_SECRET` — Cloudflare Worker App-Secret
+- `AI_PROXY_SECRET` — Cloudflare Worker App-Secret (redacted)
+
+### WICHTIG: Secret-Rotation (2026-03-15)
+- Cloudflare Worker APP_SECRET wurde rotiert
+- Neues Secret muss an 3 Stellen identisch sein: Worker (`wrangler secret put`), `App/Secrets.xcconfig` (lokal), Xcode Cloud Environment Variable
+- Xcode Cloud Secret muss manuell aktualisiert werden (API unterstützt kein Setzen von Environment Variables)
 
 ### Deployment-Workflow
 ```
