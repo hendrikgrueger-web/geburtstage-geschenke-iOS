@@ -28,6 +28,7 @@ final class AppLockManager {
 
     var biometricName: String {
         switch biometricType {
+        case .none: String(localized: "Biometrie")
         case .faceID: String(localized: "Face ID")
         case .touchID: String(localized: "Touch ID")
         case .opticID: String(localized: "Optic ID")
@@ -37,6 +38,7 @@ final class AppLockManager {
 
     var biometricIcon: String {
         switch biometricType {
+        case .none: "lock.shield"
         case .faceID: "faceid"
         case .touchID: "touchid"
         case .opticID: "opticid"

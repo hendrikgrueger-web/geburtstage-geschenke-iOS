@@ -125,10 +125,15 @@ final class AIServiceTests: XCTestCase {
 
     // MARK: - Verfügbarkeit
 
-    func testIsAPIKeyConfigured_falseInTestEnvironment() {
-        // In der Test-Umgebung ist kein Proxy-Secret in Info.plist eingetragen,
-        // daher muss isAPIKeyConfigured false liefern.
-        XCTAssertFalse(AIService.isAPIKeyConfigured, "API key should not be configured in test environment")
+    func testIsAPIKeyConfigured_matchesAppConfigValidation() {
+        let secret = AppConfig.AI.proxySecret
+        let expected = !secret.isEmpty && secret != "your-app-secret-here" && secret.count > 8
+
+        XCTAssertEqual(
+            AIService.isAPIKeyConfigured,
+            expected,
+            "AIService should mirror AppConfig.AI secret validation"
+        )
     }
 
     // MARK: - extractJSON
@@ -155,5 +160,32 @@ final class AIServiceTests: XCTestCase {
         let input = "  {\"a\":1}  "
         XCTAssertEqual(AIService.extractJSON(from: input), "{\"a\":1}",
                        "Leading and trailing whitespace should be trimmed")
+    }
+
+    func testDecodeGiftSuggestions_stripsMarkdownWrapper() {
+        let responseData = """
+        ```json
+        {"suggestions":[{"title":"Buch","reason":"Passt zu den Hobbys"}]}
+        ```
+        """.data(using: .utf8)!
+
+        let suggestions = AIService.decodeGiftSuggestions(from: responseData)
+
+        XCTAssertEqual(suggestions?.count, 1, "Expected one decoded suggestion")
+        XCTAssertEqual(suggestions?.first?.title, "Buch")
+        XCTAssertEqual(suggestions?.first?.reason, "Passt zu den Hobbys")
+    }
+
+    func testDecodeBirthdayMessage_stripsMarkdownWrapperAndAppendsSenderName() {
+        let responseData = """
+        ```json
+        {"greeting":"Liebe Anna,","body":"alles Gute zum Geburtstag!"}
+        ```
+        """.data(using: .utf8)!
+
+        let message = AIService.decodeBirthdayMessage(from: responseData, senderName: "Hendrik")
+
+        XCTAssertEqual(message?.greeting, "Liebe Anna,")
+        XCTAssertEqual(message?.body, "alles Gute zum Geburtstag!\n\nHendrik")
     }
 }

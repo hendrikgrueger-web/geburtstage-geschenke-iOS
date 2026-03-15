@@ -21,6 +21,23 @@ final class FormatterHelperTests: XCTestCase {
         XCTAssertFalse(formatted.isEmpty, "Formatted short date should not be empty")
     }
 
+    func testFormatBirthdayWithKnownYear_usesDisplayFormatter() {
+        let birthday = createDate(month: 7, day: 4, year: 2000)
+
+        let formatted = FormatterHelper.formatBirthday(birthday, birthYearKnown: true)
+
+        XCTAssertEqual(formatted, FormatterHelper.displayDateFormatter.string(from: birthday))
+    }
+
+    func testFormatBirthdayWithoutKnownYear_omitsBirthYear() {
+        let birthday = createDate(month: 7, day: 4, year: 2000)
+
+        let formatted = FormatterHelper.formatBirthday(birthday, birthYearKnown: false)
+
+        XCTAssertEqual(formatted, FormatterHelper.birthdayMonthDayFormatter.string(from: birthday))
+        XCTAssertFalse(formatted.contains("2000"), "Unknown birth year should not leak the placeholder year")
+    }
+
     func testFormatRelativeDateToday() {
         let today = Date()
         let formatted = FormatterHelper.formatRelativeDate(today)
