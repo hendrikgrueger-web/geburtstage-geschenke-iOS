@@ -1701,13 +1701,13 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Para preguntas sobre privacidad:\n\nHendrik Grüger\nhendrik@gruepi.de"
+            "value": "Para preguntas sobre protección de datos:\n\nHendrik Grüger\nhendrik@gruepi.de"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pour toute question sur la confidentialité :\n\nHendrik Grüger\nhendrik@gruepi.de"
+            "value": "Pour toute question sur la protection des données :\n\nHendrik Grüger\nhendrik@gruepi.de"
           }
         }
       }
@@ -12959,6 +12959,138 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gémeaux"
+          }
+        }
+      }
+    },
+    "Diese App sammelt keine Daten für den Betreiber. Alles, was du eingibst, bleibt auf deinem Gerät. Kein eigener Server, keine eigene Datenbank, kein Tracking.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This app does not collect data for the developer. Everything you enter stays on your device. No own server, no own database, no tracking."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta app no recopila datos para el desarrollador. Todo lo que ingresas permanece en tu dispositivo. Sin servidor propio, sin base de datos propia, sin rastreo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette app ne collecte aucune donnée pour le développeur. Tout ce que vous saisissez reste sur votre appareil. Pas de serveur propre, pas de base de données propre, pas de suivi."
+          }
+        }
+      }
+    },
+    "Die App speichert lokal auf deinem Gerät:\n\n• Namen und Geburtstage der Personen, die du einträgst\n• Deine Geschenkideen und Notizen\n• Erinnerungsregeln\n\nDiese Daten verlassen dein Gerät nicht — es sei denn, du aktivierst iCloud Sync (siehe unten).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The app stores locally on your device:\n\n• Names and birthdays of the people you add\n• Your gift ideas and notes\n• Reminder rules\n\nThis data does not leave your device — unless you enable iCloud Sync (see below)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La app almacena localmente en tu dispositivo:\n\n• Nombres y cumpleaños de las personas que añades\n• Tus ideas de regalos y notas\n• Reglas de recordatorio\n\nEstos datos no salen de tu dispositivo — a menos que actives la sincronización de iCloud (ver abajo)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'app stocke localement sur votre appareil :\n\n• Noms et dates d'anniversaire des personnes ajoutées\n• Vos idées cadeaux et notes\n• Règles de rappel\n\nCes données ne quittent pas votre appareil — sauf si vous activez la synchronisation iCloud (voir ci-dessous)."
+          }
+        }
+      }
+    },
+    "Wenn du iCloud Sync in den Einstellungen aktivierst, werden deine Daten über Apples eigene iCloud-Infrastruktur zwischen deinen Apple-Geräten synchronisiert.\n\nDer Betreiber dieser App hat keinen Zugriff auf deine iCloud-Daten. Es gelten Apples Datenschutzrichtlinien:\napple.com/legal/privacy/de-ww/": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you enable iCloud Sync in settings, your data is synced between your Apple devices via Apple's own iCloud infrastructure.\n\nThe developer of this app has no access to your iCloud data. Apple's privacy policies apply:\napple.com/legal/privacy/"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando activas la sincronización de iCloud en los ajustes, tus datos se sincronizan entre tus dispositivos Apple a través de la infraestructura iCloud de Apple.\n\nEl desarrollador de esta app no tiene acceso a tus datos de iCloud. Se aplican las políticas de privacidad de Apple:\napple.com/legal/privacy/"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lorsque vous activez la synchronisation iCloud dans les réglages, vos données sont synchronisées entre vos appareils Apple via l'infrastructure iCloud d'Apple.\n\nLe développeur de cette app n'a pas accès à vos données iCloud. Les règles de confidentialité d'Apple s'appliquent :\napple.com/legal/privacy/"
+          }
+        }
+      }
+    },
+    "Wenn du die KI-Funktion aktivierst (nach expliziter Einwilligung), werden folgende Daten an externe Dienste übertragen:\n\n• Vorname (für bessere, persönliche Vorschläge)\n• Geschlecht (lokal abgeleitet, z.B. \"weiblich\")\n• Altersgruppe (z.B. \"Mitte 30\", nicht das exakte Alter)\n• Beziehungstyp (z.B. \"Freund\", \"Mutter\")\n• Sternzeichen (berechnet)\n• Interessen/Hobbies (sofern eingetragen)\n• Budget-Rahmen\n• Titel vergangener Geschenke\n\nNICHT übertragen werden: Nachname, Geburtsdatum, exaktes Alter, Links, Notizen, Telefonnummern. Der Nachname verbleibt ausschließlich auf deinem Gerät.\n\nKeine dauerhafte Speicherung: Die KI-Anfragen werden mit Zero Data Retention (ZDR) gesendet — weder OpenRouter noch Google speichern deine Daten dauerhaft oder nutzen sie zum Training.\n\nDer Datenweg:\n• Cloudflare Workers (Proxy) → OpenRouter Inc. (USA) → Google Gemini (USA)\n\nDatenübertragung in die USA auf Basis von Standardvertragsklauseln (Art. 46 DSGVO).\nRechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).\n\nOhne Einwilligung werden keine Daten übertragen.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you enable the AI function (after explicit consent), the following data is transmitted to external services:\n\n• First name (for better, personalized suggestions)\n• Gender (locally inferred, e.g. \"female\")\n• Age group (e.g. \"mid 30s\", not the exact age)\n• Relationship type (e.g. \"Friend\", \"Mother\")\n• Zodiac sign (calculated)\n• Interests/hobbies (if entered)\n• Budget range\n• Titles of past gifts\n\nNOT transmitted: Last name, birth date, exact age, links, notes, phone numbers. Your last name stays exclusively on your device.\n\nNo permanent storage: AI requests are sent with Zero Data Retention (ZDR) — neither OpenRouter nor Google store your data permanently or use it for training.\n\nData path:\n• Cloudflare Workers (Proxy) → OpenRouter Inc. (USA) → Google Gemini (USA)\n\nData transfer to the USA based on Standard Contractual Clauses (Art. 46 GDPR).\nLegal basis: Art. 6(1)(a) GDPR (Consent).\n\nWithout consent, no data is transmitted."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando activas la función de IA (tras consentimiento explícito), los siguientes datos se transmiten a servicios externos:\n\n• Nombre de pila (para sugerencias mejores y personalizadas)\n• Género (deducido localmente, p. ej. \"femenino\")\n• Grupo de edad (p. ej. \"mediados de los 30\", no la edad exacta)\n• Tipo de relación (p. ej. \"Amigo/a\", \"Madre\")\n• Signo zodiacal (calculado)\n• Intereses/aficiones (si se han introducido)\n• Rango de presupuesto\n• Títulos de regalos anteriores\n\nNO se transmiten: Apellido, fecha de nacimiento, edad exacta, enlaces, notas, números de teléfono. Tu apellido permanece exclusivamente en tu dispositivo.\n\nSin almacenamiento permanente: Las solicitudes de IA se envían con Zero Data Retention (ZDR) — ni OpenRouter ni Google almacenan tus datos de forma permanente ni los utilizan para entrenamiento.\n\nRuta de datos:\n• Cloudflare Workers (Proxy) → OpenRouter Inc. (EE. UU.) → Google Gemini (EE. UU.)\n\nTransferencia de datos a EE. UU. sobre la base de cláusulas contractuales tipo (Art. 46 RGPD).\nBase legal: Art. 6, ap. 1, let. a RGPD (Consentimiento).\n\nSin consentimiento, no se transmiten datos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lorsque vous activez la fonction IA (après consentement explicite), les données suivantes sont transmises à des services externes :\n\n• Prénom (pour des suggestions meilleures et personnalisées)\n• Genre (déduit localement, p. ex. « féminin »)\n• Tranche d'âge (p. ex. « milieu de la trentaine », pas l'âge exact)\n• Type de relation (p. ex. « Ami(e) », « Mère »)\n• Signe astrologique (calculé)\n• Centres d'intérêt/loisirs (si renseignés)\n• Fourchette de budget\n• Titres des cadeaux passés\n\nNON transmis : Nom de famille, date de naissance, âge exact, liens, notes, numéros de téléphone. Votre nom de famille reste exclusivement sur votre appareil.\n\nPas de stockage permanent : Les requêtes IA sont envoyées avec Zero Data Retention (ZDR) — ni OpenRouter ni Google ne stockent vos données de manière permanente ni ne les utilisent pour l'entraînement.\n\nChemin des données :\n• Cloudflare Workers (Proxy) → OpenRouter Inc. (États-Unis) → Google Gemini (États-Unis)\n\nTransfert de données vers les États-Unis sur la base de clauses contractuelles types (Art. 46 RGPD).\nBase juridique : Art. 6, al. 1, let. a RGPD (Consentement).\n\nSans consentement, aucune donnée n'est transmise."
+          }
+        }
+      }
+    },
+    "Wenn du Kontakte aus deinem Adressbuch importierst, liest die App nur Namen und Geburtstage. Keine Telefonnummern, Adressen oder andere Kontaktdaten werden verwendet.\n\nDie importierten Daten werden ausschließlich lokal auf deinem Gerät gespeichert.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you import contacts from your address book, the app only reads names and birthdays. No phone numbers, addresses, or other contact data is used.\n\nImported data is stored exclusively on your device."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando importas contactos de tu agenda, la app solo lee nombres y cumpleaños. No se utilizan números de teléfono, direcciones ni otros datos de contacto.\n\nLos datos importados se almacenan exclusivamente en tu dispositivo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lorsque vous importez des contacts depuis votre carnet d'adresses, l'app ne lit que les noms et dates d'anniversaire. Aucun numéro de téléphone, adresse ou autre donnée de contact n'est utilisé.\n\nLes données importées sont stockées exclusivement sur votre appareil."
+          }
+        }
+      }
+    },
+    "Da alle Daten lokal auf deinem Gerät liegen, hast du die vollständige Kontrolle:\n\n• Alle Daten können jederzeit in den App-Einstellungen gelöscht werden (Einstellungen → Alle Daten löschen)\n• Berechtigungen (Kontakte, Benachrichtigungen) kannst du jederzeit in den iOS-Einstellungen widerrufen\n• Die App deinstallieren löscht alle lokal gespeicherten Daten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Since all data is stored locally on your device, you have full control:\n\n• All data can be deleted at any time in the app settings (Settings → Delete All Data)\n• Permissions (Contacts, Notifications) can be revoked at any time in iOS Settings\n• Uninstalling the app deletes all locally stored data"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Como todos los datos se almacenan localmente en tu dispositivo, tienes control total:\n\n• Todos los datos se pueden eliminar en cualquier momento en los ajustes de la app (Ajustes → Eliminar todos los datos)\n• Los permisos (Contactos, Notificaciones) se pueden revocar en cualquier momento en los Ajustes de iOS\n• Desinstalar la app elimina todos los datos almacenados localmente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puisque toutes les données sont stockées localement sur votre appareil, vous avez un contrôle total :\n\n• Toutes les données peuvent être supprimées à tout moment dans les réglages de l'app (Réglages → Supprimer toutes les données)\n• Les autorisations (Contacts, Notifications) peuvent être révoquées à tout moment dans les Réglages iOS\n• La désinstallation de l'app supprime toutes les données stockées localement"
           }
         }
       }
