@@ -20,6 +20,11 @@ jobs:
       with:
         xcode-version: latest-stable
 
+    - name: Create Secrets.xcconfig
+      run: |
+        echo "// CI dummy" > App/Secrets.xcconfig
+        echo "AI_PROXY_SECRET = " >> App/Secrets.xcconfig
+
     - name: Build
       run: |
         xcodebuild -project ai-presents-app-ios.xcodeproj \
