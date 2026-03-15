@@ -4,6 +4,19 @@
 
 iOS-App für Geburtstags- und Geschenkeverwaltung. Generiert von Open Claw (n8n/Telegram Bot), manuell gefixt und weiterentwickelt.
 
+## Skills-Pflicht
+
+**INTENSIV die Apple iOS Platform Skills nutzen** (148 Skills in `.claude/skills/`) — bei jedem Feature, Bug, Review oder Launch-Schritt den passenden Skill aufrufen. Insbesondere:
+- **App Store Skills:** `app-description-writer`, `keyword-optimizer`, `screenshot-planner`, `rejection-handler`, `marketing-strategy`
+- **Product Skills:** `prd-generator`, `architecture-spec`, `ux-spec`, `implementation-spec`
+- **Growth Skills:** `analytics-interpretation`, `indie-business`
+- **Monetization:** `storekit-2` für In-App Purchases
+- **Testing:** `tdd-feature`, `tdd-bug-fix`, `snapshot-test-setup`
+- **Design:** `animation-patterns`, `liquid-glass`, `ui-review`
+- **Generators:** `paywall-generator`, `onboarding-generator`, `push-notifications`, `deep-linking`
+
+Ziel: Brutal gutes Ergebnis durch konsequente Nutzung aller verfügbaren Skills.
+
 ## Tech Stack
 
 - **Swift 6.0**, SwiftUI, SwiftData (iOS 26+)
