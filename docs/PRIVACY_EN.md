@@ -106,12 +106,14 @@ AI Präsente respects your privacy and protects your personal data. This app is 
 **Purpose:** Generation of personalized gift ideas and birthday messages.
 
 **Processing:**
-- AI requests contain only anonymized data: gender (locally inferred), age group (e.g. 'mid 30s'), relationship type, zodiac sign, interests, budget range, gift titles. NO names, birth dates, or exact ages are transmitted.
+- AI requests contain mostly anonymized data: gender (locally inferred), age group (e.g. 'mid 30s'), relationship type, zodiac sign, interests, budget range, gift titles.
+- The **first name** is transmitted to enable better and more personalized AI results. The **last name** is NOT transmitted and remains exclusively on the device.
+- NO birth dates or exact ages are transmitted.
 - Requests are routed through Cloudflare Workers to OpenRouter Inc. (USA) and then to Google Gemini (USA).
 - AI responses are stored only locally.
 
 **Privacy:**
-- No personally identifiable information (name, birth date, age) is sent to the AI service. All data is anonymized.
+- The first name is transmitted for AI quality. Last name, birth date, and exact age are NOT transmitted.
 - AI services may store requests temporarily for analytical purposes.
 
 **Your Control:**

@@ -22,8 +22,9 @@ Die KI-Features (Geschenkvorschläge, Geburtstagsgrüße) übertragen ausschlie�
 
 ### 2.1 Was wird übertragen
 
-Folgende anonymisierte Daten werden pro KI-Anfrage an OpenRouter / Google übertragen:
+Folgende Daten werden pro KI-Anfrage an OpenRouter / Google übertragen:
 
+- **Vorname** — wird für bessere, personalisierte KI-Ergebnisse übertragen (Nachname verbleibt auf dem Gerät)
 - **Geschlecht** — lokal abgeleitet aus Beziehungstyp und Vorname (z.B. "weiblich", "männlich", "Person")
 - **Altersgruppe** — ungefähre Angabe (z.B. "Mitte 30", "Anfang 20"), NICHT das exakte Alter
 - **Beziehungstyp** — z.B. "Freund", "Mutter", "Kollege"
@@ -38,7 +39,7 @@ Folgende anonymisierte Daten werden pro KI-Anfrage an OpenRouter / Google übert
 
 Folgende Daten verlassen das Gerät niemals im Rahmen der KI-Features:
 
-- **Name** (weder Vor- noch Nachname)
+- **Nachname** (verbleibt ausschließlich auf dem Gerät)
 - **Geburtsdatum** (weder Tag, Monat noch Jahr)
 - **Exaktes Alter**
 - Links (z.B. Produkt-URLs)
@@ -50,10 +51,10 @@ Folgende Daten verlassen das Gerät niemals im Rahmen der KI-Features:
 
 | Originaldaten | Anonymisierte Form | Utility |
 |---|---|---|
-| Vorname "Anna" | "weiblich" | `GenderInference.swift` |
+| Vorname "Anna" | "Anna" (wird übertragen) + "weiblich" | `GenderInference.swift` |
 | Alter 34 | "Mitte 30" | `AgeObfuscator.swift` |
 | Geburtstag 15.03. | (nicht übertragen) | — |
-| Name "Anna Müller" | (nicht übertragen) | — |
+| Nachname "Müller" | (nicht übertragen) | — |
 
 ---
 

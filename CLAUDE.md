@@ -89,16 +89,16 @@ Sources/BirthdayWidget/  # WidgetKit Extension (separates Target)
 
 ## KI-Architektur (AIService + AIConsentManager)
 
-**Cloud-basiert via Cloudflare Worker Proxy → OpenRouter** — erfordert explizite DSGVO-Einwilligung. **Vollständig anonymisiert.**
+**Cloud-basiert via Cloudflare Worker Proxy → OpenRouter** — erfordert explizite DSGVO-Einwilligung.
 
-| Pfad | Voraussetzung | Daten (anonymisiert) |
+| Pfad | Voraussetzung | Daten |
 |---|---|---|
-| App → CF Worker → OpenRouter → Google Gemini | Proxy-Secret + Einwilligung | Geschlecht (lokal), Altersgruppe, Relation, Sternzeichen, Hobbies, Tags, Budget, Geschenktitel, Tage bis Geburtstag |
+| App → CF Worker → OpenRouter → Google Gemini | Proxy-Secret + Einwilligung | **Vorname**, Geschlecht (lokal), Altersgruppe, Relation, Sternzeichen, Hobbies, Tags, Budget, Geschenktitel, Tage bis Geburtstag |
 
 **Anonymisierungs-Pipeline:**
 - `GenderInference.swift` — leitet Geschlecht aus Beziehungstyp + Vorname lokal ab (`.male`/`.female`/`.neutral`)
 - `AgeObfuscator.swift` — wandelt exaktes Alter in Altersgruppe ("Mitte 30", "Anfang 20" etc.)
-- Name + Geburtsdatum werden NIE an die API gesendet
+- **Vorname** wird für KI-Qualität übertragen; **Nachname** + Geburtsdatum werden NIE an die API gesendet
 
 Kein Demo-Modus — ohne Proxy-Secret oder Einwilligung werden Fehler angezeigt.
 
@@ -134,10 +134,10 @@ AppConfig.AI.model                // "google/gemini-3.1-flash-lite-preview"
 AppConfig.AI.openRouterBaseURL    // https://ai-presents-proxy.hendrikgrueger.workers.dev
 ```
 
-## DSGVO — KI-Features (vollständig anonymisiert)
+## DSGVO — KI-Features
 
-**Übertragene Daten (anonymisiert):** Geschlecht (lokal abgeleitet via `GenderInference`), Altersgruppe (z.B. "Mitte 30" via `AgeObfuscator`), Beziehungstyp, Sternzeichen, Hobbies/Interessen, Tags, Budget-Rahmen (Min/Max), Geschenktitel, Tage bis Geburtstag
-**NICHT übertragen:** Name (weder Vor- noch Nachname), Geburtsdatum, exaktes Alter, Links, Notizen, Telefonnummer
+**Übertragene Daten:** **Vorname** (für KI-Qualität), Geschlecht (lokal abgeleitet via `GenderInference`), Altersgruppe (z.B. "Mitte 30" via `AgeObfuscator`), Beziehungstyp, Sternzeichen, Hobbies/Interessen, Tags, Budget-Rahmen (Min/Max), Geschenktitel, Tage bis Geburtstag
+**NICHT übertragen:** Nachname, Geburtsdatum, exaktes Alter, Links, Notizen, Telefonnummer
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)
 **Datenweg:** App → Cloudflare Workers (Proxy) → OpenRouter Inc. (USA) → Google Gemini (USA)
 **Drittlandübermittlung:** Standardvertragsklauseln Art. 46 DSGVO
@@ -396,9 +396,10 @@ enum GiftDirection {
 
 ### TestFlight Status (2026-03-15)
 - Builds hochgeladen: v13–v19
-- Beta Review: Build v19 eingereicht (WAITING_FOR_BETA_REVIEW)
+- **Build v19:** BETA_APPROVED — externen Gruppen zugewiesen, Einladungen verschickt
 - Interne Gruppe: `Testgrupp Geschenke-App Hendrik` (gruepigmbh@gmail.com)
-- Externe Gruppe: `Familie-extern` (Tester werden nach Beta Review zugewiesen)
+- Externe Gruppe `Familie-extern`: hendrik187@gmail.com, maik.vonangern@bv.aok.de (INVITED)
+- Externe Gruppe `Externe-Tester`: bergen.inga@gmail.com (INVITED)
 
 ## Xcode Cloud (CI/CD)
 

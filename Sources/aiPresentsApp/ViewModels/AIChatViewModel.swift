@@ -282,7 +282,7 @@ final class AIChatViewModel {
 
     private func buildCompactPersonEntry(_ person: PersonRef, shortId: String, lang: String, giftCounter: inout Int) -> String {
         // Format: p1:Dennis|männlich|Mitte 30|10d|Freund|Reiten,Kochen
-        // Vorname wird mitgesendet (nicht personenbezogen identifizierbar)
+        // DSGVO: Nur Vorname wird übertragen (für KI-Qualität), NIEMALS Nachname
         let firstName = person.displayName.split(separator: " ").first.map(String.init) ?? person.displayName
         let gender = GenderInference.infer(relation: person.relation, firstName: firstName)
 
@@ -486,6 +486,7 @@ final class AIChatViewModel {
             .sorted(by: { $0.1 < $1.1 })
             .first {
             let name = nextPerson.0.displayName
+            let relation = nextPerson.0.relation
             let label: String = switch lang {
             case "de": "Wann hat \(name) Geburtstag?"
             case "fr": "C'est quand l'anniversaire de \(name) ?"

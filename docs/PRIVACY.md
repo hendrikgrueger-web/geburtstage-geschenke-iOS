@@ -106,12 +106,14 @@ AI Präsente respektiert Ihre Privatsphäre und schützt Ihre persönlichen Date
 **Zweck:** Generierung von personalisierten Geschenkideen und Geburtstagsnachrichten.
 
 **Verarbeitung:**
-- KI-Anfragen enthalten ausschließlich anonymisierte Daten: Geschlecht (lokal abgeleitet), Altersgruppe (z.B. „Mitte 30"), Beziehungstyp, Sternzeichen, Interessen, Budget-Rahmen, Geschenktitel. Es werden KEINE Namen, Geburtsdaten oder exakten Altersangaben übertragen.
+- KI-Anfragen enthalten überwiegend anonymisierte Daten: Geschlecht (lokal abgeleitet), Altersgruppe (z.B. „Mitte 30"), Beziehungstyp, Sternzeichen, Interessen, Budget-Rahmen, Geschenktitel.
+- Der **Vorname** wird übertragen, um bessere und persönlichere KI-Ergebnisse zu ermöglichen. Der **Nachname** wird NICHT übertragen und verbleibt ausschließlich auf dem Gerät.
+- Es werden KEINE Geburtsdaten oder exakten Altersangaben übertragen.
 - Anfragen werden über Cloudflare Workers an OpenRouter Inc. (USA) und von dort an Google Gemini (USA) weitergeleitet.
 - KI-Antworten werden nur lokal gespeichert.
 
 **Datenschutz:**
-- Keine personenbezogenen Daten (Name, Geburtsdatum, Alter) werden an den KI-Dienst gesendet. Alle Daten sind anonymisiert.
+- Der Vorname wird für die Qualität der KI-Vorschläge übertragen. Nachname, Geburtsdatum und exaktes Alter werden NICHT übertragen.
 - KI-Dienste speichern Anfragen möglicherweise temporär zu Analysezwecken.
 
 **Ihre Kontrolle:**

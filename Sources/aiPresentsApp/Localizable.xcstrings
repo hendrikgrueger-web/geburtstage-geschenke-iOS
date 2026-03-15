@@ -3255,24 +3255,24 @@
         }
       }
     },
-    "Die KI-Funktionen nutzen anonymisierte Daten (Geschlecht, Altersgruppe, Beziehung). Keine Namen oder Geburtsdaten werden übertragen. Widerruf jederzeit möglich.": {
+    "Die KI-Funktionen nutzen deinen Vornamen und anonymisierte Daten (Geschlecht, Altersgruppe, Beziehung) für bessere Vorschläge. Dein Nachname bleibt auf dem Gerät. Widerruf jederzeit möglich.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI features use anonymized data (gender, age group, relationship). No names or birth dates are transmitted. Revocable at any time."
+            "value": "AI features use your first name and anonymized data (gender, age group, relationship) for better suggestions. Your last name stays on the device. Revocable at any time."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les fonctions IA utilisent des données anonymisées (genre, groupe d'âge, relation). Aucun nom ni date de naissance n'est transmis. Révocable à tout moment."
+            "value": "Les fonctions IA utilisent votre prénom et des données anonymisées (genre, groupe d'âge, relation) pour de meilleures suggestions. Votre nom de famille reste sur l'appareil. Révocable à tout moment."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Las funciones de IA usan datos anonimizados (género, grupo de edad, relación). No se transmiten nombres ni fechas de nacimiento. Revocable en cualquier momento."
+            "value": "Las funciones de IA usan tu nombre de pila y datos anonimizados (género, grupo de edad, relación) para mejores sugerencias. Tu apellido permanece en el dispositivo. Revocable en cualquier momento."
           }
         }
       }
@@ -4376,24 +4376,24 @@
         }
       }
     },
-    "Es werden keine personenbezogenen Daten übertragen. Die KI erhält nur anonymisierte Informationen wie Altersgruppe und Geschlecht — keine Namen, keine Geburtsdaten.": {
+    "Die KI erhält deinen Vornamen und anonymisierte Daten wie Altersgruppe und Geschlecht. Dein Nachname und Geburtsdatum bleiben auf dem Gerät.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No personal data is transmitted. The AI only receives anonymized information like age group and gender — no names, no birth dates."
+            "value": "The AI receives your first name and anonymized data like age group and gender. Your last name and birth date stay on the device."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aucune donnée personnelle n'est transmise. L'IA ne reçoit que des informations anonymisées comme le groupe d'âge et le genre — sans noms ni dates de naissance."
+            "value": "L'IA reçoit votre prénom et des données anonymisées comme le groupe d'âge et le genre. Votre nom de famille et date de naissance restent sur l'appareil."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "No se transmiten datos personales. La IA solo recibe información anonimizada como grupo de edad y género — sin nombres ni fechas de nacimiento."
+            "value": "La IA recibe tu nombre de pila y datos anonimizados como grupo de edad y género. Tu apellido y fecha de nacimiento permanecen en el dispositivo."
           }
         }
       }

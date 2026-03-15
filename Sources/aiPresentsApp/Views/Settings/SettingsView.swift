@@ -293,7 +293,7 @@ struct SettingsView: View {
                 } header: {
                     Text("KI-Assistent")
                 } footer: {
-                    Text("Die KI-Funktionen nutzen anonymisierte Daten (Geschlecht, Altersgruppe, Beziehung). Keine Namen oder Geburtsdaten werden übertragen. Widerruf jederzeit möglich.")
+                    Text("Die KI-Funktionen nutzen deinen Vornamen und anonymisierte Daten (Geschlecht, Altersgruppe, Beziehung) für bessere Vorschläge. Dein Nachname bleibt auf dem Gerät. Widerruf jederzeit möglich.")
                 }
                 .alert("Einwilligung widerrufen?", isPresented: $showingRevokeConsentConfirmation) {
                     Button("Abbrechen", role: .cancel) { }
