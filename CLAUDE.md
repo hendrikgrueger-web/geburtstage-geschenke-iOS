@@ -381,12 +381,31 @@ enum GiftDirection {
 | Team (Xcode + App Store) | Gruepi GmbH `CU87QNNB3N` |
 | Erster Build | 0.8.1 (13) — hochgeladen ✅ |
 
-### Nächste Schritte vor erstem TestFlight-Upload
-1. **Xcode öffnen** → beide Targets prüfen (Signing & Capabilities, kein rotes Ausrufezeichen)
-2. **iCloud Container** ggf. anlegen: `iCloud.com.hendrikgrueger.birthdays-presents-ai` (falls CloudKit genutzt)
-3. ~~**Datenschutz-URL** in App Store Connect eintragen~~ ✅ Gesetzt: `https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/`
-4. **Product → Archive** → Xcode Organizer → Distribute App → App Store Connect
-5. **TestFlight** aktivieren + Tester einladen
+### TestFlight Status (2026-03-15)
+- Builds hochgeladen: v13–v19
+- Beta Review: Build v19 eingereicht (WAITING_FOR_BETA_REVIEW)
+- Interne Gruppe: `Testgrupp Geschenke-App Hendrik` (gruepigmbh@gmail.com)
+- Externe Gruppe: `Familie-extern` (Tester werden nach Beta Review zugewiesen)
+
+## Xcode Cloud (CI/CD)
+
+**Status:** Aktiv — Workflow "Deploy to TestFlight" konfiguriert.
+
+| Komponente | Wert |
+|------------|------|
+| CI Product ID | `9FAFC09A-4B7E-4FD0-ACD1-2DB6847BEFC8` |
+| Workflow | "Deploy to TestFlight" — Push auf `main` → Archive iOS |
+| Scheme | `aiPresentsApp` |
+| ci_scripts | `ci_post_clone.sh` — generiert `Secrets.xcconfig` aus `$AI_PROXY_SECRET` |
+| GitHub Repo | `hendrikgrueger-web/geburtstage-geschenke-iOS` (verbunden) |
+
+### Environment Variable (in Xcode Cloud Settings)
+- `AI_PROXY_SECRET` — Cloudflare Worker App-Secret
+
+### Deployment-Workflow
+```
+Code ändern → git push origin main → Xcode Cloud baut → TestFlight (intern, sofort)
+```
 
 ## Launch-Plan
 
