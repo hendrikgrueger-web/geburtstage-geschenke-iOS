@@ -114,7 +114,8 @@ AI Präsente respektiert Ihre Privatsphäre und schützt Ihre persönlichen Date
 
 **Datenschutz:**
 - Der Vorname wird für die Qualität der KI-Vorschläge übertragen. Nachname, Geburtsdatum und exaktes Alter werden NICHT übertragen.
-- KI-Dienste speichern Anfragen möglicherweise temporär zu Analysezwecken.
+- **Zero Data Retention (ZDR):** Die KI-Anfragen werden mit aktiviertem ZDR gesendet. Weder OpenRouter noch Google speichern Prompts oder Antworten dauerhaft. Daten werden nicht zum Modelltraining verwendet.
+- Durch aktiviertes Zero Data Retention (ZDR) speichern weder OpenRouter noch Google Anfragen oder Antworten dauerhaft. Daten werden nicht zum Modelltraining verwendet.
 
 **Ihre Kontrolle:**
 - KI-Funktionen sind optional und können in den Einstellungen deaktiviert werden.

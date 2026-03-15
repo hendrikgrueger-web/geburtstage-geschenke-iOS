@@ -75,6 +75,8 @@ Folgende Daten verlassen das Gerät niemals im Rahmen der KI-Features:
 - **Sitz:** USA (San Francisco, CA)
 - **Zweck:** Weiterleitung der KI-Anfragen an das Sprachmodell
 - **Datenschutz:** https://openrouter.ai/privacy
+- **Zero Data Retention (ZDR):** Aktiviert — OpenRouter speichert keine Prompts oder Antworten dauerhaft
+- **Training:** Daten werden NICHT zum Modelltraining verwendet
 - **Drittlandübermittlung:** USA — Standardvertragsklauseln gemäß Art. 46 DSGVO
 
 **Empfehlung:** Mit OpenRouter einen Auftragsverarbeitungsvertrag (AVV) abschließen. Kontakt: legal@openrouter.ai
@@ -85,6 +87,8 @@ Folgende Daten verlassen das Gerät niemals im Rahmen der KI-Features:
 - **Sitz:** USA (Mountain View, CA)
 - **Zweck:** Verarbeitung der eigentlichen KI-Anfragen
 - **Datenschutz:** https://policies.google.com/privacy
+- **Retains Prompts:** Nein — Google speichert keine Prompts bei Nutzung über OpenRouter mit ZDR
+- **Training:** Daten werden NICHT zum Modelltraining verwendet
 - **Modell:** Google Gemini (via OpenRouter)
 - **Drittlandübermittlung:** USA — Standardvertragsklauseln gemäß Art. 46 DSGVO
 

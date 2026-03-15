@@ -91,6 +91,10 @@ export default {
           role: VALID_ROLES.includes(m.role) ? m.role : "user",
           content: String(m.content || "").slice(0, MAX_CONTENT_LENGTH),
         })),
+        // DSGVO: Zero Data Retention — Provider speichert keine Prompts/Antworten
+        provider: {
+          zdr: true,
+        },
       };
 
       const upstream = await fetch("https://openrouter.ai/api/v1/chat/completions", {

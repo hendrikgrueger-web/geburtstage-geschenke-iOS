@@ -114,7 +114,8 @@ AI Präsente respects your privacy and protects your personal data. This app is 
 
 **Privacy:**
 - The first name is transmitted for AI quality. Last name, birth date, and exact age are NOT transmitted.
-- AI services may store requests temporarily for analytical purposes.
+- **Zero Data Retention (ZDR):** AI requests are sent with ZDR enabled. Neither OpenRouter nor Google store prompts or responses permanently. Data is not used for model training.
+- With Zero Data Retention (ZDR) enabled, neither OpenRouter nor Google store requests or responses permanently. Data is not used for model training.
 
 **Your Control:**
 - AI features are optional and can be disabled in settings.
