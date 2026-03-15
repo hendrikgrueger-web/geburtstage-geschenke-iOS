@@ -33,7 +33,7 @@ targets:
         # App Store name is set in App Store Connect, this is the icon label on the home screen.
         CFBundleDisplayName: "AI Präsente"
         CFBundleShortVersionString: "1.0.0"
-        CFBundleVersion: "21"
+        CFBundleVersion: "22"
         # App only uses HTTPS (TLS) which is exempt encryption per Apple guidelines.
         # Required to skip US export compliance questionnaire on every upload.
         ITSAppUsesNonExemptEncryption: false
@@ -92,7 +92,7 @@ targets:
       properties:
         CFBundleDisplayName: "Geburtstage"
         CFBundleShortVersionString: "1.0.0"
-        CFBundleVersion: "21"
+        CFBundleVersion: "22"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     settings:
