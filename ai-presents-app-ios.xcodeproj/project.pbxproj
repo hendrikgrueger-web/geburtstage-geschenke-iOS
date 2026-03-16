@@ -81,7 +81,6 @@
 		7957F19643497DB441123934 /* ContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29444B6BDF0731546595DE2 /* ContactsService.swift */; };
 		803759AE778885B8326EB53D /* ContactsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB6E1690ACBC0C41AE04F7 /* ContactsServiceTests.swift */; };
 		831940E5795C3E5929750297 /* SmartInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C1474BF62BF80C2734793F /* SmartInputField.swift */; };
-		83B8D918FDB4ED0D5B20FC62 /* TimelineFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502554517C926AD4B7EF35EE /* TimelineFilterView.swift */; };
 		84656637788C8AB6FB5FD211 /* BirthdayWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2995C4F05BD8267A5F3EB228 /* BirthdayWidgetViews.swift */; };
 		8501B070F5EFF7678DC7071C /* ChatInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DDD4E6A61E3B0E0D97E57E /* ChatInputBar.swift */; };
 		85F84E3782BF1D0066448A5B /* BirthdayCalculationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B21B2CB3D74C9F83C2AE0FB /* BirthdayCalculationTests.swift */; };
@@ -116,7 +115,6 @@
 		B7E016C0B6BB420CF944444E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106D1BEF8550146110F92A6C /* OnboardingView.swift */; };
 		B805699DF86D36AAA54F0F1C /* AppLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAAE077D709F609179254B0 /* AppLoggerTests.swift */; };
 		B9854D7E3B02288BCF098983 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5693E1132B7D77C5A771711 /* LaunchScreen.swift */; };
-		BDF4D04C70CB9E87D9F20383 /* QuickActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D193311408BB3D5C00C5C7D6 /* QuickActionCard.swift */; };
 		C03A75E3B72AEF439DCE247B /* SampleDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B829D839F0FB868391D0FA /* SampleDataService.swift */; };
 		C087C138C4A30588B39AAE16 /* AIContent.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = FA76DEA3D7FF98FFEF1BCB48 /* AIContent.xcstrings */; };
 		C2E8551D0E177976CDA639ED /* AnimationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5814499A1D7F07472C1E3A /* AnimationHelperTests.swift */; };
@@ -233,7 +231,6 @@
 		4B3DCE06A0DFE3AB2C55B83F /* ReminderSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSettingsView.swift; sourceTree = "<group>"; };
 		4B4893D652B650DADF64E35C /* AppLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockManager.swift; sourceTree = "<group>"; };
 		4CA036501E37863B03B99A76 /* DevSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevSettingsView.swift; sourceTree = "<group>"; };
-		502554517C926AD4B7EF35EE /* TimelineFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineFilterView.swift; sourceTree = "<group>"; };
 		505CF312F2774E4C40670379 /* SuggestionQualityViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionQualityViewModelTests.swift; sourceTree = "<group>"; };
 		507E0BBB507D60FBD3B50AC0 /* SampleDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataServiceTests.swift; sourceTree = "<group>"; };
 		508247F8818A2793DD521981 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
@@ -310,7 +307,6 @@
 		CC88C885EE88547724D7673C /* ValidationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationHelperTests.swift; sourceTree = "<group>"; };
 		CC8BA551EDF2FC361A5B1CF9 /* BirthdayWidgetDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayWidgetDataTests.swift; sourceTree = "<group>"; };
 		CCC5D2F28E192F7222EDA70D /* ToastViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewTests.swift; sourceTree = "<group>"; };
-		D193311408BB3D5C00C5C7D6 /* QuickActionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionCard.swift; sourceTree = "<group>"; };
 		D54D03939A717560DDD798EB /* ReminderRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRule.swift; sourceTree = "<group>"; };
 		D5F96D1561167E4419327758 /* NochOhneGeschenkSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NochOhneGeschenkSection.swift; sourceTree = "<group>"; };
 		D654609E73AC420D24EAFCA2 /* NotificationPermissionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionHelper.swift; sourceTree = "<group>"; };
@@ -416,11 +412,9 @@
 				84458F69E06194AA2FA07A2F /* EmptyStateView.swift */,
 				0F28E31AFE15E5C5BF328E7F /* HobbiesChipView.swift */,
 				DCD1F569FEA422C2EBC05E35 /* NonLinearPriceSlider.swift */,
-				D193311408BB3D5C00C5C7D6 /* QuickActionCard.swift */,
 				53ADD72AECCB8BD0511F891D /* RelationPickerView.swift */,
 				C7C1474BF62BF80C2734793F /* SmartInputField.swift */,
 				A3185DD71D459EE21A6A0461 /* SuggestionFeedbackView.swift */,
-				502554517C926AD4B7EF35EE /* TimelineFilterView.swift */,
 				633E1C1B18B0D830A8E305E3 /* ToastView.swift */,
 			);
 			path = Components;
@@ -948,7 +942,6 @@
 				9BF2F2BB730530A2209C0220 /* PersonRef.swift in Sources */,
 				4C1FF090C338E5735622B544 /* PremiumGateModifier.swift in Sources */,
 				C801A1B192B9D9FE1FEF75B4 /* PrivacyView.swift in Sources */,
-				BDF4D04C70CB9E87D9F20383 /* QuickActionCard.swift in Sources */,
 				2AE99D96C46A7D61B8233E7E /* ReadOnlyBanner.swift in Sources */,
 				D29BAACE8F45C70867A0BB03 /* RelationOptions.swift in Sources */,
 				CCE878A6908A834DF2CAEDDC /* RelationPickerView.swift in Sources */,
@@ -964,7 +957,6 @@
 				7646F3A08BCEF6CA391CDB98 /* SuggestionFeedback.swift in Sources */,
 				88ED29FC5BFFAE3D273DBF27 /* SuggestionFeedbackView.swift in Sources */,
 				02BD9144C92EBA217C096D14 /* SuggestionQualityViewModel.swift in Sources */,
-				83B8D918FDB4ED0D5B20FC62 /* TimelineFilterView.swift in Sources */,
 				19E9A3274F1DEA8DBD575123 /* TimelineView.swift in Sources */,
 				536C68C701B7445374355897 /* ToastView.swift in Sources */,
 				618B54FA2FCE6FEDA3840D24 /* URLValidator.swift in Sources */,

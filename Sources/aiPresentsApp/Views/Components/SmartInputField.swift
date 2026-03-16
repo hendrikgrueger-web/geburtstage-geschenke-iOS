@@ -309,13 +309,30 @@ extension SmartInputField {
                         return .valid
                     }
                     guard let parsed = Double(valueText) else {
-                        return ValidationResult(isValid: false, errorMessage: "Bitte gib eine gültige Zahl ein", errorKey: "invalidNumber")
+                        return ValidationResult(
+                            isValid: false,
+                            errorMessage: String(localized: "Bitte gib eine gültige Zahl ein"),
+                            errorKey: "invalidNumber"
+                        )
                     }
+                    let formatter = NumberFormatter()
+                    formatter.numberStyle = .currency
+                    formatter.locale = Locale.current
                     if parsed < minValue {
-                        return ValidationResult(isValid: false, errorMessage: "Minimum: \(minValue)€", errorKey: "minValue")
+                        let formatted = formatter.string(from: NSNumber(value: minValue)) ?? "\(minValue)"
+                        return ValidationResult(
+                            isValid: false,
+                            errorMessage: String(localized: "Minimum: \(formatted)"),
+                            errorKey: "minValue"
+                        )
                     }
                     if parsed > maxValue {
-                        return ValidationResult(isValid: false, errorMessage: "Maximum: \(maxValue)€", errorKey: "maxValue")
+                        let formatted = formatter.string(from: NSNumber(value: maxValue)) ?? "\(maxValue)"
+                        return ValidationResult(
+                            isValid: false,
+                            errorMessage: String(localized: "Maximum: \(formatted)"),
+                            errorKey: "maxValue"
+                        )
                     }
                     return .valid
                 },

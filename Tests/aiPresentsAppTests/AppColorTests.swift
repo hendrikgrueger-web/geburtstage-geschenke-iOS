@@ -9,13 +9,7 @@ final class AppColorTests: XCTestCase {
         XCTAssertNotNil(AppColor.primary)
     }
 
-    func testPrimaryLightColorExists() {
-        XCTAssertNotNil(AppColor.primaryLight)
-    }
-
-    func testPrimaryDarkColorExists() {
-        XCTAssertNotNil(AppColor.primaryDark)
-    }
+    // primaryLight und primaryDark entfernt (Dead Code)
 
     // MARK: - Secondary Colors Tests
 
@@ -23,9 +17,7 @@ final class AppColorTests: XCTestCase {
         XCTAssertNotNil(AppColor.secondary)
     }
 
-    func testSecondaryLightColorExists() {
-        XCTAssertNotNil(AppColor.secondaryLight)
-    }
+    // secondaryLight entfernt (Dead Code)
 
     // MARK: - Accent Colors Tests
 
@@ -33,9 +25,7 @@ final class AppColorTests: XCTestCase {
         XCTAssertNotNil(AppColor.accent)
     }
 
-    func testAccentLightColorExists() {
-        XCTAssertNotNil(AppColor.accentLight)
-    }
+    // accentLight entfernt (Dead Code)
 
     // MARK: - Status Colors Tests
 
@@ -265,12 +255,8 @@ final class AppColorTests: XCTestCase {
     func testAllColorsAreDefined() {
         let colors = [
             AppColor.primary,
-            AppColor.primaryLight,
-            AppColor.primaryDark,
             AppColor.secondary,
-            AppColor.secondaryLight,
             AppColor.accent,
-            AppColor.accentLight,
             AppColor.success,
             AppColor.warning,
             AppColor.error,

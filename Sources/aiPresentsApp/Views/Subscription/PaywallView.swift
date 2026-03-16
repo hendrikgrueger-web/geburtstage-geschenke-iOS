@@ -58,6 +58,7 @@ struct PaywallView: View {
                 await subscriptionManager.loadProducts()
             }
         }
+        .presentationDetents([.large])
     }
 
     // MARK: - Header

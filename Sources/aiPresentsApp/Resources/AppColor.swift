@@ -20,8 +20,6 @@ enum AppColor {
             ? UIColor(red: 10/255, green: 132/255, blue: 255/255, alpha: 1)   // iOS Dark Blue
             : UIColor(red: 0/255,  green: 122/255, blue: 255/255, alpha: 1)   // iOS Light Blue
     })
-    static let primaryLight = Color(red: 0.4, green: 0.7, blue: 1.0)
-    static let primaryDark = Color(red: 0.0, green: 0.35, blue: 0.8)
 
     // MARK: - Secondary Colors — Soft Purple (dynamisch)
     static let secondary = Color(UIColor { trait in
@@ -29,7 +27,6 @@ enum AppColor {
             ? UIColor(red: 175/255, green: 122/255, blue: 255/255, alpha: 1)  // Dark Purple
             : UIColor(red: 153/255, green: 102/255, blue: 229/255, alpha: 1)  // Light Purple
     })
-    static let secondaryLight = Color(red: 0.75, green: 0.55, blue: 0.95)
 
     // MARK: - Accent Colors — Warm Orange (dynamisch)
     static let accent = Color(UIColor { trait in
@@ -37,7 +34,6 @@ enum AppColor {
             ? UIColor(red: 255/255, green: 159/255, blue: 10/255,  alpha: 1)  // iOS Dark Orange
             : UIColor(red: 255/255, green: 148/255, blue: 0/255,   alpha: 1)  // iOS Light Orange
     })
-    static let accentLight = Color(red: 1.0, green: 0.75, blue: 0.3)
 
     // MARK: - Status Colors (dynamisch)
     static let success = Color(UIColor { trait in
@@ -58,10 +54,25 @@ enum AppColor {
     /// Alias für Abwärtskompatibilität — neu: `AppColor.danger` verwenden
     static var error: Color { danger }
 
-    // MARK: - Birthday Colors
-    static let birthdayToday = Color(red: 1.0, green: 0.4, blue: 0.7)
-    static let birthdaySoon = Color(red: 1.0, green: 0.6, blue: 0.2)
-    static let birthdayUpcoming = Color(red: 0.3, green: 0.7, blue: 1.0)
+    // MARK: - Birthday Colors (dynamisch, Light/Dark Mode)
+    /// Pink — "Heute Geburtstag". Dark: leicht gedämpft für bessere Lesbarkeit auf dunklem Hintergrund.
+    static let birthdayToday = Color(UIColor { trait in
+        trait.userInterfaceStyle == .dark
+            ? UIColor(red: 204/255, green: 82/255,  blue: 143/255, alpha: 1)  // 80 % von (1.0, 0.4, 0.7)
+            : UIColor(red: 255/255, green: 102/255, blue: 179/255, alpha: 1)  // Light: #FF66B3
+    })
+    /// Orange — "Bald Geburtstag". Dark: leicht gedämpft.
+    static let birthdaySoon = Color(UIColor { trait in
+        trait.userInterfaceStyle == .dark
+            ? UIColor(red: 204/255, green: 122/255, blue: 41/255,  alpha: 1)  // 80 % von (1.0, 0.6, 0.2)
+            : UIColor(red: 255/255, green: 153/255, blue: 51/255,  alpha: 1)  // Light: #FF9933
+    })
+    /// Blau — "Zukünftiger Geburtstag". Dark: leicht gedämpft.
+    static let birthdayUpcoming = Color(UIColor { trait in
+        trait.userInterfaceStyle == .dark
+            ? UIColor(red: 61/255,  green: 143/255, blue: 204/255, alpha: 1)  // 80 % von (0.3, 0.7, 1.0)
+            : UIColor(red: 77/255,  green: 179/255, blue: 255/255, alpha: 1)  // Light: #4DB3FF
+    })
 
     // MARK: - Background Colors (dynamisch)
     static let background = Color(UIColor.systemGroupedBackground)

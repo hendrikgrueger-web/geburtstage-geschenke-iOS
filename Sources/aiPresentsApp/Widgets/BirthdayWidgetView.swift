@@ -98,11 +98,11 @@ struct UpcomingBirthdayHero: View {
         }
 
         if daysUntil == 0 {
-            return String(localized: "Heute wird \(age)!")
+            return String(localized: "Heute wird \(age + 1)!")
         } else if daysUntil == 1 {
-            return String(localized: "Morgen wird \(age)")
+            return String(localized: "Morgen wird \(age + 1)")
         } else {
-            return String(localized: "In \(daysUntil) Tagen wird \(age)")
+            return String(localized: "In \(daysUntil) Tagen wird \(age + 1)")
         }
     }
 

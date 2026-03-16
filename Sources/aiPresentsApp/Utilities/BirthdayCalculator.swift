@@ -14,9 +14,9 @@ struct BirthdayCalculator {
         let age: Int?
         let timestamp: Date
 
-        /// Check if cache entry is valid (not older than 5 seconds)
+        /// Check if cache entry is valid (not older than 300 seconds / 5 minutes)
         var isValid: Bool {
-            Date().timeIntervalSince(timestamp) < 5.0
+            Date().timeIntervalSince(timestamp) < 300.0
         }
 
         /// Merge new values into this entry, preserving existing non-nil fields

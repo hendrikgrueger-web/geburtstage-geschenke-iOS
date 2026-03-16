@@ -113,6 +113,7 @@ struct ContactsImportView: View {
                 }
             }
         }
+        .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
         .sheet(isPresented: $showingPaywall) {
             PaywallView()

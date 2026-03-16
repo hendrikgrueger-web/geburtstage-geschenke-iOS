@@ -55,6 +55,7 @@ struct AIGiftSuggestionsSheet: View {
 
     // Track which suggestions have received feedback
     @State private var feedbackGivenForSuggestions = Set<String>()
+    @State private var fetchTask: Task<Void, Never>?
 
     var body: some View {
         NavigationStack {
@@ -492,11 +493,12 @@ struct AIGiftSuggestionsSheet: View {
     }
 
     private func fetchSuggestions() {
+        fetchTask?.cancel()
         let maxBudget = budgetValue
         let history = filteredGiftHistory
         let existingTitles = suggestions.map { $0.title }
         let p = person
-        Task { @MainActor in
+        fetchTask = Task { @MainActor in
             do {
                 let newSuggestions = try await AIService.shared.generateGiftIdeas(
                     for: p,
