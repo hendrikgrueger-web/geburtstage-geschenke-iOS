@@ -70,12 +70,16 @@ struct BirthdayWidgetMediumView: View {
             } else {
                 Spacer(minLength: 8)
                 ForEach(Array(displayEntries.enumerated()), id: \.element.id) { index, birthday in
-                    Link(destination: URL(string: "aipresents://person/\(birthday.id)")!) {
+                    if let deepLinkURL = URL(string: "aipresents://person/\(birthday.id)") {
+                        Link(destination: deepLinkURL) {
+                            BirthdayWidgetRow(entry: birthday)
+                        }
+                        .accessibilityLabel(birthday.daysUntil == 0
+                            ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
+                            : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
+                    } else {
                         BirthdayWidgetRow(entry: birthday)
                     }
-                    .accessibilityLabel(birthday.daysUntil == 0
-                        ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
-                        : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
                     if index < displayEntries.count - 1 {
                         Spacer(minLength: 10)
                     }
@@ -84,7 +88,7 @@ struct BirthdayWidgetMediumView: View {
             }
         }
         .containerBackground(.fill.tertiary, for: .widget)
-        .widgetURL(URL(string: "aipresents://")!)
+        .widgetURL(URL(string: "aipresents://"))
     }
 }
 
@@ -142,12 +146,16 @@ struct BirthdayWidgetLargeView: View {
             } else {
                 Spacer(minLength: 10)
                 ForEach(Array(displayEntries.enumerated()), id: \.element.id) { index, birthday in
-                    Link(destination: URL(string: "aipresents://person/\(birthday.id)")!) {
+                    if let deepLinkURL = URL(string: "aipresents://person/\(birthday.id)") {
+                        Link(destination: deepLinkURL) {
+                            BirthdayWidgetRow(entry: birthday)
+                        }
+                        .accessibilityLabel(birthday.daysUntil == 0
+                            ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
+                            : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
+                    } else {
                         BirthdayWidgetRow(entry: birthday)
                     }
-                    .accessibilityLabel(birthday.daysUntil == 0
-                        ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
-                        : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
                     if index < displayEntries.count - 1 {
                         Spacer(minLength: 0)
                         Divider()
@@ -159,7 +167,7 @@ struct BirthdayWidgetLargeView: View {
             }
         }
         .containerBackground(.fill.tertiary, for: .widget)
-        .widgetURL(URL(string: "aipresents://")!)
+        .widgetURL(URL(string: "aipresents://"))
     }
 }
 

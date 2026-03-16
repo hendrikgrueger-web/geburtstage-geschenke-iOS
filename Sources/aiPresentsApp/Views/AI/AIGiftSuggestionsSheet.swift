@@ -94,7 +94,7 @@ struct AIGiftSuggestionsSheet: View {
                 }
             }
         }
-        .sheet(item: $selectedSuggestion) { suggestion in
+        .fullScreenCover(item: $selectedSuggestion) { suggestion in
             AddGiftIdeaSheet(
                 person: person,
                 prefillTitle: suggestion.title,
@@ -321,7 +321,7 @@ struct AIGiftSuggestionsSheet: View {
                         } else {
                             HStack {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(.green)
+                                    .foregroundStyle(AppColor.success)
                                 Text("Feedback gespeichert")
                                     .font(.caption)
                                     .foregroundStyle(AppColor.textSecondary)

@@ -97,7 +97,7 @@ struct AIBirthdayMessageSheet: View {
             VStack(alignment: .trailing, spacing: 4) {
                 Image(systemName: "cake.fill")
                     .font(.title3)
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(AppColor.accent)
 
                 if let ageString {
                     Text(ageString)
@@ -201,7 +201,7 @@ struct AIBirthdayMessageSheet: View {
                 } else {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .font(.system(size: 50))
-                        .foregroundStyle(.orange)
+                        .foregroundStyle(AppColor.accent)
 
                     Text("Fehler")
                         .font(.headline)
@@ -280,7 +280,7 @@ struct AIBirthdayMessageSheet: View {
                     }) {
                         HStack {
                             Image(systemName: "arrow.clockwise")
-                                .foregroundStyle(.orange)
+                                .foregroundStyle(AppColor.accent)
                             Text("Neue Nachricht generieren")
                                 .font(.subheadline)
                             Spacer()
@@ -307,7 +307,7 @@ struct AIBirthdayMessageSheet: View {
                 HStack(spacing: 12) {
                     Image(systemName: "sparkles.text.viewfinder")
                         .font(.title3)
-                        .foregroundStyle(.orange)
+                        .foregroundStyle(AppColor.accent)
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Persönliche Geburtstagsnachricht")

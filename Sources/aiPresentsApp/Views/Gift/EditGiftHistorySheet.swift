@@ -128,13 +128,13 @@ struct EditGiftHistorySheet: View {
                         Text("Budget")
                         TextField(CurrencyManager.shared.currencySymbol, text: $budget)
                             .keyboardType(.decimalPad)
-                            .foregroundStyle(isBudgetValid ? Color.primary : Color.red)
+                            .foregroundStyle(isBudgetValid ? Color.primary : AppColor.danger)
                     }
 
                     if !isBudgetValid && !budget.isEmpty {
                         Text("Bitte gib eine gültige Zahl ein")
                             .font(.caption)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(AppColor.danger)
                     }
 
                     // SmartInputField for notes

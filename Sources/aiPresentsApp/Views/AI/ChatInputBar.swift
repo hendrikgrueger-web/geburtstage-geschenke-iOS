@@ -23,9 +23,9 @@ struct ChatInputBar: View {
             } label: {
                 Image(systemName: isRecording ? "mic.fill" : "mic")
                     .font(.system(size: 20))
-                    .foregroundStyle(isRecording ? Color.red : Color.secondary)
+                    .foregroundStyle(isRecording ? AppColor.danger : Color.secondary)
                     .frame(width: 36, height: 36)
-                    .background(isRecording ? Color.red.opacity(0.12) : Color.clear)
+                    .background(isRecording ? AppColor.danger.opacity(0.12) : Color.clear)
                     .clipShape(Circle())
                     .symbolEffect(.pulse, isActive: isRecording)
             }

@@ -3,16 +3,24 @@ import UIKit
 
 /// Lädt Kontaktfotos on-demand aus dem Adressbuch und cached sie im Memory.
 /// Fotos werden NICHT in SwiftData gespeichert — sie können sich ändern und sind zu groß.
+///
+/// **Thread-Safety:** Cache-Zugriff und -Schreiben laufen auf dem MainActor.
+/// Der teure CNContactStore-I/O wird im Hintergrund erledigt und das Ergebnis
+/// danach auf dem MainActor in den Cache geschrieben (kein Main-Thread-Block).
 @MainActor
-final class ContactPhotoService {
+final class ContactPhotoService: ObservableObject {
     static let shared = ContactPhotoService()
 
     private var cache: [String: UIImage] = [:]
     private var noPhotoIdentifiers: Set<String> = []
+    /// Verhindert parallele Lade-Requests für dieselbe ID.
+    private var loadingIdentifiers: Set<String> = []
 
     private init() {}
 
-    /// Gibt das Kontaktfoto für den gegebenen contactIdentifier zurück, oder nil.
+    /// Gibt das gecachte Kontaktfoto zurück, oder `nil` wenn noch nicht geladen.
+    /// Bei einem Cache-Miss wird ein asynchroner Ladevorgang gestartet;
+    /// wenn das Foto ankommt, published `objectWillChange` damit Views neu rendern.
     func photo(for contactIdentifier: String) -> UIImage? {
         if let cached = cache[contactIdentifier] {
             return cached
@@ -20,27 +28,40 @@ final class ContactPhotoService {
         if noPhotoIdentifiers.contains(contactIdentifier) {
             return nil
         }
-        // Demo-Kontakte: Gebundelte Fotos laden
+        // Demo-Kontakte: Gebundelte Fotos synchron laden (nur Datei-I/O, akzeptabel)
         if contactIdentifier.hasPrefix("demo-") {
             if let image = loadDemoPhoto(for: contactIdentifier) {
                 cache[contactIdentifier] = image
                 return image
             }
-        }
-        // Lazy load beim ersten Zugriff
-        let image = loadPhoto(for: contactIdentifier)
-        if let image {
-            cache[contactIdentifier] = image
-        } else {
             noPhotoIdentifiers.insert(contactIdentifier)
+            return nil
         }
-        return image
+        // Cache-Miss: asynchron im Hintergrund laden, um den Main Thread nicht zu blockieren
+        guard !loadingIdentifiers.contains(contactIdentifier) else { return nil }
+        loadingIdentifiers.insert(contactIdentifier)
+
+        Task.detached(priority: .userInitiated) {
+            let image = await Self.fetchPhoto(for: contactIdentifier)
+            await MainActor.run { [weak self] in
+                guard let self else { return }
+                self.loadingIdentifiers.remove(contactIdentifier)
+                if let image {
+                    self.cache[contactIdentifier] = image
+                } else {
+                    self.noPhotoIdentifiers.insert(contactIdentifier)
+                }
+                self.objectWillChange.send()
+            }
+        }
+        return nil
     }
 
     /// Cache leeren (z.B. bei App-Wechsel aus dem Hintergrund).
     func clearCache() {
         cache.removeAll()
         noPhotoIdentifiers.removeAll()
+        loadingIdentifiers.removeAll()
     }
 
     private func loadDemoPhoto(for identifier: String) -> UIImage? {
@@ -52,11 +73,12 @@ final class ContactPhotoService {
         return image
     }
 
-    private nonisolated func loadPhoto(for identifier: String) -> UIImage? {
-        let store = CNContactStore()
+    /// Führt den CNContactStore-Fetch im Hintergrund durch (nonisolated → kein Main-Thread-Block).
+    private static nonisolated func fetchPhoto(for identifier: String) async -> UIImage? {
         guard CNContactStore.authorizationStatus(for: .contacts) == .authorized else {
             return nil
         }
+        let store = CNContactStore()
         let keys = [CNContactThumbnailImageDataKey] as [CNKeyDescriptor]
         guard let contact = try? store.unifiedContact(withIdentifier: identifier, keysToFetch: keys),
               let data = contact.thumbnailImageData else {

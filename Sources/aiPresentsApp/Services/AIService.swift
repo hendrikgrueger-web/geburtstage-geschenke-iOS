@@ -325,6 +325,7 @@ struct AIService {
         }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.timeoutInterval = 15
         request.setValue(secret, forHTTPHeaderField: "X-App-Secret")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
@@ -406,6 +407,7 @@ struct AIService {
         }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.timeoutInterval = 15
         request.setValue(secret, forHTTPHeaderField: "X-App-Secret")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 

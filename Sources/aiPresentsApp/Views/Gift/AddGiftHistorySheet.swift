@@ -110,7 +110,7 @@ struct AddGiftHistorySheet: View {
                         Text("Budget")
                         TextField(CurrencyManager.shared.currencySymbol, text: $budget)
                             .keyboardType(.decimalPad)
-                            .foregroundStyle(isBudgetValid ? Color.primary : Color.red)
+                            .foregroundStyle(isBudgetValid ? Color.primary : AppColor.danger)
                             .accessibilityLabel("Budget")
                             .accessibilityHint(String(localized: "Gib das Budget ein"))
                     }
@@ -118,7 +118,7 @@ struct AddGiftHistorySheet: View {
                     if !isBudgetValid && !budget.isEmpty {
                         Text("Bitte gib eine gültige Zahl ein")
                             .font(.caption)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(AppColor.danger)
                             .accessibilityLabel("Fehler: Ungültiges Budget")
                     }
 

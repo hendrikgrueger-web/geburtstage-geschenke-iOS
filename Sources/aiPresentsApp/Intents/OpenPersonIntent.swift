@@ -21,7 +21,13 @@ struct OpenPersonIntent: AppIntent {
     func perform() async throws -> some IntentResult & OpensIntent {
         // Die App wird via openAppWhenRun=true in den Vordergrund gebracht.
         // Der Deep-Link URL wird als Result mitgegeben — iOS öffnet ihn via onOpenURL in ContentView.
-        let url = URL(string: "aipresents://person/\(person.id.uuidString)")!
+        guard let url = URL(string: "aipresents://person/\(person.id.uuidString)") else {
+            throw IntentError.personNotFound
+        }
         return .result(opensIntent: OpenURLIntent(url))
+    }
+
+    private enum IntentError: Error {
+        case personNotFound
     }
 }

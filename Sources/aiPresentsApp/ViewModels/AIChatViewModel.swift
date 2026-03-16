@@ -396,9 +396,13 @@ final class AIChatViewModel {
         // 1. Klammer-IDs komplett entfernen: "(p33)" → "" (Beziehung steht schon im Text)
         cleaned = cleaned.replacing(/\s*\(p\d+\)/, with: "")
         // 2. Alleinstehende IDs durch Display-Namen ersetzen: "p33 hat..." → "Name hat..."
+        // Wortgrenzen-Matching via einfachem String-Check statt Regex (Short-IDs haben bekannte Formate wie "p1", "p42")
         for (shortId, uuid) in personIdMap {
             guard let person = people.first(where: { $0.id == uuid }) else { continue }
-            cleaned = cleaned.replacing(try! Regex("\\b\(shortId)\\b"), with: person.displayName)
+            // Ersetze " p42 ", " p42.", " p42,", etc. — alle Positionen wo shortId von Nicht-Alphanumerik umgeben ist
+            if let regex = try? Regex("\\b\(shortId)\\b") {
+                cleaned = cleaned.replacing(regex, with: person.displayName)
+            }
         }
         return cleaned
     }

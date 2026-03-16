@@ -48,12 +48,8 @@ struct PaywallView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+                    Button(String(localized: "Fertig")) {
                         dismiss()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(.secondary)
-                            .font(.title2)
                     }
                     .disabled(isPurchasing)
                 }
@@ -78,12 +74,12 @@ struct PaywallView: View {
             }
 
             if people.count > 0 {
-                Text("Du hast \(people.count) Geburtstage gespeichert")
+                Text(String(localized: "Du hast \(people.count) Geburtstage gespeichert"))
                     .font(.title2.bold())
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.center)
             } else {
-                Text("Alle Features freischalten")
+                Text(String(localized: "Alle Features freischalten"))
                     .font(.title2.bold())
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.center)
@@ -96,12 +92,12 @@ struct PaywallView: View {
 
     private var featureList: some View {
         VStack(alignment: .leading, spacing: 6) {
-            featureRow(icon: "person.crop.circle.badge.plus", text: "Unbegrenzt Kontakte importieren")
-            featureRow(icon: "sparkles", text: "KI-Geschenkvorschläge")
-            featureRow(icon: "pencil", text: "Geschenkideen bearbeiten & verwalten")
-            featureRow(icon: "bell.badge", text: "Smarte Erinnerungen")
-            featureRow(icon: "rectangle.on.rectangle", text: "Homescreen Widget")
-            featureRow(icon: "message", text: "KI-Geburtstagsnachrichten")
+            featureRow(icon: "person.crop.circle.badge.plus", text: String(localized: "Unbegrenzt Kontakte importieren"))
+            featureRow(icon: "sparkles", text: String(localized: "KI-Geschenkvorschläge"))
+            featureRow(icon: "pencil", text: String(localized: "Geschenkideen bearbeiten & verwalten"))
+            featureRow(icon: "bell.badge", text: String(localized: "Smarte Erinnerungen"))
+            featureRow(icon: "rectangle.on.rectangle", text: String(localized: "Homescreen Widget"))
+            featureRow(icon: "message", text: String(localized: "KI-Geburtstagsnachrichten"))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 8)
@@ -131,10 +127,10 @@ struct PaywallView: View {
                 .font(.title3)
                 .foregroundStyle(AppColor.success)
             VStack(alignment: .leading, spacing: 2) {
-                Text("Testphase aktiv")
+                Text(String(localized: "Testphase aktiv"))
                     .font(.subheadline.bold())
                     .foregroundStyle(AppColor.success)
-                Text("Noch \(subscriptionManager.trialDaysRemaining) Tage kostenloser Zugang")
+                Text(String(localized: "Noch \(subscriptionManager.trialDaysRemaining) Tage kostenloser Zugang"))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
@@ -157,7 +153,7 @@ struct PaywallView: View {
                 ProgressView()
                     .frame(maxWidth: .infinity, minHeight: 160)
             } else if subscriptionManager.products.isEmpty {
-                Text("Produkte konnten nicht geladen werden.")
+                Text(String(localized: "Produkte konnten nicht geladen werden."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, minHeight: 100)
@@ -188,7 +184,7 @@ struct PaywallView: View {
         Button {
             Task { await subscriptionManager.restorePurchases() }
         } label: {
-            Text("Käufe wiederherstellen")
+            Text(String(localized: "Käufe wiederherstellen"))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
@@ -199,15 +195,15 @@ struct PaywallView: View {
 
     private var legalSection: some View {
         VStack(spacing: 8) {
-            Text("Das Abonnement verlängert sich automatisch, sofern es nicht mindestens 24 Stunden vor Ende des Abrechnungszeitraums gekündigt wird.")
+            Text(String(localized: "Das Abonnement verlängert sich automatisch, sofern es nicht mindestens 24 Stunden vor Ende des Abrechnungszeitraums gekündigt wird."))
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
                 .multilineTextAlignment(.center)
             HStack(spacing: 16) {
-                Link("Datenschutz", destination: URL(string: "https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/")!)
+                Link(String(localized: "Datenschutz"), destination: URL(string: "https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/")!)
                 Text("·")
                     .foregroundStyle(.tertiary)
-                Link("AGB", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
+                Link(String(localized: "AGB"), destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
             }
             .font(.caption2)
             .foregroundStyle(.secondary)
@@ -322,10 +318,19 @@ private struct ProductCard: View {
                 .font(.subheadline.bold())
                 .foregroundStyle(.primary)
             if product.type == .autoRenewable {
-                Text(String(localized: "/ Monat").lowercased())
+                Text(periodLabel)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
+        }
+    }
+
+    private var periodLabel: String {
+        switch product.subscription?.subscriptionPeriod.unit {
+        case .year:
+            return String(localized: "/ Jahr").lowercased()
+        default:
+            return String(localized: "/ Monat").lowercased()
         }
     }
 

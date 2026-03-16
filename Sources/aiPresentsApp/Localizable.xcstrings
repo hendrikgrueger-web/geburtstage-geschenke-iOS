@@ -13094,6 +13094,314 @@
           }
         }
       }
+    },
+    "Vorname (damit die KI deine Kontakte erkennt)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First name (so the AI can recognize your contacts)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prénom (pour que l'IA reconnaisse tes contacts)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre (para que la IA reconozca tus contactos)"
+          }
+        }
+      }
+    },
+    "Geschlecht (lokal aus Name/Beziehung abgeleitet)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gender (locally inferred from name/relationship)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genre (déduit localement du nom/relation)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Género (deducido localmente del nombre/relación)"
+          }
+        }
+      }
+    },
+    "Altersgruppe (z.B. \u201EMitte 30\u201C, nicht das exakte Alter)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Age group (e.g. \u201Cmid 30s\u201D, not the exact age)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Groupe d\u2019\u00E2ge (ex. \u00AB\u00A0milieu de la trentaine\u00A0\u00BB, pas l\u2019\u00E2ge exact)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grupo de edad (p. ej. \u00ABmediados de los 30\u00BB, no la edad exacta)"
+          }
+        }
+      }
+    },
+    "Beziehungstyp (z.B. \u201EFreund/in\u201C, \u201EMutter\u201C)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relationship type (e.g. \u201Cfriend\u201D, \u201Cmother\u201D)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type de relation (ex. \u00AB\u00A0ami(e)\u00A0\u00BB, \u00AB\u00A0m\u00E8re\u00A0\u00BB)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tipo de relaci\u00F3n (p. ej. \u00ABamigo/a\u00BB, \u00ABmadre\u00BB)"
+          }
+        }
+      }
+    },
+    "Sternzeichen (aus Geburtsmonat und -tag)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zodiac sign (from birth month and day)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signe astrologique (d\u00E9duit du mois et jour de naissance)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signo del zodiaco (del mes y d\u00EDa de nacimiento)"
+          }
+        }
+      }
+    },
+    "Hobbies und Interessen (sofern vorhanden)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hobbies and interests (if available)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loisirs et int\u00E9r\u00EAts (si disponibles)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aficiones e intereses (si los hay)"
+          }
+        }
+      }
+    },
+    "Budget-Rahmen (Min/Max f\u00FCr passende Vorschl\u00E4ge)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget range (min/max for suitable suggestions)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fourchette de budget (min/max pour des suggestions adapt\u00E9es)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rango de presupuesto (m\u00EDn/m\u00E1x para sugerencias adecuadas)"
+          }
+        }
+      }
+    },
+    "Geschenkideen: Titel und Status (geplant/gekauft)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gift ideas: title and status (planned/purchased)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Id\u00E9es cadeaux\u00A0: titre et statut (pr\u00E9vu/achet\u00E9)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideas de regalo: t\u00EDtulo y estado (planificado/comprado)"
+          }
+        }
+      }
+    },
+    "Geschenkhistorie: Titel fr\u00FCher gemachter Geschenke": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gift history: titles of past gifts"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historique des cadeaux\u00A0: titres des cadeaux pass\u00E9s"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historial de regalos: t\u00EDtulos de regalos anteriores"
+          }
+        }
+      }
+    },
+    "Nachname": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last name"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nom de famille"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apellido"
+          }
+        }
+      }
+    },
+    "Geburtsdatum (kein Tag, Monat oder Jahr)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date of birth (no day, month, or year)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date de naissance (ni jour, ni mois, ni ann\u00E9e)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha de nacimiento (sin d\u00EDa, mes ni a\u00F1o)"
+          }
+        }
+      }
+    },
+    "Exaktes Alter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exact age"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\u00C2ge exact"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edad exacta"
+          }
+        }
+      }
+    },
+    "Was wird \u00FCbertragen?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What is transmitted?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qu\u2019est-ce qui est transmis\u00A0?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\u00BFQu\u00E9 se transmite?"
+          }
+        }
+      }
+    },
+    "Datenschutz-Prinzip": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy Principle"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Principe de confidentialit\u00E9"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Principio de privacidad"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

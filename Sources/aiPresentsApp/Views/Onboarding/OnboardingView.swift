@@ -76,7 +76,7 @@ struct OnboardingView: View {
 
             Image(systemName: "icloud.fill")
                 .font(.system(size: 80))
-                .foregroundStyle(.blue)
+                .foregroundStyle(AppColor.primary)
 
             VStack(spacing: 16) {
                 Text("iCloud Sync")
@@ -103,7 +103,7 @@ struct OnboardingView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
+                    .background(AppColor.primary)
                     .foregroundStyle(.white)
                     .clipShape(.rect(cornerRadius: 12))
                 }

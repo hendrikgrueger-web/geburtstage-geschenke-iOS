@@ -60,11 +60,16 @@ final class CurrencyManager {
     }
 
     @objc private func iCloudDidChange(_ notification: Notification) {
-        if let auto = iCloudStore.object(forKey: automaticKey) as? Bool {
-            isAutomatic = auto
-        }
-        if let code = iCloudStore.string(forKey: codeKey) {
-            currencyCode = code
+        // NotificationCenter kann auf beliebigem Thread feuern — explizit auf MainActor dispatchen.
+        let auto = iCloudStore.object(forKey: automaticKey) as? Bool
+        let code = iCloudStore.string(forKey: codeKey)
+        Task { @MainActor in
+            if let auto {
+                self.isAutomatic = auto
+            }
+            if let code {
+                self.currencyCode = code
+            }
         }
     }
 

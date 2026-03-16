@@ -6,9 +6,13 @@
 	<array>
 		<string>group.com.hendrikgrueger.birthdays-presents-ai</string>
 	</array>
-	<key>com.apple.developer.in-app-payments</key>
+	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
-		<string>merchant.com.hendrikgrueger.birthdays-presents-ai</string>
+		<string>iCloud.com.hendrikgrueger.birthdays-presents-ai</string>
+	</array>
+	<key>com.apple.developer.icloud-services</key>
+	<array>
+		<string>CloudKit</string>
 	</array>
 </dict>
 </plist>
