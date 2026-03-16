@@ -172,13 +172,13 @@ struct EditGiftHistorySheet: View {
             .navigationTitle(history.giftDirection == .given ? String(localized: "Geschenk bearbeiten") : String(localized: "Erhaltenes Geschenk bearbeiten"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button("Abbrechen") {
                         dismiss()
                     }
                 }
 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("Speichern") {
                         if canSave {
                             saveHistory()

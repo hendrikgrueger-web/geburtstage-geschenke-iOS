@@ -104,7 +104,8 @@ struct DevSettingsView: View {
         isCreatingSampleData = true
         SampleDataService.createSampleData(in: modelContext)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(0.5))
             isCreatingSampleData = false
             sampleDataCreated = true
             alertMessage = String(localized: "Demo-Daten erstellt!")
@@ -121,7 +122,8 @@ struct DevSettingsView: View {
             try modelContext.delete(model: GiftIdea.self)
             try modelContext.delete(model: PersonRef.self)
             try modelContext.delete(model: SuggestionFeedback.self)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            Task { @MainActor in
+                try? await Task.sleep(for: .seconds(0.5))
                 isClearingData = false
                 dataCleared = true
                 alertMessage = String(localized: "Alle Daten gelöscht!")

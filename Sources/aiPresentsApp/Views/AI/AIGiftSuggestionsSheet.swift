@@ -88,7 +88,7 @@ struct AIGiftSuggestionsSheet: View {
             .navigationTitle("KI-Geschenk-Ideen")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("Fertig") {
                         dismiss()
                     }

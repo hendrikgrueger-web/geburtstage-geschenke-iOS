@@ -142,7 +142,7 @@ struct AddGiftIdeaSheet: View {
                     .foregroundStyle(.secondary)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button("Abbrechen") {
                         dismiss()
                     }
@@ -150,7 +150,7 @@ struct AddGiftIdeaSheet: View {
                     .accessibilityHint("Schließt das Formular ohne zu speichern")
                 }
 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("Speichern") {
                         if canSave {
                             saveGiftIdea()

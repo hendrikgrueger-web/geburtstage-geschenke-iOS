@@ -196,11 +196,11 @@ struct ContactsImportView: View {
         importError = nil
         SampleDataService.createSampleData(in: modelContext)
         WidgetDataService.shared.updateWidgetData(from: modelContext)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(0.8))
             isImporting = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                dismiss()
-            }
+            try? await Task.sleep(for: .seconds(0.6))
+            dismiss()
         }
     }
 }

@@ -132,7 +132,7 @@ struct EditGiftIdeaSheet: View {
             .navigationTitle("Idee bearbeiten")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button("Abbrechen") {
                         dismiss()
                     }
@@ -140,7 +140,7 @@ struct EditGiftIdeaSheet: View {
                     .accessibilityHint("Schließt das Formular ohne zu speichern")
                 }
 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("Speichern") {
                         if canSave {
                             saveGiftIdea()

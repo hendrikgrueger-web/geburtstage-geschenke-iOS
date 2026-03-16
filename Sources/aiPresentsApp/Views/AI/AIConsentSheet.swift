@@ -184,7 +184,7 @@ struct AIConsentSheet: View {
             .navigationTitle("Datenschutz-Einwilligung")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button("Abbrechen") {
                         isPresented = false
                     }

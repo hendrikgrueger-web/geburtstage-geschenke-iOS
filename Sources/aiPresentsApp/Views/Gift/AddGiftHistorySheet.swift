@@ -175,7 +175,7 @@ struct AddGiftHistorySheet: View {
             .navigationTitle(direction == .given ? String(localized: "Geschenk vermerken") : String(localized: "Erhaltenes Geschenk"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button("Abbrechen") {
                         dismiss()
                     }
@@ -183,7 +183,7 @@ struct AddGiftHistorySheet: View {
                     .accessibilityHint("Schließt das Formular ohne zu speichern")
                 }
 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("Speichern") {
                         if canSave {
                             saveGiftHistory()

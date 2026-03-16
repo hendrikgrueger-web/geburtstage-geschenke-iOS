@@ -47,7 +47,7 @@ struct AIChatView: View {
             .navigationTitle("KI-Assistent")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("Fertig") {
                         dismiss()
                     }

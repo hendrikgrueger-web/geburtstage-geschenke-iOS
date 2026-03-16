@@ -61,11 +61,7 @@ struct BirthdayCountdownBadge: View {
     }
 
     private var countdownText: String {
-        if daysUntil <= 7 {
-            return "\(daysUntil)"
-        } else {
-            return "\(daysUntil)"
-        }
+        "\(daysUntil)"
     }
 
     private var badgeColor: Color {

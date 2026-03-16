@@ -163,14 +163,16 @@ struct TimelineView: View {
         .onAppear {
             if UserDefaults.standard.bool(forKey: "screenshotShowSettings") {
                 UserDefaults.standard.removeObject(forKey: "screenshotShowSettings")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                Task { @MainActor in
+                    try? await Task.sleep(for: .seconds(0.5))
                     showingSettings = true
                 }
             }
             if let idString = UserDefaults.standard.string(forKey: "screenshotShowAddGift"),
                let id = UUID(uuidString: idString) {
                 UserDefaults.standard.removeObject(forKey: "screenshotShowAddGift")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                Task { @MainActor in
+                    try? await Task.sleep(for: .seconds(0.5))
                     showingAddGiftIdeaFor = people.first(where: { $0.id == id })
                 }
             }

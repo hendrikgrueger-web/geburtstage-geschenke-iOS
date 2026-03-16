@@ -142,14 +142,16 @@ struct aiPresentsApp: App {
                             if let idString = UserDefaults.standard.string(forKey: "screenshotPersonID"),
                                let id = UUID(uuidString: idString) {
                                 UserDefaults.standard.removeObject(forKey: "screenshotPersonID")
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                Task { @MainActor in
+                                    try? await Task.sleep(for: .seconds(0.5))
                                     deepLinkPersonID = id
                                 }
                             }
                             // Screenshot-Modus: AI-Chat öffnen
                             if UserDefaults.standard.bool(forKey: "screenshotShowChat") {
                                 UserDefaults.standard.removeObject(forKey: "screenshotShowChat")
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                Task { @MainActor in
+                                    try? await Task.sleep(for: .seconds(0.5))
                                     screenshotShowChat = true
                                 }
                             }
