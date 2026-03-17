@@ -26,7 +26,7 @@ struct ReminderSettingsView: View {
         Form {
             Section {
                 Toggle("Erinnerungen aktivieren", isOn: $enabled)
-                    .accessibilityLabel("Erinnerungen aktivieren")
+                    .accessibilityLabel(String(localized: "Erinnerungen aktivieren"))
             } header: {
                 Text("Allgemein")
             } footer: {
@@ -56,7 +56,7 @@ struct ReminderSettingsView: View {
                             )
                         )
                         .labelsHidden()
-                        .accessibilityLabel("\(dayText(for: day))")
+                        .accessibilityLabel(String(localized: "\(dayText(for: day))"))
                     }
                 }
             } header: {
@@ -86,7 +86,7 @@ struct ReminderSettingsView: View {
                             }
                         }
                         .pickerStyle(.menu)
-                        .accessibilityLabel("Beginn Ruhestunden")
+                        .accessibilityLabel(String(localized: "Beginn Ruhestunden"))
 
                         Spacer()
 
@@ -99,7 +99,7 @@ struct ReminderSettingsView: View {
                             }
                         }
                         .pickerStyle(.menu)
-                        .accessibilityLabel("Ende Ruhestunden")
+                        .accessibilityLabel(String(localized: "Ende Ruhestunden"))
                     }
                 }
             } header: {

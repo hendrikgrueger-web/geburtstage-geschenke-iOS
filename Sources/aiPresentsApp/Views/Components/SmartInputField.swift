@@ -166,9 +166,9 @@ struct SmartInputField: View {
         .animation(.easeInOut(duration: 0.2), value: validationResult.isValid)
         .animation(.easeInOut(duration: 0.2), value: isFocused)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(title), \(text.isEmpty ? "leer" : text)")
+        .accessibilityLabel(String(localized: "\(title), \(text.isEmpty ? String(localized: "leer") : text)"))
         .accessibilityHint(validationResult.errorMessage ?? "")
-        .accessibilityValue(validationResult.isValid ? "gültig" : "ungültig")
+        .accessibilityValue(validationResult.isValid ? String(localized: "gültig") : String(localized: "ungültig"))
     }
 
     // MARK: - Subviews

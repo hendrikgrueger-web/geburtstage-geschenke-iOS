@@ -40,7 +40,7 @@ struct GiftSummaryView: View {
         }
         .padding(.vertical, 4)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Geschenk-Status Übersicht")
+        .accessibilityLabel(String(localized: "Geschenk-Status Übersicht"))
     }
 
     private var progressOverview: some View {

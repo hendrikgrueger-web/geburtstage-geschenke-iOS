@@ -67,7 +67,7 @@ struct EditGiftIdeaSheet: View {
                     } label: {
                         Image(systemName: "arrow.up.right.square").foregroundStyle(AppColor.primary)
                     }
-                    .accessibilityLabel("Link öffnen")
+                    .accessibilityLabel(String(localized: "Link öffnen"))
                 }
             }
         }
@@ -136,8 +136,8 @@ struct EditGiftIdeaSheet: View {
                     Button("Abbrechen") {
                         dismiss()
                     }
-                    .accessibilityLabel("Abbrechen")
-                    .accessibilityHint("Schließt das Formular ohne zu speichern")
+                    .accessibilityLabel(String(localized: "Abbrechen"))
+                    .accessibilityHint(String(localized: "Schließt das Formular ohne zu speichern"))
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -152,7 +152,7 @@ struct EditGiftIdeaSheet: View {
                         }
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
-                    .accessibilityLabel("Speichern")
+                    .accessibilityLabel(String(localized: "Speichern"))
                     .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? String(localized: "Titel muss ausgefüllt sein") : String(localized: "Speichert die Änderungen"))
                 }
             }

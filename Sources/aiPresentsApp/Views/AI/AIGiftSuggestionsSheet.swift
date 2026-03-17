@@ -414,7 +414,7 @@ struct AIGiftSuggestionsSheet: View {
                     in: 0...500,
                     step: 5
                 )
-                .accessibilityLabel("Budget")
+                .accessibilityLabel(String(localized: "Budget"))
                 .accessibilityValue(budgetLabel)
             }
 

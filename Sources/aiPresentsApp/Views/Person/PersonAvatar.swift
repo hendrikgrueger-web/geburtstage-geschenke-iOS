@@ -72,7 +72,7 @@ struct CompactPersonAvatar: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Avatar für \(person.displayName)")
+        .accessibilityLabel(String(localized: "Avatar für \(person.displayName)"))
         .accessibilityHidden(true)
     }
 }

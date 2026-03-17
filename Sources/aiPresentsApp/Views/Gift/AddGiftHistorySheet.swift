@@ -111,7 +111,7 @@ struct AddGiftHistorySheet: View {
                         TextField(CurrencyManager.shared.currencySymbol, text: $budget)
                             .keyboardType(.decimalPad)
                             .foregroundStyle(isBudgetValid ? Color.primary : AppColor.danger)
-                            .accessibilityLabel("Budget")
+                            .accessibilityLabel(String(localized: "Budget"))
                             .accessibilityHint(String(localized: "Gib das Budget ein"))
                     }
 
@@ -119,7 +119,7 @@ struct AddGiftHistorySheet: View {
                         Text("Bitte gib eine gültige Zahl ein")
                             .font(.caption)
                             .foregroundStyle(AppColor.danger)
-                            .accessibilityLabel("Fehler: Ungültiges Budget")
+                            .accessibilityLabel(String(localized: "Fehler: Ungültiges Budget"))
                     }
 
                     // SmartInputField for notes
@@ -149,8 +149,8 @@ struct AddGiftHistorySheet: View {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundStyle(AppColor.primary)
                             }
-                            .accessibilityLabel("Link öffnen")
-                            .accessibilityHint("Öffnet den Link im Browser")
+                            .accessibilityLabel(String(localized: "Link öffnen"))
+                            .accessibilityHint(String(localized: "Öffnet den Link im Browser"))
                         }
                     }
                 }
@@ -161,7 +161,7 @@ struct AddGiftHistorySheet: View {
                             Text("\(y)").tag(y)
                         }
                     }
-                    .accessibilityLabel("Jahr des Geschenks")
+                    .accessibilityLabel(String(localized: "Jahr des Geschenks"))
                 } header: {
                     Text("Jahr des Geschenks")
                 } footer: {
@@ -179,8 +179,8 @@ struct AddGiftHistorySheet: View {
                     Button("Abbrechen") {
                         dismiss()
                     }
-                    .accessibilityLabel("Abbrechen")
-                    .accessibilityHint("Schließt das Formular ohne zu speichern")
+                    .accessibilityLabel(String(localized: "Abbrechen"))
+                    .accessibilityHint(String(localized: "Schließt das Formular ohne zu speichern"))
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -194,7 +194,7 @@ struct AddGiftHistorySheet: View {
                         }
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
-                    .accessibilityLabel("Speichern")
+                    .accessibilityLabel(String(localized: "Speichern"))
                     .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? String(localized: "Titel muss ausgefüllt sein") : String(localized: "Speichert das Geschenk"))
                 }
             }

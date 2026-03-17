@@ -99,8 +99,8 @@ struct AddGiftIdeaSheet: View {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundStyle(AppColor.primary)
                             }
-                            .accessibilityLabel("Link öffnen")
-                            .accessibilityHint("Öffnet den Link im Browser")
+                            .accessibilityLabel(String(localized: "Link öffnen"))
+                            .accessibilityHint(String(localized: "Öffnet den Link im Browser"))
                         }
                     }
                 }
@@ -112,14 +112,14 @@ struct AddGiftIdeaSheet: View {
                 Section("Tags") {
                     TextField("Getrennt durch Kommas", text: $tagsInput)
                         .textInputAutocapitalization(.never)
-                        .accessibilityLabel("Tags")
-                        .accessibilityHint("Gib bis zu 10 Tags getrennt durch Kommas ein, max 30 Zeichen pro Tag")
+                        .accessibilityLabel(String(localized: "Tags"))
+                        .accessibilityHint(String(localized: "Gib bis zu 10 Tags getrennt durch Kommas ein, max 30 Zeichen pro Tag"))
 
                     if let error = tagsValidation {
                         Text(error.errorDescription ?? "")
                             .font(.caption)
                             .foregroundStyle(AppColor.danger)
-                            .accessibilityLabel("Fehler: \(error.errorDescription ?? "")")
+                            .accessibilityLabel(String(localized: "Fehler: \(error.errorDescription ?? "")"))
                     }
                 }
 
@@ -130,8 +130,8 @@ struct AddGiftIdeaSheet: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    .accessibilityLabel("Geschenkstatus")
-                    .accessibilityHint("Wähle den Status der Geschenkidee aus")
+                    .accessibilityLabel(String(localized: "Geschenkstatus"))
+                    .accessibilityHint(String(localized: "Wähle den Status der Geschenkidee aus"))
                 }
             }
             .navigationTitle("Geschenk-Idee")
@@ -146,8 +146,8 @@ struct AddGiftIdeaSheet: View {
                     Button("Abbrechen") {
                         dismiss()
                     }
-                    .accessibilityLabel("Abbrechen")
-                    .accessibilityHint("Schließt das Formular ohne zu speichern")
+                    .accessibilityLabel(String(localized: "Abbrechen"))
+                    .accessibilityHint(String(localized: "Schließt das Formular ohne zu speichern"))
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -162,7 +162,7 @@ struct AddGiftIdeaSheet: View {
                         }
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
-                    .accessibilityLabel("Speichern")
+                    .accessibilityLabel(String(localized: "Speichern"))
                     .accessibilityHint(title.trimmingCharacters(in: .whitespaces).isEmpty ? String(localized: "Titel muss ausgefüllt sein") : String(localized: "Speichert die Geschenkidee"))
                 }
             }

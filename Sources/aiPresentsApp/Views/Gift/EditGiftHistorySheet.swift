@@ -113,7 +113,7 @@ struct EditGiftHistorySheet: View {
                             Text("\(y)").tag(y)
                         }
                     }
-                    .accessibilityLabel("Jahr des Geschenks")
+                    .accessibilityLabel(String(localized: "Jahr des Geschenks"))
                 } header: {
                     Text("Jahr des Geschenks")
                 } footer: {
@@ -164,7 +164,7 @@ struct EditGiftHistorySheet: View {
                                 Image(systemName: "arrow.up.right.square")
                                     .foregroundStyle(AppColor.primary)
                             }
-                            .accessibilityLabel("Link öffnen")
+                            .accessibilityLabel(String(localized: "Link öffnen"))
                         }
                     }
                 }
