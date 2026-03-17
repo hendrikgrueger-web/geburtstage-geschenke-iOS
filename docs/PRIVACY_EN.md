@@ -189,17 +189,17 @@ You can request that all your data be deleted.
 
 **How:**
 - In the app: Remove all data via "Settings → Delete Data".
-- By email: hendrik@gruepi.de with the subject "Data Deletion Request".
+- By email: hendriks-apps@gruepi.de with the subject "Data Deletion Request".
 
 ### 9.3 Right to Correction
 You can have incorrect data corrected.
 
-**How:** Edit directly in the app or email hendrik@gruepi.de.
+**How:** Edit directly in the app or email hendriks-apps@gruepi.de.
 
 ### 9.4 Right to Data Portability
 You can request all your data in a machine-readable format.
 
-**How:** Send an email to hendrik@gruepi.de with the subject "Data Export Request".
+**How:** Send an email to hendriks-apps@gruepi.de with the subject "Data Export Request".
 
 ### 9.5 Right to Withdraw Consent
 You can withdraw your consent to data processing at any time.
@@ -207,6 +207,21 @@ You can withdraw your consent to data processing at any time.
 **How:**
 - In iOS Settings: Disable Contacts, Notifications, iCloud.
 - In the app: Disable AI features.
+
+### 9.6 Right to Restriction of Processing
+You can request that the processing of your data be restricted (Art. 18 GDPR).
+
+### 9.7 Right to Object
+You have the right to object to the processing of your personal data (Art. 21 GDPR).
+
+### 9.8 Right to Lodge a Complaint
+You have the right to lodge a complaint with a data protection supervisory authority (Art. 77 GDPR).
+
+Supervisory authority:
+Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen
+Kavalleriestraße 2–4, 40213 Düsseldorf, Germany
+Email: poststelle@ldi.nrw.de
+Web: https://www.ldi.nrw.de
 
 ---
 
@@ -242,7 +257,7 @@ We reserve the right to adapt this privacy policy:
 
 For questions about this privacy policy or your data rights, contact us:
 
-- **Email:** hendrik@gruepi.de
+- **Email:** hendriks-apps@gruepi.de
 - **GitHub Issues:** https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
 - **Language:** English or German
 

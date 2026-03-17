@@ -4,7 +4,7 @@ Stand: März 2026 (v1.0.0)
 
 ## Überblick
 
-Die KI-Features (Geschenkvorschläge, Geburtstagsgrüße) übertragen ausschließlich anonymisierte Daten über Cloudflare Workers (Proxy) → OpenRouter Inc. (USA) → Google Gemini (USA). Die Nutzung ist optional und erfordert eine explizite Einwilligung des Nutzers.
+Die KI-Features (Geschenkvorschläge, Geburtstagsgrüße) übertragen überwiegend pseudonymisierte Daten (mit Vorname für bessere Ergebnisse) über Cloudflare Workers (Proxy) → OpenRouter Inc. (USA) → Google Gemini (USA). Die Nutzung ist optional und erfordert eine explizite Einwilligung des Nutzers.
 
 ---
 
@@ -177,6 +177,6 @@ Für Daten, die bereits an OpenRouter/Google übertragen wurden:
 ## 8. Kontakt Datenschutz
 
 Gruepi GmbH
-Goethestraße 3, 36304 Alsfeld
-Geschäftsführer: Hendrik Grüger
-hendrik@gruepi.de
+Rennekamp 19, 59494 Soest
+Geschäftsführer: Hendrik Grüger, Sebastian Mause
+hendriks-apps@gruepi.de

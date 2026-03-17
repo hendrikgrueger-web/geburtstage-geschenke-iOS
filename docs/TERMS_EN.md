@@ -140,7 +140,7 @@ We do not guarantee specific availability of the app or its features:
 ### 9.2 Support
 Support is offered through the following channels:
 - GitHub Issues: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
-- Email: hendrik@gruepi.de
+- Email: hendriks-apps@gruepi.de
 
 We strive to respond to requests promptly but provide no response guarantees.
 
@@ -210,11 +210,11 @@ These Terms of Service constitute the entire agreement between you and the devel
 For questions about these Terms of Service, please contact us:
 
 **Gruepi GmbH**
-Goethestraße 3
-36304 Alsfeld
+Rennekamp 19
+59494 Soest
 
-- **Email:** hendrik@gruepi.de
-- **Managing Director:** Hendrik Grüger
+- **Email:** hendriks-apps@gruepi.de
+- **Managing Directors:** Hendrik Grüger, Sebastian Mause
 - **Language:** English or German
 
 ---
