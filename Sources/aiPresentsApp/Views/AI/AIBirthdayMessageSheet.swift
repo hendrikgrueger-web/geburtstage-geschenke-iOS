@@ -254,8 +254,8 @@ struct AIBirthdayMessageSheet: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("In Zwischenablage kopieren")
-                    .accessibilityHint("Kopiert die gesamte Nachricht in die Zwischenablage")
+                    .accessibilityLabel(String(localized: "In Zwischenablage kopieren"))
+                    .accessibilityHint(String(localized: "Kopiert die gesamte Nachricht in die Zwischenablage"))
 
                     // Share Button
                     Button(action: {
@@ -270,8 +270,8 @@ struct AIBirthdayMessageSheet: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Teilen")
-                    .accessibilityHint("Teilt die Nachricht über das Share Sheet")
+                    .accessibilityLabel(String(localized: "Teilen"))
+                    .accessibilityHint(String(localized: "Teilt die Nachricht über das Share Sheet"))
 
                     // Regenerate Button
                     Button(action: {
@@ -287,8 +287,8 @@ struct AIBirthdayMessageSheet: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Neue Nachricht generieren")
-                    .accessibilityHint("Generiert eine alternative Geburtstagsnachricht")
+                    .accessibilityLabel(String(localized: "Neue Nachricht generieren"))
+                    .accessibilityHint(String(localized: "Generiert eine alternative Geburtstagsnachricht"))
                 }
             }
             .padding(.vertical, 8)

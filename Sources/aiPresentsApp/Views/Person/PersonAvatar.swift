@@ -38,8 +38,8 @@ struct PersonAvatar: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Avatar für \(person.displayName)")
-        .accessibilityHint("\(person.relation)")
+        .accessibilityLabel(String(localized: "Avatar für \(person.displayName)"))
+        .accessibilityHint(String(localized: "\(person.relation)"))
     }
 }
 

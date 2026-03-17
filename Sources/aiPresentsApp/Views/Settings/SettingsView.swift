@@ -502,7 +502,7 @@ struct SettingsView: View {
     }
 
     private func openFeedback() {
-        let feedbackEmail = "hendrik@gruepi.de"
+        let feedbackEmail = "hendriks-apps@gruepi.de"
         let subject = "ai-presents-app Feedback v\(appVersion)"
         let body = String(localized: "Was funktioniert gut?\n\nWas könnte besser sein?\n\n")
 

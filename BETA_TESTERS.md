@@ -126,7 +126,7 @@ Besuche https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues u
 - **Screenshots/Videos**: Falls hilfreich
 
 ### Email Feedback
-Schreibe an hendrik@gruepi.de mit:
+Schreibe an hendriks-apps@gruepi.de mit:
 - App Version (siehe Einstellungen)
 - iOS Version
 - iPhone Modell
@@ -175,7 +175,7 @@ Vielen Dank für deine Unterstützung beim Testen von aiPresents! Dein Feedback 
 
 **Kontakt:**
 - GitHub: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
-- Email: hendrik@gruepi.de
+- Email: hendriks-apps@gruepi.de
 
 ---
 

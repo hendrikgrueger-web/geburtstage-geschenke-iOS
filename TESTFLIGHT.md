@@ -249,7 +249,7 @@ Keine kritischen Issues bekannt.
 
 - **GitHub**: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS
 - **Issues**: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
-- **Email**: hendrik@gruepi.de
+- **Email**: hendriks-apps@gruepi.de
 
 ---
 

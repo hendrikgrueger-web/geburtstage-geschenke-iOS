@@ -21,12 +21,12 @@ struct DevSettingsView: View {
                 } label: {
                     HStack {
                         Image(systemName: "plus.circle.fill")
-                            .foregroundStyle(.green)
+                            .foregroundStyle(AppColor.success)
                         Text("Demo-Daten erstellen")
                         Spacer()
                         if sampleDataCreated {
                             Image(systemName: "checkmark.circle.fill")
-                                .foregroundStyle(.green)
+                                .foregroundStyle(AppColor.success)
                         }
                     }
                 }

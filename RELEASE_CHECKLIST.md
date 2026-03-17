@@ -220,7 +220,7 @@ Product → Archive
 ## Contact & Support
 
 - **GitHub Issues**: https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
-- **Email**: hendrik@gruepi.de
+- **Email**: hendriks-apps@gruepi.de
 - **Documentation**: See `Docs/` folder
 
 ---

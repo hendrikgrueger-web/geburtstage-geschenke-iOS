@@ -81,7 +81,7 @@ struct EmptyStateView: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(type.title). \(type.message)")
+        .accessibilityLabel(String(localized: "\(type.title). \(type.message)"))
     }
 }
 

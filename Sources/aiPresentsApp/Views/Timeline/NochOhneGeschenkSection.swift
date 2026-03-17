@@ -76,7 +76,7 @@ struct NochOhneGeschenkSection: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(color: Color.black.opacity(0.06), radius: 4, x: 0, y: 2)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(person.displayName), noch ohne Geschenk")
+        .accessibilityLabel(String(localized: "\(person.displayName), noch ohne Geschenk"))
     }
 
     private func badgeColor(for days: Int) -> Color {
