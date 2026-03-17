@@ -13,6 +13,14 @@ struct PrivacyView: View {
                         content: "Diese App sammelt keine Daten für den Betreiber. Alles, was du eingibst, bleibt auf deinem Gerät. Kein eigener Server, keine eigene Datenbank, kein Tracking."
                     )
 
+                    // Verantwortlicher
+                    PrivacySection(
+                        icon: "building.2.fill",
+                        iconColor: AppColor.primary,
+                        title: "Verantwortlicher (Art. 13 Abs. 1 DSGVO)",
+                        content: "Grüpi GmbH\nRennekamp 19, 59494 Soest\nGeschäftsführer: Hendrik Grüger, Sebastian Mause\nE-Mail: hendriks-apps@gruepi.de\nWeb: gruepi.de"
+                    )
+
                     // Lokale Daten
                     PrivacySection(
                         icon: "iphone",
@@ -45,12 +53,28 @@ struct PrivacyView: View {
                         content: "Wenn du Kontakte aus deinem Adressbuch importierst, liest die App nur Namen und Geburtstage. Keine Telefonnummern, Adressen oder andere Kontaktdaten werden verwendet.\n\nDie importierten Daten werden ausschließlich lokal auf deinem Gerät gespeichert."
                     )
 
+                    // Speicherdauer
+                    PrivacySection(
+                        icon: "clock.fill",
+                        iconColor: AppColor.primary,
+                        title: "Speicherdauer",
+                        content: "Deine Daten werden gespeichert, solange du die App nutzt. Bei Deinstallation werden alle lokalen Daten gelöscht. iCloud-Daten bleiben erhalten, bis du sie manuell löschst. KI-Anfragen werden nicht gespeichert (Zero Data Retention)."
+                    )
+
                     // Deine Rechte
                     PrivacySection(
                         icon: "hand.raised.fill",
                         iconColor: .red,
-                        title: "Deine Rechte",
-                        content: "Da alle Daten lokal auf deinem Gerät liegen, hast du die vollständige Kontrolle:\n\n• Alle Daten können jederzeit in den App-Einstellungen gelöscht werden (Einstellungen → Alle Daten löschen)\n• Berechtigungen (Kontakte, Benachrichtigungen) kannst du jederzeit in den iOS-Einstellungen widerrufen\n• Die App deinstallieren löscht alle lokal gespeicherten Daten"
+                        title: "Deine Rechte (Art. 15–21 DSGVO)",
+                        content: "Du hast folgende Rechte:\n\n• Auskunft (Art. 15): Welche Daten über dich gespeichert sind\n• Berichtigung (Art. 16): Falsche Daten korrigieren\n• Löschung (Art. 17): Alle Daten löschen (Einstellungen → Alle Daten löschen)\n• Einschränkung (Art. 18): Verarbeitung einschränken\n• Datenübertragbarkeit (Art. 20): Daten in maschinenlesbarem Format\n• Widerspruch (Art. 21): Der Verarbeitung widersprechen\n• Widerruf (Art. 7 Abs. 3): Einwilligung jederzeit widerrufen\n\nBerechtigungen (Kontakte, Benachrichtigungen) kannst du jederzeit in den iOS-Einstellungen widerrufen. Die App deinstallieren löscht alle lokal gespeicherten Daten.\n\nAnfragen per E-Mail an: hendriks-apps@gruepi.de"
+                    )
+
+                    // Beschwerderecht
+                    PrivacySection(
+                        icon: "exclamationmark.bubble.fill",
+                        iconColor: .orange,
+                        title: "Beschwerderecht",
+                        content: "Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO).\n\nZuständige Aufsichtsbehörde:\nLandesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen\nKavalleriestraße 2–4, 40213 Düsseldorf\npoststelle@ldi.nrw.de\nhttps://www.ldi.nrw.de"
                     )
 
                     // Kontakt
@@ -58,7 +82,7 @@ struct PrivacyView: View {
                         icon: "envelope.fill",
                         iconColor: AppColor.primary,
                         title: "Kontakt",
-                        content: "Bei Fragen zum Datenschutz:\n\nHendrik Grüger\nhendrik@gruepi.de"
+                        content: "Bei Fragen zum Datenschutz:\n\nGrüpi GmbH\nhendriks-apps@gruepi.de"
                     )
 
                     Text("Stand: März 2026")

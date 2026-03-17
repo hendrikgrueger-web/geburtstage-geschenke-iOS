@@ -5,10 +5,16 @@ struct LegalView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    // Anbieter
+                    // Impressum
                     LegalSection(
-                        title: "Anbieter",
-                        content: "Gruepi GmbH\nGoethestraße 3\n36304 Alsfeld\n\nVertreten durch: Hendrik Grüger, Sebastian Mause\nE-Mail: hendrik@gruepi.de\n\nRegistergericht: Amtsgericht Gießen\nRegisternummer: HRB 12564\nUSt-IdNr.: DE322907053"
+                        title: "Angaben gemäß § 5 DDG",
+                        content: "Grüpi GmbH\nRennekamp 19\n59494 Soest\n\nVertreten durch die Geschäftsführer:\nHendrik Grüger, Sebastian Mause\n\nE-Mail: hendriks-apps@gruepi.de\nWeb: gruepi.de\n\nRegistergericht: Amtsgericht Arnsberg\nRegisternummer: HRB 12564\nUSt-IdNr.: DE322907053"
+                    )
+
+                    // EU-Streitschlichtung
+                    LegalSection(
+                        title: "EU-Streitschlichtung",
+                        content: "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:\nhttps://ec.europa.eu/consumers/odr/\n\nWir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
                     )
 
                     // Haftungsausschluss

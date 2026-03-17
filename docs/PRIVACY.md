@@ -23,11 +23,11 @@ AI Präsente respektiert Ihre Privatsphäre und schützt Ihre persönlichen Date
 ## 2. Verantwortlicher
 
 **Anbieter:**
-- Gruepi GmbH, Goethestraße 3, 36304 Alsfeld
-- Geschäftsführer: Hendrik Grüger
-- E-Mail: hendrik@gruepi.de
+- Gruepi GmbH, Rennekamp 19, 59494 Soest
+- Geschäftsführer: Hendrik Grüger, Sebastian Mause
+- E-Mail: hendriks-apps@gruepi.de
 
-**Kontakt für Datenschutzfragen:** hendrik@gruepi.de
+**Kontakt für Datenschutzfragen:** hendriks-apps@gruepi.de
 
 ---
 
@@ -182,19 +182,19 @@ Nach der DSGVO (EU) und geltenden Datenschutzgesetzen haben Sie folgende Rechte:
 ### 9.1 Recht auf Auskunft
 Sie können eine Übersicht aller über Sie gespeicherten Daten anfordern.
 
-**Wie:** Senden Sie eine E-Mail an hendrik@gruepi.de mit dem Betreff "Datenauskunft".
+**Wie:** Senden Sie eine E-Mail an hendriks-apps@gruepi.de mit dem Betreff "Datenauskunft".
 
 ### 9.2 Recht auf Löschung
 Sie können verlangen, dass alle Ihre Daten gelöscht werden.
 
 **Wie:**
 - In der App: Alle Daten über "Einstellungen → Daten löschen" entfernen.
-- Per E-Mail: hendrik@gruepi.de mit dem Betreff "Datenlöschung".
+- Per E-Mail: hendriks-apps@gruepi.de mit dem Betreff "Datenlöschung".
 
 ### 9.3 Recht auf Berichtigung
 Sie können falsche Daten korrigieren lassen.
 
-**Wie:** In der App direkt ändern oder per E-Mail an hendrik@gruepi.de.
+**Wie:** In der App direkt ändern oder per E-Mail an hendriks-apps@gruepi.de.
 
 ### 9.4 Recht auf Datenübertragbarkeit
 Sie können alle Ihre Daten in einem maschinenlesbaren Format anfordern.
