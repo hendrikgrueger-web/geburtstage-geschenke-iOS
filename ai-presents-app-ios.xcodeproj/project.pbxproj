@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		011B23B9E759F14B51EF9A81 /* BirthdayDateHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BE49BD68A19D2708B9FF4D /* BirthdayDateHelperTests.swift */; };
 		02BD9144C92EBA217C096D14 /* SuggestionQualityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E705474AA673040B59B5EBA /* SuggestionQualityViewModel.swift */; };
+		03FEB96D808B3CC07F55A5DB /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA39B9FFF1B49B23E10FE3 /* TermsView.swift */; };
 		0630A95A542BA683B7B03A09 /* demo-hans.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA0ACA005426F88C2D806DF7 /* demo-hans.jpg */; };
 		0B105CAA3122D6323CE7824E /* BirthdayWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC35DCCF49380674DAC125E /* BirthdayWidgetView.swift */; };
 		0D3739160A5B71DD7F9E76F7 /* LegalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A28EFE658E6EEEB73069B2 /* LegalView.swift */; };
@@ -214,6 +215,7 @@
 		2B21B2CB3D74C9F83C2AE0FB /* BirthdayCalculationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCalculationTests.swift; sourceTree = "<group>"; };
 		2B618522D35422F2E3961784 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		2D5814499A1D7F07472C1E3A /* AnimationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelperTests.swift; sourceTree = "<group>"; };
+		2FDA39B9FFF1B49B23E10FE3 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		32E907972344B19DBE2B836D /* UpcomingBirthdaysIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingBirthdaysIntent.swift; sourceTree = "<group>"; };
 		34597EBF8E869A576A033613 /* AccessibilityConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityConfiguration.swift; sourceTree = "<group>"; };
 		3BC3124099F551F5EA373EA7 /* BirthdayCalculatorThreadSafetyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayCalculatorThreadSafetyTests.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				508247F8818A2793DD521981 /* PrivacyView.swift */,
 				4B3DCE06A0DFE3AB2C55B83F /* ReminderSettingsView.swift */,
 				722036218687E49E95EF8A33 /* SettingsView.swift */,
+				2FDA39B9FFF1B49B23E10FE3 /* TermsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				7646F3A08BCEF6CA391CDB98 /* SuggestionFeedback.swift in Sources */,
 				88ED29FC5BFFAE3D273DBF27 /* SuggestionFeedbackView.swift in Sources */,
 				02BD9144C92EBA217C096D14 /* SuggestionQualityViewModel.swift in Sources */,
+				03FEB96D808B3CC07F55A5DB /* TermsView.swift in Sources */,
 				19E9A3274F1DEA8DBD575123 /* TimelineView.swift in Sources */,
 				536C68C701B7445374355897 /* ToastView.swift in Sources */,
 				618B54FA2FCE6FEDA3840D24 /* URLValidator.swift in Sources */,

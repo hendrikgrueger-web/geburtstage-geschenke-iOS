@@ -326,6 +326,12 @@ struct SettingsView: View {
                     }
 
                     NavigationLink {
+                        TermsView()
+                    } label: {
+                        Text("Nutzungsbedingungen")
+                    }
+
+                    NavigationLink {
                         LegalView()
                     } label: {
                         Text("Impressum")
