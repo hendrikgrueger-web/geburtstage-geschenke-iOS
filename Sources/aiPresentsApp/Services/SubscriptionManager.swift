@@ -54,7 +54,10 @@ final class SubscriptionManager: ObservableObject {
     var isSubscribed: Bool { !purchasedProductIDs.isEmpty }
 
     /// Nutzer hat vollen Zugriff (Abo oder Trial aktiv).
-    var hasFullAccess: Bool { isSubscribed || isInTrial }
+    ///
+    /// - Note: Für den v1-Launch sind alle Features kostenlos verfügbar.
+    ///   Dieses Flag wird auf `true` gesetzt, bis die Monetarisierung aktiviert wird.
+    var hasFullAccess: Bool { true }
 
     // MARK: - Transaction Listener
 

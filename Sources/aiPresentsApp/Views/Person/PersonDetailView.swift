@@ -38,7 +38,6 @@ struct PersonDetailView: View {
     @State private var toast: ToastItem?
     @State private var showingAddReceivedGift = false
     @State private var showingEditPerson = false
-    @State private var showingPaywall = false
     @State private var editedName: String = ""
     @State private var editedBirthday: Date = Date()
     @State private var editedPersonRelation: String = ""
@@ -106,12 +105,8 @@ struct PersonDetailView: View {
                         .foregroundStyle(.secondary)
                     Spacer()
                     Button {
-                        if subscriptionManager.hasFullAccess {
-                            showingEditRelation = true
-                            HapticFeedback.light()
-                        } else {
-                            showingPaywall = true
-                        }
+                        showingEditRelation = true
+                        HapticFeedback.light()
                     } label: {
                         HStack {
                             Text(person.relation)
@@ -131,7 +126,7 @@ struct PersonDetailView: View {
                         HapticFeedback.selectionChanged()
                     }
                 ))
-                .disabled(!subscriptionManager.hasFullAccess)
+                .disabled(false)
             }
 
             // MARK: - Hobbies & Interessen (fließen in KI-Prompt ein)
@@ -156,12 +151,8 @@ struct PersonDetailView: View {
 
                 if filteredGiftIdeas.isEmpty {
                     Button {
-                        if subscriptionManager.hasFullAccess {
-                            showingAddGiftIdea = true
-                            HapticFeedback.light()
-                        } else {
-                            showingPaywall = true
-                        }
+                        showingAddGiftIdea = true
+                        HapticFeedback.light()
                     } label: {
                         VStack(spacing: 12) {
                             Image(systemName: "plus.circle.fill")
@@ -181,11 +172,7 @@ struct PersonDetailView: View {
                 } else {
                     ForEach(filteredGiftIdeas) { idea in
                         Button {
-                            if subscriptionManager.hasFullAccess {
-                                showingEditGiftIdea = idea
-                            } else {
-                                showingPaywall = true
-                            }
+                            showingEditGiftIdea = idea
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 GiftIdeaRow(idea: idea)
@@ -203,11 +190,7 @@ struct PersonDetailView: View {
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                             Button {
-                                if subscriptionManager.hasFullAccess {
-                                    advanceStatus(for: idea)
-                                } else {
-                                    showingPaywall = true
-                                }
+                                advanceStatus(for: idea)
                             } label: {
                                 Label("Vor", systemImage: "arrow.right.circle.fill")
                             }
@@ -233,11 +216,7 @@ struct PersonDetailView: View {
                             .accessibilityLabel(String(localized: "Geschenkidee duplizieren"))
 
                             Button {
-                                if subscriptionManager.hasFullAccess {
-                                    advanceStatus(for: idea)
-                                } else {
-                                    showingPaywall = true
-                                }
+                                advanceStatus(for: idea)
                             } label: {
                                 Label("Status vorwärts", systemImage: "arrow.right.circle.fill")
                             }
@@ -256,12 +235,8 @@ struct PersonDetailView: View {
                     .onDelete(perform: deleteGiftIdeas)
 
                     Button {
-                        if subscriptionManager.hasFullAccess {
-                            showingAddGiftIdea = true
-                            HapticFeedback.medium()
-                        } else {
-                            showingPaywall = true
-                        }
+                        showingAddGiftIdea = true
+                        HapticFeedback.medium()
                     } label: {
                         VStack(spacing: 8) {
                             Image(systemName: "plus.circle.fill")
@@ -349,23 +324,15 @@ struct PersonDetailView: View {
             Section {
                 if givenGiftHistory.isEmpty {
                     EmptyStateView(type: .noHistory, action: {
-                        if subscriptionManager.hasFullAccess {
-                            showingAddGiftHistory = true
-                            HapticFeedback.light()
-                        } else {
-                            showingPaywall = true
-                        }
+                        showingAddGiftHistory = true
+                        HapticFeedback.light()
                     })
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
                 } else {
                     ForEach(givenGiftHistory) { history in
                         Button {
-                            if subscriptionManager.hasFullAccess {
-                                showingEditGiftHistory = history
-                            } else {
-                                showingPaywall = true
-                            }
+                            showingEditGiftHistory = history
                         } label: {
                             GiftHistoryRow(
                                 history: history,
@@ -393,12 +360,8 @@ struct PersonDetailView: View {
                     }
 
                     Button {
-                        if subscriptionManager.hasFullAccess {
-                            showingAddGiftHistory = true
-                            HapticFeedback.medium()
-                        } else {
-                            showingPaywall = true
-                        }
+                        showingAddGiftHistory = true
+                        HapticFeedback.medium()
                     } label: {
                         Label("Eintrag hinzufügen", systemImage: "plus.circle.fill")
                             .foregroundStyle(AppColor.primary)
@@ -423,11 +386,7 @@ struct PersonDetailView: View {
                 } else {
                     ForEach(receivedGiftHistory) { history in
                         Button {
-                            if subscriptionManager.hasFullAccess {
-                                showingEditGiftHistory = history
-                            } else {
-                                showingPaywall = true
-                            }
+                            showingEditGiftHistory = history
                         } label: {
                             GiftHistoryRow(
                                 history: history,
@@ -448,12 +407,8 @@ struct PersonDetailView: View {
                 }
 
                 Button {
-                    if subscriptionManager.hasFullAccess {
-                        showingAddReceivedGift = true
-                        HapticFeedback.medium()
-                    } else {
-                        showingPaywall = true
-                    }
+                    showingAddReceivedGift = true
+                    HapticFeedback.medium()
                 } label: {
                     Label("Eintrag hinzufügen", systemImage: "plus.circle.fill")
                         .foregroundStyle(AppColor.primary)
@@ -530,15 +485,11 @@ struct PersonDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Bearbeiten") {
-                    if subscriptionManager.hasFullAccess {
-                        editedName = person.displayName
-                        editedBirthday = person.birthday
-                        editedPersonRelation = person.relation
-                        showingEditPerson = true
-                        HapticFeedback.light()
-                    } else {
-                        showingPaywall = true
-                    }
+                    editedName = person.displayName
+                    editedBirthday = person.birthday
+                    editedPersonRelation = person.relation
+                    showingEditPerson = true
+                    HapticFeedback.light()
                 }
                 .accessibilityLabel(String(localized: "Bearbeiten"))
                 .accessibilityHint(String(localized: "Öffnet das Formular zum Bearbeiten von Name, Geburtstag und Beziehung"))
@@ -565,11 +516,7 @@ struct PersonDetailView: View {
                     Divider()
 
                     Button {
-                        if subscriptionManager.hasFullAccess {
-                            showingAddGiftIdea = true
-                        } else {
-                            showingPaywall = true
-                        }
+                        showingAddGiftIdea = true
                     } label: {
                         Label("Neue Idee", systemImage: "plus")
                     }
@@ -682,9 +629,6 @@ struct PersonDetailView: View {
                     pendingAIAction = nil
                 }
             }
-        }
-        .sheet(isPresented: $showingPaywall) {
-            PaywallView()
         }
         .toast(item: $toast)
     }

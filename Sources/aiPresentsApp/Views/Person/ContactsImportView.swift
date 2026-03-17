@@ -8,8 +8,6 @@ struct ContactsImportView: View {
     @State private var isImporting = false
     @State private var importError: String?
     @EnvironmentObject private var subscriptionManager: SubscriptionManager
-    @State private var showingPaywall = false
-    @State private var showingPaywallAfterImport = false
 
     var body: some View {
         NavigationStack {
@@ -39,11 +37,7 @@ struct ContactsImportView: View {
                     } else {
                         // Primär: Adressbuch
                         Button {
-                            if subscriptionManager.hasFullAccess {
-                                importFromContacts()
-                            } else {
-                                showingPaywall = true
-                            }
+                            importFromContacts()
                         } label: {
                             HStack(spacing: 10) {
                                 Image(systemName: "person.2.fill")
@@ -59,11 +53,7 @@ struct ContactsImportView: View {
 
                         // Sekundär: Demo
                         Button {
-                            if subscriptionManager.hasFullAccess {
-                                loadSampleData()
-                            } else {
-                                showingPaywall = true
-                            }
+                            loadSampleData()
                         } label: {
                             HStack(spacing: 10) {
                                 Image(systemName: "wand.and.stars")
@@ -115,14 +105,6 @@ struct ContactsImportView: View {
         }
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
-        .sheet(isPresented: $showingPaywall) {
-            PaywallView()
-        }
-        .sheet(isPresented: $showingPaywallAfterImport, onDismiss: {
-            dismiss()
-        }) {
-            PaywallView()
-        }
     }
 
     private func importFromContacts() {
@@ -175,12 +157,7 @@ struct ContactsImportView: View {
                 }
                 try? await Task.sleep(nanoseconds: 600_000_000)
                 await MainActor.run {
-                    if !UserDefaults.standard.bool(forKey: "hasSeenPostImportPaywall") {
-                        UserDefaults.standard.set(true, forKey: "hasSeenPostImportPaywall")
-                        showingPaywallAfterImport = true
-                    } else {
-                        dismiss()
-                    }
+                    dismiss()
                 }
             } catch {
                 await MainActor.run {

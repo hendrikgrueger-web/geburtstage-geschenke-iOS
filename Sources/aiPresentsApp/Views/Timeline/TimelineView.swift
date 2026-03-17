@@ -8,7 +8,6 @@ struct TimelineView: View {
     @Binding var screenshotShowChat: Bool
 
     @EnvironmentObject private var subscriptionManager: SubscriptionManager
-    @State private var showingPaywall = false
     @State private var showingContactsImport = false
 
     @State private var showingSettings = false
@@ -47,11 +46,7 @@ struct TimelineView: View {
                         birthdayRow(for: person)
                             .swipeActions(edge: .trailing) {
                                 Button {
-                                    if subscriptionManager.hasFullAccess {
-                                        toggleSkipGift(for: person)
-                                    } else {
-                                        showingPaywall = true
-                                    }
+                                    toggleSkipGift(for: person)
                                 } label: {
                                     Label(
                                         person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk nötig"),
@@ -114,11 +109,7 @@ struct TimelineView: View {
                     }
 
                     Button {
-                        if subscriptionManager.hasFullAccess {
-                            showingContactsImport = true
-                        } else {
-                            showingPaywall = true
-                        }
+                        showingContactsImport = true
                     } label: {
                         Image(systemName: "person.badge.plus")
                     }
@@ -149,9 +140,6 @@ struct TimelineView: View {
         }
         .sheet(isPresented: $showingContactsImport) {
             ContactsImportView()
-        }
-        .sheet(isPresented: $showingPaywall) {
-            PaywallView()
         }
         .onChange(of: screenshotShowChat) { _, newValue in
             if newValue {
@@ -264,11 +252,7 @@ struct TimelineView: View {
     private func birthdayRow(for person: PersonRef) -> some View {
         NavigationLink(value: person) {
             BirthdayRow(person: person, giftIdeas: ideasByPerson[person.id] ?? [], onQuickAdd: {
-                if subscriptionManager.hasFullAccess {
-                    showingAddGiftIdeaFor = person
-                } else {
-                    showingPaywall = true
-                }
+                showingAddGiftIdeaFor = person
             })
         }
         .contextMenu {
@@ -279,21 +263,13 @@ struct TimelineView: View {
             }
 
             Button {
-                if subscriptionManager.hasFullAccess {
-                    showingAddGiftIdeaFor = person
-                } else {
-                    showingPaywall = true
-                }
+                showingAddGiftIdeaFor = person
             } label: {
                 Label("Idee hinzufügen", systemImage: "plus.circle.fill")
             }
 
             Button {
-                if subscriptionManager.hasFullAccess {
-                    toggleSkipGift(for: person)
-                } else {
-                    showingPaywall = true
-                }
+                toggleSkipGift(for: person)
             } label: {
                 Label(
                     person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk nötig"),
@@ -303,11 +279,7 @@ struct TimelineView: View {
 
             if let firstIdea = ideasByPerson[person.id]?.first(where: { $0.status == .idea }) {
                 Button {
-                    if subscriptionManager.hasFullAccess {
-                        markAsPlanned(firstIdea)
-                    } else {
-                        showingPaywall = true
-                    }
+                    markAsPlanned(firstIdea)
                 } label: {
                     Label("Erste Idee planen", systemImage: "checkmark.circle")
                 }
@@ -347,11 +319,7 @@ struct TimelineView: View {
 
     private var smartSearchBar: some View {
         Button {
-            if subscriptionManager.hasFullAccess {
-                showingAIChat = true
-            } else {
-                showingPaywall = true
-            }
+            showingAIChat = true
             HapticFeedback.light()
         } label: {
             HStack(spacing: 10) {
