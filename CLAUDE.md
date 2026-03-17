@@ -382,7 +382,11 @@ enum GiftDirection {
 - Alle Features (KI, Kontakte, Widget) sind für alle User freigeschaltet (kein Premium-Gating)
 - **RelationOptions:** Benutzerdefinierte Beziehungstypen sind in UserDefaults persistiert, nicht iCloud-synced; bei Geräte-Sync verlieren sich custom-Typen
 
-## App Store Setup — Stand 2026-03-09
+## App Store Connect & Xcode Cloud
+
+**Zentrale Referenz:** `~/.claude/docs/app-store-connect.md` — Tester, Gruppen, Workflows, Learnings.
+**Tool:** `asc` CLI (Profil: `gruepi-admin`). Beispiel: `asc testflight groups list --app 6760319397`
+**Skills:** `~/.claude/skills/asc-cli/` — asc-testflight-orchestration, asc-build-lifecycle, asc-release-flow etc.
 
 ### Registrierte Identifier (Apple Developer Portal ✅)
 | Was | Identifier |
@@ -391,7 +395,7 @@ enum GiftDirection {
 | Widget Bundle ID | `com.hendrikgrueger.birthdays-presents-ai.widget` |
 | App Group | `group.com.hendrikgrueger.birthdays-presents-ai` |
 | App Store Connect App-ID | `6760319397` ✅ |
-| Team (Xcode + App Store) | Gruepi GmbH `CU87QNNB3N` |
+| Team (Xcode + App Store) | Grüpi GmbH `CU87QNNB3N` |
 | Erster Build | 0.8.1 (13) — hochgeladen ✅ |
 
 ### TestFlight Status (2026-03-17)
