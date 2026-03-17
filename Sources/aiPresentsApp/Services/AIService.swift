@@ -34,10 +34,12 @@ private struct BirthdayContext: Sendable {
 
 /// KI-Service für Geschenkvorschläge und Geburtstagsgrüße via Cloudflare Worker Proxy → OpenRouter (Google Gemini).
 ///
-/// ## Datenschutz: Cloud-Verarbeitung (DSGVO-konform anonymisiert)
-/// Übertragene Daten sind ANONYMISIERT: Geschlecht (lokal abgeleitet), Altersgruppe (z.B. "Mitte 30"),
-/// Beziehungstyp, Sternzeichen, Interessen/Tags, Budget-Rahmen, Geschenktitel (ohne Jahr).
-/// NICHT übertragen: Name, Geburtsdatum, exaktes Alter, Links, Notizen, Telefonnummer.
+/// ## Datenschutz: Cloud-Verarbeitung (DSGVO-konform)
+/// **Single-Turn** (Gift Ideas, Birthday Message): Übertragene Daten sind pseudonymisiert: Geschlecht (lokal abgeleitet),
+/// Altersgruppe (z.B. "Mitte 30"), Beziehungstyp, Sternzeichen, Interessen/Tags, Budget-Rahmen, Geschenktitel.
+/// NICHT übertragen bei Single-Turn: Name, Geburtsdatum, exaktes Alter, Links, Notizen, Telefonnummer.
+/// **Multi-Turn Chat** (via AIChatViewModel): Überträgt zusätzlich den Vornamen aller Kontakte für personalisierte Ergebnisse.
+/// Nachname wird NIE übertragen.
 ///
 /// ## Voraussetzungen
 /// - Proxy-Secret in Info.plist (AIProxySecret)

@@ -199,7 +199,7 @@ Sie können falsche Daten korrigieren lassen.
 ### 9.4 Recht auf Datenübertragbarkeit
 Sie können alle Ihre Daten in einem maschinenlesbaren Format anfordern.
 
-**Wie:** Senden Sie eine E-Mail an hendrik@gruepi.de mit dem Betreff "Datenexport".
+**Wie:** Senden Sie eine E-Mail an hendriks-apps@gruepi.de mit dem Betreff "Datenexport".
 
 ### 9.5 Recht auf Widerruf der Einwilligung
 Sie können Ihre Einwilligung zur Datenverarbeitung jederzeit widerrufen.
@@ -207,6 +207,21 @@ Sie können Ihre Einwilligung zur Datenverarbeitung jederzeit widerrufen.
 **Wie:**
 - In den iOS-Einstellungen: Kontakte, Benachrichtigungen, iCloud deaktivieren.
 - In der App: KI-Funktionen deaktivieren.
+
+### 9.6 Recht auf Einschränkung der Verarbeitung
+Sie können verlangen, dass die Verarbeitung Ihrer Daten eingeschränkt wird (Art. 18 DSGVO).
+
+### 9.7 Widerspruchsrecht
+Sie haben das Recht, der Verarbeitung Ihrer personenbezogenen Daten zu widersprechen (Art. 21 DSGVO).
+
+### 9.8 Beschwerderecht bei der Aufsichtsbehörde
+Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO).
+
+Zuständige Aufsichtsbehörde:
+Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen
+Kavalleriestraße 2–4, 40213 Düsseldorf
+E-Mail: poststelle@ldi.nrw.de
+Web: https://www.ldi.nrw.de
 
 ---
 

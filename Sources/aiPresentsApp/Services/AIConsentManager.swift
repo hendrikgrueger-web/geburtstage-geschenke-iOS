@@ -6,7 +6,7 @@ import Combine
 ///
 /// ## Consent-Versionen
 /// - **v1:** Geschenkvorschläge + Geburtstagsnachrichten (Vorname, Alter, Relation, Hobbies, Tags, Budget)
-/// - **v2:** Zusätzlich KI-Chat mit erweiterten Daten (Geburtstag Monat/Tag, Geschenk-Status, IDs, Nachnamen)
+/// - **v2:** Zusätzlich KI-Chat mit erweiterten Daten (Vorname, Tage bis Geburtstag, Geschenk-Status, Geschenkhistorie)
 ///
 /// Bestandsnutzer mit v1 müssen bei Nutzung des Chats erneut zustimmen (v2).
 @MainActor
