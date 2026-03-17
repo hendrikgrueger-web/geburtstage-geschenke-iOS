@@ -116,6 +116,93 @@
           }
         }
       }
+    },
+    "NSMicrophoneUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese App benötigt Zugriff auf das Mikrofon für die Spracheingabe im KI-Chat."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This app needs microphone access for voice input in the AI chat."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette app a besoin d'accéder au microphone pour la saisie vocale dans le chat IA."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta app necesita acceso al micrófono para la entrada de voz en el chat de IA."
+          }
+        }
+      }
+    },
+    "NSSpeechRecognitionUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese App nutzt Spracherkennung, um deine Spracheingaben im KI-Chat in Text umzuwandeln."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This app uses speech recognition to convert your voice input into text in the AI chat."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette app utilise la reconnaissance vocale pour convertir vos entrées vocales en texte dans le chat IA."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta app utiliza reconocimiento de voz para convertir tu entrada de voz en texto en el chat de IA."
+          }
+        }
+      }
+    },
+    "NSFaceIDUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese App nutzt Face ID zum Schutz deiner persönlichen Daten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This app uses Face ID to protect your personal data."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette app utilise Face ID pour protéger vos données personnelles."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta app utiliza Face ID para proteger tus datos personales."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -257,7 +257,7 @@ Wir behalten uns vor, diese Datenschutzrichtlinie anzupassen:
 
 Bei Fragen zu dieser Datenschutzrichtlinie oder Ihren Datenrechten kontaktieren Sie uns:
 
-- **E-Mail:** hendrik@gruepi.de
+- **E-Mail:** hendriks-apps@gruepi.de
 - **GitHub Issues:** https://github.com/hendrikgrueger-web/geburtstage-geschenke-iOS/issues
 - **Sprache:** Deutsch oder Englisch
 

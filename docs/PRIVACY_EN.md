@@ -23,11 +23,11 @@ AI Präsente respects your privacy and protects your personal data. This app is 
 ## 2. Data Controller
 
 **Provider:**
-- Gruepi GmbH, Goethestraße 3, 36304 Alsfeld
-- Managing Director: Hendrik Grüger
-- Email: hendrik@gruepi.de
+- Gruepi GmbH, Rennekamp 19, 59494 Soest
+- Managing Directors: Hendrik Grüger, Sebastian Mause
+- Email: hendriks-apps@gruepi.de
 
-**Contact for privacy questions:** hendrik@gruepi.de
+**Contact for privacy questions:** hendriks-apps@gruepi.de
 
 ---
 
@@ -182,7 +182,7 @@ Under the GDPR (EU) and applicable privacy laws, you have the following rights:
 ### 9.1 Right to Information
 You can request an overview of all data stored about you.
 
-**How:** Send an email to hendrik@gruepi.de with the subject "Data Access Request".
+**How:** Send an email to hendriks-apps@gruepi.de with the subject "Data Access Request".
 
 ### 9.2 Right to Deletion
 You can request that all your data be deleted.
