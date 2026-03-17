@@ -37,12 +37,12 @@ struct DevSettingsView: View {
                 } label: {
                     HStack {
                         Image(systemName: "trash.fill")
-                            .foregroundStyle(.red)
+                            .foregroundStyle(AppColor.danger)
                         Text("Alle Daten löschen")
                         Spacer()
                         if dataCleared {
                             Image(systemName: "checkmark.circle.fill")
-                                .foregroundStyle(.green)
+                                .foregroundStyle(AppColor.success)
                         }
                     }
                 }

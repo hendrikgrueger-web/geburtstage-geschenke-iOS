@@ -105,7 +105,7 @@ struct EditGiftIdeaSheet: View {
         Section("Tags") {
             TextField("Getrennt durch Kommas", text: $tagsInput).textInputAutocapitalization(.never)
             if let error = tagsValidation {
-                Text(error.errorDescription ?? "").font(.caption).foregroundStyle(.red)
+                Text(error.errorDescription ?? "").font(.caption).foregroundStyle(AppColor.danger)
             }
         }
     }

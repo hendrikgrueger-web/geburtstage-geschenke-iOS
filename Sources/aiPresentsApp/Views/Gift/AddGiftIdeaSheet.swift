@@ -118,7 +118,7 @@ struct AddGiftIdeaSheet: View {
                     if let error = tagsValidation {
                         Text(error.errorDescription ?? "")
                             .font(.caption)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(AppColor.danger)
                             .accessibilityLabel("Fehler: \(error.errorDescription ?? "")")
                     }
                 }
