@@ -54,7 +54,7 @@ struct LegalView: View {
 
 // MARK: - Section Component
 
-private struct LegalSection: View {
+struct LegalSection: View {
     let title: LocalizedStringKey
     let content: LocalizedStringKey
 
