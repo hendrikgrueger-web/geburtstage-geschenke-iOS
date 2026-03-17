@@ -394,12 +394,14 @@ enum GiftDirection {
 | Team (Xcode + App Store) | Gruepi GmbH `CU87QNNB3N` |
 | Erster Build | 0.8.1 (13) — hochgeladen ✅ |
 
-### TestFlight Status (2026-03-15)
-- Builds hochgeladen: v13–v19 (alt), v27 (aktuell, mit ZDR + DSGVO-Fix)
-- **Builds 20-26 fehlten in TestFlight** — Ursache: `buildDistributionAudience` war `null`, jetzt auf `INTERNAL_ONLY` gefixt
-- Interne Gruppe: `Testgrupp Geschenke-App Hendrik` (gruepigmbh@gmail.com — INSTALLED)
-- Externe Gruppe `Familie-extern`: hendrik187@gmail.com (INSTALLED), maik.vonangern@bv.aok.de (INSTALLED)
-- Externe Gruppe `Externe-Tester`: bergen.inga@gmail.com (INVITED)
+### TestFlight Status (2026-03-17)
+- Builds hochgeladen: v13–v70 (alle INTERNAL_ONLY)
+- **Builds 20-26 fehlten in TestFlight** — Ursache: `buildDistributionAudience` war `null`
+- **Builds bis 70 waren INTERNAL_ONLY** — Workflow am 2026-03-17 neu erstellt mit `APP_STORE_ELIGIBLE` (Workflow ID: `6a4ec88c-4115-4424-b495-b2b8f690e1a8`)
+- Neuer Build läuft — danach Beta Review einreichen für externe Tester
+- Interne Gruppe: `Testgrupp Geschenke-App Hendrik` — gruepigmbh@gmail.com (INSTALLED), s.mause83@gmail.com (INSTALLED), stephaniegrueger@gmail.com (INVITED)
+- Externe Gruppe `Familie-extern`: 9 Tester (hendrik187, maik.vonangern, j.mastroianni, mail@kurtpetzuch, b00mi, bergen.inga, sophia.grueger, jhgrueger, stephaniegrueger)
+- Externe Gruppe `Externe-Tester`: mail@kurtpetzuch, b00mi, bergen.inga
 
 ## Xcode Cloud (CI/CD)
 
@@ -409,8 +411,9 @@ enum GiftDirection {
 |------------|------|
 | CI Product ID | `9FAFC09A-4B7E-4FD0-ACD1-2DB6847BEFC8` |
 | Workflow | "Deploy to TestFlight" — Push auf `main` → Archive iOS → TestFlight (intern + extern) |
+| Workflow ID | `6a4ec88c-4115-4424-b495-b2b8f690e1a8` (neu erstellt 2026-03-17) |
 | Scheme | `aiPresentsApp` |
-| Distribution | `INTERNAL_ONLY` + Nachaktion: externe Gruppen (Familie-extern, Externe-Tester) |
+| Distribution | `APP_STORE_ELIGIBLE` (für intern + extern Beta Testing) |
 | ci_scripts | `ci_post_clone.sh` — generiert `Secrets.xcconfig` aus `$AI_PROXY_SECRET` |
 | GitHub Repo | `hendrikgrueger-web/geburtstage-geschenke-iOS` (verbunden) |
 | GitHub Actions | `.github/workflows/test.yml` — Build + SwiftLint bei Push/PR (Dummy Secrets.xcconfig) |
