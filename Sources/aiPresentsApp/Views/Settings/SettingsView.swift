@@ -15,7 +15,6 @@ struct SettingsView: View {
     @State private var showingAbout = false
     @State private var showingRevokeConsentConfirmation = false
     @State private var showingAIConsentSheet = false
-    @State private var showingPaywall = false
     @EnvironmentObject private var reminderManager: ReminderManager
     @EnvironmentObject private var subscriptionManager: SubscriptionManager
     @ObservedObject private var consentManager = AIConsentManager.shared
@@ -67,34 +66,12 @@ struct SettingsView: View {
             List {
                 // Abo-Section
                 Section {
-                    if subscriptionManager.isSubscribed {
-                        Label("Premium aktiv", systemImage: "crown.fill")
-                            .foregroundStyle(AppColor.accent)
-                    } else if subscriptionManager.isInTrial {
-                        Button {
-                            showingPaywall = true
-                        } label: {
-                            HStack {
-                                Label("Testphase", systemImage: "clock.fill")
-                                Spacer()
-                                Text("Noch \(subscriptionManager.trialDaysRemaining) Tage")
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-                    } else {
-                        Button {
-                            showingPaywall = true
-                        } label: {
-                            Label("Premium freischalten", systemImage: "crown")
-                                .foregroundStyle(AppColor.accent)
-                        }
-                    }
-
-                    Button("Käufe wiederherstellen") {
-                        Task { await subscriptionManager.restorePurchases() }
-                    }
+                    Label("Alle Features kostenlos", systemImage: "gift.fill")
+                        .foregroundStyle(AppColor.accent)
                 } header: {
                     Text("Abo")
+                } footer: {
+                    Text("Zum v1-Launch sind alle Features gratis verfügbar.")
                 }
 
                 // Next Birthday Card
@@ -377,9 +354,6 @@ struct SettingsView: View {
             AIConsentSheet(isPresented: $showingAIConsentSheet) {
                 consentManager.aiEnabled = true
             }
-        }
-        .sheet(isPresented: $showingPaywall) {
-            PaywallView()
         }
     }
 

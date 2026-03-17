@@ -696,11 +696,6 @@ struct PersonDetailView: View {
     private func handleAIButtonTap(_ action: AIAction) {
         HapticFeedback.medium()
 
-        guard subscriptionManager.hasFullAccess else {
-            showingPaywall = true
-            return
-        }
-
         if AIConsentManager.shared.consentGiven {
             if AIConsentManager.shared.aiEnabled {
                 switch action {
