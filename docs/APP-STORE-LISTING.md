@@ -28,7 +28,7 @@ DEIN PERSÖNLICHER KI-GESCHENKASSISTENT
 - Personalisierte Vorschläge basierend auf Hobbies, Alter und Beziehung
 - Ideen direkt speichern und als geplant oder gekauft markieren
 - Persönliche Geburtstagsnachrichten auf Knopfdruck
-- Datenschutz: Keine Namen oder Geburtsdaten werden übertragen
+- Datenschutz: Dein Nachname und Geburtsdatum bleiben immer auf deinem Gerät
 
 GESCHENKE PERFEKT ORGANISIERT
 - Geschenkideen sammeln, planen und den Überblick behalten
@@ -74,7 +74,7 @@ YOUR PERSONAL AI GIFT ADVISOR
 - Personalized suggestions based on hobbies, age, and relationship
 - Save ideas instantly and mark them as planned or purchased
 - Get heartfelt birthday messages written for you in seconds
-- Privacy first: No names or birth dates ever leave your device
+- Privacy first: Your last name and birth date never leave your device
 
 GIFT PLANNING, SIMPLIFIED
 - Collect ideas, track your plans, and stay organized
@@ -120,7 +120,7 @@ TON ASSISTANT CADEAUX PERSONNEL PROPULSÉ PAR L'IA
 - Suggestions personnalisées selon les hobbies, l'âge et ta relation
 - Enregistre les idées directement et marque-les comme planifiées ou achetées
 - Messages d'anniversaire touchants générés en quelques secondes
-- Vie privée protégée : aucun nom ni date de naissance n'est transmis
+- Vie privée protégée : ton nom de famille et ta date de naissance restent toujours sur ton appareil
 
 CADEAUX PARFAITEMENT ORGANISÉS
 - Collecte des idées, planifie et garde le cap
@@ -166,7 +166,7 @@ TU ASISTENTE DE REGALOS CON IA
 - Sugerencias personalizadas según hobbies, edad y relación
 - Guarda ideas al instante y márcalas como planificadas o compradas
 - Mensajes de cumpleaños especiales generados en segundos
-- Privacidad garantizada: ningún nombre ni fecha de nacimiento sale de tu dispositivo
+- Privacidad garantizada: tu apellido y fecha de nacimiento nunca salen de tu dispositivo
 
 REGALOS PERFECTAMENTE ORGANIZADOS
 - Colecciona ideas, planifica y mantén el control
@@ -287,10 +287,20 @@ Wichtige Hinweise:
 - Die App fragt beim ersten Sprach-Input nach Mikrofon-Zugriff (optional)
 - Ohne KI-Einwilligung sind alle anderen Features (Geburtstage, Geschenkideen, Widget)
   vollständig nutzbar
-- An die KI werden KEINE Namen oder Geburtsdaten übertragen (nur Altersgruppe,
-  Beziehungstyp, Hobbies, anonymisierte Geschenkdaten)
+- An die KI werden Vornamen übertragen (für personalisierte Vorschläge). Nachnamen
+  und Geburtsdaten werden NICHT übertragen (nur Altersgruppe, Beziehungstyp, Hobbies,
+  anonymisierte Geschenkdaten).
 - Der Cloudflare Worker Proxy ist live unter:
   https://ai-presents-proxy.hendrikgrueger.workers.dev
+
+---
+
+Note for Apple Review Team (English):
+
+The app sends first names to the AI to enable personalized gift suggestions. Last names
+and birth dates are NEVER transmitted. Only the following data is sent to the AI:
+first name, age group (e.g. "mid 30s" — not the exact date of birth), relationship type,
+hobbies, gift titles, and days until the next birthday.
 ```
 
 ---
