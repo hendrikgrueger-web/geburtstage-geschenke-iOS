@@ -25,11 +25,35 @@ jobs:
         echo "// CI dummy" > App/Secrets.xcconfig
         echo "AI_PROXY_SECRET = " >> App/Secrets.xcconfig
 
+    - name: Find available simulator
+      id: simulator
+      run: |
+        # Finde den ersten verfügbaren iPhone-Simulator
+        DEVICE=$(xcrun simctl list devices available -j | python3 -c "
+        import json, sys
+        data = json.load(sys.stdin)
+        for runtime, devices in data.get('devices', {}).items():
+            if 'iOS' not in runtime:
+                continue
+            for d in devices:
+                if 'iPhone' in d['name'] and 'Pro' in d['name']:
+                    print(d['name']); sys.exit(0)
+        # Fallback: erster iPhone
+        for runtime, devices in data.get('devices', {}).items():
+            if 'iOS' not in runtime:
+                continue
+            for d in devices:
+                if 'iPhone' in d['name']:
+                    print(d['name']); sys.exit(0)
+        ")
+        echo "device=$DEVICE" >> "$GITHUB_OUTPUT"
+        echo "Verwende Simulator: $DEVICE"
+
     - name: Build
       run: |
         xcodebuild -project ai-presents-app-ios.xcodeproj \
           -scheme aiPresentsApp \
-          -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+          -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device }}" \
           -configuration Debug \
           CODE_SIGNING_ALLOWED=NO \
           build
@@ -38,7 +62,7 @@ jobs:
       run: |
         xcodebuild -project ai-presents-app-ios.xcodeproj \
           -scheme aiPresentsApp \
-          -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+          -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device }}" \
           -configuration Debug \
           CODE_SIGNING_ALLOWED=NO \
           test
