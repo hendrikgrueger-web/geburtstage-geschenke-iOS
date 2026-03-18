@@ -44,6 +44,7 @@ struct OnboardingView: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
             .indexViewStyle(.page(backgroundDisplayMode: .always))
+            .accessibilityValue(String(localized: "Seite \(currentPage + 1) von \(pages.count + 1)"))
 
             if !isICloudPage {
                 VStack {
@@ -65,6 +66,8 @@ struct OnboardingView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 40)
                     .buttonStyle(.pressable)
+                    .accessibilityLabel(String(localized: "Weiter"))
+                    .accessibilityHint(String(localized: "Nächste Onboarding-Seite"))
                 }
             }
         }
@@ -108,6 +111,8 @@ struct OnboardingView: View {
                     .clipShape(.rect(cornerRadius: 12))
                 }
                 .buttonStyle(.pressable)
+                .accessibilityLabel(String(localized: "iCloud Sync aktivieren"))
+                .accessibilityHint(String(localized: "Daten werden auf allen deinen Apple-Geräten synchronisiert"))
 
                 Button {
                     UserDefaults.standard.set(false, forKey: "iCloudSyncEnabled")
@@ -117,6 +122,8 @@ struct OnboardingView: View {
                         .font(.subheadline)
                         .foregroundStyle(AppColor.textSecondary)
                 }
+                .accessibilityLabel(String(localized: "Nur lokal speichern"))
+                .accessibilityHint(String(localized: "Daten werden nur auf diesem Gerät gespeichert"))
             }
             .padding(.horizontal)
 
@@ -154,6 +161,7 @@ struct OnboardingPageView: View {
             Image(systemName: page.icon)
                 .font(.system(size: 80))
                 .foregroundStyle(AppColor.primary)
+                .accessibilityHidden(true)
 
             VStack(spacing: 16) {
                 Text(page.title)
@@ -172,5 +180,6 @@ struct OnboardingPageView: View {
             Spacer()
         }
         .padding()
+        .accessibilityElement(children: .combine)
     }
 }

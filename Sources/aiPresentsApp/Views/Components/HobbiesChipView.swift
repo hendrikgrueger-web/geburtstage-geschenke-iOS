@@ -99,6 +99,7 @@ struct HobbiesChipView: View {
                         .padding(.vertical, 4)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(String(localized: "Hobby hinzufügen"))
                 }
             } else if isEditable && hobbies.count >= 10 {
                 Text("Maximum erreicht (10)")
@@ -127,6 +128,7 @@ private struct ChipView: View {
         HStack(spacing: 4) {
             Text(text)
                 .font(.subheadline)
+                .accessibilityHidden(true)
             if isEditable {
                 Button(action: onRemove) {
                     Image(systemName: "xmark.circle.fill")
@@ -134,12 +136,15 @@ private struct ChipView: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(String(localized: "\(text) entfernen"))
             }
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
         .background(.fill.secondary)
         .clipShape(Capsule())
+        .accessibilityLabel(text)
+        .accessibilityHint(isEditable ? String(localized: "Doppeltippen zum Entfernen") : "")
     }
 }
 

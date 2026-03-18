@@ -4,6 +4,7 @@ struct BirthdayCountdownBadge: View {
     let daysUntil: Int
     @State private var isAnimating = false
     @State private var pulseScale: CGFloat = 1.0
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(spacing: 2) {
@@ -12,7 +13,7 @@ struct BirthdayCountdownBadge: View {
                     Text("🎉")
                         .font(.title3)
                         .scaleEffect(isAnimating ? 1.3 : 1.0)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.4).repeatForever(autoreverses: true), value: isAnimating)
+                        .animation(reduceMotion ? nil : .spring(response: 0.5, dampingFraction: 0.4).repeatForever(autoreverses: true), value: isAnimating)
                 } else {
                     Text(countdownText)
                         .font(.caption)
@@ -42,7 +43,7 @@ struct BirthdayCountdownBadge: View {
         .onAppear {
             if daysUntil == 0 {
                 isAnimating = true
-            } else if daysUntil <= 2 {
+            } else if daysUntil <= 2 && !reduceMotion {
                 withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
                     pulseScale = 1.05
                 }

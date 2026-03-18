@@ -143,6 +143,7 @@ struct ChatBubbleView: View {
 /// Animierte Punkte während die KI antwortet.
 struct TypingIndicatorView: View {
     @State private var animating = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
@@ -160,12 +161,12 @@ struct TypingIndicatorView: View {
                     Circle()
                         .fill(Color.secondary)
                         .frame(width: 8, height: 8)
-                        .scaleEffect(animating ? 1.0 : 0.5)
-                        .opacity(animating ? 1.0 : 0.4)
+                        .scaleEffect(reduceMotion ? 1.0 : (animating ? 1.0 : 0.5))
+                        .opacity(reduceMotion ? 1.0 : (animating ? 1.0 : 0.4))
                         .animation(
-                            .easeInOut(duration: 0.6)
-                            .repeatForever()
-                            .delay(Double(index) * 0.2),
+                            reduceMotion ? nil : .easeInOut(duration: 0.6)
+                                .repeatForever()
+                                .delay(Double(index) * 0.2),
                             value: animating
                         )
                 }
