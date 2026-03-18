@@ -86,13 +86,13 @@ struct Debounced<Value: Equatable> {
 
 // MARK: - View Extension for Debounced Search
 extension View {
-    /// Adds a debounced search field to the view
-    /// - Parameters:
-    ///   - text: Binding to the search text
-    ///   - debouncedText: Binding to store the debounced text
-    ///   - delay: The debounce delay in seconds (default: 0.3)
-    ///   - prompt: The placeholder text
-    /// - Returns: A view with a debounced searchable modifier
+    /// Adds a debounced search field to the view.
+    ///
+    /// - Warning: Broken — creates a new `Debouncer` instance per `onChange` call,
+    ///   which is immediately deallocated before its timer fires. Debouncing never takes effect.
+    /// - Note: TODO: Reimplement using a stable `@State` or `@StateObject` Debouncer stored
+    ///   in the view itself. Use `SmartSearchBar` instead for now.
+    @available(*, deprecated, message: "Broken: creates new Debouncer per call. Use SmartSearchBar instead.")
     func searchableWithDebounce(
         _ text: Binding<String>,
         debouncedText: Binding<String>,
