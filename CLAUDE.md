@@ -391,11 +391,16 @@ enum GiftDirection {
 | Team (Xcode + App Store) | Grüpi GmbH `CU87QNNB3N` |
 | Erster Build | 0.8.1 (13) — hochgeladen ✅ |
 
+### Version & Build Status (2026-03-18)
+- **Aktuelle Version 1.0:** DEVELOPER_REJECTED (zu Überprüfung aus App Store zurückgewiesen)
+- **Neuester Build:** 92 (VALID) — bereit für neue Version
+- **Problem (App Store Connect Limitation):** Version kann nicht gelöscht werden (ist die einzige Version), und neue Version kann nicht erstellt werden, solange alte Version in DEVELOPER_REJECTED ist
+- **Lösung erforderlich:** Über Web-UI (`https://appstoreconnect.apple.com`) — wahrscheinlich Button "Überprüfung zurückziehen" oder "Erneut übertragen" für alte Version, ODER neue Version 1.0.1 erstellen
+
 ### TestFlight Status (2026-03-17)
-- Builds hochgeladen: v13–v70 (alle INTERNAL_ONLY)
+- Builds hochgeladen: v13–v92 (alle INTERNAL_ONLY bis v70, dann APP_STORE_ELIGIBLE)
 - **Builds 20-26 fehlten in TestFlight** — Ursache: `buildDistributionAudience` war `null`
-- **Builds bis 70 waren INTERNAL_ONLY** — Workflow am 2026-03-17 neu erstellt mit `APP_STORE_ELIGIBLE` (Workflow ID: `6a4ec88c-4115-4424-b495-b2b8f690e1a8`)
-- Neuer Build läuft — danach Beta Review einreichen für externe Tester
+- **Builds ab v70 sind APP_STORE_ELIGIBLE** — Workflow am 2026-03-17 neu erstellt (Workflow ID: `6a4ec88c-4115-4424-b495-b2b8f690e1a8`)
 - Interne Gruppe: `Testgrupp Geschenke-App Hendrik` — gruepigmbh@gmail.com (INSTALLED), s.mause83@gmail.com (INSTALLED), stephaniegrueger@gmail.com (INVITED)
 - Externe Gruppe `Familie-extern`: 9 Tester (hendrik187, maik.vonangern, j.mastroianni, mail@kurtpetzuch, b00mi, bergen.inga, sophia.grueger, jhgrueger, stephaniegrueger)
 - Externe Gruppe `Externe-Tester`: mail@kurtpetzuch, b00mi, bergen.inga
