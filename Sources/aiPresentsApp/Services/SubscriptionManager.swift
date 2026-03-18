@@ -67,7 +67,8 @@ final class SubscriptionManager: ObservableObject {
 
     init() {
         startTrialIfNeeded()
-        scheduleTrialReminders()
+        // Trial-Reminders deaktiviert für v1-Launch (IAP-Produkte noch nicht konfiguriert)
+        // scheduleTrialReminders()
         transactionListener = listenForTransactions()
         Task { await updatePurchasedProducts() }
     }

@@ -64,16 +64,6 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
-                // Abo-Section
-                Section {
-                    Label("Alle Features kostenlos", systemImage: "gift.fill")
-                        .foregroundStyle(AppColor.accent)
-                } header: {
-                    Text("Abo")
-                } footer: {
-                    Text("Zum v1-Launch sind alle Features gratis verfügbar.")
-                }
-
                 // Next Birthday Card
                 if let next = nextBirthday {
                     Section {

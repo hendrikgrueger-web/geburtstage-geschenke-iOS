@@ -27,13 +27,6 @@ struct TimelineView: View {
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)
 
-            // ReadOnlyBanner vor den BirthdayRows
-            Section {
-                ReadOnlyBanner()
-            }
-            .listRowInsets(EdgeInsets())
-            .listRowBackground(Color.clear)
-
             // Chronologische Liste aller Geburtstage
             if filteredBirthdays.isEmpty {
                 Section {

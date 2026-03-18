@@ -49,28 +49,25 @@ final class CurrencyManager {
         self.isAutomatic = storedAuto
         self.currencyCode = storedCode
 
-        // iCloud Sync bei externen Änderungen
+        // iCloud Sync bei externen Änderungen.
+        // Closure-API mit queue: .main stellt sicher, dass der Handler bereits auf dem Main Thread
+        // läuft — kein @objc-Selector nötig, kein Data Race durch Thread-Hop.
         NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(iCloudDidChange),
-            name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
-            object: iCloudStore
-        )
-        iCloudStore.synchronize()
-    }
-
-    @objc private func iCloudDidChange(_ notification: Notification) {
-        // NotificationCenter kann auf beliebigem Thread feuern — explizit auf MainActor dispatchen.
-        let auto = iCloudStore.object(forKey: automaticKey) as? Bool
-        let code = iCloudStore.string(forKey: codeKey)
-        Task { @MainActor in
-            if let auto {
-                self.isAutomatic = auto
-            }
-            if let code {
-                self.currencyCode = code
+            forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+            object: iCloudStore,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self else { return }
+            Task { @MainActor in
+                if let auto = self.iCloudStore.object(forKey: self.automaticKey) as? Bool {
+                    self.isAutomatic = auto
+                }
+                if let code = self.iCloudStore.string(forKey: self.codeKey) {
+                    self.currencyCode = code
+                }
             }
         }
+        iCloudStore.synchronize()
     }
 
     /// Formatiert einen Betrag in der aktiven Währung (0 Nachkommastellen für ganzzahlige Währungen)
