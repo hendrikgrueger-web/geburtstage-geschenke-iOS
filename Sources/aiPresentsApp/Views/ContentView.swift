@@ -25,6 +25,7 @@ struct ContentView: View {
         } detail: {
             if let person = selectedPerson {
                 PersonDetailView(person: person)
+                    .id(person.id)
             } else {
                 emptyDetailView
             }

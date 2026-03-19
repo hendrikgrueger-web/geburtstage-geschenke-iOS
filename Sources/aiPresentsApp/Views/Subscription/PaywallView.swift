@@ -201,10 +201,14 @@ struct PaywallView: View {
                 .foregroundStyle(.tertiary)
                 .multilineTextAlignment(.center)
             HStack(spacing: 16) {
-                Link(String(localized: "Datenschutz"), destination: URL(string: "https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/")!)
+                if let privacyURL = URL(string: "https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/") {
+                    Link(String(localized: "Datenschutz"), destination: privacyURL)
+                }
                 Text("·")
                     .foregroundStyle(.tertiary)
-                Link(String(localized: "AGB"), destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
+                if let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                    Link(String(localized: "AGB"), destination: termsURL)
+                }
             }
             .font(.caption2)
             .foregroundStyle(.secondary)

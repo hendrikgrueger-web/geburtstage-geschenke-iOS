@@ -96,20 +96,30 @@ struct FormatterHelper {
         }
     }
 
-    /// Formats a month and year
-    static func formatMonthYear(_ date: Date) -> String {
+    /// Shared month-year formatter (cached, nicht bei jedem Aufruf neu erzeugt)
+    static let monthYearFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = .current
         formatter.dateFormat = "MMMM yyyy"
-        return formatter.string(from: date)
+        return formatter
+    }()
+
+    /// Shared weekday formatter (cached)
+    static let weekdayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.dateFormat = "EEEE"
+        return formatter
+    }()
+
+    /// Formats a month and year
+    static func formatMonthYear(_ date: Date) -> String {
+        monthYearFormatter.string(from: date)
     }
 
     /// Formats a weekday
     static func formatWeekday(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = .current
-        formatter.dateFormat = "EEEE"
-        return formatter.string(from: date)
+        weekdayFormatter.string(from: date)
     }
 
     // MARK: - Number/Currency Formatting
@@ -150,7 +160,8 @@ struct FormatterHelper {
             return "\(items[0]) \(conjunction) \(items[1])"
         default:
             let allButLast = items.dropLast().joined(separator: ", ")
-            return "\(allButLast) \(conjunction) \(items.last!)"
+            guard let last = items.last else { return allButLast }
+            return "\(allButLast) \(conjunction) \(last)"
         }
     }
 
