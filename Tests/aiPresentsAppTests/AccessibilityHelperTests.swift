@@ -204,11 +204,8 @@ final class AccessibilityHelperTests: XCTestCase {
             birthday: Date(),
             relation: "Freund"
         )
-        person.giftIdeas = [
-            GiftIdea(personId: UUID(), title: "Idea 1", budgetMin: 0, budgetMax: 0, status: .idea),
-            GiftIdea(personId: UUID(), title: "Idea 2", budgetMin: 0, budgetMax: 0, status: .idea)
-        ]
-        let label = AccessibilityHelper.personLabel(person, daysUntil: nil)
+        // Use giftCount parameter directly — SwiftData relationships require a ModelContext
+        let label = AccessibilityHelper.personLabel(person, daysUntil: nil, giftCount: 2)
 
         XCTAssertTrue(label.contains("2 Geschenkideen"), "Should contain gift count (plural)")
     }
@@ -220,10 +217,8 @@ final class AccessibilityHelperTests: XCTestCase {
             birthday: Date(),
             relation: "Freund"
         )
-        person.giftIdeas = [
-            GiftIdea(personId: UUID(), title: "Idea 1", budgetMin: 0, budgetMax: 0, status: .idea)
-        ]
-        let label = AccessibilityHelper.personLabel(person, daysUntil: nil)
+        // Use giftCount parameter directly — SwiftData relationships require a ModelContext
+        let label = AccessibilityHelper.personLabel(person, daysUntil: nil, giftCount: 1)
 
         XCTAssertTrue(label.contains("1 Geschenkidee"), "Should contain gift count (singular)")
     }

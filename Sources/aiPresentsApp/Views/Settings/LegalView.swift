@@ -2,9 +2,8 @@ import SwiftUI
 
 struct LegalView: View {
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
                     // Impressum
                     LegalSection(
                         title: "Angaben gemäß § 5 DDG",
@@ -44,11 +43,10 @@ struct LegalView: View {
                     Spacer(minLength: 32)
                 }
                 .padding()
-            }
-            .navigationTitle("Impressum")
-            .navigationBarTitleDisplayMode(.inline)
-            .background(AppColor.background)
         }
+        .navigationTitle("Impressum")
+        .navigationBarTitleDisplayMode(.inline)
+        .background(AppColor.background)
     }
 }
 

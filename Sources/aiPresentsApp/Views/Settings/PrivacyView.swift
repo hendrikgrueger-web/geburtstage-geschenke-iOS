@@ -2,9 +2,8 @@ import SwiftUI
 
 struct PrivacyView: View {
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
                     // Auf einen Blick
                     PrivacySection(
                         icon: "checkmark.shield.fill",
@@ -94,11 +93,10 @@ struct PrivacyView: View {
                     Spacer(minLength: 32)
                 }
                 .padding()
-            }
-            .navigationTitle("Datenschutz")
-            .navigationBarTitleDisplayMode(.inline)
-            .background(AppColor.background)
         }
+        .navigationTitle("Datenschutz")
+        .navigationBarTitleDisplayMode(.inline)
+        .background(AppColor.background)
     }
 }
 
