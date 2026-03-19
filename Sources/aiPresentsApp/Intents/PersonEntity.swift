@@ -45,7 +45,7 @@ func makeIntentsModelContainer() throws -> ModelContainer {
         ReminderRule.self,
         SuggestionFeedback.self
     ])
-    let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false, cloudKitDatabase: .none)
     return try ModelContainer(for: schema, configurations: [config])
 }
 
