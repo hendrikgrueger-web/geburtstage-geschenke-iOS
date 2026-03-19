@@ -27,6 +27,7 @@ struct SuggestionFeedbackView: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(hasGivenFeedback)
+                .accessibilityLabel(String(localized: "Guter Vorschlag"))
 
                 Button(action: {
                     onFeedback(false)
@@ -39,6 +40,7 @@ struct SuggestionFeedbackView: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(hasGivenFeedback)
+                .accessibilityLabel(String(localized: "Schlechter Vorschlag"))
             }
         }
         .padding(.top, 4)

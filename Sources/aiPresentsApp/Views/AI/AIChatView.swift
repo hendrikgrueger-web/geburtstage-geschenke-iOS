@@ -55,6 +55,9 @@ struct AIChatView: View {
             }
         }
         .presentationDragIndicator(.visible)
+        .onDisappear {
+            viewModel.cancelPendingRequests()
+        }
         .onAppear {
             viewModel.configure(
                 people: people,
@@ -224,9 +227,7 @@ struct AIChatView: View {
             return
         }
 
-        Task {
-            await viewModel.sendMessage(text)
-        }
+        viewModel.sendMessage(text)
     }
 
     private func handleActionTap(_ action: ChatAction) {

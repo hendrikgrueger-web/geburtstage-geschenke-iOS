@@ -32,6 +32,9 @@ final class AIChatViewModel {
     /// Flag: System-Prompt muss beim nächsten API-Call neu gebaut werden.
     private var promptNeedsRebuild = true
 
+    /// Laufender API-Task — wird bei cancelPendingRequests() abgebrochen.
+    private var currentTask: Task<Void, Never>?
+
     // MARK: - Setup
 
     func configure(people: [PersonRef], giftIdeas: [GiftIdea], giftHistory: [GiftHistory], modelContext: ModelContext) {
@@ -61,7 +64,21 @@ final class AIChatViewModel {
 
     // MARK: - Senden
 
-    func sendMessage(_ text: String) async {
+    func sendMessage(_ text: String) {
+        currentTask?.cancel()
+        currentTask = Task { @MainActor in
+            await self.performSend(text)
+        }
+    }
+
+    /// Bricht einen laufenden API-Call ab — z.B. wenn das Chat-Sheet geschlossen wird.
+    func cancelPendingRequests() {
+        currentTask?.cancel()
+        currentTask = nil
+        isLoading = false
+    }
+
+    private func performSend(_ text: String) async {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
 
@@ -72,6 +89,11 @@ final class AIChatViewModel {
         do {
             let apiMessages = buildAPIMessages()
             let response = try await AIService.shared.callOpenRouterChat(messages: apiMessages)
+
+            guard !Task.isCancelled else {
+                isLoading = false
+                return
+            }
 
             let action = parseAction(from: response.action)
             // Short-IDs aus Nachrichtentext entfernen (p1 → Beziehungsname)
@@ -90,9 +112,11 @@ final class AIChatViewModel {
                 await processAction(action)
             }
         } catch {
-            let errorChat = ChatMessage(role: .assistant, content: String(localized: "Entschuldigung, es gab einen Fehler. Bitte versuche es erneut."))
-            messages.append(errorChat)
-            AppLogger.data.error("Chat-Fehler", error: error)
+            if !Task.isCancelled {
+                let errorChat = ChatMessage(role: .assistant, content: String(localized: "Entschuldigung, es gab einen Fehler. Bitte versuche es erneut."))
+                messages.append(errorChat)
+                AppLogger.data.error("Chat-Fehler", error: error)
+            }
         }
 
         isLoading = false

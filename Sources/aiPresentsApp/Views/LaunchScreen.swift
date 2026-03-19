@@ -18,6 +18,7 @@ struct LaunchScreen: View {
                     .scaleEffect(isAnimating ? 1.5 : 1.0)
                     .opacity(isAnimating ? 0 : 0.5)
                     .animation(.easeOut(duration: 1.2), value: isAnimating)
+                    .accessibilityHidden(true)
 
                 Circle()
                     .fill(Color.white.opacity(0.05))
@@ -25,6 +26,7 @@ struct LaunchScreen: View {
                     .scaleEffect(isAnimating ? 1.8 : 1.0)
                     .opacity(isAnimating ? 0 : 0.3)
                     .animation(.easeOut(duration: 1.0).delay(0.2), value: isAnimating)
+                    .accessibilityHidden(true)
             }
 
             // Main content
@@ -34,12 +36,14 @@ struct LaunchScreen: View {
                     Circle()
                         .fill(Color.white.opacity(0.2))
                         .frame(width: 120, height: 120)
+                        .accessibilityHidden(true)
 
                     Image(systemName: "gift.fill")
                         .font(.system(size: 60))
                         .foregroundStyle(.white)
                         .scaleEffect(isAnimating ? 1.0 : 0.5)
                         .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.3), value: isAnimating)
+                        .accessibilityHidden(true)
 
                     // Confetti elements
                     if isAnimating {
@@ -55,6 +59,7 @@ struct LaunchScreen: View {
                                         .delay(Double(index) * 0.1 + 0.6),
                                     value: isAnimating
                                 )
+                                .accessibilityHidden(true)
                         }
                     }
                 }

@@ -71,6 +71,7 @@ struct GiftHistoryRow: View {
                     }
                     .buttonStyle(.plain)
                     .pressable()
+                    .accessibilityLabel(String(localized: "Als neue Idee verwenden"))
                 }
 
                 if let onShare = onShare {
@@ -85,14 +86,14 @@ struct GiftHistoryRow: View {
                     }
                     .buttonStyle(.plain)
                     .pressable()
+                    .accessibilityLabel(String(localized: "Teilen"))
                 }
             }
         }
         .padding(.vertical, 2)
         .hoverEffect(.highlight)
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .contain)
         .accessibilityLabel(String(localized: "\(history.giftDirection == .given ? String(localized: "Verschenkt") : String(localized: "Erhalten")): \(history.title), \(history.category), \(history.year)"))
-        .accessibilityHint(String(localized: "Geschenk vermerkt im Jahr \(history.year)"))
     }
 
     private var yearBadgeColor: Color {
