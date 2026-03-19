@@ -57,13 +57,18 @@ export default {
       });
     }
 
-    // App-Secret Authentifizierung
-    const appSecret = env.APP_SECRET;
-    if (appSecret) {
-      const auth = request.headers.get("X-App-Secret") ?? "";
-      if (auth !== appSecret) {
-        return jsonError("Unauthorized", 401);
-      }
+    // Hard-Fail wenn APP_SECRET nicht konfiguriert (P1 Security: M3)
+    if (!env.APP_SECRET) {
+      return new Response(JSON.stringify({ error: 'Server misconfigured' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    }
+
+    // App-Secret Authentifizierung — Timing-Safe (P1 Security: P1-7)
+    const encoder = new TextEncoder();
+    const auth = request.headers.get("X-App-Secret") ?? "";
+    const a = encoder.encode(auth);
+    const b = encoder.encode(env.APP_SECRET);
+    if (a.byteLength !== b.byteLength || !crypto.subtle.timingSafeEqual(a, b)) {
+      return jsonError("Unauthorized", 401);
     }
 
     // Payload-Size-Limit

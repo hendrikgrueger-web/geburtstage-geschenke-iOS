@@ -11,7 +11,11 @@ import UIKit
 final class ContactPhotoService: ObservableObject {
     static let shared = ContactPhotoService()
 
-    private var cache: [String: UIImage] = [:]
+    private let cache: NSCache<NSString, UIImage> = {
+        let c = NSCache<NSString, UIImage>()
+        c.countLimit = 200
+        return c
+    }()
     private var noPhotoIdentifiers: Set<String> = []
     /// Verhindert parallele Lade-Requests für dieselbe ID.
     private var loadingIdentifiers: Set<String> = []
@@ -22,7 +26,7 @@ final class ContactPhotoService: ObservableObject {
     /// Bei einem Cache-Miss wird ein asynchroner Ladevorgang gestartet;
     /// wenn das Foto ankommt, published `objectWillChange` damit Views neu rendern.
     func photo(for contactIdentifier: String) -> UIImage? {
-        if let cached = cache[contactIdentifier] {
+        if let cached = cache.object(forKey: contactIdentifier as NSString) {
             return cached
         }
         if noPhotoIdentifiers.contains(contactIdentifier) {
@@ -31,7 +35,7 @@ final class ContactPhotoService: ObservableObject {
         // Demo-Kontakte: Gebundelte Fotos synchron laden (nur Datei-I/O, akzeptabel)
         if contactIdentifier.hasPrefix("demo-") {
             if let image = loadDemoPhoto(for: contactIdentifier) {
-                cache[contactIdentifier] = image
+                cache.setObject(image, forKey: contactIdentifier as NSString)
                 return image
             }
             noPhotoIdentifiers.insert(contactIdentifier)
@@ -47,7 +51,7 @@ final class ContactPhotoService: ObservableObject {
                 guard let self else { return }
                 self.loadingIdentifiers.remove(contactIdentifier)
                 if let image {
-                    self.cache[contactIdentifier] = image
+                    self.cache.setObject(image, forKey: contactIdentifier as NSString)
                 } else {
                     self.noPhotoIdentifiers.insert(contactIdentifier)
                 }
@@ -59,7 +63,7 @@ final class ContactPhotoService: ObservableObject {
 
     /// Cache leeren (z.B. bei App-Wechsel aus dem Hintergrund).
     func clearCache() {
-        cache.removeAll()
+        cache.removeAllObjects()
         noPhotoIdentifiers.removeAll()
         loadingIdentifiers.removeAll()
     }
