@@ -90,6 +90,7 @@
 		85F84E3782BF1D0066448A5B /* BirthdayCalculationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B21B2CB3D74C9F83C2AE0FB /* BirthdayCalculationTests.swift */; };
 		88ED29FC5BFFAE3D273DBF27 /* SuggestionFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3185DD71D459EE21A6A0461 /* SuggestionFeedbackView.swift */; };
 		8C1D891DD58EFE489820B87A /* GiftAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B179606944CE70B2D4F7F /* GiftAppShortcuts.swift */; };
+		8D1027AC5348B6DB997364FF /* AIChatViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050F0443F62696ACF3B75CD1 /* AIChatViewModelTests.swift */; };
 		9243DC8E316E82F7A49D34B9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458F69E06194AA2FA07A2F /* EmptyStateView.swift */; };
 		927932D1E34BB9B96838198B /* ReminderRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54D03939A717560DDD798EB /* ReminderRule.swift */; };
 		92BA59DE300D1909E8E79515 /* GenderInferenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D79AF365A992F4461047709 /* GenderInferenceTests.swift */; };
@@ -195,6 +196,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		050F0443F62696ACF3B75CD1 /* AIChatViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatViewModelTests.swift; sourceTree = "<group>"; };
 		063CAB0C081F446D470C7433 /* DebouncerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncerTests.swift; sourceTree = "<group>"; };
 		0750E534FFC66119B4D89A2B /* GiftIdea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftIdea.swift; sourceTree = "<group>"; };
 		0C0DDFF0C23DE788F8DF31A4 /* demo-erika.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "demo-erika.jpg"; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				A92D5A39066D3EB9FAD43895 /* AccessibilityHelperTests.swift */,
 				76009692592AB72DAE480A06 /* AgeObfuscatorTests.swift */,
 				AA443DCF283A93273952F5B3 /* AIBirthdayMessageSheetTests.swift */,
+				050F0443F62696ACF3B75CD1 /* AIChatViewModelTests.swift */,
 				463BBEC37B287A1D9FCC89A3 /* AIConsentManagerTests.swift */,
 				B67C423C60F6B50FA69691AD /* AIServiceTests.swift */,
 				2D5814499A1D7F07472C1E3A /* AnimationHelperTests.swift */,
@@ -863,6 +866,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9427DC3A62E7EFC8747F871D /* AIBirthdayMessageSheetTests.swift in Sources */,
+				8D1027AC5348B6DB997364FF /* AIChatViewModelTests.swift in Sources */,
 				302089CCD50FCAE95999D515 /* AIConsentManagerTests.swift in Sources */,
 				FBB7A3F4309F98B05DC46435 /* AIServiceTests.swift in Sources */,
 				1FD4F88401FFE069FBFD3B3E /* AccessibilityConfigurationTests.swift in Sources */,
