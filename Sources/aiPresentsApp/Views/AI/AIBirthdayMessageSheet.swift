@@ -357,11 +357,11 @@ struct AIBirthdayMessageSheet: View {
         birthdayMessage = nil
         HapticFeedback.light()
 
-        let p = person
+        let currentPerson = person
         let name = senderName.isEmpty ? nil : senderName
         Task { @MainActor in
             do {
-                let message = try await AIService.shared.generateBirthdayMessage(for: p, senderName: name)
+                let message = try await AIService.shared.generateBirthdayMessage(for: currentPerson, senderName: name)
                 isLoading = false
                 birthdayMessage = message
                 HapticFeedback.success()

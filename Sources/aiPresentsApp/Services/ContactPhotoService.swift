@@ -12,9 +12,9 @@ final class ContactPhotoService: ObservableObject {
     static let shared = ContactPhotoService()
 
     private let cache: NSCache<NSString, UIImage> = {
-        let c = NSCache<NSString, UIImage>()
-        c.countLimit = 200
-        return c
+        let photoCache = NSCache<NSString, UIImage>()
+        photoCache.countLimit = 200
+        return photoCache
     }()
     private var noPhotoIdentifiers: Set<String> = []
     /// Verhindert parallele Lade-Requests für dieselbe ID.

@@ -101,13 +101,11 @@ enum AccessibilityConfiguration {
         case -1:
             return String(localized: "Gestern")
         case 2...6:
-            let d = days
-            return String(localized: "In") + " \(d) " + String(localized: "Tagen")
-        case let x where x < 0:
-            return String(localized: "vor") + " \(abs(x)) " + String(localized: "Tagen")
+            return String(localized: "In") + " \(days) " + String(localized: "Tagen")
+        case let negativeDays where negativeDays < 0:
+            return String(localized: "vor") + " \(abs(negativeDays)) " + String(localized: "Tagen")
         default:
-            let d = days
-            return String(localized: "In") + " \(d) " + String(localized: "Tagen")
+            return String(localized: "In") + " \(days) " + String(localized: "Tagen")
         }
     }
 }

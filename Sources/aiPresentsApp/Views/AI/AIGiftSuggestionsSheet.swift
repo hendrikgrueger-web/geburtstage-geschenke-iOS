@@ -497,11 +497,11 @@ struct AIGiftSuggestionsSheet: View {
         let maxBudget = budgetValue
         let history = filteredGiftHistory
         let existingTitles = suggestions.map { $0.title }
-        let p = person
+        let currentPerson = person
         fetchTask = Task { @MainActor in
             do {
                 let newSuggestions = try await AIService.shared.generateGiftIdeas(
-                    for: p,
+                    for: currentPerson,
                     budgetMin: 0,
                     budgetMax: maxBudget == 0 ? 500 : maxBudget,
                     tags: [],

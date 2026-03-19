@@ -29,9 +29,9 @@ struct FormatterHelper {
 
     /// Kurzes Log-Datum (dd.MM.yy) für Status-Logs.
     static let shortLogDateFormatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateFormat = "dd.MM.yy"
-        return f
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yy"
+        return formatter
     }()
 
     /// Number formatter for budget ranges

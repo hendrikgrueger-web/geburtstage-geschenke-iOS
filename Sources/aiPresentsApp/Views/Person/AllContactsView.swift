@@ -39,15 +39,15 @@ struct AllContactsView: View {
                                     for: person.birthday,
                                     from: Calendar.current.startOfDay(for: Date())
                                 )
-                                if let d = days {
-                                    if d == 0 {
+                                if let daysUntil = days {
+                                    if daysUntil == 0 {
                                         Text("Heute 🎉")
                                             .font(.caption)
                                             .foregroundStyle(AppColor.accent)
                                     } else {
-                                        Text("in \(d) T.")
+                                        Text("in \(daysUntil) T.")
                                             .font(.caption)
-                                            .foregroundStyle(d <= 7 ? AppColor.accent : Color.secondary)
+                                            .foregroundStyle(daysUntil <= 7 ? AppColor.accent : Color.secondary)
                                     }
                                 }
                             }
