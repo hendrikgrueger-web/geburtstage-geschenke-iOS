@@ -13,15 +13,13 @@ protocol ContactsServiceProtocol {
 // MARK: - ContactsService
 
 @MainActor
-class ContactsService: ObservableObject, ContactsServiceProtocol {
+final class ContactsService: ObservableObject, ContactsServiceProtocol {
     static let shared = ContactsService()
-
-    private let store = CNContactStore()
 
     private init() {}
 
     func requestPermission() async throws -> Bool {
-        return try await store.requestAccess(for: .contacts)
+        return try await CNContactStore().requestAccess(for: .contacts)
     }
 
     func importBirthdays() async throws -> [PersonRef] {

@@ -1,7 +1,7 @@
 import Foundation
 
 /// In-Memory Chat-Nachricht (nicht persistiert).
-struct ChatMessage: Identifiable, Sendable {
+struct ChatMessage: Identifiable, Equatable, Sendable {
     let id: UUID
     let role: Role
     let content: String
@@ -26,7 +26,7 @@ struct ChatMessage: Identifiable, Sendable {
 // MARK: - Chat-Aktionen
 
 /// Strukturierte Aktion, die die KI als Teil ihrer Antwort zurückgibt.
-struct ChatAction: Sendable {
+struct ChatAction: Equatable, Sendable {
     let type: ActionType
     let data: ActionData?
 
@@ -42,7 +42,7 @@ struct ChatAction: Sendable {
 }
 
 /// Daten einer Chat-Aktion (je nach Typ unterschiedlich befüllt).
-struct ActionData: Sendable {
+struct ActionData: Equatable, Sendable {
     let personId: String?
     let personName: String?
     let giftTitle: String?

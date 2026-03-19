@@ -19,7 +19,7 @@ protocol ReminderManagerProtocol: AnyObject {
 
 @MainActor
 @Observable
-class ReminderManager: ReminderManagerProtocol {
+final class ReminderManager: ReminderManagerProtocol {
     private static let birthdayNotificationPrefix = "birthday_"
     private let modelContext: ModelContext
     private let center = UNUserNotificationCenter.current()

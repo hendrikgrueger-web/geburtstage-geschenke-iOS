@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 // swiftlint:disable function_body_length type_body_length file_length
-class SampleDataService {
+enum SampleDataService {
     // swiftlint:disable:next cyclomatic_complexity
     static func createSampleData(in context: ModelContext) {
         let cal = Calendar.current

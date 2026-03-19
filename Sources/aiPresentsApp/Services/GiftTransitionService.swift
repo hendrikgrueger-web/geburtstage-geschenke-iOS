@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 @MainActor
-struct GiftTransitionService {
+enum GiftTransitionService {
 
     static func autoTransitionPurchasedGifts(in context: ModelContext) {
         let calendar = Calendar.current

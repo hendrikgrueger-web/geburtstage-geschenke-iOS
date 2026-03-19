@@ -75,7 +75,7 @@ final class PersonRef {
             let year = String(item.year)
             let category = item.category.replacingOccurrences(of: "\"", with: "\"\"")
             let budget = String(format: "%.2f", item.budget)
-            let direction = item.giftDirection.displayName
+            let direction = item.giftDirection.localizedName
             let link = item.link.replacingOccurrences(of: "\"", with: "\"\"")
             let note = item.note.replacingOccurrences(of: "\"", with: "\"\"").replacingOccurrences(of: "\n", with: " ")
 
