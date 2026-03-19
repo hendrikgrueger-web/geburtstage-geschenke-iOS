@@ -5,7 +5,7 @@ import SwiftUI
 /// Paywall-Sheet mit 3 Preisoptionen (Jährlich, Monatlich, Lifetime), Trial-Banner und Restore-Funktion.
 struct PaywallView: View {
 
-    @EnvironmentObject private var subscriptionManager: SubscriptionManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager
     @Environment(\.dismiss) private var dismiss
 
     @Query private var people: [PersonRef]
@@ -370,5 +370,5 @@ private struct ProductCard: View {
 
 #Preview {
     PaywallView()
-        .environmentObject(SubscriptionManager())
+        .environment(SubscriptionManager())
 }

@@ -15,9 +15,9 @@ struct SettingsView: View {
     @State private var showingAbout = false
     @State private var showingRevokeConsentConfirmation = false
     @State private var showingAIConsentSheet = false
-    @EnvironmentObject private var reminderManager: ReminderManager
-    @EnvironmentObject private var subscriptionManager: SubscriptionManager
-    @ObservedObject private var consentManager = AIConsentManager.shared
+    @Environment(ReminderManager.self) private var reminderManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager
+    private let consentManager = AIConsentManager.shared
 
     @Query private var reminderRule: [ReminderRule]
     @Query private var people: [PersonRef]

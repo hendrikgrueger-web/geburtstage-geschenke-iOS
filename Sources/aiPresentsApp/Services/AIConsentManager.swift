@@ -1,5 +1,4 @@
 import Foundation
-import Combine
 
 // MARK: - AIConsentManagerProtocol
 
@@ -26,7 +25,8 @@ protocol AIConsentManagerProtocol: AnyObject {
 ///
 /// Bestandsnutzer mit v1 müssen bei Nutzung des Chats erneut zustimmen (v2).
 @MainActor
-final class AIConsentManager: ObservableObject, AIConsentManagerProtocol {
+@Observable
+final class AIConsentManager: AIConsentManagerProtocol {
     static let shared = AIConsentManager()
 
     /// Aktuelle Consent-Version. Bei Erhöhung müssen alle Nutzer erneut zustimmen.
@@ -37,9 +37,9 @@ final class AIConsentManager: ObservableObject, AIConsentManagerProtocol {
     // Legacy-Key für Migration
     private let legacyConsentKey = "ai_dsgvo_consent_v1"
 
-    @Published private(set) var consentGiven: Bool
-    @Published private(set) var consentVersion: Int
-    @Published var aiEnabled: Bool {
+    private(set) var consentGiven: Bool
+    private(set) var consentVersion: Int
+    var aiEnabled: Bool {
         didSet { UserDefaults.standard.set(aiEnabled, forKey: enabledKey) }
     }
 

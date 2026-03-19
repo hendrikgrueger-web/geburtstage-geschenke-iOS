@@ -16,7 +16,7 @@ struct AIBirthdayMessageSheet: View {
     @State private var shareText: String = ""
     @State private var toast: ToastItem?
     @State private var showingConsentSheet = false
-    @ObservedObject private var consentManager = AIConsentManager.shared
+    private let consentManager = AIConsentManager.shared
 
     var body: some View {
         NavigationStack {

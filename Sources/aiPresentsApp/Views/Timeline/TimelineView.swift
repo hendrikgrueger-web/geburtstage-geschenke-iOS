@@ -7,7 +7,7 @@ struct TimelineView: View {
     @Query private var giftIdeas: [GiftIdea]
     @Binding var screenshotShowChat: Bool
 
-    @EnvironmentObject private var subscriptionManager: SubscriptionManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager
     @State private var showingContactsImport = false
 
     @State private var showingSettings = false

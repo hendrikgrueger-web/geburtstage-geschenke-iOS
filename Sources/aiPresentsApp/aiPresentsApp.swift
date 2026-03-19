@@ -5,8 +5,8 @@ import WidgetKit
 @main
 struct aiPresentsApp: App {
     let modelContainer: ModelContainer
-    @StateObject private var reminderManager: ReminderManager
-    @StateObject private var subscriptionManager = SubscriptionManager()
+    @State private var reminderManager: ReminderManager
+    @State private var subscriptionManager = SubscriptionManager()
     @Environment(\.scenePhase) private var scenePhase
     @State private var deepLinkPersonID: UUID?
     @State private var screenshotShowChat = false
@@ -32,7 +32,7 @@ struct aiPresentsApp: App {
             containerCreationFailed = false
 
             let manager = ReminderManager(modelContext: modelContainer.mainContext)
-            _reminderManager = StateObject(wrappedValue: manager)
+            _reminderManager = State(wrappedValue: manager)
         } catch {
             AppLogger.data.error("ModelContainer (CloudKit) fehlgeschlagen, versuche lokal", error: error)
             // Fallback: lokal ohne CloudKit
@@ -43,7 +43,7 @@ struct aiPresentsApp: App {
                 containerCreationFailed = false
 
                 let manager = ReminderManager(modelContext: modelContainer.mainContext)
-                _reminderManager = StateObject(wrappedValue: manager)
+                _reminderManager = State(wrappedValue: manager)
             } catch {
                 AppLogger.data.error("Auch lokaler ModelContainer fehlgeschlagen — In-Memory-Fallback", error: error)
                 // Letzter Fallback: In-Memory (Daten gehen bei App-Neustart verloren, aber kein Crash)
@@ -54,7 +54,7 @@ struct aiPresentsApp: App {
                 containerCreationFailed = true
 
                 let manager = ReminderManager(modelContext: modelContainer.mainContext)
-                _reminderManager = StateObject(wrappedValue: manager)
+                _reminderManager = State(wrappedValue: manager)
             }
         }
 
@@ -161,8 +161,8 @@ struct aiPresentsApp: App {
                     OnboardingView()
                 }
             }
-            .environmentObject(reminderManager)
-            .environmentObject(subscriptionManager)
+            .environment(reminderManager)
+            .environment(subscriptionManager)
             .overlay {
                 if AppLockManager.shared.isLocked {
                     AppLockView()
