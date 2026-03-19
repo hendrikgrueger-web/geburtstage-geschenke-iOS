@@ -530,7 +530,6 @@ final class AIChatViewModel {
             .sorted(by: { $0.1 < $1.1 })
             .first {
             let name = nextPerson.0.displayName
-            let relation = nextPerson.0.relation
             let label: String = switch lang {
             case "de": "Wann hat \(name) Geburtstag?"
             case "fr": "C'est quand l'anniversaire de \(name) ?"

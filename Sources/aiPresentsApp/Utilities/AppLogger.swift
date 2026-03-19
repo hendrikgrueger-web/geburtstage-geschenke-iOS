@@ -107,7 +107,7 @@ struct AppLogger {
     // MARK: - Subsystems
 
     /// Main app subsystem
-    private static let subsystem = "com.aipresents.app"
+    private static let subsystem = "com.hendrikgrueger.birthdays-presents-ai"
 
     /// Subsystem for AI operations
     private static let aiSubsystem = "com.aipresents.app.ai"

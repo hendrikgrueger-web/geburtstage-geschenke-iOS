@@ -14,10 +14,22 @@ struct GiftTransitionService {
         let dateString = formatter.string(from: today)
 
         let descriptor = FetchDescriptor<GiftIdea>()
-        guard let allIdeas = try? context.fetch(descriptor) else { return }
+        let allIdeas: [GiftIdea]
+        do {
+            allIdeas = try context.fetch(descriptor)
+        } catch {
+            AppLogger.data.error("GiftTransitionService: Geschenkideen laden fehlgeschlagen", error: error)
+            return
+        }
 
         let personDescriptor = FetchDescriptor<PersonRef>()
-        guard let allPeople = try? context.fetch(personDescriptor) else { return }
+        let allPeople: [PersonRef]
+        do {
+            allPeople = try context.fetch(personDescriptor)
+        } catch {
+            AppLogger.data.error("GiftTransitionService: Personen laden fehlgeschlagen", error: error)
+            return
+        }
 
         let personMap = Dictionary(uniqueKeysWithValues: allPeople.map { ($0.id, $0) })
 
