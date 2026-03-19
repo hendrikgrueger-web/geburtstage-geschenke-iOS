@@ -30,6 +30,31 @@ private struct BirthdayContext: Sendable {
     let senderName: String?
 }
 
+// MARK: - AIServiceProtocol
+
+/// Protocol für den KI-Service — ermöglicht Dependency Injection und Testbarkeit.
+@MainActor
+protocol AIServiceProtocol {
+    func generateGiftIdeas(
+        for person: PersonRef,
+        budgetMin: Double,
+        budgetMax: Double,
+        tags: [String],
+        pastGifts: [GiftHistory],
+        excludeTitles: [String]
+    ) async throws -> [GiftSuggestion]
+
+    func generateBirthdayMessage(
+        for person: PersonRef,
+        pastGifts: [GiftHistory],
+        senderName: String?
+    ) async throws -> BirthdayMessage
+
+    func callOpenRouterChat(messages: [[String: String]]) async throws -> ChatResponseJSON
+
+    static var isAPIKeyConfigured: Bool { get }
+}
+
 // MARK: - AIService
 
 /// KI-Service für Geschenkvorschläge und Geburtstagsgrüße via Cloudflare Worker Proxy → OpenRouter (Google Gemini).
@@ -46,7 +71,7 @@ private struct BirthdayContext: Sendable {
 /// - Einwilligung via AIConsentManager
 ///
 /// Wirft Fehler wenn Proxy-Secret fehlt oder Netzwerkprobleme auftreten (kein Demo-Modus).
-struct AIService {
+struct AIService: AIServiceProtocol {
     static let shared = AIService()
     private init() {}
 

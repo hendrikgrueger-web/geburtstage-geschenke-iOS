@@ -1,6 +1,22 @@
 import Foundation
 import Combine
 
+// MARK: - AIConsentManagerProtocol
+
+/// Protocol für den DSGVO-Einwilligungs-Manager — ermöglicht Dependency Injection und Testbarkeit.
+@MainActor
+protocol AIConsentManagerProtocol: AnyObject {
+    var consentGiven: Bool { get }
+    var consentVersion: Int { get }
+    var aiEnabled: Bool { get set }
+    var canUseAI: Bool { get }
+    var canUseChat: Bool { get }
+    func giveConsent()
+    func revokeConsent()
+}
+
+// MARK: - AIConsentManager
+
 /// Verwaltet die DSGVO-Einwilligung für KI-Features.
 /// Gespeichert in UserDefaults — kein Server-Roundtrip.
 ///
@@ -10,7 +26,7 @@ import Combine
 ///
 /// Bestandsnutzer mit v1 müssen bei Nutzung des Chats erneut zustimmen (v2).
 @MainActor
-final class AIConsentManager: ObservableObject {
+final class AIConsentManager: ObservableObject, AIConsentManagerProtocol {
     static let shared = AIConsentManager()
 
     /// Aktuelle Consent-Version. Bei Erhöhung müssen alle Nutzer erneut zustimmen.

@@ -1,8 +1,19 @@
 import Foundation
 import Contacts
 
+// MARK: - ContactsServiceProtocol
+
+/// Protocol für den Kontakte-Service — ermöglicht Dependency Injection und Testbarkeit.
 @MainActor
-class ContactsService: ObservableObject {
+protocol ContactsServiceProtocol {
+    func requestPermission() async throws -> Bool
+    func importBirthdays() async throws -> [PersonRef]
+}
+
+// MARK: - ContactsService
+
+@MainActor
+class ContactsService: ObservableObject, ContactsServiceProtocol {
     static let shared = ContactsService()
 
     private let store = CNContactStore()

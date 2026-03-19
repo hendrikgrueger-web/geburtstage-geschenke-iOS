@@ -2,8 +2,23 @@ import Foundation
 import SwiftData
 import UserNotifications
 
+// MARK: - ReminderManagerProtocol
+
+/// Protocol für den Erinnerungs-Manager — ermöglicht Dependency Injection und Testbarkeit.
 @MainActor
-class ReminderManager: ObservableObject {
+protocol ReminderManagerProtocol: AnyObject {
+    func requestPermission() async -> Bool
+    func checkPermission() async -> Bool
+    func scheduleAllReminders() async
+    func cancelReminders(for person: PersonRef) async
+    func cancelBirthdayReminders() async
+    func cancelAllReminders() async
+}
+
+// MARK: - ReminderManager
+
+@MainActor
+class ReminderManager: ObservableObject, ReminderManagerProtocol {
     private static let birthdayNotificationPrefix = "birthday_"
     private let modelContext: ModelContext
     private let center = UNUserNotificationCenter.current()
