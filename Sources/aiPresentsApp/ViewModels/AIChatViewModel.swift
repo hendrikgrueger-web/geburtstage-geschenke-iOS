@@ -27,8 +27,10 @@ final class AIChatViewModel {
     private var personIdMap: [String: UUID] = [:]
     private var giftIdeaIdMap: [String: UUID] = [:]
 
-    /// Gecachter System-Prompt — wird einmalig in configure() gebaut, nicht bei jeder Nachricht neu.
+    /// Gecachter System-Prompt — wird lazy beim nächsten API-Call gebaut.
     private var cachedSystemPrompt: String = ""
+    /// Flag: System-Prompt muss beim nächsten API-Call neu gebaut werden.
+    private var promptNeedsRebuild = true
 
     // MARK: - Setup
 
@@ -38,12 +40,23 @@ final class AIChatViewModel {
         self.giftIdeas = giftIdeas
         self.giftHistory = giftHistory
         self.modelContext = modelContext
-        cachedSystemPrompt = buildSystemPrompt()
+        promptNeedsRebuild = true
+        cachedSystemPrompt = ""
     }
 
-    /// Invalidiert den gecachten System-Prompt, z.B. nach Änderungen an giftIdeas/giftHistory.
+    /// Invalidiert den gecachten System-Prompt lazy — rebuild erfolgt erst beim nächsten API-Call.
     func invalidatePromptCache() {
-        cachedSystemPrompt = buildSystemPrompt()
+        promptNeedsRebuild = true
+        cachedSystemPrompt = ""
+    }
+
+    /// Gibt den (ggf. neu gebauten) System-Prompt zurück.
+    private func getSystemPrompt() -> String {
+        if promptNeedsRebuild || cachedSystemPrompt.isEmpty {
+            cachedSystemPrompt = buildSystemPrompt()
+            promptNeedsRebuild = false
+        }
+        return cachedSystemPrompt
     }
 
     // MARK: - Senden
@@ -89,10 +102,12 @@ final class AIChatViewModel {
 
     private func buildAPIMessages() -> [[String: String]] {
         var apiMessages: [[String: String]] = [
-            ["role": "system", "content": cachedSystemPrompt]
+            ["role": "system", "content": getSystemPrompt()]
         ]
 
-        for msg in messages {
+        // Sliding window: max. 20 letzte Nachrichten, um Token-Verbrauch zu begrenzen
+        let recentMessages = messages.suffix(20)
+        for msg in recentMessages {
             switch msg.role {
             case .user:
                 apiMessages.append(["role": "user", "content": msg.content])

@@ -63,15 +63,9 @@ struct AIChatView: View {
                 modelContext: modelContext
             )
         }
-        .onChange(of: people) { _, newVal in
-            viewModel.configure(people: newVal, giftIdeas: giftIdeas, giftHistory: giftHistory, modelContext: modelContext)
-        }
-        .onChange(of: giftIdeas) { _, newVal in
-            viewModel.configure(people: people, giftIdeas: newVal, giftHistory: giftHistory, modelContext: modelContext)
-        }
-        .onChange(of: giftHistory) { _, newVal in
-            viewModel.configure(people: people, giftIdeas: giftIdeas, giftHistory: newVal, modelContext: modelContext)
-        }
+        .onChange(of: people.count) { _, _ in viewModel.invalidatePromptCache() }
+        .onChange(of: giftIdeas.count) { _, _ in viewModel.invalidatePromptCache() }
+        .onChange(of: giftHistory.count) { _, _ in viewModel.invalidatePromptCache() }
         .sheet(item: $viewModel.pendingGiftIdeaPerson) { person in
             AddGiftIdeaSheet(
                 person: person,
