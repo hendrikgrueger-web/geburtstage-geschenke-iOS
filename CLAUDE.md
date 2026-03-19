@@ -36,10 +36,10 @@ xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp -destina
 Sources/aiPresentsApp/
 ├── Models/          # SwiftData Models: PersonRef, GiftIdea, GiftHistory, ReminderRule, SuggestionFeedback
 ├── Services/        # ContactsService, ContactPhotoService, ReminderManager, AIService, AIConsentManager, SpeechRecognitionService, SampleDataService, WidgetDataService
-├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator, RelationOptions, GiftDirection, GenderInference, AgeObfuscator
+├── Utilities/       # AppLogger, AppConfig (inkl. AppConfig.AI), FormState, FormValidator, Accessibility, Debouncer, BirthdayCalculator, RelationOptions, GiftDirection, GenderInference, AgeObfuscator, PersonDetailTypes (GiftSortOption, GiftStatusFilter)
 ├── Views/
 │   ├── Timeline/    # TimelineView (eine chronologische Liste), BirthdayRow (mit Status-Badge), BirthdayCountdownBadge
-│   ├── Person/      # PersonDetailView (mit skipGift-Toggle, Hobbies, Received-Gifts), PersonAvatar, AllContactsView, ContactsImportView
+│   ├── Person/      # PersonDetailView (Container), PersonDetailHeaderSection, PersonDetailHobbiesSection, PersonDetailGiftIdeasSection, PersonDetailGiftHistorySection, PersonAvatar, AllContactsView, ContactsImportView
 │   ├── Gift/        # GiftIdeaRow, GiftHistoryRow, GiftSummaryView, Add/Edit Sheets
 │   ├── AI/          # AIChatView (KI-Chat Sheet), ChatBubbleView, ChatInputBar, AIGiftSuggestionsSheet, AIBirthdayMessageSheet, AIConsentSheet
 │   ├── Settings/    # SettingsView (als Sheet via Gear-Icon), ReminderSettingsView, PrivacyView, LegalView, DevSettingsView
@@ -441,7 +441,7 @@ Vollständiger Launch-Plan mit 8 Phasen, Skills-Referenz und Revenue-Prognose: *
 
 ### Offen
 
-1. **PersonDetailView aufteilen** (niedrige Prio) — 1041 Zeilen, sollte in Sub-Views aufgeteilt werden
+1. ~~**PersonDetailView aufteilen**~~ ✅ Erledigt — aufgeteilt in PersonDetailHeaderSection, PersonDetailHobbiesSection, PersonDetailGiftIdeasSection, PersonDetailGiftHistorySection + PersonDetailTypes (1058→500 LOC Haupt-View)
 2. **Custom RelationOptions iCloud-Sync** — UserDefaults sind nicht iCloud-synced; bei Geräte-Sync gehen custom-Typen verloren. Später: evtl. SwiftData-Model oder CloudKit für custom-Typen
 3. **Relation-DB-Migration** — Vordefinierte Typen sind deutsch in DB gespeichert; spätere Migration kann englische Keys einführen (aktuell: Display-Layer lokalisiert, DB-Werte deutsch)
 4. **Doppelter Loading/Error-State in AI-Sheets** (niedrige Prio) — Shared Components extrahieren
