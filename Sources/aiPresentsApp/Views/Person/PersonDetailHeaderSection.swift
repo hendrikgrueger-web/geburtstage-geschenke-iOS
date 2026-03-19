@@ -17,6 +17,7 @@ struct PersonDetailHeaderSection: View {
                 Text(person.displayName)
                     .fontWeight(.medium)
             }
+            .accessibilityElement(children: .combine)
 
             HStack {
                 Text("Geburtstag")
@@ -25,6 +26,7 @@ struct PersonDetailHeaderSection: View {
                 Text(birthdayString)
                     .fontWeight(.medium)
             }
+            .accessibilityElement(children: .combine)
 
             HStack {
                 Text("Nächster Geburtstag")
@@ -34,6 +36,7 @@ struct PersonDetailHeaderSection: View {
                     .fontWeight(.medium)
                     .foregroundStyle(daysUntilBirthday <= 7 ? AppColor.accent : Color.primary)
             }
+            .accessibilityElement(children: .combine)
 
             HStack {
                 Text("Beziehung")
@@ -52,6 +55,8 @@ struct PersonDetailHeaderSection: View {
                     }
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(String(localized: "Beziehung: \(person.relation)"))
+                .accessibilityHint(String(localized: "Tippen, um die Beziehung zu ändern"))
             }
 
             Toggle("Kein Geschenk nötig", isOn: Binding(
