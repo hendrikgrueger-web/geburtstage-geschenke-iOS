@@ -119,7 +119,8 @@ export default {
         headers: { "Content-Type": "application/json" },
       });
     } catch (err) {
-      return jsonError(String(err), 500);
+      console.error("Proxy error:", err);
+      return jsonError("Internal server error", 500);
     }
   },
 };

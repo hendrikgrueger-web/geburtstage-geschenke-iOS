@@ -5,7 +5,8 @@ import os
 
 /// Verwaltet StoreKit 2 Käufe, Abonnements und den 3-Monats-Trial.
 @MainActor
-final class SubscriptionManager: ObservableObject {
+@Observable
+final class SubscriptionManager {
 
     // MARK: - Product IDs
 
@@ -15,11 +16,11 @@ final class SubscriptionManager: ObservableObject {
         case lifetime = "com.hendrikgrueger.birthdays-presents-ai.lifetime"
     }
 
-    // MARK: - Published State
+    // MARK: - State
 
-    @Published private(set) var products: [Product] = []
-    @Published private(set) var purchasedProductIDs: Set<String> = []
-    @Published private(set) var isLoading = false
+    private(set) var products: [Product] = []
+    private(set) var purchasedProductIDs: Set<String> = []
+    private(set) var isLoading = false
 
     // MARK: - Trial Constants
 
@@ -61,6 +62,8 @@ final class SubscriptionManager: ObservableObject {
 
     // MARK: - Transaction Listener
 
+    // @ObservationIgnored damit @Observable das Property nicht tracked — nötig für deinit-Zugriff
+    @ObservationIgnored
     private var transactionListener: Task<Void, Never>?
 
     // MARK: - Init / Deinit

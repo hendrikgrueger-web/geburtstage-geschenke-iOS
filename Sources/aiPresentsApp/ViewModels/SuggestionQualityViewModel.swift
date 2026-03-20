@@ -2,8 +2,9 @@ import Foundation
 import SwiftData
 
 @MainActor
-class SuggestionQualityViewModel: ObservableObject {
-    @Published var metrics: SuggestionQualityMetrics = SuggestionQualityMetrics()
+@Observable
+class SuggestionQualityViewModel {
+    var metrics: SuggestionQualityMetrics = SuggestionQualityMetrics()
 
     private let modelContext: ModelContext
 

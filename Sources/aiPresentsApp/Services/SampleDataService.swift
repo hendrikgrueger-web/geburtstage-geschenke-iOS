@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 // swiftlint:disable function_body_length type_body_length file_length
-class SampleDataService {
+enum SampleDataService {
     // swiftlint:disable:next cyclomatic_complexity
     static func createSampleData(in context: ModelContext) {
         let cal = Calendar.current
@@ -11,12 +11,11 @@ class SampleDataService {
 
         // Helper: Geburtsdatum mit korrektem Alter
         func bday(_ daysFromNow: Int, _ age: Int) -> Date {
-            let next = cal.date(
-                byAdding: .day, value: daysFromNow, to: today
-            )!
-            return cal.date(
-                byAdding: .year, value: -age, to: next
-            )!
+            guard let next = cal.date(byAdding: .day, value: daysFromNow, to: today),
+                  let result = cal.date(byAdding: .year, value: -age, to: next) else {
+                return today
+            }
+            return result
         }
 
         // MARK: - 50 Demo-Personen

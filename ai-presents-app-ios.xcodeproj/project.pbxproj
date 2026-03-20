@@ -53,7 +53,6 @@
 		43CFD7DFC511954691EAA57B /* CurrencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CB6420BDF5CF7A64EC62AB /* CurrencyManager.swift */; };
 		44475B6B9052225B83F66E8D /* EditGiftHistorySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711769EFA88D8FC06C5A5572 /* EditGiftHistorySheet.swift */; };
 		452B098D43648CAD88063CA7 /* demo-peter.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0DF552A504FEB6F294F90285 /* demo-peter.jpg */; };
-		4688F631BAAFB6A1850550F0 /* BirthdayWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0FFC29100B5746FDA7B170 /* BirthdayWidgetData.swift */; };
 		4713FF664A80E5DAECB848AF /* UpcomingBirthdaysIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E907972344B19DBE2B836D /* UpcomingBirthdaysIntent.swift */; };
 		4BB8F952AE94C51E3B6E502B /* demo-max.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C140E38D86B8B10857861C83 /* demo-max.jpg */; };
 		4C1FF090C338E5735622B544 /* PremiumGateModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB846A6AD80BD60EAE0C51 /* PremiumGateModifier.swift */; };
@@ -283,7 +282,6 @@
 		8B56C3E141AAE5222EF953CE /* GiftHistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftHistoryRow.swift; sourceTree = "<group>"; };
 		8B96234C76EED9BED2CE7C03 /* aiPresentsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aiPresentsApp.swift; sourceTree = "<group>"; };
 		8E1667501766ADA59031037C /* PersonDetailGiftIdeasSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailGiftIdeasSection.swift; sourceTree = "<group>"; };
-		8F0FFC29100B5746FDA7B170 /* BirthdayWidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayWidgetData.swift; sourceTree = "<group>"; };
 		94B7A7A1704B15FDFCB8467B /* CurrencyPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPickerView.swift; sourceTree = "<group>"; };
 		95BB6E1690ACBC0C41AE04F7 /* ContactsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsServiceTests.swift; sourceTree = "<group>"; };
 		987579EBF3FB66AC923CA758 /* BirthdayTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayTimelineProvider.swift; sourceTree = "<group>"; };
@@ -664,7 +662,6 @@
 				1FCB7E8FECC68A391737DFAF /* AppLogger.swift */,
 				1F1A02B6D7A77AAD75AE1990 /* BirthdayCalculator.swift */,
 				6F4689396F1072DD2D28E078 /* BirthdayDateHelper.swift */,
-				8F0FFC29100B5746FDA7B170 /* BirthdayWidgetData.swift */,
 				A1CEA4ED4260D661E8A6F60F /* Debouncer.swift */,
 				27B18845F0E7BC36A990BF92 /* FormatterHelper.swift */,
 				BB528C5CB9257C5B49C23519 /* FormState.swift */,
@@ -932,7 +929,6 @@
 				5D92B07A74082F74F8F3613D /* BirthdayCountdownBadge.swift in Sources */,
 				19E005C071527D0AB3DF63EF /* BirthdayDateHelper.swift in Sources */,
 				ADE1CC765E156F4853A4DDF8 /* BirthdayRow.swift in Sources */,
-				4688F631BAAFB6A1850550F0 /* BirthdayWidgetData.swift in Sources */,
 				0B105CAA3122D6323CE7824E /* BirthdayWidgetView.swift in Sources */,
 				DC9D90107E2252A49DE8F90E /* ButtonStyles.swift in Sources */,
 				A3EB1C597C140A4C1561CA0A /* ChatBubbleView.swift in Sources */,

@@ -51,7 +51,7 @@ struct AIGiftSuggestionsSheet: View {
     @State private var budgetValue: Double = 50
     @State private var qualityViewModel: SuggestionQualityViewModel?
     @State private var showingConsentSheet = false
-    @ObservedObject private var consentManager = AIConsentManager.shared
+    private let consentManager = AIConsentManager.shared
 
     // Track which suggestions have received feedback
     @State private var feedbackGivenForSuggestions = Set<String>()

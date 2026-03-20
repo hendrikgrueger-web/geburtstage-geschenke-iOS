@@ -5,7 +5,7 @@ import SwiftUI
 /// Wenn `hasFullAccess` nicht verfügbar ist, zeigt der Modifier
 /// einen transparenten Overlay, der Tap-Ereignisse abfängt und das Paywall-Sheet öffnet.
 struct PremiumGateModifier: ViewModifier {
-    @EnvironmentObject private var subscriptionManager: SubscriptionManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager
     @State private var showingPaywall = false
 
     func body(content: Content) -> some View {
@@ -21,7 +21,7 @@ struct PremiumGateModifier: ViewModifier {
             }
             .sheet(isPresented: $showingPaywall) {
                 PaywallView()
-                    .environmentObject(subscriptionManager)
+                    .environment(subscriptionManager)
             }
     }
 }

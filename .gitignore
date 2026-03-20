@@ -115,3 +115,4 @@ Proxy/.dev.vars
 Config/Secrets.xcconfig
 App/Secrets.xcconfig
 Screenshots/
+.claude/worktrees/

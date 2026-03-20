@@ -128,7 +128,7 @@ struct DebugMenu {
 struct TestDataGenerator {
     static func createTestPerson() -> PersonRef {
         let calendar = Calendar.current
-        let birthday = calendar.date(from: DateComponents(year: 1990, month: 3, day: 15))!
+        let birthday = calendar.date(from: DateComponents(year: 1990, month: 3, day: 15)) ?? Date()
 
         return PersonRef(
             contactIdentifier: UUID().uuidString,

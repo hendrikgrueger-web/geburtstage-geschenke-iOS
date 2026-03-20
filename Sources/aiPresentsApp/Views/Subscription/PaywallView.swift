@@ -5,7 +5,7 @@ import SwiftUI
 /// Paywall-Sheet mit 3 Preisoptionen (Jährlich, Monatlich, Lifetime), Trial-Banner und Restore-Funktion.
 struct PaywallView: View {
 
-    @EnvironmentObject private var subscriptionManager: SubscriptionManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager
     @Environment(\.dismiss) private var dismiss
 
     @Query private var people: [PersonRef]
@@ -201,10 +201,14 @@ struct PaywallView: View {
                 .foregroundStyle(.tertiary)
                 .multilineTextAlignment(.center)
             HStack(spacing: 16) {
-                Link(String(localized: "Datenschutz"), destination: URL(string: "https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/")!)
+                if let privacyURL = URL(string: "https://hendrikgrueger-web.github.io/geburtstage-geschenke-iOS/") {
+                    Link(String(localized: "Datenschutz"), destination: privacyURL)
+                }
                 Text("·")
                     .foregroundStyle(.tertiary)
-                Link(String(localized: "AGB"), destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
+                if let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                    Link(String(localized: "AGB"), destination: termsURL)
+                }
             }
             .font(.caption2)
             .foregroundStyle(.secondary)
@@ -366,5 +370,5 @@ private struct ProductCard: View {
 
 #Preview {
     PaywallView()
-        .environmentObject(SubscriptionManager())
+        .environment(SubscriptionManager())
 }

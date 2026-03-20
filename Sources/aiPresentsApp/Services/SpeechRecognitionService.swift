@@ -21,6 +21,11 @@ final class SpeechRecognitionService {
 
     /// Fordert Berechtigungen an und startet die Live-Transkription.
     func startTranscribing(onTranscript: @escaping @Sendable (String) -> Void) async throws {
+        // Vorherige Session bereinigen, falls noch aktiv
+        if isTranscribing {
+            stopTranscribing()
+        }
+
         let authStatus = await withCheckedContinuation { continuation in
             SFSpeechRecognizer.requestAuthorization { status in
                 continuation.resume(returning: status)
@@ -87,16 +92,21 @@ final class SpeechRecognitionService {
     }
 
     func stopTranscribing() {
+        guard isTranscribing else { return }
+
         timeoutTask?.cancel()
         timeoutTask = nil
+
         audioEngine?.stop()
         audioEngine?.inputNode.removeTap(onBus: 0)
-        recognitionRequest?.endAudio()
-        recognitionTask?.cancel()
-
         audioEngine = nil
+
+        recognitionRequest?.endAudio()
         recognitionRequest = nil
+
+        recognitionTask?.cancel()
         recognitionTask = nil
+
         isTranscribing = false
 
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)

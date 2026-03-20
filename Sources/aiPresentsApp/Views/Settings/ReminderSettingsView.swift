@@ -7,7 +7,7 @@ struct ReminderSettingsView: View {
 
     @Query private var rules: [ReminderRule]
 
-    @EnvironmentObject private var reminderManager: ReminderManager
+    @Environment(ReminderManager.self) private var reminderManager
 
     @State private var leadDays: Set<Int>
     @State private var quietHoursStart: Int

@@ -92,6 +92,7 @@ struct ToastView: View {
                         .font(.caption)
                         .foregroundStyle(AppColor.textSecondary)
                 }
+                .accessibilityLabel(String(localized: "Schließen"))
             }
             .padding(16)
             .background(.regularMaterial)
@@ -102,7 +103,10 @@ struct ToastView: View {
             .offset(x: offset)
             .opacity(opacity)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isStaticText)
         .onAppear {
+            UIAccessibility.post(notification: .announcement, argument: item.title)
             withAnimation(AnimationHelper.spring) {
                 offset = 0
                 opacity = 1

@@ -6,7 +6,7 @@ import SwiftUI
 /// - Zeigt "Noch X Tage kostenlos", wenn Trial läuft
 /// - Verborgen, wenn `hasFullAccess` true ist
 struct ReadOnlyBanner: View {
-    @EnvironmentObject private var subscriptionManager: SubscriptionManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager
     @State private var showingPaywall = false
 
     var body: some View {
@@ -35,7 +35,7 @@ struct ReadOnlyBanner: View {
             .padding(.horizontal)
             .sheet(isPresented: $showingPaywall) {
                 PaywallView()
-                    .environmentObject(subscriptionManager)
+                    .environment(subscriptionManager)
             }
         } else if subscriptionManager.isInTrial {
             HStack(spacing: 8) {
@@ -55,7 +55,7 @@ struct ReadOnlyBanner: View {
         ReadOnlyBanner()
         Spacer()
     }
-    .environmentObject(SubscriptionManager())
+    .environment(SubscriptionManager())
 }
 
 #Preview("Trial expired") {
@@ -63,9 +63,8 @@ struct ReadOnlyBanner: View {
         ReadOnlyBanner()
         Spacer()
     }
-    .environmentObject({
+    .environment({
         let manager = SubscriptionManager()
-        // Simuliere abgelaufenen Trial durch manuelles Setzen in Zukunft
         UserDefaults.standard.set(Date().addingTimeInterval(-120 * 86400), forKey: "subscriptionTrialStartDate")
         return manager
     }())

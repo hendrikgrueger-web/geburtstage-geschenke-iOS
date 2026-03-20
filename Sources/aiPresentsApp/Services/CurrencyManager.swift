@@ -8,6 +8,8 @@ final class CurrencyManager {
     private let automaticKey = "currencyAutomatic"
     private let codeKey = "selectedCurrencyCode"
     private let iCloudStore = NSUbiquitousKeyValueStore.default
+    @ObservationIgnored
+    private var iCloudObserver: (any NSObjectProtocol)?
 
     var isAutomatic: Bool {
         didSet {
@@ -52,7 +54,7 @@ final class CurrencyManager {
         // iCloud Sync bei externen Änderungen.
         // Closure-API mit queue: .main stellt sicher, dass der Handler bereits auf dem Main Thread
         // läuft — kein @objc-Selector nötig, kein Data Race durch Thread-Hop.
-        NotificationCenter.default.addObserver(
+        iCloudObserver = NotificationCenter.default.addObserver(
             forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
             object: iCloudStore,
             queue: .main

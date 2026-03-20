@@ -18,13 +18,14 @@ protocol ReminderManagerProtocol: AnyObject {
 // MARK: - ReminderManager
 
 @MainActor
-class ReminderManager: ObservableObject, ReminderManagerProtocol {
+@Observable
+final class ReminderManager: ReminderManagerProtocol {
     private static let birthdayNotificationPrefix = "birthday_"
     private let modelContext: ModelContext
     private let center = UNUserNotificationCenter.current()
 
     nonisolated(unsafe) private static var _shared: ReminderManager?
-    nonisolated(unsafe) private static let lock = NSLock()
+    nonisolated(unsafe) private static let lock = NSLock() // nonisolated(unsafe) nötig für deinit-Zugriff
 
     static var shared: ReminderManager? {
         lock.lock()

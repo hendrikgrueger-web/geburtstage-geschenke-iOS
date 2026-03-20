@@ -176,6 +176,8 @@ struct EditGiftHistorySheet: View {
                     Button("Abbrechen") {
                         dismiss()
                     }
+                    .accessibilityLabel(String(localized: "Abbrechen"))
+                    .accessibilityHint(String(localized: "Änderungen verwerfen und schließen"))
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -189,6 +191,8 @@ struct EditGiftHistorySheet: View {
                         }
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .accessibilityLabel(String(localized: "Speichern"))
+                    .accessibilityHint(String(localized: "Änderungen am Geschenk speichern"))
                 }
             }
         }

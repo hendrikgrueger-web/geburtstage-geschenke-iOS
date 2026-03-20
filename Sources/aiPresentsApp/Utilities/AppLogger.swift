@@ -107,16 +107,16 @@ struct AppLogger {
     // MARK: - Subsystems
 
     /// Main app subsystem
-    private static let subsystem = "com.aipresents.app"
+    private static let subsystem = "com.hendrikgrueger.birthdays-presents-ai"
 
     /// Subsystem for AI operations
-    private static let aiSubsystem = "com.aipresents.app.ai"
+    private static let aiSubsystem = "com.hendrikgrueger.birthdays-presents-ai.ai"
 
     /// Subsystem for CloudKit operations
-    private static let cloudkitSubsystem = "com.aipresents.app.cloudkit"
+    private static let cloudkitSubsystem = "com.hendrikgrueger.birthdays-presents-ai.cloudkit"
 
     /// Subsystem for Contacts operations
-    private static let contactsSubsystem = "com.aipresents.app.contacts"
+    private static let contactsSubsystem = "com.hendrikgrueger.birthdays-presents-ai.contacts"
 
     // MARK: - Loggers
 
