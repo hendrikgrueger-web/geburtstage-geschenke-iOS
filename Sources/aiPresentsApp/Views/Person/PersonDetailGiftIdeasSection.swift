@@ -336,9 +336,9 @@ struct PersonDetailGiftIdeasSection: View {
     private func controlPill(icon: String, label: String, isActive: Bool) -> some View {
         HStack(spacing: 3) {
             Image(systemName: icon)
-                .font(.system(size: 10, weight: .semibold))
+                .font(.caption2.weight(.semibold))
             Text(label)
-                .font(.system(size: 11, weight: isActive ? .semibold : .regular))
+                .font(.caption2.weight(isActive ? .semibold : .regular))
         }
         .foregroundStyle(isActive ? AppColor.primary : Color.secondary)
         .padding(.horizontal, 7)
