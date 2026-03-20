@@ -116,3 +116,9 @@ Config/Secrets.xcconfig
 App/Secrets.xcconfig
 Screenshots/
 .claude/worktrees/
+
+# Archiv
+_Archiv/
+
+# Superpowers temp files
+.superpowers/

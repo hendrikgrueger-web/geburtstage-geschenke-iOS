@@ -17,7 +17,7 @@ iOS-App für Geburtstags- und Geschenkeverwaltung. Generiert von Open Claw (n8n/
 - **Daten:** SwiftData + iCloud Sync (CloudKit)
 - **KI:** OpenRouter API → Google Gemini 3.1 Flash Lite (Cloud, opt-in, DSGVO-konform, vollständig anonymisiert)
 - **Widget:** WidgetKit Birthday Widget (Medium + Large) mit Deep-Linking
-- **Version:** 1.0.0 (Build 18)
+- **Version:** 1.0.0 (Build 110)
 - **Target:** iPhone + iPad / iOS 26+
 - **iPad:** NavigationSplitView (zwei Spalten: Sidebar + Detail), alle 4 Orientierungen
 
@@ -391,31 +391,37 @@ enum GiftDirection {
 | Team (Xcode + App Store) | Grüpi GmbH `CU87QNNB3N` |
 | Erster Build | 0.8.1 (13) — hochgeladen ✅ |
 
-### Version & Build Status (2026-03-18)
-- **Aktuelle Version 1.0:** DEVELOPER_REJECTED (zu Überprüfung aus App Store zurückgewiesen)
-- **Neuester Build:** 92 (VALID) — bereit für neue Version
-- **Problem (App Store Connect Limitation):** Version kann nicht gelöscht werden (ist die einzige Version), und neue Version kann nicht erstellt werden, solange alte Version in DEVELOPER_REJECTED ist
-- **Lösung erforderlich:** Über Web-UI (`https://appstoreconnect.apple.com`) — wahrscheinlich Button "Überprüfung zurückziehen" oder "Erneut übertragen" für alte Version, ODER neue Version 1.0.1 erstellen
+### Version & Build Status (2026-03-21)
+- **Aktuelle Version 1.0:** WAITING_FOR_REVIEW — eingereicht am 21.03.2026
+- **Angehängter Build:** 110 (APP_STORE_ELIGIBLE, VALID) — gebaut mit neuem "App Store Build" Workflow
+- **Screenshots:** 26 Screenshots hochgeladen (DE + EN, iPhone 6.5" + 6.7" + iPad 12.9")
+- **Metadata:** 7 Sprachen vollständig (DE, EN-US, EN-GB, ES-ES, ES-MX, FR-FR, FR-CA)
+- **Pricing:** Gratis
 
-### TestFlight Status (2026-03-17)
-- Builds hochgeladen: v13–v92 (alle INTERNAL_ONLY bis v70, dann APP_STORE_ELIGIBLE)
-- **Builds 20-26 fehlten in TestFlight** — Ursache: `buildDistributionAudience` war `null`
-- **Builds ab v70 sind APP_STORE_ELIGIBLE** — Workflow am 2026-03-17 neu erstellt (Workflow ID: `6a4ec88c-4115-4424-b495-b2b8f690e1a8`)
+### TestFlight Gruppen
 - Interne Gruppe: `Testgrupp Geschenke-App Hendrik` — gruepigmbh@gmail.com (INSTALLED), s.mause83@gmail.com (INSTALLED), stephaniegrueger@gmail.com (INVITED)
 - Externe Gruppe `Familie-extern`: 9 Tester (hendrik187, maik.vonangern, j.mastroianni, mail@kurtpetzuch, b00mi, bergen.inga, sophia.grueger, jhgrueger, stephaniegrueger)
 - Externe Gruppe `Externe-Tester`: mail@kurtpetzuch, b00mi, bergen.inga
 
 ## Xcode Cloud (CI/CD)
 
-**Status:** Aktiv — Workflow "Deploy to TestFlight" mit automatischer Distribution.
+**Status:** Aktiv — zwei Workflows.
+
+### Workflows
+
+| Workflow | ID | Trigger | Distribution | Zweck |
+|----------|----|---------|--------------|-------|
+| Deploy to Testflight V2 | `FAF5B5BC-AC5C-45CC-AE14-F82C1136A295` | Push auf `main` | `INTERNAL_ONLY` | Automatische TestFlight-Builds (intern) |
+| App Store Build | `27f2efdf-ce6e-4c74-846f-3eb002c39ef5` | Manuell | `APP_STORE_ELIGIBLE` | Builds für App Store Submission |
+
+**WICHTIG:** Nur Builds vom "App Store Build" Workflow können an App Store Versionen angehängt werden. "Deploy to Testflight V2" erstellt `INTERNAL_ONLY` Builds — diese können NICHT für App Store Review verwendet werden.
+
+### Weitere Details
 
 | Komponente | Wert |
 |------------|------|
 | CI Product ID | `9FAFC09A-4B7E-4FD0-ACD1-2DB6847BEFC8` |
-| Workflow | "Deploy to TestFlight" — Push auf `main` → Archive iOS → TestFlight (intern + extern) |
-| Workflow ID | `6a4ec88c-4115-4424-b495-b2b8f690e1a8` (neu erstellt 2026-03-17) |
 | Scheme | `aiPresentsApp` |
-| Distribution | `APP_STORE_ELIGIBLE` (für intern + extern Beta Testing) |
 | ci_scripts | `ci_post_clone.sh` — generiert `Secrets.xcconfig` aus `$AI_PROXY_SECRET` |
 | GitHub Repo | `hendrikgrueger-web/geburtstage-geschenke-iOS` (verbunden) |
 | GitHub Actions | `.github/workflows/test.yml` — Build + SwiftLint bei Push/PR (Dummy Secrets.xcconfig) |
@@ -423,15 +429,23 @@ enum GiftDirection {
 ### Environment Variable (in Xcode Cloud Settings)
 - `AI_PROXY_SECRET` — Cloudflare Worker App-Secret (redacted)
 
-### WICHTIG: Secret-Rotation (2026-03-15)
-- Cloudflare Worker APP_SECRET wurde rotiert
-- Neues Secret muss an 3 Stellen identisch sein: Worker (`wrangler secret put`), `App/Secrets.xcconfig` (lokal), Xcode Cloud Environment Variable
-- Xcode Cloud Secret muss manuell aktualisiert werden (API unterstützt kein Setzen von Environment Variables)
+### Deployment-Workflows
+```
+# TestFlight (automatisch bei Push):
+Code ändern → git push origin main → "Deploy to Testflight V2" → TestFlight (intern)
 
-### Deployment-Workflow
+# App Store Submission (manuell):
+asc xcode-cloud run --workflow-id 27f2efdf-ce6e-4c74-846f-3eb002c39ef5 --branch main
+→ Build mit APP_STORE_ELIGIBLE → an Version anhängen → Submit
 ```
-Code ändern → git push origin main → Xcode Cloud baut → TestFlight (intern, sofort)
-```
+
+## Website / Landingpage
+
+**Pfad:** `website/index.html` — Self-Contained HTML (Stitch "Aura Editorial" Design)
+**Screenshots:** `website/screenshots/` (Symlinks zu `Screenshots/marketing/`)
+**Design:** Warm-Cream (#F9F9F7), Orange/Coral-Gradient, Epilogue + Manrope Typografie
+**Sektionen:** Hero (3 iPhone-Mockups) → Features (3-Grid) → DSGVO-Banner → Footer
+**Deploy:** Noch nicht deployed — kann auf Vercel oder Alfahosting gehostet werden
 
 ## Launch-Plan
 
