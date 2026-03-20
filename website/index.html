@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Geburtstage & Geschenkideen — Dein KI-Geschenke-Assistent</title>
+<meta name="description" content="Nie wieder ein Geschenk vergessen. Dein persönlicher Geburtstags-Assistent mit KI-gestützten Geschenkideen für iOS.">
+<meta name="theme-color" content="#f9f9f7">
+<meta property="og:title" content="Geburtstage & Geschenkideen">
+<meta property="og:description" content="Nie wieder ein Geschenk vergessen. KI-gestützte Geschenkideen für jeden Anlass.">
+<meta property="og:type" content="website">
+<link rel="apple-touch-icon" href="screenshots/de_01_timeline.png">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#f9f9f7",
+            "surface-tint": "#ab3500",
+            "on-surface": "#1a1c1b",
+            "on-surface-variant": "#564338",
+            "primary": "#ab3500",
+            "primary-container": "#ff8a62",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#390c00",
+            "primary-fixed": "#ffdbd0",
+            "primary-fixed-dim": "#ffb59d",
+            "secondary": "#6c3acd",
+            "secondary-container": "#8557e8",
+            "on-secondary-container": "#fffbff",
+            "tertiary": "#89502e",
+            "tertiary-fixed": "#ffdbca",
+            "on-tertiary-fixed": "#331200",
+            "outline": "#897266",
+            "outline-variant": "#ddc1b3",
+            "surface-container-low": "#f4f4f2",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e8e8e6",
+            "surface-container": "#eeeeec",
+          },
+          fontFamily: {
+            "headline": ["Epilogue", "system-ui", "sans-serif"],
+            "body": ["Manrope", "system-ui", "sans-serif"],
+          },
+          borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem"},
+        },
+      },
+    }
+</script>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+    }
+    .editorial-gradient {
+        background: linear-gradient(135deg, #ab3500 0%, #ff8a62 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .hero-glow {
+        background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255, 138, 98, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+    }
+    .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+    }
+
+    /* iPhone Mockup Frame */
+    .phone-frame {
+        position: relative;
+        background: #1a1a1a;
+        overflow: hidden;
+        box-shadow: 0 40px 80px -15px rgba(86, 67, 56, 0.18),
+                    inset 0 0 0 2px rgba(255,255,255,0.08);
+    }
+    .phone-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+    }
+    /* Dynamic Island */
+    .phone-frame::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 24px;
+        background: #000;
+        border-radius: 20px;
+        z-index: 10;
+    }
+
+    /* Subtle entrance animations */
+    @keyframes fade-up {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up {
+        animation: fade-up 0.8s ease-out both;
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+
+    /* App Store Badge */
+    .app-store-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: #000;
+        color: #fff;
+        padding: 12px 28px;
+        border-radius: 14px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .app-store-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+    .app-store-badge:active {
+        transform: scale(0.97);
+    }
+    .app-store-badge svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* Feature card hover */
+    .feature-card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-4px);
+    }
+</style>
+</head>
+<body class="bg-surface font-body text-on-surface overflow-x-hidden">
+
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-outline-variant/10 transition-all duration-300">
+  <div class="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
+    <div class="text-lg font-bold font-headline text-on-surface tracking-tight">
+      Geburtstage & Geschenkideen
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+      <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body font-light tracking-wide uppercase text-xs" href="#features">Features</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body font-light tracking-wide uppercase text-xs" href="#privacy">Datenschutz</a>
+      <a href="https://apps.apple.com/app/id6760319397" target="_blank" rel="noopener"
+         class="bg-primary text-on-primary px-5 py-2 rounded-full font-body font-semibold text-sm hover:opacity-90 transition-all active:scale-95">
+        Download
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<main class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-8 px-6 overflow-hidden">
+  <!-- Ambient Glow -->
+  <div class="absolute inset-0 hero-glow -z-10 scale-150 translate-y-16"></div>
+
+  <div class="max-w-4xl w-full text-center space-y-6 animate-fade-up">
+    <h1 class="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl editorial-gradient tracking-tighter leading-[1.05] font-extrabold">
+      Nie wieder ein Geschenk vergessen
+    </h1>
+    <p class="font-body text-base sm:text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto font-light leading-relaxed">
+      Dein persönlicher Geburtstags-Assistent mit KI-gestützten Geschenkideen.
+    </p>
+  </div>
+
+  <!-- iPhone Mockups -->
+  <div class="relative mt-12 sm:mt-16 md:mt-20 w-full max-w-4xl h-[380px] sm:h-[450px] md:h-[580px] flex items-center justify-center">
+
+    <!-- Left Phone — Timeline -->
+    <div class="absolute left-2 sm:left-8 md:left-16 top-16 sm:top-12
+                w-[130px] sm:w-[180px] md:w-[250px]
+                aspect-[9/19.5] phone-frame rounded-[1.8rem] sm:rounded-[2.2rem] md:rounded-[2.8rem]
+                border-[4px] sm:border-[5px] md:border-[6px] border-zinc-800
+                rotate-[-6deg] z-10
+                transition-transform hover:rotate-[-2deg] duration-500
+                animate-fade-up delay-200">
+      <img src="screenshots/de_01_timeline.png" alt="Geburtstags-Timeline mit Countdown-Badges"/>
+    </div>
+
+    <!-- Center Phone — Person Detail (Hero, larger) -->
+    <div class="absolute z-30
+                w-[155px] sm:w-[210px] md:w-[290px]
+                aspect-[9/19.5] phone-frame rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem]
+                border-[5px] sm:border-[6px] md:border-[8px] border-zinc-800
+                shadow-[0_40px_80px_-15px_rgba(86,67,56,0.2)]
+                transition-transform hover:scale-[1.03] duration-500
+                animate-fade-up delay-300">
+      <img src="screenshots/de_02_person_detail.png" alt="Personen-Detail mit Hobbies und Geschenkideen"/>
+    </div>
+
+    <!-- Right Phone — AI Chat -->
+    <div class="absolute right-2 sm:right-8 md:right-16 top-12 sm:top-8
+                w-[130px] sm:w-[180px] md:w-[250px]
+                aspect-[9/19.5] phone-frame rounded-[1.8rem] sm:rounded-[2.2rem] md:rounded-[2.8rem]
+                border-[4px] sm:border-[5px] md:border-[6px] border-zinc-800
+                rotate-[8deg] z-20
+                transition-transform hover:rotate-[2deg] duration-500
+                animate-fade-up delay-400">
+      <img src="screenshots/de_06_smart.png" alt="KI-Geschenke-Assistent mit smarten Vorschlägen"/>
+    </div>
+  </div>
+
+  <!-- App Store Badge -->
+  <div class="mt-8 sm:mt-10 mb-8 animate-fade-up delay-500">
+    <a href="https://apps.apple.com/app/id6760319397" target="_blank" rel="noopener" class="app-store-badge">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="text-left leading-tight">
+        <p class="text-[10px] uppercase tracking-[0.15em] font-semibold opacity-60">Laden im</p>
+        <p class="text-lg font-bold font-headline -mt-0.5">App Store</p>
+      </div>
+    </a>
+  </div>
+</main>
+
+<!-- Features Section -->
+<section class="py-20 sm:py-28 px-6 bg-surface-container-low" id="features">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-14 text-center">
+      <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl tracking-tighter text-on-surface">
+        Was die App besonders macht
+      </h2>
+      <div class="h-1 w-16 bg-primary mt-5 rounded-full mx-auto"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Feature 1 — Geburtstage -->
+      <div class="feature-card bg-surface-container-lowest p-8 sm:p-10 rounded-lg hover:shadow-lg">
+        <div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-on-primary-fixed text-2xl">cake</span>
+        </div>
+        <h3 class="font-headline text-xl sm:text-2xl mb-3 text-on-surface">Alle Geburtstage im Blick</h3>
+        <p class="font-body text-on-surface-variant font-light leading-relaxed text-sm sm:text-base">
+          Countdown, Erinnerungen und eine übersichtliche Timeline für alle deine Kontakte.
+        </p>
+      </div>
+
+      <!-- Feature 2 — Geschenkideen -->
+      <div class="feature-card bg-surface-container-lowest p-8 sm:p-10 rounded-lg hover:shadow-lg">
+        <div class="w-14 h-14 bg-tertiary-fixed rounded-2xl flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-on-tertiary-fixed text-2xl">featured_seasonal_and_gifts</span>
+        </div>
+        <h3 class="font-headline text-xl sm:text-2xl mb-3 text-on-surface">Persönliche Geschenkideen</h3>
+        <p class="font-body text-on-surface-variant font-light leading-relaxed text-sm sm:text-base">
+          Hobbies, Interessen und Budget — die App kennt deine Liebsten und findet das Passende.
+        </p>
+      </div>
+
+      <!-- Feature 3 — KI (purple accent) -->
+      <div class="feature-card bg-secondary-container p-8 sm:p-10 rounded-lg hover:shadow-xl text-on-secondary-container relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-[0.06]">
+          <span class="material-symbols-outlined text-8xl rotate-12">auto_awesome</span>
+        </div>
+        <div class="w-14 h-14 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-white text-2xl">magic_button</span>
+        </div>
+        <h3 class="font-headline text-xl sm:text-2xl mb-3 text-white">KI-Geschenke-Assistent</h3>
+        <p class="font-body text-white/85 font-light leading-relaxed text-sm sm:text-base">
+          Frag die KI per Chat oder Sprache — personalisierte Vorschläge in Sekunden.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Privacy Banner -->
+<section class="py-16 sm:py-20 px-6 flex justify-center" id="privacy">
+  <div class="max-w-3xl w-full glass-card p-8 sm:p-10 md:p-12 rounded-xl flex flex-col sm:flex-row items-center gap-6 sm:gap-10 border border-outline-variant/10">
+    <div class="w-16 h-16 bg-surface-container-high rounded-full flex items-center justify-center flex-shrink-0">
+      <span class="material-symbols-outlined text-3xl text-primary">lock_person</span>
+    </div>
+    <div class="text-center sm:text-left space-y-2">
+      <h2 class="font-headline text-2xl sm:text-3xl tracking-tight">Deine Daten gehören dir</h2>
+      <p class="font-body text-on-surface-variant font-light text-sm sm:text-base leading-relaxed">
+        DSGVO-konform. Keine Werbung. Keine Tracker. KI-Features nur mit deiner ausdrücklichen Einwilligung.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full py-12 px-6 bg-surface-container-low">
+  <div class="flex flex-col sm:flex-row justify-between items-center gap-6 max-w-5xl mx-auto">
+    <p class="font-headline font-bold text-on-surface-variant uppercase tracking-[0.15em] text-[10px]">
+      Geburtstage & Geschenkideen
+    </p>
+    <div class="flex gap-6 items-center">
+      <a class="font-body text-xs tracking-wider uppercase text-on-surface-variant/60 hover:text-primary transition-colors" href="datenschutz.html">Datenschutz</a>
+      <a class="font-body text-xs tracking-wider uppercase text-on-surface-variant/60 hover:text-primary transition-colors" href="impressum.html">Impressum</a>
+      <a class="font-body text-xs tracking-wider uppercase text-on-surface-variant/60 hover:text-primary transition-colors" href="mailto:hendriks-apps@gruepi.de">Kontakt</a>
+    </div>
+    <p class="font-body text-xs text-on-surface-variant/50 tracking-wider">
+      Made with <span class="text-primary">&#10084;</span> in Germany
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
