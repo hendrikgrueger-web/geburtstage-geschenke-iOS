@@ -333,8 +333,9 @@ struct AIGiftSuggestionsSheet: View {
                     }
                     .padding(.vertical, 8)
                     .contentShape(Rectangle())
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityHint(String(localized: "Tippen zum Speichern als Geschenkidee"))
                     .onTapGesture {
-                        // Always allow saving as gift idea
                         selectedSuggestion = suggestion
                         HapticFeedback.medium()
                     }

@@ -47,10 +47,14 @@ struct aiPresentsApp: App {
             } catch {
                 AppLogger.data.error("Auch lokaler ModelContainer fehlgeschlagen — In-Memory-Fallback", error: error)
                 // Letzter Fallback: In-Memory (Daten gehen bei App-Neustart verloren, aber kein Crash)
-                let config = ModelConfiguration("ai-presents-app-recovery", schema: schema,
-                                               isStoredInMemoryOnly: true, cloudKitDatabase: .none)
-                // swiftlint:disable:next force_try
-                modelContainer = try! ModelContainer(for: schema, configurations: [config])
+                do {
+                    let config = ModelConfiguration("ai-presents-app-recovery", schema: schema,
+                                                   isStoredInMemoryOnly: true, cloudKitDatabase: .none)
+                    modelContainer = try ModelContainer(for: schema, configurations: [config])
+                } catch {
+                    AppLogger.data.error("In-Memory ModelContainer fehlgeschlagen — Fatal", error: error)
+                    fatalError("Kein ModelContainer erstellbar: \(error.localizedDescription)")
+                }
                 containerCreationFailed = true
 
                 let manager = ReminderManager(modelContext: modelContainer.mainContext)
