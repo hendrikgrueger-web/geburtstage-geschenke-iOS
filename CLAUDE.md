@@ -391,12 +391,20 @@ enum GiftDirection {
 | Team (Xcode + App Store) | Grüpi GmbH `CU87QNNB3N` |
 | Erster Build | 0.8.1 (13) — hochgeladen ✅ |
 
-### Version & Build Status (2026-03-21)
-- **Aktuelle Version 1.0:** WAITING_FOR_REVIEW — eingereicht am 21.03.2026
-- **Angehängter Build:** 110 (APP_STORE_ELIGIBLE, VALID) — gebaut mit neuem "App Store Build" Workflow
-- **Screenshots:** 26 Screenshots hochgeladen (DE + EN, iPhone 6.5" + 6.7" + iPad 12.9")
-- **Metadata:** 7 Sprachen vollständig (DE, EN-US, EN-GB, ES-ES, ES-MX, FR-FR, FR-CA)
-- **Pricing:** Gratis
+### Version & Build Status (2026-03-24)
+- **Aktuelle Version 1.0:** **READY_FOR_SALE** — live seit 2026-03-24
+- **App Store URL:** https://apps.apple.com/us/app/birthday-calendar-gifts/id6760319397
+- **Angehängter Build:** 110 (APP_STORE_ELIGIBLE, VALID)
+- **Availability:** alle 175 Apple-Territorien gesetzt (2026-03-24) — Propagierung läuft
+- **Screenshots:** 7 Locales (DE, EN-US, EN-GB, ES-ES, ES-MX, FR-FR, FR-CA)
+  - DE/EN-US/FR-FR/ES-ES: je 10× iPhone 6.5", 6× iPhone 6.7", 10× iPad 12.9"
+  - EN-GB/ES-MX/FR-CA: je 3× iPhone 6.7", 1× iPad 12.9"
+  - Hinweis: 6.5"-Sets (tmp*-Namen) sind Altlasten — können bei READY_FOR_SALE nicht gelöscht werden
+- **Subscription Group:** `customAppName` für 4 Locales gesetzt
+- **Noch offen (MANUELL in ASC-Browser):**
+  1. Subscriptions "Premium Jährlich" + "Premium Monatlich" → Review einreichen
+  2. Lifetime IAP Metadata vervollständigen + einreichen
+  3. Terms of Use Link → erst für Version 1.1
 
 ### TestFlight Gruppen
 - Interne Gruppe: `Testgrupp Geschenke-App Hendrik` — gruepigmbh@gmail.com (INSTALLED), s.mause83@gmail.com (INSTALLED), stephaniegrueger@gmail.com (INVITED)
