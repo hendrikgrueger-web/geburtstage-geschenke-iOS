@@ -34,19 +34,9 @@ extension PersonEntity {
 
 // MARK: - ModelContainer helper
 
-/// Creates a fresh ModelContainer for use inside AppIntent processes.
-/// Each call creates an independent container — intentional since intents run
-/// in a separate process without access to the main app's container.
+/// Creates the same shared ModelContainer contract used by the main app.
 func makeIntentsModelContainer() throws -> ModelContainer {
-    let schema = Schema([
-        PersonRef.self,
-        GiftIdea.self,
-        GiftHistory.self,
-        ReminderRule.self,
-        SuggestionFeedback.self
-    ])
-    let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false, cloudKitDatabase: .none)
-    return try ModelContainer(for: schema, configurations: [config])
+    try AppModelContainerFactory.create().container
 }
 
 // MARK: - PersonEntityQuery

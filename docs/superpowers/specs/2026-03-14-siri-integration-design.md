@@ -129,14 +129,14 @@ struct GiftAppShortcuts: AppShortcutsProvider {
 
 ## SwiftData-Zugriff in Intents
 
-AppIntents laufen NICHT im App-Prozess. SwiftData ModelContainer muss im Intent erstellt werden:
+AppIntents dürfen keinen eigenen Store-Vertrag erfinden. App und Intents müssen denselben SwiftData-Containervertrag verwenden:
 
-```swift
-// Shared ModelContainer-Factory (gleiche Config wie App)
-static func makeModelContainer() throws -> ModelContainer {
-    try ModelContainer(for: PersonRef.self, GiftIdea.self, GiftHistory.self)
-}
-```
+- gemeinsame Factory: `AppModelContainerFactory`
+- gleiche Store-Namen wie die App (`ai-presents-app`, `ai-presents-app-local`, `ai-presents-app-recovery`)
+- gleiche iCloud-vs-lokal Entscheidung über `iCloudSyncEnabled`
+- gleicher Fallback-Pfad (primary -> local fallback -> in-memory recovery)
+
+Die Intent-Helferfunktion `makeIntentsModelContainer()` delegiert daher direkt an `AppModelContainerFactory.create()`.
 
 ---
 

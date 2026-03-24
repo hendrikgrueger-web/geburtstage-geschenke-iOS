@@ -22,26 +22,21 @@ final class SubscriptionManager {
     private(set) var purchasedProductIDs: Set<String> = []
     private(set) var isLoading = false
 
-    // MARK: - Trial Constants
-
-    private static let trialStartKey = "subscriptionTrialStartDate"
-    private static let trialDurationDays = 14
-
     // MARK: - Trial Properties
 
     var trialStartDate: Date? {
-        UserDefaults.standard.object(forKey: Self.trialStartKey) as? Date
+        SubscriptionAccessPolicy.trialStartDate()
     }
 
     var trialEndDate: Date {
-        guard let start = trialStartDate else { return .distantPast }
-        return Calendar.current.date(byAdding: .day, value: Self.trialDurationDays, to: start) ?? .distantPast
+        SubscriptionAccessPolicy.trialEndDate(trialStartDate: trialStartDate) ?? .distantPast
     }
 
     var isInTrial: Bool {
-        guard !isSubscribed else { return false }
-        guard trialStartDate != nil else { return false }
-        return Date() < trialEndDate
+        SubscriptionAccessPolicy.isInTrial(
+            purchasedProductIDs: purchasedProductIDs,
+            trialStartDate: trialStartDate
+        )
     }
 
     var trialDaysRemaining: Int {
@@ -58,7 +53,12 @@ final class SubscriptionManager {
     ///
     /// - Note: Für den v1-Launch sind alle Features kostenlos verfügbar.
     ///   Dieses Flag wird auf `true` gesetzt, bis die Monetarisierung aktiviert wird.
-    var hasFullAccess: Bool { true }
+    var hasFullAccess: Bool {
+        SubscriptionAccessPolicy.hasFullAccess(
+            purchasedProductIDs: purchasedProductIDs,
+            trialStartDate: trialStartDate
+        )
+    }
 
     // MARK: - Transaction Listener
 
@@ -82,8 +82,8 @@ final class SubscriptionManager {
 
     /// Startet den Trial beim ersten App-Start, falls noch nicht gestartet.
     func startTrialIfNeeded() {
-        if UserDefaults.standard.object(forKey: Self.trialStartKey) == nil {
-            UserDefaults.standard.set(Date(), forKey: Self.trialStartKey)
+        if UserDefaults.standard.object(forKey: SubscriptionAccessPolicy.trialStartKey) == nil {
+            UserDefaults.standard.set(Date(), forKey: SubscriptionAccessPolicy.trialStartKey)
             AppLogger.data.info("Trial gestartet")
         }
     }

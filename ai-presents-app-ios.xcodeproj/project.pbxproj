@@ -60,8 +60,10 @@
 		536C68C701B7445374355897 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633E1C1B18B0D830A8E305E3 /* ToastView.swift */; };
 		555A8B4C1720028D88EFF528 /* PersonDetailGiftIdeasSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1667501766ADA59031037C /* PersonDetailGiftIdeasSection.swift */; };
 		5588AE9AB8463F7BF41CD246 /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FEF71AF911AEF88A1FD15D /* PersonDetailView.swift */; };
+		57B4C4CACDC23B0DD10BEF7F /* SubscriptionAccessPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5685B33EB811AC4010B4C4AA /* SubscriptionAccessPolicyTests.swift */; };
 		5AB38A2B566D33FAAC8D5B5A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9625CCD9B5CF0D4CD77D3C0 /* AppConfig.swift */; };
 		5CB56DD85D350BE96FD24FDD /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F19315FD9DFE8E8059A7D2 /* AIService.swift */; };
+		5D734BFEE0A19824B463E399 /* SubscriptionAccessPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA6C5634C107C94D0D5A240 /* SubscriptionAccessPolicy.swift */; };
 		5D92B07A74082F74F8F3613D /* BirthdayCountdownBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E2AFB4F054F2327E661194 /* BirthdayCountdownBadge.swift */; };
 		5E461CD06FCC9B092BA2EA4E /* HapticFeedbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA89C692C942FB0A0FCFB3 /* HapticFeedbackTests.swift */; };
 		5F9A0C7FCB67D118A9EDF9CE /* demo-anna.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F79BE3D8FCC1B5CB99E57DBB /* demo-anna.jpg */; };
@@ -97,8 +99,8 @@
 		94B30E193EA3E3912B354687 /* PersonDetailGiftHistorySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7AE8EBCC80EFF0F12B3DAA /* PersonDetailGiftHistorySection.swift */; };
 		957D35ED0EDC35A8C09D2D4E /* EditGiftIdeaSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8769414B8C61426492D58056 /* EditGiftIdeaSheet.swift */; };
 		9588530C039939683320C67D /* FormStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52099417BCBD7016D7D7C66 /* FormStateTests.swift */; };
-		97207EC8D3DF3E4B7B92D373 /* BirthdayWidgetDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BA551EDF2FC361A5B1CF9 /* BirthdayWidgetDataTests.swift */; };
 		97CA71ECC58101BBEBA9A15F /* PersonAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD126F2E5D15ED3C1A0A867 /* PersonAvatar.swift */; };
+		99041396F2C27DB4ABD5F3EB /* WidgetDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102A7242873401232E47C1E5 /* WidgetDataServiceTests.swift */; };
 		9BF2F2BB730530A2209C0220 /* PersonRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B65F655134CF6668D50BD9 /* PersonRef.swift */; };
 		9C3438E34DD32FF19D18E93D /* AccessibilityHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92D5A39066D3EB9FAD43895 /* AccessibilityHelperTests.swift */; };
 		9D8A60137B72FF9BB1003B7B /* URLValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4EEB524DA35DA87130A7F8 /* URLValidatorTests.swift */; };
@@ -118,6 +120,7 @@
 		ADE1CC765E156F4853A4DDF8 /* BirthdayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF726314BEDDE5BB6C64E630 /* BirthdayRow.swift */; };
 		B0EE9F055B8E798FA06CACD8 /* AgeObfuscatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76009692592AB72DAE480A06 /* AgeObfuscatorTests.swift */; };
 		B20A8F0530F4C41B976873AF /* BirthdayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44614D5AC68097C1AE93D4BC /* BirthdayWidget.swift */; };
+		B50B70E9C2E6BB98538EB148 /* AppModelContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661B2576ACE75A9B30AC7540 /* AppModelContainerFactory.swift */; };
 		B6F30405FEBA5F73D16CEA09 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEA4ED4260D661E8A6F60F /* Debouncer.swift */; };
 		B7E016C0B6BB420CF944444E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106D1BEF8550146110F92A6C /* OnboardingView.swift */; };
 		B805699DF86D36AAA54F0F1C /* AppLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAAE077D709F609179254B0 /* AppLoggerTests.swift */; };
@@ -137,9 +140,11 @@
 		CF9D641FC9416892F7BB1136 /* PersonDetailTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6546B8F7D9BA4CBB8A2397A1 /* PersonDetailTypes.swift */; };
 		D29BAACE8F45C70867A0BB03 /* RelationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B4A599402C7B306F56FE6 /* RelationOptions.swift */; };
 		D41082B2ED0E32EFDE1354A9 /* DebouncerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063CAB0C081F446D470C7433 /* DebouncerTests.swift */; };
+		D4327ACE7E7956A676BC6A58 /* AIChatPromptCachingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B5017DC220A38334142516 /* AIChatPromptCachingTests.swift */; };
 		D4370B129053585B936FB3EE /* ToastViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5D2F28E192F7222EDA70D /* ToastViewTests.swift */; };
 		D88CF76CBECD49423145CE85 /* AIConsentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1189BC8C6BCB6FA40B03A301 /* AIConsentSheet.swift */; };
 		DB037047927D8B4E3AD267B9 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A800C081194B19F639DD7 /* ShareSheetView.swift */; };
+		DB7381D7875F47359BA87E85 /* AppModelContainerFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C48900B3337F4B968B6409A /* AppModelContainerFactoryTests.swift */; };
 		DC9D90107E2252A49DE8F90E /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271E66143DD2D410FCAFD44D /* ButtonStyles.swift */; };
 		DD4C17C3DAFCF8C18E4EB0C4 /* demo-erika.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C0DDFF0C23DE788F8DF31A4 /* demo-erika.jpg */; };
 		DE56A3B1C078CF765FF226DE /* AccessibilityConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34597EBF8E869A576A033613 /* AccessibilityConfiguration.swift */; };
@@ -198,15 +203,18 @@
 		050F0443F62696ACF3B75CD1 /* AIChatViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatViewModelTests.swift; sourceTree = "<group>"; };
 		063CAB0C081F446D470C7433 /* DebouncerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncerTests.swift; sourceTree = "<group>"; };
 		0750E534FFC66119B4D89A2B /* GiftIdea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftIdea.swift; sourceTree = "<group>"; };
+		0BA6C5634C107C94D0D5A240 /* SubscriptionAccessPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAccessPolicy.swift; sourceTree = "<group>"; };
 		0C0DDFF0C23DE788F8DF31A4 /* demo-erika.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "demo-erika.jpg"; sourceTree = "<group>"; };
 		0D67459933E4675EC2D59215 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		0DF552A504FEB6F294F90285 /* demo-peter.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "demo-peter.jpg"; sourceTree = "<group>"; };
 		0F28E31AFE15E5C5BF328E7F /* HobbiesChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbiesChipView.swift; sourceTree = "<group>"; };
+		102A7242873401232E47C1E5 /* WidgetDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataServiceTests.swift; sourceTree = "<group>"; };
 		106D1BEF8550146110F92A6C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		1189BC8C6BCB6FA40B03A301 /* AIConsentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIConsentSheet.swift; sourceTree = "<group>"; };
 		12050DD29ABF53F754FB7448 /* SmartInputFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartInputFieldTests.swift; sourceTree = "<group>"; };
 		12D1D096860C12DFAB2C4D16 /* aiPresentsApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = aiPresentsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1352AE658416E5B2DEEB06D7 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
+		14B5017DC220A38334142516 /* AIChatPromptCachingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatPromptCachingTests.swift; sourceTree = "<group>"; };
 		194FEF6D34BD0E36B4E9FA00 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		1B36F2A6758410F64F73DFA8 /* demo-lisa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "demo-lisa.jpg"; sourceTree = "<group>"; };
 		1BAAE077D709F609179254B0 /* AppLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoggerTests.swift; sourceTree = "<group>"; };
@@ -249,6 +257,7 @@
 		508247F8818A2793DD521981 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		51B467A880F06011A6CE947A /* BirthdayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthdayWidget.entitlements; sourceTree = "<group>"; };
 		53ADD72AECCB8BD0511F891D /* RelationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationPickerView.swift; sourceTree = "<group>"; };
+		5685B33EB811AC4010B4C4AA /* SubscriptionAccessPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAccessPolicyTests.swift; sourceTree = "<group>"; };
 		56B829D839F0FB868391D0FA /* SampleDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataService.swift; sourceTree = "<group>"; };
 		577176E5413D563A0D2954E0 /* AddGiftIdeaIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGiftIdeaIntent.swift; sourceTree = "<group>"; };
 		596E3CA77753436EF1C30BDD /* AIChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatViewModel.swift; sourceTree = "<group>"; };
@@ -260,6 +269,7 @@
 		64C584B17491C3120AF1DF0B /* demo-michael.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "demo-michael.jpg"; sourceTree = "<group>"; };
 		6546B8F7D9BA4CBB8A2397A1 /* PersonDetailTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailTypes.swift; sourceTree = "<group>"; };
 		65B3A3AFD86F73CED4FC6D72 /* demo-julia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "demo-julia.jpg"; sourceTree = "<group>"; };
+		661B2576ACE75A9B30AC7540 /* AppModelContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelContainerFactory.swift; sourceTree = "<group>"; };
 		669201D64E204AF27A8B4549 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		6A5FC754F1167DC0929B2495 /* HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		6F4689396F1072DD2D28E078 /* BirthdayDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayDateHelper.swift; sourceTree = "<group>"; };
@@ -268,6 +278,7 @@
 		7445EDABC3BF7FB4E9809AD8 /* AIBirthdayMessageSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIBirthdayMessageSheet.swift; sourceTree = "<group>"; };
 		76009692592AB72DAE480A06 /* AgeObfuscatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeObfuscatorTests.swift; sourceTree = "<group>"; };
 		78BE49BD68A19D2708B9FF4D /* BirthdayDateHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayDateHelperTests.swift; sourceTree = "<group>"; };
+		7C48900B3337F4B968B6409A /* AppModelContainerFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelContainerFactoryTests.swift; sourceTree = "<group>"; };
 		7EAA89C692C942FB0A0FCFB3 /* HapticFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackTests.swift; sourceTree = "<group>"; };
 		7FD126F2E5D15ED3C1A0A867 /* PersonAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonAvatar.swift; sourceTree = "<group>"; };
 		81D810CCD472376033152FEE /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
@@ -322,7 +333,6 @@
 		C82887340C489D12FFB0B697 /* PersonEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonEntity.swift; sourceTree = "<group>"; };
 		CB39183418B0E76238FA9158 /* GiftIdeaRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftIdeaRow.swift; sourceTree = "<group>"; };
 		CC88C885EE88547724D7673C /* ValidationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationHelperTests.swift; sourceTree = "<group>"; };
-		CC8BA551EDF2FC361A5B1CF9 /* BirthdayWidgetDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayWidgetDataTests.swift; sourceTree = "<group>"; };
 		CCC5D2F28E192F7222EDA70D /* ToastViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewTests.swift; sourceTree = "<group>"; };
 		D54D03939A717560DDD798EB /* ReminderRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRule.swift; sourceTree = "<group>"; };
 		D5F96D1561167E4419327758 /* NochOhneGeschenkSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NochOhneGeschenkSection.swift; sourceTree = "<group>"; };
@@ -608,6 +618,7 @@
 				A92D5A39066D3EB9FAD43895 /* AccessibilityHelperTests.swift */,
 				76009692592AB72DAE480A06 /* AgeObfuscatorTests.swift */,
 				AA443DCF283A93273952F5B3 /* AIBirthdayMessageSheetTests.swift */,
+				14B5017DC220A38334142516 /* AIChatPromptCachingTests.swift */,
 				050F0443F62696ACF3B75CD1 /* AIChatViewModelTests.swift */,
 				463BBEC37B287A1D9FCC89A3 /* AIConsentManagerTests.swift */,
 				B67C423C60F6B50FA69691AD /* AIServiceTests.swift */,
@@ -615,11 +626,11 @@
 				F4BE28E623996C74E0FB24BE /* AppColorTests.swift */,
 				BE4BD0FE84325AD2FF2976F3 /* AppConfigTests.swift */,
 				1BAAE077D709F609179254B0 /* AppLoggerTests.swift */,
+				7C48900B3337F4B968B6409A /* AppModelContainerFactoryTests.swift */,
 				2B21B2CB3D74C9F83C2AE0FB /* BirthdayCalculationTests.swift */,
 				9AF1C70D1E7AA24CAA593363 /* BirthdayCalculatorEdgeCasesTests.swift */,
 				FF382AF887CC2A4530148FD7 /* BirthdayCalculatorTests.swift */,
 				3BC3124099F551F5EA373EA7 /* BirthdayCalculatorThreadSafetyTests.swift */,
-				CC8BA551EDF2FC361A5B1CF9 /* BirthdayWidgetDataTests.swift */,
 				95BB6E1690ACBC0C41AE04F7 /* ContactsServiceTests.swift */,
 				063CAB0C081F446D470C7433 /* DebouncerTests.swift */,
 				EC6FCD24AE708AB86CF01C17 /* FormatterHelperTests.swift */,
@@ -632,10 +643,12 @@
 				5BB733891BECCDBA0E57B496 /* RelationOptionsTests.swift */,
 				C1099CCB57FBD2055364A801 /* ReminderManagerTests.swift */,
 				507E0BBB507D60FBD3B50AC0 /* SampleDataServiceTests.swift */,
+				5685B33EB811AC4010B4C4AA /* SubscriptionAccessPolicyTests.swift */,
 				505CF312F2774E4C40670379 /* SuggestionQualityViewModelTests.swift */,
 				CCC5D2F28E192F7222EDA70D /* ToastViewTests.swift */,
 				8A4EEB524DA35DA87130A7F8 /* URLValidatorTests.swift */,
 				CC88C885EE88547724D7673C /* ValidationHelperTests.swift */,
+				102A7242873401232E47C1E5 /* WidgetDataServiceTests.swift */,
 				65F124070173F797FC23F8BF /* UtilityTests */,
 			);
 			name = aiPresentsAppTests;
@@ -660,6 +673,7 @@
 				40B6E83D614EF822E16CE41C /* AppAnimation.swift */,
 				E9625CCD9B5CF0D4CD77D3C0 /* AppConfig.swift */,
 				1FCB7E8FECC68A391737DFAF /* AppLogger.swift */,
+				661B2576ACE75A9B30AC7540 /* AppModelContainerFactory.swift */,
 				1F1A02B6D7A77AAD75AE1990 /* BirthdayCalculator.swift */,
 				6F4689396F1072DD2D28E078 /* BirthdayDateHelper.swift */,
 				A1CEA4ED4260D661E8A6F60F /* Debouncer.swift */,
@@ -690,6 +704,7 @@
 				AF5D518273E7BB19D619E0DF /* ReminderManager.swift */,
 				56B829D839F0FB868391D0FA /* SampleDataService.swift */,
 				BA3BFC741FC7522FB943DEC6 /* SpeechRecognitionService.swift */,
+				0BA6C5634C107C94D0D5A240 /* SubscriptionAccessPolicy.swift */,
 				9980FD538EBE7937C51AFEE3 /* SubscriptionManager.swift */,
 				A6EB8AD13515C4A79913E22B /* WidgetDataService.swift */,
 			);
@@ -863,6 +878,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9427DC3A62E7EFC8747F871D /* AIBirthdayMessageSheetTests.swift in Sources */,
+				D4327ACE7E7956A676BC6A58 /* AIChatPromptCachingTests.swift in Sources */,
 				8D1027AC5348B6DB997364FF /* AIChatViewModelTests.swift in Sources */,
 				302089CCD50FCAE95999D515 /* AIConsentManagerTests.swift in Sources */,
 				FBB7A3F4309F98B05DC46435 /* AIServiceTests.swift in Sources */,
@@ -873,12 +889,12 @@
 				F1632B641E2ADD434097F145 /* AppColorTests.swift in Sources */,
 				223704652E1BAC3EDDF046FC /* AppConfigTests.swift in Sources */,
 				B805699DF86D36AAA54F0F1C /* AppLoggerTests.swift in Sources */,
+				DB7381D7875F47359BA87E85 /* AppModelContainerFactoryTests.swift in Sources */,
 				85F84E3782BF1D0066448A5B /* BirthdayCalculationTests.swift in Sources */,
 				1AE22A18E8DF8520632671A6 /* BirthdayCalculatorEdgeCasesTests.swift in Sources */,
 				3B35DB430F791BD5DEF5018A /* BirthdayCalculatorTests.swift in Sources */,
 				293D6EBEDA0427F92D55F28D /* BirthdayCalculatorThreadSafetyTests.swift in Sources */,
 				011B23B9E759F14B51EF9A81 /* BirthdayDateHelperTests.swift in Sources */,
-				97207EC8D3DF3E4B7B92D373 /* BirthdayWidgetDataTests.swift in Sources */,
 				803759AE778885B8326EB53D /* ContactsServiceTests.swift in Sources */,
 				D41082B2ED0E32EFDE1354A9 /* DebouncerTests.swift in Sources */,
 				9588530C039939683320C67D /* FormStateTests.swift in Sources */,
@@ -893,10 +909,12 @@
 				6F7B8B4B1ABDF4B49D08BACB /* ReminderManagerTests.swift in Sources */,
 				259BBF9C15E6B8EA771EA140 /* SampleDataServiceTests.swift in Sources */,
 				2587C2B231841BC97D8E4FF6 /* SmartInputFieldTests.swift in Sources */,
+				57B4C4CACDC23B0DD10BEF7F /* SubscriptionAccessPolicyTests.swift in Sources */,
 				DFB1700B4EA9D5C9723CD707 /* SuggestionQualityViewModelTests.swift in Sources */,
 				D4370B129053585B936FB3EE /* ToastViewTests.swift in Sources */,
 				9D8A60137B72FF9BB1003B7B /* URLValidatorTests.swift in Sources */,
 				ACF2CFCF45EB2312F56815E0 /* ValidationHelperTests.swift in Sources */,
+				99041396F2C27DB4ABD5F3EB /* WidgetDataServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,6 +943,7 @@
 				359265187D945F839F876683 /* AppLockManager.swift in Sources */,
 				F776571360D1F1DC5689ED80 /* AppLockView.swift in Sources */,
 				4184E6B2443944AB6077A7AE /* AppLogger.swift in Sources */,
+				B50B70E9C2E6BB98538EB148 /* AppModelContainerFactory.swift in Sources */,
 				AC138672CE067DF6B4308C1E /* BirthdayCalculator.swift in Sources */,
 				5D92B07A74082F74F8F3613D /* BirthdayCountdownBadge.swift in Sources */,
 				19E005C071527D0AB3DF63EF /* BirthdayDateHelper.swift in Sources */,
@@ -988,6 +1007,7 @@
 				DB037047927D8B4E3AD267B9 /* ShareSheetView.swift in Sources */,
 				831940E5795C3E5929750297 /* SmartInputField.swift in Sources */,
 				400365EF33DDCECA2B3AE6C6 /* SpeechRecognitionService.swift in Sources */,
+				5D734BFEE0A19824B463E399 /* SubscriptionAccessPolicy.swift in Sources */,
 				A54009A95F62E43039B42E1A /* SubscriptionManager.swift in Sources */,
 				7646F3A08BCEF6CA391CDB98 /* SuggestionFeedback.swift in Sources */,
 				88ED29FC5BFFAE3D273DBF27 /* SuggestionFeedbackView.swift in Sources */,

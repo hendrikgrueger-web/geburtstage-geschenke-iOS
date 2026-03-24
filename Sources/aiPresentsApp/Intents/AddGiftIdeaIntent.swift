@@ -53,25 +53,18 @@ struct AddGiftIdeaIntent: AppIntent {
     }
 
     private nonisolated func hasFullAccess() async -> Bool {
-        if isTrialActive() {
-            return true
-        }
-
         let productIDs = Set(SubscriptionManager.ProductID.allCases.map(\.rawValue))
+        var purchasedProductIDs: Set<String> = []
         for await result in StoreKit.Transaction.currentEntitlements {
             guard case .verified(let transaction) = result else { continue }
             if productIDs.contains(transaction.productID) {
-                return true
+                purchasedProductIDs.insert(transaction.productID)
             }
         }
-        return false
-    }
 
-    private nonisolated func isTrialActive(now: Date = Date()) -> Bool {
-        guard let trialStartDate = UserDefaults.standard.object(forKey: "subscriptionTrialStartDate") as? Date,
-              let trialEndDate = Calendar.current.date(byAdding: .day, value: 14, to: trialStartDate) else {
-            return false
-        }
-        return now < trialEndDate
+        return SubscriptionAccessPolicy.hasFullAccess(
+            purchasedProductIDs: purchasedProductIDs,
+            trialStartDate: SubscriptionAccessPolicy.trialStartDate()
+        )
     }
 }

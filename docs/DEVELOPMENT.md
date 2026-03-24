@@ -43,3 +43,8 @@ Bei Feature/Fix immer aktualisieren:
 - README (falls user-relevant)
 - PRD/Architecture (falls Verhalten/Scope geändert)
 - Roadmap (falls Meilenstein verschoben)
+
+## 7) Shared Runtime Contracts
+- SwiftData-Container nur über `AppModelContainerFactory` erzeugen. App, AppIntents und andere Nebenpfade dürfen keine eigene Store-Konfiguration bauen.
+- Feature-Zugriff nur über `SubscriptionAccessPolicy` auswerten. UI und Shortcuts müssen für denselben Nutzerzustand dieselbe Antwort geben.
+- KI-Chat-Kontext nach prompt-relevanten Datenänderungen immer per `refreshContext(...)` bzw. `invalidatePromptCache()` erneuern. Count-basierte Beobachtung allein reicht nicht.
