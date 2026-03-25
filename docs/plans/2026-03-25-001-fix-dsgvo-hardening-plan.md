@@ -1,7 +1,7 @@
 ---
 title: "fix: DSGVO-Härtung — AVV-Status dokumentieren, Consent-Text fixen, Docs konsistent machen"
 type: fix
-status: active
+status: completed
 date: 2026-03-25
 ---
 
@@ -76,7 +76,7 @@ Die App "Geburtstage & Geschenkideen" ist seit 24.03.2026 im App Store. Die Date
 
 ## Implementation Units
 
-- [ ] **Unit 1: Consent-Sheet Text fixen**
+- [x] **Unit 1: Consent-Sheet Text fixen**
 
   **Goal:** Rechtlich angreifbaren Satz streichen und durch korrekte Formulierung ersetzen
 
@@ -101,7 +101,7 @@ Die App "Geburtstage & Geschenkideen" ist seit 24.03.2026 im App Store. Die Date
   - Satz "nicht personenbezogen" kommt nirgends mehr vor
   - Build erfolgreich
 
-- [ ] **Unit 2: App-Name in Docs vereinheitlichen**
+- [x] **Unit 2: App-Name in Docs vereinheitlichen**
 
   **Goal:** "AI Präsente" durch "Geburtstage & Geschenkideen" als primären App-Namen ersetzen
 
@@ -125,7 +125,7 @@ Die App "Geburtstage & Geschenkideen" ist seit 24.03.2026 im App Store. Die Date
   **Verification:**
   - `grep -r "AI Präsente" docs/` zeigt keine alleinstehenden Vorkommen mehr
 
-- [ ] **Unit 3: AVV/DPA-Status dokumentieren**
+- [x] **Unit 3: AVV/DPA-Status dokumentieren**
 
   **Goal:** Formalen AVV-Status mit allen Auftragsverarbeitern in DSGVO-AI.md dokumentieren
 
@@ -149,7 +149,7 @@ Die App "Geburtstage & Geschenkideen" ist seit 24.03.2026 im App Store. Die Date
   - Jeder Auftragsverarbeiter hat expliziten DPA-Status
   - Keine offenen "Empfehlungen" mehr ohne Zeitplan
 
-- [ ] **Unit 4: In-App PrivacyView aktualisieren**
+- [x] **Unit 4: In-App PrivacyView aktualisieren**
 
   **Goal:** PrivacyView konsistent mit aktualisierter DSGVO-AI.md machen
 
@@ -169,7 +169,7 @@ Die App "Geburtstage & Geschenkideen" ist seit 24.03.2026 im App Store. Die Date
   - PrivacyView und PRIVACY.md sind inhaltlich konsistent
   - Build erfolgreich
 
-- [ ] **Unit 5: OpenRouter DPA anfragen (manueller Schritt)**
+- [x] **Unit 5: OpenRouter DPA anfragen (manueller Schritt)**
 
   **Goal:** Enterprise-DPA bei OpenRouter anfordern
 
