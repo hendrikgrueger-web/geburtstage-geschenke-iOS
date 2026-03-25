@@ -1,7 +1,7 @@
 # Terms of Service
 
-**App:** AI Präsente
-**Version:** 1.0.0
+**App:** Geburtstage & Geschenkideen (Birthday Calendar & Gifts)
+**Version:** 1.0.1
 **Date:** March 2026
 **Language:** English
 
@@ -9,13 +9,13 @@
 
 ## 1. Acceptance of Terms
 
-By downloading, installing, or using the "AI Präsente" app, you agree to these Terms of Service. If you do not agree to these terms, please do not use the app.
+By downloading, installing, or using the "Geburtstage & Geschenkideen" app, you agree to these Terms of Service. If you do not agree to these terms, please do not use the app.
 
 ---
 
 ## 2. App Description
 
-AI Präsente is an iOS app for managing birthdays and gift ideas. The app provides the following features:
+Geburtstage & Geschenkideen is an iOS app for managing birthdays and gift ideas. The app provides the following features:
 
 - Import of birthday data from iOS contacts
 - Timeline view with filter options
@@ -60,7 +60,7 @@ As a user of the app, you agree to:
 ## 5. Intellectual Property
 
 ### 5.1 Provider Rights
-All rights to the "AI Präsente" app, including:
+All rights to the "Geburtstage & Geschenkideen" app, including:
 - Source code
 - Design
 - Trademarks
@@ -201,7 +201,7 @@ If any provision of these Terms of Service is or becomes invalid, the validity o
 
 ## 14. Entire Agreement
 
-These Terms of Service constitute the entire agreement between you and the developer regarding the use of the "AI Präsente" app and supersede all previous agreements or arrangements.
+These Terms of Service constitute the entire agreement between you and the developer regarding the use of the "Geburtstage & Geschenkideen" app and supersede all previous agreements or arrangements.
 
 ---
 
@@ -219,6 +219,6 @@ Rennekamp 19
 
 ---
 
-**Thank you for your trust in AI Präsente!**
+**Thank you for your trust in Geburtstage & Geschenkideen!**
 
 Last Updated: March 2026

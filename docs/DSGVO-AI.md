@@ -1,6 +1,6 @@
 # DSGVO-Dokumentation: KI-Features
 
-Stand: März 2026 (v1.0.0)
+Stand: März 2026 (v1.0.1)
 
 ## Überblick
 
@@ -60,36 +60,60 @@ Folgende Daten verlassen das Gerät niemals im Rahmen der KI-Features:
 
 ## 3. Auftragsverarbeiter (Art. 28 DSGVO)
 
+### AVV/DPA-Status Übersicht
+
+| Auftragsverarbeiter | Rolle | DPA-Status | Datum |
+|---------------------|-------|------------|-------|
+| Cloudflare Inc. | Proxy | ✅ Auto-akzeptiert (Main Service Agreement, DPA v6.3) | Juni 2025 |
+| OpenRouter Inc. | API-Gateway | ⏳ DPA angefragt (Enterprise-Tier) | 25. März 2026 |
+| Google LLC | Sub-Processor via OpenRouter | ✅ Abgedeckt über OpenRouter-Vertragskette | — |
+
+### Ergänzende Schutzmaßnahmen (Supplementary Measures)
+
+Zusätzlich zu den Standardvertragsklauseln (Art. 46 DSGVO) werden folgende technische Maßnahmen umgesetzt:
+- **Zero Data Retention (ZDR):** Weder OpenRouter noch Google speichern Prompts oder Antworten dauerhaft
+- **Verschlüsselung in Transit:** TLS 1.3 auf allen Verbindungen (App → Cloudflare → OpenRouter → Google)
+- **Kein Modelltraining:** Daten werden nicht zum Training von KI-Modellen verwendet
+- **Datensparsamkeit:** Nur pseudonymisierte Daten (Vorname, Altersgruppe, Beziehungstyp) werden übertragen
+- **Keine dauerhafte Speicherung:** API-Calls sind stateless — nach Verarbeitung werden keine Daten vorgehalten
+
 ### 3.0 Cloudflare Inc.
 
 - **Rolle:** Auftragsverarbeiter (Proxy)
 - **Sitz:** USA (San Francisco, CA)
 - **Zweck:** Proxying der API-Anfragen, Schutz des API-Keys
+- **DPA-Status:** ✅ Automatisch akzeptiert als Teil des Cloudflare Main Service Agreement (DPA v6.3, Juni 2025)
+- **DPA-Link:** https://www.cloudflare.com/cloudflare-customer-dpa/
 - **Datenschutz:** https://www.cloudflare.com/privacypolicy/
-- **DPA:** Verfügbar unter https://www.cloudflare.com/cloudflare-customer-dpa/
-- **Drittlandübermittlung:** USA — Standardvertragsklauseln gemäß Art. 46 DSGVO
+- **Trust Hub:** https://trust.cloudflare.com/
+- **Drittlandübermittlung:** USA — Standardvertragsklauseln (SCCs Module 2 & 3) gemäß Art. 46 DSGVO
 
 ### 3.1 OpenRouter Inc.
 
 - **Rolle:** Auftragsverarbeiter (API-Gateway)
 - **Sitz:** USA (San Francisco, CA)
 - **Zweck:** Weiterleitung der KI-Anfragen an das Sprachmodell
+- **DPA-Status:** ⏳ DPA angefragt am 25.03.2026 — Enterprise-Tier erforderlich für formales DPA
+- **DPA-Kontakt:** enterprise@openrouter.ai / https://openrouter.ai/enterprise
+- **Trust Center:** https://trust.openrouter.ai/
 - **Datenschutz:** https://openrouter.ai/privacy
-- **Zero Data Retention (ZDR):** Aktiviert — OpenRouter speichert keine Prompts oder Antworten dauerhaft
+- **Zero Data Retention (ZDR):** Aktiviert (`provider.zdr: true`) — OpenRouter speichert keine Prompts oder Antworten dauerhaft
 - **Training:** Daten werden NICHT zum Modelltraining verwendet
 - **Drittlandübermittlung:** USA — Standardvertragsklauseln gemäß Art. 46 DSGVO
 
-**Empfehlung:** Mit OpenRouter einen Auftragsverarbeitungsvertrag (AVV) abschließen. Kontakt: legal@openrouter.ai
+**Hinweis:** Bis zum Abschluss des formalen DPA stützt sich die Datenübertragung auf: (1) Einwilligung des Nutzers (Art. 6.1.a), (2) Standardvertragsklauseln (Art. 46), (3) Zero Data Retention als ergänzende Schutzmaßnahme, (4) OpenRouter ToS mit DPA-Verweis für Organizations.
 
 ### 3.2 Google LLC (Vertex AI / Google AI Studio)
 
 - **Rolle:** Sub-Auftragsverarbeiter (Sprachmodell-Betreiber)
 - **Sitz:** USA (Mountain View, CA)
 - **Zweck:** Verarbeitung der eigentlichen KI-Anfragen
+- **DPA-Status:** ✅ Abgedeckt über OpenRouter als Auftragsverarbeiter — kein separater Vertrag erforderlich
 - **Datenschutz:** https://policies.google.com/privacy
+- **Google Cloud DPA:** https://cloud.google.com/terms/data-processing-addendum
 - **Retains Prompts:** Nein — Google speichert keine Prompts bei Nutzung über OpenRouter mit ZDR
 - **Training:** Daten werden NICHT zum Modelltraining verwendet
-- **Modell:** Google Gemini (via OpenRouter)
+- **Modell:** Google Gemini 3.1 Flash Lite (via OpenRouter)
 - **Drittlandübermittlung:** USA — Standardvertragsklauseln gemäß Art. 46 DSGVO
 
 ---
@@ -180,3 +204,36 @@ Gruepi GmbH
 Rennekamp 19, 59494 Soest
 Geschäftsführer: Hendrik Grüger, Sebastian Mause
 hendriks-apps@gruepi.de
+
+---
+
+## 9. DPA-Anfrage an OpenRouter (Vorlage)
+
+**Status:** ⏳ Angefragt am 25.03.2026
+**Kontakt:** enterprise@openrouter.ai / https://openrouter.ai/enterprise
+
+**E-Mail-Vorlage:**
+
+> Subject: Data Processing Agreement (DPA) Request — Grüpi GmbH
+>
+> Dear OpenRouter Team,
+>
+> We are Grüpi GmbH (Germany) and operate the iOS app "Geburtstage & Geschenkideen" (Birthday Calendar & Gifts) on the Apple App Store.
+>
+> Our app uses OpenRouter's API with Zero Data Retention (ZDR) enabled to provide optional AI-powered gift suggestions to EU-based users. As this constitutes data processing under GDPR (Art. 28), we require a formal Data Processing Agreement (DPA/AVV).
+>
+> Details:
+> - Company: Grüpi GmbH, Rennekamp 19, 59494 Soest, Germany
+> - App: Geburtstage & Geschenkideen (App Store ID: 6760319397)
+> - Model used: Google Gemini 3.1 Flash Lite via OpenRouter
+> - Data transmitted: First names, age groups, relationship types, hobbies (pseudonymized, with user consent)
+> - ZDR: Enabled (provider.zdr: true)
+> - Legal basis: User consent (GDPR Art. 6.1.a) + Standard Contractual Clauses (Art. 46)
+>
+> Could you provide us with your standard DPA or direct us to the Enterprise tier where DPAs are available?
+>
+> Best regards,
+> Hendrik Grüger
+> hendriks-apps@gruepi.de
+
+**Nach Antwort:** DPA-Status in Abschnitt 3 aktualisieren (⏳ → ✅).

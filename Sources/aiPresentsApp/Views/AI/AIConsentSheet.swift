@@ -74,7 +74,7 @@ struct AIConsentSheet: View {
                         iconColor: .green,
                         title: "Datenschutz-Prinzip"
                     ) {
-                        Text("Die KI kennt nur Vornamen, Altersgruppe und Beziehung — keine Nachnamen, keine Geburtsdaten, keine Kontaktdaten. Ein Vorname allein ist nicht personenbezogen.")
+                        Text("Die übertragenen Daten sind so gewählt, dass eine Identifikation der beschriebenen Person stark erschwert wird. Nachnamen, Geburtsdaten und Kontaktdaten werden nie übertragen.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }

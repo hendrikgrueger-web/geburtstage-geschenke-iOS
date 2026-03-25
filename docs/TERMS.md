@@ -1,7 +1,7 @@
 # Nutzungsbedingungen (Terms of Service)
 
-**App:** AI Präsente
-**Version:** 1.0.0
+**App:** Geburtstage & Geschenkideen
+**Version:** 1.0.1
 **Stand:** März 2026
 **Sprache:** Deutsch
 
@@ -9,13 +9,13 @@
 
 ## 1. Annahme der Bedingungen
 
-Durch Herunterladen, Installieren oder Nutzen der App "AI Präsente" stimmen Sie diesen Nutzungsbedingungen zu. Wenn Sie nicht mit diesen Bedingungen einverstanden sind, nutzen Sie die App bitte nicht.
+Durch Herunterladen, Installieren oder Nutzen der App "Geburtstage & Geschenkideen" stimmen Sie diesen Nutzungsbedingungen zu. Wenn Sie nicht mit diesen Bedingungen einverstanden sind, nutzen Sie die App bitte nicht.
 
 ---
 
 ## 2. Beschreibung der App
 
-AI Präsente ist eine iOS-App zur Verwaltung von Geburtstagen und Geschenkideen. Die App bietet folgende Funktionen:
+Geburtstage & Geschenkideen ist eine iOS-App zur Verwaltung von Geburtstagen und Geschenkideen. Die App bietet folgende Funktionen:
 
 - Import von Geburtstagsdaten aus iOS-Kontakten
 - Timeline-Ansicht mit Filteroptionen
@@ -60,7 +60,7 @@ Als Nutzer der App verpflichten Sie sich zu:
 ## 5. Geistiges Eigentum
 
 ### 5.1 Rechte des Anbieters
-Alle Rechte an der App "AI Präsente" einschließlich:
+Alle Rechte an der App "Geburtstage & Geschenkideen" einschließlich:
 - Quellcode
 - Design
 - Marken
@@ -201,7 +201,7 @@ Sollte eine Bestimmung dieser Nutzungsbedingungen unwirksam sein oder werden, bl
 
 ## 14. Vollständigkeit
 
-Diese Nutzungsbedingungen stellen die vollständige Vereinbarung zwischen Ihnen und dem Entwickler bezüglich der Nutzung der App "AI Präsente" dar und ersetzen alle vorherigen Vereinbarungen oder Absprachen.
+Diese Nutzungsbedingungen stellen die vollständige Vereinbarung zwischen Ihnen und dem Entwickler bezüglich der Nutzung der App "Geburtstage & Geschenkideen" dar und ersetzen alle vorherigen Vereinbarungen oder Absprachen.
 
 ---
 
@@ -219,6 +219,6 @@ Rennekamp 19
 
 ---
 
-**Vielen Dank für das Vertrauen in AI Präsente!**
+**Vielen Dank für das Vertrauen in Geburtstage & Geschenkideen!**
 
 Letzte Aktualisierung: März 2026

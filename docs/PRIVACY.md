@@ -1,15 +1,15 @@
 # Datenschutzrichtlinie (Privacy Policy)
 
-**App:** AI Präsente
-**Version:** 1.0.0
-**Stand:** 11. März 2026
+**App:** Geburtstage & Geschenkideen
+**Version:** 1.0.1
+**Stand:** 25. März 2026
 **Sprache:** Deutsch
 
 ---
 
 ## 1. Überblick
 
-AI Präsente respektiert Ihre Privatsphäre und schützt Ihre persönlichen Daten. Diese App wurde entwickelt, um Geburtstage und Geschenkideen zu verwalten, ohne unnötige Daten zu sammeln oder zu teilen.
+Geburtstage & Geschenkideen respektiert Ihre Privatsphäre und schützt Ihre persönlichen Daten. Diese App wurde entwickelt, um Geburtstage und Geschenkideen zu verwalten, ohne unnötige Daten zu sammeln oder zu teilen.
 
 ### Kernprinzipien
 - **Datensparsamkeit:** Wir sammeln nur Daten, die für die App-Funktionalität notwendig sind.
@@ -40,7 +40,7 @@ AI Präsente respektiert Ihre Privatsphäre und schützt Ihre persönlichen Date
 **Daten:**
 - Name und Vorname
 - Geburtsdatum (falls vorhanden)
-- Profilbild (falls vorhanden)
+- Profilbild (falls vorhanden) — wird nur lokal auf dem Gerät angezeigt, nie übertragen
 
 **Verarbeitung:**
 - Daten werden nur lokal auf Ihrem Gerät und in Ihrem persönlichen iCloud-Konto gespeichert.
@@ -249,7 +249,7 @@ Wir behalten uns vor, diese Datenschutzrichtlinie anzupassen:
 - Die aktualisierte Version wird hier dokumentiert.
 - Sie werden per E-Mail informiert (falls Sie einen Account bei App Store Connect haben).
 
-**Letzte Aktualisierung:** 11. März 2026
+**Letzte Aktualisierung:** 25. März 2026
 
 ---
 
@@ -270,11 +270,11 @@ Bei Fragen zu dieser Datenschutzrichtlinie oder Ihren Datenrechten kontaktieren 
 Um Ihre Privatsphäre zu schützen, überprüfen Sie folgende Einstellungen:
 
 **Einstellungen → Datenschutz & Sicherheit:**
-- Kontakte: Prüfen, ob AI Präsente Zugriff hat (einmalige Abfrage beim ersten Start).
-- Benachrichtigungen: AI Präsente-Benachrichtigungen anpassen oder deaktivieren.
+- Kontakte: Prüfen, ob Geburtstage & Geschenkideen Zugriff hat (einmalige Abfrage beim ersten Start).
+- Benachrichtigungen: Geburtstage & Geschenkideen-Benachrichtigungen anpassen oder deaktivieren.
 
 **Einstellungen → [Ihr Name] → iCloud:**
-- iCloud Drive: AI Präsente-Daten können deaktiviert werden.
+- iCloud Drive: Geburtstage & Geschenkideen-Daten können deaktiviert werden.
 
 ### 13.2 App-Settings für Datenschutz
 

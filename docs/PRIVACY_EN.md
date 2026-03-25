@@ -1,15 +1,15 @@
 # Privacy Policy
 
-**App:** AI Präsente
-**Version:** 1.0.0
-**Date:** March 11, 2026
+**App:** Geburtstage & Geschenkideen (Birthday Calendar & Gifts)
+**Version:** 1.0.1
+**Date:** March 25, 2026
 **Language:** English
 
 ---
 
 ## 1. Overview
 
-AI Präsente respects your privacy and protects your personal data. This app is designed to manage birthdays and gift ideas without collecting unnecessary data or sharing it with third parties.
+Geburtstage & Geschenkideen respects your privacy and protects your personal data. This app is designed to manage birthdays and gift ideas without collecting unnecessary data or sharing it with third parties.
 
 ### Core Principles
 - **Data Minimization:** We only collect data that is necessary for the app's functionality.
@@ -270,11 +270,11 @@ For questions about this privacy policy or your data rights, contact us:
 To protect your privacy, check the following settings:
 
 **Settings → Privacy & Security:**
-- Contacts: Check if AI Präsente has access (one-time prompt on first launch).
-- Notifications: Adjust or disable AI Präsente notifications.
+- Contacts: Check if Geburtstage & Geschenkideen has access (one-time prompt on first launch).
+- Notifications: Adjust or disable Geburtstage & Geschenkideen notifications.
 
 **Settings → [Your Name] → iCloud:**
-- iCloud Drive: AI Präsente data can be disabled here.
+- iCloud Drive: Geburtstage & Geschenkideen data can be disabled here.
 
 ### 13.2 App Settings for Privacy
 
