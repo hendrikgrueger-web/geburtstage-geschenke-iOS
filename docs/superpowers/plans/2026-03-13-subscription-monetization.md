@@ -1,5 +1,7 @@
 # Subscription & Monetization Implementation Plan
 
+> **Status note (2026-03-24):** Diese Planung beschreibt die spätere Monetarisierungsrichtung. Der aktuelle v1-Runtime-Vertrag ist bewusst freigeschaltet und wird zentral über `SubscriptionAccessPolicy` erzwungen. Neue Codepfade dürfen die hier beschriebene Trial-/Paywall-Logik nicht lokal wieder einführen.
+
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Freemium-Monetarisierung mit 3-Monats-Trial, danach Read-Only. Drei Kauf-Optionen: Monatsabo €2,90, Jahresabo €19,90, Lifetime €29,90.

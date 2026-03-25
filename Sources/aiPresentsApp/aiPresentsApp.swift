@@ -14,53 +14,18 @@ struct aiPresentsApp: App {
     private let containerCreationFailed: Bool
 
     init() {
-        // iCloud-Präferenz lesen (default: true beim ersten Start)
-        let iCloudEnabled = UserDefaults.standard.object(forKey: "iCloudSyncEnabled") as? Bool ?? true
-        let cloudKitDB: ModelConfiguration.CloudKitDatabase = iCloudEnabled ? .automatic : .none
-
-        let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self, SuggestionFeedback.self])
-
+        let creationResult: AppModelContainerFactory.CreationResult
         do {
-            let config = ModelConfiguration(
-                "ai-presents-app",
-                schema: schema,
-                isStoredInMemoryOnly: false,
-                allowsSave: true,
-                cloudKitDatabase: cloudKitDB
-            )
-            modelContainer = try ModelContainer(for: schema, configurations: [config])
-            containerCreationFailed = false
-
-            let manager = ReminderManager(modelContext: modelContainer.mainContext)
-            _reminderManager = State(wrappedValue: manager)
+            creationResult = try AppModelContainerFactory.create()
         } catch {
-            AppLogger.data.error("ModelContainer (CloudKit) fehlgeschlagen, versuche lokal", error: error)
-            // Fallback: lokal ohne CloudKit
-            do {
-                let config = ModelConfiguration("ai-presents-app-local", schema: schema,
-                                               isStoredInMemoryOnly: false, cloudKitDatabase: .none)
-                modelContainer = try ModelContainer(for: schema, configurations: [config])
-                containerCreationFailed = false
-
-                let manager = ReminderManager(modelContext: modelContainer.mainContext)
-                _reminderManager = State(wrappedValue: manager)
-            } catch {
-                AppLogger.data.error("Auch lokaler ModelContainer fehlgeschlagen — In-Memory-Fallback", error: error)
-                // Letzter Fallback: In-Memory (Daten gehen bei App-Neustart verloren, aber kein Crash)
-                do {
-                    let config = ModelConfiguration("ai-presents-app-recovery", schema: schema,
-                                                   isStoredInMemoryOnly: true, cloudKitDatabase: .none)
-                    modelContainer = try ModelContainer(for: schema, configurations: [config])
-                } catch {
-                    AppLogger.data.error("In-Memory ModelContainer fehlgeschlagen — Fatal", error: error)
-                    fatalError("Kein ModelContainer erstellbar: \(error.localizedDescription)")
-                }
-                containerCreationFailed = true
-
-                let manager = ReminderManager(modelContext: modelContainer.mainContext)
-                _reminderManager = State(wrappedValue: manager)
-            }
+            AppLogger.data.error("In-Memory ModelContainer fehlgeschlagen — Fatal", error: error)
+            fatalError("Kein ModelContainer erstellbar: \(error.localizedDescription)")
         }
+
+        modelContainer = creationResult.container
+        containerCreationFailed = creationResult.containerCreationFailed
+        let manager = ReminderManager(modelContext: modelContainer.mainContext)
+        _reminderManager = State(wrappedValue: manager)
 
         #if DEBUG
         // Screenshot-Modus: globaler Flag (versteckt Dev-Only-UI in Screenshots)

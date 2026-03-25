@@ -30,6 +30,46 @@ struct AIChatView: View {
         }
     }
 
+    private var promptContextFingerprint: [String] {
+        let peopleFingerprint = people
+            .sorted { $0.id.uuidString < $1.id.uuidString }
+            .map {
+                [
+                    $0.id.uuidString,
+                    $0.displayName,
+                    $0.relation,
+                    String($0.birthday.timeIntervalSince1970),
+                    String($0.birthYearKnown),
+                    String($0.skipGift),
+                    $0.hobbies.joined(separator: ",")
+                ].joined(separator: "|")
+            }
+
+        let giftIdeasFingerprint = giftIdeas
+            .sorted { $0.id.uuidString < $1.id.uuidString }
+            .map {
+                [
+                    $0.id.uuidString,
+                    $0.personId.uuidString,
+                    $0.title,
+                    $0.status.rawValue
+                ].joined(separator: "|")
+            }
+
+        let giftHistoryFingerprint = giftHistory
+            .sorted { $0.id.uuidString < $1.id.uuidString }
+            .map {
+                [
+                    $0.id.uuidString,
+                    $0.personId.uuidString,
+                    $0.title,
+                    String($0.year)
+                ].joined(separator: "|")
+            }
+
+        return peopleFingerprint + ["--gift-ideas--"] + giftIdeasFingerprint + ["--gift-history--"] + giftHistoryFingerprint
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -66,9 +106,14 @@ struct AIChatView: View {
                 modelContext: modelContext
             )
         }
-        .onChange(of: people.count) { _, _ in viewModel.invalidatePromptCache() }
-        .onChange(of: giftIdeas.count) { _, _ in viewModel.invalidatePromptCache() }
-        .onChange(of: giftHistory.count) { _, _ in viewModel.invalidatePromptCache() }
+        .onChange(of: promptContextFingerprint) { _, _ in
+            viewModel.refreshContext(
+                people: people,
+                giftIdeas: giftIdeas,
+                giftHistory: giftHistory,
+                modelContext: modelContext
+            )
+        }
         .sheet(item: $viewModel.pendingGiftIdeaPerson) { person in
             AddGiftIdeaSheet(
                 person: person,

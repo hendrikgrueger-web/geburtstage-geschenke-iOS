@@ -37,14 +37,32 @@ final class AIChatViewModel {
 
     // MARK: - Setup
 
-    func configure(people: [PersonRef], giftIdeas: [GiftIdea], giftHistory: [GiftHistory], modelContext: ModelContext) {
+    func configure(
+        people: [PersonRef],
+        giftIdeas: [GiftIdea],
+        giftHistory: [GiftHistory],
+        modelContext: ModelContext?
+    ) {
+        refreshContext(
+            people: people,
+            giftIdeas: giftIdeas,
+            giftHistory: giftHistory,
+            modelContext: modelContext
+        )
+    }
+
+    func refreshContext(
+        people: [PersonRef],
+        giftIdeas: [GiftIdea],
+        giftHistory: [GiftHistory],
+        modelContext: ModelContext?
+    ) {
         // FIX: Stabile Sortierung — verhindert dass p1 auf verschiedene Personen zeigt
         self.people = people.sorted { $0.displayName < $1.displayName }
         self.giftIdeas = giftIdeas
         self.giftHistory = giftHistory
         self.modelContext = modelContext
-        promptNeedsRebuild = true
-        cachedSystemPrompt = ""
+        invalidatePromptCache()
     }
 
     /// Invalidiert den gecachten System-Prompt lazy — rebuild erfolgt erst beim nächsten API-Call.
@@ -491,6 +509,7 @@ final class AIChatViewModel {
             let oldStatus = idea.status
             idea.statusLog.append("\(dateString) - \(oldStatus.rawValue) \u{2192} \(newStatus.rawValue)")
             idea.status = newStatus
+            invalidatePromptCache()
             WidgetDataService.refresh(using: modelContext)
             HapticFeedback.success()
 
@@ -589,5 +608,13 @@ final class AIChatViewModel {
         }
 
         return chips
+    }
+
+    func systemPromptForTesting() -> String {
+        getSystemPrompt()
+    }
+
+    var promptNeedsRebuildForTesting: Bool {
+        promptNeedsRebuild
     }
 }

@@ -37,41 +37,7 @@ final class WidgetDataService {
 
         let giftDescriptor = FetchDescriptor<GiftIdea>()
         let allIdeas = (try? context.fetch(giftDescriptor)) ?? []
-        let ideasByPerson = Dictionary(grouping: allIdeas, by: \.personId)
-
-        let today = Calendar.current.startOfDay(for: Date())
-
-        // Alle Personen mit Tagen bis zum nächsten Geburtstag sortieren
-        let entries: [WidgetBirthdayEntry] = people.compactMap { person in
-            guard let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
-                return nil
-            }
-
-            let nextBirthday = BirthdayCalculator.nextBirthday(for: person.birthday, from: today)
-            let nextAge: Int
-            if !person.birthYearKnown {
-                nextAge = 0
-            } else if let nb = nextBirthday {
-                nextAge = BirthdayCalculator.age(for: person.birthday, on: nb) ?? 0
-            } else {
-                nextAge = (BirthdayCalculator.age(for: person.birthday, on: today) ?? 0) + 1
-            }
-
-            let giftStatus = computeGiftStatus(skipGift: person.skipGift, ideas: ideasByPerson[person.id] ?? [])
-
-            return WidgetBirthdayEntry(
-                id: person.id,
-                displayName: person.displayName,
-                daysUntil: daysUntil,
-                nextAge: nextAge,
-                relation: person.relation,
-                giftStatus: giftStatus,
-                skipGift: person.skipGift
-            )
-        }
-        .sorted { $0.daysUntil < $1.daysUntil }
-
-        let topEntries = Array(entries.prefix(10))
+        let topEntries = Self.makeEntries(people: people, ideas: allIdeas)
 
         // In App Group UserDefaults schreiben
         guard let defaults = UserDefaults(suiteName: Self.appGroupID) else {
@@ -106,8 +72,46 @@ final class WidgetDataService {
         }
     }
 
+    static func makeEntries(
+        people: [PersonRef],
+        ideas: [GiftIdea],
+        today: Date = Calendar.current.startOfDay(for: Date()),
+        limit: Int = 10
+    ) -> [WidgetBirthdayEntry] {
+        let ideasByPerson = Dictionary(grouping: ideas, by: \.personId)
+
+        let entries = people.compactMap { person -> WidgetBirthdayEntry? in
+            guard let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
+                return nil
+            }
+
+            let nextBirthday = BirthdayCalculator.nextBirthday(for: person.birthday, from: today)
+            let nextAge: Int
+            if !person.birthYearKnown {
+                nextAge = 0
+            } else if let nextBirthday {
+                nextAge = BirthdayCalculator.age(for: person.birthday, on: nextBirthday) ?? 0
+            } else {
+                nextAge = (BirthdayCalculator.age(for: person.birthday, on: today) ?? 0) + 1
+            }
+
+            return WidgetBirthdayEntry(
+                id: person.id,
+                displayName: person.displayName,
+                daysUntil: daysUntil,
+                nextAge: nextAge,
+                relation: person.relation,
+                giftStatus: computeGiftStatus(skipGift: person.skipGift, ideas: ideasByPerson[person.id] ?? []),
+                skipGift: person.skipGift
+            )
+        }
+        .sorted { $0.daysUntil < $1.daysUntil }
+
+        return Array(entries.prefix(limit))
+    }
+
     /// Berechnet den Gift-Status-String für eine Person (konsistent mit BirthdayRow)
-    private func computeGiftStatus(skipGift: Bool, ideas: [GiftIdea]) -> String {
+    private static func computeGiftStatus(skipGift: Bool, ideas: [GiftIdea]) -> String {
         if skipGift {
             return "skip"
         }
