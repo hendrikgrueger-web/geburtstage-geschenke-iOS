@@ -7,25 +7,25 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Präsente"
+            "value": "Geschenke AI"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Presents"
+            "value": "Gifts AI"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Présents"
+            "value": "Cadeaux AI"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Regalos"
+            "value": "Regalos AI"
           }
         }
       }
