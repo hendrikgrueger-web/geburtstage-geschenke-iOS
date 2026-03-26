@@ -17,7 +17,7 @@ iOS-App für Geburtstags- und Geschenkeverwaltung. Generiert von Open Claw (n8n/
 - **Daten:** SwiftData + iCloud Sync (CloudKit)
 - **KI:** OpenRouter API → Google Gemini 3.1 Flash Lite (Cloud, opt-in, DSGVO-konform, vollständig anonymisiert)
 - **Widget:** WidgetKit Birthday Widget (Medium + Large) mit Deep-Linking
-- **Version:** 1.0.0 (Build 110)
+- **Version:** 1.0.1 (Build 112)
 - **Target:** iPhone + iPad / iOS 26+
 - **iPad:** NavigationSplitView (zwei Spalten: Sidebar + Detail), alle 4 Orientierungen
 

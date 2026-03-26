@@ -39,7 +39,6 @@ targets:
         ITSAppUsesNonExemptEncryption: false
         AIProxySecret: "$(AI_PROXY_SECRET)"
         LSRequiresIPhoneOS: true
-        UIRequiresFullScreen: false
         UILaunchScreen: {}
         UIRequiredDeviceCapabilities:
           - arm64

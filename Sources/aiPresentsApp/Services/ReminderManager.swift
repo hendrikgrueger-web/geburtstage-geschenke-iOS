@@ -25,7 +25,7 @@ final class ReminderManager: ReminderManagerProtocol {
     private let center = UNUserNotificationCenter.current()
 
     nonisolated(unsafe) private static var _shared: ReminderManager?
-    nonisolated(unsafe) private static let lock = NSLock() // nonisolated(unsafe) nötig für deinit-Zugriff
+    nonisolated private static let lock = NSLock()
 
     static var shared: ReminderManager? {
         lock.lock()
