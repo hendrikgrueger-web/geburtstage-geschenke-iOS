@@ -5,7 +5,7 @@ import SwiftUI
 /// Paywall-Sheet mit 3 Preisoptionen (Jährlich, Monatlich, Lifetime), Trial-Banner und Restore-Funktion.
 struct PaywallView: View {
 
-    @Environment(SubscriptionManager.self) private var subscriptionManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager: SubscriptionManager?
     @Environment(\.dismiss) private var dismiss
 
     @Query private var people: [PersonRef]
@@ -20,7 +20,7 @@ struct PaywallView: View {
             SubscriptionManager.ProductID.monthly.rawValue,
             SubscriptionManager.ProductID.lifetime.rawValue,
         ]
-        return subscriptionManager.products.sorted { a, b in
+        return (subscriptionManager?.products ?? []).sorted { a, b in
             let ai = order.firstIndex(of: a.id) ?? Int.max
             let bi = order.firstIndex(of: b.id) ?? Int.max
             return ai < bi
@@ -32,7 +32,7 @@ struct PaywallView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     headerSection
-                    if subscriptionManager.isInTrial {
+                    if subscriptionManager?.isInTrial == true {
                         trialBanner
                     }
                     productsSection
@@ -55,7 +55,7 @@ struct PaywallView: View {
                 }
             }
             .task {
-                await subscriptionManager.loadProducts()
+                await subscriptionManager?.loadProducts()
             }
         }
         .presentationDetents([.large])
@@ -131,7 +131,7 @@ struct PaywallView: View {
                 Text(String(localized: "Testphase aktiv"))
                     .font(.subheadline.bold())
                     .foregroundStyle(AppColor.success)
-                Text(String(localized: "Noch \(subscriptionManager.trialDaysRemaining) Tage kostenloser Zugang"))
+                Text(String(localized: "Noch \(subscriptionManager?.trialDaysRemaining ?? 0) Tage kostenloser Zugang"))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
@@ -150,10 +150,10 @@ struct PaywallView: View {
 
     private var productsSection: some View {
         VStack(spacing: 12) {
-            if subscriptionManager.isLoading {
+            if subscriptionManager?.isLoading == true {
                 ProgressView()
                     .frame(maxWidth: .infinity, minHeight: 160)
-            } else if subscriptionManager.products.isEmpty {
+            } else if subscriptionManager?.products.isEmpty ?? true {
                 Text(String(localized: "Produkte konnten nicht geladen werden."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
@@ -183,7 +183,7 @@ struct PaywallView: View {
 
     private var restoreButton: some View {
         Button {
-            Task { await subscriptionManager.restorePurchases() }
+            Task { await subscriptionManager?.restorePurchases() }
         } label: {
             Text(String(localized: "Käufe wiederherstellen"))
                 .font(.footnote)
@@ -222,7 +222,7 @@ struct PaywallView: View {
         errorMessage = nil
         defer { isPurchasing = false }
         do {
-            let transaction = try await subscriptionManager.purchase(product)
+            let transaction = try await subscriptionManager?.purchase(product)
             if transaction != nil {
                 dismiss()
             }

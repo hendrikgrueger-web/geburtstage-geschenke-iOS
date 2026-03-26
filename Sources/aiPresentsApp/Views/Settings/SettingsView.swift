@@ -15,8 +15,8 @@ struct SettingsView: View {
     @State private var showingAbout = false
     @State private var showingRevokeConsentConfirmation = false
     @State private var showingAIConsentSheet = false
-    @Environment(ReminderManager.self) private var reminderManager
-    @Environment(SubscriptionManager.self) private var subscriptionManager
+    @Environment(ReminderManager.self) private var reminderManager: ReminderManager?
+    @Environment(SubscriptionManager.self) private var subscriptionManager: SubscriptionManager?
     private let consentManager = AIConsentManager.shared
 
     @Query private var reminderRule: [ReminderRule]
@@ -314,8 +314,10 @@ struct SettingsView: View {
             .alert("Alle Daten löschen?", isPresented: $showingResetConfirmation) {
                 Button("Abbrechen", role: .cancel) { }
                 Button("Löschen", role: .destructive) {
-                    Task {
-                        await reminderManager.cancelAllReminders()
+                    if let reminderManager {
+                        Task {
+                            await reminderManager.cancelAllReminders()
+                        }
                     }
                     resetAllData()
                 }
@@ -415,6 +417,7 @@ struct SettingsView: View {
     }
 
     private func handlePermissionChange(_ enabled: Bool) async {
+        guard let reminderManager else { return }
         if enabled {
             let granted = await reminderManager.requestPermission()
             hasNotificationPermission = granted
@@ -432,6 +435,7 @@ struct SettingsView: View {
     }
 
     private func refreshReminders() async {
+        guard let reminderManager else { return }
         isRefreshingReminders = true
         HapticFeedback.light()
 

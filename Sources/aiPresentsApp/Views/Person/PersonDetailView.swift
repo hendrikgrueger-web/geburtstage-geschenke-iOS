@@ -4,7 +4,7 @@ import SwiftData
 struct PersonDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Environment(SubscriptionManager.self) private var subscriptionManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager: SubscriptionManager?
 
     let person: PersonRef
 

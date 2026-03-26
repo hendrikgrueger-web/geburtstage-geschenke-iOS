@@ -7,7 +7,7 @@ struct ReminderSettingsView: View {
 
     @Query private var rules: [ReminderRule]
 
-    @Environment(ReminderManager.self) private var reminderManager
+    @Environment(ReminderManager.self) private var reminderManager: ReminderManager?
 
     @State private var leadDays: Set<Int>
     @State private var quietHoursStart: Int
@@ -195,11 +195,12 @@ struct ReminderSettingsView: View {
             modelContext.insert(newRule)
         }
 
-        // Reschedule reminders with new settings
-        Task {
-            await reminderManager.cancelBirthdayReminders()
-            if enabled {
-                await reminderManager.scheduleAllReminders()
+        if let reminderManager {
+            Task {
+                await reminderManager.cancelBirthdayReminders()
+                if enabled {
+                    await reminderManager.scheduleAllReminders()
+                }
             }
         }
     }

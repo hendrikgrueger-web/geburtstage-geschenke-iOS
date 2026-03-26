@@ -7,7 +7,7 @@ struct ContactsImportView: View {
     @Query private var existingPeople: [PersonRef]
     @State private var isImporting = false
     @State private var importError: String?
-    @Environment(SubscriptionManager.self) private var subscriptionManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager: SubscriptionManager?
 
     var body: some View {
         NavigationStack {

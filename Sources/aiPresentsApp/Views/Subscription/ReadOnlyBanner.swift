@@ -6,11 +6,11 @@ import SwiftUI
 /// - Zeigt "Noch X Tage kostenlos", wenn Trial läuft
 /// - Verborgen, wenn `hasFullAccess` true ist
 struct ReadOnlyBanner: View {
-    @Environment(SubscriptionManager.self) private var subscriptionManager
+    @Environment(SubscriptionManager.self) private var subscriptionManager: SubscriptionManager?
     @State private var showingPaywall = false
 
     var body: some View {
-        if !subscriptionManager.hasFullAccess {
+        if !(subscriptionManager?.hasFullAccess ?? true) {
             Button {
                 showingPaywall = true
             } label: {
@@ -34,14 +34,16 @@ struct ReadOnlyBanner: View {
             }
             .padding(.horizontal)
             .sheet(isPresented: $showingPaywall) {
-                PaywallView()
-                    .environment(subscriptionManager)
+                if let subscriptionManager {
+                    PaywallView()
+                        .environment(subscriptionManager)
+                }
             }
-        } else if subscriptionManager.isInTrial {
+        } else if subscriptionManager?.isInTrial == true {
             HStack(spacing: 8) {
                 Image(systemName: "clock.fill")
                     .foregroundStyle(AppColor.accent)
-                Text("Noch \(subscriptionManager.trialDaysRemaining) Tage kostenlos")
+                Text("Noch \(subscriptionManager?.trialDaysRemaining ?? 0) Tage kostenlos")
                     .font(.caption)
             }
             .foregroundStyle(.secondary)
