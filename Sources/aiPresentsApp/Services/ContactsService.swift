@@ -13,7 +13,7 @@ protocol ContactsServiceProtocol {
 // MARK: - ContactsService
 
 @MainActor
-final class ContactsService: ObservableObject, ContactsServiceProtocol {
+final class ContactsService: ContactsServiceProtocol {
     static let shared = ContactsService()
 
     private init() {}

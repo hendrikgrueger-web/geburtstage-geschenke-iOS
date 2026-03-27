@@ -293,24 +293,24 @@
         }
       }
     },
-    "AI Präsente": {
+    "Geschenke AI": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Presents"
+            "value": "Gifts AI"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Cadeaux"
+            "value": "Cadeaux AI"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Regalos"
+            "value": "Regalos AI"
           }
         }
       }

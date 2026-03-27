@@ -37,7 +37,7 @@ struct LegalView: View {
                     // App-Info
                     LegalSection(
                         title: "App-Informationen",
-                        content: "Name: AI Präsente\nPlattform: iOS\nVersion: siehe Einstellungen → App-Info\nStand: März 2026"
+                        content: "Name: Geschenke AI\nPlattform: iOS\nVersion: siehe Einstellungen → App-Info\nStand: März 2026"
                     )
 
                     Spacer(minLength: 32)

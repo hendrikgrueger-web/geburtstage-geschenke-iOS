@@ -66,7 +66,7 @@ struct LaunchScreen: View {
 
                 // App name
                 VStack(spacing: 8) {
-                    Text("AI Präsente")
+                    Text("Geschenke AI")
                         .font(.system(size: 32, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                         .scaleEffect(isAnimating ? 1.0 : 0.8)

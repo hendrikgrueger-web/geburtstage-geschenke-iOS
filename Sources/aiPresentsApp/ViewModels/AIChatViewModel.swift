@@ -243,7 +243,7 @@ final class AIChatViewModel {
         switch lang {
         case "de":
             return """
-            Du bist der freundliche Geschenke-Assistent der App "AI Präsente".
+            Du bist der freundliche Geschenke-Assistent der App "Geschenke AI".
 
             REGELN:
             - Antworte auf Deutsch, herzlich und natürlich wie ein guter Freund der bei Geschenken hilft.
@@ -266,7 +266,7 @@ final class AIChatViewModel {
 
         case "fr":
             return """
-            Tu es l'assistant cadeaux sympathique de l'app « AI Présents ».
+            Tu es l'assistant cadeaux sympathique de l'app « Cadeaux AI ».
 
             RÈGLES :
             - Réponds en français, chaleureusement et naturellement, comme un bon ami qui aide à trouver des cadeaux.
@@ -290,7 +290,7 @@ final class AIChatViewModel {
 
         case "es":
             return """
-            Eres el simpático asistente de regalos de la app "AI Présents".
+            Eres el simpático asistente de regalos de la app "Regalos AI".
 
             REGLAS:
             - Responde en español, con calidez y naturalidad, como un buen amigo que ayuda con los regalos.
@@ -314,7 +314,7 @@ final class AIChatViewModel {
 
         default:
             return """
-            You are the friendly gift assistant of the app "AI Présents".
+            You are the friendly gift assistant of the app "Gifts AI".
 
             RULES:
             - Respond warmly and naturally, like a helpful friend who's great at gift-giving.

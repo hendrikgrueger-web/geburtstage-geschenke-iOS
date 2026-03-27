@@ -1,3 +1,4 @@
+#if DEBUG
 import Foundation
 import SwiftData
 
@@ -1442,3 +1443,4 @@ enum SampleDataService {
     }
 }
 // swiftlint:enable function_body_length type_body_length file_length
+#endif
