@@ -123,7 +123,7 @@ struct PersonDetailView: View {
         }
         .sheet(isPresented: $showingAISuggestions) {
             AIGiftSuggestionsSheet(person: person)
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.large])
         }
         .sheet(isPresented: $showingBirthdayMessage) {
             AIBirthdayMessageSheet(person: person)

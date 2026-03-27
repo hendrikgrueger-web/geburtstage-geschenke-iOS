@@ -123,6 +123,7 @@ struct AIChatView: View {
         }
         .sheet(item: $viewModel.pendingSuggestionsPerson) { person in
             AIGiftSuggestionsSheet(person: person)
+                .presentationDetents([.large])
         }
         .sheet(isPresented: $showingConsentSheet) {
             AIConsentSheet(isPresented: $showingConsentSheet) {

@@ -117,7 +117,7 @@ struct TimelineView: View {
         }
         .sheet(item: $showingAISuggestionsFor) { person in
             AIGiftSuggestionsSheet(person: person)
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.large])
         }
         .sheet(isPresented: $showingSettings) {
             NavigationStack {
