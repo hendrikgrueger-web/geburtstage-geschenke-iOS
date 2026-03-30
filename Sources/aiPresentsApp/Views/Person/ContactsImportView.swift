@@ -51,7 +51,8 @@ struct ContactsImportView: View {
                             .clipShape(.rect(cornerRadius: 14))
                         }
 
-                        // Sekundär: Demo
+                        // Sekundär: Demo (nur Debug)
+                        #if DEBUG
                         Button {
                             loadSampleData()
                         } label: {
@@ -66,6 +67,7 @@ struct ContactsImportView: View {
                             .foregroundStyle(.primary)
                             .clipShape(.rect(cornerRadius: 14))
                         }
+                        #endif
                     }
 
                     if let error = importError {
@@ -168,6 +170,7 @@ struct ContactsImportView: View {
         }
     }
 
+    #if DEBUG
     private func loadSampleData() {
         isImporting = true
         importError = nil
@@ -180,4 +183,5 @@ struct ContactsImportView: View {
             dismiss()
         }
     }
+    #endif
 }
