@@ -6,7 +6,8 @@ import WidgetKit
 struct WidgetBirthdayEntry: Codable, Sendable {
     let id: UUID
     let displayName: String
-    let daysUntil: Int
+    /// Echtes Datum des nächsten Geburtstags — daysUntil wird dynamisch im Widget berechnet
+    let nextBirthdayDate: Date
     let nextAge: Int
     let relation: String
     let giftStatus: String // "skip" | "purchased" | "planned" | "ideas:N" | "none"
@@ -19,6 +20,7 @@ final class WidgetDataService {
     static let shared = WidgetDataService()
     static let appGroupID = "group.com.hendrikgrueger.birthdays-presents-ai"
     private static let userDefaultsKey = "widgetBirthdayEntries"
+    private static let widgetKind = "BirthdayWidget"
 
     private init() {}
 
@@ -29,6 +31,9 @@ final class WidgetDataService {
 
     /// Schreibt einen JSON-Snapshot der nächsten Geburtstage in die App Group UserDefaults
     func updateWidgetData(from context: ModelContext) {
+        // Cache leeren damit Geburtstags-Berechnungen immer frisch sind (kein veralteter 5-Minuten-Cache)
+        BirthdayCalculator.clearCache()
+
         let descriptor = FetchDescriptor<PersonRef>()
         guard let people = try? context.fetch(descriptor) else {
             AppLogger.data.error("WidgetDataService: Konnte Personen nicht laden")
@@ -53,8 +58,8 @@ final class WidgetDataService {
             AppLogger.data.error("WidgetDataService: JSON-Encoding fehlgeschlagen: \(error)")
         }
 
-        // Widget-Timeline neu laden
-        WidgetCenter.shared.reloadAllTimelines()
+        // Widget-Timeline neu laden (nur das BirthdayWidget, nicht alle)
+        WidgetCenter.shared.reloadTimelines(ofKind: Self.widgetKind)
     }
 
     /// Liest Widget-Daten aus App Group UserDefaults (für Widget-Zugriff)
@@ -81,31 +86,28 @@ final class WidgetDataService {
         let ideasByPerson = Dictionary(grouping: ideas, by: \.personId)
 
         let entries = people.compactMap { person -> WidgetBirthdayEntry? in
-            guard let daysUntil = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else {
+            guard let nextBirthdayDate = BirthdayCalculator.nextBirthday(for: person.birthday, from: today) else {
                 return nil
             }
 
-            let nextBirthday = BirthdayCalculator.nextBirthday(for: person.birthday, from: today)
             let nextAge: Int
             if !person.birthYearKnown {
                 nextAge = 0
-            } else if let nextBirthday {
-                nextAge = BirthdayCalculator.age(for: person.birthday, on: nextBirthday) ?? 0
             } else {
-                nextAge = (BirthdayCalculator.age(for: person.birthday, on: today) ?? 0) + 1
+                nextAge = BirthdayCalculator.age(for: person.birthday, on: nextBirthdayDate) ?? 0
             }
 
             return WidgetBirthdayEntry(
                 id: person.id,
                 displayName: person.displayName,
-                daysUntil: daysUntil,
+                nextBirthdayDate: nextBirthdayDate,
                 nextAge: nextAge,
                 relation: person.relation,
                 giftStatus: computeGiftStatus(skipGift: person.skipGift, ideas: ideasByPerson[person.id] ?? []),
                 skipGift: person.skipGift
             )
         }
-        .sorted { $0.daysUntil < $1.daysUntil }
+        .sorted { $0.nextBirthdayDate < $1.nextBirthdayDate }
 
         return Array(entries.prefix(limit))
     }

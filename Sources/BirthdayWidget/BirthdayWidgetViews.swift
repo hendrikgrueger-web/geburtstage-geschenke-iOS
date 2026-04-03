@@ -34,6 +34,13 @@ struct BirthdayWidgetMediumView: View {
         Array(entry.birthdays.prefix(2))
     }
 
+    /// Berechnet Tage bis zum Geburtstag relativ zur Timeline-Position (entry.date).
+    private func daysUntil(for birthday: WidgetBirthdayEntry) -> Int {
+        let calendar = Calendar.current
+        let start = calendar.startOfDay(for: entry.date)
+        return max(0, calendar.dateComponents([.day], from: start, to: birthday.nextBirthdayDate).day ?? 0)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // Header
@@ -70,15 +77,16 @@ struct BirthdayWidgetMediumView: View {
             } else {
                 Spacer(minLength: 8)
                 ForEach(Array(displayEntries.enumerated()), id: \.element.id) { index, birthday in
+                    let days = daysUntil(for: birthday)
                     if let deepLinkURL = URL(string: "aipresents://person/\(birthday.id)") {
                         Link(destination: deepLinkURL) {
-                            BirthdayWidgetRow(entry: birthday)
+                            BirthdayWidgetRow(entry: birthday, entryDate: entry.date)
                         }
-                        .accessibilityLabel(birthday.daysUntil == 0
+                        .accessibilityLabel(days == 0
                             ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
-                            : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
+                            : String(localized: "\(birthday.displayName), Geburtstag in \(days) Tagen"))
                     } else {
-                        BirthdayWidgetRow(entry: birthday)
+                        BirthdayWidgetRow(entry: birthday, entryDate: entry.date)
                     }
                     if index < displayEntries.count - 1 {
                         Spacer(minLength: 10)
@@ -108,6 +116,13 @@ struct BirthdayWidgetLargeView: View {
     /// Large-Format zeigt 5 Einträge — genug für Übersicht, ohne Gedränge.
     private var displayEntries: [WidgetBirthdayEntry] {
         Array(entry.birthdays.prefix(5))
+    }
+
+    /// Berechnet Tage bis zum Geburtstag relativ zur Timeline-Position (entry.date).
+    private func daysUntil(for birthday: WidgetBirthdayEntry) -> Int {
+        let calendar = Calendar.current
+        let start = calendar.startOfDay(for: entry.date)
+        return max(0, calendar.dateComponents([.day], from: start, to: birthday.nextBirthdayDate).day ?? 0)
     }
 
     var body: some View {
@@ -146,15 +161,16 @@ struct BirthdayWidgetLargeView: View {
             } else {
                 Spacer(minLength: 10)
                 ForEach(Array(displayEntries.enumerated()), id: \.element.id) { index, birthday in
+                    let days = daysUntil(for: birthday)
                     if let deepLinkURL = URL(string: "aipresents://person/\(birthday.id)") {
                         Link(destination: deepLinkURL) {
-                            BirthdayWidgetRow(entry: birthday)
+                            BirthdayWidgetRow(entry: birthday, entryDate: entry.date)
                         }
-                        .accessibilityLabel(birthday.daysUntil == 0
+                        .accessibilityLabel(days == 0
                             ? String(localized: "\(birthday.displayName), hat heute Geburtstag")
-                            : String(localized: "\(birthday.displayName), Geburtstag in \(birthday.daysUntil) Tagen"))
+                            : String(localized: "\(birthday.displayName), Geburtstag in \(days) Tagen"))
                     } else {
-                        BirthdayWidgetRow(entry: birthday)
+                        BirthdayWidgetRow(entry: birthday, entryDate: entry.date)
                     }
                     if index < displayEntries.count - 1 {
                         Spacer(minLength: 0)
@@ -184,6 +200,15 @@ struct BirthdayWidgetLargeView: View {
 /// **Deep-Linking:** Jede Row ist ein tappable Link → `aipresents://person/{personUUID}`
 struct BirthdayWidgetRow: View {
     let entry: WidgetBirthdayEntry
+    let entryDate: Date
+
+    /// Tage bis zum Geburtstag, relativ zur Timeline-Position (entryDate).
+    /// Immer korrekt — auch ohne App-Öffnung über Wochen.
+    private var daysUntil: Int {
+        let calendar = Calendar.current
+        let start = calendar.startOfDay(for: entryDate)
+        return max(0, calendar.dateComponents([.day], from: start, to: entry.nextBirthdayDate).day ?? 0)
+    }
 
     var body: some View {
         HStack(spacing: 12) {
@@ -264,7 +289,7 @@ struct BirthdayWidgetRow: View {
     /// Andere Tage: große Zahl in Akzentfarbe + kleine "T."-Einheit darunter.
     private var countdownBadge: some View {
         Group {
-            if entry.daysUntil == 0 {
+            if daysUntil == 0 {
                 // Heute: Pill-Badge
                 Text(String(localized: "Heute"))
                     .font(.caption2)
@@ -276,7 +301,7 @@ struct BirthdayWidgetRow: View {
             } else {
                 // Zukünftige Geburtstage: prominente Zahl + kleine Einheit
                 VStack(spacing: 0) {
-                    Text("\(entry.daysUntil)")
+                    Text("\(daysUntil)")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                         .foregroundStyle(countdownColor)
                         .lineLimit(1)
@@ -288,9 +313,9 @@ struct BirthdayWidgetRow: View {
             }
         }
         .accessibilityLabel(
-            entry.daysUntil == 0
+            daysUntil == 0
                 ? String(localized: "Heute")
-                : String(localized: "In \(entry.daysUntil) Tagen")
+                : String(localized: "In \(daysUntil) Tagen")
         )
     }
 
@@ -300,11 +325,11 @@ struct BirthdayWidgetRow: View {
     /// - ≤7 Tage: Orange (diese Woche)
     /// - >7 Tage: Blau (aufkommend — nicht dringend)
     private var countdownColor: Color {
-        if entry.daysUntil == 0 {
+        if daysUntil == 0 {
             return WidgetColors.birthdayToday   // Heute: Rose
-        } else if entry.daysUntil <= 2 {
+        } else if daysUntil <= 2 {
             return WidgetColors.birthdaySoon    // Bald: Orange
-        } else if entry.daysUntil <= 7 {
+        } else if daysUntil <= 7 {
             return WidgetColors.accent          // Diese Woche: Orange
         } else {
             return WidgetColors.birthdayUpcoming  // Aufkommend: Blau

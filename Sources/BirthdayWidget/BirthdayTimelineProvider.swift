@@ -22,47 +22,52 @@ struct BirthdayTimelineProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<BirthdayTimelineEntry>) -> Void) {
         let entries = WidgetDataReader.readEntries()
         let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
 
-        // Erstelle Einträge für die nächsten 7 Tage (Countdown aktualisiert sich täglich)
+        // 30-Tage-Fenster: Widget bleibt korrekt auch ohne App-Öffnung über Wochen.
+        // daysUntil wird pro Timeline-Position dynamisch aus nextBirthdayDate berechnet —
+        // kein veralteter Integer-Snapshot mehr.
         var timelineEntries: [BirthdayTimelineEntry] = []
 
-        for dayOffset in 0..<7 {
-            guard let entryDate = calendar.date(byAdding: .day, value: dayOffset, to: calendar.startOfDay(for: Date())) else {
+        for dayOffset in 0..<30 {
+            guard let entryDate = calendar.date(byAdding: .day, value: dayOffset, to: today) else {
                 continue
             }
 
-            // Passe daysUntil für zukünftige Tage an und filtere vergangene Geburtstage
             let adjustedBirthdays = entries.compactMap { birthday -> WidgetBirthdayEntry? in
-                let adjusted = birthday.daysUntil - dayOffset
-                guard adjusted >= 0 else { return nil }
-                return WidgetBirthdayEntry(
-                    id: birthday.id,
-                    displayName: birthday.displayName,
-                    daysUntil: adjusted,
-                    nextAge: birthday.nextAge,
-                    relation: birthday.relation,
-                    giftStatus: birthday.giftStatus,
-                    skipGift: birthday.skipGift
-                )
+                let days = calendar.dateComponents([.day], from: entryDate, to: birthday.nextBirthdayDate).day ?? -1
+                guard days >= 0 else { return nil }
+                return birthday
             }
-            .sorted { $0.daysUntil < $1.daysUntil }
+            .sorted { lhs, rhs in
+                let lhsDays = calendar.dateComponents([.day], from: entryDate, to: lhs.nextBirthdayDate).day ?? 0
+                let rhsDays = calendar.dateComponents([.day], from: entryDate, to: rhs.nextBirthdayDate).day ?? 0
+                return lhsDays < rhsDays
+            }
 
             timelineEntries.append(BirthdayTimelineEntry(date: entryDate, birthdays: adjustedBirthdays))
         }
 
-        // Nächste Mitternacht als Refresh-Zeitpunkt
-        let nextMidnight = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: Date()) ?? Date())
-        let timeline = Timeline(entries: timelineEntries, policy: .after(nextMidnight))
+        // Refresh nach 30 Tagen — bis dahin liefert die Timeline immer korrekte Werte
+        let refreshDate = calendar.date(byAdding: .day, value: 30, to: today) ?? today
+        let timeline = Timeline(entries: timelineEntries, policy: .after(refreshDate))
         completion(timeline)
     }
 
-    // Sample-Daten für Preview und Placeholder
-    static let sampleData: [WidgetBirthdayEntry] = [
-        WidgetBirthdayEntry(id: UUID(), displayName: "Anna Müller", daysUntil: 3, nextAge: 30, relation: "Freund/in", giftStatus: "purchased", skipGift: false),
-        WidgetBirthdayEntry(id: UUID(), displayName: "Max Schmidt", daysUntil: 12, nextAge: 45, relation: "Kollege/in", giftStatus: "ideas:2", skipGift: false),
-        WidgetBirthdayEntry(id: UUID(), displayName: "Lisa Weber", daysUntil: 28, nextAge: 25, relation: "Schwester", giftStatus: "none", skipGift: false),
-        WidgetBirthdayEntry(id: UUID(), displayName: "Tom Fischer", daysUntil: 35, nextAge: 52, relation: "Vater", giftStatus: "planned", skipGift: false),
-        WidgetBirthdayEntry(id: UUID(), displayName: "Sarah Koch", daysUntil: 42, nextAge: 33, relation: "Freund/in", giftStatus: "none", skipGift: false),
-        WidgetBirthdayEntry(id: UUID(), displayName: "Jan Bauer", daysUntil: 51, nextAge: 28, relation: "Bruder", giftStatus: "ideas:1", skipGift: false),
-    ]
+    // Sample-Daten für Preview und Placeholder — relative Dates für immer korrekte Vorschauen
+    static let sampleData: [WidgetBirthdayEntry] = {
+        let calendar = Calendar.current
+        let now = Date()
+        func date(inDays days: Int) -> Date {
+            calendar.date(byAdding: .day, value: days, to: calendar.startOfDay(for: now)) ?? now
+        }
+        return [
+            WidgetBirthdayEntry(id: UUID(), displayName: "Anna Müller", nextBirthdayDate: date(inDays: 3), nextAge: 30, relation: "Freund/in", giftStatus: "purchased", skipGift: false),
+            WidgetBirthdayEntry(id: UUID(), displayName: "Max Schmidt", nextBirthdayDate: date(inDays: 12), nextAge: 45, relation: "Kollege/in", giftStatus: "ideas:2", skipGift: false),
+            WidgetBirthdayEntry(id: UUID(), displayName: "Lisa Weber", nextBirthdayDate: date(inDays: 28), nextAge: 25, relation: "Schwester", giftStatus: "none", skipGift: false),
+            WidgetBirthdayEntry(id: UUID(), displayName: "Tom Fischer", nextBirthdayDate: date(inDays: 35), nextAge: 52, relation: "Vater", giftStatus: "planned", skipGift: false),
+            WidgetBirthdayEntry(id: UUID(), displayName: "Sarah Koch", nextBirthdayDate: date(inDays: 42), nextAge: 33, relation: "Freund/in", giftStatus: "none", skipGift: false),
+            WidgetBirthdayEntry(id: UUID(), displayName: "Jan Bauer", nextBirthdayDate: date(inDays: 51), nextAge: 28, relation: "Bruder", giftStatus: "ideas:1", skipGift: false),
+        ]
+    }()
 }

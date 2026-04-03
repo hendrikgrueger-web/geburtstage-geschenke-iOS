@@ -4,7 +4,8 @@ import Foundation
 struct WidgetBirthdayEntry: Codable, Sendable {
     let id: UUID
     let displayName: String
-    let daysUntil: Int
+    /// Echtes Datum des nächsten Geburtstags — daysUntil wird dynamisch im Widget berechnet
+    let nextBirthdayDate: Date
     let nextAge: Int
     let relation: String
     let giftStatus: String
