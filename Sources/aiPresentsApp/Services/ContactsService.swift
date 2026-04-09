@@ -65,9 +65,11 @@ final class ContactsService: ContactsServiceProtocol {
             guard let birthday = contact.birthday else { return }
             guard birthday.month != nil && birthday.day != nil else { return }
 
-            let calendar = Calendar.current
+            var calendar = Calendar.current
+            calendar.timeZone = TimeZone.current
             let yearKnown = birthday.year != nil
             var components = birthday
+            components.timeZone = TimeZone.current
             if !yearKnown {
                 components.year = 2000
             }

@@ -40,6 +40,15 @@ struct ContentView: View {
         }) { person in
             NavigationStack {
                 PersonDetailView(person: person)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button {
+                                compactPresentedPerson = nil
+                            } label: {
+                                Image(systemName: "xmark")
+                            }
+                        }
+                    }
             }
         }
         .onChange(of: deepLinkPersonID) { _, newID in
