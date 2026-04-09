@@ -5,7 +5,8 @@ import SwiftData
 enum GiftTransitionService {
 
     static func autoTransitionPurchasedGifts(in context: ModelContext) {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let today = calendar.startOfDay(for: Date())
         let currentYear = calendar.component(.year, from: today)
 

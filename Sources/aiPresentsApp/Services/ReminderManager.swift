@@ -108,7 +108,8 @@ final class ReminderManager: ReminderManagerProtocol {
 
     private func scheduleReminder(for person: PersonRef, nextBirthday: Date, leadDay: Int,
                                   quietHoursStart: Int, quietHoursEnd: Int) async {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let notificationDate = calendar.date(byAdding: .day, value: -leadDay, to: nextBirthday) ?? nextBirthday
         let today = calendar.startOfDay(for: Date())
         if notificationDate < today { return }

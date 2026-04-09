@@ -120,10 +120,8 @@ struct TimelineView: View {
                 .presentationDetents([.large])
         }
         .sheet(isPresented: $showingSettings) {
-            NavigationStack {
-                SettingsView()
-            }
-            .presentationDetents([.large])
+            SettingsView()
+                .presentationDetents([.large])
         }
         .sheet(isPresented: $showingAIChat) {
             AIChatView(onPersonSelected: { person in

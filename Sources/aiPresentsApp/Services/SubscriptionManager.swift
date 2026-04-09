@@ -41,7 +41,10 @@ final class SubscriptionManager {
 
     var trialDaysRemaining: Int {
         guard isInTrial else { return 0 }
-        return max(0, Calendar.current.dateComponents([.day], from: Date(), to: trialEndDate).day ?? 0)
+        let calendar = Calendar.current
+        let todayStart = calendar.startOfDay(for: Date())
+        let endStart = calendar.startOfDay(for: trialEndDate)
+        return max(0, calendar.dateComponents([.day], from: todayStart, to: endStart).day ?? 0)
     }
 
     // MARK: - Access

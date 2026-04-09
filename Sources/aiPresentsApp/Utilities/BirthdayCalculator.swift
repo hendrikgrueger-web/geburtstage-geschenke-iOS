@@ -74,7 +74,8 @@ struct BirthdayCalculator {
 
     /// Calculates the next occurrence of a birthday from a reference date (uncached)
     private static func calculateNextBirthday(for birthday: Date, from referenceDate: Date) -> Date? {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let today = calendar.startOfDay(for: referenceDate)
         let currentYear = calendar.component(.year, from: today)
 
@@ -146,7 +147,8 @@ struct BirthdayCalculator {
             return nil
         }
 
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let today = calendar.startOfDay(for: referenceDate)
         let daysUntil = calendar.dateComponents([.day], from: today, to: nextBirthday).day ?? 0
 
@@ -155,7 +157,8 @@ struct BirthdayCalculator {
 
     /// Generates a unique cache key based on birthday and reference date
     private static func generateCacheKey(birthday: Date, from referenceDate: Date) -> String {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let today = calendar.startOfDay(for: referenceDate)
         let birthdayKey = calendar.startOfDay(for: birthday).timeIntervalSince1970
 
@@ -219,7 +222,8 @@ struct BirthdayCalculator {
 
     /// Calculates age for a given birthday on a specific date (uncached)
     private static func calculateAge(for birthday: Date, on date: Date) -> Int? {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let today = calendar.startOfDay(for: date)
         let components = calendar.dateComponents([.year, .month, .day], from: birthday)
         let currentComponents = calendar.dateComponents([.year, .month, .day], from: today)

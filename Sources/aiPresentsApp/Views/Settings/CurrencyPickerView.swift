@@ -5,8 +5,7 @@ struct CurrencyPickerView: View {
     private var currencyManager: CurrencyManager { CurrencyManager.shared }
 
     var body: some View {
-        NavigationStack {
-            List {
+        List {
                 Section {
                     Toggle("Automatisch (Geräteregion)", isOn: Binding(
                         get: { currencyManager.isAutomatic },
@@ -45,13 +44,7 @@ struct CurrencyPickerView: View {
                     }
                 }
             }
-            .navigationTitle("Währung")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Fertig") { dismiss() }
-                }
-            }
-        }
+        .navigationTitle("Währung")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

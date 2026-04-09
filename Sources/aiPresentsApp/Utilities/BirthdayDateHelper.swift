@@ -248,6 +248,7 @@ struct BirthdayDateHelper {
     private static var calendar: Calendar {
         var cal = Calendar(identifier: .gregorian)
         cal.locale = .current
+        cal.timeZone = .current
         return cal
     }
 

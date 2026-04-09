@@ -95,7 +95,7 @@ struct AIGiftSuggestionsSheet: View {
                 }
             }
         }
-        .fullScreenCover(item: $selectedSuggestion) { suggestion in
+        .sheet(item: $selectedSuggestion) { suggestion in
             AddGiftIdeaSheet(
                 person: person,
                 prefillTitle: suggestion.title,

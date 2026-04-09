@@ -21,7 +21,8 @@ struct BirthdayTimelineProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<BirthdayTimelineEntry>) -> Void) {
         let entries = WidgetDataReader.readEntries()
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = .current
         let today = calendar.startOfDay(for: Date())
 
         // 30-Tage-Fenster: Widget bleibt korrekt auch ohne App-Öffnung über Wochen.
