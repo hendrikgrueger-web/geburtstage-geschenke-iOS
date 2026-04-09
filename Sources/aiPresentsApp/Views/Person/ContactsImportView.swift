@@ -7,6 +7,8 @@ struct ContactsImportView: View {
     @Query private var existingPeople: [PersonRef]
     @State private var isImporting = false
     @State private var importError: String?
+    @State private var removedContacts: [PersonRef] = []
+    @State private var showDeleteConfirmation = false
     @Environment(SubscriptionManager.self) private var subscriptionManager: SubscriptionManager?
 
     var body: some View {
@@ -107,6 +109,27 @@ struct ContactsImportView: View {
         }
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
+        .alert(
+            "Kontakte entfernen?",
+            isPresented: $showDeleteConfirmation
+        ) {
+            Button("Entfernen", role: .destructive) {
+                for person in removedContacts {
+                    modelContext.delete(person)
+                }
+                WidgetDataService.shared.updateWidgetData(from: modelContext)
+                removedContacts = []
+                dismiss()
+            }
+            Button("Behalten", role: .cancel) {
+                removedContacts = []
+                dismiss()
+            }
+        } message: {
+            let names = removedContacts.prefix(3).map(\.displayName).joined(separator: ", ")
+            let suffix = removedContacts.count > 3 ? " und \(removedContacts.count - 3) weitere" : ""
+            Text("\(removedContacts.count) Kontakt(e) nicht mehr in deinen Apple Kontakten gefunden:\n\(names)\(suffix)\n\nGeschenkideen werden mitgelöscht.")
+        }
     }
 
     private func importFromContacts() {
@@ -154,12 +177,21 @@ struct ContactsImportView: View {
                     }
 
                     for person in newPeople { modelContext.insert(person) }
+
+                    // Kontakte erkennen die nicht mehr in Apple Contacts existieren
+                    let importedIDs = Set(people.map { $0.contactIdentifier })
+                    let toDelete = existingPeople.filter { !importedIDs.contains($0.contactIdentifier) }
+
                     WidgetDataService.shared.updateWidgetData(from: modelContext)
+                    UserDefaults.standard.set(Date(), forKey: "lastContactsSync")
                     isImporting = false
-                }
-                try? await Task.sleep(nanoseconds: 600_000_000)
-                await MainActor.run {
-                    dismiss()
+
+                    if !toDelete.isEmpty {
+                        removedContacts = toDelete
+                        showDeleteConfirmation = true
+                    } else {
+                        dismiss()
+                    }
                 }
             } catch {
                 await MainActor.run {

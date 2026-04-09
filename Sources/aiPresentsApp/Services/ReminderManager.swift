@@ -188,4 +188,46 @@ final class ReminderManager: ReminderManagerProtocol {
         center.removeAllPendingNotificationRequests()
         AppLogger.reminder.debug("All reminders cancelled")
     }
+
+    // MARK: - Kontakt-Sync-Erinnerung
+
+    private static let contactSyncReminderID = "contacts_sync_reminder"
+
+    /// Plant eine Erinnerung wenn der letzte Kontakt-Sync > 7 Tage her ist.
+    func scheduleContactSyncReminderIfNeeded() async {
+        let lastSync = UserDefaults.standard.object(forKey: "lastContactsSync") as? Date ?? .distantPast
+        let daysSince = Calendar.current.dateComponents([.day], from: lastSync, to: Date()).day ?? 8
+
+        // Bestehende Erinnerung entfernen
+        center.removePendingNotificationRequests(withIdentifiers: [Self.contactSyncReminderID])
+
+        guard daysSince >= 7 else {
+            AppLogger.reminder.debug("Kontakt-Sync ist aktuell (\(daysSince) Tage)")
+            return
+        }
+
+        let content = UNMutableNotificationContent()
+        content.title = "Kontakte aktualisieren"
+        content.body = "Deine Kontakte wurden seit \(daysSince) Tagen nicht aktualisiert. Öffne die App um sie zu synchronisieren."
+        content.sound = .default
+
+        // Morgens um 10:00 am nächsten Tag erinnern
+        var dateComponents = DateComponents()
+        dateComponents.hour = 10
+        dateComponents.minute = 0
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+
+        let request = UNNotificationRequest(
+            identifier: Self.contactSyncReminderID,
+            content: content,
+            trigger: trigger
+        )
+
+        do {
+            try await center.add(request)
+            AppLogger.reminder.debug("Kontakt-Sync-Erinnerung geplant (letzter Sync: \(daysSince) Tage)")
+        } catch {
+            AppLogger.reminder.error("Kontakt-Sync-Erinnerung fehlgeschlagen: \(error)")
+        }
+    }
 }

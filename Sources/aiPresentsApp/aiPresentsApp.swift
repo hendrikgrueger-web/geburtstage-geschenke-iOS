@@ -102,6 +102,7 @@ struct aiPresentsApp: App {
                             GiftTransitionService.autoTransitionPurchasedGifts(in: modelContainer.mainContext)
                             Task {
                                 await reminderManager.scheduleAllReminders()
+                                await reminderManager.scheduleContactSyncReminderIfNeeded()
                             }
                             // Widget-Daten initial aktualisieren
                             WidgetDataService.shared.updateWidgetData(from: modelContainer.mainContext)
