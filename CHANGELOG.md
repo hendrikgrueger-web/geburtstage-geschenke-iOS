@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- **Geburtstage einen Tag zu früh**: CNContact.birthday DateComponents hatten keine Timezone → UTC-Mitternacht wurde in lokaler TZ als Vortag interpretiert. Fix: `TimeZone.current` explizit auf DateComponents setzen (ContactsService.swift)
+- **Kein Zurück-Button nach Suche/DeepLink**: fullScreenCover für PersonDetailView hatte eigenen NavigationStack ohne History → Schließen-Button (X) in Toolbar ergänzt (ContentView.swift)
 - **Zodiac Symbols Bug**: Corrected zodiac sign symbols in BirthdayDateHelper
   - All zodiac signs were incorrectly displaying as '♈' (Aries)
   - Fixed: ♉ Stier, ♊ Zwilling, ♋ Krebs, ♌ Löwe
@@ -37,6 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **GiftIdea**: `CaseIterable` auf `GiftStatus` Enum ergänzt
 
 ### Added
+- **Gelöschte Kontakte erkennen**: Kontakt-Sync vergleicht jetzt importierte IDs mit lokalen Einträgen. Nicht mehr vorhandene Apple-Kontakte werden per Bestätigungs-Dialog zum Löschen angeboten (Geschenkideen werden per Kaskade mitgelöscht)
+- **7-Tage-Sync-Erinnerung**: Lokale Notification erinnert täglich um 10:00 an Kontakt-Update wenn letzter Sync > 7 Tage her. Wird beim App-Start geprüft, nach Sync automatisch zurückgesetzt
 - **Phase 4: TestFlight Documentation**
   - **Privacy Policy (Deutsch & Englisch)**: Complete data protection documentation
     - Data collection overview (contacts, user data, notifications, iCloud sync)
