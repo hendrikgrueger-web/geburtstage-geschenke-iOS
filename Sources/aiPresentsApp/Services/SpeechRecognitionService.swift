@@ -36,6 +36,12 @@ final class SpeechRecognitionService {
             throw SpeechError.notAuthorized
         }
 
+        // Mikrofon-Berechtigung anfragen (separate Berechtigung!)
+        let micAllowed = await AVAudioApplication.requestRecordPermission()
+        guard micAllowed else {
+            throw SpeechError.notAuthorized
+        }
+
         let locale = Locale.current
         guard let recognizer = SFSpeechRecognizer(locale: locale), recognizer.isAvailable else {
             throw SpeechError.notAvailable
@@ -55,6 +61,10 @@ final class SpeechRecognitionService {
         let engine = AVAudioEngine()
         let inputNode = engine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
+
+        guard recordingFormat.channelCount > 0, recordingFormat.sampleRate > 0 else {
+            throw SpeechError.notAvailable
+        }
 
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
             request.append(buffer)

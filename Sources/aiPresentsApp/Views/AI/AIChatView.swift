@@ -296,12 +296,12 @@ struct AIChatView: View {
         } else {
             Task {
                 do {
-                    isRecording = true
                     try await speechService.startTranscribing { transcript in
                         Task { @MainActor in
                             inputText = transcript
                         }
                     }
+                    isRecording = true
                 } catch {
                     isRecording = false
                     AppLogger.ui.error("Spracheingabe fehlgeschlagen", error: error)
