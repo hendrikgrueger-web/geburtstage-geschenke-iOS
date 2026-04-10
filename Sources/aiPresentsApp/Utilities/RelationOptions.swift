@@ -16,9 +16,12 @@ import Foundation
 enum RelationOptions {
     // UserDefaults key für benutzerdefinierte Beziehungstypen
     private static let customKey = "customRelationTypes"
-    // iCloud Key-Value-Store (gleicher Key für konsistente Sync-Semantik)
-    // nonisolated(unsafe): NSUbiquitousKeyValueStore ist ein thread-sicherer Singleton — kein Data Race
-    nonisolated(unsafe) private static let iCloudStore = NSUbiquitousKeyValueStore.default
+    // iCloud Key-Value-Store — nil wenn im Test-Target oder kein iCloud-Konto
+    private static var iCloudStore: NSUbiquitousKeyValueStore? {
+        // Im Test-Target (TEST_HOST) crasht NSUbiquitousKeyValueStore ohne Entitlement
+        guard !ProcessInfo.processInfo.environment.keys.contains("XCTestConfigurationFilePath") else { return nil }
+        return NSUbiquitousKeyValueStore.default
+    }
 
     // MARK: - Predefined
     /// Standard-Beziehungstypen (8 vordefinierte + 1 universeller Fallback).
@@ -45,58 +48,55 @@ enum RelationOptions {
     /// auch offline-Änderungen zuverlässig synchronisiert werden.
     static var custom: [String] {
         get {
-            let iCloudValues = iCloudStore.array(forKey: customKey) as? [String] ?? []
             let localValues = UserDefaults.standard.stringArray(forKey: customKey) ?? []
 
+            guard let store = iCloudStore else { return localValues }
+            let iCloudValues = store.array(forKey: customKey) as? [String] ?? []
+
             if !iCloudValues.isEmpty {
-                // iCloud hat Daten — als Quelle nutzen, lokal aktuell halten
                 if iCloudValues != localValues {
                     UserDefaults.standard.set(iCloudValues, forKey: customKey)
                 }
                 return iCloudValues
             } else if !localValues.isEmpty {
-                // Lokale Daten vorhanden, iCloud noch leer → Migration in iCloud
-                iCloudStore.set(localValues, forKey: customKey)
-                iCloudStore.synchronize()
+                store.set(localValues, forKey: customKey)
+                store.synchronize()
                 return localValues
             }
             return []
         }
         set {
             UserDefaults.standard.set(newValue, forKey: customKey)
-            iCloudStore.set(newValue, forKey: customKey)
-            iCloudStore.synchronize()
+            iCloudStore?.set(newValue, forKey: customKey)
+            iCloudStore?.synchronize()
         }
     }
 
     // MARK: - iCloud Sync
 
     /// Lazy Observer-Token — wird beim ersten Aufruf von `startICloudSync()` initialisiert.
-    /// Horcht auf externe iCloud-Änderungen und aktualisiert UserDefaults entsprechend.
-    // nonisolated(unsafe): Lazy-Init über static let ist thread-sicher durch Swift-Garantien
-    nonisolated(unsafe) private static let iCloudObserver: NSObjectProtocol? = {
-        NotificationCenter.default.addObserver(
-            forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
-            object: NSUbiquitousKeyValueStore.default,
-            queue: .main
-        ) { notification in
-            guard
-                let changedKeys = notification.userInfo?[NSUbiquitousKeyValueStoreChangedKeysKey] as? [String],
-                changedKeys.contains("customRelationTypes")
-            else { return }
-
-            let iCloudValues = NSUbiquitousKeyValueStore.default.array(forKey: "customRelationTypes") as? [String] ?? []
-            // Duplikat-sicheres Merge: iCloud-Werte sind authorativ, aber wir deduplizieren
-            let merged = Array(NSOrderedSet(array: iCloudValues).compactMap { $0 as? String })
-            UserDefaults.standard.set(merged, forKey: "customRelationTypes")
-        }
-    }()
+    nonisolated(unsafe) private static var iCloudObserver: NSObjectProtocol?
 
     /// Startet den iCloud-Sync für benutzerdefinierte Beziehungstypen.
     /// Muss einmalig beim App-Start aufgerufen werden (z.B. in `aiPresentsApp.init()`).
     static func startICloudSync() {
-        _ = iCloudObserver  // Lazy-Observer initialisieren
-        iCloudStore.synchronize()
+        guard let store = iCloudStore, iCloudObserver == nil else { return }
+
+        iCloudObserver = NotificationCenter.default.addObserver(
+            forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+            object: store,
+            queue: .main
+        ) { notification in
+            guard
+                let changedKeys = notification.userInfo?[NSUbiquitousKeyValueStoreChangedKeysKey] as? [String],
+                changedKeys.contains(customKey)
+            else { return }
+
+            let iCloudValues = store.array(forKey: customKey) as? [String] ?? []
+            let merged = Array(NSOrderedSet(array: iCloudValues).compactMap { $0 as? String })
+            UserDefaults.standard.set(merged, forKey: customKey)
+        }
+        store.synchronize()
     }
 
     // MARK: - Combined
