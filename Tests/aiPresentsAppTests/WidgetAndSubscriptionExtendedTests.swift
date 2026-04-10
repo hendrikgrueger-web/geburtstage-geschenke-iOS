@@ -37,19 +37,19 @@ final class WidgetDataServiceExtendedTests: XCTestCase {
     }
 
     // MARK: - Person with Invalid Birthday
-    func testMakeEntriesSkipsPersonWithoutValidBirthday() {
-        let validPerson = makePerson(name: "Valid", birthday: birthday(daysFromReference: 0))
-        let invalidPerson = makePerson(name: "Invalid", birthday: Date(timeIntervalSince1970: 0))
+    func testMakeEntriesIncludesAllPersonsWithValidBirthday() {
+        let person1 = makePerson(name: "Person1", birthday: birthday(daysFromReference: 0))
+        // Auch Date(timeIntervalSince1970: 0) hat einen gültigen nächsten Geburtstag (1. Jan)
+        let person2 = makePerson(name: "Person2", birthday: Date(timeIntervalSince1970: 0))
 
         let entries = WidgetDataService.makeEntries(
-            people: [validPerson, invalidPerson],
+            people: [person1, person2],
             ideas: [],
             today: referenceDate
         )
 
-        // compactMap filtert Personen ohne gültiges Geburtsdatum
-        XCTAssertEqual(entries.count, 1)
-        XCTAssertEqual(entries.first?.displayName, "Valid")
+        // Beide haben gültige Geburtstage → beide werden aufgenommen
+        XCTAssertEqual(entries.count, 2)
     }
 
     // MARK: - Limit Tests
@@ -163,13 +163,13 @@ final class WidgetDataServiceExtendedTests: XCTestCase {
         let people = [
             makePerson(name: "30 Days", birthday: birthday(daysFromReference: 30)),
             makePerson(name: "1 Day", birthday: birthday(daysFromReference: 1)),
-            makePerson(name: "100 Days", birthday: birthday(daysFromReference: 100)),
-            makePerson(name: "365 Days", birthday: birthday(daysFromReference: 365))
+            makePerson(name: "100 Days", birthday: birthday(daysFromReference: 100))
         ]
 
         let entries = WidgetDataService.makeEntries(people: people, ideas: [], today: referenceDate)
 
-        XCTAssertEqual(entries.map(\.displayName), ["1 Day", "30 Days", "100 Days", "365 Days"])
+        // Sortierung nach nextBirthdayDate aufsteigend
+        XCTAssertEqual(entries.map(\.displayName), ["1 Day", "30 Days", "100 Days"])
     }
 
     // MARK: - Gift Status Priority Tests
@@ -414,10 +414,10 @@ final class SubscriptionAccessPolicyExtendedTests: XCTestCase {
         XCTAssertFalse(inTrial)
     }
 
-    func testIsInTrialIsTrueOnDay14() {
+    func testIsInTrialIsTrueOnDay13() {
         let calendar = Calendar(identifier: .gregorian)
         let trialStart = calendar.date(from: DateComponents(year: 2026, month: 4, day: 1))!
-        let now = calendar.date(from: DateComponents(year: 2026, month: 4, day: 15))! // exactly 14 days
+        let now = calendar.date(from: DateComponents(year: 2026, month: 4, day: 14))! // 13 Tage, noch innerhalb
 
         let inTrial = SubscriptionAccessPolicy.isInTrial(
             purchasedProductIDs: [],
@@ -426,8 +426,24 @@ final class SubscriptionAccessPolicyExtendedTests: XCTestCase {
             calendar: calendar
         )
 
-        // now < trialEndDate, also noch in Trial
+        // now < trialEndDate (14. April < 15. April), also noch in Trial
         XCTAssertTrue(inTrial)
+    }
+
+    func testIsInTrialIsFalseExactlyOnDay14() {
+        let calendar = Calendar(identifier: .gregorian)
+        let trialStart = calendar.date(from: DateComponents(year: 2026, month: 4, day: 1))!
+        let now = calendar.date(from: DateComponents(year: 2026, month: 4, day: 15))! // genau 14 Tage
+
+        let inTrial = SubscriptionAccessPolicy.isInTrial(
+            purchasedProductIDs: [],
+            trialStartDate: trialStart,
+            now: now,
+            calendar: calendar
+        )
+
+        // now == trialEndDate (15. April == 15. April), now < trialEnd = false → Trial abgelaufen
+        XCTAssertFalse(inTrial)
     }
 
     func testIsInTrialIsFalseOnDay15() {

@@ -305,7 +305,8 @@ import XCTest
     }
 
     func testFormatAge_MilestoneAge_30() {
-        let birthday = makeDate(year: currentYear - 30, month: 6, day: 15)
+        // Geburtstag muss VOR heute liegen damit Alter korrekt ist
+        let birthday = makeDate(year: currentYear - 30, month: 1, day: 1)
         let formatted = BirthdayDateHelper.formatAge(birthday: birthday)
         XCTAssertTrue(formatted.contains("30"))
         XCTAssertTrue(formatted.contains("Geburtstag"))
@@ -319,7 +320,8 @@ import XCTest
     }
 
     func testFormatAge_Age100() {
-        let birthday = makeDate(year: currentYear - 100, month: 12, day: 31)
+        // Geburtstag muss VOR heute liegen
+        let birthday = makeDate(year: currentYear - 100, month: 1, day: 1)
         let formatted = BirthdayDateHelper.formatAge(birthday: birthday)
         XCTAssertTrue(formatted.contains("100"))
         XCTAssertTrue(formatted.contains("Geburtstag"))
@@ -402,14 +404,18 @@ import XCTest
         }
     }
 
-    func testRelativeDateDescription_366Days() {
+    func testRelativeDateDescription_OverOneYear() {
+        // relativeDateDescription nutzt BirthdayCalculator.daysUntilBirthday
+        // Ein Geburtstag kann maximal ~365 Tage entfernt sein
+        // Daher testen wir den "Nächstes Jahr"-Fall nicht direkt — er tritt nur bei nil auf
+        // Stattdessen testen wir den grössten realistischen Wert
         let calendar = Calendar.current
-        let today = Date()
-        var components = calendar.dateComponents([.year, .month, .day], from: today)
-        components.day! += 366
-        if let futureDate = calendar.date(from: components) {
-            let description = BirthdayDateHelper.relativeDateDescription(from: futureDate, asOf: today)
-            XCTAssertTrue(description.contains("Nächstes Jahr"))
+        let today = calendar.startOfDay(for: Date())
+        // Geburtstag gestern → nächstes Auftreten in ~364 Tagen
+        if let yesterday = calendar.date(byAdding: .day, value: -1, to: today) {
+            let description = BirthdayDateHelper.relativeDateDescription(from: yesterday, asOf: today)
+            XCTAssertTrue(description.contains("Monat") || description.contains("📅"),
+                          "Weit entfernter Geburtstag sollte Monate anzeigen: \(description)")
         }
     }
 
@@ -575,7 +581,8 @@ import XCTest
     // MARK: - Date Extensions
 
     func testDateExtension_Age() {
-        let birthday = makeDate(year: currentYear - 25, month: 5, day: 10)
+        // Geburtstag muss VOR heute liegen (Januar) damit Alter korrekt 25 ist
+        let birthday = makeDate(year: currentYear - 25, month: 1, day: 1)
         let age = birthday.age
         XCTAssertEqual(age, 25)
     }
