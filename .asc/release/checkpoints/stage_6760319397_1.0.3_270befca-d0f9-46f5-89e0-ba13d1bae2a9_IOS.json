@@ -1,0 +1,24 @@
+{
+  "appId": "6760319397",
+  "version": "1.0.3",
+  "buildId": "270befca-d0f9-46f5-89e0-ba13d1bae2a9",
+  "copyMetadataFrom": "1.0.2",
+  "selectedCopyFields": [
+    "description",
+    "keywords",
+    "marketingUrl",
+    "promotionalText",
+    "supportUrl",
+    "whatsNew"
+  ],
+  "platform": "IOS",
+  "versionId": "6ba13f22-a3ef-4a5f-b415-634dbc7e8d05",
+  "mode": "stage",
+  "completed": {
+    "apply_metadata": true,
+    "attach_build": true,
+    "ensure_version": true,
+    "validate_readiness": true
+  },
+  "updatedAt": "2026-04-03T20:35:15Z"
+}

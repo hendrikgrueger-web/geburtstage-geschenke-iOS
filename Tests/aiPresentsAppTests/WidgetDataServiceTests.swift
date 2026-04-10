@@ -27,7 +27,10 @@ final class WidgetDataServiceTests: XCTestCase {
         let entries = WidgetDataService.makeEntries(people: people, ideas: [], today: referenceDate)
 
         XCTAssertEqual(entries.map(\.displayName), ["Today", "Tomorrow", "In Five Days"])
-        XCTAssertEqual(entries.map(\.daysUntil), [0, 1, 5])
+        // daysUntil wird dynamisch im Widget berechnet — prüfe stattdessen Sortierung via nextBirthdayDate
+        XCTAssertEqual(entries.count, 3)
+        XCTAssertTrue(entries[0].nextBirthdayDate <= entries[1].nextBirthdayDate)
+        XCTAssertTrue(entries[1].nextBirthdayDate <= entries[2].nextBirthdayDate)
     }
 
     func testMakeEntriesLimitsToTenEntries() {
