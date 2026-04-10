@@ -44,13 +44,15 @@ enum GenderInference {
 
         // Weiblich
         if ["mutter", "schwester", "tochter", "oma", "großmutter", "tante", "nichte", "schwägerin",
-            "mother", "sister", "daughter", "grandmother", "aunt", "niece"].contains(lower) {
+            "ehefrau", "cousine",
+            "mother", "sister", "daughter", "grandmother", "aunt", "niece", "wife"].contains(lower) {
             return .female
         }
 
         // Männlich
         if ["vater", "bruder", "sohn", "opa", "großvater", "onkel", "neffe", "schwager",
-            "father", "brother", "son", "grandfather", "uncle", "nephew"].contains(lower) {
+            "ehemann", "cousin",
+            "father", "brother", "son", "grandfather", "uncle", "nephew", "husband"].contains(lower) {
             return .male
         }
 

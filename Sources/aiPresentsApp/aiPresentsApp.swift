@@ -27,6 +27,9 @@ struct aiPresentsApp: App {
         let manager = ReminderManager(modelContext: modelContainer.mainContext)
         _reminderManager = State(wrappedValue: manager)
 
+        // iCloud-Sync für benutzerdefinierte Beziehungstypen starten
+        RelationOptions.startICloudSync()
+
         #if DEBUG
         // Screenshot-Modus: globaler Flag (versteckt Dev-Only-UI in Screenshots)
         let screenshotArgs = ["--reset-sample-data", "--show-person", "--show-chat", "--show-settings", "--show-add-gift", "--show-onboarding"]

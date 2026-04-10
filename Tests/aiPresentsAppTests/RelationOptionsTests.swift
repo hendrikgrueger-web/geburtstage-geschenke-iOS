@@ -7,13 +7,15 @@ final class RelationOptionsTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        // Sicherstellen, dass custom-Typen leer starten
+        // Sicherstellen, dass custom-Typen leer starten (lokal + iCloud)
         UserDefaults.standard.removeObject(forKey: "customRelationTypes")
+        NSUbiquitousKeyValueStore.default.removeObject(forKey: "customRelationTypes")
     }
 
     override func tearDown() {
-        // Custom-Typen aufräumen nach jedem Test
+        // Custom-Typen aufräumen nach jedem Test (lokal + iCloud)
         UserDefaults.standard.removeObject(forKey: "customRelationTypes")
+        NSUbiquitousKeyValueStore.default.removeObject(forKey: "customRelationTypes")
         super.tearDown()
     }
 
@@ -236,5 +238,75 @@ final class RelationOptionsTests: XCTestCase {
         let customs = RelationOptions.custom
         XCTAssertFalse(customs.contains("Tante"),
                        "Removed custom type should not appear after re-read")
+    }
+
+    // MARK: - iCloud Sync
+
+    func testAddCustom_writesToICloudStore() {
+        RelationOptions.addCustom("Oma")
+
+        let iCloudValues = (NSUbiquitousKeyValueStore.default.array(forKey: "customRelationTypes") as? [String]) ?? []
+        XCTAssertTrue(iCloudValues.contains("Oma"),
+                      "Custom type should be written to NSUbiquitousKeyValueStore")
+    }
+
+    func testRemoveCustom_removesFromICloudStore() {
+        RelationOptions.addCustom("Oma")
+        RelationOptions.removeCustom("Oma")
+
+        let iCloudValues = (NSUbiquitousKeyValueStore.default.array(forKey: "customRelationTypes") as? [String]) ?? []
+        XCTAssertFalse(iCloudValues.contains("Oma"),
+                       "Removed custom type should not appear in iCloud store")
+    }
+
+    func testCustom_iCloudTakesPriorityOverLocal() {
+        // Nur lokal setzen (simuliert alte UserDefaults-Daten ohne iCloud)
+        UserDefaults.standard.set(["LocalOnly"], forKey: "customRelationTypes")
+        // iCloud hat anderen Wert (simuliert Sync von anderem Gerät)
+        NSUbiquitousKeyValueStore.default.set(["FromICloud"], forKey: "customRelationTypes")
+
+        let customs = RelationOptions.custom
+        XCTAssertTrue(customs.contains("FromICloud"),
+                      "iCloud value should take priority over local UserDefaults")
+        XCTAssertFalse(customs.contains("LocalOnly"),
+                       "Local-only value should not appear when iCloud has data")
+    }
+
+    func testCustom_localMigratedToICloudWhenICloudEmpty() {
+        // Nur lokal setzen, iCloud leer lassen (Migration-Szenario)
+        UserDefaults.standard.set(["LocalTante"], forKey: "customRelationTypes")
+        // iCloud explizit leer lassen (bereits durch setUp gesetzt)
+
+        let customs = RelationOptions.custom
+        XCTAssertTrue(customs.contains("LocalTante"),
+                      "Local types should be returned when iCloud is empty")
+
+        // Nach dem Lesen sollte iCloud befüllt worden sein (Migration)
+        let iCloudValues = (NSUbiquitousKeyValueStore.default.array(forKey: "customRelationTypes") as? [String]) ?? []
+        XCTAssertTrue(iCloudValues.contains("LocalTante"),
+                      "Local types should be migrated to iCloud on first read")
+    }
+
+    func testCustom_deduplication_noDuplicatesAfterMerge() {
+        // Beide Stores mit überlappenden Werten füllen
+        NSUbiquitousKeyValueStore.default.set(["Oma", "Oma", "Tante"], forKey: "customRelationTypes")
+        UserDefaults.standard.set(["Oma", "Onkel"], forKey: "customRelationTypes")
+
+        // iCloud hat Priorität — Oma ist doppelt drin, Tante ist neu
+        let customs = RelationOptions.custom
+        let omaCount = customs.filter { $0 == "Oma" }.count
+        XCTAssertGreaterThan(customs.count, 0, "Should have custom types")
+        // Nach dem Observer-Merge (manuell simuliert via iCloudObserver-Logik) sollte kein Duplikat entstehen
+        // Hier testen wir, dass der iCloud-Store selbst keine Duplikate produziert wenn er authorativ ist
+        XCTAssertEqual(omaCount, 1,
+                       "Duplicates in iCloud store should be deduplicated by the merge logic")
+    }
+
+    func testStartICloudSync_doesNotCrash() {
+        // startICloudSync() mehrfach aufzurufen sollte problemlos sein
+        XCTAssertNoThrow(RelationOptions.startICloudSync(),
+                         "startICloudSync() should not throw")
+        XCTAssertNoThrow(RelationOptions.startICloudSync(),
+                         "Calling startICloudSync() twice should not crash")
     }
 }

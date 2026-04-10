@@ -8,9 +8,8 @@ final class GiftModelValidationTests: XCTestCase {
     var person: PersonRef!
 
     override func setUp() async throws {
-        throw XCTSkip("SwiftData ModelContainer conflicts with TEST_HOST app container")
-        let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self])
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let schema = Schema([PersonRef.self, GiftIdea.self, GiftHistory.self, ReminderRule.self, SuggestionFeedback.self])
+        let config = ModelConfiguration("test", isStoredInMemoryOnly: true, cloudKitDatabase: .none)
         let container = try ModelContainer(for: schema, configurations: [config])
         modelContext = container.mainContext
 

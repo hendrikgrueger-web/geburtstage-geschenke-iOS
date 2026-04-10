@@ -27,9 +27,18 @@ struct AIBirthdayMessageSheet: View {
                 }
 
                 if isLoading {
-                    loadingState
+                    AILoadingView(style: .animated(
+                        title: String(localized: "KI schreibt..."),
+                        subtitle: String(localized: "Einen Moment bitte...")
+                    ))
                 } else if let error = errorMessage {
-                    errorState(error)
+                    AIErrorView(
+                        error: error,
+                        needsConsent: needsConsent,
+                        consentDescription: String(localized: "Für KI-Nachrichten wird eine Einwilligung zur anonymisierten Datenverarbeitung benötigt."),
+                        onConsent: { showingConsentSheet = true },
+                        onRetry: { generateMessage() }
+                    )
                 } else if let message = birthdayMessage {
                     messageContentView(message: message)
                 } else {
@@ -134,93 +143,8 @@ struct AIBirthdayMessageSheet: View {
         return "\(age)."
     }
 
-    private var loadingState: some View {
-        Section {
-            VStack(spacing: 16) {
-                ZStack {
-                    Circle()
-                        .stroke(AppColor.primary.opacity(0.2), lineWidth: 4)
-                        .frame(width: 80, height: 80)
-
-                    Circle()
-                        .trim(from: 0, to: 0.7)
-                        .stroke(
-                            AppColor.primary,
-                            style: StrokeStyle(lineWidth: 4, lineCap: .round)
-                        )
-                        .frame(width: 80, height: 80)
-                        .rotationEffect(.degrees(isLoading ? 360 : 0))
-                        .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: isLoading)
-                }
-
-                VStack(spacing: 4) {
-                    Text("KI schreibt...")
-                        .font(.headline)
-                        .foregroundStyle(AppColor.textPrimary)
-
-                    Text("Einen Moment bitte...")
-                        .font(.caption)
-                        .foregroundStyle(AppColor.textSecondary)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding()
-        }
-    }
-
     private var needsConsent: Bool {
         !consentManager.consentGiven || !consentManager.aiEnabled
-    }
-
-    private func errorState(_ error: String) -> some View {
-        Section {
-            VStack(spacing: 16) {
-                if needsConsent {
-                    Image(systemName: "shield.lefthalf.filled")
-                        .font(.system(size: 50))
-                        .foregroundStyle(AppColor.primary)
-
-                    Text("Einwilligung erforderlich")
-                        .font(.headline)
-                        .foregroundStyle(AppColor.textPrimary)
-
-                    Text("Für KI-Nachrichten wird eine Einwilligung zur anonymisierten Datenverarbeitung benötigt.")
-                        .font(.subheadline)
-                        .foregroundStyle(AppColor.textSecondary)
-                        .multilineTextAlignment(.center)
-
-                    Button {
-                        showingConsentSheet = true
-                    } label: {
-                        HStack {
-                            Image(systemName: "checkmark.shield")
-                            Text("Einwilligung erteilen")
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                } else {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .font(.system(size: 50))
-                        .foregroundStyle(AppColor.accent)
-
-                    Text("Fehler")
-                        .font(.headline)
-                        .foregroundStyle(AppColor.textPrimary)
-
-                    Text(error)
-                        .font(.subheadline)
-                        .foregroundStyle(AppColor.textSecondary)
-                        .multilineTextAlignment(.center)
-
-                    Button("Erneut versuchen") {
-                        generateMessage()
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding()
-        }
     }
 
     private func messageContentView(message: BirthdayMessage) -> some View {

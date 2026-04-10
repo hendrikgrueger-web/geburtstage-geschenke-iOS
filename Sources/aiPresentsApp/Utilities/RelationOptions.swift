@@ -7,7 +7,8 @@ import Foundation
 ///
 /// **Persistierung:**
 /// - Vordefinierte Typen: hardcodiert (8 Standard-Kategorien + "Sonstige"-Fallback)
-/// - Benutzerdefinierte Typen: in UserDefaults unter Schlüssel `"customRelationTypes"` gespeichert
+/// - Benutzerdefinierte Typen: in UserDefaults (lokal) + NSUbiquitousKeyValueStore (iCloud-Sync)
+/// - Bei Konflikt: iCloud hat Vorrang; lokale Werte werden ggf. in iCloud migriert
 /// - Alle Typen (in Anzeige-Reihenfolge): `predefined.filter { != "Sonstige" } + custom + ["Sonstige"]`
 ///
 /// **Lokalisierung:** `localizedDisplayName(for:)` returniert i18n-Werte für vordefinierte Typen,
@@ -15,6 +16,9 @@ import Foundation
 enum RelationOptions {
     // UserDefaults key für benutzerdefinierte Beziehungstypen
     private static let customKey = "customRelationTypes"
+    // iCloud Key-Value-Store (gleicher Key für konsistente Sync-Semantik)
+    // nonisolated(unsafe): NSUbiquitousKeyValueStore ist ein thread-sicherer Singleton — kein Data Race
+    nonisolated(unsafe) private static let iCloudStore = NSUbiquitousKeyValueStore.default
 
     // MARK: - Predefined
     /// Standard-Beziehungstypen (8 vordefinierte + 1 universeller Fallback).
@@ -32,11 +36,67 @@ enum RelationOptions {
     ]
 
     // MARK: - Custom (User-defined)
-    /// Vom Nutzer selbst angelegte Beziehungstypen, persistiert in UserDefaults.
-    /// Lese-/Schreibzugriff via Property-Getter/-Setter.
+    /// Vom Nutzer selbst angelegte Beziehungstypen.
+    ///
+    /// **Lesen:** iCloud hat Vorrang. Wenn iCloud leer ist aber UserDefaults Werte hat,
+    /// werden diese automatisch in iCloud migriert (einmalige Migration bei erstem Sync).
+    ///
+    /// **Schreiben:** Wird in beide Stores geschrieben (UserDefaults + iCloud), damit
+    /// auch offline-Änderungen zuverlässig synchronisiert werden.
     static var custom: [String] {
-        get { UserDefaults.standard.stringArray(forKey: customKey) ?? [] }
-        set { UserDefaults.standard.set(newValue, forKey: customKey) }
+        get {
+            let iCloudValues = iCloudStore.array(forKey: customKey) as? [String] ?? []
+            let localValues = UserDefaults.standard.stringArray(forKey: customKey) ?? []
+
+            if !iCloudValues.isEmpty {
+                // iCloud hat Daten — als Quelle nutzen, lokal aktuell halten
+                if iCloudValues != localValues {
+                    UserDefaults.standard.set(iCloudValues, forKey: customKey)
+                }
+                return iCloudValues
+            } else if !localValues.isEmpty {
+                // Lokale Daten vorhanden, iCloud noch leer → Migration in iCloud
+                iCloudStore.set(localValues, forKey: customKey)
+                iCloudStore.synchronize()
+                return localValues
+            }
+            return []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: customKey)
+            iCloudStore.set(newValue, forKey: customKey)
+            iCloudStore.synchronize()
+        }
+    }
+
+    // MARK: - iCloud Sync
+
+    /// Lazy Observer-Token — wird beim ersten Aufruf von `startICloudSync()` initialisiert.
+    /// Horcht auf externe iCloud-Änderungen und aktualisiert UserDefaults entsprechend.
+    // nonisolated(unsafe): Lazy-Init über static let ist thread-sicher durch Swift-Garantien
+    nonisolated(unsafe) private static let iCloudObserver: NSObjectProtocol? = {
+        NotificationCenter.default.addObserver(
+            forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+            object: NSUbiquitousKeyValueStore.default,
+            queue: .main
+        ) { notification in
+            guard
+                let changedKeys = notification.userInfo?[NSUbiquitousKeyValueStoreChangedKeysKey] as? [String],
+                changedKeys.contains("customRelationTypes")
+            else { return }
+
+            let iCloudValues = NSUbiquitousKeyValueStore.default.array(forKey: "customRelationTypes") as? [String] ?? []
+            // Duplikat-sicheres Merge: iCloud-Werte sind authorativ, aber wir deduplizieren
+            let merged = Array(NSOrderedSet(array: iCloudValues).compactMap { $0 as? String })
+            UserDefaults.standard.set(merged, forKey: "customRelationTypes")
+        }
+    }()
+
+    /// Startet den iCloud-Sync für benutzerdefinierte Beziehungstypen.
+    /// Muss einmalig beim App-Start aufgerufen werden (z.B. in `aiPresentsApp.init()`).
+    static func startICloudSync() {
+        _ = iCloudObserver  // Lazy-Observer initialisieren
+        iCloudStore.synchronize()
     }
 
     // MARK: - Combined

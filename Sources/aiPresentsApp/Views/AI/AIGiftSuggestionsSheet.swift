@@ -71,9 +71,15 @@ struct AIGiftSuggestionsSheet: View {
                 }
 
                 if isLoading && suggestions.isEmpty {
-                    loadingState
+                    AILoadingView(style: .simple(message: String(localized: "KI denkt nach…")))
                 } else if let error = errorMessage, suggestions.isEmpty {
-                    errorState(error)
+                    AIErrorView(
+                        error: error,
+                        needsConsent: needsConsent,
+                        consentDescription: String(localized: "Für KI-Vorschläge wird eine Einwilligung zur anonymisierten Datenverarbeitung benötigt."),
+                        onConsent: { showingConsentSheet = true },
+                        onRetry: { loadSuggestions() }
+                    )
                 } else if !suggestions.isEmpty {
                     suggestionsList
                 } else {
@@ -213,74 +219,8 @@ struct AIGiftSuggestionsSheet: View {
         }
     }
 
-    private var loadingState: some View {
-        Section {
-            VStack(spacing: 12) {
-                ProgressView()
-                    .controlSize(.large)
-
-                Text("KI denkt nach…")
-                    .font(.subheadline)
-                    .foregroundStyle(AppColor.textSecondary)
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.vertical, 24)
-        }
-    }
-
     private var needsConsent: Bool {
         !consentManager.consentGiven || !consentManager.aiEnabled
-    }
-
-    private func errorState(_ error: String) -> some View {
-        Section {
-            VStack(spacing: 16) {
-                if needsConsent {
-                    Image(systemName: "shield.lefthalf.filled")
-                        .font(.system(size: 50))
-                        .foregroundStyle(AppColor.primary)
-
-                    Text("Einwilligung erforderlich")
-                        .font(.headline)
-                        .foregroundStyle(AppColor.textPrimary)
-
-                    Text("Für KI-Vorschläge wird eine Einwilligung zur anonymisierten Datenverarbeitung benötigt.")
-                        .font(.subheadline)
-                        .foregroundStyle(AppColor.textSecondary)
-                        .multilineTextAlignment(.center)
-
-                    Button {
-                        showingConsentSheet = true
-                    } label: {
-                        HStack {
-                            Image(systemName: "checkmark.shield")
-                            Text("Einwilligung erteilen")
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                } else {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .font(.system(size: 50))
-                        .foregroundStyle(AppColor.accent)
-
-                    Text("Fehler")
-                        .font(.headline)
-                        .foregroundStyle(AppColor.textPrimary)
-
-                    Text(error)
-                        .font(.subheadline)
-                        .foregroundStyle(AppColor.textSecondary)
-                        .multilineTextAlignment(.center)
-
-                    Button("Erneut versuchen") {
-                        loadSuggestions()
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding()
-        }
     }
 
     private var suggestionsList: some View {

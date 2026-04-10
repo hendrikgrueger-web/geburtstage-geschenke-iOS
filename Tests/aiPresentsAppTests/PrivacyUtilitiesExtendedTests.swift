@@ -8,36 +8,34 @@ final class PrivacyUtilitiesExtendedTests: XCTestCase {
 
     // MARK: - GenderInference: Zusätzliche Beziehungstypen (nicht im Basis-Test)
 
-    // Ehefrau, Ehemann, Cousin, Cousine, wife, husband sind NICHT in der Relation-Liste
-    // → Fallback auf Name-Inference (neutral bei leerem Namen)
-    func testRelation_ehefrau_fallsBackToNeutral() {
+    func testRelation_ehefrau_isFemale() {
         let result = GenderInference.infer(relation: "Ehefrau", firstName: "")
-        XCTAssertEqual(result, .neutral, "Ehefrau nicht in Relation-Liste → neutral bei leerem Namen")
+        XCTAssertEqual(result, .female, "Ehefrau should be female")
     }
 
-    func testRelation_ehemann_fallsBackToNeutral() {
+    func testRelation_ehemann_isMale() {
         let result = GenderInference.infer(relation: "Ehemann", firstName: "")
-        XCTAssertEqual(result, .neutral, "Ehemann nicht in Relation-Liste → neutral bei leerem Namen")
+        XCTAssertEqual(result, .male, "Ehemann should be male")
     }
 
-    func testRelation_cousin_fallsBackToNeutral() {
+    func testRelation_cousin_isMale() {
         let result = GenderInference.infer(relation: "Cousin", firstName: "")
-        XCTAssertEqual(result, .neutral, "Cousin nicht in Relation-Liste → neutral")
+        XCTAssertEqual(result, .male, "Cousin should be male")
     }
 
-    func testRelation_cousine_fallsBackToNeutral() {
+    func testRelation_cousine_isFemale() {
         let result = GenderInference.infer(relation: "Cousine", firstName: "")
-        XCTAssertEqual(result, .neutral, "Cousine nicht in Relation-Liste → neutral")
+        XCTAssertEqual(result, .female, "Cousine should be female")
     }
 
-    func testRelation_wife_fallsBackToNeutral() {
+    func testRelation_wife_isFemale() {
         let result = GenderInference.infer(relation: "wife", firstName: "")
-        XCTAssertEqual(result, .neutral, "wife nicht in Relation-Liste → neutral")
+        XCTAssertEqual(result, .female, "English 'wife' should be female")
     }
 
-    func testRelation_husband_fallsBackToNeutral() {
+    func testRelation_husband_isMale() {
         let result = GenderInference.infer(relation: "husband", firstName: "")
-        XCTAssertEqual(result, .neutral, "husband nicht in Relation-Liste → neutral")
+        XCTAssertEqual(result, .male, "English 'husband' should be male")
     }
 
     func testRelation_cousin_english_isMale() {
@@ -88,6 +86,16 @@ final class PrivacyUtilitiesExtendedTests: XCTestCase {
     func testRelation_priority_vater_overridesAnyName() {
         let result = GenderInference.infer(relation: "Vater", firstName: "Anna")
         XCTAssertEqual(result, .male, "Vater (male) should override Anna (female name)")
+    }
+
+    func testRelation_priority_ehefrau_overridesAnyName() {
+        let result = GenderInference.infer(relation: "Ehefrau", firstName: "Max")
+        XCTAssertEqual(result, .female, "Ehefrau (female) should override Max (male name)")
+    }
+
+    func testRelation_priority_ehemann_overridesAnyName() {
+        let result = GenderInference.infer(relation: "Ehemann", firstName: "Anna")
+        XCTAssertEqual(result, .male, "Ehemann (male) should override Anna (female name)")
     }
 
     // MARK: - GenderInference: Whitespace-Variationen

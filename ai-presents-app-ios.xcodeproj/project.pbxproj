@@ -11,6 +11,7 @@
 		02BD9144C92EBA217C096D14 /* SuggestionQualityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E705474AA673040B59B5EBA /* SuggestionQualityViewModel.swift */; };
 		03FEB96D808B3CC07F55A5DB /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA39B9FFF1B49B23E10FE3 /* TermsView.swift */; };
 		0630A95A542BA683B7B03A09 /* demo-hans.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA0ACA005426F88C2D806DF7 /* demo-hans.jpg */; };
+		0963B1449CD4BA585EE0B2FE /* AILoadingErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDF54B2A57407AB6775A85 /* AILoadingErrorView.swift */; };
 		0B105CAA3122D6323CE7824E /* BirthdayWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC35DCCF49380674DAC125E /* BirthdayWidgetView.swift */; };
 		0D3739160A5B71DD7F9E76F7 /* LegalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A28EFE658E6EEEB73069B2 /* LegalView.swift */; };
 		0D6E38A50ABD9ACEF04B8E23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC502D8F73D78DC65FF08F9 /* ContentView.swift */; };
@@ -260,6 +261,7 @@
 		4B3DCE06A0DFE3AB2C55B83F /* ReminderSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSettingsView.swift; sourceTree = "<group>"; };
 		4B4893D652B650DADF64E35C /* AppLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockManager.swift; sourceTree = "<group>"; };
 		4CA036501E37863B03B99A76 /* DevSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevSettingsView.swift; sourceTree = "<group>"; };
+		4CBDF54B2A57407AB6775A85 /* AILoadingErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AILoadingErrorView.swift; sourceTree = "<group>"; };
 		505CF312F2774E4C40670379 /* SuggestionQualityViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionQualityViewModelTests.swift; sourceTree = "<group>"; };
 		507E0BBB507D60FBD3B50AC0 /* SampleDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataServiceTests.swift; sourceTree = "<group>"; };
 		508247F8818A2793DD521981 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 		34D78A230962A7B1D395A352 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4CBDF54B2A57407AB6775A85 /* AILoadingErrorView.swift */,
 				A85C20D3A71B7D4A912D1454 /* AppLockView.swift */,
 				271E66143DD2D410FCAFD44D /* ButtonStyles.swift */,
 				84458F69E06194AA2FA07A2F /* EmptyStateView.swift */,
@@ -948,6 +951,7 @@
 				7574E0C815AA410516F222F2 /* AIConsentManager.swift in Sources */,
 				D88CF76CBECD49423145CE85 /* AIConsentSheet.swift in Sources */,
 				3D50FD8737ED88810260C6C0 /* AIGiftSuggestionsSheet.swift in Sources */,
+				0963B1449CD4BA585EE0B2FE /* AILoadingErrorView.swift in Sources */,
 				5CB56DD85D350BE96FD24FDD /* AIService.swift in Sources */,
 				DE56A3B1C078CF765FF226DE /* AccessibilityConfiguration.swift in Sources */,
 				24B66A4E2179EF84ACF9109C /* AccessibilityHelper.swift in Sources */,
