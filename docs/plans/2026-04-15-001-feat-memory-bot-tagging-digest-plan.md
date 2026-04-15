@@ -68,7 +68,7 @@ Das sind zwei unabhängige Verbesserungsebenen: Tags machen einzelne Einträge d
 - **Tags inline, kein Extra-LLM-Call**: Tags werden im gleichen LLM-Response-Schema zurückgegeben. Kein Extra-Kosten-Risiko, keine Latenz.
 - **Category in Memory speichern** (zusätzlich zu Tags): Die Fragen-Kategorie ist semantisch verwandt mit der Antwort; nützlich für Digest-Gruppierung. Wird vom LLM als `memory.category` mitgegeben.
 - **Digest als JSONB-Blob** (nicht normalisiert): Das Digest-Schema wird sich weiterentwickeln. JSONB ist flexibel ohne Schema-Migrationen bei jeder Änderung. Metadaten (Zeitraum, Anzahl) bleiben als Top-Level-Spalten.
-- **Digest-Modell**: `google/gemini-3.1-flash-lite-preview` via OpenRouter — 1M Kontext, günstig, gut für strukturierte Analyse. Separate Entscheidung vom Answer-LLM.
+- **Digest-Modell**: `qwen/qwen3.6-plus` via OpenRouter — 1M Kontext, günstig, gut für strukturierte Analyse. Separate Entscheidung vom Answer-LLM.
 - **Pagination**: Digest liest max. 500 Memories (reicht für ~1 Jahr). Bei Überschreitung → letzten Digest als rollierenden Kontext nutzen.
 - **R6 optional**: Letzter Digest in `Prepare LLM Body` einbinden ist Low-Risk-Add; kann nach Unit 3 ergänzt werden ohne blockierende Abhängigkeit.
 
@@ -214,7 +214,7 @@ claude_memory_index Schema:
 2. `GET claude_memory` — Supabase HTTP, alle Einträge, `order=created_at.desc`, `limit=500`
 3. `IF: Memories vorhanden?` — `$json.length > 0`; sonst End
 4. `Build Digest Prompt` (Code Node) — serialisiert Memories als kompaktes JSON, baut System-Prompt mit Analyseanweisung (Bereiche, Muster, Querverbindungen, Lücken)
-5. `LLM: Analyze Memories` (HTTP Request) — OpenRouter, `google/gemini-3.1-flash-lite-preview`, temperature 0.2, 1M context
+5. `LLM: Analyze Memories` (HTTP Request) — OpenRouter, `qwen/qwen3.6-plus`, temperature 0.2, 1M context
 6. `Parse Digest Response` (Code Node) — 4-Stage JSON extractor (analog Parse LLM Response)
 7. `Insert claude_memory_index` — Supabase POST mit `period_start/end`, `memory_count`, `model_used`, `analysis`
 8. `Telegram: Digest Summary` (optional) — kurze Zusammenfassung an Hendrik (Chat-ID 6740845735)
@@ -299,4 +299,4 @@ Unit 1 und 2 können theoretisch parallel starten, aber Unit 2 schreibt in die n
 - Credential Supabase: `hxTemGKuTtemTmSx` (supabaseApi)
 - Credential OpenRouter: `O1DsfKu851ea2NbP` (httpHeaderAuth)
 - Aktuelles LLM: `qwen/qwen3.6-plus`
-- Digest LLM: `google/gemini-3.1-flash-lite-preview` (OpenRouter)
+- Digest LLM: `qwen/qwen3.6-plus` (OpenRouter)
