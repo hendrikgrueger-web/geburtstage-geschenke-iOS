@@ -1,9 +1,10 @@
 ---
 title: "fix: E2E-Bericht 2026-05-01 — Locale-Year + KI-Datum + Suchleiste"
 type: fix
-status: active
+status: shipped
 date: 2026-05-01
 origin: docs/E2E-TESTBERICHT-2026-05-01.md
+shipped_in: v1.0.7 (168) — Submission f21d073c-c47e-4be6-ac43-a1ac8d40549f, eingereicht 2026-05-01 20:44 UTC
 ---
 
 # fix: E2E-Bericht 2026-05-01 — Locale-Year + KI-Datum + Suchleiste
