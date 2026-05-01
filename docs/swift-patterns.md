@@ -131,6 +131,41 @@ enum GiftDirection {
 }
 ```
 
+## SwiftUI: Text-Integer-Locale-Falle ⚠️
+
+**Problem:** `Text("\(someInt)")` löst in SwiftUI `LocalizedStringKey`-Interpolation aus.
+In Locales mit Tausenderpunkt/-leerzeichen formatiert iOS den Integer mit Separator:
+- `de_DE`: `2025` → `"2.025"` (Punkt)
+- `fr_FR`: `2025` → `"2 025"` (schmales Leerzeichen U+202F)
+- `es_ES`: `2025` → `"2.025"` (Punkt)
+
+**Betroffen:** ALLE 4-stelligen (und größeren) Integer in `Text("\(int)")`.
+Typischer Fall: Jahresangaben in UI-Badges (z.B. `GiftHistoryRow.yearBadge`).
+
+**Korrekte Lösung:**
+```swift
+// ✅ Fix 1: Text(verbatim:) — kein LocalizedStringKey, keine Locale-Formatierung
+Text(verbatim: String(someInt))
+
+// ✅ Fix 2: String() explizit — dann kein Locale-Overhead
+Text(String(someInt))
+
+// ❌ Buggy: Locale-Falle
+Text("\(someInt)")                    // → "2.025" in de_DE
+```
+
+**Accessibility-Labels:** Gleiches Problem in String-Interpolation wenn Int direkt interpoliert wird:
+```swift
+// ❌ Buggy in AccessibilityLabel-Strings:
+"\(history.year)"            // → "2.025" in de_DE
+
+// ✅ Korrekt:
+"\(String(history.year))"   // → "2025" immer
+```
+
+**Merksatz:** `String(Int)` ist IMMER ASCII-Ziffern, locale-unabhängig. `NumberFormatter` und
+SwiftUI-Interpolation dagegen lokalisieren. Fix eingeführt in `GiftHistoryRow` v1.0.7.
+
 ## AIService API
 
 ```swift
