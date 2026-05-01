@@ -1,5 +1,6 @@
 import Foundation
 import Contacts
+import UIKit
 
 // MARK: - ContactsServiceProtocol
 
@@ -27,8 +28,18 @@ final class ContactsService: ContactsServiceProtocol {
             throw ContactsError.notAuthorized
         }
 
-        // Kontakt-Daten als Sendable-Struct extrahieren (off-MainActor)
+        // Kontakt-Daten inkl. Thumbnail extrahieren (off-MainActor)
         let contactData = try await fetchContactData()
+
+        // Foto-Cache vorbefuellen, damit die Bilder beim ersten Render der
+        // Liste sofort sichtbar sind und nicht erst per Cache-Miss async
+        // nachgeladen werden muessen.
+        for data in contactData {
+            ContactPhotoService.shared.preloadFromImport(
+                imageData: data.thumbnailData,
+                for: data.identifier
+            )
+        }
 
         // Zurück auf MainActor: PersonRef-Objekte erstellen (SwiftData erfordert MainActor)
         var importedPeople: [PersonRef] = []
@@ -55,7 +66,8 @@ final class ContactsService: ContactsServiceProtocol {
         let keys = [CNContactGivenNameKey,
                     CNContactFamilyNameKey,
                     CNContactBirthdayKey,
-                    CNContactIdentifierKey] as [CNKeyDescriptor]
+                    CNContactIdentifierKey,
+                    CNContactThumbnailImageDataKey] as [CNKeyDescriptor]
 
         let request = CNContactFetchRequest(keysToFetch: keys)
 
@@ -82,7 +94,8 @@ final class ContactsService: ContactsServiceProtocol {
                 identifier: contact.identifier,
                 displayName: displayName,
                 birthday: date,
-                birthYearKnown: yearKnown
+                birthYearKnown: yearKnown,
+                thumbnailData: contact.thumbnailImageData
             ))
         }
 
@@ -95,6 +108,7 @@ final class ContactsService: ContactsServiceProtocol {
         let displayName: String
         let birthday: Date
         let birthYearKnown: Bool
+        let thumbnailData: Data?
     }
 
     enum ContactsError: LocalizedError {

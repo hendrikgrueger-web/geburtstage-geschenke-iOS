@@ -61,6 +61,20 @@ final class ContactPhotoService: ObservableObject {
         return nil
     }
 
+    /// Beim Initial-Import des Adressbuchs aufgerufen — schreibt das beim
+    /// CNContactFetch bereits geladene Thumbnail direkt in den Cache, damit
+    /// die Liste sofort Fotos zeigt statt erst Initialen + async Nachladen.
+    func preloadFromImport(imageData data: Data?, for contactIdentifier: String) {
+        guard let data, let image = UIImage(data: data) else {
+            // Kein Foto im Adressbuch — als "kein Foto" markieren, damit photo()
+            // gar nicht erst einen async Fetch startet.
+            noPhotoIdentifiers.insert(contactIdentifier)
+            return
+        }
+        cache.setObject(image, forKey: contactIdentifier as NSString)
+        noPhotoIdentifiers.remove(contactIdentifier)
+    }
+
     /// Cache leeren (z.B. bei App-Wechsel aus dem Hintergrund).
     func clearCache() {
         cache.removeAllObjects()
