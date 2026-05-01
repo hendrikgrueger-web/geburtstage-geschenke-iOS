@@ -15,6 +15,10 @@ struct SettingsView: View {
     @State private var showingAbout = false
     @State private var showingRevokeConsentConfirmation = false
     @State private var showingAIConsentSheet = false
+    @State private var exportFileURL: URL?
+    @State private var showingExportShareSheet = false
+    @State private var exportError: String?
+    @State private var showingExportError = false
     @Environment(ReminderManager.self) private var reminderManager: ReminderManager?
     @Environment(SubscriptionManager.self) private var subscriptionManager: SubscriptionManager?
     private let consentManager = AIConsentManager.shared
@@ -273,17 +277,7 @@ struct SettingsView: View {
 
 
 
-                Section("Daten") {
-                    Button(role: .destructive) {
-                        showingResetConfirmation = true
-                    } label: {
-                        HStack {
-                            Text("Alle Daten löschen")
-                            Spacer()
-                            Image(systemName: "trash")
-                        }
-                    }
-                }
+                dataSection
 
                 Section {
                     NavigationLink {
@@ -346,6 +340,16 @@ struct SettingsView: View {
             AIConsentSheet(isPresented: $showingAIConsentSheet) {
                 consentManager.aiEnabled = true
             }
+        }
+        .sheet(isPresented: $showingExportShareSheet, onDismiss: cleanupExportFile) {
+            if let url = exportFileURL {
+                ShareSheetView(items: [url])
+            }
+        }
+        .alert("Export fehlgeschlagen", isPresented: $showingExportError, presenting: exportError) { _ in
+            Button("OK", role: .cancel) { exportError = nil }
+        } message: { error in
+            Text(error)
         }
     }
 
@@ -467,6 +471,61 @@ struct SettingsView: View {
             AppLogger.data.error("Failed to reset data", error: error)
             toast = ToastItem.error(String(localized: "Fehler beim Löschen"), message: String(localized: "Ein Fehler ist aufgetreten. Bitte versuche es erneut."))
         }
+    }
+
+    // MARK: - Data Section
+
+    @ViewBuilder
+    private var dataSection: some View {
+        Section {
+            Button {
+                runExport()
+            } label: {
+                HStack {
+                    Text("Alle Daten exportieren")
+                    Spacer()
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+            .accessibilityHint(String(localized: "Speichert alle Personen und Geschenkideen als JSON-Datei zum Sichern oder Übertragen"))
+
+            Button(role: .destructive) {
+                showingResetConfirmation = true
+            } label: {
+                HStack {
+                    Text("Alle Daten löschen")
+                    Spacer()
+                    Image(systemName: "trash")
+                }
+            }
+        } header: {
+            Text("Daten")
+        } footer: {
+            Text("Der Export enthält alle Personen, Geschenkideen und Geschenkhistorie als JSON-Datei. Praktisch als manuelles Backup oder für die Übergabe auf ein anderes Gerät.")
+                .font(.caption)
+        }
+    }
+
+    // MARK: - Export
+
+    private func runExport() {
+        do {
+            let url = try DataExportService.exportAll(modelContext: modelContext)
+            exportFileURL = url
+            showingExportShareSheet = true
+            HapticFeedback.success()
+            AppLogger.data.info("Export successful at \(url.lastPathComponent)")
+        } catch {
+            AppLogger.data.error("Export failed", error: error)
+            exportError = error.localizedDescription
+            showingExportError = true
+        }
+    }
+
+    private func cleanupExportFile() {
+        guard let url = exportFileURL else { return }
+        try? FileManager.default.removeItem(at: url)
+        exportFileURL = nil
     }
 
     private func openFeedback() {

@@ -7,25 +7,25 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Geschenke AI"
+            "value": "MerkTag"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gifts AI"
+            "value": "MerkTag"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cadeaux AI"
+            "value": "MerkTag"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Regalos AI"
+            "value": "MerkTag"
           }
         }
       }

@@ -85,6 +85,17 @@ struct PersonDetailGiftIdeasSection: View {
                 .tint(AppColor.primary)
                 .accessibilityLabel(String(localized: "Status ändern"))
                 .accessibilityHint(String(localized: "Ändert den Status der Geschenkidee zum nächsten Schritt"))
+
+                if idea.status != .purchased && idea.status != .given {
+                    Button {
+                        markAsPurchased(idea)
+                    } label: {
+                        Label("Gekauft", systemImage: "checkmark.circle.fill")
+                    }
+                    .tint(.green)
+                    .accessibilityLabel(String(localized: "Als gekauft markieren"))
+                    .accessibilityHint(String(localized: "Setzt die Geschenkidee direkt auf den Status gekauft"))
+                }
             }
             .contextMenu {
                 Button {
@@ -285,6 +296,19 @@ struct PersonDetailGiftIdeasSection: View {
             triggerWidgetUpdate()
         }
         HapticFeedback.medium()
+    }
+
+    /// Direkt-Marker fuer Swipe-Action: setzt eine Idee aus jedem Pre-Purchase-
+    /// Status (idea/planned) auf .purchased ohne den Zwischenschritt.
+    /// Loggt den Sprung als einzelnen Eintrag im statusLog.
+    private func markAsPurchased(_ idea: GiftIdea) {
+        guard idea.status != .purchased && idea.status != .given else { return }
+        let dateString = FormatterHelper.shortLogDateFormatter.string(from: Date())
+        let oldStatus = idea.status
+        idea.status = .purchased
+        idea.statusLog.append("\(dateString) - \(statusDisplayName(oldStatus)) \u{2192} \(statusDisplayName(.purchased))")
+        triggerWidgetUpdate()
+        HapticFeedback.success()
     }
 
     private func duplicateGiftIdea(_ idea: GiftIdea) {

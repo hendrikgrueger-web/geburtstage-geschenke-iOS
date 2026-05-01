@@ -26,6 +26,9 @@ struct TimelineView: View {
                 // Stats-Leiste — Anchor fuer Scroll-to-Top
                 Section {
                     statsRow
+                    if let reassurance = nextBirthdayReassurance {
+                        reassurance
+                    }
                 }
                 .id(Self.scrollTopAnchorID)
                 .listRowInsets(EdgeInsets())
@@ -194,29 +197,46 @@ struct TimelineView: View {
 
     private var statsRow: some View {
         HStack(spacing: 0) {
-            statItem(value: "\(people.count)", label: String(localized: "Kontakte"), icon: "person.2.fill")
+            statItem(
+                value: "\(birthdaysToday)",
+                label: String(localized: "Heute"),
+                icon: "gift.fill",
+                isHighlighted: birthdaysToday > 0
+            )
             Divider().frame(height: 32)
-            statItem(value: "\(birthdaysThisWeek)", label: String(localized: "Diese Woche"), icon: "calendar")
+            statItem(
+                value: "\(birthdaysThisWeek)",
+                label: String(localized: "Diese Woche"),
+                icon: "calendar",
+                isHighlighted: birthdaysThisWeek > 0
+            )
             Divider().frame(height: 32)
-            statItem(value: "\(giftIdeas.count)", label: String(localized: "Ideen"), icon: "lightbulb.fill")
+            statItem(
+                value: "\(birthdaysThisMonth)",
+                label: String(localized: "Diesen Monat"),
+                icon: "calendar.badge.clock",
+                isHighlighted: birthdaysThisMonth > 0
+            )
         }
         .padding(.vertical, 10)
         .background(AppColor.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding(.horizontal)
         .padding(.vertical, 8)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(statsAccessibilityLabel)
     }
 
-    private func statItem(value: String, label: String, icon: String) -> some View {
+    private func statItem(value: String, label: String, icon: String, isHighlighted: Bool) -> some View {
         HStack(spacing: 6) {
             Image(systemName: icon)
                 .font(.caption)
-                .foregroundStyle(AppColor.primary)
+                .foregroundStyle(isHighlighted ? AppColor.accent : AppColor.primary)
             VStack(alignment: .leading, spacing: 1) {
                 Text(value)
                     .font(.subheadline)
                     .fontWeight(.bold)
-                    .foregroundStyle(AppColor.textPrimary)
+                    .foregroundStyle(isHighlighted ? AppColor.accent : AppColor.textPrimary)
                 Text(label)
                     .font(.caption2)
                     .foregroundStyle(AppColor.textSecondary)
@@ -225,12 +245,77 @@ struct TimelineView: View {
         .frame(maxWidth: .infinity)
     }
 
+    private var birthdaysToday: Int {
+        let today = Calendar.current.startOfDay(for: Date())
+        return people.filter { person in
+            guard let days = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else { return false }
+            return days == 0
+        }.count
+    }
+
     private var birthdaysThisWeek: Int {
         let today = Calendar.current.startOfDay(for: Date())
         return people.filter { person in
             guard let days = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else { return false }
             return days >= 0 && days <= 7
         }.count
+    }
+
+    private var birthdaysThisMonth: Int {
+        let today = Calendar.current.startOfDay(for: Date())
+        return people.filter { person in
+            guard let days = BirthdayCalculator.daysUntilBirthday(for: person.birthday, from: today) else { return false }
+            return days >= 0 && days <= 30
+        }.count
+    }
+
+    private var statsAccessibilityLabel: String {
+        String(
+            localized: "\(birthdaysToday) Geburtstage heute, \(birthdaysThisWeek) diese Woche, \(birthdaysThisMonth) diesen Monat"
+        )
+    }
+
+    /// Reassurance-Zeile unter der Stats-Row: zeigt nur, wenn nichts in den
+    /// naechsten 30 Tagen ansteht aber Kontakte existieren — dann nennen wir
+    /// den naechsten Geburtstag konkret. Vermeidet "stille" Hauptansicht.
+    @ViewBuilder
+    private var nextBirthdayReassurance: (some View)? {
+        if birthdaysThisMonth == 0,
+           !people.isEmpty,
+           let nextPerson = soonestBirthdayPerson,
+           let days = BirthdayCalculator.daysUntilBirthday(
+               for: nextPerson.birthday,
+               from: Calendar.current.startOfDay(for: Date())
+           ) {
+            HStack(spacing: 8) {
+                Image(systemName: "calendar.circle")
+                    .font(.body)
+                    .foregroundStyle(AppColor.textSecondary)
+                Text(
+                    days == 1
+                    ? String(localized: "Aktuell ist Ruhe — der naechste Geburtstag ist morgen: \(nextPerson.displayName).")
+                    : String(localized: "Aktuell ist Ruhe — der naechste Geburtstag ist in \(days) Tagen: \(nextPerson.displayName).")
+                )
+                .font(.footnote)
+                .foregroundStyle(AppColor.textSecondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
+            .padding(.bottom, 8)
+        }
+    }
+
+    private var soonestBirthdayPerson: PersonRef? {
+        let today = Calendar.current.startOfDay(for: Date())
+        return people
+            .compactMap { person -> (PersonRef, Int)? in
+                guard let days = BirthdayCalculator.daysUntilBirthday(
+                    for: person.birthday, from: today
+                ) else { return nil }
+                return (person, days)
+            }
+            .min(by: { $0.1 < $1.1 })?
+            .0
     }
 
     // MARK: - Alle Geburtstage chronologisch
