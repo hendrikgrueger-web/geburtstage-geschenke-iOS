@@ -79,27 +79,65 @@ Plus zwei kleinere Punkte, die als „Sweep" mitgenommen werden:
 
 ---
 
-### Unit 2: ASC-Listing — Subtitle + Description neu
+### Unit 2: App-Name + ASC-Listing — Rebrand zu „MerkTag" + Reminder-First
 
-**Goal:** Marketing-Versprechen entspricht App-Inhalt. Erinnern → KI als Unterstützung, nicht andersrum.
+**Goal:** App heißt ab v1.0.7 **MerkTag**. Marketing-Versprechen entspricht App-Inhalt: Erinnern → KI als Unterstützung, nicht andersrum.
+
+**Begründung:** Bisheriger Name „Geburtstage & Geschenkideen" / „Birthdays & Gifts" beschreibt nur, verkauft nicht. ChatGPT-Vorschlag MerkTag verbindet „merken + (besonderer) Tag" zu einem Reminder-First-Brand. Self-Check (App Store Search, Web-Trademark, iTunes Search API DE+US, Domain-Whois) ohne sichtbare Konflikte — Hobby-Indie-Risiko praktisch null. Vollständiges Audit unter `docs/NAMING-SELFCHECK-MerkTag.md`.
 
 **Files:**
-- Modify: `docs/APP-STORE-LISTING.md` (DE/EN als Quelle)
-- Add: `docs/APP-STORE-LISTING-1.0.7.md` (versioniertes Update, alle 7 Locales)
+- Modify: `project.yml` — `CFBundleDisplayName: "Geschenke AI"` → `"MerkTag"` (in beiden Targets: App + Widget)
+- Modify: `App/Info.plist`, `Sources/BirthdayWidget/Info.plist` (xcodegen-getriggert)
+- Modify: `docs/APP-STORE-LISTING.md` als Quelle
+- Add: `docs/APP-STORE-LISTING-1.0.7.md` (versioniert, alle 7 Locales)
+- ASC-CLI-Update via `asc apps info edit --name "MerkTag: …"` für 7 Locales + `asc localizations update --subtitle/--description`
 
-**Neuer Subtitle (max 30 Zeichen):**
-- DE: „Nie einen Geburtstag vergessen" (28 Zeichen) — fokussiert die tägliche Nutzung
-- EN: „Never forget a birthday again" (29) / EN-GB identisch
-- FR: „Ne plus oublier d'anniversaire" (30) / FR-CA identisch
-- ES: „No olvides ningún cumpleaños" (28) / ES-MX identisch
+**Neuer App-Name pro Locale (max 30 Zeichen, alle drunter):**
 
-**Neue Description-Reihenfolge:**
+| Locale | App-Name | Zeichen |
+|---|---|---|
+| de-DE | MerkTag: Geburtstage | 20 |
+| en-US | MerkTag: Birthday Gifts | 23 |
+| en-GB | MerkTag: Birthday Gifts | 23 |
+| fr-FR | MerkTag: Anniversaires | 22 |
+| fr-CA | MerkTag: Anniversaires | 22 |
+| es-ES | MerkTag: Cumpleaños | 19 |
+| es-MX | MerkTag: Cumpleaños | 19 |
+
+**Neuer Subtitle pro Locale (max 30 Zeichen):**
+
+| Locale | Subtitle | Zeichen |
+|---|---|---|
+| de-DE | Geschenke rechtzeitig planen | 28 |
+| en-US | Never forget. Gift better. | 26 |
+| en-GB | Never forget. Gift better. | 26 |
+| fr-FR | Cadeaux planifiés à temps | 25 |
+| fr-CA | Cadeaux planifiés à temps | 25 |
+| es-ES | Regalos planeados a tiempo | 26 |
+| es-MX | Regalos planeados a tiempo | 26 |
+
+**Neue Description-Reihenfolge (alle Locales):**
 1. Hook (1 Satz): „Du vergisst keinen Geburtstag mehr. Und nie wieder die passende Geschenkidee."
 2. Block „NIE WIEDER VERGESSEN" (Erinnern, Widget, Timeline) — vorher Block 2, jetzt Block 1
 3. Block „GESCHENKE PERFEKT ORGANISIERT" (Ideen, Historie, Budget) — vorher Block 3, jetzt Block 2
 4. Block „DEIN KI-GESCHENKEBERATER" (KI-Chat, Sprachvorschläge) — vorher Block 1, jetzt Block 3
 5. Block „100% DEINE DATEN" (Privacy) — bleibt am Ende
-6. CTA-Satz unverändert
+6. CTA: „Lade MerkTag jetzt herunter."
+
+**Promotional Text-Vorschlag (170 Z. Limit):**
+- DE: „Nie wieder zu spät. Nie wieder ideenlos. MerkTag erinnert Dich rechtzeitig an Geburtstage und hilft Dir, die passende Geschenkidee zu planen — mit Privacy-First-KI."
+- EN: „Never late. Never out of ideas. MerkTag reminds you of birthdays in time and helps you plan the right gift — with privacy-first AI assistance."
+
+**Keywords (100 Z. pro Locale, neu strukturiert):**
+- DE: „Erinnerung,Kalender,Planer,Wunschliste,Geschenk,Familie,Anlass,Jubiläum,Schenken,Festtag,Countdown"
+- EN: „reminder,calendar,birthday tracker,gift ideas,wish list,anniversary,family,present,celebration,countdown"
+
+**Wichtig — Implementierungs-Reihenfolge:**
+1. **NICHT** während 1.0.6 in Apple-Review-Phase (`WAITING_FOR_REVIEW`) — Name-Change würde Submission invalidieren
+2. Erst nach 1.0.6 Review-Entscheidung (REJECTED oder READY_FOR_SALE) starten
+3. Bei v1.0.7-Build der erste Push enthält den neuen `CFBundleDisplayName` — TestFlight zeigt App schon mit „MerkTag" auf Tester-Geräten (Konsistenz-Check)
+4. ASC-Listing-Update (Name + Subtitle + Description) erst direkt vor `asc submit create` von v1.0.7 — dann läuft der Reviewer mit dem neuen Branding
+5. Der Submit selbst läuft via Standard-Auto-Pfad aus Apple-Apps-CLAUDE.md
 
 **Approach:**
 - Plain-Text-Versionen pro Locale in `docs/APP-STORE-LISTING-1.0.7.md` schreiben
