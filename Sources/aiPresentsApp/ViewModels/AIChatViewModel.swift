@@ -31,6 +31,11 @@ final class AIChatViewModel {
     private var cachedSystemPrompt: String = ""
     /// Flag: System-Prompt muss beim nächsten API-Call neu gebaut werden.
     private var promptNeedsRebuild = true
+    /// Tag (00:00 lokal), an dem `cachedSystemPrompt` gebaut wurde — bei Tageswechsel rebuild.
+    private var cachedPromptBuildDay: Date?
+
+    /// Injizierbarer Date-Provider. Default: `Date()`. Tests können hier ein fixes Datum setzen.
+    var currentDate: () -> Date = { Date() }
 
     /// Laufender API-Task — wird bei cancelPendingRequests() abgebrochen.
     private var currentTask: Task<Void, Never>?
@@ -69,12 +74,17 @@ final class AIChatViewModel {
     func invalidatePromptCache() {
         promptNeedsRebuild = true
         cachedSystemPrompt = ""
+        cachedPromptBuildDay = nil
     }
 
     /// Gibt den (ggf. neu gebauten) System-Prompt zurück.
+    /// Rebuild-Trigger: Daten-Änderung (`promptNeedsRebuild`) ODER Tageswechsel seit letztem Build.
     private func getSystemPrompt() -> String {
-        if promptNeedsRebuild || cachedSystemPrompt.isEmpty {
+        let today = Calendar.current.startOfDay(for: currentDate())
+        let dayChanged = cachedPromptBuildDay.map { $0 != today } ?? true
+        if promptNeedsRebuild || cachedSystemPrompt.isEmpty || dayChanged {
             cachedSystemPrompt = buildSystemPrompt()
+            cachedPromptBuildDay = today
             promptNeedsRebuild = false
         }
         return cachedSystemPrompt
@@ -240,10 +250,14 @@ final class AIChatViewModel {
         - none
         """
 
+        let dateAnchor = buildDateAnchor(lang: lang, region: region)
+
         switch lang {
         case "de":
             return """
             Du bist der freundliche Geschenke-Assistent der App "Geschenke AI".
+
+            \(dateAnchor)
 
             REGELN:
             - Antworte auf Deutsch, herzlich und natürlich wie ein guter Freund der bei Geschenken hilft.
@@ -267,6 +281,8 @@ final class AIChatViewModel {
         case "fr":
             return """
             Tu es l'assistant cadeaux sympathique de l'app « Cadeaux AI ».
+
+            \(dateAnchor)
 
             RÈGLES :
             - Réponds en français, chaleureusement et naturellement, comme un bon ami qui aide à trouver des cadeaux.
@@ -292,6 +308,8 @@ final class AIChatViewModel {
             return """
             Eres el simpático asistente de regalos de la app "Regalos AI".
 
+            \(dateAnchor)
+
             REGLAS:
             - Responde en español, con calidez y naturalidad, como un buen amigo que ayuda con los regalos.
             - Temas: Cumpleaños, ideas de regalo, planificación de regalos. Rechaza amablemente temas fuera de contexto y sugiere SIEMPRE una pregunta relevante (ej. "Mejor pregúntame: ¿Quién cumple años pronto?").
@@ -316,6 +334,8 @@ final class AIChatViewModel {
             return """
             You are the friendly gift assistant of the app "Gifts AI".
 
+            \(dateAnchor)
+
             RULES:
             - Respond warmly and naturally, like a helpful friend who's great at gift-giving.
             - Topics: Birthdays, gift ideas, gift planning. Politely decline off-topic requests and ALWAYS suggest a relevant question instead.
@@ -334,6 +354,65 @@ final class AIChatViewModel {
 
             Example: {"message":"How about a book for your sister?","action":{"type":"create_gift_idea","person_id":"p1","person_name":"Sister","gift_title":"Book","gift_note":""}}
             """
+        }
+    }
+
+    /// Baut den Datums-Anker für den System-Prompt — verhindert Halluzinationen wie
+    /// "in 7 Tagen am 20. Mai", wenn das LLM keinen Cutoff-Anker hat (TC-07).
+    /// Format: Klartext-Wochentag + ISO-String + Schutzklausel zu absoluten/relativen Daten.
+    func buildDateAnchor(lang: String, region: String) -> String {
+        let now = currentDate()
+
+        // ISO 8601 Tagesdatum (yyyy-MM-dd) — sprachunabhängiger Maschinenanker
+        let isoFormatter = DateFormatter()
+        isoFormatter.locale = Locale(identifier: "en_US_POSIX")
+        isoFormatter.dateFormat = "yyyy-MM-dd"
+        isoFormatter.timeZone = .current
+        let iso = isoFormatter.string(from: now)
+
+        // Klartext-Datum mit Wochentag in der jeweiligen Sprache
+        let prettyFormatter = DateFormatter()
+        prettyFormatter.locale = Self.localeForPrompt(lang: lang, region: region)
+        prettyFormatter.dateStyle = .full
+        prettyFormatter.timeStyle = .none
+        prettyFormatter.timeZone = .current
+        let pretty = prettyFormatter.string(from: now)
+
+        switch lang {
+        case "de":
+            return """
+            HEUTIGES DATUM: \(pretty) (\(iso)).
+            Wenn du absolute Daten nennst (z.B. "am 15. April"), berechne sie ausschließlich aus diesem Datum. Wenn du dir bei einem Datum nicht sicher bist, bleibe bei relativen Angaben ("in 7 Tagen", "nächste Woche").
+            """
+        case "fr":
+            return """
+            DATE D'AUJOURD'HUI : \(pretty) (\(iso)).
+            Si tu mentionnes des dates absolues (ex. « le 15 avril »), calcule-les uniquement à partir de cette date. En cas de doute sur une date, reste sur des indications relatives (« dans 7 jours », « la semaine prochaine »).
+            """
+        case "es":
+            return """
+            FECHA DE HOY: \(pretty) (\(iso)).
+            Si mencionas fechas absolutas (ej. "el 15 de abril"), calcúlalas solo a partir de esta fecha. Si tienes dudas sobre una fecha, mantén indicaciones relativas ("en 7 días", "la próxima semana").
+            """
+        default:
+            return """
+            TODAY'S DATE: \(pretty) (\(iso)).
+            If you mention absolute dates (e.g. "on April 15th"), derive them only from this date. If you're unsure about a date, stick to relative wording ("in 7 days", "next week").
+            """
+        }
+    }
+
+    /// Wählt eine passende Locale für die Klartext-Formatierung des Datums-Ankers.
+    /// Fällt bei unbekanntem Region-Code auf eine reine Sprach-Locale zurück.
+    private static func localeForPrompt(lang: String, region: String) -> Locale {
+        if !region.isEmpty {
+            return Locale(identifier: "\(lang)_\(region)")
+        }
+        switch lang {
+        case "de": return Locale(identifier: "de_DE")
+        case "fr": return Locale(identifier: "fr_FR")
+        case "es": return Locale(identifier: "es_ES")
+        default: return Locale(identifier: "en_US")
         }
     }
 

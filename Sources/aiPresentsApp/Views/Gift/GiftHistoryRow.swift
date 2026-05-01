@@ -15,8 +15,8 @@ struct GiftHistoryRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            // Year badge
-            Text("\(history.year)")
+            // Year badge — verbatim verhindert Locale-Tausenderpunkt (de-DE würde sonst "2.025" rendern).
+            Text(verbatim: String(history.year))
                 .font(.caption)
                 .fontWeight(.bold)
                 .frame(width: 50, height: 50)
@@ -93,7 +93,7 @@ struct GiftHistoryRow: View {
         .padding(.vertical, 2)
         .hoverEffect(.highlight)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel(String(localized: "\(history.giftDirection == .given ? String(localized: "Verschenkt") : String(localized: "Erhalten")): \(history.title), \(history.category), \(history.year)"))
+        .accessibilityLabel(String(localized: "\(history.giftDirection == .given ? String(localized: "Verschenkt") : String(localized: "Erhalten")): \(history.title), \(history.category), \(String(history.year))"))
     }
 
     private var yearBadgeColor: Color {
