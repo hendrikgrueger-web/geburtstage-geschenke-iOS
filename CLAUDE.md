@@ -15,8 +15,10 @@ Checkliste in `Apple Apps/CLAUDE.md` → "PFLICHT: Skills vor jeder Aktion prüf
 - **Swift 6.0**, SwiftUI, SwiftData, MVVM, iCloud Sync (CloudKit)
 - **KI:** OpenRouter → Google Gemini 3.1 Flash Lite (opt-in, DSGVO-konform, anonymisiert)
 - **Widget:** WidgetKit (Medium + Large) mit Deep-Linking
-- **Version:** 1.0.1 (Build 112) | iOS 26+ | iPhone + iPad
+- **Aktueller Build:** v1.0.6 (137) im Apple-Review · v1.0.7 (138/139) lokal in Wave 1+2
+- **Min:** iOS 26+ | iPhone + iPad
 - **iPad:** NavigationSplitView, alle 4 Orientierungen
+- **Tests:** 1294 Tests (Stand 2026-05-01), 0 Failures — extreme Coverage Pflicht (Memory: `feedback_extreme_testing.md`)
 
 ## Build
 
@@ -100,6 +102,7 @@ wrangler deploy
 - Keine hardcodierten Farben — immer `AppColor.accent/danger/success`
 - `.foregroundStyle()` statt `.foregroundColor()` | `.clipShape(.rect)` statt `.cornerRadius()`
 - `ReminderManager`/`AIConsentManager` sind `@MainActor` — NIE neue Instanz in Views
+- **`Text("\(int)")` triggert Locale-Tausenderpunkt** (de_DE → "2.025"). Für reine Zahlen wie Jahre, IDs: `Text(verbatim: String(int))` oder `Text(String(int))` (siehe Locale-Falle in `docs/swift-patterns.md`)
 
 ## DSGVO — KI
 
@@ -119,10 +122,16 @@ wrangler deploy
 
 ## Docs-Referenz
 
+Volle Übersicht: `docs/README.md` — der zentrale Doku-Index.
+
 | Datei | Inhalt |
 |-------|--------|
-| `docs/swift-patterns.md` | Swift-Konventionen, SwiftData, SwiftUI, Concurrency, Lokalisierung, AIService-API |
+| `docs/README.md` | **Doku-Index — hier starten** |
+| `docs/swift-patterns.md` | Swift-Konventionen, SwiftData, SwiftUI, Concurrency, Lokalisierung, Locale-Falle, AIService-API |
 | `docs/architektur-details.md` | Projektstruktur, KI-Chat-Flow, Widget, UI-Architektur, Komponenten |
 | `docs/DSGVO-AI.md` | Vollständige DSGVO-Dokumentation |
 | `docs/LAUNCH-PLAN.md` | Launch-Plan, 8 Phasen, Revenue-Prognose |
+| `docs/E2E-TESTPLAN-CLAUDE-COWORK.md` | E2E-Testplan für Cowork (Computer Use im Simulator) |
+| `docs/plans/` | Strukturierte Implementierungspläne |
+| `_Archiv/2026-03-historisch/` | Pre-Launch-Material aus März 2026 |
 | `Apple Apps/CLAUDE.md` | Skill-Checkliste, ASC CLI, Release-Notes-Regeln |
