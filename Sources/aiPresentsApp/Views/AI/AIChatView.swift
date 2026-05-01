@@ -212,7 +212,7 @@ struct AIChatView: View {
             HStack(spacing: 6) {
                 Image(systemName: "lock.shield.fill")
                     .font(.caption2)
-                Text("Die KI erhält deinen Vornamen und anonymisierte Daten wie Altersgruppe und Geschlecht. Dein Nachname und Geburtsdatum bleiben auf dem Gerät.")
+                Text("Übertragen werden Vornamen und anonymisierte Eckdaten der Kontakte (Altersgruppe, Geschlecht) — nur für die Anfrage, nicht dauerhaft gespeichert (Zero Data Retention). Nachnamen und Geburtsdaten bleiben lokal.")
                     .font(.caption2)
             }
             .foregroundStyle(.tertiary)
@@ -293,19 +293,21 @@ struct AIChatView: View {
         if isRecording {
             speechService.stopTranscribing()
             isRecording = false
-        } else {
-            Task {
-                do {
-                    try await speechService.startTranscribing { transcript in
-                        Task { @MainActor in
-                            inputText = transcript
-                        }
+            return
+        }
+        // Doppelklick-Guard: waehrend Permission-Dialog laeuft, kein zweiter Task
+        guard !speechService.isTranscribing else { return }
+        Task {
+            do {
+                try await speechService.startTranscribing { transcript in
+                    Task { @MainActor in
+                        inputText = transcript
                     }
-                    isRecording = true
-                } catch {
-                    isRecording = false
-                    AppLogger.ui.error("Spracheingabe fehlgeschlagen", error: error)
                 }
+                isRecording = true
+            } catch {
+                isRecording = false
+                AppLogger.ui.error("Spracheingabe fehlgeschlagen", error: error)
             }
         }
     }

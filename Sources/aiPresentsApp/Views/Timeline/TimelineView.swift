@@ -18,41 +18,69 @@ struct TimelineView: View {
     @State private var isRefreshing = false
     @State private var showingAIChat = false
 
-    var body: some View {
-        List {
-            // Stats-Leiste
-            Section {
-                statsRow
-            }
-            .listRowInsets(EdgeInsets())
-            .listRowBackground(Color.clear)
+    private static let scrollTopAnchorID = "timeline-top"
 
-            // Chronologische Liste aller Geburtstage
-            if filteredBirthdays.isEmpty {
+    var body: some View {
+        ScrollViewReader { proxy in
+            List {
+                // Stats-Leiste — Anchor fuer Scroll-to-Top
                 Section {
-                    emptyStateView
+                    statsRow
                 }
+                .id(Self.scrollTopAnchorID)
+                .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
-            } else {
-                Section {
-                    ForEach(filteredBirthdays) { person in
-                        birthdayRow(for: person)
-                            .swipeActions(edge: .trailing) {
-                                Button {
-                                    toggleSkipGift(for: person)
-                                } label: {
-                                    Label(
-                                        person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk nötig"),
-                                        systemImage: person.skipGift ? "gift.fill" : "minus.circle"
-                                    )
+
+                // Chronologische Liste aller Geburtstage
+                if filteredBirthdays.isEmpty {
+                    Section {
+                        emptyStateView
+                    }
+                    .listRowBackground(Color.clear)
+                } else {
+                    Section {
+                        ForEach(filteredBirthdays) { person in
+                            birthdayRow(for: person)
+                                .swipeActions(edge: .trailing) {
+                                    Button {
+                                        toggleSkipGift(for: person)
+                                    } label: {
+                                        Label(
+                                            person.skipGift ? String(localized: "Geschenk nötig") : String(localized: "Kein Geschenk nötig"),
+                                            systemImage: person.skipGift ? "gift.fill" : "minus.circle"
+                                        )
+                                    }
+                                    .tint(person.skipGift ? .blue : .gray)
                                 }
-                                .tint(person.skipGift ? .blue : .gray)
-                            }
+                        }
                     }
                 }
             }
+            .listStyle(.plain)
+            .overlay(alignment: .bottomTrailing) {
+                // Sprung-zu-heute-Button — nur sichtbar wenn die Liste lang genug ist
+                if filteredBirthdays.count > 5 {
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.35)) {
+                            proxy.scrollTo(Self.scrollTopAnchorID, anchor: .top)
+                        }
+                        HapticFeedback.selectionChanged()
+                    } label: {
+                        Image(systemName: "arrow.up.to.line")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+                            .frame(width: 48, height: 48)
+                            .background(AppColor.accent, in: Circle())
+                            .shadow(color: .black.opacity(0.18), radius: 6, x: 0, y: 3)
+                    }
+                    .padding(.trailing, 18)
+                    .padding(.bottom, 22)
+                    .accessibilityLabel(String(localized: "Zu heute springen"))
+                    .accessibilityHint(String(localized: "Springt zum Anfang der Geburtstagsliste"))
+                }
+            }
         }
-        .listStyle(.plain)
         .refreshable {
             await refreshTimeline()
         }

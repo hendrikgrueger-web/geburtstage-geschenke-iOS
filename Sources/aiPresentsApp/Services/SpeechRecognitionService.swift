@@ -42,6 +42,11 @@ final class SpeechRecognitionService {
             throw SpeechError.notAuthorized
         }
 
+        // Direkt nach Permission-Grant kann AVAudioSession kurz noch nicht
+        // initialisiert sein — kurze Pause verhindert 0-Channel-Format und
+        // installTap-Crashes auf iOS 26 beim ersten Mic-Aktivieren.
+        try? await Task.sleep(for: .milliseconds(150))
+
         let locale = Locale.current
         guard let recognizer = SFSpeechRecognizer(locale: locale), recognizer.isAvailable else {
             throw SpeechError.notAvailable
@@ -55,23 +60,41 @@ final class SpeechRecognitionService {
         request.shouldReportPartialResults = true
 
         let audioSession = AVAudioSession.sharedInstance()
-        try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
-        try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-
-        let engine = AVAudioEngine()
-        let inputNode = engine.inputNode
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
-
-        guard recordingFormat.channelCount > 0, recordingFormat.sampleRate > 0 else {
+        do {
+            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            // Audio-Session konnte nicht aktiviert werden — sauber zurueck
+            try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
             throw SpeechError.notAvailable
         }
 
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
-            request.append(buffer)
+        let engine = AVAudioEngine()
+        // prepare() VOR installTap — sonst kann inputNode bei Race-Conditions
+        // mit einem Format ankommen, das installTap mit NSException sprengt.
+        engine.prepare()
+
+        let inputNode = engine.inputNode
+        // inputFormat ist robuster als outputFormat direkt nach Permission-Grant.
+        let recordingFormat = inputNode.inputFormat(forBus: 0)
+
+        guard recordingFormat.channelCount > 0,
+              recordingFormat.sampleRate > 0,
+              recordingFormat.commonFormat != .otherFormat else {
+            try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
+            throw SpeechError.notAvailable
         }
 
-        engine.prepare()
-        try engine.start()
+        do {
+            inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+                request.append(buffer)
+            }
+            try engine.start()
+        } catch {
+            inputNode.removeTap(onBus: 0)
+            try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
+            throw SpeechError.notAvailable
+        }
 
         self.audioEngine = engine
         self.recognitionRequest = request
@@ -119,7 +142,12 @@ final class SpeechRecognitionService {
 
         isTranscribing = false
 
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        // Session deaktivieren UND Category zuruecksetzen, sonst kollidiert
+        // unser .record/.measurement-State mit System-Diktat im Search-Bar
+        // und anderen Audio-Sessions.
+        let session = AVAudioSession.sharedInstance()
+        try? session.setActive(false, options: .notifyOthersOnDeactivation)
+        try? session.setCategory(.ambient, mode: .default)
     }
 
     // MARK: - Fehler

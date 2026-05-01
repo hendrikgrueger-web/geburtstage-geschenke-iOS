@@ -1047,24 +1047,24 @@
         }
       }
     },
-    "Die KI-Funktionen nutzen deinen Vornamen und anonymisierte Daten (Geschlecht, Altersgruppe, Beziehung) für bessere Vorschläge. Dein Nachname bleibt auf dem Gerät. Widerruf jederzeit möglich.": {
+    "Für KI-Vorschläge werden Vornamen und anonymisierte Eckdaten der Kontakte (Geschlecht, Altersgruppe, Beziehung) übertragen — nur für die Anfrage, nicht dauerhaft gespeichert (Zero Data Retention). Nachnamen und Geburtsdaten bleiben lokal. Widerruf jederzeit möglich.": {
       "localizations": {
         "en": {
           "stringUnit": {
-            "state": "translated",
-            "value": "AI features use your first name and anonymized data (gender, age group, relationship) for better suggestions. Your last name stays on the device. Revocable at any time."
+            "state": "needs_review",
+            "value": "For AI suggestions, contact first names and anonymized basics (gender, age group, relationship) are transmitted — only for the request, not stored long-term (Zero Data Retention). Last names and birthdates stay local. Revocable at any time."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "translated",
-            "value": "Les fonctions IA utilisent votre prénom et des données anonymisées (genre, groupe d'âge, relation) pour de meilleures suggestions. Votre nom de famille reste sur l'appareil. Révocable à tout moment."
+            "state": "needs_review",
+            "value": "Pour les suggestions de l'IA, les prénoms des contacts et des données anonymisées (genre, groupe d'âge, relation) sont transmis — uniquement pour la requête, non conservés durablement (Zero Data Retention). Les noms de famille et dates de naissance restent locaux. Révocable à tout moment."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "translated",
-            "value": "Las funciones de IA usan tu nombre de pila y datos anonimizados (género, grupo de edad, relación) para mejores sugerencias. Tu apellido permanece en el dispositivo. Revocable en cualquier momento."
+            "state": "needs_review",
+            "value": "Para las sugerencias de IA se transmiten los nombres de pila de los contactos y datos anonimizados (género, grupo de edad, relación) — solo para la consulta, no almacenados de forma permanente (Zero Data Retention). Apellidos y fechas de nacimiento permanecen locales. Revocable en cualquier momento."
           }
         }
       }
@@ -1317,24 +1317,24 @@
         }
       }
     },
-    "Die KI erhält deinen Vornamen und anonymisierte Daten wie Altersgruppe und Geschlecht. Dein Nachname und Geburtsdatum bleiben auf dem Gerät.": {
+    "Übertragen werden Vornamen und anonymisierte Eckdaten der Kontakte (Altersgruppe, Geschlecht) — nur für die Anfrage, nicht dauerhaft gespeichert (Zero Data Retention). Nachnamen und Geburtsdaten bleiben lokal.": {
       "localizations": {
         "en": {
           "stringUnit": {
-            "state": "translated",
-            "value": "The AI receives your first name and anonymized data like age group and gender. Your last name and birth date stay on the device."
+            "state": "needs_review",
+            "value": "Transmitted: contact first names and anonymized basics (age group, gender) — only for the request, not stored long-term (Zero Data Retention). Last names and birthdates stay local."
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "translated",
-            "value": "L'IA reçoit votre prénom et des données anonymisées comme le groupe d'âge et le genre. Votre nom de famille et date de naissance restent sur l'appareil."
+            "state": "needs_review",
+            "value": "Sont transmis : les prénoms des contacts et des données anonymisées (groupe d'âge, genre) — uniquement pour la requête, non conservés durablement (Zero Data Retention). Les noms de famille et dates de naissance restent locaux."
           }
         },
         "es": {
           "stringUnit": {
-            "state": "translated",
-            "value": "La IA recibe tu nombre de pila y datos anonimizados como grupo de edad y género. Tu apellido y fecha de nacimiento permanecen en el dispositivo."
+            "state": "needs_review",
+            "value": "Se transmiten: nombres de pila de los contactos y datos anonimizados (grupo de edad, género) — solo para la consulta, no almacenados de forma permanente (Zero Data Retention). Apellidos y fechas de nacimiento permanecen locales."
           }
         }
       }
