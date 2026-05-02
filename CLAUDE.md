@@ -15,7 +15,7 @@ Checkliste in `Apple Apps/CLAUDE.md` → "PFLICHT: Skills vor jeder Aktion prüf
 - **Swift 6.0**, SwiftUI, SwiftData, MVVM, iCloud Sync (CloudKit)
 - **KI:** OpenRouter → Google Gemini 3.1 Flash Lite (opt-in, DSGVO-konform, anonymisiert)
 - **Widget:** WidgetKit (Medium + Large) mit Deep-Linking
-- **Aktueller Build:** v1.0.6 (137) im Apple-Review · v1.0.7 (138/139) lokal in Wave 1+2
+- **Aktueller Build:** v1.0.7 (169) APPROVED 2026-05-02 (Submission `f21d073c-c47e-4be6-ac43-a1ac8d40549f`) · v1.0.6 (160) APPROVED 2026-05-01 (Submission `70920239-e2b1-4bc4-9d98-edc0c9edb866`)
 - **Min:** iOS 26+ | iPhone + iPad
 - **iPad:** NavigationSplitView, alle 4 Orientierungen
 - **Tests:** 1294 Tests (Stand 2026-05-01), 0 Failures — extreme Coverage Pflicht (Memory: `feedback_extreme_testing.md`)
@@ -44,11 +44,20 @@ xcodebuild -project ai-presents-app-ios.xcodeproj -scheme aiPresentsApp \
 
 ## App Store Status
 
+- **Version 1.0.7:** APPROVED 2026-05-02 (Build 169) — Release pending publication
+- **Version 1.0.6:** APPROVED 2026-05-01 (Build 160) — Release pending publication
+- **Version 1.0.3:** READY_FOR_SALE seit 2026-04-04 (Submission `e58abf8f-…`)
 - **Version 1.0:** READY_FOR_SALE — live seit 2026-03-24
 - **Offen (MANUELL in ASC-Browser):**
   1. Subscriptions "Premium Jährlich" + "Premium Monatlich" → Review einreichen
   2. Lifetime IAP Metadata vervollständigen + einreichen
   3. Terms of Use Link → erst für Version 1.1
+
+### Lessons Learned aus Mai-Releases (1.0.5 → 1.0.7)
+
+- **2026-05-01 13:41/13:54:** Builds 154 + 155 (Version 1.0.5) verworfen mit `ITMS-90186` (Train 1.0.5 closed) + `ITMS-90062` (CFBundleShortVersionString muss höher sein als bereits approved 1.0.5). Ursache: Version-String wurde nicht hochgezählt, nachdem 1.0.5 bereits approved war.
+- **Regel:** Vor jedem Push auf `main` prüfen, ob die **letzte approved Version** auf ASC schon dem `CFBundleShortVersionString` in `project.yml` entspricht — wenn ja: Version vorher hochzählen. Build-Number-Pflicht ist in `MEMORY/feedback_build-number-increment.md` dokumentiert; Version-String-Pflicht hier ergänzen.
+- Nach den Failures war die Build-Sequenz 157 → 159 → 160 (1.0.6, approved) → 161 → 162 → 163 → 166 → 167 → 169 (1.0.7, approved).
 
 ## Xcode Cloud (CI/CD)
 

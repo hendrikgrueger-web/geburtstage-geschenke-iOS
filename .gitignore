@@ -115,7 +115,8 @@ Proxy/.dev.vars
 Config/Secrets.xcconfig
 App/Secrets.xcconfig
 Screenshots/
-.claude/worktrees/
+# Claude Code per-machine state (settings.local.json, scheduled_tasks.lock, worktrees, etc.)
+.claude/
 
 # Archiv
 _Archiv/
